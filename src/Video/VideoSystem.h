@@ -1,9 +1,9 @@
 #pragma once
 
-#include <SDL.h>
+#include "..\Base\SDLAdapter.h"
+#include "..\Base\OpenGLAdapter.h"
 
-class OpenGLAdapter;
-class SDLAdapter;
+using namespace Base;
 
 namespace Video
 {

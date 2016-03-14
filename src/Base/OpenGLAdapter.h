@@ -2,45 +2,45 @@
 
 #include <GL\gl.h>
 
-#include <stdarg.h>
-#include <string>
-
-class OpenGLAdapter
+namespace Base
 {
-public:
-	// Constructor
-	OpenGLAdapter();
+	class OpenGLAdapter
+	{
+	public:
+		// Constructor
+		OpenGLAdapter();
 
-	// Destructor
-	virtual ~OpenGLAdapter();
+		// Destructor
+		virtual ~OpenGLAdapter();
 
-	// set matrix mode
-	void SetMatrixMode(GLenum mode);
+		// set matrix mode
+		void SetMatrixMode(GLenum mode);
 
-	// safe load identity matrix
-	void SafeLoadIdentityMatrix();
+		// safe load identity matrix
+		void SafeLoadIdentityMatrix();
 
-	// load identity matrix
-	void LoadIdentityMatrix();
+		// load identity matrix
+		void LoadIdentityMatrix();
 
-	// safe set clear color
-	void SafeSetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+		// safe set clear color
+		void SafeSetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
-	// set clear color
-	void SetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+		// set clear color
+		void SetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
-	// assert that no error happened
-	void AssertNoError();
+		// assert that no error happened
+		void AssertNoError();
 
-	// clear screen
-	void ClearScreen();
+		// clear screen
+		void ClearScreen();
 
-	// begin primitive
-	void BeginPrimitive(GLenum mode);
+		// begin primitive
+		void BeginPrimitive(GLenum mode);
 
-	// set vertex 2D
-	void SetVertex2D(GLfloat x, GLfloat y);
+		// set vertex 2D
+		void SetVertex2D(GLfloat x, GLfloat y);
 
-	// end primitive
-	void EndPrimitive();
-};
+		// end primitive
+		void EndPrimitive();
+	};
+}

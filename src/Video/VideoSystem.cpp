@@ -1,14 +1,10 @@
-#include "VideoSystem.h"
-
-#define NO_SDL_GLEXT
-#include <SDL_opengl.h>
 #include <iostream>
 
+#include "VideoSystem.h"
 #include "..\Base\Exception.h"
 #include "..\Base\StringHelper.h"
 #include "..\Base\SDLAdapter.h"
 #include "..\Base\OpenGLAdapter.h"
-
 
 namespace Video
 {
