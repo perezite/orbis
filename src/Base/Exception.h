@@ -2,15 +2,18 @@
 
 #include <string>
 
-class Exception
+namespace Base
 {
-public:
-	Exception(const std::string &message) : _message(message) {}
+	class Exception
+	{
+	public:
+		Exception(const std::string &message) : _message(message) {}
 
-	virtual ~Exception() throw() {}
+		virtual ~Exception() throw() {}
 
-	virtual const std::string &what() const throw() { return _message; }
+		virtual const std::string &what() const throw() { return _message; }
 
-protected:
-	std::string _message;
-};
+	protected:
+		std::string _message;
+	};
+}
