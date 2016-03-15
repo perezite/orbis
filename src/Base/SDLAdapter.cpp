@@ -5,24 +5,13 @@
 
 namespace Base
 {
-	SDLAdapter::SDLAdapter()
-	{
-		m_SDLWindow = NULL;
-	}
+	SDL_Window* SDLAdapter::m_SDLWindow = NULL;
 
-	SDLAdapter::~SDLAdapter()
+	SDL_GLContext SDLAdapter::m_OpenGLContext;
+
+	void SDLAdapter::QuitSDL()
 	{
 		SDL_Quit();
-	}
-
-	void SDLAdapter::InitializeVideoSubsystem()
-	{
-		int result = SDL_Init(SDL_INIT_VIDEO);
-
-		if (result != 0)
-		{
-			throw Exception("SDL_Init failed");
-		}
 	}
 
 	void SDLAdapter::CreateSDLWindow(int windowWidth, int windowHeight)
@@ -35,6 +24,26 @@ namespace Base
 		{
 			throw Exception("SDL_CreateWindow failed");
 		}
+	}
+
+	void SDLAdapter::DestroySDLWindow()
+	{
+		SDL_DestroyWindow(m_SDLWindow);
+	}
+
+	void SDLAdapter::InitializeVideoSubsystem()
+	{
+		int result = SDL_Init(SDL_INIT_VIDEO);
+
+		if (result != 0)
+		{
+			throw Exception("SDL_Init failed");
+		}
+	}
+
+	void SDLAdapter::QuitVideoSubsystem()
+	{
+		SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	}
 
 	void SDLAdapter::CreateOpenGLContext()
@@ -80,10 +89,5 @@ namespace Base
 		}
 
 		return e;
-	}
-
-	void SDLAdapter::DestroyWindow()
-	{
-		SDL_DestroyWindow(m_SDLWindow);
 	}
 }

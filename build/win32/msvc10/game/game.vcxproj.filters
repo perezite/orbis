@@ -22,11 +22,11 @@
     <Filter Include="Quelldateien\Video">
       <UniqueIdentifier>{52343e93-138d-4d85-a28b-5750e383b4a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Input">
+      <UniqueIdentifier>{825157e4-6204-4cf2-aef3-d95645cdfd26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\Core\Main.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Base\StringHelper.cpp">
       <Filter>Quelldateien\Base</Filter>
     </ClCompile>
@@ -38,6 +38,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Base\SDLAdapter.cpp">
       <Filter>Quelldateien\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Core\Main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Core\Orbis.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp">
+      <Filter>Quelldateien\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,5 +65,14 @@
     <ClInclude Include="..\..\..\..\src\Base\SDLAdapter.h">
       <Filter>Quelldateien\Base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Core\Orbis.h">
+      <Filter>Quelldateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Input\InputManager.h">
+      <Filter>Quelldateien\Input</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

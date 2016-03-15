@@ -3,35 +3,32 @@
 #include "VideoSystem.h"
 #include "..\Base\Exception.h"
 #include "..\Base\StringHelper.h"
-#include "..\Base\SDLAdapter.h"
-#include "..\Base\OpenGLAdapter.h"
 
 namespace Video
 {
 	VideoSystem::VideoSystem(int windowWidth, int windowHeight)
 	{
 		m_openGLAdapter = new OpenGLAdapter();
-		m_SDLAdapter = new SDLAdapter();
 
-		InitializeSDL(windowWidth, windowHeight);
+		InitializeSDLVideo(windowWidth, windowHeight);
 
 		InitializeOpenGL();
 	}
 
 	VideoSystem::~VideoSystem()
 	{
-		m_SDLAdapter->DestroyWindow();
+		SDLAdapter::QuitVideoSubsystem();
+		SDLAdapter::DestroySDLWindow();
 
-		delete m_SDLAdapter;
 		delete m_openGLAdapter;
 	}
 
-	void VideoSystem::InitializeSDL(int windowWidth, int windowHeight)
+	void VideoSystem::InitializeSDLVideo(int windowWidth, int windowHeight)
 	{
-		m_SDLAdapter->InitializeVideoSubsystem();
-		m_SDLAdapter->CreateSDLWindow(windowWidth, windowHeight);
-		m_SDLAdapter->CreateOpenGLContext();
-		m_SDLAdapter->SetOpenGLSwapInterval(1);
+		SDLAdapter::InitializeVideoSubsystem();
+		SDLAdapter::CreateSDLWindow(windowWidth, windowHeight);
+		SDLAdapter::CreateOpenGLContext();
+		SDLAdapter::SetOpenGLSwapInterval(1);
 	}
 
 	void VideoSystem::InitializeOpenGL()
@@ -52,9 +49,9 @@ namespace Video
 
 		while (quit == false)
 		{
-			while (m_SDLAdapter->HasPendingEvents())
+			while (SDLAdapter::HasPendingEvents())
 			{
-				e = m_SDLAdapter->PollEvent();
+				e = SDLAdapter::PollEvent();
 
 				if (e.type == SDL_QUIT)
 				{
@@ -64,7 +61,7 @@ namespace Video
 
 			Render();
 
-			m_SDLAdapter->SwapOpenGLBuffers();
+			SDLAdapter::SwapOpenGLBuffers();
 		}
 	}
 

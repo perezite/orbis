@@ -22,16 +22,7 @@ namespace Video
 
 	protected:
 		// Initialize SDL
-		void InitializeSDL(int windowWidth, int windowHeight);
-
-		// Create SDL video subsystem
-		void initializeSDLVideoSubsystem();
-
-		// Create SDL OpenGL context
-		void createSDLOpenGLContext();
-
-		// Set SDL OpenGL Swap interval
-		void setSDLOpenGLSwapInterval();
+		void InitializeSDLVideo(int windowWidth, int windowHeight);
 
 		// Initialize OpenGL
 		void InitializeOpenGL();
@@ -43,15 +34,5 @@ namespace Video
 	private:
 		// OpenGL adapter
 		OpenGLAdapter *m_openGLAdapter;
-
-		// SDL adapter
-		SDLAdapter *m_SDLAdapter;
-
-
-		// SDL window
-		//SDL_Window* m_SDLWindow = NULL;
-
-		// SDL OpenGL contex
-		// SDL_GLContext m_OpenGLContext;
 	};
 }

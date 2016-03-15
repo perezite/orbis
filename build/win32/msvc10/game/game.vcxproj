@@ -15,6 +15,8 @@
     <ClCompile Include="..\..\..\..\src\Base\SDLAdapter.cpp" />
     <ClCompile Include="..\..\..\..\src\Base\StringHelper.cpp" />
     <ClCompile Include="..\..\..\..\src\Core\Main.cpp" />
+    <ClCompile Include="..\..\..\..\src\Core\Orbis.cpp" />
+    <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp" />
     <ClCompile Include="..\..\..\..\src\Video\VideoSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -22,7 +24,12 @@
     <ClInclude Include="..\..\..\..\src\Base\OpenGLAdapter.h" />
     <ClInclude Include="..\..\..\..\src\Base\SDLAdapter.h" />
     <ClInclude Include="..\..\..\..\src\Base\StringHelper.h" />
+    <ClInclude Include="..\..\..\..\src\Core\Orbis.h" />
+    <ClInclude Include="..\..\..\..\src\Input\InputManager.h" />
     <ClInclude Include="..\..\..\..\src\Video\VideoSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D5BEA501-ACE4-4341-B97A-3DC71021EA9E}</ProjectGuid>
@@ -110,5 +117,12 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Gsl.0.0.1.0\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.0.1.0\build\native\Microsoft.Gsl.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.0.1.0\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.0.1.0\build\native\Microsoft.Gsl.targets'))" />
+  </Target>
 </Project>
