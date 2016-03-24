@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SDLEvent.h"
+
 #define NO_SDL_GLEXT
 #include <SDL_opengl.h>
 #include <SDL.h>
@@ -37,7 +39,7 @@ namespace Base
 		static bool HasPendingEvents();
 
 		// Poll event
-		static SDL_Event PollEvent();
+		static SDLEvent PollEvent();
 	private:
 		// SDL window
 		static SDL_Window *m_SDLWindow;

@@ -1,7 +1,9 @@
 #pragma once
 
-#include "..\Video\VideoSystem.h"
+#include "..\Input\InputManager.h"
+using namespace Input;
 
+#include "..\Video\VideoSystem.h"
 using namespace Video;
 
 namespace Core
@@ -20,5 +22,7 @@ namespace Core
 
 	private:
 		VideoSystem *m_VideoSystem;
+
+		InputManager m_inputManager;
 	};
 }

@@ -2,7 +2,8 @@
 
 namespace Core
 {
-	Orbis::Orbis(int windowWidth, int windowHeight)
+	Orbis::Orbis(int windowWidth, int windowHeight) : 
+		m_inputManager(InputManager::GetInstance())
 	{
 		m_VideoSystem = new VideoSystem(windowWidth, windowHeight);
 	}
@@ -14,6 +15,11 @@ namespace Core
 
 	void Orbis::Run()
 	{
-		m_VideoSystem->Run();
+		while (m_inputManager.HasQuitEvent() == false)
+		{
+			m_inputManager.Update();
+
+			m_VideoSystem->Update();
+		}
 	}
 }

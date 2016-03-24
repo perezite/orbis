@@ -2,9 +2,10 @@
 #include <string>
 #include <iostream>
 
-#include "..\Base\Exception.h"
-#include "..\Core\Orbis.h"
+#include "Base\Exception.h"
+using namespace Base;
 
+#include "Core\Orbis.h"
 using namespace Core;
 
 // reference: http://lazyfoo.net/tutorials/OpenGL/01_hello_opengl/index2.php

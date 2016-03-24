@@ -2,7 +2,6 @@
 
 #include "..\Base\SDLAdapter.h"
 #include "..\Base\OpenGLAdapter.h"
-
 using namespace Base;
 
 namespace Video
@@ -18,7 +17,7 @@ namespace Video
 
 		// Run 
 		// TODO: move to input system
-		void Run();
+		void Update();
 
 	protected:
 		// Initialize SDL

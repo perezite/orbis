@@ -1,5 +1,10 @@
 #pragma once
 
+#include "..\Base\SDLAdapter.h"
+using namespace Base;
+
+#include <map>
+
 namespace Input
 {
 	class InputManager
@@ -12,23 +17,23 @@ namespace Input
 		void Update();
 
 		// is key down
-		bool IsKeyDown();
+		bool IsKeyDown(SDLKeyCode keyCode);
 
-		// is key tapped (down at current frame)
-		bool IsKeyTapped();
-
-		// temp: Is Quit
-		bool TempIsQuit();
-
-	protected:
-		// Constructor
-		InputManager();
+		// has manager caught a quit event
+		bool HasQuitEvent();
 
 		// Destructor
 		virtual ~InputManager();
 
+	protected:
+		// Singleton Constructor
+		InputManager();
+
 	private:
-		// temp
-		bool m_IsQuit;
+		// has manager caught a quit event
+		bool m_hasQuitEvent;
+
+		// pressed keys
+		std::map<SDLKeyCode, bool> m_pressedKeys;
 	};
 }

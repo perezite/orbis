@@ -1,8 +1,6 @@
 #include "InputManager.h"
 
-#include "..\Base\SDLAdapter.h"
-
-using namespace Base;
+#include <iostream>
 
 namespace Input
 {
@@ -23,31 +21,37 @@ namespace Input
 
 	void InputManager::Update()
 	{
-		SDL_Event e;
-
 		while (SDLAdapter::HasPendingEvents())
 		{
-			e = SDLAdapter::PollEvent();
+			SDLEvent event = SDLAdapter::PollEvent();
 
-			if (e.type == SDL_QUIT)
+			switch (event.GetType())
 			{
-				m_IsQuit = true;
-			}
+			case SDLEvent::Type::Quit:
+				m_hasQuitEvent = true;
+				break;
+			case SDLEvent::Type::KeyDown:
+				m_pressedKeys.insert_or_assign(event.GetKeyCode(), true);
+				break;
+			case SDLEvent::Type::KeyUp:
+				m_pressedKeys.insert_or_assign(event.GetKeyCode(), false);
+				break;
+			}	
 		}	
 	}
 
-	bool InputManager::IsKeyDown()
+	bool InputManager::IsKeyDown(SDLKeyCode keyCode)
 	{
-		return false;
+		if (m_pressedKeys.find(keyCode) == m_pressedKeys.end())
+		{
+			m_pressedKeys.insert_or_assign(keyCode, false);
+		}
+
+		return m_pressedKeys.at(keyCode);
 	}
 
-	bool InputManager::IsKeyTapped()
+	bool InputManager::HasQuitEvent()
 	{
-		return false;
-	}
-
-	bool InputManager::TempIsQuit()
-	{
-		return m_IsQuit;
+		return m_hasQuitEvent;
 	}
 }

@@ -13,16 +13,19 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\Base\OpenGLAdapter.cpp" />
     <ClCompile Include="..\..\..\..\src\Base\SDLAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\Base\SDLEvent.cpp" />
     <ClCompile Include="..\..\..\..\src\Base\StringHelper.cpp" />
-    <ClCompile Include="..\..\..\..\src\Core\Main.cpp" />
     <ClCompile Include="..\..\..\..\src\Core\Orbis.cpp" />
     <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp" />
+    <ClCompile Include="..\..\..\..\src\Main.cpp" />
     <ClCompile Include="..\..\..\..\src\Video\VideoSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\src\Base\Exception.h" />
     <ClInclude Include="..\..\..\..\src\Base\OpenGLAdapter.h" />
     <ClInclude Include="..\..\..\..\src\Base\SDLAdapter.h" />
+    <ClInclude Include="..\..\..\..\src\Base\SDLEvent.h" />
+    <ClInclude Include="..\..\..\..\src\Base\SDLKeyCode.h" />
     <ClInclude Include="..\..\..\..\src\Base\StringHelper.h" />
     <ClInclude Include="..\..\..\..\src\Core\Orbis.h" />
     <ClInclude Include="..\..\..\..\src\Input\InputManager.h" />

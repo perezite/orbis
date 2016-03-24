@@ -1,7 +1,8 @@
-#include <iostream>
-
 #include "SDLAdapter.h"
-#include "..\Base\Exception.h"
+
+#include "Exception.h"
+
+#include <iostream>
 
 namespace Base
 {
@@ -77,7 +78,7 @@ namespace Base
 		return SDL_PollEvent(NULL) == 1;
 	}
 
-	SDL_Event SDLAdapter::PollEvent()
+	SDLEvent SDLAdapter::PollEvent()
 	{
 		SDL_Event e;
 
@@ -88,6 +89,6 @@ namespace Base
 			throw Exception("SDLAdapter::PollEvent has been called, but there are no events. Use SDLAdapter::HasPendingEvents before polling.");
 		}
 
-		return e;
+		return SDLEvent(e);
 	}
 }

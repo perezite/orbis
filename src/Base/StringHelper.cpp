@@ -1,8 +1,8 @@
+#include "StringHelper.h"
+
 #include <stdarg.h>
 #include <memory.h>
 #include <iostream>
-
-#include "StringHelper.h"
 
 namespace Base
 {

@@ -39,14 +39,17 @@
     <ClCompile Include="..\..\..\..\src\Base\SDLAdapter.cpp">
       <Filter>Quelldateien\Base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Core\Main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Core\Orbis.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp">
       <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Base\SDLEvent.cpp">
+      <Filter>Quelldateien\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Main.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Input\InputManager.h">
       <Filter>Quelldateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Base\SDLEvent.h">
+      <Filter>Quelldateien\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Base\SDLKeyCode.h">
+      <Filter>Quelldateien\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

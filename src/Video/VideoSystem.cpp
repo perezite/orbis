@@ -1,8 +1,13 @@
-#include <iostream>
-
 #include "VideoSystem.h"
+
 #include "..\Base\Exception.h"
 #include "..\Base\StringHelper.h"
+using namespace Base;
+
+#include "..\Input\InputManager.h"
+using namespace Input;
+
+#include <iostream>
 
 namespace Video
 {
@@ -42,29 +47,14 @@ namespace Video
 		m_openGLAdapter->SafeSetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	}
 
-	void VideoSystem::Run()
+	void VideoSystem::Update()
 	{
-		bool quit = false;
-		SDL_Event e;
+		Render();
 
-		while (quit == false)
-		{
-			while (SDLAdapter::HasPendingEvents())
-			{
-				e = SDLAdapter::PollEvent();
-
-				if (e.type == SDL_QUIT)
-				{
-					quit = true;
-				}
-			}
-
-			Render();
-
-			SDLAdapter::SwapOpenGLBuffers();
-		}
+		SDLAdapter::SwapOpenGLBuffers();
 	}
 
+	// Just rendering a little test quad
 	void VideoSystem::Render()
 	{
 		m_openGLAdapter->ClearScreen();
