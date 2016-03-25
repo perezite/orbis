@@ -1,10 +1,11 @@
-#include "SDLEvent.h"
+#include "Event.h"
 
-#include "Exception.h"
+#include "..\Core\Exception.h"
+using namespace Core;
 
-namespace Base
+namespace Input
 {
-	SDLEvent::Type SDLEvent::GetType()
+	Event::Type Event::GetType()
 	{
 		switch (m_sdlEvent.type)
 		{
@@ -19,7 +20,7 @@ namespace Base
 		}
 	}
 
-	SDLKeyCode SDLEvent::GetKeyCode()
+	KeyCode Event::GetKeyCode()
 	{
 		// check if operation is supported for this type of event
 		static std::vector<Type> supportedTypes;
@@ -27,10 +28,10 @@ namespace Base
 		supportedTypes.push_back(Type::KeyDown);
 		AssertType(supportedTypes);
 
-		return (SDLKeyCode)m_sdlEvent.key.keysym.sym;
+		return (KeyCode)m_sdlEvent.key.keysym.sym;
 	}
 
-	void SDLEvent::AssertType(std::vector<Type> types)
+	void Event::AssertType(std::vector<Type> types)
 	{
 		bool match = std::find(types.begin(), types.end(), GetType()) != types.end();
 		if (match == false)

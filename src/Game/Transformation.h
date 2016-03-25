@@ -3,7 +3,7 @@
 #include "..\Math\Vector2D.h"
 using namespace Math;
 
-namespace Core
+namespace Game
 {
 	// Represents the transformation of an Entity
 	class Transformation

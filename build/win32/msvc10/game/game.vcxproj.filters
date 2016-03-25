@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Quelldateien\Base">
-      <UniqueIdentifier>{0371fc11-a776-49e4-a4b1-efdfb1f79fc6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\Video">
       <UniqueIdentifier>{52343e93-138d-4d85-a28b-5750e383b4a7}</UniqueIdentifier>
     </Filter>
@@ -28,28 +25,19 @@
     <Filter Include="Quelldateien\Math">
       <UniqueIdentifier>{bf79c526-4787-4f37-aded-23a8569fdb94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Entity">
+    <Filter Include="Quelldateien\Game">
       <UniqueIdentifier>{d8be402f-7f26-44e6-b702-8cc4a9b89fcf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Scene">
-      <UniqueIdentifier>{7545edbf-f7b8-444d-877f-aba139d86079}</UniqueIdentifier>
+    <Filter Include="Quelldateien\Components">
+      <UniqueIdentifier>{683aa64e-f05f-4d91-a570-158537f4e361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core">
+      <UniqueIdentifier>{0371fc11-a776-49e4-a4b1-efdfb1f79fc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\Base\StringHelper.cpp">
-      <Filter>Quelldateien\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Base\OpenGLAdapter.cpp">
-      <Filter>Quelldateien\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Base\SDLAdapter.cpp">
-      <Filter>Quelldateien\Base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp">
       <Filter>Quelldateien\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Base\SDLEvent.cpp">
-      <Filter>Quelldateien\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Main.cpp">
       <Filter>Quelldateien</Filter>
@@ -63,46 +51,37 @@
     <ClCompile Include="..\..\..\..\src\Video\RenderDevice.cpp">
       <Filter>Quelldateien\Video</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Video\Renderer.cpp">
+    <ClCompile Include="..\..\..\..\src\Video\GraphicsAdapter.cpp">
       <Filter>Quelldateien\Video</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Core\Entity.cpp">
-      <Filter>Quelldateien\Entity</Filter>
+    <ClCompile Include="..\..\..\..\src\Input\Event.cpp">
+      <Filter>Quelldateien\Input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Scene\Level.cpp">
-      <Filter>Quelldateien\Scene</Filter>
+    <ClCompile Include="..\..\..\..\src\Input\EventAdapter.cpp">
+      <Filter>Quelldateien\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Video\Color.cpp">
+      <Filter>Quelldateien\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Core\StringHelper.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Game\Entity.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Game\Level.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Components\TestRenderer.cpp">
+      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\src\Base\StringHelper.h">
-      <Filter>Quelldateien\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Base\Exception.h">
-      <Filter>Quelldateien\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Base\OpenGLAdapter.h">
-      <Filter>Quelldateien\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Base\SDLAdapter.h">
-      <Filter>Quelldateien\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Input\InputManager.h">
-      <Filter>Quelldateien\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Base\SDLEvent.h">
-      <Filter>Quelldateien\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Base\SDLKeyCode.h">
-      <Filter>Quelldateien\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Input\KeyCode.h">
       <Filter>Quelldateien\Input</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Orbis.h">
       <Filter>Quelldateien\Orbis</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Video\Renderer.h">
-      <Filter>Quelldateien\Video</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Video\VideoManager.h">
       <Filter>Quelldateien\Video</Filter>
@@ -113,17 +92,38 @@
     <ClInclude Include="..\..\..\..\src\Math\Vector2D.h">
       <Filter>Quelldateien\Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Core\Component.h">
-      <Filter>Quelldateien\Entity</Filter>
+    <ClInclude Include="..\..\..\..\src\Video\GraphicsAdapter.h">
+      <Filter>Quelldateien\Video</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Core\Entity.h">
-      <Filter>Quelldateien\Entity</Filter>
+    <ClInclude Include="..\..\..\..\src\Input\Event.h">
+      <Filter>Quelldateien\Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Core\Transformation.h">
-      <Filter>Quelldateien\Entity</Filter>
+    <ClInclude Include="..\..\..\..\src\Input\EventAdapter.h">
+      <Filter>Quelldateien\Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Scene\Level.h">
-      <Filter>Quelldateien\Scene</Filter>
+    <ClInclude Include="..\..\..\..\src\Video\Color.h">
+      <Filter>Quelldateien\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Core\Exception.h">
+      <Filter>Quelldateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Core\StringHelper.h">
+      <Filter>Quelldateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Game\Component.h">
+      <Filter>Quelldateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Game\Entity.h">
+      <Filter>Quelldateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Game\Level.h">
+      <Filter>Quelldateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Game\Transformation.h">
+      <Filter>Quelldateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Components\TestRenderer.h">
+      <Filter>Quelldateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

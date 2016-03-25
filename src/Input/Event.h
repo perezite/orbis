@@ -1,13 +1,14 @@
 #pragma once
 
-#include "SDLKeyCode.h"
+#include "EventAdapter.h"
 
 #include <vector>
 #include <SDL.h>
 
-namespace Base
+namespace Input
 {
-	class SDLEvent
+	// adapter for sdl events
+	class Event
 	{
 	public:
 		enum Type
@@ -20,16 +21,16 @@ namespace Base
 
 	public:
 		// Constructor
-		SDLEvent(SDL_Event sdlEvent) : m_sdlEvent(m_sdlEvent = sdlEvent) {}
+		Event(SDL_Event sdlEvent) : m_sdlEvent(m_sdlEvent = sdlEvent) {}
 
 		// Destructor
-		virtual ~SDLEvent() {};
+		virtual ~Event() {};
 
 		// Get the event type
 		Type GetType();
 
 		// Get the keycode
-		SDLKeyCode GetKeyCode();
+		KeyCode GetKeyCode();
 
 	protected:
 		// Assert that the SDLEvent is one of the given types

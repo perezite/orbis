@@ -1,7 +1,7 @@
 #include "Entity.h"
 #include "Entity.h"
 
-namespace Core
+namespace Game
 {
 	Entity::~Entity()
 	{

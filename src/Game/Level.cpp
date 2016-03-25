@@ -3,7 +3,7 @@
 #include "..\Video\VideoManager.h"
 using namespace Video;
 
-namespace Scene
+namespace Game
 {
 	Level::~Level()
 	{

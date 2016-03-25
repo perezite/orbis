@@ -2,8 +2,8 @@
 
 #include "RenderDevice.h"
 
-#include "..\Core\Entity.h"
-using namespace Core;
+#include "..\Game\Entity.h"
+using namespace Game;
 
 #include "..\Math\Vector2D.h"
 using namespace Math;
@@ -22,11 +22,14 @@ namespace Video
 		// get the render device
 		RenderDevice* GetRenderDevice();
 
+		// initialize SDL
+		void InitializeVideo(int windowWidth, int windowHeight);
+
+		// quit video
+		void QuitVideo();
+
 		// set resolution
 		void SetWindowResolution(int widthInPixels, int heightInPixels);
-
-		// render
-		void Render(std::vector<Entity*> &entities);
 
 		// clear screen
 		void ClearScreen();
@@ -35,20 +38,9 @@ namespace Video
 		void SwapBuffers();
 
 	protected:
-		// default singleton constructor
+		// singleton constructor
 		VideoManager();
 
-		// initialize video system
-		void Initialize(int windowWidth, int windowHeight);
-
-		// deinitialize video system
-		void DeInitialize();
-
-		// initialize SDL
-		void InitializeSDLVideo(int windowWidth, int windowHeight);
-
-		// initialize OpenGL
-		void InitializeOpenGL();
 	private:
 		// window size
 		const Vector2D m_defaultWindowSize;

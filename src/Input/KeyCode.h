@@ -1,9 +1,8 @@
 #pragma once
 
-#include "..\Base\SDLKeyCode.h"
-using namespace Base;
+#include <SDL.h>
 
 namespace Input
 {
-	typedef SDLKeyCode KeyCode;
+
 }

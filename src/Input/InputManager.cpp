@@ -1,5 +1,7 @@
 #include "InputManager.h"
 
+#include "Event.h"
+
 #include <iostream>
 
 namespace Input
@@ -21,19 +23,19 @@ namespace Input
 
 	void InputManager::Update()
 	{
-		while (SDLAdapter::HasPendingEvents())
+		while (EventAdapter::HasPendingEvents())
 		{
-			SDLEvent event = SDLAdapter::PollEvent();
+			Event event = EventAdapter::PollEvent();
 
 			switch (event.GetType())
 			{
-			case SDLEvent::Type::Quit:
+			case Event::Type::Quit:
 				m_hasQuitEvent = true;
 				break;
-			case SDLEvent::Type::KeyDown:
+			case Event::Type::KeyDown:
 				m_pressedKeys.insert_or_assign(event.GetKeyCode(), true);
 				break;
-			case SDLEvent::Type::KeyUp:
+			case Event::Type::KeyUp:
 				m_pressedKeys.insert_or_assign(event.GetKeyCode(), false);
 				break;
 			}	

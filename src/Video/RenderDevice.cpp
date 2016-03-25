@@ -1,22 +1,21 @@
 #include "RenderDevice.h"
 
-#include "..\Base\OpenGLAdapter.h"
-using namespace Base;
+#include "GraphicsAdapter.h"
 
 namespace Video
 {
 	void RenderDevice::BeginPrimitive()
 	{
-		OpenGLAdapter::BeginPrimitive(GL_QUADS);
+		GraphicsAdapter::BeginPrimitive(RenderMode::Quads);
 	}
 
 	void RenderDevice::EndPrimitive()
 	{
-		OpenGLAdapter::EndPrimitive();
+		GraphicsAdapter::EndPrimitive();
 	}
 
 	void RenderDevice::SetVertex2D(Vector2D position)
 	{
-		OpenGLAdapter::SetVertex2D(position.GetX(), position.GetY());
+		GraphicsAdapter::SetVertex2D(position);
 	}
 }

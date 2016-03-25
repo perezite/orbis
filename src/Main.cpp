@@ -2,8 +2,8 @@
 #include <string>
 #include <iostream>
 
-#include "Base\Exception.h"
-using namespace Base;
+#include "Core\Exception.h"
+using namespace Core;
 
 #include "Orbis\Orbis.h"
 using namespace Core;

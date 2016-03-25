@@ -2,9 +2,23 @@
 
 #include <SDL.h>
 
-namespace Base
+namespace Input
 {
-	enum SDLKeyCode
+	class Event;
+
+	// wraps low-level event system calls into a single static class
+	class EventAdapter
+	{
+	public:
+		// Check if there is at least one pending event
+		static bool HasPendingEvents();
+
+		// Poll event
+		static Event PollEvent();
+	};
+
+	// key codes
+	enum KeyCode
 	{
 		Unknown = SDLK_UNKNOWN,
 		Backspace = SDLK_BACKSPACE,

@@ -2,8 +2,7 @@
 
 #include "KeyCode.h"
 
-#include "..\Base\SDLAdapter.h"
-using namespace Base;
+#include "EventAdapter.h"
 
 #include <map>
 
@@ -36,6 +35,6 @@ namespace Input
 		bool m_hasQuitEvent;
 
 		// pressed keys
-		std::map<SDLKeyCode, bool> m_pressedKeys;
+		std::map<KeyCode, bool> m_pressedKeys;
 	};
 }

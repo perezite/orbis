@@ -9,8 +9,8 @@ using namespace Input;
 #include "..\Video\VideoManager.h"
 using namespace Video;
 
-#include "..\Scene\Level.h"
-using namespace Scene;
+#include "..\Game\Level.h"
+using namespace Game;
 
 namespace Core
 {

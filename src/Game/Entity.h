@@ -8,7 +8,7 @@ using namespace Math;
 
 #include <vector>
 
-namespace Core
+namespace Game
 {
 
 	// Represents an Entity in the game

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "..\Core\Entity.h"
-using namespace Core;
+#include "..\Game\Entity.h"
+using namespace Game;
 
 #include <vector>
 
-namespace Scene
+namespace Game
 {
 	// Represents a level in the game
 	class Level

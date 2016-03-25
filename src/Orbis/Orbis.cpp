@@ -1,9 +1,9 @@
 #include "Orbis.h"
 
-#include "..\Core\Entity.h"
-using namespace Core;
+#include "..\Game\Entity.h"
+using namespace Game;
 
-#include "..\Video\Renderer.h"
+#include "..\Components\TestRenderer.h"
 using namespace Video;
 
 #include <iostream>
@@ -13,7 +13,7 @@ namespace Core
 {
 	void Orbis::TestLevelInit()
 	{
-		Component *component = new Renderer(entity);
+		Component *component = new TestRenderer(entity);
 		entity->AddComponent(component);
 		level->AddEntity(entity);
 	}
