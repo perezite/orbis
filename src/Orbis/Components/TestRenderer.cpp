@@ -3,7 +3,7 @@
 #include "..\Video\VideoManager.h"
 using namespace Video;
 
-namespace Video
+namespace Components
 {
 	void TestRenderer::Update() { }
 
@@ -12,8 +12,8 @@ namespace Video
 		static const float extent = 0.1f;
 
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		Entity *entity = GetEntity();
-		Vector2D position = entity->GetTransformation().GetPosition();
+		Entity *entity = GetParentEntity();
+		Vector2D position = entity->GetTransformation()->GetPosition();
 		
 		renderDevice->BeginPrimitive();
 		renderDevice->SetVertex2D(Vector2D(position.GetX() - extent, position.GetY() - extent));

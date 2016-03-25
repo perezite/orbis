@@ -1,7 +1,5 @@
 #pragma once
 
-#include "KeyCode.h"
-
 #include "EventAdapter.h"
 
 #include <map>

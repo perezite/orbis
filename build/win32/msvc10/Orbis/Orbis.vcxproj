@@ -15,9 +15,11 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Core\StringHelper.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Game\Entity.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Game\Level.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Game\LevelManager.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Input\Event.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Input\EventAdapter.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Input\InputManager.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Math\Vector2D.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Orbis\OrbisMain.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Video\Color.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Video\GraphicsAdapter.cpp" />
@@ -35,11 +37,11 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Component.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Entity.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Level.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\LevelManager.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Transformation.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Input\Event.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Input\EventAdapter.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Input\InputManager.h" />
-    <ClInclude Include="..\..\..\..\src\Orbis\Input\KeyCode.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Math\Vector2D.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Orbis\OrbisMain.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Video\Color.h" />
@@ -80,10 +82,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)\Orbis\Lib</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)\Orbis\Lib\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)\Orbis\Lib</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)\Orbis\Lib\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
   </PropertyGroup>

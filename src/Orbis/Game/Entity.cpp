@@ -13,6 +13,12 @@ namespace Game
 		m_components.clear();
 	}
 
+	void Entity::AddComponent(Component *component)   		
+	{
+		component->SetParentEntity(this);
+		m_components.push_back(component);
+	}
+
 	void Entity::Update()
 	{
 		for each (Component *component in m_components)

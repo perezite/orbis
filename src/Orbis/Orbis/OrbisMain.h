@@ -19,24 +19,24 @@ namespace Orbis
 	class OrbisMain
 	{
 	public:
-		// Constructor
+		// constructor
 		OrbisMain(int windowWidth, int windowHeight);
 
-		// Destructor
+		// ^destructor
 		virtual ~OrbisMain() { };
 
-		// Run 
-		void Run();
+		// queue level
+		void QueueLevel(Level *level);
 
-		// test
-		void TestLevelInit();
+		// run 
+		void Run();
 
 		// test
 		void TestEntityController();
 
 	private:
-		// default window size
-		const Vector2D m_defaultWindowSize;
+		// default windosw size
+		static const Vector2D m_defaultWindowSize;
 	
 		// test
 		Level *level;

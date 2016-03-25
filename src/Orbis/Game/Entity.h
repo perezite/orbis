@@ -25,10 +25,10 @@ namespace Game
 		void SetTransformation(Transformation transformation) { m_transformation = transformation; }
 
 		// get transformation
-		Transformation GetTransformation() { return m_transformation; }
+		Transformation* GetTransformation() { return &m_transformation; }
 
 		// add component
-		void AddComponent(Component *component) { m_components.push_back(component); }
+		void AddComponent(Component *component);
 
 		// update the entity
 		void Update();

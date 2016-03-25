@@ -12,8 +12,17 @@ namespace Math
 		// constructor
 		Vector2D (float x, float y) : m_x(x), m_y(y) { }
 
+		// constructor 
+		Vector2D(const Vector2D &other) : m_x(other.m_x), m_y(other.m_y) { }
+
 		// destructor
 		virtual ~Vector2D() { };
+
+		// assignment
+		const Vector2D& operator=(const Vector2D &other);
+
+		// addition
+		const Vector2D operator+(const Vector2D &other) const;
 
 		// get x
 		float GetX() const { return m_x; }

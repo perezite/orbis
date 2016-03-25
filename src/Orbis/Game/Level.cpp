@@ -5,6 +5,11 @@ using namespace Video;
 
 namespace Game
 {
+	Level::Level()
+	{
+		OnLoad();
+	}
+
 	Level::~Level()
 	{
 		for each (Entity *entity in m_entities)
@@ -43,6 +48,7 @@ namespace Game
 
 		for each (Entity *entity in m_entities)
 		{
+	
 			entity->Render();
 		}
 

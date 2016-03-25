@@ -1,6 +1,7 @@
 #include "OrbisMain.h"
 
 #include "..\Game\Entity.h"
+#include "..\Game\LevelManager.h"
 using namespace Game;
 
 #include "..\Components\TestRenderer.h"
@@ -11,13 +12,9 @@ using namespace Video;
 
 namespace Orbis
 {
-	void OrbisMain::TestLevelInit()
-	{
-		Component *component = new TestRenderer(entity);
-		entity->AddComponent(component);
-		level->AddEntity(entity);
-	}
+	const Vector2D OrbisMain::m_defaultWindowSize = Vector2D(640, 480);
 
+	/*
 	void OrbisMain::TestEntityController()
 	{
 		if (InputManager::GetInstance()->IsKeyDown(KeyCode::Left))
@@ -28,33 +25,30 @@ namespace Orbis
 			transformation.SetPosition(newPosition);
 			entity->SetTransformation(transformation);
 		}
-	}
+	}*/
 
-	OrbisMain::OrbisMain(int windowWidth, int windowHeight) :
-		m_defaultWindowSize(Vector2D(640, 480))
+	OrbisMain::OrbisMain(int windowWidth, int windowHeight)
 	{
 		VideoManager::GetInstance()->SetWindowResolution((int)m_defaultWindowSize.GetX(), (int)m_defaultWindowSize.GetY());
+	}
 
-		// test
-		level = new Level();
-		entity = new Entity();
+	void OrbisMain::QueueLevel(Level *level)
+	{
+		LevelManager::GetInstance()->QueueLevel(level);
 	}
 
 	void OrbisMain::Run()
 	{
 		InputManager *inputManager = InputManager::GetInstance();
+		LevelManager *levelManager = LevelManager::GetInstance();
 		bool hasQuitEvent = false;
-
-		TestLevelInit();
 
 		while (hasQuitEvent == false)
 		{
 			inputManager->Update();
 			hasQuitEvent = inputManager->HasQuitEvent() || inputManager->IsKeyDown(KeyCode::Escape);
 
-			TestEntityController();
-
-			level->Update();
+			levelManager->Update();
 		}
 	}
 }

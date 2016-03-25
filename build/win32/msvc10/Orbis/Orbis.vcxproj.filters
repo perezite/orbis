@@ -75,6 +75,12 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Orbis\OrbisMain.cpp">
       <Filter>Quelldateien\Orbis</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Game\LevelManager.cpp">
+      <Filter>Quelldateien\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Math\Vector2D.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -110,9 +116,6 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Input\InputManager.h">
       <Filter>Quelldateien\Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Input\KeyCode.h">
-      <Filter>Quelldateien\Input</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Math\Vector2D.h">
       <Filter>Quelldateien\Math</Filter>
     </ClInclude>
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Orbis\OrbisMain.h">
       <Filter>Quelldateien\Orbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\LevelManager.h">
+      <Filter>Quelldateien\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

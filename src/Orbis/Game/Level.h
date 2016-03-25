@@ -12,10 +12,13 @@ namespace Game
 	{
 	public:
 		// constructor
-		Level() { };
+		Level();
 
 		// destructor
 		virtual ~Level();
+
+		// gets called when level is loaded
+		virtual void OnLoad() { };
 
 		// add entity
 		void AddEntity(Entity *entity);
