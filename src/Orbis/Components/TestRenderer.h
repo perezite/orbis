@@ -1,7 +1,8 @@
 #pragma once
 
+#include "Component.h"
+
 #include "..\Game\Entity.h"
-#include "..\Game\Component.h"
 using namespace Game;
 
 namespace Components

@@ -22,7 +22,7 @@ namespace Controllers
 		if (inputManager->IsKeyDown(KeyCode::Down))
 			offset = offset + Vector2D(0.0f, -0.01f);
 
-		Vector2D position = GetParentEntity()->GetTransformation()->GetPosition();
-		GetParentEntity()->GetTransformation()->SetPosition(position + offset);
+		Vector2D position = GetParent()->GetTransform()->GetPosition();
+		GetParent()->GetTransform()->SetPosition(position + offset);
 	}
 }

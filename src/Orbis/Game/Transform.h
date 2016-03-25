@@ -6,17 +6,17 @@ using namespace Math;
 namespace Game
 {
 	// Represents the transformation of an Entity
-	class Transformation
+	class Transform
 	{
 	public:
 		// default constructor
-		Transformation() { } 
+		Transform() { } 
 
 		// constructor
-		Transformation(Vector2D position, float rotation) { m_position = position; m_rotation = rotation; }
+		Transform(Vector2D position, float rotation) { m_position = position; m_rotation = rotation; }
 
 		// destructor
-		virtual ~Transformation() { }
+		virtual ~Transform() { }
 
 		// get position
 		Vector2D GetPosition() { return m_position; }

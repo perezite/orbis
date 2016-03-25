@@ -1,5 +1,4 @@
 #include "Entity.h"
-#include "Entity.h"
 
 namespace Game
 {
@@ -15,7 +14,7 @@ namespace Game
 
 	void Entity::AddComponent(Component *component)   		
 	{
-		component->SetParentEntity(this);
+		component->SetParent(this);
 		m_components.push_back(component);
 	}
 

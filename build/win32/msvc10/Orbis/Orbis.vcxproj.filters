@@ -95,16 +95,10 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Core\StringHelper.h">
       <Filter>Quelldateien\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Game\Component.h">
-      <Filter>Quelldateien\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Entity.h">
       <Filter>Quelldateien\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Level.h">
-      <Filter>Quelldateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Game\Transformation.h">
       <Filter>Quelldateien\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Input\Event.h">
@@ -141,6 +135,12 @@
       <Filter>Quelldateien\Orbis</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Game\LevelManager.h">
+      <Filter>Quelldateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\Component.h">
+      <Filter>Quelldateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\Transform.h">
       <Filter>Quelldateien\Game</Filter>
     </ClInclude>
   </ItemGroup>

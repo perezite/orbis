@@ -5,15 +5,18 @@
 namespace Game
 {
 	class Entity;
+}
 
+namespace Components
+{
 	class Component
 	{
 	public:
 		// default constructor
-		Component() : m_parentEntity(NULL) { }
+		Component() : m_parent(NULL) { }
 
 		// constructor
-		Component(Entity* parentEntity) : m_parentEntity(parentEntity) { };
+		Component(Game::Entity* parent) : m_parent(parent) { };
 
 		// update
 		virtual void Update() = 0;
@@ -22,13 +25,13 @@ namespace Game
 		virtual void Render() = 0;
 
 		// set entity
-		void SetParentEntity(Entity* parentEntity) { m_parentEntity = parentEntity; }
+		void SetParent(Game::Entity* parent) { m_parent = parent; }
 
 		// get entity
-		Entity *GetParentEntity() { return m_parentEntity; }
+		Game::Entity *GetParent() { return m_parent; }
 
 	private: 
 		// entity which uses the component
-		Entity *m_parentEntity;
+		Game::Entity *m_parent;
 	};
 }

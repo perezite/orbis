@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Transformation.h"
-#include "Component.h"
+#include "Transform.h"
+
+#include "..\Components\Component.h"
+using namespace Components;
 
 #include "..\Math\Vector2D.h"
 using namespace Math;
@@ -21,11 +23,11 @@ namespace Game
 		// destructor
 		virtual ~Entity();
 
-		// set transformation
-		void SetTransformation(Transformation transformation) { m_transformation = transformation; }
+		// set transform
+		void SetTransform(Transform transform) { m_transform = transform; }
 
-		// get transformation
-		Transformation* GetTransformation() { return &m_transformation; }
+		// get transform
+		Transform* GetTransform() { return &m_transform; }
 
 		// add component
 		void AddComponent(Component *component);
@@ -37,10 +39,10 @@ namespace Game
 		void Render();
 
 	private: 
-		// the transformation of the entity
-		Transformation m_transformation;
+		// transform of the entity
+		Transform m_transform;
 
-		//  components of the entity
+		// components of the entity
 		std::vector<Component*> m_components;
 	};
 }

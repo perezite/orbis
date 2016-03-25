@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Orbis\Game\Component.h"
-using namespace Game;
+#include "..\..\Orbis\Components\Component.h"
+using namespace Components;
 
 namespace Controllers
 {

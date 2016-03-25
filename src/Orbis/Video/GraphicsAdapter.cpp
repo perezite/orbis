@@ -69,6 +69,8 @@ namespace Video
 		CreateSDLWindow(windowWidth, windowHeight);
 		CreateOpenGLContext();
 		SetOpenGLSwapInterval(1);
+		// std::cout << StringHelper::GetFormattedString("OpenGL Renderer: %s", glGetString(GL_RENDERER)) << std::endl;
+		// std::cout << StringHelper::GetFormattedString("OpenGL Vendor: %s", glGetString(GL_VENDOR)) << std::endl;
 	}
 
 	void GraphicsAdapter::QuitGraphics()
@@ -108,7 +110,9 @@ namespace Video
 	{
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, OpenGLContextMajorVersion);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, OpenGLContextMinorVersion);
-		m_SDLWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+		// SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+
+		m_SDLWindow = SDL_CreateWindow("Orbis", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
 		if (m_SDLWindow == NULL)
 		{

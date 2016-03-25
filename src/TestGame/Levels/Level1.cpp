@@ -25,7 +25,7 @@ namespace Levels
 		Entity *entity2 = new Entity();
 		entity2->AddComponent(new TestRenderer());
 		entity2->AddComponent(new SimpleController());
-		entity2->GetTransformation()->SetPosition(Vector2D(0.5f, 0.5f));
+		entity2->GetTransform()->SetPosition(Vector2D(0.5f, 0.5f));
 		this->AddEntity(entity2);
 	}
 }

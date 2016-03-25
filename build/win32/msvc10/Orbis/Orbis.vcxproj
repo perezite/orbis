@@ -31,14 +31,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\Component.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Components\TestRenderer.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Core\Exception.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Core\StringHelper.h" />
-    <ClInclude Include="..\..\..\..\src\Orbis\Game\Component.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Entity.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Level.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\LevelManager.h" />
-    <ClInclude Include="..\..\..\..\src\Orbis\Game\Transformation.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\Transform.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Input\Event.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Input\EventAdapter.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Input\InputManager.h" />
