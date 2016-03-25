@@ -8,14 +8,6 @@
 
 namespace Base
 {
-	OpenGLAdapter::OpenGLAdapter()
-	{
-	}
-
-	OpenGLAdapter::~OpenGLAdapter()
-	{
-	}
-
 	void OpenGLAdapter::SetMatrixMode(GLenum mode)
 	{
 		glMatrixMode(mode);

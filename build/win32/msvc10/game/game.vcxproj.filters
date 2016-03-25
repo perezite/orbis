@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Quelldateien\Core">
-      <UniqueIdentifier>{0873562e-cf12-42bd-84d9-27ef719c7f8f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\Base">
       <UniqueIdentifier>{0371fc11-a776-49e4-a4b1-efdfb1f79fc6}</UniqueIdentifier>
     </Filter>
@@ -25,22 +22,25 @@
     <Filter Include="Quelldateien\Input">
       <UniqueIdentifier>{825157e4-6204-4cf2-aef3-d95645cdfd26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Orbis">
+      <UniqueIdentifier>{0873562e-cf12-42bd-84d9-27ef719c7f8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Math">
+      <UniqueIdentifier>{bf79c526-4787-4f37-aded-23a8569fdb94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core">
+      <UniqueIdentifier>{d8be402f-7f26-44e6-b702-8cc4a9b89fcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\Base\StringHelper.cpp">
       <Filter>Quelldateien\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Video\VideoSystem.cpp">
-      <Filter>Quelldateien\Video</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Base\OpenGLAdapter.cpp">
       <Filter>Quelldateien\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Base\SDLAdapter.cpp">
       <Filter>Quelldateien\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Core\Orbis.cpp">
-      <Filter>Quelldateien\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp">
       <Filter>Quelldateien\Input</Filter>
@@ -51,6 +51,21 @@
     <ClCompile Include="..\..\..\..\src\Main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Orbis.cpp">
+      <Filter>Quelldateien\Orbis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Video\VideoManager.cpp">
+      <Filter>Quelldateien\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Video\RenderDevice.cpp">
+      <Filter>Quelldateien\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Video\Renderer.cpp">
+      <Filter>Quelldateien\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Core\Entity.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\src\Base\StringHelper.h">
@@ -59,17 +74,11 @@
     <ClInclude Include="..\..\..\..\src\Base\Exception.h">
       <Filter>Quelldateien\Base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Video\VideoSystem.h">
-      <Filter>Quelldateien\Video</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Base\OpenGLAdapter.h">
       <Filter>Quelldateien\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Base\SDLAdapter.h">
       <Filter>Quelldateien\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Core\Orbis.h">
-      <Filter>Quelldateien\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Input\InputManager.h">
       <Filter>Quelldateien\Input</Filter>
@@ -79,6 +88,33 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Base\SDLKeyCode.h">
       <Filter>Quelldateien\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Input\KeyCode.h">
+      <Filter>Quelldateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Orbis.h">
+      <Filter>Quelldateien\Orbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Video\Renderer.h">
+      <Filter>Quelldateien\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Video\VideoManager.h">
+      <Filter>Quelldateien\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Video\RenderDevice.h">
+      <Filter>Quelldateien\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Math\Vector2D.h">
+      <Filter>Quelldateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Core\Component.h">
+      <Filter>Quelldateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Core\Entity.h">
+      <Filter>Quelldateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Core\Transformation.h">
+      <Filter>Quelldateien\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

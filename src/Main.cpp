@@ -5,7 +5,7 @@
 #include "Base\Exception.h"
 using namespace Base;
 
-#include "Core\Orbis.h"
+#include "Orbis\Orbis.h"
 using namespace Core;
 
 // reference: http://lazyfoo.net/tutorials/OpenGL/01_hello_opengl/index2.php
@@ -20,7 +20,9 @@ int main(int argc, char* args[])
 	}
 	catch (Exception e)
 	{
+		std::cout << "An exception occured: " << std::endl;
 		std::cout << e.what() << std::endl;
+		std::cout.flush();
 		std::cin.get();
 	}
 

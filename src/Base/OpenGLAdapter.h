@@ -1,5 +1,7 @@
 #pragma once
 
+#include "..\Base\\SDLAdapter.h"
+
 #include <GL\gl.h>
 
 namespace Base
@@ -7,40 +9,34 @@ namespace Base
 	class OpenGLAdapter
 	{
 	public:
-		// Constructor
-		OpenGLAdapter();
-
-		// Destructor
-		virtual ~OpenGLAdapter();
-
 		// set matrix mode
-		void SetMatrixMode(GLenum mode);
+		static void SetMatrixMode(GLenum mode);
 
 		// safe load identity matrix
-		void SafeLoadIdentityMatrix();
+		static void SafeLoadIdentityMatrix();
 
 		// load identity matrix
-		void LoadIdentityMatrix();
+		static void LoadIdentityMatrix();
 
 		// safe set clear color
-		void SafeSetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+		static void SafeSetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
 		// set clear color
-		void SetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+		static void SetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
 		// assert that no error happened
-		void AssertNoError();
+		static void AssertNoError();
 
 		// clear screen
-		void ClearScreen();
+		static void ClearScreen();
 
 		// begin primitive
-		void BeginPrimitive(GLenum mode);
+		static void BeginPrimitive(GLenum mode);
 
 		// set vertex 2D
-		void SetVertex2D(GLfloat x, GLfloat y);
+		static void SetVertex2D(GLfloat x, GLfloat y);
 
 		// end primitive
-		void EndPrimitive();
+		static void EndPrimitive();
 	};
 }

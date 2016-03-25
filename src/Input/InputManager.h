@@ -1,5 +1,7 @@
 #pragma once
 
+#include "KeyCode.h"
+
 #include "..\Base\SDLAdapter.h"
 using namespace Base;
 
@@ -17,7 +19,7 @@ namespace Input
 		void Update();
 
 		// is key down
-		bool IsKeyDown(SDLKeyCode keyCode);
+		bool IsKeyDown(KeyCode keyCode);
 
 		// has manager caught a quit event
 		bool HasQuitEvent();

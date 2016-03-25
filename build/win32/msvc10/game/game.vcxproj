@@ -15,10 +15,13 @@
     <ClCompile Include="..\..\..\..\src\Base\SDLAdapter.cpp" />
     <ClCompile Include="..\..\..\..\src\Base\SDLEvent.cpp" />
     <ClCompile Include="..\..\..\..\src\Base\StringHelper.cpp" />
-    <ClCompile Include="..\..\..\..\src\Core\Orbis.cpp" />
+    <ClCompile Include="..\..\..\..\src\Core\Entity.cpp" />
     <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp" />
     <ClCompile Include="..\..\..\..\src\Main.cpp" />
-    <ClCompile Include="..\..\..\..\src\Video\VideoSystem.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Orbis.cpp" />
+    <ClCompile Include="..\..\..\..\src\Video\RenderDevice.cpp" />
+    <ClCompile Include="..\..\..\..\src\Video\Renderer.cpp" />
+    <ClCompile Include="..\..\..\..\src\Video\VideoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\src\Base\Exception.h" />
@@ -27,9 +30,16 @@
     <ClInclude Include="..\..\..\..\src\Base\SDLEvent.h" />
     <ClInclude Include="..\..\..\..\src\Base\SDLKeyCode.h" />
     <ClInclude Include="..\..\..\..\src\Base\StringHelper.h" />
-    <ClInclude Include="..\..\..\..\src\Core\Orbis.h" />
+    <ClInclude Include="..\..\..\..\src\Core\Component.h" />
+    <ClInclude Include="..\..\..\..\src\Core\Entity.h" />
+    <ClInclude Include="..\..\..\..\src\Core\Transformation.h" />
     <ClInclude Include="..\..\..\..\src\Input\InputManager.h" />
-    <ClInclude Include="..\..\..\..\src\Video\VideoSystem.h" />
+    <ClInclude Include="..\..\..\..\src\Input\KeyCode.h" />
+    <ClInclude Include="..\..\..\..\src\Math\Vector2D.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Orbis.h" />
+    <ClInclude Include="..\..\..\..\src\Video\RenderDevice.h" />
+    <ClInclude Include="..\..\..\..\src\Video\Renderer.h" />
+    <ClInclude Include="..\..\..\..\src\Video\VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

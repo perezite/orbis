@@ -40,7 +40,7 @@ namespace Input
 		}	
 	}
 
-	bool InputManager::IsKeyDown(SDLKeyCode keyCode)
+	bool InputManager::IsKeyDown(KeyCode keyCode)
 	{
 		if (m_pressedKeys.find(keyCode) == m_pressedKeys.end())
 		{
