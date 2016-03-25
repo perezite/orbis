@@ -11,44 +11,48 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\Components\TestRenderer.cpp" />
-    <ClCompile Include="..\..\..\..\src\Core\StringHelper.cpp" />
-    <ClCompile Include="..\..\..\..\src\Game\Entity.cpp" />
-    <ClCompile Include="..\..\..\..\src\Game\Level.cpp" />
-    <ClCompile Include="..\..\..\..\src\Input\EventAdapter.cpp" />
-    <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp" />
-    <ClCompile Include="..\..\..\..\src\Input\Event.cpp" />
-    <ClCompile Include="..\..\..\..\src\Main.cpp" />
-    <ClCompile Include="..\..\..\..\src\Orbis\Orbis.cpp" />
-    <ClCompile Include="..\..\..\..\src\Video\Color.cpp" />
-    <ClCompile Include="..\..\..\..\src\Video\GraphicsAdapter.cpp" />
-    <ClCompile Include="..\..\..\..\src\Video\RenderDevice.cpp" />
-    <ClCompile Include="..\..\..\..\src\Video\VideoManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\src\Components\TestRenderer.h" />
-    <ClInclude Include="..\..\..\..\src\Core\Exception.h" />
-    <ClInclude Include="..\..\..\..\src\Core\StringHelper.h" />
-    <ClInclude Include="..\..\..\..\src\Game\Component.h" />
-    <ClInclude Include="..\..\..\..\src\Game\Entity.h" />
-    <ClInclude Include="..\..\..\..\src\Game\Level.h" />
-    <ClInclude Include="..\..\..\..\src\Game\Transformation.h" />
-    <ClInclude Include="..\..\..\..\src\Input\EventAdapter.h" />
-    <ClInclude Include="..\..\..\..\src\Input\InputManager.h" />
-    <ClInclude Include="..\..\..\..\src\Input\Event.h" />
-    <ClInclude Include="..\..\..\..\src\Math\Vector2D.h" />
-    <ClInclude Include="..\..\..\..\src\Orbis\Orbis.h" />
-    <ClInclude Include="..\..\..\..\src\Video\Color.h" />
-    <ClInclude Include="..\..\..\..\src\Video\GraphicsAdapter.h" />
-    <ClInclude Include="..\..\..\..\src\Video\RenderDevice.h" />
-    <ClInclude Include="..\..\..\..\src\Video\VideoManager.h" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Components\TestRenderer.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Core\StringHelper.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Game\Entity.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Game\Level.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Input\Event.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Input\EventAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Input\InputManager.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Main.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Orbis\Orbis.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Video\Color.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Video\GraphicsAdapter.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Video\RenderDevice.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Video\Source.cpp" />
+    <ClCompile Include="..\..\..\..\src\Orbis\Video\VideoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\TestRenderer.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Core\Exception.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Core\StringHelper.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\Component.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\Entity.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\Level.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Game\Transformation.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Input\Event.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Input\EventAdapter.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Input\InputManager.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Input\KeyCode.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Math\Vector2D.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Orbis\Orbis.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Video\Color.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Video\GraphicsAdapter.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Video\MatrixMode.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Video\RenderDevice.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Video\RenderType.h" />
+    <ClInclude Include="..\..\..\..\src\Orbis\Video\VideoManager.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D5BEA501-ACE4-4341-B97A-3DC71021EA9E}</ProjectGuid>
-    <RootNamespace>game</RootNamespace>
+    <RootNamespace>Orbis</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>Orbis</ProjectName>
   </PropertyGroup>
