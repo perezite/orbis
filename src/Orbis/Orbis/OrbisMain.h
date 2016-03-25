@@ -12,16 +12,18 @@ using namespace Video;
 #include "..\Game\Level.h"
 using namespace Game;
 
-namespace Core
+#undef main
+
+namespace Orbis
 {
-	class Orbis
+	class OrbisMain
 	{
 	public:
 		// Constructor
-		Orbis(int windowWidth, int windowHeight);
+		OrbisMain(int windowWidth, int windowHeight);
 
 		// Destructor
-		virtual ~Orbis() { };
+		virtual ~OrbisMain() { };
 
 		// Run 
 		void Run();

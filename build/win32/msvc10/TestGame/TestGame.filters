@@ -36,6 +36,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\Orbis\Main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Components\TestRenderer.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
@@ -57,6 +60,9 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Input\InputManager.cpp">
       <Filter>Quelldateien\Input</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Orbis\Orbis.cpp">
+      <Filter>Quelldateien\Orbis</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Video\Color.cpp">
       <Filter>Quelldateien\Video</Filter>
     </ClCompile>
@@ -71,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Video\VideoManager.cpp">
       <Filter>Quelldateien\Video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Orbis\Orbis\OrbisMain.cpp">
-      <Filter>Quelldateien\Orbis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +119,9 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Math\Vector2D.h">
       <Filter>Quelldateien\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Orbis\Orbis.h">
+      <Filter>Quelldateien\Orbis</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Video\Color.h">
       <Filter>Quelldateien\Video</Filter>
     </ClInclude>
@@ -133,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Video\VideoManager.h">
       <Filter>Quelldateien\Video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Orbis\OrbisMain.h">
-      <Filter>Quelldateien\Orbis</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

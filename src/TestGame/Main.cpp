@@ -2,14 +2,12 @@
 #include <string>
 #include <iostream>
 
-#include "Core\Exception.h"
+#include "..\Orbis\Core\Exception.h"
 using namespace Core;
 
-#include "Orbis\OrbisMain.h"
+#include "..\Orbis\Orbis\OrbisMain.h"
 using namespace Orbis;
 
-// reference: http://lazyfoo.net/tutorials/OpenGL/01_hello_opengl/index2.php
-#undef main
 int main(int argc, char* args[])
 {
 	OrbisMain orbis(640, 480);

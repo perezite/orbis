@@ -1,4 +1,4 @@
-#include "Orbis.h"
+#include "OrbisMain.h"
 
 #include "..\Game\Entity.h"
 using namespace Game;
@@ -9,16 +9,16 @@ using namespace Video;
 #include <iostream>
 #include <vector>
 
-namespace Core
+namespace Orbis
 {
-	void Orbis::TestLevelInit()
+	void OrbisMain::TestLevelInit()
 	{
 		Component *component = new TestRenderer(entity);
 		entity->AddComponent(component);
 		level->AddEntity(entity);
 	}
 
-	void Orbis::TestEntityController()
+	void OrbisMain::TestEntityController()
 	{
 		if (InputManager::GetInstance()->IsKeyDown(KeyCode::Left))
 		{
@@ -30,7 +30,7 @@ namespace Core
 		}
 	}
 
-	Orbis::Orbis(int windowWidth, int windowHeight) :
+	OrbisMain::OrbisMain(int windowWidth, int windowHeight) :
 		m_defaultWindowSize(Vector2D(640, 480))
 	{
 		VideoManager::GetInstance()->SetWindowResolution((int)m_defaultWindowSize.GetX(), (int)m_defaultWindowSize.GetY());
@@ -40,7 +40,7 @@ namespace Core
 		entity = new Entity();
 	}
 
-	void Orbis::Run()
+	void OrbisMain::Run()
 	{
 		InputManager *inputManager = InputManager::GetInstance();
 		bool hasQuitEvent = false;
