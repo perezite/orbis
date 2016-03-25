@@ -12,11 +12,11 @@ namespace Input
 	{
 	}
 
-	InputManager& InputManager::GetInstance()
+	InputManager* InputManager::GetInstance()
 	{
 		static InputManager instance;
 
-		return instance;
+		return &instance;
 	}
 
 	void InputManager::Update()

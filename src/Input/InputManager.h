@@ -13,7 +13,7 @@ namespace Input
 	{
 	public:
 		// get instance
-		static InputManager& GetInstance();
+		static InputManager* GetInstance();
 
 		// update
 		void Update();

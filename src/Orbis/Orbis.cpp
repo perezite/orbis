@@ -11,37 +11,50 @@ using namespace Video;
 
 namespace Core
 {
-	// test
-	Entity g_testEntity;
+	void Orbis::TestLevelInit()
+	{
+		Component *component = new Renderer(entity);
+		entity->AddComponent(component);
+		level->AddEntity(entity);
+	}
 
-	Orbis::Orbis(int windowWidth, int windowHeight) : 
-		m_inputManager(InputManager::GetInstance()),
-		m_videoManager(VideoManager::GetInstance()),
+	void Orbis::TestEntityController()
+	{
+		if (InputManager::GetInstance()->IsKeyDown(KeyCode::Left))
+		{
+			Transformation transformation = entity->GetTransformation();
+			Vector2D position = transformation.GetPosition();
+			Vector2D newPosition = Vector2D(position.GetX() - 0.01f, position.GetY());
+			transformation.SetPosition(newPosition);
+			entity->SetTransformation(transformation);
+		}
+	}
+
+	Orbis::Orbis(int windowWidth, int windowHeight) :
 		m_defaultWindowSize(Vector2D(640, 480))
 	{
-		m_videoManager.SetWindowResolution((int)m_defaultWindowSize.GetX(), (int)m_defaultWindowSize.GetY());
+		VideoManager::GetInstance()->SetWindowResolution((int)m_defaultWindowSize.GetX(), (int)m_defaultWindowSize.GetY());
+
+		// test
+		level = new Level();
+		entity = new Entity();
 	}
 
 	void Orbis::Run()
 	{
-		// test 
-		g_testEntity.AddComponent(new Renderer(&g_testEntity));
+		InputManager *inputManager = InputManager::GetInstance();
+		bool hasQuitEvent = false;
 
-		while (m_inputManager.HasQuitEvent() == false)
+		TestLevelInit();
+
+		while (hasQuitEvent == false)
 		{
-			m_inputManager.Update();
+			inputManager->Update();
+			hasQuitEvent = inputManager->HasQuitEvent() || inputManager->IsKeyDown(KeyCode::Escape);
 
-			// test
-			if (m_inputManager.IsKeyDown(KeyCode::Left))
-			{
-				Transformation transformation = g_testEntity.GetTransformation();
-				Vector2D position = transformation.GetPosition();
-				Vector2D newPosition = Vector2D(position.GetX() - 0.01f, position.GetY());
-				transformation.SetPosition(newPosition);
-				g_testEntity.SetTransformation(transformation);
-			}
+			TestEntityController();
 
-			m_videoManager.Render(g_testEntity);
+			level->Update();
 		}
 	}
 }

@@ -28,8 +28,11 @@
     <Filter Include="Quelldateien\Math">
       <UniqueIdentifier>{bf79c526-4787-4f37-aded-23a8569fdb94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Core">
+    <Filter Include="Quelldateien\Entity">
       <UniqueIdentifier>{d8be402f-7f26-44e6-b702-8cc4a9b89fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Scene">
+      <UniqueIdentifier>{7545edbf-f7b8-444d-877f-aba139d86079}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +67,10 @@
       <Filter>Quelldateien\Video</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\Core\Entity.cpp">
-      <Filter>Quelldateien\Core</Filter>
+      <Filter>Quelldateien\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Scene\Level.cpp">
+      <Filter>Quelldateien\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,13 +114,16 @@
       <Filter>Quelldateien\Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Core\Component.h">
-      <Filter>Quelldateien\Core</Filter>
+      <Filter>Quelldateien\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Core\Entity.h">
-      <Filter>Quelldateien\Core</Filter>
+      <Filter>Quelldateien\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Core\Transformation.h">
-      <Filter>Quelldateien\Core</Filter>
+      <Filter>Quelldateien\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Scene\Level.h">
+      <Filter>Quelldateien\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

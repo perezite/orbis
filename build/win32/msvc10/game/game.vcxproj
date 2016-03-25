@@ -19,6 +19,7 @@
     <ClCompile Include="..\..\..\..\src\Input\InputManager.cpp" />
     <ClCompile Include="..\..\..\..\src\Main.cpp" />
     <ClCompile Include="..\..\..\..\src\Orbis\Orbis.cpp" />
+    <ClCompile Include="..\..\..\..\src\Scene\Level.cpp" />
     <ClCompile Include="..\..\..\..\src\Video\RenderDevice.cpp" />
     <ClCompile Include="..\..\..\..\src\Video\Renderer.cpp" />
     <ClCompile Include="..\..\..\..\src\Video\VideoManager.cpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="..\..\..\..\src\Input\KeyCode.h" />
     <ClInclude Include="..\..\..\..\src\Math\Vector2D.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Orbis.h" />
+    <ClInclude Include="..\..\..\..\src\Scene\Level.h" />
     <ClInclude Include="..\..\..\..\src\Video\RenderDevice.h" />
     <ClInclude Include="..\..\..\..\src\Video\Renderer.h" />
     <ClInclude Include="..\..\..\..\src\Video\VideoManager.h" />

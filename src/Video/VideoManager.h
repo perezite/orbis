@@ -14,19 +14,25 @@ namespace Video
 	{
 	public:
 		// get instance
-		static VideoManager& GetInstance();
+		static VideoManager* GetInstance();
 
 		// destructor
 		virtual ~VideoManager();
 
 		// get the render device
-		RenderDevice& GetRenderDevice();
+		RenderDevice* GetRenderDevice();
 
 		// set resolution
 		void SetWindowResolution(int widthInPixels, int heightInPixels);
 
 		// render
-		void Render(Entity &entity);
+		void Render(std::vector<Entity*> &entities);
+
+		// clear screen
+		void ClearScreen();
+
+		// swap buffers
+		void SwapBuffers();
 
 	protected:
 		// default singleton constructor

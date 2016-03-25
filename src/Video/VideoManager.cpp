@@ -13,11 +13,11 @@ using namespace Input;
 
 namespace Video
 {
-	VideoManager & VideoManager::GetInstance()
+	VideoManager* VideoManager::GetInstance()
 	{
 		static VideoManager instance;
 
-		return instance;
+		return &instance;
 	}
 
 	VideoManager::VideoManager() : m_defaultWindowSize(Vector2D(100.0f, 100.0f))
@@ -30,9 +30,9 @@ namespace Video
 		DeInitialize();
 	}
 
-	RenderDevice& VideoManager::GetRenderDevice()
+	RenderDevice* VideoManager::GetRenderDevice()
 	{
-		return m_renderDevice;
+		return &m_renderDevice;
 	}
 
 	void VideoManager::SetWindowResolution(int windowWidth, int windowHeight)
@@ -60,19 +60,18 @@ namespace Video
 		OpenGLAdapter::SafeSetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	}
 
-	void VideoManager::Render(Entity &entity)
+	// clear screen
+	void VideoManager::ClearScreen()
 	{
 		OpenGLAdapter::ClearScreen();
+	}
 
-		/*for each (Entity entity in entities)
-		{
-			entity.Render();
-		}*/
-
-		entity.Render();
-
+	// swap buffers
+	void VideoManager::SwapBuffers()
+	{
 		SDLAdapter::SwapOpenGLBuffers();
 	}
+
 
 	void VideoManager::Initialize(int windowWidth, int windowHeight)
 	{

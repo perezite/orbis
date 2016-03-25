@@ -9,6 +9,9 @@ using namespace Input;
 #include "..\Video\VideoManager.h"
 using namespace Video;
 
+#include "..\Scene\Level.h"
+using namespace Scene;
+
 namespace Core
 {
 	class Orbis
@@ -23,18 +26,20 @@ namespace Core
 		// Run 
 		void Run();
 
-	protected:
-		// temporary: test update
-		void TestUpdate();
+		// test
+		void TestLevelInit();
+
+		// test
+		void TestEntityController();
 
 	private:
 		// default window size
 		const Vector2D m_defaultWindowSize;
 	
-		// the video system
-		VideoManager m_videoManager;
+		// test
+		Level *level;
 
-		// the input manager
-		InputManager m_inputManager;
+		// test
+		Entity *entity;
 	};
 }
