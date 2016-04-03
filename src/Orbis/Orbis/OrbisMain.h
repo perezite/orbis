@@ -22,11 +22,8 @@ namespace Orbis
 		// constructor
 		OrbisMain(int windowWidth, int windowHeight);
 
-		// ^destructor
+		// destructor
 		virtual ~OrbisMain() { };
-
-		// queue level
-		void QueueLevel(Level *level);
 
 		// run 
 		void Run();

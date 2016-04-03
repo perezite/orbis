@@ -7,7 +7,7 @@ using namespace Game;
 
 namespace Components
 {
-	// A test renderer which renders a small box at the position of the entity
+	// A wireframe renderer (for testing)
 	class TestRenderer : public Component
 	{
 	public:

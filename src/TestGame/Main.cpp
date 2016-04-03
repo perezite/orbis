@@ -5,6 +5,9 @@
 #include "..\Orbis\Core\Exception.h"
 using namespace Core;
 
+#include "..\Orbis\Game\LevelManager.h"
+using namespace Game;
+
 #include "..\Orbis\Orbis\OrbisMain.h"
 using namespace Orbis;
 
@@ -18,7 +21,7 @@ int main(int argc, char* args[])
 	try
 	{
 		Level *initialLevel = new Level1();
-		orbis.QueueLevel(initialLevel);
+		LevelManager::GetInstance()->QueueLevel(initialLevel);
 		orbis.Run();
 	}
 	catch (Exception e)

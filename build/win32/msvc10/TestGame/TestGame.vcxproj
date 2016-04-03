@@ -16,13 +16,13 @@
     <ClCompile Include="..\..\..\..\src\TestGame\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\TestGame\Controllers\SimpleController.h" />
+    <ClInclude Include="..\..\..\..\src\TestGame\Levels\Level1.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Orbis\Orbis.vcxproj">
       <Project>{d5bea501-ace4-4341-b97a-3dc71021ea9e}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\src\TestGame\Controllers\SimpleController.h" />
-    <ClInclude Include="..\..\..\..\src\TestGame\Levels\Level1.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{12141837-C454-462C-84B9-5311A2214659}</ProjectGuid>

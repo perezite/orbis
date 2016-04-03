@@ -3,7 +3,7 @@
 #include "..\..\Orbis\Game\Entity.h"
 using namespace Game;
 
-#include "..\..\Orbis\Components\TestRenderer.h"
+#include "..\..\Orbis\Components\WireframeRenderer.h"
 using namespace Components;
 
 #include "..\Controllers\SimpleController.h"

@@ -4,7 +4,7 @@
 #include "..\Game\LevelManager.h"
 using namespace Game;
 
-#include "..\Components\TestRenderer.h"
+#include "..\Components\WireframeRenderer.h"
 using namespace Video;
 
 #include <iostream>
@@ -13,16 +13,11 @@ using namespace Video;
 
 namespace Orbis
 {
-	const Vector2D OrbisMain::m_defaultWindowSize = Vector2D(640, 480);
+	const Vector2D OrbisMain::m_defaultWindowSize = Vector2D(480, 480);
 
 	OrbisMain::OrbisMain(int windowWidth, int windowHeight)
 	{
 		VideoManager::GetInstance()->SetWindowResolution((int)m_defaultWindowSize.GetX(), (int)m_defaultWindowSize.GetY());
-	}
-
-	void OrbisMain::QueueLevel(Level *level)
-	{
-		LevelManager::GetInstance()->QueueLevel(level);
 	}
 
 	void OrbisMain::Run()

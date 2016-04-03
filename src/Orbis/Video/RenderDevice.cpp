@@ -1,12 +1,10 @@
 #include "RenderDevice.h"
 
-#include "GraphicsAdapter.h"
-
 namespace Video
 {
-	void RenderDevice::BeginPrimitive()
+	void RenderDevice::BeginPrimitive(RenderMode renderMode)
 	{
-		GraphicsAdapter::BeginPrimitive(RenderMode::Quads);
+		GraphicsAdapter::BeginPrimitive(renderMode);
 	}
 
 	void RenderDevice::EndPrimitive()

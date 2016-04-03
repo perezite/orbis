@@ -36,9 +36,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\Orbis\Components\TestRenderer.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Core\StringHelper.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
@@ -81,14 +78,17 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Math\Vector2D.cpp">
       <Filter>Quelldateien\Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Components\WireframeRenderer.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Math\MathHelper.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\src\Orbis\Components\TestRenderer.h">
-      <Filter>Quelldateien\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Core\Exception.h">
       <Filter>Quelldateien\Core</Filter>
     </ClInclude>
@@ -142,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Transform.h">
       <Filter>Quelldateien\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\WireframeRenderer.h">
+      <Filter>Quelldateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Math\MathHelper.h">
+      <Filter>Quelldateien\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

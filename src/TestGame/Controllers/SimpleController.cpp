@@ -12,17 +12,29 @@ namespace Controllers
 	{
 		InputManager* inputManager = InputManager::GetInstance();
 	
-		Vector2D offset = Vector2D(0.0f, 0.0f);
+		// compute delta position
+		Vector2D deltaPosition = Vector2D(0.0f, 0.0f);
 		if (inputManager->IsKeyDown(KeyCode::Left))
-			offset = offset + Vector2D(-0.01f, 0.0f);
+			deltaPosition = deltaPosition + Vector2D(-0.01f, 0.0f);
 		if (inputManager->IsKeyDown(KeyCode::Right))
-			offset = offset + Vector2D(0.01f, 0.0f);
+			deltaPosition = deltaPosition + Vector2D(0.01f, 0.0f);
 		if (inputManager->IsKeyDown(KeyCode::Up))
-			offset = offset + Vector2D(0.0f, 0.01f);
+			deltaPosition = deltaPosition + Vector2D(0.0f, 0.01f);
 		if (inputManager->IsKeyDown(KeyCode::Down))
-			offset = offset + Vector2D(0.0f, -0.01f);
+			deltaPosition = deltaPosition + Vector2D(0.0f, -0.01f);
 
+		// compute delta rotation
+		float deltaRotation = 0.0f;
+		if (inputManager->IsKeyDown(KeyCode::a))
+			deltaRotation = 0.1f;
+		if (inputManager->IsKeyDown(KeyCode::s))
+			deltaRotation = -0.1f;
+
+		// apply
 		Vector2D position = GetParent()->GetTransform()->GetPosition();
-		GetParent()->GetTransform()->SetPosition(position + offset);
+		float rotation = GetParent()->GetTransform()->GetRotation();
+		GetParent()->GetTransform()->SetPosition(position + deltaPosition);
+		GetParent()->GetTransform()->SetRotation(rotation + deltaRotation);
+
 	}
 }

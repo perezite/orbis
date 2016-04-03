@@ -24,6 +24,9 @@ namespace Math
 		// addition
 		const Vector2D operator+(const Vector2D &other) const;
 
+		// subtraction
+		const Vector2D operator-(const Vector2D &other) const;
+
 		// get x
 		float GetX() const { return m_x; }
 
@@ -35,6 +38,13 @@ namespace Math
 
 		// set y
 		void SetY(float y) { m_y = y; }
+
+	public:
+		// zero vector
+		static const Vector2D Zero;
+
+		// one vector
+		static const Vector2D One;
 
 	private:
 		float m_x;
