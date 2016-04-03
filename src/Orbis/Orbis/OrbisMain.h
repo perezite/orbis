@@ -31,9 +31,6 @@ namespace Orbis
 		// run 
 		void Run();
 
-		// test
-		void TestEntityController();
-
 	private:
 		// default windosw size
 		static const Vector2D m_defaultWindowSize;

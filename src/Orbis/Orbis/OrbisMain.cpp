@@ -27,8 +27,6 @@ namespace Orbis
 
 	void OrbisMain::Run()
 	{
-
-
 		InputManager *inputManager = InputManager::GetInstance();
 		LevelManager *levelManager = LevelManager::GetInstance();
 		bool hasQuitEvent = false;
