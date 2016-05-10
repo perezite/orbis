@@ -16,12 +16,12 @@ using namespace Levels;
 
 int main(int argc, char* args[])
 {
-	OrbisMain orbis(640, 480);
+	OrbisMain orbis(480, 480);
 
 	try
 	{
-		Level *initialLevel = new Level1();
-		LevelManager::GetInstance()->QueueLevel(initialLevel);
+		Level *level1 = new Level1();
+		LevelManager::GetInstance()->QueueLevel(level1);
 		orbis.Run();
 	}
 	catch (Exception e)

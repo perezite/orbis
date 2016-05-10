@@ -15,9 +15,9 @@ namespace Orbis
 {
 	const Vector2D OrbisMain::m_defaultWindowSize = Vector2D(480, 480);
 
-	OrbisMain::OrbisMain(int windowWidth, int windowHeight)
+	OrbisMain::OrbisMain(int windowWidth = (int)m_defaultWindowSize.GetX(), int windowHeight = (int)m_defaultWindowSize.GetY())
 	{
-		VideoManager::GetInstance()->SetWindowResolution((int)m_defaultWindowSize.GetX(), (int)m_defaultWindowSize.GetY());
+		VideoManager::GetInstance()->SetWindowResolution(windowWidth, windowHeight);
 	}
 
 	void OrbisMain::Run()
