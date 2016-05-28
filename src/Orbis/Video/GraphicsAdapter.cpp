@@ -8,6 +8,9 @@
 #include "..\Core\StringHelper.h"
 using namespace Core;
 
+#include "..\Math\MathHelper.h"
+using namespace Math;
+
 #include <iostream>
 
 namespace Video
@@ -30,6 +33,21 @@ namespace Video
 	void GraphicsAdapter::LoadIdentityMatrix()
 	{
 		glLoadIdentity();
+	}
+
+	void GraphicsAdapter::ApplyGlobalTranslation(Vector2D translation)
+	{
+		glTranslatef(translation.GetX(), translation.GetY(), 0.0f);
+	}
+
+	void GraphicsAdapter::ApplyGlobalScale(Vector2D scale)
+	{
+		glScalef(scale.GetX(), scale.GetY(), 0.0f);
+	}
+
+	void GraphicsAdapter::ApplyGlobalRotation(float rotation)
+	{
+		glRotatef(MathHelper::RadianToDegrees(rotation), 0.0f, 0.0f, 1.0f);
 	}
 
 	void GraphicsAdapter::SafeSetClearColor(Color color)

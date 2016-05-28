@@ -24,5 +24,17 @@ namespace Video
 
 		// set vertex 2d
 		void SetVertex2D(Vector2D position);
+
+		// translate all vertices
+		void ApplyGlobalTranslation(Vector2D translation);
+
+		// scale all vertices
+		void ApplyGlobalScale(Vector2D scale);
+
+		// rotate all vertices
+		void ApplyGlobalRotation(float rotation);
+
+		// reset global transformations
+		void ResetGlobalTransforms();
 	};
 }

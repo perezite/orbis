@@ -78,11 +78,14 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Math\Vector2D.cpp">
       <Filter>Quelldateien\Math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Orbis\Components\WireframeRenderer.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Math\MathHelper.cpp">
       <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Components\SillyRenderer.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Components\Camera.cpp">
+      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,11 +146,14 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Transform.h">
       <Filter>Quelldateien\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Components\WireframeRenderer.h">
-      <Filter>Quelldateien\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Math\MathHelper.h">
       <Filter>Quelldateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\SillyRenderer.h">
+      <Filter>Quelldateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\Camera.h">
+      <Filter>Quelldateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

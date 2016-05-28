@@ -22,4 +22,8 @@ namespace Math
 	{
 		return Vector2D(m_x - other.m_x, m_y - other.m_y);
 	}
+	const Vector2D Vector2D::operator-() const
+	{
+		return Vector2D(-m_x, -m_y);
+	}
 }

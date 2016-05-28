@@ -16,4 +16,24 @@ namespace Video
 	{
 		GraphicsAdapter::SetVertex2D(position);
 	}
+
+	void RenderDevice::ApplyGlobalTranslation(Vector2D translation)
+	{
+		GraphicsAdapter::ApplyGlobalTranslation(translation);
+	}
+
+	void RenderDevice::ApplyGlobalScale(Vector2D scale)
+	{
+		GraphicsAdapter::ApplyGlobalScale(scale);
+	}
+
+	void RenderDevice::ApplyGlobalRotation(float rotation)
+	{
+		GraphicsAdapter::ApplyGlobalRotation(rotation);
+	}
+
+	void RenderDevice::ResetGlobalTransforms()
+	{
+		GraphicsAdapter::LoadIdentityMatrix();
+	}
 }

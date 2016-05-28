@@ -16,7 +16,7 @@ using namespace Levels;
 
 int main(int argc, char* args[])
 {
-	OrbisMain orbis(480, 480);
+	OrbisMain orbis(400, 400);
 
 	try
 	{

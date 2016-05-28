@@ -27,6 +27,9 @@ namespace Math
 		// subtraction
 		const Vector2D operator-(const Vector2D &other) const;
 
+		// additive inverse
+		const Vector2D operator-() const;
+
 		// get x
 		float GetX() const { return m_x; }
 

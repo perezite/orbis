@@ -42,6 +42,15 @@ namespace Video
 		// load identity matrix
 		static void LoadIdentityMatrix();
 
+		// apply global translation
+		static void ApplyGlobalTranslation(Vector2D translation);
+
+		// apply global scale
+		static void ApplyGlobalScale(Vector2D scale);
+
+		// apply global rotation
+		static void ApplyGlobalRotation(float rotation);
+
 		// safe set clear color
 		static void SafeSetClearColor(Color color);
 

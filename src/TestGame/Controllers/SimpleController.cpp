@@ -6,6 +6,8 @@ using namespace Game;
 #include "..\..\Orbis\Input\InputManager.h"
 using namespace Input;
 
+#include <iostream>
+
 namespace Controllers
 {
 	void SimpleController::Update() 
@@ -15,13 +17,13 @@ namespace Controllers
 		// compute delta position
 		Vector2D deltaPosition = Vector2D(0.0f, 0.0f);
 		if (inputManager->IsKeyDown(KeyCode::Left))
-			deltaPosition = deltaPosition + Vector2D(-0.01f, 0.0f);
+			deltaPosition = deltaPosition + Vector2D(-0.1f, 0.0f);
 		if (inputManager->IsKeyDown(KeyCode::Right))
-			deltaPosition = deltaPosition + Vector2D(0.01f, 0.0f);
+			deltaPosition = deltaPosition + Vector2D(0.1f, 0.0f);
 		if (inputManager->IsKeyDown(KeyCode::Up))
-			deltaPosition = deltaPosition + Vector2D(0.0f, 0.01f);
+			deltaPosition = deltaPosition + Vector2D(0.0f, 0.1f);
 		if (inputManager->IsKeyDown(KeyCode::Down))
-			deltaPosition = deltaPosition + Vector2D(0.0f, -0.01f);
+			deltaPosition = deltaPosition + Vector2D(0.0f, -0.1f);
 
 		// compute delta rotation
 		float deltaRotation = 0.0f;
@@ -35,6 +37,5 @@ namespace Controllers
 		float rotation = GetParent()->GetTransform()->GetRotation();
 		GetParent()->GetTransform()->SetPosition(position + deltaPosition);
 		GetParent()->GetTransform()->SetRotation(rotation + deltaRotation);
-
 	}
 }

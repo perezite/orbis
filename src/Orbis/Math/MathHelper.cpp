@@ -10,4 +10,9 @@ namespace Math
 	{
 		return M_PI;
 	}
+
+	float MathHelper::RadianToDegrees(float radian)
+	{
+		return (radian / (2.0f * GetPi())) * 360.0f;
+	}
 }

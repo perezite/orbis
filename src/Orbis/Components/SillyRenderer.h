@@ -8,7 +8,7 @@ using namespace Game;
 namespace Components
 {
 	// A wireframe renderer (for testing)
-	class TestRenderer : public Component
+	class SillyRenderer : public Component
 	{
 	public:
 		// update

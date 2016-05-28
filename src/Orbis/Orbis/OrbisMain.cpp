@@ -4,7 +4,7 @@
 #include "..\Game\LevelManager.h"
 using namespace Game;
 
-#include "..\Components\WireframeRenderer.h"
+#include "..\Components\SillyRenderer.h"
 using namespace Video;
 
 #include <iostream>

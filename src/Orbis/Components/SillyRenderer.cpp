@@ -1,4 +1,4 @@
-#include "WireframeRenderer.h"
+#include "SillyRenderer.h"
 
 #include "..\Video\VideoManager.h"
 using namespace Video;
@@ -13,16 +13,16 @@ using namespace Math;
 
 namespace Components
 {
-	void TestRenderer::Update() { }
+	void SillyRenderer::Update() { }
 
-	void TestRenderer::Render()
+	void SillyRenderer::Render()
 	{
 		Vector2D vertices[4];
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
 		Entity *entity = GetParent();
 		Vector2D position = entity->GetTransform()->GetPosition();
-		float horizontalExtent = 0.1f * entity->GetTransform()->GetScale().GetX();
-		float verticalExtent = 0.1f * entity->GetTransform()->GetScale().GetY();
+		float horizontalExtent =  entity->GetTransform()->GetScale().GetX();
+		float verticalExtent = entity->GetTransform()->GetScale().GetY();
 	
 		// compute position
 		vertices[0] = Vector2D(-horizontalExtent, -verticalExtent);

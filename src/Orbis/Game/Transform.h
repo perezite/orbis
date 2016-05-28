@@ -34,7 +34,7 @@ namespace Game
 		void SetRotation(float rotation) { m_rotation = rotation;  }
 
 		// set scale
-		Vector2D SetScale(Vector2D scale) { m_scale = scale; }
+		void SetScale(Vector2D scale) { m_scale = scale; }
 
 	private:
 		// position
