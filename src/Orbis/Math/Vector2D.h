@@ -27,6 +27,9 @@ namespace Math
 		// subtraction
 		const Vector2D operator-(const Vector2D &other) const;
 
+		// scalar multiplication
+		const Vector2D operator*(float scalar) const;
+
 		// additive inverse
 		const Vector2D operator-() const;
 

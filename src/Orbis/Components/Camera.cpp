@@ -12,8 +12,8 @@ namespace Components
 		Vector2D inverseScale = Vector2D(1.0f / transform->GetScale().GetX(), 1.0f / transform->GetScale().GetY());
 
 		renderDevice->ResetGlobalTransforms();
-		renderDevice->ApplyGlobalRotation(-transform->GetRotation());
 		renderDevice->ApplyGlobalScale(inverseScale);
+		renderDevice->ApplyGlobalRotation(-transform->GetRotation());
 		renderDevice->ApplyGlobalTranslation(-transform->GetPosition());
 	}
 }

@@ -18,11 +18,14 @@ namespace Components
 		// constructor
 		Component(Game::Entity* parent) : m_parent(parent) { };
 
+		// start
+		virtual void Start() { };
+
 		// update
-		virtual void Update() = 0;
+		virtual void Update() { };
 
 		// render
-		virtual void Render() = 0;
+		virtual void Render() { };
 
 		// set entity
 		void SetParent(Game::Entity* parent) { m_parent = parent; }

@@ -32,6 +32,9 @@ namespace Game
 		// add component
 		void AddComponent(Component *component);
 
+		// start the entity
+		void Start();
+
 		// update the entity
 		void Update();
 

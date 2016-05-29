@@ -5,7 +5,7 @@ using namespace Video;
 
 namespace Game
 {
-	Level::Level()
+	Level::Level() : m_isStarted(false)
 	{
 		OnLoad();
 	}
@@ -27,9 +27,25 @@ namespace Game
 
 	void Level::Update()
 	{
-		UpdateEntities();
+		if (m_isStarted == false)
+		{
+			StartEntities();
+			m_isStarted = true;
+		}
+		else
+		{
+			UpdateEntities();
 
-		RenderEntities();
+			RenderEntities();
+		}
+	}
+
+	void Level::StartEntities()
+	{
+		for each (Entity *entity in m_entities)
+		{
+			entity->Start();
+		}
 	}
 
 	void Level::UpdateEntities()

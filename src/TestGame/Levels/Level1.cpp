@@ -23,7 +23,7 @@ namespace Levels
 		Entity *camera = new Entity();
 		camera->AddComponent(new Camera());
 		camera->AddComponent(new CameraController());
-		camera->GetTransform()->SetScale(Vector2D(4.0f, 4.0f));
+		camera->GetTransform()->SetScale(Vector2D(8.0f, 4.0f));
 		this->AddEntity(camera);
 
 		// entity 1

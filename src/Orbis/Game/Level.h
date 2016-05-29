@@ -27,6 +27,9 @@ namespace Game
 		void Update();
 
 	protected:
+		// start the entities
+		void StartEntities();
+
 		// update entities
 		void UpdateEntities();
 
@@ -35,6 +38,8 @@ namespace Game
 	private:
 		// entites in the level
 		std::vector<Entity*> m_entities;
-
+		
+		// is the level started
+		bool m_isStarted;
 	};
 }

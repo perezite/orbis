@@ -18,6 +18,14 @@ namespace Game
 		m_components.push_back(component);
 	}
 
+	void Entity::Start()
+	{
+		for each (Component *component in m_components)
+		{
+			component->Start();
+		}
+	}
+
 	void Entity::Update()
 	{
 		for each (Component *component in m_components)
