@@ -1,0 +1,20 @@
+TODO:
+- Sprite-Funktionalität erstellen
+	- Konzepte definieren:
+		- SpriteSheet: Eine Textur, welche eines oder mehrere Sprites enthält, die dasselbe Objekt zu verschiedenen Zeiten darstellen. Im Normalfall sind die einzelnen Sprites Abfolgen in einer Animation.
+		- Sprite: Ein Rechteck innerhalb eines Sprite-Sheets, welches ein einzelnes Frame innerhalb einer Animation definiert.
+		- SpriteSheetRenderer: Ein Renderer, welcher aus den einzelen Sprites innerhalb eines SpriteSheets eine Animation rendert
+	- Texture-Klasse schreiben:
+		- Laden mit SDL mittels folgendem Tipp implementieren: http://www.sdltutorials.com/sdl-tip-sdl-surface-to-opengl-texture
+	- SpriteSheet-schreiben:
+		- Enthält eine Texture mit den Sprite Daten
+		- Funktion GetTexture() schreiben, welche die Bild-Texture des SpriteSheets liefert
+		- Funktion GetSprite(int position) schreiben, welche das Sprite an der Position 'position' innerhalb des SpriteSheets zurückgibt
+	- Sprite 
+		- Enthält eine Referenz auf das SpriteSheets, in welchem dieses Sprite enthalten ist
+		- Funktion GetSpritesheetTexture() schreiben, welche die Texture des Parent-Spritesheets liefert
+		- Funktion GetTextureCoordinates() schreiben, welche die Textur-Koordinaten dieses Sprites innerhalb des Spritesheets liefert
+	- SpriteSheetRenderer:
+		// Das ist jetzt eine Komponente
+		- Update() implementieren, welches periodisch das aktuelle Sprite hochzählt
+		- Render() implementieren, welches die Spritesheet-Textur und die Textur-Koordinaten des aktuellen Sprites holt und das Sprite so rendert, dass es zentriert an der Transform-Position der Komponente ist

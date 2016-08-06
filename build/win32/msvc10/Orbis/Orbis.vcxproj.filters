@@ -87,6 +87,9 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Components\Camera.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Components\SpriteSheetRenderer.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -153,6 +156,9 @@
       <Filter>Quelldateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Components\Camera.h">
+      <Filter>Quelldateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\SpriteSheetRenderer.h">
       <Filter>Quelldateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
