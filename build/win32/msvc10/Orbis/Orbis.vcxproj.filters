@@ -63,9 +63,6 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Video\RenderDevice.cpp">
       <Filter>Quelldateien\Video</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Orbis\Video\Source.cpp">
-      <Filter>Quelldateien\Video</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Video\VideoManager.cpp">
       <Filter>Quelldateien\Video</Filter>
     </ClCompile>
@@ -87,7 +84,10 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Components\Camera.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Orbis\Components\SpriteSheetRenderer.cpp">
+    <ClCompile Include="..\..\..\..\src\Orbis\Video\Texture.cpp">
+      <Filter>Quelldateien\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Orbis\Components\TextureRenderer.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,13 +125,7 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Video\GraphicsAdapter.h">
       <Filter>Quelldateien\Video</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Video\MatrixMode.h">
-      <Filter>Quelldateien\Video</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Video\RenderDevice.h">
-      <Filter>Quelldateien\Video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Video\RenderType.h">
       <Filter>Quelldateien\Video</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Video\VideoManager.h">
@@ -158,7 +152,10 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Components\Camera.h">
       <Filter>Quelldateien\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Components\SpriteSheetRenderer.h">
+    <ClInclude Include="..\..\..\..\src\Orbis\Video\Texture.h">
+      <Filter>Quelldateien\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Orbis\Components\TextureRenderer.h">
       <Filter>Quelldateien\Components</Filter>
     </ClInclude>
   </ItemGroup>

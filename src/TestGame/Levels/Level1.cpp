@@ -4,8 +4,7 @@
 using namespace Game;
 
 #include "..\..\Orbis\Components\SillyRenderer.h"
-using namespace Components;
-
+#include "..\..\Orbis\Components\TextureRenderer.h"
 #include "..\..\Orbis\Components\Camera.h"
 using namespace Components;
 
@@ -19,7 +18,10 @@ namespace Levels
 {
 	Level1::Level1()
 	{
-		// camera
+		// assets
+		m_texture = new Texture("Graphics\\Test.png");
+
+		// camera entity
 		Entity *camera = new Entity();
 		camera->AddComponent(new Camera());
 		camera->AddComponent(new CameraController());
@@ -35,10 +37,15 @@ namespace Levels
 
 		// entity 2
 		Entity *entity2 = new Entity();
-		entity2->GetTransform()->SetScale(Vector2D(1.0f, 0.5f));
-		entity2->AddComponent(new SillyRenderer());
-		entity2->AddComponent(new SimpleController());
 		entity2->GetTransform()->SetPosition(Vector2D(1.0f, 2.0f));
+		TextureRenderer* textureRenderer = new TextureRenderer();
+		textureRenderer->SetTexture(m_texture);
+		entity2->AddComponent(textureRenderer);
 		this->AddEntity(entity2);
+	}
+
+	Level1::~Level1()
+	{
+		delete m_texture;
 	}
 }

@@ -25,7 +25,7 @@ namespace Video
 	{
 		Modelview = GL_MODELVIEW,
 		Projection = GL_PROJECTION,
-		Texture = GL_TEXTURE,
+		Texturing = GL_TEXTURE,
 		Colour = GL_COLOR
 	};
 
@@ -78,10 +78,9 @@ namespace Video
 		// Swap graphics buffers
 		static void SwapBuffers();
 
-	protected: 
 		// assert that no error happened
 		static void AssertNoError();
-
+	protected: 
 		// initialize SDL video subsystem
 		static void InitializeSDLVideoSubsystem();
 

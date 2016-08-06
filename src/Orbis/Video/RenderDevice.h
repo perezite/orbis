@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GraphicsAdapter.h"
+#include "Texture.h"
 
 #include "..\Math\Vector2D.h"
 using namespace Math;
@@ -11,16 +12,19 @@ namespace Video
 	{
 	public:
 		// constructor
-		RenderDevice() { };
+		RenderDevice() : m_texturedRendering(false) { };
 		
 		// destructor
 		virtual ~RenderDevice() { };
 
 		// begin primitive
-		void BeginPrimitive(RenderMode renderMode);
+		void BeginPrimitive(RenderMode renderMode, bool texturedRendering);
 
 		// end primitive
 		void EndPrimitive();
+
+		// set texture coordinate
+		void SetTextureCoordinate(Vector2D position);
 
 		// set vertex 2d
 		void SetVertex2D(Vector2D position);
@@ -36,5 +40,8 @@ namespace Video
 
 		// reset global transformations
 		void ResetGlobalTransforms();
+
+	private:
+		bool m_texturedRendering;
 	};
 }

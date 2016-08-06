@@ -48,7 +48,7 @@ namespace Components
 		vertices[3] = vertices[3] + entity->GetTransform()->GetPosition();
 
 		// render
-		renderDevice->BeginPrimitive(RenderMode::LineLoop);
+		renderDevice->BeginPrimitive(RenderMode::LineLoop, false);
 		renderDevice->SetVertex2D(vertices[0]);
 		renderDevice->SetVertex2D(vertices[1]);
 		renderDevice->SetVertex2D(vertices[2]);
