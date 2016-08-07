@@ -4,6 +4,12 @@ TODO:
 		// SpriteSheet: Eine Textur, welche eines oder mehrere Sprites enthält, die dasselbe Objekt zu verschiedenen Zeiten darstellen. Im Normalfall sind die einzelnen Sprites Abfolgen in einer Animation.
 		// Sprite: Ein Rechteck innerhalb eines Sprite-Sheets, welches ein einzelnes Frame innerhalb einer Animation definiert.
 		// SpriteSheetRenderer: Ein Renderer, welcher aus den einzelen Sprites innerhalb eines SpriteSheets eine Animation rendert
+	- Texture-Klasse schreiben
+		- Funktionalität mit mehreren Texturen testen
+		- Error-Handling sauber implementieren
+			- GraphicsAdapter in GraphicsSystem umbennen (denn es ist ein Adapter für das GraphicsSystem)
+			- Analog die anderen Adapter-Klassen umbenennen
+			- Alle Funktionsaufrufe in die GraphicsSystem-Klasse auslagern und in diesen Funktionen die Errors in Exceptions umwandeln
 	- SpriteSheet-schreiben:
 		- Enthält eine Texture mit den Sprite Daten
 		- Funktion GetTexture() schreiben, welche die Bild-Texture des SpriteSheets liefert

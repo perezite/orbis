@@ -19,7 +19,7 @@ namespace Levels
 	Level1::Level1()
 	{
 		// assets
-		m_texture = new Texture("Graphics\\Test.png");
+		m_texture = new Texture("Graphics\\TestTransparent.png");
 
 		// camera entity
 		Entity *camera = new Entity();
