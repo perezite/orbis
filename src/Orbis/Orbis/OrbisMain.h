@@ -31,11 +31,5 @@ namespace Orbis
 	private:
 		// default windosw size
 		static const Vector2D m_defaultWindowSize;
-	
-		// test
-		Level *level;
-
-		// test
-		Entity *entity;
 	};
 }
