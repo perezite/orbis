@@ -2,7 +2,7 @@
 
 #include "Color.h"
 
-#include "..\Math\Vector2D.h"
+#include "..\..\Base\Math\Vector2D.h"
 using namespace Math;
 
 #define NO_SDL_GLEXT

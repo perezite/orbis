@@ -1,13 +1,13 @@
 #include "CameraController.h"
 
+#include "..\..\Base\Math\MathHelper.h"
+using namespace Math;
+
 #include "..\..\Orbis\Game\Entity.h"
 using namespace Game;
 
 #include "..\..\Orbis\Input\InputManager.h"
 using namespace Input;
-
-#include "..\..\Orbis\Math\MathHelper.h"
-using namespace Math;
 
 #include <cmath>
 #include <iostream>

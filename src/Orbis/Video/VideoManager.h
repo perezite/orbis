@@ -2,11 +2,11 @@
 
 #include "RenderDevice.h"
 
+#include "..\..\Base\Math\Vector2D.h"
+using namespace Math;
+
 #include "..\Game\Entity.h"
 using namespace Game;
-
-#include "..\Math\Vector2D.h"
-using namespace Math;
 
 namespace Video
 {

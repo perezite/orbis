@@ -3,7 +3,7 @@
 #include "GraphicsAdapter.h"
 #include "Texture.h"
 
-#include "..\Math\Vector2D.h"
+#include "..\..\Base\Math\Vector2D.h"
 using namespace Math;
 
 namespace Video

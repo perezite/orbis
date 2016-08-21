@@ -3,7 +3,7 @@
 #include "..\..\Orbis\Components\Component.h"
 using namespace Components;
 
-#include "..\..\Orbis\Math\Vector2D.h"
+#include "..\..\Base\Math\Vector2D.h"
 using namespace Math;
 
 namespace Controllers

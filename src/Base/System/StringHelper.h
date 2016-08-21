@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace Core
+namespace System
 {
 	class StringHelper
 	{

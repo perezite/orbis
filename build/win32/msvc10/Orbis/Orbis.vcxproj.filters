@@ -22,9 +22,6 @@
     <Filter Include="Quelldateien\Orbis">
       <UniqueIdentifier>{0873562e-cf12-42bd-84d9-27ef719c7f8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Math">
-      <UniqueIdentifier>{bf79c526-4787-4f37-aded-23a8569fdb94}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\Game">
       <UniqueIdentifier>{d8be402f-7f26-44e6-b702-8cc4a9b89fcf}</UniqueIdentifier>
     </Filter>
@@ -36,9 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\Orbis\Core\StringHelper.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Game\Entity.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
@@ -72,12 +66,6 @@
     <ClCompile Include="..\..\..\..\src\Orbis\Game\LevelManager.cpp">
       <Filter>Quelldateien\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Orbis\Math\Vector2D.cpp">
-      <Filter>Quelldateien\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\src\Orbis\Math\MathHelper.cpp">
-      <Filter>Quelldateien\Math</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\Orbis\Components\SillyRenderer.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
@@ -98,9 +86,6 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Core\Exception.h">
       <Filter>Quelldateien\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Core\StringHelper.h">
-      <Filter>Quelldateien\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Entity.h">
       <Filter>Quelldateien\Game</Filter>
     </ClInclude>
@@ -115,9 +100,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Input\InputManager.h">
       <Filter>Quelldateien\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Math\Vector2D.h">
-      <Filter>Quelldateien\Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Video\Color.h">
       <Filter>Quelldateien\Video</Filter>
@@ -142,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Transform.h">
       <Filter>Quelldateien\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\Orbis\Math\MathHelper.h">
-      <Filter>Quelldateien\Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Components\SillyRenderer.h">
       <Filter>Quelldateien\Components</Filter>

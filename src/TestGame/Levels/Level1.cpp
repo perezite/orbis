@@ -16,10 +16,12 @@ using namespace Controllers;
 
 namespace Levels
 {
+	const std::string TransparentTextureTestPath = "Graphics\\TestTransparent.png";
+
 	Level1::Level1()
 	{
 		// assets
-		m_texture = new Texture("Graphics\\TestTransparent.png");
+		m_texture = new Texture(TransparentTextureTestPath);
 
 		// camera entity
 		Entity *camera = new Entity();

@@ -6,7 +6,7 @@ using namespace Video;
 #include "..\Game\Entity.h"
 using namespace Game;
 
-#include "..\Math\MathHelper.h"
+#include "..\..\Base\Math\MathHelper.h"
 using namespace Math;
 
 #include <math.h>

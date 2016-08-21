@@ -3,7 +3,7 @@
 #include "GraphicsAdapter.h"
 
 #include "..\Core\Exception.h"
-#include "..\Core\StringHelper.h"
+#include "..\..\Base\System\StringHelper.h"
 using namespace Core;
 
 #include "..\Input\InputManager.h"

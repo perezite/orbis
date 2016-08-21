@@ -5,10 +5,12 @@
 #include "GraphicsAdapter.h"
 
 #include "..\Core\Exception.h"
-#include "..\Core\StringHelper.h"
 using namespace Core;
 
-#include "..\Math\MathHelper.h"
+#include "..\..\Base\System\StringHelper.h"
+using namespace System;
+
+#include "..\..\Base\Math\MathHelper.h"
 using namespace Math;
 
 #include <iostream>

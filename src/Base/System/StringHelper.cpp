@@ -4,7 +4,7 @@
 #include <memory.h>
 #include <iostream>
 
-namespace Core
+namespace System
 {
 	std::string StringHelper::GetFormattedString(std::string format, int maximalFormattedLength, ...)
 	{

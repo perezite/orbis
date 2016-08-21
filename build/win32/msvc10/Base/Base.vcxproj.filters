@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\System">
+      <UniqueIdentifier>{98243726-b5da-4b03-a903-eb2f83f5591d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Math">
+      <UniqueIdentifier>{750e14de-89e5-4412-9412-acaa2dcdbb44}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\Base\System\StringHelper.cpp">
+      <Filter>Quelldateien\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Base\Math\MathHelper.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Base\Math\Vector2D.cpp">
+      <Filter>Quelldateien\Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\Base\System\StringHelper.h">
+      <Filter>Quelldateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Base\Math\MathHelper.h">
+      <Filter>Quelldateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Base\Math\Vector2D.h">
+      <Filter>Quelldateien\Math</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
