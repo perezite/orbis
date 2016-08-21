@@ -11,12 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\TestGame\Application\App.cpp" />
     <ClCompile Include="..\..\..\..\src\TestGame\Controllers\CameraController.cpp" />
     <ClCompile Include="..\..\..\..\src\TestGame\Controllers\SimpleController.cpp" />
     <ClCompile Include="..\..\..\..\src\TestGame\Levels\Level1.cpp" />
     <ClCompile Include="..\..\..\..\src\TestGame\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\TestGame\Application\App.h" />
     <ClInclude Include="..\..\..\..\src\TestGame\Controllers\CameraController.h" />
     <ClInclude Include="..\..\..\..\src\TestGame\Controllers\SimpleController.h" />
     <ClInclude Include="..\..\..\..\src\TestGame\Levels\Level1.h" />

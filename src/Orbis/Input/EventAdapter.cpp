@@ -2,8 +2,8 @@
 
 #include "Event.h"
 
-#include "..\Core\Exception.h"
-using namespace Core;
+#include "..\..\Base\System\Exception.h"
+using namespace System;
 
 namespace Input
 {

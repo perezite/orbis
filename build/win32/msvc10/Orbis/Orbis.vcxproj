@@ -35,7 +35,6 @@
     <ClInclude Include="..\..\..\..\src\Orbis\Components\Component.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Components\SillyRenderer.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Components\TextureRenderer.h" />
-    <ClInclude Include="..\..\..\..\src\Orbis\Core\Exception.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Entity.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Level.h" />
     <ClInclude Include="..\..\..\..\src\Orbis\Game\LevelManager.h" />

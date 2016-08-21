@@ -4,9 +4,7 @@
 
 #include "GraphicsAdapter.h"
 
-#include "..\Core\Exception.h"
-using namespace Core;
-
+#include "..\..\Base\System\Exception.h"
 #include "..\..\Base\System\StringHelper.h"
 using namespace System;
 

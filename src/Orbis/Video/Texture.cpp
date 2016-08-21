@@ -1,8 +1,8 @@
 #include "Texture.h"
 #include "GraphicsAdapter.h"
 
-#include "..\Core\Exception.h"
-using namespace Core;
+#include "..\..\Base\System\Exception.h"
+using namespace System;
 
 #include <SDL_image.h>
 

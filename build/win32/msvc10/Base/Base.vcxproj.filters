@@ -26,6 +26,9 @@
     <ClCompile Include="..\..\..\..\src\Base\Math\Vector2D.cpp">
       <Filter>Quelldateien\Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\Base\System\EnvironmentHelper.cpp">
+      <Filter>Quelldateien\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\src\Base\System\StringHelper.h">
@@ -36,6 +39,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\Base\Math\Vector2D.h">
       <Filter>Quelldateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Base\System\EnvironmentHelper.h">
+      <Filter>Quelldateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\Base\System\Exception.h">
+      <Filter>Quelldateien\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

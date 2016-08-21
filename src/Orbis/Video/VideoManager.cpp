@@ -2,9 +2,9 @@
 
 #include "GraphicsAdapter.h"
 
-#include "..\Core\Exception.h"
+#include "..\..\Base\System\Exception.h"
 #include "..\..\Base\System\StringHelper.h"
-using namespace Core;
+using namespace System;
 
 #include "..\Input\InputManager.h"
 using namespace Input;

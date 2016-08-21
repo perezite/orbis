@@ -28,9 +28,6 @@
     <Filter Include="Quelldateien\Components">
       <UniqueIdentifier>{683aa64e-f05f-4d91-a570-158537f4e361}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Core">
-      <UniqueIdentifier>{0371fc11-a776-49e4-a4b1-efdfb1f79fc6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\Orbis\Game\Entity.cpp">
@@ -83,9 +80,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\src\Orbis\Core\Exception.h">
-      <Filter>Quelldateien\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\src\Orbis\Game\Entity.h">
       <Filter>Quelldateien\Game</Filter>
     </ClInclude>
