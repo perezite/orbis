@@ -16,12 +16,14 @@ using namespace Controllers;
 
 namespace Levels
 {
-	const std::string TransparentTextureTestPath = "Graphics\\TestTransparent.png";
+	const std::string TransparentTestTexture1Path = "Graphics\\TestTransparent.png";
+	const std::string TransparentTestTexture2Path = "Graphics\\TestTransparent2.png";
 
 	Level1::Level1()
 	{
 		// assets
-		m_texture = new Texture(TransparentTextureTestPath);
+		m_texture1 = new Texture(TransparentTestTexture1Path);
+		m_texture2 = new Texture(TransparentTestTexture2Path);	
 
 		// camera entity
 		Entity *camera = new Entity();
@@ -41,13 +43,21 @@ namespace Levels
 		Entity *entity2 = new Entity();
 		entity2->GetTransform()->SetPosition(Vector2D(1.0f, 2.0f));
 		TextureRenderer* textureRenderer = new TextureRenderer();
-		textureRenderer->SetTexture(m_texture);
+		textureRenderer->SetTexture(m_texture1);
 		entity2->AddComponent(textureRenderer);
 		this->AddEntity(entity2);
+
+		// entity 3
+		Entity *entity3 = new Entity();
+		entity3->GetTransform()->SetPosition(Vector2D(-1.0f, -1.0f));
+		TextureRenderer* textureRenderer2 = new TextureRenderer();
+		textureRenderer2->SetTexture(m_texture2);
+		entity3->AddComponent(textureRenderer2);
+		this->AddEntity(entity3);
 	}
 
 	Level1::~Level1()
 	{
-		delete m_texture;
+		delete m_texture1;
 	}
 }

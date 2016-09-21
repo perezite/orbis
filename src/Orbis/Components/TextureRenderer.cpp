@@ -18,13 +18,13 @@ namespace Components
 {
 	void TextureRenderer::SetTexture(Texture * texture)
 	{
-		m_texture = texture;
+		m_texture1 = texture;
 	}
 
 	void TextureRenderer::Render() 
 	{ 		
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		m_texture->SetActive();
+		m_texture1->SetActive();
 		Vector2D position = GetParent()->GetTransform()->GetPosition();
 
 		renderDevice->BeginPrimitive(RenderMode::Quads, true);

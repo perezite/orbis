@@ -16,6 +16,7 @@ namespace Levels
 		~Level1();
 
 	private:
-		Texture *m_texture;
+		Texture *m_texture1;
+		Texture *m_texture2;
 	};
 }

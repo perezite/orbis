@@ -25,7 +25,7 @@ namespace Components
 
 	private:
 		// the texture
-		Texture* m_texture;
+		Texture* m_texture1;
 
 		// temp
 		GLuint m_textureId;
