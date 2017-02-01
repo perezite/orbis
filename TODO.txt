@@ -1,24 +1,32 @@
 TODO:
-- Sprite-Funktionalität erstellen
-	// Konzepte definieren:
-		// SpriteSheet: Eine Textur, welche eines oder mehrere Sprites enthält, die dasselbe Objekt zu verschiedenen Zeiten darstellen. Im Normalfall sind die einzelnen Sprites Abfolgen in einer Animation.
-		// Sprite: Ein Rechteck innerhalb eines Sprite-Sheets, welches ein einzelnes Frame innerhalb einer Animation definiert.
-		// SpriteSheetRenderer: Ein Renderer, welcher aus den einzelen Sprites innerhalb eines SpriteSheets eine Animation rendert
-	- Texture-Klasse schreiben
-		- Error-Handling sauber implementieren
-        - GraphicsAdapter in GraphicsSystem umbennen (denn es ist ein Adapter für das GraphicsSystem)
-        - Analog die anderen Adapter-Klassen umbenennen
-        - Alle Funktionsaufrufe in die GraphicsSystem-Klasse auslagern und in diesen Funktionen die Errors in Exceptions umwandeln
-	- SpriteSheet-schreiben:
-		- Enthält eine Texture mit den Sprite Daten
-		- Funktion GetTexture() schreiben, welche die Bild-Texture des SpriteSheets liefert
-		- Funktion GetSprite(int position) schreiben, welche das Sprite an der Position 'position' innerhalb des SpriteSheets zurückgibt
-	- Sprite 
-		- Enthält eine Referenz auf das SpriteSheets, in welchem dieses Sprite enthalten ist
-		- Funktion GetSpritesheetTexture() schreiben, welche die Texture des Parent-Spritesheets liefert
-		- Funktion GetTextureCoordinates() schreiben, welche die Textur-Koordinaten dieses Sprites innerhalb des Spritesheets liefert
-	- SpriteSheetRenderer:
-		// Das ist jetzt eine Komponente
-		- Update() implementieren, welches periodisch das aktuelle Sprite hochzählt
-		- Render() implementieren, welches die Spritesheet-Textur und die Textur-Koordinaten des aktuellen Sprites holt und das Sprite so rendert, dass es zentriert an der Transform-Position der Komponente ist
-- Adapter-Logik Web-Refactoren
+- Den Build-Ordner umstellen in SDL2CrossPlatform
+	- build/windows erstellen
+		- build/windows/lib mit Windows SDL-Files befüllen 
+		- build/windows/include mit Windows SDL-Files befüllen
+		- Ordner build/common erstellen
+		- build/android/lib-build/OpenGLEngine anheben auf build/common/lib-build
+		- Die OpenGLEngine auch für Windows kompilierbar machen
+			- Folgende Struktur unter ../OpenGLEngine erstellen:
+				- src
+				- build
+				- bin
+			- Die vorhandenen Android-Projekt Files verschieben nach build/android und die Pfade in den Makefiles anpassen
+			- Implementieren, dass die Android-Kompilate in bin landen
+			- C:\Program Files (x86)\CodeBlocks\MinGW\bin zu System-Path hinzufügen
+			- Unter build/windows ein einfaches Batch-Projekt zum Kompilieren machen
+			- Die Windows-DLL verfrachten nach build/windows/lib
+	- Das Projekt verschieben nach build/projects (liegt aktell in build/android/vs-tegra/SDL2Test)
+	- build/android/include/OpenGLEngine anheben auf build/common/include/OpenGLEngine
+	- Die Ordner-Referenzen anpassen im Projekt, so dass beide Plattformen kompilerbar sind
+	- Im Ordner Android und Windows befinden sich jeweils:
+      - Ein temp-Ordner mit den temporär-Files
+      - Die Ordner include, lib, lib-build (für Android, aktuell nicht nötig für Windows)
+- Ein rotierendes Dreieck kompilierbar machen für Windows unter SDL2CrossPlatform
+    - Code implementieren für Windows
+	- Code implementieren für Android
+	- Common-Code abstrahieren
+- Feature-Brach von SDL2CrossPlatform mergen
+- Feature-Branch in orbis erstellen
+- Den Code in Orbis im Feature-Branch ersetzen durch Templates/SDL2CrossPlatform
+- Die orbis-Funktionalität für beide Plattformen schrittweise wieder einbauen in dem übernommenen Code
+- Feature-Branch mergen
