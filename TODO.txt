@@ -1,12 +1,8 @@
 TODO:  
-- Output-Pfad von Tegra-Android fixen
 - Ein rotierendes Dreieck kompilierbar machen für Windows unter SDL2CrossPlatform
-    - Code implementieren für Windows
-		- Kleines OpenGL-Programm schreiben zum Testen (Fenster und Viereck)
-		- OpenGLEngine einbinden
-		- Rotierendes Dreieck so einfach wie möglich implementieren
-	- Code implementieren für Android
 	- Common-Code abstrahieren
+- Shipping-Konfiguration löschen
+- Debug und Release Konfigurationen beide lauffähig machen	
 - Feature-Brach von SDL2CrossPlatform mergen
 - Feature-Branch in orbis erstellen
 - Den Code in Orbis im Feature-Branch ersetzen durch Templates/SDL2CrossPlatform
