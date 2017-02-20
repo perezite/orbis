@@ -1,6 +1,6 @@
 TODO:  
 - Den kompletten Code aus orbis ersetzen durch templates/SDL2CrossPlatform
-- In sandbox-Projekt das partielle Auslagern von Platform-Code in einen Unterordner austesten
+- In einem sandbox-Projekt das partielle Auslagern von Platform-Code in einen Unterordner austesten
 - Das rotierende Dreieck im Orbis-Style implementieren
 	-- Falls der Platform-Abhängige Code zu Komplex wird: Ordner Platform machen und Code dort implementieren
 	- Das von SDL2CrossPlatform kopierte Projekt umbenennen zu 'Orbis'
@@ -12,19 +12,31 @@ TODO:
 		- Kompilation sicherstellen
 	- src/Orbis/Platform/Android.cpp erstellen und Code von SDL2CrossPlatform/SDL_android_main.c übernehmen
 		- Dieses File ruft die main-Funktion aus src/Orbis/Main.cpp auf	
-	- Orbis-Ordner wieder implementieren
-		- OrbisMain anpassen
-			- Konstruktor bietet ein Fullscreen-Flag
-			- Konstruktor wirft eine Exception wenn auf Android nicht Fullscreen aufgerufen wird
-	- Input-Ordner wieder implementieren
+	- Orbis-Ordner partiell re-implementieren
+		- Auflösung aus OrbisMain-Konstruktor entfernen
+		- Im OrbisMain Konstruktor unter Windows ein Fenster mit Default-Grösse erzeugen. Unter Android ein Fullscreen-Fenster mit maximaler Auflösung
+	- Input-Ordner partiell re-implementieren
 		- Orbis.Input.EventAdapter und Orbis.Input.InputManager mergen
-	- Video-Ordner wieder implementieren
+		- GetTapDown() und GetTap() implementieren
+	- Video-Ordner partiell re-implementieren
 		- Orbis.Video.GraphicsAdapter und Orbis.Video.VideoManager mergen
 		- Funktionalität aus VideoManager nach RenderDevice verschieben, falls sie nur dort benötigt wird
-		- Texture.cpp implementieren, auch für Android
-		
-	- Neues Projekt 'Base' erstellen
-	- EnvironmentHelper.cpp für Android implementieren
-	- Den restlichen Base-Code einbinden
-	- 
+	- Components-Ordner partiell re-implementieren
+		- Component übernehmen
+		- SolidRedTriangleRenderer erstellen
+	- Game-Ordner re-implementieren
+		- Alles übernehmen
+	- Testcode erstellen unter src/Orbis/TestGame.cpp welcher
+		- Das Programm startet
+		- Orbis startet
+		- Ein Level erstellt
+		- Ein Triangle Entity erstellt
+		- Den SolidRedTriangleRenderer hinzufügt
+		- Die Transform rotieren lässt
+	- 'TestGame' Projekt partiell re-implementieren
+		- Das File src/Orbis/TestGame.cpp verschieben nach TestGame/TestGame.cpp
+		- Referenzen setzen, auch für Android
+		- Kompilation testen
+- Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
+	- TODO: Einzelne Schritte einfügen
 - Feature-Branch orbis/cross-platform nach master mergen
