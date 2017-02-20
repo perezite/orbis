@@ -1,10 +1,5 @@
-TODO:  
-- Ein rotierendes Dreieck kompilierbar machen für Windows unter SDL2CrossPlatform
-	- Common-Code abstrahieren
-- Shipping-Konfiguration löschen
-- Debug und Release Konfigurationen beide lauffähig machen	
-- Feature-Brach von SDL2CrossPlatform mergen
-- Feature-Branch in orbis erstellen
+TODO:  	
+- Feature-Branch cross-platform in orbis erstellen
 - Den Code in Orbis im Feature-Branch ersetzen durch Templates/SDL2CrossPlatform
 - Die orbis-Funktionalität für beide Plattformen schrittweise wieder einbauen in dem übernommenen Code
-- Feature-Branch mergen
+- Feature-Branch orbis/cross-platform nach master mergen
