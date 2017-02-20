@@ -1,5 +1,30 @@
-TODO:  	
-- Feature-Branch cross-platform in orbis erstellen
-- Den Code in Orbis im Feature-Branch ersetzen durch Templates/SDL2CrossPlatform
-- Die orbis-Funktionalität für beide Plattformen schrittweise wieder einbauen in dem übernommenen Code
+TODO:  
+- Den kompletten Code aus orbis ersetzen durch templates/SDL2CrossPlatform
+- In sandbox-Projekt das partielle Auslagern von Platform-Code in einen Unterordner austesten
+- Das rotierende Dreieck im Orbis-Style implementieren
+	-- Falls der Platform-Abhängige Code zu Komplex wird: Ordner Platform machen und Code dort implementieren
+	- Das von SDL2CrossPlatform kopierte Projekt umbenennen zu 'Orbis'
+	- 'Base' Projekt partiell implementieren
+		- MathHelper, Vector2D, Exception, StringHelper übernehmen
+		- Referenz von Orbis auf Base implementieren (auch für Android)
+			- Testen mittels einfachem Call von StringHelper.cpp in Orbis
+		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			
+		- Kompilation sicherstellen
+	- src/Orbis/Platform/Android.cpp erstellen und Code von SDL2CrossPlatform/SDL_android_main.c übernehmen
+		- Dieses File ruft die main-Funktion aus src/Orbis/Main.cpp auf	
+	- Orbis-Ordner wieder implementieren
+		- OrbisMain anpassen
+			- Konstruktor bietet ein Fullscreen-Flag
+			- Konstruktor wirft eine Exception wenn auf Android nicht Fullscreen aufgerufen wird
+	- Input-Ordner wieder implementieren
+		- Orbis.Input.EventAdapter und Orbis.Input.InputManager mergen
+	- Video-Ordner wieder implementieren
+		- Orbis.Video.GraphicsAdapter und Orbis.Video.VideoManager mergen
+		- Funktionalität aus VideoManager nach RenderDevice verschieben, falls sie nur dort benötigt wird
+		- Texture.cpp implementieren, auch für Android
+		
+	- Neues Projekt 'Base' erstellen
+	- EnvironmentHelper.cpp für Android implementieren
+	- Den restlichen Base-Code einbinden
+	- 
 - Feature-Branch orbis/cross-platform nach master mergen

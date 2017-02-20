@@ -10,7 +10,6 @@ using namespace Video;
 #include <iostream>
 #include <vector>
 
-
 namespace Orbis
 {
 	const Vector2D OrbisMain::m_defaultWindowSize = Vector2D(480, 480);
