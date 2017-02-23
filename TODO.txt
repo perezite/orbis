@@ -1,5 +1,4 @@
 TODO:  
-- Den kompletten Code aus orbis ersetzen durch templates/SDL2CrossPlatform
 - In einem sandbox-Projekt das partielle Auslagern von Platform-Code in einen Unterordner austesten
 - Das rotierende Dreieck im Orbis-Style implementieren
 	-- Falls der Platform-Abhängige Code zu Komplex wird: Ordner Platform machen und Code dort implementieren
