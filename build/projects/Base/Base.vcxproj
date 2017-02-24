@@ -66,73 +66,64 @@
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>
-      <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
+      <AntBuildPath>..\..\android\ndk</AntBuildPath>
       <NativeLibDependencies>
       </NativeLibDependencies>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>
-      <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
+      <AntBuildPath>..\..\android\ndk</AntBuildPath>
       <NativeLibDependencies>
       </NativeLibDependencies>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\windows\include;..\..\windows\include\SDL2;..\..\windows\include\glew-1.5.8;..\..\common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\..\windows\lib\SDL2;..\..\windows\lib\glew-1.5.8;..\..\windows\lib\OpenGLEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;engined.lib;opengl32.lib;glew32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)..\bin\$(Platform)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Link>
-      <AdditionalLibraryDirectories>..\..\windows\lib\SDL2;..\..\windows\lib\glew-1.5.8;..\..\windows\lib\OpenGLEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;engine.lib;opengl32.lib;glew32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)..\bin\$(Platform)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>WIN32</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\windows\include;..\..\windows\include\SDL2;..\..\windows\include\glew-1.5.8;..\..\common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\..\android\ndk\Orbis\AndroidManifest.xml" />
-    <None Include="..\..\android\ndk\Orbis\default.properties" />
-    <None Include="..\..\android\ndk\Orbis\jni\Android.mk" />
-    <None Include="..\..\android\\ndk\Orbis\jni\Application.mk" />
-    <None Include="..\..\android\\ndk\Orbis\res\values\strings.xml" />
+    <None Include="..\..\android\ndk\AndroidManifest.xml" />
+    <None Include="..\..\android\ndk\default.properties" />
+    <None Include="..\..\android\ndk\jni\Android.mk" />
+    <None Include="..\..\android\\ndk\jni\Application.mk" />
+    <None Include="..\..\android\\ndk\res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\Orbis\CheesyHelper.cpp" />
-    <ClCompile Include="..\..\..\src\Orbis\SDL_android_main.c" />
-    <ClCompile Include="..\..\..\src\Orbis\SDL_main.cpp" />
+    <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h" />
-  </ItemGroup>  
-  <ItemGroup>
-    <JCompile Include="..\..\android\ndk\Orbis\src\org\libsdl\app\SDLActivity.java" />
+	<ClInclude Include="..\..\..\src\Base\Math\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
