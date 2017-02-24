@@ -171,31 +171,25 @@ static void display()
 
     // set untransformed points
     const float z = 0.0f;
-    float leftX = -0.3f;
-    float leftY = -0.3f;
-    float rightX = 0.3f;
-    float rightY = -0.3f;
-    float topX = 0.0f;
-    float topY = 0.3f;
+    Vector2D leftPoint(-0.3f, -0.3f);
+    Vector2D rightPoint(0.3f, -0.3f);
+    Vector2D topPoint(0.0f, 0.3f);
 
     // compute rotated points
     float omega = M_PI;
     static float alpha = 0.0f;
     alpha += omega * deltaTime;
-    float rotLeftX = cos(alpha)*leftX - sin(alpha)*leftY;
-    float rotLeftY = sin(alpha)*leftX + cos(alpha)*leftY;
-    float rotRightX = cos(alpha)*rightX - sin(alpha)*rightY;
-    float rotRightY = sin(alpha)*rightX + cos(alpha)*rightY;
-    float rotTopX = cos(alpha)*topX - sin(alpha)*topY;
-    float rotTopY = sin(alpha)*topX + cos(alpha)*topY;
+    Vector2D rotatedLeftPoint(cos(alpha)*leftPoint.GetX() - sin(alpha)*leftPoint.GetY(), sin(alpha)*leftPoint.GetX() + cos(alpha)*leftPoint.GetY());
+    Vector2D rotatedRightPoint(cos(alpha)*rightPoint.GetX() - sin(alpha)*rightPoint.GetY(), sin(alpha)*rightPoint.GetX() + cos(alpha)*rightPoint.GetY());
+    Vector2D rotatedTopPoint(cos(alpha)*topPoint.GetX() - sin(alpha)*topPoint.GetY(), sin(alpha)*topPoint.GetX() + cos(alpha)*topPoint.GetY());
 
     // render
     const float color[] = { 1.0f, 0.0f, 0.0f, 1.0f };
-    GLfloat triangle[] = { rotTopX, rotTopY, z,
+    GLfloat triangle[] = { rotatedTopPoint.GetX(), rotatedTopPoint.GetY(), z,
         color[0], color[1], color[2], color[3],
-        rotLeftX, rotLeftY, z,
+        rotatedLeftPoint.GetX(), rotatedLeftPoint.GetY(), z,
         color[0], color[1], color[2], color[3],
-        rotRightX, rotRightY, z,
+        rotatedRightPoint.GetX(), rotatedRightPoint.GetY(), z,
         color[0], color[1], color[2], color[3] };
 
     glVertexAttribPointer(POSITION_PARAMETER_INDEX, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize, triangle);
