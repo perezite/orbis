@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}</ProjectGuid>
+    <ProjectGuid>{4D6F7B10-C99B-4A20-B459-3E0147071F53}</ProjectGuid>
     <RootNamespace>Orbis</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -40,6 +40,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PlatformToolset>v140</PlatformToolset>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -68,12 +69,13 @@
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk\Base</AntBuildPath>
       <NativeLibDependencies>
       </NativeLibDependencies>
+      <SkipAntStep>True</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk\Base</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
@@ -82,12 +84,13 @@
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk\Base</AntBuildPath>
       <NativeLibDependencies>
       </NativeLibDependencies>
+      <SkipAntStep>True</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk\Base</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -113,17 +116,14 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\..\android\ndk\AndroidManifest.xml" />
-    <None Include="..\..\android\ndk\default.properties" />
-    <None Include="..\..\android\ndk\jni\Android.mk" />
-    <None Include="..\..\android\\ndk\jni\Application.mk" />
-    <None Include="..\..\android\\ndk\res\values\strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-	<ClInclude Include="..\..\..\src\Base\Math\Vector2D.h" />
+    <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\android\ndk\Base\jni\Android.mk" />
+    <None Include="..\..\android\ndk\Base\jni\Application.mk" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

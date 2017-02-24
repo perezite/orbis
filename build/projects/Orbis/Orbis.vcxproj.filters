@@ -7,14 +7,14 @@
     <None Include="..\..\android\ndk\Orbis\default.properties">
       <Filter>build\android</Filter>
     </None>
-    <None Include="..\..\android\ndk\Orbis\jni\Android.mk">
-      <Filter>build\android\jni\Orbis</Filter>
-    </None>
-    <None Include="..\..\android\\ndk\Orbis\jni\Application.mk">
-      <Filter>build\android\jni\Orbis</Filter>
-    </None>
     <None Include="..\..\android\\ndk\Orbis\res\values\strings.xml">
       <Filter>build\android\res\values</Filter>
+    </None>
+    <None Include="..\..\android\ndk\Orbis\jni\Android.mk">
+      <Filter>build\android\jni</Filter>
+    </None>
+    <None Include="..\..\android\\ndk\Orbis\jni\Application.mk">
+      <Filter>build\android\jni</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -47,9 +47,6 @@
     </Filter>
     <Filter Include="build\android\src\org\libsdl\app">
       <UniqueIdentifier>{891970ee-17b6-4be1-8add-e82e657ad42f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\android\jni\Orbis">
-      <UniqueIdentifier>{c8eb90ac-969b-4867-b275-4a8acaf33e71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

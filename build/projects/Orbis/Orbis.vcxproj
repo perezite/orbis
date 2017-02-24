@@ -130,9 +130,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h" />
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <JCompile Include="..\..\android\ndk\Orbis\src\org\libsdl\app\SDLActivity.java" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base\Base.vcxproj">
+      <Project>{4d6f7b10-c99b-4a20-b459-3e0147071f53}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

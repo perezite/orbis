@@ -1,50 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include="..\..\android\ndk\jni\Android.mk">
-      <Filter>build\android\jni</Filter>
-    </None>
-    <None Include="..\..\android\\ndk\jni\Application.mk">
-      <Filter>build\android\jni</Filter>
-    </None>
-    <None Include="..\..\android\\ndk\res\values\strings.xml">
-      <Filter>build\android\res\values</Filter>
-    </None>
-    <None Include="..\..\android\ndk\AndroidManifest.xml">
-      <Filter>build\android</Filter>
-    </None>
-    <None Include="..\..\android\ndk\default.properties">
-      <Filter>build\android</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="build">
-      <UniqueIdentifier>{774bc8de-b09b-4df4-acb9-c0d86e5cfcf0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src">
-      <UniqueIdentifier>{b6394026-fd6c-446d-ac98-8a334b55f775}</UniqueIdentifier>
+      <UniqueIdentifier>{16c77023-4ec5-4176-8531-00e60f382cf9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="build\android">
-      <UniqueIdentifier>{27742484-6795-47de-870e-754545c4309c}</UniqueIdentifier>
+    <Filter Include="src\Math">
+      <UniqueIdentifier>{dff19296-bae0-4011-a09a-0926f352af47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="build\android\jni">
-      <UniqueIdentifier>{827fb5ef-3876-4d47-a695-e4dbb77dccb0}</UniqueIdentifier>
+    <Filter Include="build">
+      <UniqueIdentifier>{7ff0b9c0-d334-4cf0-9297-7a2c4518633b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="build\android\res">
-      <UniqueIdentifier>{c3954bfb-1970-4a91-b852-b610695a8c42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\android\res\values">
-      <UniqueIdentifier>{0d89a7af-bcc2-43d2-9447-bb49201d9d6c}</UniqueIdentifier>
+    <Filter Include="build\jni">
+      <UniqueIdentifier>{af980106-01bd-4795-94c4-1b69bca56b39}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\Base\Math\Vector2D.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp">
+      <Filter>src\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h">
-      <Filter>src</Filter>
+      <Filter>src\Math</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\android\ndk\Base\jni\Android.mk">
+      <Filter>build\jni</Filter>
+    </None>
+    <None Include="..\..\android\ndk\Base\jni\Application.mk">
+      <Filter>build\jni</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,12 +1,9 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- 'Base' Projekt partiell implementieren
-		- Makefiles in build/android/ndk/jni in Unterordner Orbis verschieben und 'Orbis'-Projekt entsprechend anpassen
-		- Neuen Unterordner build/android/ndk/jni/Base erstellen und 'Base'-Projekt entsprechend anpassen
-		- 'Base' der Solution hinzufügen
-		- 'Base'-Projekt Windows Build-Target als Static-Library einstellen
 		- 'Base'-Projekt Ant Build-Step überspringen lassen		
 		- In 'Orbis' eine Referenz auf 'Base' erstellen
+		- In 'Orbis' Android-Makefile eine Referenz auf Base erstellen
 		- Dreiecks-Koordinaten testweise als Vector2D darstellen und testen auf Windows und Android
 		- MathHelper, Exception, StringHelper übernehmen
 		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			
