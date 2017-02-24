@@ -12,6 +12,9 @@
     #include <gl\glu.h>
 #endif
 
+#include "../Base/Math/Vector2D.h"
+using namespace Math;
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -66,22 +69,6 @@ GLuint LoadShader(const char *shaderSrc, GLenum type)
     }
     return shader;
 }
-
-/*
-static std::string getFragmentShaderCode()
-{
-    return 
-        #ifdef WIN32
-            "#version 130				                \n"
-        #endif
-        "precision mediump float;                   \n"
-        "varying vec4 v_vColor;		 				\n"
-        "void main()                                \n"
-        "{                                          \n"
-        "  gl_FragColor = v_vColor;					\n"
-        "}                                          \n";
-}
-*/
 
 static int init() {
     // Initialize GL state.

@@ -1,8 +1,7 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- 'Base' Projekt partiell implementieren
-		- 'Base'-Projekt Ant Build-Step überspringen lassen		
-		- In 'Orbis' eine Referenz auf 'Base' erstellen
+		- Konfigurationsnamen fixen	
 		- In 'Orbis' Android-Makefile eine Referenz auf Base erstellen
 		- Dreiecks-Koordinaten testweise als Vector2D darstellen und testen auf Windows und Android
 		- MathHelper, Exception, StringHelper übernehmen
