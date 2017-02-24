@@ -1,13 +1,15 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
-	-- Falls der Platform-Abhängige Code zu Komplex wird: Ordner Platform machen und Code dort implementieren
-	- Das von SDL2CrossPlatform kopierte Projekt umbenennen zu 'Orbis'
 	- 'Base' Projekt partiell implementieren
-		- MathHelper, Vector2D, Exception, StringHelper übernehmen
+		- Projekt 'Base' erstellen und auf Windows und Android zum Laufen bringen
+		- Vector2D übernehmen
+			- Dreiecks-Koordinaten testweise als Vector2D darstellen
+		- MathHelper, Exception, StringHelper übernehmen
 		- Referenz von Orbis auf Base implementieren (auch für Android)
 			- Testen mittels einfachem Call von StringHelper.cpp in Orbis
 		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			
 		- Kompilation sicherstellen
+		- Testen auf Windows und Android
 	- src/Orbis/Platform/Android.cpp erstellen und Code von SDL2CrossPlatform/SDL_android_main.c übernehmen
 		- Dieses File ruft die main-Funktion aus src/Orbis/Main.cpp auf	
 	- Orbis-Ordner partiell re-implementieren
@@ -38,3 +40,4 @@ TODO:
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 	- TODO: Einzelne Schritte einfügen
 - Feature-Branch orbis/cross-platform nach master mergen
+- orbis.master wieder löschen

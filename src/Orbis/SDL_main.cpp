@@ -67,6 +67,22 @@ GLuint LoadShader(const char *shaderSrc, GLenum type)
     return shader;
 }
 
+/*
+static std::string getFragmentShaderCode()
+{
+    return 
+        #ifdef WIN32
+            "#version 130				                \n"
+        #endif
+        "precision mediump float;                   \n"
+        "varying vec4 v_vColor;		 				\n"
+        "void main()                                \n"
+        "{                                          \n"
+        "  gl_FragColor = v_vColor;					\n"
+        "}                                          \n";
+}
+*/
+
 static int init() {
     // Initialize GL state.
     glDisable(GL_CULL_FACE);
@@ -82,12 +98,15 @@ static int init() {
         "	v_vColor = a_vColor;		\n"
         "}								\n";
 
-    char fShaderStr[] =
+    char fShaderStr[] = 
+    #ifdef WIN32
+        "#version 130				                \n"
+    #endif
         "precision mediump float;                   \n"
         "varying vec4 v_vColor;		 				\n"
         "void main()                                \n"
         "{                                          \n"
-        "  gl_FragColor = v_vColor;					\n"
+        "   gl_FragColor = v_vColor;				\n"
         "}                                          \n";
 
     GLuint vertexShader;

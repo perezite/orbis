@@ -124,15 +124,15 @@
     <None Include="..\..\android\\ndk\res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\CheesyHelper.cpp" />
-    <ClCompile Include="..\..\..\src\SDL_android_main.c" />
-    <ClCompile Include="..\..\..\src\SDL_main.cpp" />
+    <ClCompile Include="..\..\..\src\Orbis\CheesyHelper.cpp" />
+    <ClCompile Include="..\..\..\src\Orbis\SDL_android_main.c" />
+    <ClCompile Include="..\..\..\src\Orbis\SDL_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <JCompile Include="..\..\android\ndk\src\org\libsdl\app\SDLActivity.java" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\CheesyHelper.h" />
+    <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

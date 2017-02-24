@@ -50,18 +50,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\SDL_main.cpp">
+    <ClCompile Include="..\..\..\src\Orbis\SDL_main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\SDL_android_main.c">
+    <ClCompile Include="..\..\..\src\Orbis\SDL_android_main.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\CheesyHelper.cpp">
+    <ClCompile Include="..\..\..\src\Orbis\CheesyHelper.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\CheesyHelper.h">
+    <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
