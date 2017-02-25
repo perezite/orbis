@@ -1,5 +1,9 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
+	- Das Problem mit der Main-Funktion lösen: 
+		- Ich will keinen Plattform-abhängigen Code im 'ExampleGame' Projekt. Damit muss die Main-Funktion aber im 'Orbis'-Projekt sein da sie auf Windows und Android unterschiedlich ist.
+		- Es stellt sich dann aber die Frage, wie ich den User-Code aus dem 'ExampleGame'-Projekt aufrufen soll vom 'Orbis'-Projekt aus
+		- Für diese Problem eine Sandbox erstellen
 	- 'Base' Projekt partiell implementieren
 		- MathHelper, Exception, StringHelper übernehmen
 		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			
@@ -28,7 +32,7 @@ TODO:
 		- Ein Triangle Entity erstellt
 		- Den SolidRedTriangleRenderer hinzufügt
 		- Die Transform rotieren lässt
-	- 'TestGame' Projekt partiell re-implementieren
+	- 'ExampleGame' Projekt partiell re-implementieren
 		- Das File src/Orbis/TestGame.cpp verschieben nach TestGame/TestGame.cpp
 		- Referenzen setzen, auch für Android
 		- Kompilation testen
