@@ -64,6 +64,9 @@
     <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\Orbis\SDL_main.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <JCompile Include="..\..\android\ndk\Orbis\src\org\libsdl\app\SDLActivity.java">

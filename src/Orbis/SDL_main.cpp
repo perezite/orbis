@@ -268,8 +268,7 @@ int main(int argc, char *argv[])
 
 #ifdef WIN32
 
-#undef main
-int main(int argc, char* args[])
+int run(int argc, char* args[])
 {
     SDL_Window* sdlWindow;
     SDL_GLContext glContext;
@@ -282,7 +281,7 @@ int main(int argc, char* args[])
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-    sdlWindow = SDL_CreateWindow("SDL2CrossPlatform", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 400, 400, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    sdlWindow = SDL_CreateWindow("ExampleGame", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 400, 400, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     glContext = SDL_GL_CreateContext(sdlWindow);
     glewInit();
     SDL_GL_SetSwapInterval(1);

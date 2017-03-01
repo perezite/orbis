@@ -1,9 +1,9 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Das Problem mit der Main-Funktion lösen: 
-		- Ich will keinen Plattform-abhängigen Code im 'ExampleGame' Projekt. Damit muss die Main-Funktion aber im 'Orbis'-Projekt sein da sie auf Windows und Android unterschiedlich ist.
-		- Es stellt sich dann aber die Frage, wie ich den User-Code aus dem 'ExampleGame'-Projekt aufrufen soll vom 'Orbis'-Projekt aus
-		- Für diese Problem eine Sandbox erstellen
+		- Den Android main() Funktion umbenennen zu run()
+		- Die Android Main-Funktion implementieren in 'ExampleGame' und in dieser die Run()-Funktion aufrufen
+		- Testen, ob das kompilierbar und ausführbar ist
 	- 'Base' Projekt partiell implementieren
 		- MathHelper, Exception, StringHelper übernehmen
 		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			

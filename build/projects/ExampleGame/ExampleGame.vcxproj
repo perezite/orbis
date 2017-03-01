@@ -21,10 +21,19 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Orbis\Orbis.vcxproj">
+      <Project>{b4d4abc4-22e6-4be2-b6bd-02ab117e9c8f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\ExampleGame\Main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4D6F7B10-C99B-4A20-B459-3E0147071F53}</ProjectGuid>
-    <RootNamespace>Orbis</RootNamespace>
+    <ProjectGuid>{E6667E8C-109B-4FAD-9FFC-2A80817EF6F8}</ProjectGuid>
+    <RootNamespace>ExampleGame</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>ExampleGame</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
@@ -37,11 +46,11 @@
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PlatformToolset>v140</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PlatformToolset>v140</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -57,75 +66,67 @@
     <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
-    <IntDir>$(ProjectDir)..\..\android\lib\Base\</IntDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)..\bin\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <OutDir>$(SolutionDir)..\bin\$(Platform)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\android\lib\Base\</IntDir>
+    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\Base</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>
+      <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
-      <SkipAntStep>True</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\Base</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\Base</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>
+      <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
-      <SkipAntStep>True</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\Base</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\windows\include;..\..\windows\include\SDL2;..\..\windows\include\glew-1.5.8;..\..\common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\windows\lib\SDL2;..\..\windows\lib\glew-1.5.8;..\..\windows\lib\OpenGLEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;engined.lib;opengl32.lib;glew32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)..\bin\$(Platform)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Link>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\windows\lib\SDL2;..\..\windows\lib\glew-1.5.8;..\..\windows\lib\OpenGLEngine;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;engine.lib;opengl32.lib;glew32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)..\bin\$(Platform)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>WIN32</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\windows\include;..\..\windows\include\SDL2;..\..\windows\include\glew-1.5.8;..\..\common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\android\ndk\Base\jni\Android.mk" />
-    <None Include="..\..\android\ndk\Base\jni\Application.mk" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
