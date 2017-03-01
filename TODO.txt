@@ -3,7 +3,7 @@ TODO:
 	- Das Problem mit der Main-Funktion lösen: 
 		- Den Android main() Funktion umbenennen zu run()
 		- Die Android Main-Funktion implementieren in 'ExampleGame' und in dieser die Run()-Funktion aufrufen
-		- Testen, ob das kompilierbar und ausführbar ist
+		- Projekt auf Android zum kompilieren bringen
 	- 'Base' Projekt partiell implementieren
 		- MathHelper, Exception, StringHelper übernehmen
 		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			
