@@ -1,8 +1,7 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Das Problem mit der Main-Funktion auf Android lösen: 
-		- Testen, ob ich die Referenzen in Orbis löschen kann und es immer noch läuft
-		- Ant im Orbis-Projekt aktivieren und schauen, ob es jetzt funktioniert
+		- Libraries in separatem Make-File ablegen
 	- 'Base' Projekt partiell implementieren
 		- MathHelper, Exception, StringHelper übernehmen
 		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			
