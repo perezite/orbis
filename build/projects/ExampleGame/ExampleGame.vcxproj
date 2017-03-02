@@ -28,6 +28,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\ExampleGame\Main.cpp" />
+    <ClCompile Include="..\..\android\ndk\ExampleGame\jni\SDL_android_main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\android\ndk\ExampleGame\default.properties" />
+    <None Include="..\..\android\ndk\ExampleGame\jni\Android.mk" />
+    <None Include="..\..\android\ndk\ExampleGame\jni\Application.mk" />
+    <None Include="..\..\android\ndk\ExampleGame\src\org\libsdl\app\SDLActivity.java" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\android\ndk\ExampleGame\AndroidManifest.xml" />
+    <Xml Include="..\..\android\ndk\ExampleGame\res\values\strings.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E6667E8C-109B-4FAD-9FFC-2A80817EF6F8}</ProjectGuid>
@@ -80,13 +91,14 @@
       <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk\ExampleGame</AntBuildPath>
       <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
+      <SkipAntStep>IfUpToDate</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk\ExampleGame</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
@@ -96,13 +108,14 @@
       <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk\ExampleGame</AntBuildPath>
       <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
+      <SkipAntStep>IfUpToDate</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk\ExampleGame</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

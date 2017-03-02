@@ -202,7 +202,7 @@ static void display()
 
 #ifdef __ANDROID__
 // int SDL_main(int argc, char *argv[])
-int main(int argc, char *argv[])
+int run(int argc, char* args[])
 {    
     SDL_Window* window = 0;
     SDL_GLContext gl = 0;

@@ -1,9 +1,8 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
-	- Das Problem mit der Main-Funktion lösen: 
-		- Den Android main() Funktion umbenennen zu run()
-		- Die Android Main-Funktion implementieren in 'ExampleGame' und in dieser die Run()-Funktion aufrufen
-		- Projekt auf Android zum kompilieren bringen
+	- Das Problem mit der Main-Funktion auf Android lösen: 
+		- Testen, ob ich die Referenzen in Orbis löschen kann und es immer noch läuft
+		- Ant im Orbis-Projekt aktivieren und schauen, ob es jetzt funktioniert
 	- 'Base' Projekt partiell implementieren
 		- MathHelper, Exception, StringHelper übernehmen
 		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			

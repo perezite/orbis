@@ -57,12 +57,12 @@
     <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
-    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)..\..\android\lib\Orbis\</IntDir>
     <OutDir>$(SolutionDir)..\bin\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <OutDir>$(SolutionDir)..\bin\$(Platform)\</OutDir>
-    <IntDir>$(ProjectDir)$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)..\..\android\lib\Orbis\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
     <ClCompile>
@@ -75,6 +75,7 @@
       <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
+      <SkipAntStep>True</SkipAntStep>
     </AntBuild>
     <NdkBuild>
       <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
@@ -91,6 +92,7 @@
       <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
+      <SkipAntStep>True</SkipAntStep>
     </AntBuild>
     <NdkBuild>
       <NdkProjectPath>..\..\android\ndk\Orbis</NdkProjectPath>
@@ -123,19 +125,14 @@
     <None Include="..\..\android\ndk\Orbis\default.properties" />
     <None Include="..\..\android\ndk\Orbis\jni\Android.mk" />
     <None Include="..\..\android\\ndk\Orbis\jni\Application.mk" />
-    <None Include="..\..\android\\ndk\Orbis\res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Orbis\CheesyHelper.cpp" />
-    <ClCompile Include="..\..\..\src\Orbis\SDL_android_main.c" />
     <ClCompile Include="..\..\..\src\Orbis\SDL_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h" />
     <ClInclude Include="..\..\..\src\Orbis\SDL_main.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <JCompile Include="..\..\android\ndk\Orbis\src\org\libsdl\app\SDLActivity.java" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base\Base.vcxproj">
