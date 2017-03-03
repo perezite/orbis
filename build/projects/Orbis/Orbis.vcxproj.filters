@@ -13,6 +13,12 @@
     <None Include="..\..\android\\ndk\Orbis\jni\Application.mk">
       <Filter>build\android\jni</Filter>
     </None>
+    <None Include="..\..\android\ndk\Orbis\jni\Libraries.mk">
+      <Filter>build\android\jni</Filter>
+    </None>
+    <None Include="..\..\android\ndk\Orbis\jni\Modules.mk">
+      <Filter>build\android\jni</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="build">

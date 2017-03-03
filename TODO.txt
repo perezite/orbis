@@ -1,7 +1,6 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Das Problem mit der Main-Funktion auf Android lösen: 
-		- Libraries in separatem Make-File ablegen
 		- Orbis Library-Namen in separatem Makefile als Variable ablegen $ORBIS_LIBS und aufrufen in Orbis- und ExampleGame Makefile
 	- 'Base' Projekt partiell implementieren
 		- MathHelper, Exception, StringHelper übernehmen

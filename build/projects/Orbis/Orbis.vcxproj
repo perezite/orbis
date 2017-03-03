@@ -124,6 +124,8 @@
     <None Include="..\..\android\ndk\Orbis\AndroidManifest.xml" />
     <None Include="..\..\android\ndk\Orbis\default.properties" />
     <None Include="..\..\android\ndk\Orbis\jni\Android.mk" />
+    <None Include="..\..\android\ndk\Orbis\jni\Libraries.mk" />
+    <None Include="..\..\android\ndk\Orbis\jni\Modules.mk" />
     <None Include="..\..\android\\ndk\Orbis\jni\Application.mk" />
   </ItemGroup>
   <ItemGroup>

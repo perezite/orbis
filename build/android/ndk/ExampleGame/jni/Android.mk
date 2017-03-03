@@ -1,10 +1,10 @@
 LOCAL_PATH := $(call my-dir)
 
-# Orbis Libraries
+# Orbis Dependencies
 ##################
-include $(LOCAL_PATH)/../../Orbis/jni/Libraries.mk
+include $(LOCAL_PATH)/../../Orbis/jni/Modules.mk
 
-# Orbis module
+# Orbis Module
 ##################
 include $(CLEAR_VARS)
 LOCAL_MODULE := Orbis
@@ -14,12 +14,12 @@ include $(PREBUILT_SHARED_LIBRARY)
 # Application Module
 #####################
 include $(CLEAR_VARS)
+include $(LOCAL_PATH)/../../Orbis/jni/Libraries.mk
 LOCAL_MODULE := main
 MY_CODE_PATH := ../../../../../src
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../include \
     $(LOCAL_PATH)/../../../../common/include
 LOCAL_SRC_FILES := SDL_android_main.c \
     $(MY_CODE_PATH)/ExampleGame/Main.cpp
-LOCAL_SHARED_LIBRARIES := Base Orbis SDL2 openGLSharedLibrary
-# LOCAL_LDLIBS := -lGLESv1_CM -lGLESv2 -llog
+LOCAL_SHARED_LIBRARIES := $(ORBIS_SHARED_LIBS) Orbis
 include $(BUILD_SHARED_LIBRARY)
