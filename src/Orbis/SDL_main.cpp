@@ -21,7 +21,6 @@ using namespace Math;
 #include <math.h>
 #include <string>
 #include <iostream>
-using namespace std;
 
 #define _USE_MATH_DEFINES
 
@@ -213,7 +212,7 @@ int run(int argc, char* args[])
         return 1;
     }
     
-    string s = "This is a std::string";
+    std::string s = "This is a std::string";
     CheesyHelper::Log("%s\n", s.c_str());
 
     SDL_LogSetAllPriority(SDL_LOG_PRIORITY_VERBOSE);

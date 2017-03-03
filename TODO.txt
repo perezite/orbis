@@ -1,12 +1,11 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
-	- Das Problem mit der Main-Funktion auf Android lösen: 
-		- Orbis Library-Namen in separatem Makefile als Variable ablegen $ORBIS_LIBS und aufrufen in Orbis- und ExampleGame Makefile
 	- 'Base' Projekt partiell implementieren
-		- MathHelper, Exception, StringHelper übernehmen
-		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen			
+		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen	
+		- Aufrufe von CheesyHelper ersetzen durch Aufrufe von Platform
 		- Kompilation sicherstellen
 		- Testen auf Windows und Android
+	- Wildcard-Includes verwenden in Android-Makefiles
 	- src/Orbis/Platform/Android.cpp erstellen und Code von SDL2CrossPlatform/SDL_android_main.c übernehmen
 		- Dieses File ruft die main-Funktion aus src/Orbis/Main.cpp auf	
 	- Orbis-Ordner partiell re-implementieren

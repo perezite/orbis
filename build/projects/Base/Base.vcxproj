@@ -117,10 +117,17 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\Base\Math\MathHelper.cpp" />
     <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp" />
+    <ClCompile Include="..\..\..\src\Base\System\PlatformHelper.cpp" />
+    <ClCompile Include="..\..\..\src\Base\System\StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\Base\Math\MathHelper.h" />
     <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h" />
+    <ClInclude Include="..\..\..\src\Base\System\Exception.h" />
+    <ClInclude Include="..\..\..\src\Base\System\PlatformHelper.h" />
+    <ClInclude Include="..\..\..\src\Base\System\StringHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\android\ndk\Base\jni\Android.mk" />

@@ -13,15 +13,39 @@
     <Filter Include="build\jni">
       <UniqueIdentifier>{af980106-01bd-4795-94c4-1b69bca56b39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\System">
+      <UniqueIdentifier>{069ac0fb-93d6-4154-b92d-8a5c479376b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp">
       <Filter>src\Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\Base\Math\MathHelper.cpp">
+      <Filter>src\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Base\System\StringHelper.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Base\System\PlatformHelper.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h">
       <Filter>src\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Base\Math\MathHelper.h">
+      <Filter>src\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Base\System\Exception.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Base\System\StringHelper.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Base\System\PlatformHelper.h">
+      <Filter>src\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
