@@ -1,6 +1,6 @@
 #include "CheesyHelper.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #include "SDL2/SDL.h"
 

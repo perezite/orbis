@@ -1,23 +1,13 @@
 #pragma once
 
+#include <cstdlib>
 
 namespace System
 {
-	class StringHelper
+	typedef va_list orbis_va_list;			// indirection to prevent visual studio intellisense problems with nvidia tegra android
+
+	class PlatformHelper
 	{
-	public:
-		// get formatted string 
-		static std::string GetFormattedString(std::string format, int maximalFormattedLength, ...);
 
-		// get formatted string
-		static std::string GetFormattedString(std::string format, ...);
-
-	protected:
-		// get formatted string
-		static std::string GetFormattedString(std::string format, int maximalFormattedLength, va_list args);
-
-	private:
-		// default maximal length of formatted string
-		static const int DefaultMaximalFormattedLength = 1024;
 	};
 }
