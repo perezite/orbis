@@ -1,8 +1,13 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
-	- va_list Problem beheben
-		- Ausprobieren, ob das Problem verschwindet mit einem Präprozessor-Makro
 	- Wildcard-Includes verwenden in Android-Makefiles
+		- Folgende Pages studieren
+			1) http://stackoverflow.com/questions/19571391/remove-prefix-with-make
+			2) http://falsinsoft.blogspot.ch/2014/10/androidmk-include-multiple-source-files.html
+			3) http://stackoverflow.com/questions/8980284/android-mk-include-all-cpp-files (Insbesondere Kommentar von NiTe Luo)
+		- Rekursives Wildcarding mittels Vorschlag aus Page 3) implementieren
+			- Den 
+		- Falls das nicht funktionert: Die einzelnen Folders seperat einfügen mittels Pages 1) und 2)
 	- Orbis-Ordner partiell re-implementieren
 		- Auflösung aus OrbisMain-Konstruktor entfernen
 		- Im OrbisMain Konstruktor unter Windows ein Fenster mit Default-Grösse erzeugen. Unter Android ein Fullscreen-Fenster mit maximaler Auflösung
