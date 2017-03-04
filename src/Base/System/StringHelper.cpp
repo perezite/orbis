@@ -1,7 +1,7 @@
 #include "StringHelper.h"
 #include "PlatformHelper.h"
 
-#include <cstdarg>
+#include <stdarg.h>
 #include <stdlib.h>
 #include <string>
 #include <memory.h>

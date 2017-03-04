@@ -68,6 +68,7 @@
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(VC_VC_IncludePath)</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
       <AntBuildPath>..\..\android\ndk\Base</AntBuildPath>
@@ -82,7 +83,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
-      <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>  
+      <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(VC_VC_IncludePath)</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
       <AntBuildPath>..\..\android\ndk\Base</AntBuildPath>
@@ -119,14 +121,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Base\Math\MathHelper.cpp" />
     <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp" />
-    <ClCompile Include="..\..\..\src\Base\System\PlatformHelper.cpp" />
     <ClCompile Include="..\..\..\src\Base\System\StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Base\Math\MathHelper.h" />
     <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h" />
     <ClInclude Include="..\..\..\src\Base\System\Exception.h" />
-    <ClInclude Include="..\..\..\src\Base\System\PlatformHelper.h" />
     <ClInclude Include="..\..\..\src\Base\System\StringHelper.h" />
   </ItemGroup>
   <ItemGroup>

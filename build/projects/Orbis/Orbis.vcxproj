@@ -68,7 +68,7 @@
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../android/include;../../common/include;$(VC_VC_IncludePath)</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
       <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>
@@ -85,7 +85,7 @@
     <ClCompile>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <PreprocessorDefinitions>__ANDROID__</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../android/include;../../common/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../android/include;../../common/include;$(VC_VC_IncludePath)</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
       <AntBuildPath>..\..\android\ndk\Orbis</AntBuildPath>

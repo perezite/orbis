@@ -1,13 +1,8 @@
 TODO:  
 - Das rotierende Dreieck im Orbis-Style implementieren
-	- 'Base' Projekt partiell implementieren
-		- Neuen Ordner 'Platform' erstellen und Code aus CheesyHelper übernehmen	
-		- Aufrufe von CheesyHelper ersetzen durch Aufrufe von Platform
-		- Kompilation sicherstellen
-		- Testen auf Windows und Android
+	- va_list Problem beheben
+		- Ausprobieren, ob das Problem verschwindet mit einem Präprozessor-Makro
 	- Wildcard-Includes verwenden in Android-Makefiles
-	- src/Orbis/Platform/Android.cpp erstellen und Code von SDL2CrossPlatform/SDL_android_main.c übernehmen
-		- Dieses File ruft die main-Funktion aus src/Orbis/Main.cpp auf	
 	- Orbis-Ordner partiell re-implementieren
 		- Auflösung aus OrbisMain-Konstruktor entfernen
 		- Im OrbisMain Konstruktor unter Windows ein Fenster mit Default-Grösse erzeugen. Unter Android ein Fullscreen-Fenster mit maximaler Auflösung

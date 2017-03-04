@@ -1,8 +1,8 @@
 #include "CheesyHelper.h"
 
-#include <cstdarg>
-
 #include "SDL2/SDL.h"
+
+#include <stdarg.h>
 
 void CheesyHelper::Log(const char* fmt, ...)
 {
