@@ -22,9 +22,6 @@ namespace Video
 		// get the render device
 		RenderDevice* GetRenderDevice();
 
-		// initialize SDL
-		void InitializeVideo(int windowWidth, int windowHeight);
-
 		// quit video
 		void QuitVideo();
 
@@ -40,6 +37,9 @@ namespace Video
 	protected:
 		// singleton constructor
 		VideoManager();
+
+		// initialize SDL
+		void InitializeVideo(int windowWidth, int windowHeight);
 
 	private:
 		// window size
