@@ -1,10 +1,10 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-CODE_PATH := ../../../../../src/Base
+include $(LOCAL_PATH)/../../Utils.mk
 LOCAL_MODULE := Base
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/$(CODE_PATH)/Math
-LOCAL_SRC_FILES := $(CODE_PATH)/Math/Vector2D.cpp \
-		$(CODE_PATH)/Math/MathHelper.cpp \
-		$(CODE_PATH)/System/StringHelper.cpp
+CODE_PATH := $(LOCAL_PATH)/../../../../../src/Base
+#LOCAL_C_INCLUDES := $(LOCAL_PATH)/$(CODE_PATH)/Math
+FILE_LIST := $(call walksources, $(CODE_PATH))
+LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
 include $(BUILD_SHARED_LIBRARY)
