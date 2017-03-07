@@ -46,6 +46,7 @@ namespace Game
 			SwitchToQueuedLevel();
 		}
 	}
+	
 	void LevelManager::SwitchToQueuedLevel()
 	{
 		if (m_currentLevel != NULL)
