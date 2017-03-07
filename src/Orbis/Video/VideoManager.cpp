@@ -30,18 +30,6 @@ namespace Video
 		QuitVideo();
 	}
 
-	void VideoManager::InitializeVideo(int windowWidth, int windowHeight)
-	{
-		GraphicsAdapter::InitializeGraphics(windowWidth, windowHeight);
-
-		GraphicsAdapter::SetMatrixMode(MatrixMode::Projection);
-		GraphicsAdapter::SafeLoadIdentityMatrix();
-		GraphicsAdapter::SetMatrixMode(MatrixMode::Modelview);
-		GraphicsAdapter::SafeLoadIdentityMatrix();
-
-		GraphicsAdapter::SafeSetClearColor(Color::Black);
-	}
-
 	void VideoManager::QuitVideo()
 	{
 		GraphicsAdapter::QuitGraphics();
@@ -66,5 +54,17 @@ namespace Video
 	void VideoManager::SwapBuffers()
 	{
 		GraphicsAdapter::SwapBuffers();
+	}
+	
+	void VideoManager::InitializeVideo(int windowWidth, int windowHeight)
+	{
+		GraphicsAdapter::InitializeGraphics(windowWidth, windowHeight);
+
+		GraphicsAdapter::SetMatrixMode(MatrixMode::Projection);
+		GraphicsAdapter::SafeLoadIdentityMatrix();
+		GraphicsAdapter::SetMatrixMode(MatrixMode::Modelview);
+		GraphicsAdapter::SafeLoadIdentityMatrix();
+
+		GraphicsAdapter::SafeSetClearColor(Color::Black);
 	}
 }
