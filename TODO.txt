@@ -1,5 +1,5 @@
 TODO: 
-- Exceptions auf Android aktivieren
+- Multi-Tier Debugging zum Laufen bringen auf Tegra
 - Verhalten beim werfen von Exceptions testen auf Android und Windows 
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Video/VideoManager implementieren

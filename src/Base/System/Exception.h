@@ -7,7 +7,11 @@ namespace System
 	class Exception
 	{
 	public:
-		Exception(const std::string &message) : _message(message) {}
+		// Exception(const std::string &message) : _message(message) {}
+		Exception(const std::string &message)
+		{
+			_message = message;
+		}
 
 		virtual ~Exception() throw() {}
 
