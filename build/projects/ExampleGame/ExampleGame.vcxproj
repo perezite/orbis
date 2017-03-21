@@ -91,14 +91,14 @@
       <AdditionalIncludeDirectories>../../android/include;../../common/include;$(VC_VC_IncludePath)</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\ExampleGame</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk</AntBuildPath>
       <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
       <SkipAntStep>IfUpToDate</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\ExampleGame</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
@@ -108,14 +108,14 @@
       <AdditionalIncludeDirectories>../../android/include;../../common/include;$(VC_VC_IncludePath)</AdditionalIncludeDirectories>
     </ClCompile>
     <AntBuild>
-      <AntBuildPath>..\..\android\ndk\ExampleGame</AntBuildPath>
+      <AntBuildPath>..\..\android\ndk</AntBuildPath>
       <NativeLibDirectories>$(MSBuildProjectDirectory)\..\..\android\lib\OpenGLEngine\$(ArchAbi)</NativeLibDirectories>
       <NativeLibDependencies>
       </NativeLibDependencies>
       <SkipAntStep>IfUpToDate</SkipAntStep>
     </AntBuild>
     <NdkBuild>
-      <NdkProjectPath>..\..\android\ndk\ExampleGame</NdkProjectPath>
+      <NdkProjectPath>..\..\android\ndk</NdkProjectPath>
     </NdkBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

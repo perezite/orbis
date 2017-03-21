@@ -18,19 +18,15 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Debug|Android.ActiveCfg = Debug|Tegra-Android
-		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Debug|Android.Build.0 = Debug|Tegra-Android
 		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Debug|Windows.ActiveCfg = Debug|Win32
 		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Debug|Windows.Build.0 = Debug|Win32
 		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Release|Android.ActiveCfg = Release|Tegra-Android
-		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Release|Android.Build.0 = Release|Tegra-Android
 		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Release|Windows.ActiveCfg = Release|Win32
 		{B4D4ABC4-22E6-4BE2-B6BD-02AB117E9C8F}.Release|Windows.Build.0 = Release|Win32
 		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Debug|Android.ActiveCfg = Debug|Tegra-Android
-		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Debug|Android.Build.0 = Debug|Tegra-Android
 		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Debug|Windows.ActiveCfg = Debug|Win32
 		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Debug|Windows.Build.0 = Debug|Win32
 		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Release|Android.ActiveCfg = Release|Tegra-Android
-		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Release|Android.Build.0 = Release|Tegra-Android
 		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Release|Windows.ActiveCfg = Release|Win32
 		{4D6F7B10-C99B-4A20-B459-3E0147071F53}.Release|Windows.Build.0 = Release|Win32
 		{E6667E8C-109B-4FAD-9FFC-2A80817EF6F8}.Debug|Android.ActiveCfg = Debug|Tegra-Android
