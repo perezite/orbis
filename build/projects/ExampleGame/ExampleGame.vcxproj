@@ -28,17 +28,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\ExampleGame\Main.cpp" />
-    <ClCompile Include="..\..\android\ndk\ExampleGame\jni\SDL_android_main.c" />
+    <ClCompile Include="..\..\android\ndk\jni\SDL_android_main.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\android\ndk\ExampleGame\default.properties" />
-    <None Include="..\..\android\ndk\ExampleGame\jni\Android.mk" />
-    <None Include="..\..\android\ndk\ExampleGame\jni\Application.mk" />
-    <None Include="..\..\android\ndk\ExampleGame\src\org\libsdl\app\SDLActivity.java" />
+    <None Include="..\..\android\ndk\jni\Android.mk" />
+    <None Include="..\..\android\ndk\jni\Application.mk" />
+    <None Include="..\..\android\ndk\jni\Utils.mk" />
+    <None Include="..\..\android\ndk\res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\android\ndk\ExampleGame\AndroidManifest.xml" />
-    <Xml Include="..\..\android\ndk\ExampleGame\res\values\strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <JCompile Include="..\..\android\ndk\src\org\libsdl\app\SDLActivity.java" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E6667E8C-109B-4FAD-9FFC-2A80817EF6F8}</ProjectGuid>

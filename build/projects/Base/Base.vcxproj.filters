@@ -7,12 +7,6 @@
     <Filter Include="src\Math">
       <UniqueIdentifier>{dff19296-bae0-4011-a09a-0926f352af47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="build">
-      <UniqueIdentifier>{7ff0b9c0-d334-4cf0-9297-7a2c4518633b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\jni">
-      <UniqueIdentifier>{af980106-01bd-4795-94c4-1b69bca56b39}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\System">
       <UniqueIdentifier>{069ac0fb-93d6-4154-b92d-8a5c479376b0}</UniqueIdentifier>
     </Filter>
@@ -41,13 +35,5 @@
     <ClInclude Include="..\..\..\src\Base\System\StringHelper.h">
       <Filter>src\System</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\android\ndk\Base\jni\Android.mk">
-      <Filter>build\jni</Filter>
-    </None>
-    <None Include="..\..\android\ndk\Base\jni\Application.mk">
-      <Filter>build\jni</Filter>
-    </None>
   </ItemGroup>
 </Project>

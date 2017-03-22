@@ -13,6 +13,7 @@
 #endif
 
 #include "../Base/Math/Vector2D.h"
+#include "../Base/Math/MathHelper.h"
 using namespace Math;
 
 #include <stdlib.h>
@@ -175,7 +176,7 @@ static void display()
     Vector2D topPoint(0.0f, 0.3f);
 
     // compute rotated points
-    float omega = M_PI;
+    float omega = MathHelper::GetPi();
     static float alpha = 0.0f;
     alpha += omega * deltaTime;
     Vector2D rotatedLeftPoint(cos(alpha)*leftPoint.GetX() - sin(alpha)*leftPoint.GetY(), sin(alpha)*leftPoint.GetX() + cos(alpha)*leftPoint.GetY());

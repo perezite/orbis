@@ -129,10 +129,6 @@
     <ClInclude Include="..\..\..\src\Base\System\Exception.h" />
     <ClInclude Include="..\..\..\src\Base\System\StringHelper.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\android\ndk\Base\jni\Android.mk" />
-    <None Include="..\..\android\ndk\Base\jni\Application.mk" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
