@@ -17,6 +17,7 @@ int main(int argc, char* args[])
 		char buffer[1024];
 		sprintf(buffer, "%.1023s", e.what().c_str());
 		CheesyHelper::Log(e.what().c_str());
+		CheesyHelper::ShowMessageBox("Exception", e.what());
 	}
 
 	return 0;

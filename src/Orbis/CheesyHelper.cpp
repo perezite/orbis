@@ -11,3 +11,8 @@ void CheesyHelper::Log(const char* fmt, ...)
 	SDL_Log(fmt, args);
 	va_end(args);
 }
+
+void CheesyHelper::ShowMessageBox(std::string title, std::string message)
+{
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title.c_str(), message.c_str(), NULL);
+}

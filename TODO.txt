@@ -1,7 +1,4 @@
 TODO: 
-- Kompilation auf Windows fixen
-- Links der Build-Files in VisualStudio fixen
-- Verhalten beim Werfen von Exceptions testen auf Android und Windows 
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Video/VideoManager implementieren
 		- Konstruktor implementieren indem ich den Run()-Code übernehme
