@@ -1,4 +1,5 @@
 # Define functions
+# reference: http://stackoverflow.com/questions/8980284/android-mk-include-all-cpp-files
 #####################
 # walk all files within given directory
 define walk
