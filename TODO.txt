@@ -1,13 +1,36 @@
 TODO: 
 - Das rotierende Dreieck im Orbis-Style implementieren
-	- Video/VideoManager implementieren
-		- Konstruktor implementieren indem ich den Run()-Code übernehme
-			- Logik aus Master/VideoManager.cpp, Master/GraphicsAdapter.cpp und SDL_main.cpp mergen
-			- Im Konstruktor nicht mehr die gewünschte Auflösung eingeben, sondern automatisch die höchstmögliche wählen 
-		- Destruktor implementieren 
-		- Die restlichen Funktionen implementieren (ausser GetRenderDevice)
-	- TODO: Weitere Schritte planen
+	- Folgende Klassen der Reihe nach implementieren:
+		- EnvironmentHelper
+		- StringHelper
+		- MathHelper
+		- MatrixMode
+		- RenderDevice
+		- GraphicsAdapter mit VideoManager mergen
+		- VideoManager
+		- KeyCode
+		- Event
+		- EventAdapter mit InputManager mergen
+		- InputManager
+		- Entity
+		- Level
+		- LevelManager
+		- Transform
+		- Camera
+		- Vector2D
+		- SillyRenderer
+			- Funktion hinzufügen dass man Farbe, Anzahl Vertices und gefüllt/nicht gefüllt anpassen kann
+		- Level1
+			- Rendert aktuell nur das Dreieck (rot, undurchsichtig, mit drei Ecken) mittels dem SillyRenderer
+		- OrbisMain
+			- windowWidth und windowHeight aus Konstruktor entfernen
+			- Im Konstruktor automatisch die höchste verfügbare Auflösung auswählen
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
-	- TODO: Einzelne Schritte einfügen
+		- Texture
+		- CameraController
+		- SillyRenderer
+		- SimpleController
+		- TextureRenderer
+		- Level1
 - Feature-Branch orbis/cross-platform nach master mergen
-- orbis.master wieder löschen
+- orbis.master Ordner wieder löschen
