@@ -1,7 +1,15 @@
 TODO: 
 - Das rotierende Dreieck im Orbis-Style implementieren
+	- Im Master-Branch folgendes ausprobieren:
+		- Solution so einstellen, dass das exe geschrieben wird nach bin/Executable/Windows
+		- Die Textur-Dateien platzieren unter: bin/Assets
+		- Texture.cpp wie folgt anpassen:
+			- IMG_Load wird neu mit folgendem Pfad aufgerufen: EnvHelper::GetExecutablePath + "/../../Assets" + m_filePath
+		- Verifizieren, dass die Texturen geladen werden
+	- TODO: Was überlegen, um das 'Berechnen' der Asset-Pfade zu unifizieren
 	- Folgende Klassen der Reihe nach implementieren:
 		- EnvironmentHelper
+			- GetCurrentWorkingDirectory wird nicht gebraucht und kann gelöscht werden
 		- StringHelper
 		- MathHelper
 		- MatrixMode
@@ -26,6 +34,7 @@ TODO:
 			- windowWidth und windowHeight aus Konstruktor entfernen
 			- Im Konstruktor automatisch die höchste verfügbare Auflösung auswählen
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
+		- Ant konfigurieren, dass es Assets aus einem zentralen Folder einbindet: http://stackoverflow.com/questions/16591482/how-do-you-specify-an-alternative-folder-to-the-asset-folder-at-build-time
 		- Texture
 		- CameraController
 		- SillyRenderer
