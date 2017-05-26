@@ -13,9 +13,6 @@
     <ClCompile Include="..\..\..\..\src\TestGame\Controllers\CameraController.cpp">
       <Filter>Quelldateien\Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\src\TestGame\Application\App.cpp">
-      <Filter>Quelldateien\Application</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Quelldateien">
@@ -27,9 +24,6 @@
     <Filter Include="Quelldateien\Controllers">
       <UniqueIdentifier>{dbcd85d3-8c7d-43fa-9b15-f70be6a4dba7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Application">
-      <UniqueIdentifier>{48822d9e-13bc-4ade-8933-6e464756903b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\src\TestGame\Levels\Level1.h">
@@ -40,9 +34,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\src\TestGame\Controllers\CameraController.h">
       <Filter>Quelldateien\Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\src\TestGame\Application\App.h">
-      <Filter>Quelldateien\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,16 +1,27 @@
+#include <iostream>
+
 #include "..\Base\System\Exception.h"
 #include "..\Base\System\EnvironmentHelper.h"
 using namespace System;
 
-#include "Application\App.h"
-using namespace Application;
+#include "..\Orbis\Orbis\OrbisMain.h"
+using namespace Orbis;
+
+#include "Levels\Level1.h"
+using namespace Levels;
+
+#include "..\Orbis\Game\LevelManager.h"
+using namespace Game;
 
 int main(int argc, char* args[])
 {
 	try
 	{
-		App app;
-		app.Run();
+		OrbisMain orbis(800, 400);
+
+		Level *level1 = new Level1();
+		LevelManager::GetInstance()->QueueLevel(level1);
+		orbis.Run();
 	}
 	catch (Exception e)
 	{

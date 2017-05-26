@@ -16,8 +16,8 @@ using namespace Controllers;
 
 namespace Levels
 {
-	const std::string TransparentTestTexture1Path = "Graphics\\TestTransparent.png";
-	const std::string TransparentTestTexture2Path = "Graphics\\TestTransparent2.png";
+	const std::string TransparentTestTexture1Path = "Textures\\TestTransparent.png";
+	const std::string TransparentTestTexture2Path = "Textures\\TestTransparent2.png";
 
 	Level1::Level1()
 	{

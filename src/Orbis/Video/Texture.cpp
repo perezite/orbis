@@ -2,6 +2,7 @@
 #include "GraphicsAdapter.h"
 
 #include "..\..\Base\System\Exception.h"
+#include "..\..\Base\System\EnvironmentHelper.h"
 using namespace System;
 
 #include <SDL_image.h>
@@ -12,11 +13,17 @@ namespace Video
 
 	Texture::Texture(std::string filePath) : m_filePath(filePath)
 	{
+		// get absolute asset path on windows
+		std::string relativeAssetPath = ".." + EnvironmentHelper::PathSeparator + ".." 
+			+ EnvironmentHelper::PathSeparator + "Assets";
+		std::string absoluteAssetPath = EnvironmentHelper::GetExecutableDirectoryPath() 
+			+ EnvironmentHelper::PathSeparator + relativeAssetPath + EnvironmentHelper::PathSeparator + m_filePath;
+
 		// load the image into an SDL surface
-		m_surface = IMG_Load(m_filePath.c_str());
+		m_surface = IMG_Load(absoluteAssetPath.c_str());
 		if (!m_surface)
 		{
-			throw Exception("Loading the following texture file failed: " + m_filePath);
+			throw Exception("Loading the following texture file failed: " + absoluteAssetPath);
 		}
 
 		// blit the loaded surface into an auxiliary surface with known color settings
