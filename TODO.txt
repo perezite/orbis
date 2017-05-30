@@ -1,11 +1,9 @@
 TODO: 
 - Das rotierende Dreieck im Orbis-Style implementieren
-	- Im Master-Branch folgendes ausprobieren:
-		- Solution so einstellen, dass das exe geschrieben wird nach bin/Executable/Windows
-		- Die Textur-Dateien platzieren unter: bin/Assets
 	- Folgende Klassen der Reihe nach implementieren:
 		- EnvironmentHelper
-			- GetCurrentWorkingDirectory wird nicht gebraucht und kann gelöscht werden
+			- Methoden GetWorkingDirectory und SetWorkingDirectory entfernen
+			- Bei GetCurrentWorkingDirectory eine Exception werfen auf Android
 		- StringHelper
 		- MathHelper
 		- MatrixMode
@@ -31,13 +29,19 @@ TODO:
 			- Im Konstruktor automatisch die höchste verfügbare Auflösung auswählen
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 		- Ant konfigurieren, dass es Assets aus einem zentralen Folder einbindet: http://stackoverflow.com/questions/16591482/how-do-you-specify-an-alternative-folder-to-the-asset-folder-at-build-time
+		- Solution so einstellen, dass die Executables unter bin/Executables/<Platform> zu liegen kommen
+		- Texturen verschieben nach bin/Assets/Textures
+		- Die Assetpfade im Code anpassen
 		- Texture
 			- Effektiver Dateipfad für Laden des Files mittels IMG_Load wird direkt innerhalb der Klasse berechnet (vorerst)
+				- Unter Windows wird der absolute Assetpfad mittels EnvironmentHelper::GetCurrentWorkingDirectory berechnet
+				- Unter Android ist der angegebene relative Assetpfad bereits der zu verwendende Dateipfad
 			-- Später sollte die Berechnung des Dateipfades bzw. das Laden des Bildes eventuell abstrahiert werden (zB. in eine Klasse Asset oder ImageAsset)
 		- CameraController
 		- SillyRenderer
 		- SimpleController
 		- TextureRenderer
 		- Level1
+		- Testen der Änderungen unter Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
 - orbis.master Ordner wieder löschen
