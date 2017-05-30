@@ -21,6 +21,9 @@
     <ClCompile Include="..\..\..\src\Base\System\StringHelper.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\Base\System\EnvironmentHelper.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h">
@@ -33,6 +36,9 @@
       <Filter>src\System</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\Base\System\StringHelper.h">
+      <Filter>src\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Base\System\EnvironmentHelper.h">
       <Filter>src\System</Filter>
     </ClInclude>
   </ItemGroup>

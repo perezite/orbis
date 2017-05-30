@@ -1,11 +1,6 @@
 TODO: 
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Folgende Klassen der Reihe nach implementieren:
-		- EnvironmentHelper
-			- Methoden GetWorkingDirectory und SetWorkingDirectory entfernen
-			- Bei GetCurrentWorkingDirectory eine Exception werfen auf Android
-		- StringHelper
-		- MathHelper
 		- MatrixMode
 		- RenderDevice
 		- GraphicsAdapter mit VideoManager mergen

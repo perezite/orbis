@@ -38,10 +38,12 @@
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PlatformToolset>v140</PlatformToolset>
     <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PlatformToolset>v140</PlatformToolset>
     <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -121,11 +123,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Base\Math\MathHelper.cpp" />
     <ClCompile Include="..\..\..\src\Base\Math\Vector2D.cpp" />
+    <ClCompile Include="..\..\..\src\Base\System\EnvironmentHelper.cpp" />
     <ClCompile Include="..\..\..\src\Base\System\StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Base\Math\MathHelper.h" />
     <ClInclude Include="..\..\..\src\Base\Math\Vector2D.h" />
+    <ClInclude Include="..\..\..\src\Base\System\EnvironmentHelper.h" />
     <ClInclude Include="..\..\..\src\Base\System\Exception.h" />
     <ClInclude Include="..\..\..\src\Base\System\StringHelper.h" />
   </ItemGroup>

@@ -123,10 +123,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Orbis\CheesyHelper.cpp" />
     <ClCompile Include="..\..\..\src\Orbis\SDL_main.cpp" />
+    <ClCompile Include="..\..\..\src\Orbis\Video\VideoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h" />
     <ClInclude Include="..\..\..\src\Orbis\SDL_main.h" />
+    <ClInclude Include="..\..\..\src\Orbis\Video\VideoManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Base\Base.vcxproj">

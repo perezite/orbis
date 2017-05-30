@@ -4,6 +4,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{b6394026-fd6c-446d-ac98-8a334b55f775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Video">
+      <UniqueIdentifier>{f7678281-c5b3-4072-a769-3ae22e936b3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Orbis\SDL_main.cpp">
@@ -12,6 +15,9 @@
     <ClCompile Include="..\..\..\src\Orbis\CheesyHelper.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\Orbis\Video\VideoManager.cpp">
+      <Filter>src\Video</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Orbis\CheesyHelper.h">
@@ -19,6 +25,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\Orbis\SDL_main.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Orbis\Video\VideoManager.h">
+      <Filter>src\Video</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
