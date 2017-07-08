@@ -1,4 +1,7 @@
-TODO: 
+TODO:
+- Das Projekt Templates/SDL2CrossPlatform im Branch feature/cross-platform-sdl2-vstools implementieren
+- Das Projekt Templates/SDL2CrossPlatform nach master mergen
+- Das Projekt Templates/SDL2CrossPlatform vom master Branch übernehmen für das Android-Projekt in orbis
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Folgende Klassen der Reihe nach implementieren:
 		- RenderDevice
