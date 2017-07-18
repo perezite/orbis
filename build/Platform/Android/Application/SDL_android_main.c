@@ -8,6 +8,7 @@ SDL_android_main.c, placed in the public domain by Sam Lantinga  3/13/14
 
 /* Include the SDL main definition header */
 #include "SDL2/SDL_main.h"
+#undef main
 
 /*******************************************************************************
 Functions called by JNI
@@ -60,7 +61,8 @@ JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jc
 
 	/* Run the application. */
 
-	status = SDL_main(argc, argv);
+	//  status = SDL_main(argc, argv);
+	status = main(argc, argv);
 
 	/* Release the arguments. */
 

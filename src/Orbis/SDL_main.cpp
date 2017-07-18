@@ -244,7 +244,6 @@ int run(int argc, char* args[])
     
     Uint8 done = 0;
     SDL_Event event;
-    int count = 0;
     while(!done)
     {
         while(SDL_PollEvent(&event))
