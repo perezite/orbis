@@ -4,7 +4,6 @@
 #include "StringHelper.h"
 
 #ifdef WIN32
-	#define UNICODE
 	#include <windows.h>
 	#include <direct.h>
 #endif

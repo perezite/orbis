@@ -1,15 +1,14 @@
 #include "CheesyHelper.h"
 
 #include "SDL2/SDL.h"
-#include "OpenGLEngine/engine.h"
 #ifdef __ANDROID__
     #include <GLES2/gl2.h>
     #include <GLES2/gl2ext.h>
 #endif 
 #ifdef WIN32
-    #include <gl\glew.h>
-    #include <SDL_opengl.h>
-    #include <gl\glu.h>
+    #include <gl/glew.h>
+    #include <SDL2/SDL_opengl.h>
+    #include <gl/glu.h>
 #endif
 
 #include "../Base/Math/Vector2D.h"
@@ -154,10 +153,9 @@ static void display()
     glViewport(0, 0, width, height);
 
     // Just fill the screen with a color.
-    clearScreen(0.95f, 0.95f, 0.95f, 1.0f); // call from the external opengl engine
-
-                                            // Use the program object
-    glUseProgram(shaderProgram);
+	glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+    glUseProgram(shaderProgram);				 // Use the program object
 
     glEnableVertexAttribArray(POSITION_PARAMETER_INDEX);
     glEnableVertexAttribArray(COLOR_PARAMETER_INDEX);
