@@ -10,6 +10,8 @@ SDL_android_main.c, placed in the public domain by Sam Lantinga  3/13/14
 #include "SDL2/SDL_main.h"
 #undef main
 
+int main(int argc, char* args[]);
+
 /*******************************************************************************
 Functions called by JNI
 *******************************************************************************/
