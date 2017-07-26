@@ -216,7 +216,7 @@ static void display()
 #ifdef __ANDROID__
 // int SDL_main(int argc, char *argv[])
 int run(int argc, char* args[])
-{    
+{  
     SDL_Window* window = 0;
     SDL_GLContext gl = 0;
 
@@ -241,10 +241,10 @@ int run(int argc, char* args[])
    
     SDL_DisplayMode mode;
     SDL_GetDisplayMode(0, 0, &mode);
-    width = mode.w;
-    height = mode.h;
+	Vector2D windowResolution(mode.w, mode.h);
 
-    window = SDL_CreateWindow(NULL, 0, 0, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+
+    window = SDL_CreateWindow(NULL, 0, 0, (int)windowResolution.GetX(), (int)windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
 
     if (window == 0)
     {
@@ -256,6 +256,8 @@ int run(int argc, char* args[])
     gl = SDL_GL_CreateContext(window);
     
     // init();
+	g_RenderDevice.SetWindowResolution(windowResolution);
+	g_RenderDevice.Initialize();
     
     Uint8 done = 0;
     SDL_Event event;
