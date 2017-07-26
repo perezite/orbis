@@ -15,6 +15,9 @@
 #include "../Base/Math/MathHelper.h"
 using namespace Math;
 
+#include "../Orbis/Video/RenderDevice.h"
+using namespace Video;
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -24,15 +27,19 @@ using namespace Math;
 
 #define _USE_MATH_DEFINES
 
+// the render device
+RenderDevice g_RenderDevice;
+
 // shader program
 int32_t shaderProgram = 0;
 
 int height;
 int width;
 
-static const int32_t POSITION_PARAMETER_INDEX = 0;
-static const int32_t COLOR_PARAMETER_INDEX = 1;
+// static const int32_t POSITION_PARAMETER_INDEX = 0;
+// static const int32_t COLOR_PARAMETER_INDEX = 1;
 
+/*
 GLuint LoadShader(const char *shaderSrc, GLenum type)
 {
     GLuint shader;
@@ -70,6 +77,7 @@ GLuint LoadShader(const char *shaderSrc, GLenum type)
 }
 
 static int init() {
+	
     // Initialize GL state.
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
@@ -143,14 +151,15 @@ static int init() {
 
     return 0;
 }
+*/
 
 static void display()
 {
-    static const int32_t PositionNumElements = 3;
+    /* static const int32_t PositionNumElements = 3;
     static const int32_t ColorNumElements = 4;
-    static const int32_t VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements);
+    static const int32_t VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements); */
 
-    glViewport(0, 0, width, height);
+    /*glViewport(0, 0, width, height);
 
     // Just fill the screen with a color.
 	glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
@@ -158,7 +167,7 @@ static void display()
     glUseProgram(shaderProgram);				 // Use the program object
 
     glEnableVertexAttribArray(POSITION_PARAMETER_INDEX);
-    glEnableVertexAttribArray(COLOR_PARAMETER_INDEX);
+    glEnableVertexAttribArray(COLOR_PARAMETER_INDEX);*/
 
     // compute time delta in seconds
     static Uint32 previousTicks = SDL_GetTicks();
@@ -168,7 +177,7 @@ static void display()
     float deltaTime = (float)elapsedTicks / 1000.0f;
 
     // set untransformed points
-    const float z = 0.0f;
+    // const float z = 0.0f;
     Vector2D leftPoint(-0.3f, -0.3f);
     Vector2D rightPoint(0.3f, -0.3f);
     Vector2D topPoint(0.0f, 0.3f);
@@ -181,8 +190,14 @@ static void display()
     Vector2D rotatedRightPoint(cos(alpha)*rightPoint.GetX() - sin(alpha)*rightPoint.GetY(), sin(alpha)*rightPoint.GetX() + cos(alpha)*rightPoint.GetY());
     Vector2D rotatedTopPoint(cos(alpha)*topPoint.GetX() - sin(alpha)*topPoint.GetY(), sin(alpha)*topPoint.GetX() + cos(alpha)*topPoint.GetY());
 
+	g_RenderDevice.BeginPrimitive(RenderMode::Triangle);
+		g_RenderDevice.SetVertex2D(rotatedLeftPoint);
+		g_RenderDevice.SetVertex2D(rotatedRightPoint);
+		g_RenderDevice.SetVertex2D(rotatedTopPoint);
+	g_RenderDevice.EndPrimitive();
+
     // render
-    const float color[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+    /*const float color[] = { 1.0f, 0.0f, 0.0f, 1.0f };
     GLfloat triangle[] = { rotatedTopPoint.GetX(), rotatedTopPoint.GetY(), z,
         color[0], color[1], color[2], color[3],
         rotatedLeftPoint.GetX(), rotatedLeftPoint.GetY(), z,
@@ -195,7 +210,7 @@ static void display()
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glDisableVertexAttribArray(POSITION_PARAMETER_INDEX);
-    glDisableVertexAttribArray(COLOR_PARAMETER_INDEX);
+    glDisableVertexAttribArray(COLOR_PARAMETER_INDEX);*/
 }
 
 #ifdef __ANDROID__
@@ -240,7 +255,7 @@ int run(int argc, char* args[])
 
     gl = SDL_GL_CreateContext(window);
     
-    init();
+    // init();
     
     Uint8 done = 0;
     SDL_Event event;
@@ -271,18 +286,20 @@ int run(int argc, char* args[])
     SDL_GLContext glContext;
 
     // initialize
-    width = height = 400;
+	Vector2D windowResolution(400.0f, 400.0f);
     SDL_Init(SDL_INIT_VIDEO);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-    sdlWindow = SDL_CreateWindow("ExampleGame", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 400, 400, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)windowResolution.GetX(), (int)windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     glContext = SDL_GL_CreateContext(sdlWindow);
     glewInit();
     SDL_GL_SetSwapInterval(1);
-    init();
+	g_RenderDevice.SetWindowResolution(windowResolution);
+	g_RenderDevice.Initialize();
+	// init()
 
     // main loop
     bool quit = false;

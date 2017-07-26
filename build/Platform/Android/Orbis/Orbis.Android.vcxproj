@@ -76,6 +76,7 @@
       </PrecompiledHeaderFile>
       <ExceptionHandling>Enabled</ExceptionHandling>
       <AdditionalIncludeDirectories>$(SolutionDir)External\Android\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -91,6 +92,7 @@
       </PrecompiledHeaderFile>
       <ExceptionHandling>Enabled</ExceptionHandling>
       <AdditionalIncludeDirectories>$(SolutionDir)External\Android\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
