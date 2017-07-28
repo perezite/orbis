@@ -29,7 +29,7 @@ namespace Video
 		void Initialize();
 
 		// dtor
-		virtual ~RenderDevice() { };
+		virtual ~RenderDevice();
 
 		// begin primitive
 		void BeginPrimitive(RenderMode renderMode);

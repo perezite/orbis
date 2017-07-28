@@ -42,4 +42,15 @@ namespace System
 			throw Exception("This functionality is not supported on Android");
 		#endif
 	}
+
+	bool EnvironmentHelper::IsMobile()
+	{
+		#if defined WIN32
+			return false;
+		#elif defined __ANDROID__
+			return true;
+		#else
+			throw Exception("The current operating system is not supported");
+		#endif
+	}
 }

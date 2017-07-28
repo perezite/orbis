@@ -1,8 +1,8 @@
 TODO:
 - Das rotierende Dreieck im Orbis-Style implementieren
 	- Folgende Klassen der Reihe nach implementieren:
-		- GraphicsAdapter mit VideoManager mergen
 		- VideoManager
+			- GraphicsAdapter mit VideoManager mergen
 		- KeyCode
 		- Event
 		- EventAdapter mit InputManager mergen

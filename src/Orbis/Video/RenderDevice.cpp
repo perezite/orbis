@@ -5,6 +5,11 @@ using namespace System;
 
 namespace Video
 {
+	RenderDevice::~RenderDevice()
+	{
+		glDeleteProgram(m_shaderProgram);
+	}
+
 	void RenderDevice::Initialize()
 	{
 		// Initialize GL state.
@@ -23,14 +28,14 @@ namespace Video
 
 		char fShaderStr[] =
 			#ifdef WIN32
-				"#version 130							\n"
+				"#version 130				\n"
 			#endif
-			"precision mediump float;                   \n"
-			"varying vec4 v_vColor;		 				\n"
-			"void main()                                \n"
-			"{                                          \n"
-			"   gl_FragColor = v_vColor;				\n"
-			"}                                          \n";
+			"precision mediump float;       \n"
+			"varying vec4 v_vColor;		 	\n"
+			"void main()                    \n"
+			"{                              \n"
+			"   gl_FragColor = v_vColor;	\n"
+			"}                              \n";
 
 		GLint linked;
 
