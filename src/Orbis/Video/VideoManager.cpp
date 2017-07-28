@@ -28,21 +28,28 @@ namespace Video
 		m_renderDevice.Initialize();
 	}
 
+	RenderDevice* VideoManager::GetRenderDevice()
+	{
+		return &m_renderDevice;
+	}
+
 	void VideoManager::Run()
 	{
-		bool quit = false;
-		SDL_Event e;
-		while (!quit)
+		bool done = false;
+		SDL_Event event;
+		while (!done)
 		{
-			while (SDL_PollEvent(&e) != 0)
+			while (SDL_PollEvent(&event))
 			{
-				if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN || e.type == SDL_FINGERDOWN)
-					quit = true;
+				if (event.type == SDL_QUIT || event.type == SDL_KEYDOWN || event.type == SDL_FINGERDOWN)
+				{
+					done = true;
+				}
 			}
 
 			RenderTriangle();
 			SwapBuffers();
-		}
+		}	
 	}
 
 	void VideoManager::SwapBuffers()
@@ -64,27 +71,25 @@ namespace Video
 
 	void VideoManager::InitializeVideo()
 	{
-		SDL_Init(SDL_INIT_VIDEO);
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-		SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-
-		// os specific intialization
-		#ifdef WIN32		
+		#ifdef WIN32	
+			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 			m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 			glewInit();
-			SDL_GL_SetSwapInterval(1);
 		#endif	
 		#ifdef __ANDROID__
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 			SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-			m_sdlWindow = SDL_CreateWindow("Example", 0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
-
+			m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 		#endif
 	}
 
@@ -98,7 +103,6 @@ namespace Video
 		float deltaTime = (float)elapsedTicks / 1000.0f;
 
 		// set untransformed points
-		// const float z = 0.0f;
 		Vector2D leftPoint(-0.3f, -0.3f);
 		Vector2D rightPoint(0.3f, -0.3f);
 		Vector2D topPoint(0.0f, 0.3f);
@@ -112,9 +116,9 @@ namespace Video
 		Vector2D rotatedTopPoint(cos(alpha)*topPoint.GetX() - sin(alpha)*topPoint.GetY(), sin(alpha)*topPoint.GetX() + cos(alpha)*topPoint.GetY());
 
 		m_renderDevice.BeginPrimitive(RenderMode::Triangle);
-		m_renderDevice.SetVertex2D(rotatedLeftPoint);
-		m_renderDevice.SetVertex2D(rotatedRightPoint);
-		m_renderDevice.SetVertex2D(rotatedTopPoint);
+			m_renderDevice.SetVertex2D(rotatedLeftPoint);
+			m_renderDevice.SetVertex2D(rotatedRightPoint);
+			m_renderDevice.SetVertex2D(rotatedTopPoint);
 		m_renderDevice.EndPrimitive();
 	}
 
@@ -122,10 +126,5 @@ namespace Video
 	{
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
-	}
-
-	RenderDevice* VideoManager::GetRenderDevice()
-	{
-		return &m_renderDevice;
 	}
 }

@@ -4,15 +4,20 @@
     <Filter Include="Video">
       <UniqueIdentifier>{7edbb78a-0e92-4b45-8a46-211ce23701f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Orbis">
+      <UniqueIdentifier>{7707beba-0cf5-4b14-86ef-48c805563d6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.cpp">
       <Filter>Video</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\CheesyHelper.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\SDL_main.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice.cpp">
       <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis\OrbisMain.cpp">
+      <Filter>Orbis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -20,9 +25,11 @@
       <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\CheesyHelper.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\SDL_main.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice.h">
       <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis\OrbisMain.h">
+      <Filter>Orbis</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,8 +8,6 @@
 	#include <direct.h>
 #endif
 
-
-
 #include <string>
 
 namespace System

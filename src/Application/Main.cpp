@@ -1,5 +1,8 @@
-#include "../Orbis/SDL_main.h"
 #include "../Orbis/CheesyHelper.h"
+#include "../Orbis/Orbis/OrbisMain.h"
+
+#include "../Orbis/Video/VideoManager.h"
+using namespace Video;
 
 #include "../Base/System/Exception.h"
 using namespace System;
@@ -7,11 +10,11 @@ using namespace System;
 #include <iostream>
 #include <stdio.h>
 
-int main(int argc, char* args[])
+ORBIS_MAIN()
 {
 	try
 	{
-		run(argc, args);
+		VideoManager::GetInstance()->Run();
 	}
 	catch (Exception e)
 	{
@@ -23,3 +26,5 @@ int main(int argc, char* args[])
 
 	return 0;
 }
+
+
