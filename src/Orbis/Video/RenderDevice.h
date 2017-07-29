@@ -42,6 +42,7 @@ namespace Video
 
 		// set the window resolution (temporary, should be in GraphicsManager)
 		void SetWindowResolution(Vector2D resolution);
+
 	protected:	
 		// load a shader from a program string
 		GLuint LoadShader(const char *shaderSrc, GLenum type);

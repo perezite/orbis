@@ -1,8 +1,9 @@
-#include "../Orbis/CheesyHelper.h"
-#include "../Orbis/Orbis/OrbisMain.h"
-
 #include "../Orbis/Video/VideoManager.h"
+#include "../Orbis/Core/LogHelper.h"
+#include "../Orbis/GUI/GUIHelper.h"
 using namespace Video;
+using namespace Core;
+using namespace GUI;
 
 #include "../Base/System/Exception.h"
 using namespace System;
@@ -10,7 +11,7 @@ using namespace System;
 #include <iostream>
 #include <stdio.h>
 
-ORBIS_MAIN()
+int main(int argc, char* args[])
 {
 	try
 	{
@@ -18,10 +19,8 @@ ORBIS_MAIN()
 	}
 	catch (Exception e)
 	{
-		char buffer[1024];
-		snprintf(buffer, 1024, "%.1023s", e.what().c_str());
-		CheesyHelper::Log(e.what().c_str());
-		CheesyHelper::ShowMessageBox("Exception", e.what());
+		LogHelper::LogMessage("%.1023s", e.what().c_str());
+		GUIHelper::ShowMessageBox(e.what(), "Exception");
 	}
 
 	return 0;
