@@ -22,14 +22,14 @@ namespace Video
 		Triangle = GL_TRIANGLES
 	};
 
-	class RenderDevice
+	class Renderer
 	{
 	public:
 		// initialize
 		void Initialize();
 
 		// dtor
-		virtual ~RenderDevice();
+		virtual ~Renderer();
 
 		// begin primitive
 		void BeginPrimitive(RenderMode renderMode);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RenderDevice.h"
+#include "Renderer.h"
 
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
@@ -19,11 +19,11 @@ namespace Video
 		virtual ~VideoManager();
 
 		// get the render device
-		RenderDevice* GetRenderDevice();
+		Renderer* GetRenderer();
 
-		// run
-		// TODO: this is temporary, because the triangle is currently in the RenderDevice, which is in the LevelManager
-		void Run();
+
+		// clear the screen
+		void ClearScreen();
 
 		// swap the video buffers
 		void SwapBuffers();
@@ -37,10 +37,6 @@ namespace Video
 
 		// initialize the video
 		void InitializeVideo();
-
-		// render the triangle
-		// TODO: this is only temporary
-		void RenderTriangle();
 	private:
 		// the sdl window
 		SDL_Window* m_sdlWindow;
@@ -49,7 +45,7 @@ namespace Video
 		SDL_GLContext m_openGlContext;
 
 		// the attached render device
-		RenderDevice m_renderDevice;
+		Renderer m_renderer;
 
 		// the window resolution
 		Vector2D m_windowResolution;

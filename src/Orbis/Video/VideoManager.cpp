@@ -16,40 +16,31 @@ namespace Video
 	VideoManager* VideoManager::GetInstance()
 	{
 		static VideoManager instance;
-
 		return &instance;
 	}
 
 	VideoManager::VideoManager()
 	{
-		m_windowResolution = GetDefaultWindowResolution();
 		InitializeVideo();
-		m_renderDevice.SetWindowResolution(m_windowResolution);
-		m_renderDevice.Initialize();
+		m_renderer.SetWindowResolution(m_windowResolution);
+		m_renderer.Initialize();
 	}
 
-	RenderDevice* VideoManager::GetRenderDevice()
+	VideoManager::~VideoManager()
 	{
-		return &m_renderDevice;
+		SDL_DestroyWindow(m_sdlWindow);
+		SDL_Quit();
 	}
 
-	void VideoManager::Run()
+	Renderer* VideoManager::GetRenderer()
 	{
-		bool done = false;
-		SDL_Event event;
-		while (!done)
-		{
-			while (SDL_PollEvent(&event))
-			{
-				if (event.type == SDL_QUIT || event.type == SDL_KEYDOWN || event.type == SDL_FINGERDOWN)
-				{
-					done = true;
-				}
-			}
+		return &m_renderer;
+	}
 
-			RenderTriangle();
-			SwapBuffers();
-		}	
+	void VideoManager::ClearScreen()
+	{
+		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void VideoManager::SwapBuffers()
@@ -57,20 +48,10 @@ namespace Video
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
-	Vector2D VideoManager::GetDefaultWindowResolution()
-	{
-		if (EnvironmentHelper::IsMobile())
-		{
-			SDL_DisplayMode mode;
-			SDL_GetDisplayMode(0, 0, &mode);
-			return Vector2D((float)mode.w, (float)mode.h);
-		}
-
-		else return m_DefaultWindowResolution;
-	}
-
 	void VideoManager::InitializeVideo()
 	{
+		m_windowResolution = GetDefaultWindowResolution();
+
 		#ifdef WIN32	
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
@@ -93,38 +74,15 @@ namespace Video
 		#endif
 	}
 
-	void VideoManager::RenderTriangle()
+	Vector2D VideoManager::GetDefaultWindowResolution()
 	{
-		// compute time delta in seconds
-		static Uint32 previousTicks = SDL_GetTicks();
-		Uint32 currentTicks = SDL_GetTicks();
-		Uint32 elapsedTicks = currentTicks - previousTicks;
-		previousTicks = SDL_GetTicks();
-		float deltaTime = (float)elapsedTicks / 1000.0f;
+		if (EnvironmentHelper::IsMobile())
+		{
+			SDL_DisplayMode mode;
+			SDL_GetDisplayMode(0, 0, &mode);
+			return Vector2D((float)mode.w, (float)mode.h);
+		}
 
-		// set untransformed points
-		Vector2D leftPoint(-0.3f, -0.3f);
-		Vector2D rightPoint(0.3f, -0.3f);
-		Vector2D topPoint(0.0f, 0.3f);
-
-		// compute rotated points
-		float omega = MathHelper::GetPi();
-		static float alpha = 0.0f;
-		alpha += omega * deltaTime;
-		Vector2D rotatedLeftPoint(cos(alpha)*leftPoint.GetX() - sin(alpha)*leftPoint.GetY(), sin(alpha)*leftPoint.GetX() + cos(alpha)*leftPoint.GetY());
-		Vector2D rotatedRightPoint(cos(alpha)*rightPoint.GetX() - sin(alpha)*rightPoint.GetY(), sin(alpha)*rightPoint.GetX() + cos(alpha)*rightPoint.GetY());
-		Vector2D rotatedTopPoint(cos(alpha)*topPoint.GetX() - sin(alpha)*topPoint.GetY(), sin(alpha)*topPoint.GetX() + cos(alpha)*topPoint.GetY());
-
-		m_renderDevice.BeginPrimitive(RenderMode::Triangle);
-			m_renderDevice.SetVertex2D(rotatedLeftPoint);
-			m_renderDevice.SetVertex2D(rotatedRightPoint);
-			m_renderDevice.SetVertex2D(rotatedTopPoint);
-		m_renderDevice.EndPrimitive();
-	}
-
-	VideoManager::~VideoManager()
-	{
-		SDL_DestroyWindow(m_sdlWindow);
-		SDL_Quit();
+		else return m_DefaultWindowResolution;
 	}
 }

@@ -1,16 +1,16 @@
-#include "RenderDevice.h"
+#include "Renderer.h"
 
 #include "../../Base/System/Exception.h"
 using namespace System;
 
 namespace Video
 {
-	RenderDevice::~RenderDevice()
+	Renderer::~Renderer()
 	{
 		glDeleteProgram(m_shaderProgram);
 	}
 
-	void RenderDevice::Initialize()
+	void Renderer::Initialize()
 	{
 		// Initialize GL state.
 		glDisable(GL_CULL_FACE);
@@ -85,13 +85,13 @@ namespace Video
 		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 	}
 
-	void RenderDevice::BeginPrimitive(RenderMode renderMode)
+	void Renderer::BeginPrimitive(RenderMode renderMode)
 	{
 		m_renderMode = renderMode;
 		m_vertices.clear();
 	}
 
-	void RenderDevice::EndPrimitive()
+	void Renderer::EndPrimitive()
 	{
 		static const int32_t PositionNumElements = 3;
 		static const int32_t ColorNumElements = 4;
@@ -113,8 +113,6 @@ namespace Video
 		}
 
 		// prepare rendering
-		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(m_shaderProgram);				
 		glEnableVertexAttribArray(PositionShaderAttributeLocation);
 		glEnableVertexAttribArray(ColorShaderAttributeLocation);
@@ -130,17 +128,17 @@ namespace Video
 		delete [] vertexData;
 	}
 
-	void RenderDevice::SetVertex2D(Vector2D position)
+	void Renderer::SetVertex2D(Vector2D position)
 	{
 		m_vertices.push_back(position);
 	}
 
-	void RenderDevice::SetWindowResolution(Vector2D resolution)
+	void Renderer::SetWindowResolution(Vector2D resolution)
 	{
 		m_windowResolution = resolution;
 	}
 
-	GLuint RenderDevice::LoadShader(const char *shaderSrc, GLenum type)
+	GLuint Renderer::LoadShader(const char *shaderSrc, GLenum type)
 	{
 		GLuint shader;
 		GLint compiled;
