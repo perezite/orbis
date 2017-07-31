@@ -8,6 +8,7 @@
 using namespace System;
 
 #include <iostream>
+#include <chrono>
 
 namespace Video
 {

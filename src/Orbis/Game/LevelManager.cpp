@@ -1,5 +1,8 @@
 #include "LevelManager.h"
 
+#include "../Core/TimeManager.h"
+using namespace Core;
+
 #include "..\..\Base\System\Exception.h"
 using namespace System;
 
@@ -39,6 +42,7 @@ namespace Game
 			throw Exception("A level must be queued before calling LevelManager::Heartbeat()");
 		}
 
+		TimeManager::GetInstance()->Update();
 		m_currentLevel->Heartbeat();
 
 		if (m_queuedLevel != NULL)
@@ -54,5 +58,7 @@ namespace Game
 
 		m_currentLevel = m_queuedLevel;
 		m_queuedLevel = NULL;
+
+		TimeManager::GetInstance()->Reset();
 	}
 }
