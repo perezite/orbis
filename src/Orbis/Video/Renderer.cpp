@@ -12,23 +12,19 @@ namespace Video
 
 	void Renderer::Initialize()
 	{
-		// Initialize GL state.
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
-
-		char vShaderStr[] =
-			"attribute vec4 a_vPosition;	\n"
-			"attribute vec4 a_vColor;		\n"
-			"varying vec4 v_vColor;			\n"
-			"void main()					\n"
-			"{								\n"
-			"   gl_Position = a_vPosition;	\n"
-			"	v_vColor = a_vColor;		\n"
-			"}								\n";
+		char vShaderStr[] = 
+			"attribute vec3 a_vPosition;					\n \
+			attribute vec4 a_vColor;						\n \
+			varying vec4 v_vColor;							\n \
+			void main()										\n \
+			{												\n \
+			    gl_Position = vec4(a_vPosition.xyz, 1.0);	\n \
+				v_vColor = a_vColor;						\n \
+			}												\n ";
 
 		char fShaderStr[] =
 			#ifdef WIN32
-				"#version 130				\n"
+				"#version 130 				\n"
 			#endif
 			"precision mediump float;       \n"
 			"varying vec4 v_vColor;		 	\n"
@@ -39,7 +35,7 @@ namespace Video
 
 		GLint linked;
 
-		// Load the vertex/fragment shaders
+		// Load the shaders
 		m_vertexShader = LoadShader(vShaderStr, GL_VERTEX_SHADER);
 		m_fragmentShader = LoadShader(fShaderStr, GL_FRAGMENT_SHADER);
 
@@ -81,8 +77,6 @@ namespace Video
 			glDeleteProgram(m_shaderProgram);
 			throw Exception("Error linking shader program: " + infoLogString);
 		}
-
-		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 	}
 
 	void Renderer::BeginPrimitive(RenderMode renderMode)

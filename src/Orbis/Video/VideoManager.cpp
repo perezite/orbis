@@ -73,6 +73,10 @@ namespace Video
 			m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
 			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 		#endif
+
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
+		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 	}
 
 	Vector2D VideoManager::GetDefaultWindowResolution()

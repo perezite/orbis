@@ -38,5 +38,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
