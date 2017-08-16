@@ -1,9 +1,10 @@
 #pragma once
 
+#include "Color.h"
+#include "Renderer.h"
+
 #include "../../Base/Math/Vector3D.h"
 using namespace Math;
-
-#include "Color.h"
 
 #ifdef __ANDROID__
 	#include <GLES2/gl2.h>	
@@ -34,19 +35,19 @@ namespace Video
 		// set the vertex positions
 		void SetVertexPositions(std::vector<Vector3D> positions) { m_vertexPositions = positions; }
 
-	protected:
-		// set the fragment shader source code
-		virtual void SetFragmentShaderCode(std::string code);
+		// draw the shader
+		void Draw(RenderMode renderMode);
 
+	protected:
 		// load a shader
 		GLuint LoadShader(std::string shaderCode, GLenum type);
 
 	private:
 		// the vertex shader code
-		static const std::string m_vertexShaderCode;
+		static const std::string VertexShaderCode;
 
 		// the fragment shader code
-		std::string m_fragmentShaderCode;
+		static const std::string FragmentShaderCode;
 
 		// the compiled vertex shader
 		GLuint m_vertexShader;
@@ -57,10 +58,16 @@ namespace Video
 		// the shader program
 		GLuint m_shaderProgram;
 
+		// the vertex positions
+		std::vector<Vector3D> m_vertexPositions;
+
 		// the vertex colors
 		std::vector<Color> m_vertexColors;
 
-		// the vertex positions
-		std::vector<Vector3D> m_vertexPositions;
+		// position parameter index
+		static const int PositionShaderAttributeLocation = 0;
+
+		// color parameter index
+		static const int ColorShaderAttributeLocation = 1;
 	};
 }
