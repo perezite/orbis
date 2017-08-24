@@ -29,10 +29,11 @@ namespace Components
 		static const float omega = MathHelper::GetPi();
 		static float alpha = 0.0f;
 		alpha += omega * TimeManager::GetInstance()->GetDeltaSeconds();
+		float alphaRadians = MathHelper::RadianToDegrees(alpha);
 
-		Vector2D rotatedLeftPoint = leftPoint.Rotated(MathHelper::RadianToDegrees(alpha));
-		Vector2D rotatedRightPoint = rightPoint.Rotated(MathHelper::RadianToDegrees(alpha));
-		Vector2D rotatedTopPoint = topPoint.Rotated(MathHelper::RadianToDegrees(alpha));
+		Vector2D rotatedLeftPoint = leftPoint.Rotated(alphaRadians);
+		Vector2D rotatedRightPoint = rightPoint.Rotated(alphaRadians);
+		Vector2D rotatedTopPoint = topPoint.Rotated(alphaRadians);
 
 		// render
 		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();

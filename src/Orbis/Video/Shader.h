@@ -30,7 +30,7 @@ namespace Video
 		~Shader();
 
 		// set the vertex colors
-		void SetVertexColors(std::vector<Color> colors) { m_vertexColors = colors; }
+		void SetColors(std::vector<Color> colors) { m_vertexColors = colors; }
 
 		// set the vertex positions
 		void SetVertices(std::vector<Vector2D> positions) { m_vertexPositions = positions; }

@@ -35,10 +35,6 @@ namespace Video
 		// set vertex 2d
 		void SetVertex2D(Vector2D position);
 
-	protected:	
-		// load a shader from a program string
-		GLuint LoadShader(const char *shaderSrc, GLenum type);
-
 	private:
 		// the vertices of the primitive
 		std::vector<Vector2D> m_vertices;
