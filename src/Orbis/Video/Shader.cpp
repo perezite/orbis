@@ -48,30 +48,8 @@ namespace Video
 		glBindAttribLocation(m_shaderProgram, PositionShaderAttributeLocation, "a_vPosition");
 		glBindAttribLocation(m_shaderProgram, ColorShaderAttributeLocation, "a_vColor");
 
-		// Link the program
-		glLinkProgram(m_shaderProgram);
-
-		// Check the link status
-		GLint linked;
-		glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &linked);
-		if (!linked)
-		{
-			GLint infoLen = 0;
-			std::string infoLogString;
-
-			glGetProgramiv(m_shaderProgram, GL_INFO_LOG_LENGTH, &infoLen);
-
-			if (infoLen > 1)
-			{
-				char* infoLog = new char[infoLen];
-				glGetProgramInfoLog(m_shaderProgram, infoLen, NULL, infoLog);
-				infoLogString = std::string(infoLog);
-				delete[] infoLog;
-			}
-
-			glDeleteProgram(m_shaderProgram);
-			throw Exception("Error linking shader program: " + infoLogString);
-		}
+		// link the program
+		Link();
 	}
 
 	void Shader::Draw(RenderMode renderMode)
@@ -79,36 +57,22 @@ namespace Video
 		static const int32_t PositionNumElements = 3;
 		static const int32_t ColorNumElements = 4;
 		static const int32_t VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements);
-		static const float color[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 		// setup the shader for drawing
 		glUseProgram(m_shaderProgram);
 		glEnableVertexAttribArray(PositionShaderAttributeLocation);
 		glEnableVertexAttribArray(ColorShaderAttributeLocation);
 
-		// copy the vertices into an array
-		int numberOfElements = m_vertexPositions.size() * (3 + 4);
-		GLfloat *vertexData = new GLfloat[numberOfElements];
-		for (unsigned int i = 0; i < m_vertexPositions.size(); i++)
-		{
-			vertexData[i * 7 + 0] = m_vertexPositions[i].GetX();
-			vertexData[i * 7 + 1] = m_vertexPositions[i].GetY();
-			vertexData[i * 7 + 2] = 0.0f;
-			vertexData[i * 7 + 3] = color[0];
-			vertexData[i * 7 + 4] = color[1];
-			vertexData[i * 7 + 5] = color[2];
-			vertexData[i * 7 + 6] = color[3];
-		}
-
 		// draw
-		glVertexAttribPointer(PositionShaderAttributeLocation, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize,vertexData);
-		glVertexAttribPointer(ColorShaderAttributeLocation, ColorNumElements, GL_FLOAT, GL_FALSE, VertexSize, &vertexData[PositionNumElements]);
+		GLfloat *vertexBuffer = GetVertexBuffer(m_vertexPositions, m_vertexColors);
+		glVertexAttribPointer(PositionShaderAttributeLocation, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize, vertexBuffer);
+		glVertexAttribPointer(ColorShaderAttributeLocation, ColorNumElements, GL_FLOAT, GL_FALSE, VertexSize, &vertexBuffer[PositionNumElements]);
 		glDrawArrays(renderMode, 0, m_vertexPositions.size());
 
 		// cleanup
 		glDisableVertexAttribArray(PositionShaderAttributeLocation);
 		glDisableVertexAttribArray(ColorShaderAttributeLocation);
-		delete[] vertexData;
+		delete[] vertexBuffer;
 	}
 
 	GLuint Shader::LoadShader(std::string shaderCode, GLenum type)
@@ -144,5 +108,51 @@ namespace Video
 		}
 
 		return shader;
+	}
+
+	void Shader::Link()
+	{
+		// Link the program
+		glLinkProgram(m_shaderProgram);
+
+		// Check the link status
+		GLint linked;
+		glGetProgramiv(m_shaderProgram, GL_LINK_STATUS, &linked);
+		if (!linked)
+		{
+			GLint infoLen = 0;
+			std::string infoLogString;
+
+			glGetProgramiv(m_shaderProgram, GL_INFO_LOG_LENGTH, &infoLen);
+
+			if (infoLen > 1)
+			{
+				char* infoLog = new char[infoLen];
+				glGetProgramInfoLog(m_shaderProgram, infoLen, NULL, infoLog);
+				infoLogString = std::string(infoLog);
+				delete[] infoLog;
+			}
+
+			glDeleteProgram(m_shaderProgram);
+			throw Exception("Error linking shader program: " + infoLogString);
+		}
+	}
+
+	GLfloat* Shader::GetVertexBuffer(std::vector<Vector2D> vertices, std::vector<Color> colors)
+	{
+		int numberOfElements = m_vertexPositions.size() * (3 + 4);
+		GLfloat *vertexBuffer = new GLfloat[numberOfElements];
+		for (unsigned int i = 0; i < m_vertexPositions.size(); i++)
+		{
+			vertexBuffer[i * 7 + 0] = m_vertexPositions[i].GetX();
+			vertexBuffer[i * 7 + 1] = m_vertexPositions[i].GetY();
+			vertexBuffer[i * 7 + 2] = 0.0f;
+			vertexBuffer[i * 7 + 3] = m_vertexColors[i].GetRed();
+			vertexBuffer[i * 7 + 4] = m_vertexColors[i].GetGreen();
+			vertexBuffer[i * 7 + 5] = m_vertexColors[i].GetBlue();
+			vertexBuffer[i * 7 + 6] = m_vertexColors[i].GetAlpha();
+		}
+
+		return vertexBuffer;
 	}
 }

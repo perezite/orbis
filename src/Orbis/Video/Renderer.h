@@ -1,5 +1,8 @@
 #pragma once
 
+#include "RenderMode.h"
+#include "Shader.h"
+
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
@@ -17,17 +20,9 @@ using namespace Math;
 
 namespace Video
 {
-	enum RenderMode
-	{
-		Triangle = GL_TRIANGLES
-	};
-
 	class Renderer
 	{
 	public:
-		// initialize
-		void Initialize();
-
 		// dtor
 		virtual ~Renderer();
 
@@ -40,9 +35,6 @@ namespace Video
 		// set vertex 2d
 		void SetVertex2D(Vector2D position);
 
-		// set the window resolution (temporary, should be in GraphicsManager)
-		void SetWindowResolution(Vector2D resolution);
-
 	protected:	
 		// load a shader from a program string
 		GLuint LoadShader(const char *shaderSrc, GLenum type);
@@ -51,25 +43,10 @@ namespace Video
 		// the vertices of the primitive
 		std::vector<Vector2D> m_vertices;
 
+		// the shader
+		Shader m_shader;
+
 		// the current render mode
 		RenderMode m_renderMode;
-
-		// the shader program
-		int m_shaderProgram;
-
-		// the vertex shader
-		GLuint m_vertexShader;
-
-		// the fragment shader
-		GLuint m_fragmentShader;
-
-		// the window resolution (only temporary, should be in GraphicsManager)
-		Vector2D m_windowResolution;
-
-		// position parameter index
-		static const int PositionShaderAttributeLocation = 0;
-
-		// color parameter index
-		static const int ColorShaderAttributeLocation = 1;
 	};
 }

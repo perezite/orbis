@@ -98,5 +98,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Color.h">
       <Filter>Video</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderMode.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

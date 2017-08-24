@@ -21,7 +21,6 @@ namespace Video
 		// get the render device
 		Renderer* GetRenderer();
 
-
 		// clear the screen
 		void ClearScreen();
 
@@ -45,7 +44,7 @@ namespace Video
 		SDL_GLContext m_openGlContext;
 
 		// the attached render device
-		Renderer m_renderer;
+		Renderer* m_renderer;
 
 		// the window resolution
 		Vector2D m_windowResolution;

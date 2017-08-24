@@ -23,19 +23,20 @@ namespace Video
 	VideoManager::VideoManager()
 	{
 		InitializeVideo();
-		m_renderer.SetWindowResolution(m_windowResolution);
-		m_renderer.Initialize();
+		m_renderer = new Renderer();
 	}
 
 	VideoManager::~VideoManager()
 	{
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
+		if (m_renderer)
+			delete m_renderer;
 	}
 
 	Renderer* VideoManager::GetRenderer()
 	{
-		return &m_renderer;
+		return m_renderer;
 	}
 
 	void VideoManager::ClearScreen()
@@ -54,6 +55,7 @@ namespace Video
 		m_windowResolution = GetDefaultWindowResolution();
 
 		#ifdef WIN32	
+			SDL_Init(SDL_INIT_VIDEO);
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -64,6 +66,7 @@ namespace Video
 			glewInit();
 		#endif	
 		#ifdef __ANDROID__
+			SDL_Init(SDL_INIT_VIDEO);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);

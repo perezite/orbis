@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Color.h"
-#include "Renderer.h"
+#include "RenderMode.h"
 
-#include "../../Base/Math/Vector3D.h"
+#include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
 #ifdef __ANDROID__
@@ -33,7 +33,7 @@ namespace Video
 		void SetVertexColors(std::vector<Color> colors) { m_vertexColors = colors; }
 
 		// set the vertex positions
-		void SetVertexPositions(std::vector<Vector3D> positions) { m_vertexPositions = positions; }
+		void SetVertices(std::vector<Vector2D> positions) { m_vertexPositions = positions; }
 
 		// draw the shader
 		void Draw(RenderMode renderMode);
@@ -42,6 +42,11 @@ namespace Video
 		// load a shader
 		GLuint LoadShader(std::string shaderCode, GLenum type);
 
+		// link the shader program
+		void Link();
+
+		// convert to vertex buffer
+		GLfloat* GetVertexBuffer(std::vector<Vector2D> vertices, std::vector<Color> colors);
 	private:
 		// the vertex shader code
 		static const std::string VertexShaderCode;
@@ -59,7 +64,7 @@ namespace Video
 		GLuint m_shaderProgram;
 
 		// the vertex positions
-		std::vector<Vector3D> m_vertexPositions;
+		std::vector<Vector2D> m_vertexPositions;
 
 		// the vertex colors
 		std::vector<Color> m_vertexColors;
