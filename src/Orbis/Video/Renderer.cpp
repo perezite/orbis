@@ -17,15 +17,15 @@ namespace Video
 
 	void Renderer::EndPrimitive()
 	{
+		// setup shader
 		static const float color[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 		std::vector<Color> colors;
 		for (unsigned int i = 0; i < m_vertices.size(); i++)
 			colors.push_back(Color(color[0], color[1], color[2], color[3]));
-		m_shader.SetColors(colors);
+		m_shader.SetVertices(m_vertices, colors);
 
-		m_shader.SetVertices(m_vertices);
-
-		m_shader.Draw(m_renderMode);
+		// draw
+		glDrawArrays(m_renderMode, 0, m_vertices.size());
 	}
 
 	void Renderer::SetVertex2D(Vector2D position)

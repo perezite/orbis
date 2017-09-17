@@ -26,56 +26,49 @@ namespace Video
 		"   gl_FragColor = v_vColor;	\n"
 		"}                              \n";
 
-	Shader::~Shader()
-	{
-		glDeleteProgram(m_shaderProgram);
-	}
-
 	Shader::Shader()
 	{
 		// load the shaders
-		m_vertexShader = LoadShader(VertexShaderCode, GL_VERTEX_SHADER);
-		m_fragmentShader = LoadShader(FragmentShaderCode, GL_FRAGMENT_SHADER);
+		m_vertexShader = Compile(VertexShaderCode, GL_VERTEX_SHADER);
+		m_fragmentShader = Compile(FragmentShaderCode, GL_FRAGMENT_SHADER);
 
 		// initialize the shader program
 		m_shaderProgram = glCreateProgram();
-		if (m_shaderProgram == 0)
-			throw Exception("Error creating shader program");
 		glAttachShader(m_shaderProgram, m_vertexShader);
 		glAttachShader(m_shaderProgram, m_fragmentShader);
 
-		// Bind a_vPosition to attribute 0 and a_vColor to 1
+		// bind shader attributes to constants
 		glBindAttribLocation(m_shaderProgram, PositionShaderAttributeLocation, "a_vPosition");
 		glBindAttribLocation(m_shaderProgram, ColorShaderAttributeLocation, "a_vColor");
 
-		// link the program
+		// link and use the shader program
 		Link();
+		glUseProgram(m_shaderProgram);
 	}
 
-	void Shader::Draw(RenderMode renderMode)
+	Shader::~Shader()
 	{
-		static const int32_t PositionNumElements = 3;
-		static const int32_t ColorNumElements = 4;
-		static const int32_t VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements);
-
-		// setup the shader for drawing
-		glUseProgram(m_shaderProgram);
-		glEnableVertexAttribArray(PositionShaderAttributeLocation);
-		glEnableVertexAttribArray(ColorShaderAttributeLocation);
-
-		// draw
-		GLfloat *vertexBuffer = GetVertexBuffer(m_vertexPositions, m_vertexColors);
-		glVertexAttribPointer(PositionShaderAttributeLocation, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize, vertexBuffer);
-		glVertexAttribPointer(ColorShaderAttributeLocation, ColorNumElements, GL_FLOAT, GL_FALSE, VertexSize, &vertexBuffer[PositionNumElements]);
-		glDrawArrays(renderMode, 0, m_vertexPositions.size());
-
-		// cleanup
+		glDeleteProgram(m_shaderProgram);
+		delete[] m_vertexArray;
 		glDisableVertexAttribArray(PositionShaderAttributeLocation);
 		glDisableVertexAttribArray(ColorShaderAttributeLocation);
-		delete[] vertexBuffer;
 	}
 
-	GLuint Shader::LoadShader(std::string shaderCode, GLenum type)
+	void Shader::SetVertices(std::vector<Vector2D> positions, std::vector<Color> colors)
+	{
+		// number of elements per color
+		static const int32_t ColorNumElements = 4;
+		static const int32_t PositionNumElements = 3;
+		static const int32_t VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements);
+
+		m_vertexArray = GetVertexArray(positions, colors);
+		glEnableVertexAttribArray(PositionShaderAttributeLocation);
+		glEnableVertexAttribArray(ColorShaderAttributeLocation);
+		glVertexAttribPointer(PositionShaderAttributeLocation, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize, m_vertexArray);
+		glVertexAttribPointer(ColorShaderAttributeLocation, ColorNumElements, GL_FLOAT, GL_FALSE, VertexSize, &m_vertexArray[PositionNumElements]);
+	}
+
+	GLuint Shader::Compile(std::string shaderCode, GLenum type)
 	{
 		GLuint shader;
 		GLint compiled;
@@ -138,19 +131,19 @@ namespace Video
 		}
 	}
 
-	GLfloat* Shader::GetVertexBuffer(std::vector<Vector2D> vertices, std::vector<Color> colors)
+	GLfloat* Shader::GetVertexArray(std::vector<Vector2D> positions, std::vector<Color> colors)
 	{
-		int numberOfElements = m_vertexPositions.size() * (3 + 4);
+		int numberOfElements = positions.size() * (3 + 4);
 		GLfloat *vertexBuffer = new GLfloat[numberOfElements];
-		for (unsigned int i = 0; i < m_vertexPositions.size(); i++)
+		for (unsigned int i = 0; i < positions.size(); i++)
 		{
-			vertexBuffer[i * 7 + 0] = m_vertexPositions[i].GetX();
-			vertexBuffer[i * 7 + 1] = m_vertexPositions[i].GetY();
+			vertexBuffer[i * 7 + 0] = positions[i].GetX();
+			vertexBuffer[i * 7 + 1] = positions[i].GetY();
 			vertexBuffer[i * 7 + 2] = 0.0f;
-			vertexBuffer[i * 7 + 3] = m_vertexColors[i].GetRed();
-			vertexBuffer[i * 7 + 4] = m_vertexColors[i].GetGreen();
-			vertexBuffer[i * 7 + 5] = m_vertexColors[i].GetBlue();
-			vertexBuffer[i * 7 + 6] = m_vertexColors[i].GetAlpha();
+			vertexBuffer[i * 7 + 3] = colors[i].GetRed();
+			vertexBuffer[i * 7 + 4] = colors[i].GetGreen();
+			vertexBuffer[i * 7 + 5] = colors[i].GetBlue();
+			vertexBuffer[i * 7 + 6] = colors[i].GetAlpha();
 		}
 
 		return vertexBuffer;

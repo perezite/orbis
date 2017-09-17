@@ -51,4 +51,18 @@ namespace System
 			throw Exception("The current operating system is not supported");
 		#endif
 	}
+
+	std::string EnvironmentHelper::CombinePath(std::vector<std::string> parts)
+	{
+		std::string result;
+		for (unsigned int i = 0; i < parts.size() - 1; i++)
+		{
+			result += parts[i];
+			result += PathSeparator;
+		}
+
+		result += parts[parts.size() - 1];
+
+		return result;
+	}
 }

@@ -1,8 +1,25 @@
 TODO:
+- Aktuellen Code auf Android lauffähig machen
+- Shader modernisieren
+	-- Inspiration für die Änderungen findet sich auf learnopengl.com
+	- Eine Matrix-Klasse im Projekt hinzufügen
+	- Eine Einheits Model-Matrix im Shader hinzufügen
+	- Die Rotation des Dreiecks über dei Matrix-Klasse implementieren
+	- Tutorial zu VBO's und VAO's bei thecplusplusguy anschauen	
+	- VAO's durch VAO's ersetzten 
+	- Den Shader so anpassen, dass der Code gleich aussieht wie auf learnopengl.com
+		- VBOs anstatt VAOs
+		- in out, anstatt varying
+		- layout anstatt attribute (evtl. ist hier aber auch learnopengl.com veraltet..)
+	- Implementieren, dass der Shader-Code von einem Text-File geladen werden kann
+	- Anständiges Exception-Handling implementieren
 - Rotierenden Quad mit Brick-Textur implementieren
-	- Ant konfigurieren, dass es Assets aus einem zentralen Folder einbindet: http://stackoverflow.com/questions/16591482/how-do-you-specify-an-alternative-folder-to-the-asset-folder-at-build-time
-	- TextureRenderer implementieren, der einen texturierten Quad rendert
-	- Ein GameObject mit dem TextureRenderer und einem Behaviour versehen, welches den Quad rotiert
+	- Eine Start() Methode implementieren, welche die Textur-Daten lädt für Windows und Android
+	- Die Textur-Logik in eine separate Klasse extrahieren
+		- Die Funktionalität für die Berechnung des Pfades in eine separate Klasse extrahieren
+	- Ein Test-Entity erstellen und die Komponenten dranhängen
+	- Das Test-Entity mit einem Behaviour versehen, welches den Quad rotiert
+- VideoWrapper schreiben, welcher OpenGL und SDLCode wrappt
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 	- Texture
 		- Effektiver Dateipfad für Laden des Files mittels IMG_Load wird direkt innerhalb der Klasse berechnet (vorerst)

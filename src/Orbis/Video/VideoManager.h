@@ -36,6 +36,7 @@ namespace Video
 
 		// initialize the video
 		void InitializeVideo();
+
 	private:
 		// the sdl window
 		SDL_Window* m_sdlWindow;

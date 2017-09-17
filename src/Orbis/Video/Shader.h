@@ -29,24 +29,18 @@ namespace Video
 		// dtor
 		~Shader();
 
-		// set the vertex colors
-		void SetColors(std::vector<Color> colors) { m_vertexColors = colors; }
-
-		// set the vertex positions
-		void SetVertices(std::vector<Vector2D> positions) { m_vertexPositions = positions; }
-
-		// draw the shader
-		void Draw(RenderMode renderMode);
+		// set the the vertex positions and colors
+		void SetVertices(std::vector<Vector2D> positions, std::vector<Color> colors);
 
 	protected:
-		// load a shader
-		GLuint LoadShader(std::string shaderCode, GLenum type);
+		// compile the shader
+		GLuint Compile(std::string shaderCode, GLenum type);
 
-		// link the shader program
+		// link the shader
 		void Link();
 
-		// convert to vertex buffer
-		GLfloat* GetVertexBuffer(std::vector<Vector2D> vertices, std::vector<Color> colors);
+		// get vertex array
+		GLfloat* GetVertexArray(std::vector<Vector2D> vertices, std::vector<Color> colors);
 	private:
 		// the vertex shader code
 		static const std::string VertexShaderCode;
@@ -63,11 +57,8 @@ namespace Video
 		// the shader program
 		GLuint m_shaderProgram;
 
-		// the vertex positions
-		std::vector<Vector2D> m_vertexPositions;
-
-		// the vertex colors
-		std::vector<Color> m_vertexColors;
+		// the vertex array
+		GLfloat* m_vertexArray;
 
 		// position parameter index
 		static const int PositionShaderAttributeLocation = 0;
