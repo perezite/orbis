@@ -1,4 +1,5 @@
 TODO:
+- Shader/TextureRenderer refactoren
 - Aktuellen Code auf Android lauffähig machen
 - Shader modernisieren
 	-- Inspiration für die Änderungen findet sich auf learnopengl.com

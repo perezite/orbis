@@ -29,8 +29,8 @@ namespace Video
 		// dtor
 		~Shader();
 
-		// set the the vertex positions and colors
-		void SetVertices(std::vector<Vector2D> positions, std::vector<Color> colors);
+		// render
+		void Render(std::vector<Vector2D> positions, std::vector<Color> colors, RenderMode renderMode);
 
 	protected:
 		// compile the shader

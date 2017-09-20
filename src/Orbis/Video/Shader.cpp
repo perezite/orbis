@@ -49,23 +49,29 @@ namespace Video
 	Shader::~Shader()
 	{
 		glDeleteProgram(m_shaderProgram);
-		delete[] m_vertexArray;
-		glDisableVertexAttribArray(PositionShaderAttributeLocation);
-		glDisableVertexAttribArray(ColorShaderAttributeLocation);
 	}
 
-	void Shader::SetVertices(std::vector<Vector2D> positions, std::vector<Color> colors)
+	void Shader::Render(std::vector<Vector2D> positions, std::vector<Color> colors, RenderMode renderMode)
 	{
 		// number of elements per color
 		static const int32_t ColorNumElements = 4;
 		static const int32_t PositionNumElements = 3;
 		static const int32_t VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements);
 
+		// setup
 		m_vertexArray = GetVertexArray(positions, colors);
 		glEnableVertexAttribArray(PositionShaderAttributeLocation);
 		glEnableVertexAttribArray(ColorShaderAttributeLocation);
 		glVertexAttribPointer(PositionShaderAttributeLocation, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize, m_vertexArray);
 		glVertexAttribPointer(ColorShaderAttributeLocation, ColorNumElements, GL_FLOAT, GL_FALSE, VertexSize, &m_vertexArray[PositionNumElements]);
+
+		// render
+		glDrawArrays(renderMode, 0, positions.size());
+
+		// cleanup
+		delete[] m_vertexArray;
+		glDisableVertexAttribArray(PositionShaderAttributeLocation);
+		glDisableVertexAttribArray(ColorShaderAttributeLocation);
 	}
 
 	GLuint Shader::Compile(std::string shaderCode, GLenum type)
