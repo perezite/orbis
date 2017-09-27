@@ -30,7 +30,7 @@ namespace Video
 		~Shader();
 
 		// render
-		void Render(std::vector<Vector2D> positions, std::vector<Color> colors, RenderMode renderMode);
+		void Render(std::vector<Vector2D> positions, std::vector<Color> colors, float rotation, RenderMode renderMode);
 
 	protected:
 		// compile the shader
@@ -61,9 +61,12 @@ namespace Video
 		GLfloat* m_vertexArray;
 
 		// position parameter index
-		static const int PositionShaderAttributeLocation = 0;
+		int m_positionAttributeLocation;
 
 		// color parameter index
-		static const int ColorShaderAttributeLocation = 1;
+		int m_colorAttributeLocation;
+
+		// rotation parameter index
+		int m_rotationAttributeLocation;
 	};
 }

@@ -14,8 +14,8 @@ namespace System
 		// check whether we are on a mobile platform
 		static bool IsMobile();
 
-		// combine file oder folder path
-		static std::string EnvironmentHelper::CombinePath(std::vector<std::string> parts);
+		// combine file or folder paths
+		static std::string CombinePath(std::vector<std::string> parts);
 
 	public:
 		static const std::string PathSeparator;

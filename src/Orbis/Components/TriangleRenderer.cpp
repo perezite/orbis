@@ -13,6 +13,7 @@ using namespace Game;
 using namespace Math;
 
 #include <math.h>
+#include <iostream>
 
 namespace Components
 {
@@ -29,18 +30,13 @@ namespace Components
 		static const float omega = MathHelper::GetPi();
 		static float alpha = 0.0f;
 		alpha += omega * TimeManager::GetInstance()->GetDeltaSeconds();
-		float alphaRadians = MathHelper::RadianToDegrees(alpha);
-
-		Vector2D rotatedLeftPoint = leftPoint.Rotated(alphaRadians);
-		Vector2D rotatedRightPoint = rightPoint.Rotated(alphaRadians);
-		Vector2D rotatedTopPoint = topPoint.Rotated(alphaRadians);
 
 		// render
 		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
 		renderer->BeginPrimitive(RenderMode::Triangle);
-			renderer->SetVertex2D(rotatedLeftPoint);
-			renderer->SetVertex2D(rotatedRightPoint);
-			renderer->SetVertex2D(rotatedTopPoint);
-		renderer->EndPrimitive();
+			renderer->SetVertex2D(leftPoint);
+			renderer->SetVertex2D(rightPoint);
+			renderer->SetVertex2D(topPoint);
+		renderer->EndPrimitive(alpha);
 	}
 }

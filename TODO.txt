@@ -1,19 +1,10 @@
 TODO:
-- Shader/TextureRenderer refactoren
-- Aktuellen Code auf Android lauffähig machen
 - Shader modernisieren
-	-- Inspiration für die Änderungen findet sich auf learnopengl.com
-	- Eine Matrix-Klasse im Projekt hinzufügen
-	- Eine Einheits Model-Matrix im Shader hinzufügen
-	- Die Rotation des Dreiecks über dei Matrix-Klasse implementieren
-	- Tutorial zu VBO's und VAO's bei thecplusplusguy anschauen	
-	- VAO's durch VAO's ersetzten 
-	- Den Shader so anpassen, dass der Code gleich aussieht wie auf learnopengl.com
-		- VBOs anstatt VAOs
-		- in out, anstatt varying
-		- layout anstatt attribute (evtl. ist hier aber auch learnopengl.com veraltet..)
+	- VAO's durch VBO's und IBO's (Index Buffer Objects) ersetzen 
 	- Implementieren, dass der Shader-Code von einem Text-File geladen werden kann
 	- Anständiges Exception-Handling implementieren
+- Logging für Android einbauen
+- Nicht invasiven FPS Counter per Logging einbauen	
 - Rotierenden Quad mit Brick-Textur implementieren
 	- Eine Start() Methode implementieren, welche die Textur-Daten lädt für Windows und Android
 	- Die Textur-Logik in eine separate Klasse extrahieren

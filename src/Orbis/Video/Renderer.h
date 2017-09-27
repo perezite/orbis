@@ -30,7 +30,7 @@ namespace Video
 		void BeginPrimitive(RenderMode renderMode);
 
 		// end primitive
-		void EndPrimitive();
+		void EndPrimitive(float rotation);
 
 		// set vertex 2d
 		void SetVertex2D(Vector2D position);
