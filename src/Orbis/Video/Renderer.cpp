@@ -13,20 +13,24 @@ namespace Video
 	{
 		m_renderMode = renderMode;
 		m_vertices.clear();
+		m_colors.clear();
+		m_indices.clear();
 	}
 
 	void Renderer::EndPrimitive(float rotation)
 	{
-		// setup shader
-		static const float color[] = { 0.0f, 0.0f, 1.0f, 1.0f };
-		std::vector<Color> colors;
-		for (unsigned int i = 0; i < m_vertices.size(); i++)
-			colors.push_back(Color(color[0], color[1], color[2], color[3]));
-		m_shader.Render(m_vertices, colors, rotation, m_renderMode);
+		m_shader.SetIndices(m_indices);
+		m_shader.SetVertices(m_vertices, m_colors);
+		m_shader.Render(m_vertices, m_colors, rotation, m_renderMode);
 	}
 
 	void Renderer::SetVertex2D(Vector2D position)
 	{
 		m_vertices.push_back(position);
+		m_colors.push_back(Color(0.0f, 0.0f, 1.0f, 1.0f));
+
+		unsigned int lastIndex = m_indices.empty() ? -1 : m_indices.back();
+		m_indices.push_back(lastIndex + 1);
+
 	}
 }

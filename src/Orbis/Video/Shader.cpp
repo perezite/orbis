@@ -1,10 +1,21 @@
 #include "Shader.h"
 
+#include "../Helpers/VertexHelper.h"
+using namespace Helpers;
+
 #include "../../Base/System/Exception.h"
 using namespace System;
 
 namespace Video
 {
+	const int32_t Shader::ColorNumElements = 4;
+
+	const int32_t Shader::PositionNumElements = 3;
+
+	const int32_t Shader::PositionSize = PositionNumElements * sizeof(GLfloat);
+
+	const int32_t Shader::VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements);
+
 	const std::string Shader::VertexShaderCode =
 		"attribute vec4 a_vPosition;		\n \
 		attribute vec4 a_vColor;			\n \
@@ -47,7 +58,11 @@ namespace Video
 		Link();
 		glUseProgram(m_shaderProgram);
 
-		// get attribute locatons
+		// generate vertex and index buffers
+		glGenBuffers(1, &m_vertexBuffer);
+		glGenBuffers(1, &m_indexBuffer);
+
+		// get attribute locations
 		m_positionAttributeLocation = glGetAttribLocation(m_shaderProgram, "a_vPosition");
 		m_colorAttributeLocation = glGetAttribLocation(m_shaderProgram, "a_vColor");
 		m_rotationAttributeLocation = glGetAttribLocation(m_shaderProgram, "a_fRotation");
@@ -58,28 +73,53 @@ namespace Video
 		glDeleteProgram(m_shaderProgram);
 	}
 
+	void Shader::SetVertices(std::vector<Vector2D> positions, std::vector<Color> colors)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+		// float* vertexArray = VertexHelper::GetVertexArray(positions, colors);
+		float vertexArray[] = {
+			-0.3f, -0.3f, 0.0f, 
+			0.0f, 0.0f, 1.0f, 1.0f,
+			0.3f, -0.3f, 0.0f,
+			0.0f, 0.0f, 1.0f, 1.0f,
+			0.0f, 0.3f, 0.0f,
+			0.0f, 0.0f, 1.0f, 1.0f
+		};
+		// glBufferData(GL_ARRAY_BUFFER, positions.size() * VertexSize, &vertexArray, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexArray), vertexArray, GL_STATIC_DRAW);
+		// delete[] vertexArray;
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		m_numVertices = positions.size();
+	}
+
+	void Shader::SetIndices(std::vector<unsigned int> indices)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
 	void Shader::Render(std::vector<Vector2D> positions, std::vector<Color> colors, float rotation, RenderMode renderMode)
 	{
-		// number of elements per color
-		static const int32_t ColorNumElements = 4;
-		static const int32_t PositionNumElements = 3;
-		static const int32_t VertexSize = sizeof(GLfloat) * (PositionNumElements + ColorNumElements);
-
 		// setup
-		m_vertexArray = GetVertexArray(positions, colors);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
 		glEnableVertexAttribArray(m_positionAttributeLocation);
 		glEnableVertexAttribArray(m_colorAttributeLocation);
-		glVertexAttribPointer(m_positionAttributeLocation, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize, m_vertexArray);
-		glVertexAttribPointer(m_colorAttributeLocation, ColorNumElements, GL_FLOAT, GL_FALSE, VertexSize, &m_vertexArray[PositionNumElements]);
+		glVertexAttribPointer(m_positionAttributeLocation, PositionNumElements, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*) 0);
+		glVertexAttribPointer(m_colorAttributeLocation, ColorNumElements, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)(PositionSize));
+
 		glVertexAttrib1f(m_rotationAttributeLocation, rotation);
 
 		// render
-		glDrawArrays(renderMode, 0, positions.size());
+		glDrawElements(renderMode, m_numVertices, GL_UNSIGNED_INT, (void*)0);
 
 		// cleanup
 		delete[] m_vertexArray;
-		glDisableVertexAttribArray(m_positionAttributeLocation);
 		glDisableVertexAttribArray(m_colorAttributeLocation);
+		glDisableVertexAttribArray(m_positionAttributeLocation);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	GLuint Shader::Compile(std::string shaderCode, GLenum type)

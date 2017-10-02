@@ -1,17 +1,22 @@
 TODO:
+- Sandbox-Konstante in Sandbox.h reinnehmen
+- gitignores für Sandbox-Code erstellen
+- Sandbox erstellen mit VBO-Dreieck
 - Shader modernisieren
 	- VAO's durch VBO's und IBO's (Index Buffer Objects) ersetzen 
 	- Implementieren, dass der Shader-Code von einem Text-File geladen werden kann
-	- Anständiges Exception-Handling implementieren
+	- Implementieren, dass die Matrix auf der CPU berechnet und dann auf die GPU geladen wird
 - Logging für Android einbauen
 - Nicht invasiven FPS Counter per Logging einbauen	
+- Vertex-Klasser einbinden (enthält Position und Color)
 - Rotierenden Quad mit Brick-Textur implementieren
 	- Eine Start() Methode implementieren, welche die Textur-Daten lädt für Windows und Android
 	- Die Textur-Logik in eine separate Klasse extrahieren
 		- Die Funktionalität für die Berechnung des Pfades in eine separate Klasse extrahieren
 	- Ein Test-Entity erstellen und die Komponenten dranhängen
 	- Das Test-Entity mit einem Behaviour versehen, welches den Quad rotiert
-- VideoWrapper schreiben, welcher OpenGL und SDLCode wrappt
+- VideoWrapper schreiben, welcher OpenGL und SDLCode wrappt inkl. ExceptionHandling
+- Renderer wieder in RenderDevice umbenennen
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 	- Texture
 		- Effektiver Dateipfad für Laden des Files mittels IMG_Load wird direkt innerhalb der Klasse berechnet (vorerst)

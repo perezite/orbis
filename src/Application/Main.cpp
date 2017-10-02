@@ -1,3 +1,10 @@
+#define SANDBOX
+
+#ifdef SANDBOX
+	#include "Sandbox/SandboxRunner.h"
+	using namespace Sandbox;
+#endif
+
 #include "Levels/Level1.h"
 using namespace Levels;
 
@@ -13,8 +20,15 @@ using namespace Game;
 #include "../Base/System/Exception.h"
 using namespace System;
 
+#include <iostream>
+
 int main(int argc, char* args[])
 {
+	#ifdef SANDBOX
+		SandboxRunner::Run();
+		return 0;
+	#endif
+
 	try
 	{
 		Level1* level1 = new Level1();

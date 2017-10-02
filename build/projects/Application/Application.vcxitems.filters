@@ -5,15 +5,24 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandbox\SandboxRunner.cpp">
+      <Filter>Sandbox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
       <UniqueIdentifier>{cf244110-4a69-4134-af37-029f5396c942}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sandbox">
+      <UniqueIdentifier>{078f7ac2-7211-42e6-be1f-1156f49b631a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.h">
       <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandbox\SandboxRunner.h">
+      <Filter>Sandbox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

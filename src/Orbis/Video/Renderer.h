@@ -39,6 +39,12 @@ namespace Video
 		// the vertices of the primitive
 		std::vector<Vector2D> m_vertices;
 
+		// the vertex colors of the primitive
+		std::vector<Color> m_colors;
+
+		// the indices of the primitive
+		std::vector<unsigned int> m_indices;
+
 		// the shader
 		Shader m_shader;
 
