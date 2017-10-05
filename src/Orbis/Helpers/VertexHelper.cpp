@@ -10,7 +10,7 @@ namespace Helpers
 
 		float* vertexArray = new float[positions.size() * 7];
 
-		for (int i = 0; i < positions.size(); i++)
+		for (unsigned int i = 0; i < positions.size(); i++)
 		{
 			vertexArray[i * 7 + 0] = positions[i].GetX();
 			vertexArray[i * 7 + 1] = positions[i].GetY();
