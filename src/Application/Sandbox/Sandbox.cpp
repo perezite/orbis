@@ -63,7 +63,7 @@ void initGL()
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	const GLchar* fragmentShaderSource[] =
 	{
-		"#version 140\nout vec4 LFragment; void main() { LFragment = vec4( 1.0, 1.0, 1.0, 1.0 ); }"
+		"#version 140\nout vec4 LFragment; void main() { LFragment = vec4( 1.0, 0.0, 0.0, 1.0 ); }"
 	};
 	glShaderSource(fragmentShader, 1, fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);
@@ -78,19 +78,18 @@ void initGL()
 	{
 		-0.5f, -0.5f,
 		0.5f, -0.5f,
-		0.5f,  0.5f,
-		-0.5f,  0.5f
+		0.0f,  0.5f
 	};
 
-	GLuint indexData[] = { 0, 1, 2, 3 };
+	GLuint indexData[] = { 0, 1, 2 };
 
 	glGenBuffers(1, &gVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-	glBufferData(GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 2 * 3 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &gIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
 }
 
 void render()
@@ -104,7 +103,7 @@ void render()
 	glVertexAttribPointer(gVertexPos2DLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 
-	glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
 
 	glDisableVertexAttribArray(gVertexPos2DLocation);
 	glUseProgram(NULL);

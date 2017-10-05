@@ -8,8 +8,11 @@ namespace Components
 	class TriangleRenderer : public Component
 	{
 	public:
+		// dtor
+		~TriangleRenderer();
+
 		// update
-		void Update();
+		void Start();
 
 		// render
 		void Render();
