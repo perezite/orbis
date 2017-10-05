@@ -1,20 +1,15 @@
 #include "Sandbox.h"
 
 #ifdef __SANDBOX__
+#ifdef WIN32
 
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
 #include <SDL2/SDL.h>
-#ifdef __ANDROID__
-	#include <GLES2/gl2.h>	
-	#include <GLES2/gl2ext.h>
-#endif 
-#ifdef WIN32
-	#include <gl/glew.h>
-	#include <SDL2/SDL_opengl.h>
-	#include <gl/glu.h>
-#endif
+#include <gl/glew.h>
+#include <SDL2/SDL_opengl.h>
+#include <gl/glu.h>
 
 #include <vector>
 #include <iostream>
@@ -229,5 +224,5 @@ void Run()
 	SDL_Quit();
 }
 
-
+#endif
 #endif
