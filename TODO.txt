@@ -1,5 +1,4 @@
 TODO:
-- Sandbox-Konstante in Sandbox.h reinnehmen
 - gitignores für Sandbox-Code erstellen
 - Sandbox erstellen mit VBO-Dreieck
 - Shader modernisieren

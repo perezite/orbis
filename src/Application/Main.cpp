@@ -1,9 +1,4 @@
-#define SANDBOX
-
-#ifdef SANDBOX
-	#include "Sandbox/SandboxRunner.h"
-	using namespace Sandbox;
-#endif
+#include "Sandbox/Sandbox.h"
 
 #include "Levels/Level1.h"
 using namespace Levels;
@@ -24,8 +19,8 @@ using namespace System;
 
 int main(int argc, char* args[])
 {
-	#ifdef SANDBOX
-		SandboxRunner::Run();
+	#ifdef __SANDBOX__
+		Run();
 		return 0;
 	#endif
 
