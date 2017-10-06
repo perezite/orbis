@@ -8,30 +8,6 @@ using namespace System;
 
 namespace
 {
-	/*
-
-	*/
-
-	// the vertex shader code
-	const std::string VertexShaderCode =
-		"attribute vec2 a_vPosition;		\n \
-		attribute float a_fRotation;		\n \
-											\n \
-		mat4 rotationMat =					\n \
-		mat4(cos(a_fRotation), sin(a_fRotation), 0, 0,		\n \
-			- sin(a_fRotation), cos(a_fRotation), 0, 0,		\n \
-			0, 0, 1, 0, \n \
-			0, 0, 0, 1);									\n \
-															\n \
-		void main()							\n \
-		{									\n \
-			gl_Position = rotationMat * vec4( a_vPosition.xy, 0, 1 );		\n \
-		}									\n ";
-
-	// the fragment shader code
-	const std::string FragmentShaderCode =
-		"void main() { gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
-
 	// the shader program id
 	GLuint programId = 0;
 
@@ -39,7 +15,27 @@ namespace
 	GLint positionAttributeLocation = -1;
 
 	// the rotation attribute location
-	GLint rotationAttributeLocation = -1;
+	GLint rotationUniformLocation = -1;
+
+	// the vertex shader code
+	const std::string VertexShaderCode =
+		"attribute vec2 a_vPosition;										\n \
+		uniform float u_fRotation;											\n \
+																			\n \
+		mat4 rotationMat =													\n \
+			mat4(cos(u_fRotation), sin(u_fRotation), 0, 0,					\n \
+			- sin(u_fRotation), cos(u_fRotation), 0, 0,						\n \
+			0, 0, 1, 0,														\n \
+			0, 0, 0, 1);													\n \
+																			\n \
+		void main()															\n \
+		{																	\n \
+			gl_Position = rotationMat * vec4( a_vPosition.xy, 0, 1 );		\n \
+		}																	\n ";
+
+	// the fragment shader code
+	const std::string FragmentShaderCode =
+		"void main() { gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
 
 	// compile the shader code
 	GLuint Compile(std::string shaderCode, GLenum type)
@@ -120,7 +116,7 @@ namespace Video
 		Link();
 
 		positionAttributeLocation = glGetAttribLocation(programId, "a_vPosition");
-		rotationAttributeLocation = glGetAttribLocation(programId, "a_fRotation");
+		rotationUniformLocation = glGetUniformLocation(programId, "u_fRotation");
 	}
 
 	Shader::~Shader()
@@ -133,9 +129,9 @@ namespace Video
 		return positionAttributeLocation;
 	}
 
-	void Shader::SetRotationAttribute(float rotation)
+	void Shader::SetRotationUniform(float rotation)
 	{
-		glVertexAttrib1f(rotationAttributeLocation, rotation);
+		glUniform1f(rotationUniformLocation, rotation);
 	}
 
 	void Shader::Use()

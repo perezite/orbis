@@ -33,7 +33,7 @@ namespace Video
 		int GetPositionAttributeLocation();
 
 		// set the rotation attribute
-		void SetRotationAttribute(float rotation);
+		void SetRotationUniform(float rotation);
 
 		// enable the shader
 		void Use();

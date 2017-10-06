@@ -33,7 +33,7 @@ namespace Components
 	void TriangleRenderer::Render()
 	{
 		static Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
-		static const float omega = MathHelper::GetPi() * 20.0f;
+		static const float omega = MathHelper::GetPi();
 		static float alpha = 0.0f;
 
 		alpha += omega * TimeManager::GetInstance()->GetDeltaSeconds();
