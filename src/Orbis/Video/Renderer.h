@@ -29,6 +29,9 @@ namespace Video
 		// dtor
 		virtual ~Renderer();
 
+		// add geometry to the renderer
+		void AddGeometry(std::vector<Vector2D> vertices, int indices[]);
+
 		// begin primitive
 		void BeginPrimitive(RenderMode renderMode);
 
@@ -38,20 +41,11 @@ namespace Video
 		// set vertex 2d
 		void SetVertex2D(Vector2D position);
 
+		// render
+		void Render();
+
 	private:
 		// the vertices of the primitive
-		std::vector<Vector2D> m_vertices;
-
-		// the vertex colors of the primitive
-		std::vector<Color> m_colors;
-
-		// the indices of the primitive
-		std::vector<unsigned int> m_indices;
-
-		// the shader
-		Shader m_shader;
-
-		// the current render mode
-		RenderMode m_renderMode;
+		std::vector<Vector2D> vertices;
 	};
 }

@@ -15,8 +15,6 @@ using namespace Math;
 #include <math.h>
 #include <iostream>
 
-
-
 namespace Components
 {
 	TriangleRenderer::~TriangleRenderer()
@@ -25,34 +23,17 @@ namespace Components
 
 	void TriangleRenderer::Start()
 	{
+		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
+
+		std::vector<Vector2D> vertexData = { Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(0.0f,  0.5f) };
+		int indexData[] = { 0, 1, 2 };
+		renderer->AddGeometry(vertexData, indexData);
 	}
 
 	void TriangleRenderer::Render()
 	{
-		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
-		renderer->BeginPrimitive(RenderMode::Triangle);
-		renderer->EndPrimitive(0.0f);
+		static Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
+
+		renderer->Render();
 	}
-
-	/*
-	void TriangleRenderer::Render()
-	{
-		// set untransformed points
-		Vector2D leftPoint(-0.3f, -0.3f);
-		Vector2D rightPoint(0.3f, -0.3f);
-		Vector2D topPoint(0.0f, 0.3f);
-
-		// compute rotated points
-		static const float omega = MathHelper::GetPi();
-		static float alpha = 0.0f;
-		alpha += omega * TimeManager::GetInstance()->GetDeltaSeconds();
-
-		// render
-		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
-		renderer->BeginPrimitive(RenderMode::Triangle);
-			renderer->SetVertex2D(leftPoint);
-			renderer->SetVertex2D(rightPoint);
-			renderer->SetVertex2D(topPoint);
-		renderer->EndPrimitive(alpha);
-	}*/
 }
