@@ -1,5 +1,7 @@
 #include "Renderer.h"
 
+#include "VideoManager.h"
+
 #include "../../Base/System/Exception.h"
 using namespace System;
 
@@ -9,35 +11,89 @@ namespace
 	GLint gVertexPos2DLocation = -1;
 	GLuint gVBO = 0;
 	GLuint gIBO = 0;
+
+	const std::string VertexShaderCode =
+		"attribute vec2 LVertexPos2D; void main() { gl_Position = vec4( LVertexPos2D.xy, 0, 1 ); }";
+
+	const std::string FragmentShaderCode =
+		"void main() { gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
+
+	GLuint Compile(std::string shaderCode, GLenum type)
+	{
+		GLuint shader;
+		GLint compiled;
+
+		shader = glCreateShader(type);
+		if (shader != 0)
+		{
+			const char* shaderCodeData = shaderCode.c_str();
+			glShaderSource(shader, 1, &shaderCodeData, NULL);
+			glCompileShader(shader);
+
+			glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+			if (!compiled)
+			{
+				GLint infoLen = 0;
+				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
+
+				std::string infoLogString;
+				if (infoLen > 1)
+				{
+					char* infoLog = new char[infoLen];
+					glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
+					infoLogString = std::string(infoLog);
+					delete[] infoLog;
+				}
+				glDeleteShader(shader);
+
+				throw Exception("Error compiling shader: " + infoLogString);
+			}
+		}
+
+		return shader;
+	}
+
+	void Link()
+	{
+		glLinkProgram(gProgramID);
+
+		GLint linked;
+		glGetProgramiv(gProgramID, GL_LINK_STATUS, &linked);
+		if (!linked)
+		{
+			GLint infoLen = 0;
+			std::string infoLogString;
+
+			glGetProgramiv(gProgramID, GL_INFO_LOG_LENGTH, &infoLen);
+
+			if (infoLen > 1)
+			{
+				char* infoLog = new char[infoLen];
+				glGetProgramInfoLog(gProgramID, infoLen, NULL, infoLog);
+				infoLogString = std::string(infoLog);
+				delete[] infoLog;
+			}
+
+			glDeleteProgram(gProgramID);
+			throw Exception("Error linking shader program: " + infoLogString);
+		}
+	}
 }
 
 namespace Video
-{
+{	
 	Renderer::Renderer()
 	{
 		gProgramID = glCreateProgram();
-		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
-		const GLchar* vertexShaderSource[] =
-		{
-			"#version 140\nin vec2 LVertexPos2D; void main() { gl_Position = vec4( LVertexPos2D.x, LVertexPos2D.y, 0, 1 ); }"
-		};
-		glShaderSource(vertexShader, 1, vertexShaderSource, NULL);
-		glCompileShader(vertexShader);
-		GLint vShaderCompiled = GL_FALSE;
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &vShaderCompiled);
+		GLuint vertexShader = Compile(VertexShaderCode, GL_VERTEX_SHADER);
 		glAttachShader(gProgramID, vertexShader);
 
-		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		const GLchar* fragmentShaderSource[] =
-		{
-			"#version 140\nout vec4 LFragment; void main() { LFragment = vec4( 1.0, 0.0, 0.0, 1.0 ); }"
-		};
-		glShaderSource(fragmentShader, 1, fragmentShaderSource, NULL);
-		glCompileShader(fragmentShader);
+		GLuint fragmentShader = Compile(FragmentShaderCode, GL_FRAGMENT_SHADER);
 		glAttachShader(gProgramID, fragmentShader);
 
-		glLinkProgram(gProgramID);
+		Link();
+
 		gVertexPos2DLocation = glGetAttribLocation(gProgramID, "LVertexPos2D");
 
 		glClearColor(0.f, 0.f, 0.f, 1.f);
@@ -83,38 +139,6 @@ namespace Video
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
 
 		glDisableVertexAttribArray(gVertexPos2DLocation);
-		glUseProgram(NULL);
+		glUseProgram(0);
 	}
-
-
-	/*
-	Renderer::~Renderer()
-	{
-	}
-
-	void Renderer::BeginPrimitive(RenderMode renderMode)
-	{
-		m_renderMode = renderMode;
-		m_vertices.clear();
-		m_colors.clear();
-		m_indices.clear();
-	}
-
-	void Renderer::EndPrimitive(float rotation)
-	{
-		m_shader.SetIndices(m_indices);
-		m_shader.SetVertices(m_vertices, m_colors);
-		m_shader.Render(m_vertices, m_colors, rotation, m_renderMode);
-	}
-
-	void Renderer::SetVertex2D(Vector2D position)
-	{
-		m_vertices.push_back(position);
-		m_colors.push_back(Color(0.0f, 0.0f, 1.0f, 1.0f));
-
-		unsigned int lastIndex = m_indices.empty() ? -1 : m_indices.back();
-		m_indices.push_back(lastIndex + 1);
-
-	}
-	*/
 }
