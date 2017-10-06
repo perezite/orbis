@@ -9,20 +9,23 @@ using namespace System;
 namespace
 {
 	/*
-	mat4 rotationMat =											\n \
-	mat4(cos(a_fRotation), sin(a_fRotation), 0, 0,					\n \
-	-sin(a_fRotation), cos(a_fRotation), 0, 0,						\n \
-	0, 0, 1, 0,														\n \
-	0, 0, 0, 1);													\n \
+
 	*/
 
 	// the vertex shader code
 	const std::string VertexShaderCode =
 		"attribute vec2 a_vPosition;		\n \
 		attribute float a_fRotation;		\n \
+											\n \
+		mat4 rotationMat =					\n \
+		mat4(cos(a_fRotation), sin(a_fRotation), 0, 0,		\n \
+			- sin(a_fRotation), cos(a_fRotation), 0, 0,		\n \
+			0, 0, 1, 0, \n \
+			0, 0, 0, 1);									\n \
+															\n \
 		void main()							\n \
 		{									\n \
-			gl_Position = vec4( a_vPosition.xy, 0, 1 );		\n \
+			gl_Position = rotationMat * vec4( a_vPosition.xy, 0, 1 );		\n \
 		}									\n ";
 
 	// the fragment shader code
@@ -30,10 +33,13 @@ namespace
 		"void main() { gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
 
 	// the shader program id
-	GLuint gProgramID = 0;
+	GLuint programId = 0;
 
 	// the vertex position location
-	GLint gVertexPositionLocation = -1;
+	GLint positionAttributeLocation = -1;
+
+	// the rotation attribute location
+	GLint rotationAttributeLocation = -1;
 
 	// compile the shader code
 	GLuint Compile(std::string shaderCode, GLenum type)
@@ -74,26 +80,26 @@ namespace
 	// link the shader program
 	void Link()
 	{
-		glLinkProgram(gProgramID);
+		glLinkProgram(programId);
 
 		GLint linked;
-		glGetProgramiv(gProgramID, GL_LINK_STATUS, &linked);
+		glGetProgramiv(programId, GL_LINK_STATUS, &linked);
 		if (!linked)
 		{
 			GLint infoLen = 0;
 			std::string infoLogString;
 
-			glGetProgramiv(gProgramID, GL_INFO_LOG_LENGTH, &infoLen);
+			glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &infoLen);
 
 			if (infoLen > 1)
 			{
 				char* infoLog = new char[infoLen];
-				glGetProgramInfoLog(gProgramID, infoLen, NULL, infoLog);
+				glGetProgramInfoLog(programId, infoLen, NULL, infoLog);
 				infoLogString = std::string(infoLog);
 				delete[] infoLog;
 			}
 
-			glDeleteProgram(gProgramID);
+			glDeleteProgram(programId);
 			throw Exception("Error linking shader program: " + infoLogString);
 		}
 	}
@@ -103,32 +109,38 @@ namespace Video
 {
 	Shader::Shader()
 	{
-		gProgramID = glCreateProgram();
+		programId = glCreateProgram();
 
 		GLuint vertexShader = Compile(VertexShaderCode, GL_VERTEX_SHADER);
-		glAttachShader(gProgramID, vertexShader);
+		glAttachShader(programId, vertexShader);
 
 		GLuint fragmentShader = Compile(FragmentShaderCode, GL_FRAGMENT_SHADER);
-		glAttachShader(gProgramID, fragmentShader);
+		glAttachShader(programId, fragmentShader);
 
 		Link();
 
-		gVertexPositionLocation = glGetAttribLocation(gProgramID, "a_vPosition");
+		positionAttributeLocation = glGetAttribLocation(programId, "a_vPosition");
+		rotationAttributeLocation = glGetAttribLocation(programId, "a_fRotation");
 	}
 
 	Shader::~Shader()
 	{
-		glDeleteProgram(gProgramID);
+		glDeleteProgram(programId);
 	}
 
-	int Shader::GetPositionLocation()
+	int Shader::GetPositionAttributeLocation()
 	{
-		return gVertexPositionLocation;
+		return positionAttributeLocation;
+	}
+
+	void Shader::SetRotationAttribute(float rotation)
+	{
+		glVertexAttrib1f(rotationAttributeLocation, rotation);
 	}
 
 	void Shader::Use()
 	{
-		glUseProgram(gProgramID);
+		glUseProgram(programId);
 	}
 
 	void Shader::Unuse()

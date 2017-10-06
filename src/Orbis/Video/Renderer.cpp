@@ -51,15 +51,16 @@ namespace Video
 		VideoManager::GetInstance()->ClearScreen();
 
 		shader->Use();
-		glEnableVertexAttribArray(shader->GetPositionLocation());
+		glEnableVertexAttribArray(shader->GetPositionAttributeLocation());
 
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-		glVertexAttribPointer(shader->GetPositionLocation(), 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+		glVertexAttribPointer(shader->GetPositionAttributeLocation(), 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+		shader->SetRotationAttribute(rotation);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
 
-		glDisableVertexAttribArray(shader->GetPositionLocation());
+		glDisableVertexAttribArray(shader->GetPositionAttributeLocation());
 		shader->Unuse();
 	}
 }

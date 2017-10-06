@@ -29,8 +29,11 @@ namespace Video
 		// dtor
 		~Shader();
 
-		// get the position location within the vertex shader
-		int GetPositionLocation();
+		// get the position attribute location
+		int GetPositionAttributeLocation();
+
+		// set the rotation attribute
+		void SetRotationAttribute(float rotation);
 
 		// enable the shader
 		void Use();
