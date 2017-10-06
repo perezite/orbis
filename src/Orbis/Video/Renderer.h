@@ -23,6 +23,9 @@ namespace Video
 	class Renderer
 	{
 	public:
+		// ctor
+		Renderer();
+
 		// dtor
 		virtual ~Renderer();
 
