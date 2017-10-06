@@ -32,17 +32,8 @@ namespace Video
 		// add geometry to the renderer
 		void AddGeometry(std::vector<Vector2D> vertices, int indices[]);
 
-		// begin primitive
-		void BeginPrimitive(RenderMode renderMode);
-
-		// end primitive
-		void EndPrimitive(float rotation);
-
-		// set vertex 2d
-		void SetVertex2D(Vector2D position);
-
 		// render
-		void Render();
+		void Render(float rotation);
 
 	private:
 		// the vertices of the primitive

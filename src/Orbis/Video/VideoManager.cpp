@@ -21,8 +21,9 @@ namespace Video
 
 	VideoManager::VideoManager()
 	{
+		m_renderer = NULL;
+
 		InitializeVideo();
-		m_renderer = new Renderer();
 	}
 
 	VideoManager::~VideoManager()
@@ -35,6 +36,9 @@ namespace Video
 
 	Renderer* VideoManager::GetRenderer()
 	{
+		if (m_renderer == NULL)
+			m_renderer = new Renderer();
+
 		return m_renderer;
 	}
 

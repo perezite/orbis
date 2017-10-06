@@ -46,15 +46,7 @@ namespace Video
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(GLuint), indices, GL_STATIC_DRAW);
 	}
 
-	void Renderer::BeginPrimitive(RenderMode renderMode)
-	{
-	}
-
-	void Renderer::EndPrimitive(float rotation)
-	{
-	}
-
-	void Renderer::Render()
+	void Renderer::Render(float rotation)
 	{
 		VideoManager::GetInstance()->ClearScreen();
 

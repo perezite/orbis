@@ -34,6 +34,6 @@ namespace Components
 	{
 		static Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
 
-		renderer->Render();
+		renderer->Render(0.75f);
 	}
 }

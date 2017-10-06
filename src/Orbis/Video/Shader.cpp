@@ -8,19 +8,32 @@ using namespace System;
 
 namespace
 {
+	/*
+	mat4 rotationMat =											\n \
+	mat4(cos(a_fRotation), sin(a_fRotation), 0, 0,					\n \
+	-sin(a_fRotation), cos(a_fRotation), 0, 0,						\n \
+	0, 0, 1, 0,														\n \
+	0, 0, 0, 1);													\n \
+	*/
+
+	// the vertex shader code
+	const std::string VertexShaderCode =
+		"attribute vec2 a_vPosition;		\n \
+		attribute float a_fRotation;		\n \
+		void main()							\n \
+		{									\n \
+			gl_Position = vec4( a_vPosition.xy, 0, 1 );		\n \
+		}									\n ";
+
+	// the fragment shader code
+	const std::string FragmentShaderCode =
+		"void main() { gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
+
 	// the shader program id
 	GLuint gProgramID = 0;
 
 	// the vertex position location
 	GLint gVertexPositionLocation = -1;
-
-	// the vertex shader code
-	const std::string VertexShaderCode =
-		"attribute vec2 LVertexPos2D; void main() { gl_Position = vec4( LVertexPos2D.xy, 0, 1 ); }";
-
-	// the fragment shader code
-	const std::string FragmentShaderCode =
-		"void main() { gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
 
 	// compile the shader code
 	GLuint Compile(std::string shaderCode, GLenum type)
@@ -100,7 +113,7 @@ namespace Video
 
 		Link();
 
-		gVertexPositionLocation = glGetAttribLocation(gProgramID, "LVertexPos2D");
+		gVertexPositionLocation = glGetAttribLocation(gProgramID, "a_vPosition");
 	}
 
 	Shader::~Shader()
