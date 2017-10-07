@@ -60,8 +60,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TextureRenderer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Helpers\VertexHelper.cpp">
-      <Filter>Helpers</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,8 +113,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TextureRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Helpers\VertexHelper.h">
-      <Filter>Helpers</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ namespace Video
 	{
 	public:
 		// ctor
-		Shader();
+		Shader(std::string vertexAssetPath, std::string fragmentAssetPath);
 
 		// dtor
 		~Shader();

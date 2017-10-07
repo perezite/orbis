@@ -23,7 +23,7 @@ namespace Video
 {	
 	Renderer::Renderer()
 	{
-		shader = new Shader();
+		shader = new Shader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
 
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 

@@ -57,8 +57,11 @@ namespace System
 		std::string result;
 		for (unsigned int i = 0; i < parts.size() - 1; i++)
 		{
-			result += parts[i];
-			result += PathSeparator;
+			if (parts[i].size() > 0)
+			{
+				result += parts[i];
+				result += PathSeparator;
+			}
 		}
 
 		result += parts[parts.size() - 1];

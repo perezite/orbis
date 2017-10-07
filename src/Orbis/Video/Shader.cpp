@@ -1,7 +1,7 @@
 #include "Shader.h"
 
-#include "../Helpers/VertexHelper.h"
-using namespace Helpers;
+#include "../Core/AssetHelper.h"
+using namespace Core;
 
 #include "../../Base/System/Exception.h"
 using namespace System;
@@ -16,26 +16,6 @@ namespace
 
 	// the rotation attribute location
 	GLint rotationUniformLocation = -1;
-
-	// the vertex shader code
-	const std::string VertexShaderCode =
-		"attribute vec2 a_vPosition;										\n \
-		uniform float u_fRotation;											\n \
-																			\n \
-		mat4 rotationMat =													\n \
-			mat4(cos(u_fRotation), sin(u_fRotation), 0, 0,					\n \
-			- sin(u_fRotation), cos(u_fRotation), 0, 0,						\n \
-			0, 0, 1, 0,														\n \
-			0, 0, 0, 1);													\n \
-																			\n \
-		void main()															\n \
-		{																	\n \
-			gl_Position = rotationMat * vec4( a_vPosition.xy, 0, 1 );		\n \
-		}																	\n ";
-
-	// the fragment shader code
-	const std::string FragmentShaderCode =
-		"void main() { gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
 
 	// compile the shader code
 	GLuint Compile(std::string shaderCode, GLenum type)
@@ -103,14 +83,16 @@ namespace
 
 namespace Video
 {
-	Shader::Shader()
+	Shader::Shader(std::string vertexAssetPath, std::string fragmentAssetPath)
 	{
 		programId = glCreateProgram();
 
-		GLuint vertexShader = Compile(VertexShaderCode, GL_VERTEX_SHADER);
+		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexAssetPath);
+		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER);
 		glAttachShader(programId, vertexShader);
 
-		GLuint fragmentShader = Compile(FragmentShaderCode, GL_FRAGMENT_SHADER);
+		std::string fragmentShaderCode = AssetHelper::LoadTextAsset(fragmentAssetPath);
+		GLuint fragmentShader = Compile(fragmentShaderCode, GL_FRAGMENT_SHADER);
 		glAttachShader(programId, fragmentShader);
 
 		Link();
