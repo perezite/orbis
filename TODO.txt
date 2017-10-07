@@ -1,24 +1,17 @@
 TODO:
-- Texturierung implementieren
-	- Dreieck durch einen Quad ersetzen
-	- ...
+- Sandbox mit Texture-Logik versehen
+	- Texture-Laden implementieren
+	- Textur in OpenGL aktivieren
+	- Texture-Koordinaten in VBO schreiben
+	- Shader anpassen
+	- Testen
+- Logik in TriangleShader übernehmen
+- Logik in Diffuse Shader übernehmen
+- Sobald alles funktioniert: Texture-Logik in separate Klasse auslagern
+- Sobald alles funktioniert: Texture-Lade Logik gemäss Video von thecplusplusguy anpassen
 - Cpu-Matrix Code implementieren
-- Color-Attribut in Diffuse-Shader einbinden
 - Logging für Android einbauen
-- Nicht invasiven FPS Counter per Logging einbauen	
-- VideoWrapper schreiben, welcher OpenGL und SDLCode wrappt inkl. ExceptionHandling
 - Renderer wieder in RenderDevice umbenennen
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
-	- Texture
-		- Effektiver Dateipfad für Laden des Files mittels IMG_Load wird direkt innerhalb der Klasse berechnet (vorerst)
-			- Unter Windows wird der absolute Assetpfad mittels EnvironmentHelper::GetCurrentWorkingDirectory berechnet
-			- Unter Android ist der angegebene relative Assetpfad bereits der zu verwendende Dateipfad
-		-- Später sollte die Berechnung des Dateipfades bzw. das Laden des Bildes eventuell abstrahiert werden (zB. in eine Klasse Asset oder ImageAsset)
-	- CameraController
-	- SillyRenderer
-	- SimpleController
-	- TextureRenderer
-	- Level1
-	- Testen der Änderungen unter Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
-- orbis.master Ordner wieder löschen
+- Lokalen orbis.master Ordner wieder löschen

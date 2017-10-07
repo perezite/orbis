@@ -14,7 +14,6 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TextureRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TriangleRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogHelper.cpp" />
@@ -30,7 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Component.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TextureRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TriangleRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogHelper.h" />
