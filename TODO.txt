@@ -1,6 +1,7 @@
 TODO:
-- Dreieck in Sandbox Quad umwandeln
+- Image-Loading in GLES implementieren
 - '...Location'-Variabeln in '...Handle' umbenennen
+- GUIHelper in LogHelper integrieren
 - Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft
 - Logik in TriangleShader übernehmen
 - Logik in Diffuse Shader übernehmen

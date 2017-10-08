@@ -1,5 +1,3 @@
-#ifdef  WIN32
-	#define __SANDBOX__
-#endif 
+#define __SANDBOX__
 
 void run();

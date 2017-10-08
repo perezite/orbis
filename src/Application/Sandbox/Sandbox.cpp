@@ -1,23 +1,34 @@
 #include "Sandbox.h"
 
 #ifdef __SANDBOX__
-#ifdef WIN32
+
+#include "../../Orbis/GUI/GUIHelper.h"
+using namespace GUI;
 
 #include <SDL2\SDL.h>
-#include <SDL2\SDL_image.h>
+// #include <SDL2\SDL_image.h>
+#ifdef WIN32
 #include <gl\glew.h>
 #include <SDL2\SDL_opengl.h>
 #include <gl\glu.h>
+#endif
+#ifdef __ANDROID__
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#endif 
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 void init();
 void initGL();
 void render();
 void close();
 
+#ifdef WIN32
 const int SCREEN_WIDTH = 400;
 const int SCREEN_HEIGHT = 400;
+#endif
 
 const GLchar* vertexShaderSource =
 	"attribute vec2 a_vPosition;	\n \
@@ -31,12 +42,16 @@ const GLchar* vertexShaderSource =
 	}";
 
 const GLchar* fragmentShaderSource =
-	"varying vec2 v_texCoord;		\n \
+	"precision highp float;			\n \
+	varying vec2 v_texCoord;		\n \
 	uniform sampler2D s_texture;	\n \
+									\n \
 	void main()						\n \
 	{								\n \
-		gl_FragColor = texture2D(s_texture, v_texCoord);  \n\
+		gl_FragColor = texture2D(s_texture, v_texCoord);  \n \
 	}";
+
+/* gl_FragColor = texture2D(s_texture, v_texCoord);  \n \ */
 
 SDL_Window* gWindow = NULL;
 SDL_GLContext gContext;
@@ -53,9 +68,13 @@ SDL_Surface* flipSDLSurface(SDL_Surface* surface)
 	SDL_Surface *flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel,
 		surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
 
+	// lock
 	if (SDL_MUSTLOCK(surface))
 		SDL_LockSurface(surface);
+	if (SDL_MUSTLOCK(flipped))
+		SDL_LockSurface(flipped);
 
+	// copy flipped
 	for (int row = surface->h - 1; row >= 0; row--)
 	{
 		for (int col = 0; col < surface->w; col++)
@@ -69,16 +88,46 @@ SDL_Surface* flipSDLSurface(SDL_Surface* surface)
 		}
 	}
 
+	// unlock
+	if (SDL_MUSTLOCK(flipped))
+		SDL_UnlockSurface(flipped);
 	if (SDL_MUSTLOCK(surface))
 		SDL_UnlockSurface(surface);
 
 	return flipped;
 }
 
+SDL_Surface* randomImage()
+{
+	SDL_Surface* image = SDL_CreateRGBSurface(SDL_SWSURFACE, 256, 256, 32,
+		0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+
+	if (SDL_MUSTLOCK(image))
+		SDL_LockSurface(image);
+
+	unsigned int bytesPerPixel = image->format->BytesPerPixel;
+
+	for (int i = 0; i < image->w * image->h; i++)
+	{
+		for (unsigned int j = 0; j < bytesPerPixel; j++)
+		{
+			char randomValue = rand() % 255;
+			char* modifiedByte = (char*)image->pixels + i * bytesPerPixel + j;
+			*modifiedByte = randomValue;
+		}
+	}
+
+	if (SDL_MUSTLOCK(image))
+		SDL_UnlockSurface(image);
+
+	return image;
+}
+
 int loadTexture(std::string filePath, bool flipVertically = false)
 {
-	SDL_Surface* img = IMG_Load(filePath.c_str());
-	SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_RGBA8888, SDL_SWSURFACE);
+	// SDL_Surface* img = IMG_Load(filePath.c_str());
+	SDL_Surface* img = randomImage();
+	SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
 	SDL_FreeSurface(img);
 	img = img2;
 
@@ -92,7 +141,7 @@ int loadTexture(std::string filePath, bool flipVertically = false)
 	unsigned int texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8, img->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
 	SDL_FreeSurface(img);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -100,49 +149,103 @@ int loadTexture(std::string filePath, bool flipVertically = false)
 	return texture;
 }
 
+GLuint LoadShader(const char *shaderSrc, GLenum type)
+{
+	GLuint shader;
+	GLint compiled;
+
+	// Create the shader object
+	shader = glCreateShader(type);
+	if (shader != 0)
+	{
+		// Load the shader source
+		glShaderSource(shader, 1, &shaderSrc, NULL);
+
+		// Compile the shader
+		glCompileShader(shader);
+		// Check the compile status
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+
+		if (!compiled)
+		{
+			GLint infoLen = 0;
+			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
+
+			if (infoLen > 1)
+			{
+				char* infoLog = new char[infoLen];
+				glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
+				GUIHelper::ShowMessageBox(infoLog, "Shader error");
+				delete[] infoLog;
+			}
+			glDeleteShader(shader);
+			shader = 0;
+		}
+	}
+	return shader;
+}
+
 void init()
 {
+#ifdef WIN32
+	SDL_Init(SDL_INIT_VIDEO);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	gContext = SDL_GL_CreateContext(gWindow);
 	GLenum glewError = glewInit();
 	initGL();
+#endif
+#ifdef __ANDROID__
+	SDL_Init(SDL_INIT_VIDEO);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	SDL_DisplayMode mode;
+	SDL_GetDisplayMode(0, 0, &mode);
+	gWindow = SDL_CreateWindow(NULL, 0, 0, mode.w, mode.h, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+	gContext = SDL_GL_CreateContext(gWindow);
+	initGL();
+#endif
+
 }
 
 void initGL()
 {
 	gProgramID = glCreateProgram();
-	
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
+
+	GLuint vertexShader = LoadShader(vertexShaderSource, GL_VERTEX_SHADER);
 	glAttachShader(gProgramID, vertexShader);
 
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
+	GLuint fragmentShader = LoadShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
 	glAttachShader(gProgramID, fragmentShader);
-			
+
 	glLinkProgram(gProgramID);
-	
+	glUseProgram(gProgramID);
+
 	gVertexPos2DLocation = glGetAttribLocation(gProgramID, "a_vPosition");
+	int test = glGetError();
 	gTexCoordinateLocation = glGetAttribLocation(gProgramID, "a_texCoord");
 	gSamplerLocation = glGetUniformLocation(gProgramID, "s_texture");
 
-	glClearColor(1.f, 1.f, 1.f, 1.f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	GLfloat vertexData[] =
 	{
 		-0.5f, -0.5f,	// left bottom pos
-		 0.0f,  0.0f,	// left bottom tex
-		 0.5f, -0.5f,	// right bottom pos
-		 1.0f,  0.0f,	// right bottom tex
+		0.0f,  0.0f,	// left bottom tex
+		0.5f, -0.5f,	// right bottom pos
+		1.0f,  0.0f,	// right bottom tex
 		-0.5f,  0.5f,	// left top pos pos
-		 0.0f,  1.0f,	// left top tex
-		 0.5f,  0.5f,	// right top pos
-		 1.0f,  1.0f	// right top tex
+		0.0f,  1.0f,	// left top tex
+		0.5f,  0.5f,	// right top pos
+		1.0f,  1.0f	// right top tex
 	};
 
 	GLuint indexData[] = { 0, 1, 2, 2, 1, 3 };
@@ -157,6 +260,7 @@ void initGL()
 
 	gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\TestTransparent.png", true);
 	glBindTexture(GL_TEXTURE_2D, gTexture);
+	glUseProgram(0);
 }
 
 void render()
@@ -182,7 +286,7 @@ void render()
 	glDisableVertexAttribArray(gTexCoordinateLocation);
 	glDisableVertexAttribArray(gVertexPos2DLocation);
 	glDisable(GL_TEXTURE_2D);
-	glUseProgram(NULL);
+	glUseProgram(0);
 }
 
 void close()
@@ -207,7 +311,7 @@ void run()
 	{
 		while (SDL_PollEvent(&e) != 0)
 		{
-			if (e.type == SDL_QUIT)
+			if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN || e.type == SDL_FINGERDOWN)
 			{
 				quit = true;
 			}
@@ -221,5 +325,4 @@ void run()
 	close();
 }
 
-#endif
 #endif
