@@ -16,8 +16,8 @@ void initGL();
 void render();
 void close();
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 400;
+const int SCREEN_HEIGHT = 400;
 
 const GLchar* vertexShaderSource =
 	"attribute vec2 a_vPosition;	\n \
@@ -135,25 +135,27 @@ void initGL()
 
 	GLfloat vertexData[] =
 	{
-		-0.5f, -0.5f,	// pos
-		0.0f, 0.0f,		// tex
-		0.5f, -0.5f,
-		1.0f, 0.0f,	
-		0.0f, 0.5f,
-		0.5f, 1.0f
+		-0.5f, -0.5f,	// left bottom pos
+		 0.0f,  0.0f,	// left bottom tex
+		 0.5f, -0.5f,	// right bottom pos
+		 1.0f,  0.0f,	// right bottom tex
+		-0.5f,  0.5f,	// left top pos pos
+		 0.0f,  1.0f,	// left top tex
+		 0.5f,  0.5f,	// right top pos
+		 1.0f,  1.0f	// right top tex
 	};
 
-	GLuint indexData[] = { 0, 1, 2 };
+	GLuint indexData[] = { 0, 1, 2, 2, 1, 3 };
 
 	glGenBuffers(1, &gVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-	glBufferData(GL_ARRAY_BUFFER, 2 * 6 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 2 * 8 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &gIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
 
-	gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\Triangle.png", true);
+	gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\TestTransparent.png", true);
 	glBindTexture(GL_TEXTURE_2D, gTexture);
 }
 
@@ -175,7 +177,7 @@ void render()
 	glVertexAttribPointer(gTexCoordinateLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GL_FLOAT), (void*)(0 + 2 * sizeof(GL_FLOAT)));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 
-	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
 	glDisableVertexAttribArray(gTexCoordinateLocation);
 	glDisableVertexAttribArray(gVertexPos2DLocation);
