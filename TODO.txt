@@ -1,10 +1,7 @@
 TODO:
-- Sandbox mit Texture-Logik versehen
-	- Texture-Laden implementieren
-	- Textur in OpenGL aktivieren
-	- Texture-Koordinaten in VBO schreiben
-	- Shader anpassen
-	- Testen
+- Dreieck in Sandbox Quad umwandeln
+- '...Location'-Variabeln in '...Handle' umbenennen
+- Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft
 - Logik in TriangleShader übernehmen
 - Logik in Diffuse Shader übernehmen
 - Sobald alles funktioniert: Texture-Logik in separate Klasse auslagern

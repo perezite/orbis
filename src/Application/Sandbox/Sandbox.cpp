@@ -31,11 +31,11 @@ const GLchar* vertexShaderSource =
 	}";
 
 const GLchar* fragmentShaderSource =
-"varying vec2 v_texCoord;		\n \
-	uniform sampler2D s_texture; \n \
+	"varying vec2 v_texCoord;		\n \
+	uniform sampler2D s_texture;	\n \
 	void main()						\n \
 	{								\n \
-		gl_FragColor = vec4(1, 0, 0, 1); \n\
+		gl_FragColor = texture2D(s_texture, v_texCoord);  \n\
 	}";
 
 SDL_Window* gWindow = NULL;
@@ -48,18 +48,55 @@ GLuint gVBO = 0;
 GLuint gIBO = 0;
 GLuint gTexture = 0;
 
-int loadTexture(std::string filePath)
+SDL_Surface* flipSDLSurface(SDL_Surface* surface)
+{
+	SDL_Surface *flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel,
+		surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
+
+	if (SDL_MUSTLOCK(surface))
+		SDL_LockSurface(surface);
+
+	for (int row = surface->h - 1; row >= 0; row--)
+	{
+		for (int col = 0; col < surface->w; col++)
+		{
+			size_t sourceOffset = row * surface->w + col;
+			size_t sourceOffsetBytes = sourceOffset * surface->format->BytesPerPixel;
+			size_t destOffset = (surface->h - row - 1) * surface->w + col;
+			size_t destOffsetBytes = destOffset * surface->format->BytesPerPixel;
+
+			memcpy((char*)flipped->pixels + destOffsetBytes, (char*)surface->pixels + sourceOffsetBytes, surface->format->BytesPerPixel);
+		}
+	}
+
+	if (SDL_MUSTLOCK(surface))
+		SDL_UnlockSurface(surface);
+
+	return flipped;
+}
+
+int loadTexture(std::string filePath, bool flipVertically = false)
 {
 	SDL_Surface* img = IMG_Load(filePath.c_str());
 	SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_RGBA8888, SDL_SWSURFACE);
+	SDL_FreeSurface(img);
+	img = img2;
+
+	if (flipVertically)
+	{
+		SDL_Surface* flipped = flipSDLSurface(img);
+		SDL_FreeSurface(img);
+		img = flipped;
+	}
+
 	unsigned int texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img2->w, img2->h, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8, img2->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8, img->pixels);
+	SDL_FreeSurface(img);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	SDL_FreeSurface(img);
-	SDL_FreeSurface(img2);
+
 	return texture;
 }
 
@@ -77,12 +114,10 @@ void init()
 void initGL()
 {
 	gProgramID = glCreateProgram();
+	
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
-	GLint vShaderCompiled = GL_FALSE;
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &vShaderCompiled);
 	glAttachShader(gProgramID, vertexShader);
 
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -96,14 +131,14 @@ void initGL()
 	gTexCoordinateLocation = glGetAttribLocation(gProgramID, "a_texCoord");
 	gSamplerLocation = glGetUniformLocation(gProgramID, "s_texture");
 
-	glClearColor(0.f, 0.f, 0.f, 1.f);
+	glClearColor(1.f, 1.f, 1.f, 1.f);
 
 	GLfloat vertexData[] =
 	{
-		-0.5f, -0.5f,
-		0.0f, 0.0f,
+		-0.5f, -0.5f,	// pos
+		0.0f, 0.0f,		// tex
 		0.5f, -0.5f,
-		1.0f, 0.0f,
+		1.0f, 0.0f,	
 		0.0f, 0.5f,
 		0.5f, 1.0f
 	};
@@ -118,7 +153,7 @@ void initGL()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
 
-	gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\TestTransparent.png");
+	gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\Triangle.png", true);
 	glBindTexture(GL_TEXTURE_2D, gTexture);
 }
 
@@ -128,7 +163,10 @@ void render()
 	glUseProgram(gProgramID);
 
 	glEnableVertexAttribArray(gVertexPos2DLocation);
+	glEnableVertexAttribArray(gTexCoordinateLocation);
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glActiveTexture(GL_TEXTURE0);
 	glUniform1i(gSamplerLocation, 0);
 
@@ -139,6 +177,7 @@ void render()
 
 	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
 
+	glDisableVertexAttribArray(gTexCoordinateLocation);
 	glDisableVertexAttribArray(gVertexPos2DLocation);
 	glDisable(GL_TEXTURE_2D);
 	glUseProgram(NULL);

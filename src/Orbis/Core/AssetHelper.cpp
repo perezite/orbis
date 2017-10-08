@@ -51,7 +51,7 @@ namespace Core
 		SDL_RWclose(reader);
 		if (totalSize != fileSize)
 		{
-			throw Exception("Could not load textfile: " + filePath);
+			throw Exception("Could not load text file: " + filePath);
 		}
 
 		return data;
