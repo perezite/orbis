@@ -2,8 +2,8 @@
 
 #ifdef __SANDBOX__
 
-#include "../../Orbis/GUI/GUIHelper.h"
-using namespace GUI;
+#include "../../Orbis/Core/LogHelper.h"
+using namespace Core;
 
 #include <SDL2\SDL.h>
 // #include <SDL2\SDL_image.h>
@@ -56,9 +56,9 @@ const GLchar* fragmentShaderSource =
 SDL_Window* gWindow = NULL;
 SDL_GLContext gContext;
 GLuint gProgramID = 0;
-GLint gVertexPos2DLocation = -1;
-GLint gTexCoordinateLocation = -1;
-GLint gSamplerLocation = -1;
+GLint gPositionAttributeHandle = -1;
+GLint gTexCoordAttributeHandle = -1;
+GLint gSamplerUniformHandle = -1;
 GLuint gVBO = 0;
 GLuint gIBO = 0;
 GLuint gTexture = 0;
@@ -175,7 +175,7 @@ GLuint LoadShader(const char *shaderSrc, GLenum type)
 			{
 				char* infoLog = new char[infoLen];
 				glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
-				GUIHelper::ShowMessageBox(infoLog, "Shader error");
+				LogHelper::ShowMessageBox(infoLog, "Shader error");
 				delete[] infoLog;
 			}
 			glDeleteShader(shader);
@@ -229,10 +229,9 @@ void initGL()
 	glLinkProgram(gProgramID);
 	glUseProgram(gProgramID);
 
-	gVertexPos2DLocation = glGetAttribLocation(gProgramID, "a_vPosition");
-	int test = glGetError();
-	gTexCoordinateLocation = glGetAttribLocation(gProgramID, "a_texCoord");
-	gSamplerLocation = glGetUniformLocation(gProgramID, "s_texture");
+	gPositionAttributeHandle = glGetAttribLocation(gProgramID, "a_vPosition");
+	gTexCoordAttributeHandle = glGetAttribLocation(gProgramID, "a_texCoord");
+	gSamplerUniformHandle = glGetUniformLocation(gProgramID, "s_texture");
 
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -268,23 +267,23 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glUseProgram(gProgramID);
 
-	glEnableVertexAttribArray(gVertexPos2DLocation);
-	glEnableVertexAttribArray(gTexCoordinateLocation);
+	glEnableVertexAttribArray(gPositionAttributeHandle);
+	glEnableVertexAttribArray(gTexCoordAttributeHandle);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glActiveTexture(GL_TEXTURE0);
-	glUniform1i(gSamplerLocation, 0);
+	glUniform1i(gSamplerUniformHandle, 0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-	glVertexAttribPointer(gVertexPos2DLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
-	glVertexAttribPointer(gTexCoordinateLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GL_FLOAT), (void*)(0 + 2 * sizeof(GL_FLOAT)));
+	glVertexAttribPointer(gPositionAttributeHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
+	glVertexAttribPointer(gTexCoordAttributeHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GL_FLOAT), (void*)(0 + 2 * sizeof(GL_FLOAT)));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
-	glDisableVertexAttribArray(gTexCoordinateLocation);
-	glDisableVertexAttribArray(gVertexPos2DLocation);
+	glDisableVertexAttribArray(gTexCoordAttributeHandle);
+	glDisableVertexAttribArray(gPositionAttributeHandle);
 	glDisable(GL_TEXTURE_2D);
 	glUseProgram(0);
 }

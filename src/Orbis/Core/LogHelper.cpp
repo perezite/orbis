@@ -16,4 +16,9 @@ namespace Core
 		SDL_Log(message.c_str(), args);
 		va_end(args);
 	}
+
+	void LogHelper::ShowMessageBox(std::string message, std::string title)
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title.c_str(), message.c_str(), NULL);
+	}
 }

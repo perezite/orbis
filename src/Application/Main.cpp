@@ -5,11 +5,9 @@ using namespace Levels;
 
 #include "../Orbis/Orbis/OrbisMain.h"
 #include "../Orbis/Core/LogHelper.h"
-#include "../Orbis/GUI/GUIHelper.h"
 #include "../Orbis/Game/LevelManager.h"
 using namespace Orbis;
 using namespace Core;
-using namespace GUI;
 using namespace Game;
 
 #include "../Base/System/Exception.h"
@@ -34,7 +32,7 @@ int main(int argc, char* args[])
 	catch (Exception e)
 	{
 		LogHelper::LogMessage("%.1023s", e.what().c_str());
-		GUIHelper::ShowMessageBox(e.what(), "Exception");
+		LogHelper::ShowMessageBox(e.what(), "Exception");
 	}
 
 	return 0;
