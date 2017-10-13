@@ -1,8 +1,4 @@
 TODO:
-- include-Ordner für Android updaten mit SDL2.0.4 und SDL_image.2.0.1
-- Neue Libs einbinden und testen 
-- Einchecken
-- Neue Libs einbinden und testen 
 - lib-build Ordner estellen für SDL_image.2.0.1 Windows
 - lib-build Ordner erstellen für SDL2.0.4 Windows
 - include-Ordner für Windows updaten mit SDL2.0.4 und SDL_image.2.0.1

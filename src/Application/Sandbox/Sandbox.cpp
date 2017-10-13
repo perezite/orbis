@@ -6,7 +6,7 @@
 using namespace Core;
 
 #include <SDL2\SDL.h>
-#include <SDL2_image\SDL_image.h>
+#include <SDL2\SDL_image.h>
 #ifdef WIN32
 	#include <gl\glew.h>
 	#include <SDL2\SDL_opengl.h>
@@ -16,6 +16,7 @@ using namespace Core;
 	#include <GLES2/gl2.h>
 	#include <GLES2/gl2ext.h>
 #endif 
+
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -41,8 +42,9 @@ const GLchar* vertexShaderSource =
 		v_texCoord = a_texCoord;		\n \
 	}";
 
-const GLchar* fragmentShaderSource =
-	"precision highp float;			\n \
+const GLchar* fragmentShaderSource =	
+	"#version 130					\n \
+	precision highp float;			\n \
 	varying vec2 v_texCoord;		\n \
 	uniform sampler2D s_texture;	\n \
 									\n \
