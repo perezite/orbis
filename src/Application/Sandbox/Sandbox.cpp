@@ -6,15 +6,15 @@
 using namespace Core;
 
 #include <SDL2\SDL.h>
-// #include <SDL2\SDL_image.h>
+#include <SDL2_image\SDL_image.h>
 #ifdef WIN32
-#include <gl\glew.h>
-#include <SDL2\SDL_opengl.h>
-#include <gl\glu.h>
+	#include <gl\glew.h>
+	#include <SDL2\SDL_opengl.h>
+	#include <gl\glu.h>
 #endif
 #ifdef __ANDROID__
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
+	#include <GLES2/gl2.h>
+	#include <GLES2/gl2ext.h>
 #endif 
 #include <stdio.h>
 #include <string>
@@ -125,8 +125,8 @@ SDL_Surface* randomImage()
 
 int loadTexture(std::string filePath, bool flipVertically = false)
 {
-	// SDL_Surface* img = IMG_Load(filePath.c_str());
-	SDL_Surface* img = randomImage();
+	SDL_Surface* img = IMG_Load(filePath.c_str());
+	// SDL_Surface* img = randomImage();
 	SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
 	SDL_FreeSurface(img);
 	img = img2;
@@ -257,7 +257,13 @@ void initGL()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
 
-	gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\TestTransparent.png", true);
+	#ifdef WIN32 
+		gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\TestTransparent.png", true);
+	#endif
+	#ifdef __ANDROID__
+		gTexture = loadTexture("TestTransparent.png", true);
+	#endif
+
 	glBindTexture(GL_TEXTURE_2D, gTexture);
 	glUseProgram(0);
 }

@@ -1,4 +1,14 @@
 TODO:
+- include-Ordner für Android updaten mit SDL2.0.4 und SDL_image.2.0.1
+- Neue Libs einbinden und testen 
+- Einchecken
+- Neue Libs einbinden und testen 
+- lib-build Ordner estellen für SDL_image.2.0.1 Windows
+- lib-build Ordner erstellen für SDL2.0.4 Windows
+- include-Ordner für Windows updaten mit SDL2.0.4 und SDL_image.2.0.1
+- Neue Libs einbinden und testen 
+- Bilder in Folder 'Textures' verschieben
+- Einchecken
 - Image-Loading in GLES implementieren
 - Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft
 - Logik in TriangleShader übernehmen
