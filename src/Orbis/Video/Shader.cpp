@@ -11,11 +11,17 @@ namespace
 	// the shader program id
 	GLuint programId = 0;
 
-	// the vertex position location
-	GLint positionAttributeLocation = -1;
+	// the vertex position attribute handle
+	GLint positionAttributeHandle = -1;
 
-	// the rotation attribute location
-	GLint rotationUniformLocation = -1;
+	// the tex coord attribute handle
+	GLint texCoordAttributeHandle = -1;
+
+	// the rotation uniform handle
+	GLint rotationUniformHandle = -1;
+
+	// the sample uniform handle
+	GLint sampleUniformHandle = -1;
 
 	// compile the shader code
 	GLuint Compile(std::string shaderCode, GLenum type)
@@ -97,8 +103,10 @@ namespace Video
 
 		Link();
 
-		positionAttributeLocation = glGetAttribLocation(programId, "a_vPosition");
-		rotationUniformLocation = glGetUniformLocation(programId, "u_fRotation");
+		positionAttributeHandle = glGetAttribLocation(programId, "a_vPosition");
+		texCoordAttributeHandle = glGetAttribLocation(programId, "a_vTexCoord");
+		rotationUniformHandle = glGetUniformLocation(programId, "u_fRotation");
+		sampleUniformHandle = glGetUniformLocation(programId, "u_sSampler");
 	}
 
 	Shader::~Shader()
@@ -106,14 +114,24 @@ namespace Video
 		glDeleteProgram(programId);
 	}
 
-	int Shader::GetPositionAttributeLocation()
+	int Shader::GetPositionAttributeHandle()
 	{
-		return positionAttributeLocation;
+		return positionAttributeHandle;
+	}
+
+	int Shader::GetTexCoordAttributeHandle()
+	{
+		return texCoordAttributeHandle;
 	}
 
 	void Shader::SetRotationUniform(float rotation)
 	{
-		glUniform1f(rotationUniformLocation, rotation);
+		glUniform1f(rotationUniformHandle, rotation);
+	}
+
+	void Shader::SetSamplerUniform(int sampler)
+	{
+		glUniform1i(sampleUniformHandle, sampler);
 	}
 
 	void Shader::Use()

@@ -265,9 +265,6 @@ void initGL()
 	#ifdef __ANDROID__
 		gTexture = loadTexture("Textures/TestTransparent.png", true);
 	#endif
-
-	glBindTexture(GL_TEXTURE_2D, gTexture);
-	glUseProgram(0);
 }
 
 void render()
@@ -280,6 +277,8 @@ void render()
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glBindTexture(GL_TEXTURE_2D, gTexture);
 	glActiveTexture(GL_TEXTURE0);
 	glUniform1i(gSamplerUniformHandle, 0);
 

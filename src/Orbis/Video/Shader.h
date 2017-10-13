@@ -30,10 +30,16 @@ namespace Video
 		~Shader();
 
 		// get the position attribute location
-		int GetPositionAttributeLocation();
+		int GetPositionAttributeHandle();
 
+		// get the tex coord attribute handle
+		int GetTexCoordAttributeHandle();
+		
 		// set the rotation attribute
 		void SetRotationUniform(float rotation);
+
+		// set the sample uniform
+		void SetSamplerUniform(int sampler);
 
 		// enable the shader
 		void Use();

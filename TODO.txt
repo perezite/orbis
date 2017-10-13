@@ -1,5 +1,5 @@
 TODO:
-- Shader-Files wieder implementieren und einchecken
+- Dreieck texturieren
 - Image-Loading in GLES implementieren
 - Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft
 - Logik in TriangleShader übernehmen

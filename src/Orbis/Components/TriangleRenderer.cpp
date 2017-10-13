@@ -25,9 +25,10 @@ namespace Components
 	{
 		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
 
-		std::vector<Vector2D> vertexData = { Vector2D(-0.3f, -0.3f), Vector2D(0.3f, -0.3f), Vector2D(0.0f,  0.3f) };
-		int indexData[] = { 0, 1, 2 };
-		renderer->AddGeometry(vertexData, indexData);
+		std::vector<Vector2D> vertices = { Vector2D(-0.3f, -0.3f), Vector2D(0.3f, -0.3f), Vector2D(0.0f,  0.3f) };
+		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.5f, 1.0f) };
+		int indices[] = { 0, 1, 2 };
+		renderer->AddGeometry(vertices, texCoords, indices);
 	}
 
 	void TriangleRenderer::Render()

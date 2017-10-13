@@ -1,5 +1,7 @@
 attribute vec2 a_vPosition;
+attribute vec2 a_vTexCoord;	
 uniform float u_fRotation;
+varying vec2 v_vTexCoord;
 
 mat4 rotationMat =
 	mat4(cos(u_fRotation), sin(u_fRotation), 0, 0,
@@ -10,4 +12,5 @@ mat4 rotationMat =
 void main()
 {
 	gl_Position = rotationMat * vec4( a_vPosition.xy, 0, 1 );
+	v_vTexCoord = a_vTexCoord;	
 }
