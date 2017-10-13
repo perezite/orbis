@@ -43,7 +43,7 @@ const GLchar* vertexShaderSource =
 	}";
 
 const GLchar* fragmentShaderSource =	
-	"#version 130					\n \
+	"#version 100					\n \
 	precision highp float;			\n \
 	varying vec2 v_texCoord;		\n \
 	uniform sampler2D s_texture;	\n \
@@ -260,10 +260,10 @@ void initGL()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indexData, GL_STATIC_DRAW);
 
 	#ifdef WIN32 
-		gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\TestTransparent.png", true);
+		gTexture = loadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\Textures\\TestTransparent.png", true);
 	#endif
 	#ifdef __ANDROID__
-		gTexture = loadTexture("TestTransparent.png", true);
+		gTexture = loadTexture("Textures/TestTransparent.png", true);
 	#endif
 
 	glBindTexture(GL_TEXTURE_2D, gTexture);
