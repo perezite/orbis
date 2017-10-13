@@ -1,11 +1,7 @@
 TODO:
-- Dreieck texturieren
-- Image-Loading in GLES implementieren
+- Texturierten Quad implementieren
+- Texture-Logik in separate Klasse auslagern
 - Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft
-- Logik in TriangleShader übernehmen
-- Logik in Diffuse Shader übernehmen
-- Sobald alles funktioniert: Texture-Logik in separate Klasse auslagern
-- Sobald alles funktioniert: Texture-Lade Logik gemäss Video von thecplusplusguy anpassen
 - Cpu-Matrix Code implementieren
 - Logging für Android einbauen
 - Renderer wieder in RenderDevice umbenennen
