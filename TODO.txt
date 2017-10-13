@@ -1,5 +1,6 @@
 TODO:
 - Texturierten Quad implementieren
+- TriangleRenderer umbenennen in SpriteRenderer
 - Texture-Logik in separate Klasse auslagern
 - Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft
 - Cpu-Matrix Code implementieren

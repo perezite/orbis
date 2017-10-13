@@ -105,12 +105,13 @@ namespace Video
 	{
 		float vertexData[] = { vertices[0].GetX(), vertices[0].GetY(), texCoords[0].GetX(), texCoords[0].GetY(),
 			vertices[1].GetX(), vertices[1].GetY(), texCoords[1].GetX(), texCoords[1].GetY(),
-			vertices[2].GetX(), vertices[2].GetY(), texCoords[2].GetX(), texCoords[2].GetY() };
+			vertices[2].GetX(), vertices[2].GetY(), texCoords[2].GetX(), texCoords[2].GetY(),
+			vertices[3].GetX(), vertices[3].GetY(), texCoords[3].GetX(), texCoords[3].GetY() };
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-		glBufferData(GL_ARRAY_BUFFER, 2 * 2 * 3 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, 2 * 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(GLuint), indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
 	
 		#ifdef WIN32 
@@ -148,7 +149,7 @@ namespace Video
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 
 		// render
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
 		// cleanup
 		glDisableVertexAttribArray(shader->GetTexCoordAttributeHandle());

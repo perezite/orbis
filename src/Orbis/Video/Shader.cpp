@@ -6,10 +6,12 @@ using namespace Core;
 #include "../../Base/System/Exception.h"
 using namespace System;
 
+#include "VideoManager.h"
+
 namespace
 {
 	// the shader program id
-	GLuint programId = 0;
+	GLuint programId = -1;
 
 	// the vertex position attribute handle
 	GLint positionAttributeHandle = -1;
@@ -91,7 +93,11 @@ namespace Video
 {
 	Shader::Shader(std::string vertexAssetPath, std::string fragmentAssetPath)
 	{
+		VideoManager::GetInstance();
+
 		programId = glCreateProgram();
+
+		GLenum test = glGetError();
 
 		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexAssetPath);
 		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER);
