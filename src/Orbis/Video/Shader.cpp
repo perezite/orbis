@@ -23,7 +23,7 @@ namespace
 	GLint rotationUniformHandle = -1;
 
 	// the sample uniform handle
-	GLint sampleUniformHandle = -1;
+	GLint samplerUniformHandle = -1;
 
 	// compile the shader code
 	GLuint Compile(std::string shaderCode, GLenum type)
@@ -112,7 +112,7 @@ namespace Video
 		positionAttributeHandle = glGetAttribLocation(programId, "a_vPosition");
 		texCoordAttributeHandle = glGetAttribLocation(programId, "a_vTexCoord");
 		rotationUniformHandle = glGetUniformLocation(programId, "u_fRotation");
-		sampleUniformHandle = glGetUniformLocation(programId, "u_sSampler");
+		samplerUniformHandle = glGetUniformLocation(programId, "u_sSampler");
 	}
 
 	Shader::~Shader()
@@ -137,7 +137,7 @@ namespace Video
 
 	void Shader::SetSamplerUniform(int sampler)
 	{
-		glUniform1i(sampleUniformHandle, sampler);
+		glUniform1i(samplerUniformHandle, sampler);
 	}
 
 	void Shader::Use()

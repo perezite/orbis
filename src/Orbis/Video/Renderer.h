@@ -30,7 +30,7 @@ namespace Video
 		virtual ~Renderer();
 
 		// add geometry to the renderer
-		void AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoordinates, int indices[]);
+		void AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoordinates, std::vector<int> indices);
 
 		// render
 		void Render(float rotation);

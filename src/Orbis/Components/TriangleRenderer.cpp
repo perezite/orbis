@@ -25,9 +25,8 @@ namespace Components
 	{
 		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
 
-		std::vector<Vector2D> vertices = { Vector2D(-0.3f, -0.3f), Vector2D(0.3f, -0.3f), Vector2D(-0.3f, 0.3f), Vector2D(0.3f, 0.3f) };
-		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) };
-		int indices[] = { 0, 1, 2, 1, 3, 2 };
+		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.5f, 1.0f) };
+		std::vector<int> indices = { 0, 1, 2, 1, 3, 2 };
 		renderer->AddGeometry(vertices, texCoords, indices);
 	}
 
