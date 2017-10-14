@@ -1,6 +1,7 @@
 #pragma once
 
 #include "..\..\Base\Math\Vector2D.h"
+#include "..\..\Base\Math\Matrix4.h"
 using namespace Math;
 
 namespace Game
@@ -35,6 +36,9 @@ namespace Game
 
 		// set scale
 		void SetScale(Vector2D scale) { m_scale = scale; }
+
+		// get the transformation matrix
+		Matrix4 GetMatrix() const;
 
 	private:
 		// position

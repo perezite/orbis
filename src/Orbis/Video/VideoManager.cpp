@@ -1,10 +1,14 @@
 #include "VideoManager.h"
 
+#include "../Libraries/GL.h"
+using namespace Libraries;
+
 #include "../../Base/System/Exception.h"
 #include "../../Base/System/StringHelper.h"
+#include "../../Base/System/EnvironmentHelper.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
-#include "../../Base/System/EnvironmentHelper.h"
+using namespace Math;
 using namespace System;
 
 #include <iostream>
@@ -44,7 +48,7 @@ namespace Video
 
 	void VideoManager::ClearScreen()
 	{
-		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
+		GL::ClearColor(0.95f, 0.95f, 0.95f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 

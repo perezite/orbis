@@ -35,9 +35,11 @@ namespace Components
 	{
 		static RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
 		static const float omega = MathHelper::GetPi();
-		static float alpha = 0.0f;
 
-		alpha += omega * TimeManager::GetInstance()->GetDeltaSeconds();
-		renderer->Render(alpha);
+		Transform* transform = GetParent()->GetTransform();
+		float alpha = transform->GetRotation();
+		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
+
+		renderer->Render(GetParent()->GetTransform());
 	}
 }

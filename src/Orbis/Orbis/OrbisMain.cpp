@@ -23,7 +23,7 @@ namespace Orbis
 		{
 			while (SDL_PollEvent(&event))
 			{
-				if (event.type == SDL_QUIT || event.type == SDL_KEYDOWN || event.type == SDL_FINGERDOWN)
+				if (event.type == SDL_QUIT || event.type == SDL_FINGERDOWN)
 				{
 					done = true;
 				}

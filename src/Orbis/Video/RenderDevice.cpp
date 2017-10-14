@@ -85,14 +85,6 @@ namespace
 
 		return texture;
 	}
-
-	/*void GetRotationMatrix(float rotation, float* matrix)
-	{
-		matrix[0] = cos(rotation);	matrix[1] = sin(rotation);	matrix[2] = 0.0f,	matrix[3] = 0.0f;
-		matrix[4] = -sin(rotation);	matrix[5] = cos(rotation);	matrix[6] = 0.0f,	matrix[7] = 0.0f;
-		matrix[8] = 0.0f;			matrix[9] = 0.0f;			matrix[10] = 1.0f,	matrix[11] = 0.0f;
-		matrix[12] = 0.0f; 			matrix[13] = 0.0f,			matrix[14] = 0.0f,	matrix[15] = 1.0f;
-	}*/
 }
 
 namespace Video
@@ -133,7 +125,7 @@ namespace Video
 		#endif
 	}
 
-	void RenderDevice::Render(float rotation)
+	void RenderDevice::Render(Transform* transform)
 	{
 		VideoManager::GetInstance()->ClearScreen();
 
@@ -146,16 +138,12 @@ namespace Video
 		glBindTexture(GL_TEXTURE_2D, gTexture);
 		glActiveTexture(GL_TEXTURE0);	
 
-		// setup tranform
-		Matrix4 transform;
-		transform.Rotate2D(rotation);
-
 		// setup shader
 		shader->Use();
 		glEnableVertexAttribArray(shader->GetPositionAttributeHandle());
 		glEnableVertexAttribArray(shader->GetTexCoordAttributeHandle());
 		shader->SetSamplerUniform(0);	
-		shader->SetTransformUniform(transform);
+		shader->SetTransformUniform(transform->GetMatrix());
 
 		// setup data
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);

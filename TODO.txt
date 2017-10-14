@@ -1,9 +1,8 @@
 TODO:
-- Transform-Matrix von der Transform-Komponente aus berechnen
-- Rausfinden, wie man GLSL debuggt
-- Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft
-- Logging für Android einbauen
+- Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und Exceptions wirft
+- Bildverzerrung bei nicht-quadratischer Auflösung fixen
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen
 - Asset Ordner einbinden in VS Projekt
+- StackOverflow-Nachtrag erstellen für Android VS-Compilation

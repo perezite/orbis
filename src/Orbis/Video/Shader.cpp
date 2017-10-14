@@ -128,7 +128,7 @@ namespace Video
 		return texCoordAttributeHandle;
 	}
 
-	void Shader::SetTransformUniform(Matrix4& mat)
+	void Shader::SetTransformUniform(const Matrix4& mat)
 	{
 		Matrix4 transposed = mat.Transposed();
 		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, transposed.GetValues());
