@@ -5,11 +5,11 @@
 namespace Components
 {
 	// A renderer which renders a triangle
-	class TriangleRenderer : public Component
+	class SpriteRenderer : public Component
 	{
 	public:
 		// dtor
-		~TriangleRenderer();
+		~SpriteRenderer();
 
 		// update
 		void Start();

@@ -1,4 +1,4 @@
-#include "TriangleRenderer.h"
+#include "SpriteRenderer.h"
 
 #include "..\Core\TimeManager.h"
 using namespace Core;
@@ -17,11 +17,11 @@ using namespace Math;
 
 namespace Components
 {
-	TriangleRenderer::~TriangleRenderer()
+	SpriteRenderer::~SpriteRenderer()
 	{
 	}
 
-	void TriangleRenderer::Start()
+	void SpriteRenderer::Start()
 	{
 		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
 
@@ -31,7 +31,7 @@ namespace Components
 		renderer->AddGeometry(vertices, texCoords, indices);
 	}
 
-	void TriangleRenderer::Render()
+	void SpriteRenderer::Render()
 	{
 		static Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
 		static const float omega = MathHelper::GetPi();

@@ -39,9 +39,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelManager.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TriangleRenderer.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\TimeManager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -50,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SpriteRenderer.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +80,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Transform.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TriangleRenderer.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\TimeManager.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -97,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SpriteRenderer.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
