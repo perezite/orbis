@@ -34,9 +34,9 @@ namespace Video
 
 		// get the tex coord attribute handle
 		int GetTexCoordAttributeHandle();
-		
-		// set the rotation attribute
-		void SetRotationUniform(float rotation);
+
+		// set the transform uniform
+		void SetTransformUniform(float *transform);
 
 		// set the sample uniform
 		void SetSamplerUniform(int sampler);

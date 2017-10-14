@@ -22,6 +22,9 @@ namespace
 	// the rotation uniform handle
 	GLint rotationUniformHandle = -1;
 
+	// the transform uniform handle
+	GLint transformUniformHandle = -1;
+
 	// the sample uniform handle
 	GLint samplerUniformHandle = -1;
 
@@ -111,7 +114,7 @@ namespace Video
 
 		positionAttributeHandle = glGetAttribLocation(programId, "a_vPosition");
 		texCoordAttributeHandle = glGetAttribLocation(programId, "a_vTexCoord");
-		rotationUniformHandle = glGetUniformLocation(programId, "u_fRotation");
+		transformUniformHandle = glGetUniformLocation(programId, "u_mTransform");
 		samplerUniformHandle = glGetUniformLocation(programId, "u_sSampler");
 	}
 
@@ -130,9 +133,9 @@ namespace Video
 		return texCoordAttributeHandle;
 	}
 
-	void Shader::SetRotationUniform(float rotation)
+	void Shader::SetTransformUniform(float *transform)
 	{
-		glUniform1f(rotationUniformHandle, rotation);
+		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, transform);
 	}
 
 	void Shader::SetSamplerUniform(int sampler)
