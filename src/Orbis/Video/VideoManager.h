@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer.h"
+#include "RenderDevice.h"
 
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
@@ -19,7 +19,7 @@ namespace Video
 		virtual ~VideoManager();
 
 		// get the render device
-		Renderer* GetRenderer();
+		RenderDevice* GetRenderer();
 
 		// clear the screen
 		void ClearScreen();
@@ -45,7 +45,7 @@ namespace Video
 		SDL_GLContext m_openGlContext;
 
 		// the attached render device
-		Renderer* m_renderer;
+		RenderDevice* m_renderer;
 
 		// the window resolution
 		Vector2D m_windowResolution;

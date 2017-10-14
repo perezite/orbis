@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#include "RenderDevice.h"
 
 #include "VideoManager.h"
 #include "Shader.h"
@@ -86,7 +86,7 @@ namespace
 
 namespace Video
 {	
-	Renderer::Renderer()
+	RenderDevice::RenderDevice()
 	{
 		shader = new Shader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
 
@@ -96,12 +96,12 @@ namespace Video
 		glGenBuffers(1, &gIBO);
 	}
 
-	Renderer::~Renderer()
+	RenderDevice::~RenderDevice()
 	{
 		delete shader;
 	}
 
-	void Renderer::AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices)
+	void RenderDevice::AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices)
 	{
 		float vertexData[] = { vertices[0].GetX(), vertices[0].GetY(), texCoords[0].GetX(), texCoords[0].GetY(),
 			vertices[1].GetX(), vertices[1].GetY(), texCoords[1].GetX(), texCoords[1].GetY(),
@@ -122,7 +122,7 @@ namespace Video
 		#endif
 	}
 
-	void Renderer::Render(float rotation)
+	void RenderDevice::Render(float rotation)
 	{
 		VideoManager::GetInstance()->ClearScreen();
 

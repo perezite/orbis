@@ -23,7 +23,7 @@ namespace Components
 
 	void SpriteRenderer::Start()
 	{
-		Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
+		RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
 
 		std::vector<Vector2D> vertices = { Vector2D(-0.3f, -0.3f), Vector2D(0.3f, -0.3f), Vector2D(-0.3f, 0.3f), Vector2D(0.3f, 0.3f) };
 		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) };
@@ -33,7 +33,7 @@ namespace Components
 
 	void SpriteRenderer::Render()
 	{
-		static Renderer* renderer = VideoManager::GetInstance()->GetRenderer();
+		static RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
 		static const float omega = MathHelper::GetPi();
 		static float alpha = 0.0f;
 

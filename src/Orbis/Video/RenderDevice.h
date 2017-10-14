@@ -20,14 +20,14 @@ using namespace Math;
 
 namespace Video
 {
-	class Renderer
+	class RenderDevice
 	{
 	public:
 		// ctor
-		Renderer();
+		RenderDevice();
 
 		// dtor
-		virtual ~Renderer();
+		virtual ~RenderDevice();
 
 		// add geometry to the renderer
 		void AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoordinates, std::vector<int> indices);

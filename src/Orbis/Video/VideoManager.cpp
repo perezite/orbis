@@ -34,10 +34,10 @@ namespace Video
 			delete m_renderer;
 	}
 
-	Renderer* VideoManager::GetRenderer()
+	RenderDevice* VideoManager::GetRenderer()
 	{
 		if (m_renderer == NULL)
-			m_renderer = new Renderer();
+			m_renderer = new RenderDevice();
 
 		return m_renderer;
 	}
