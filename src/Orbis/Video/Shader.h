@@ -3,7 +3,7 @@
 #include "Color.h"
 #include "RenderMode.h"
 
-#include "../../Base/Math/Vector2D.h"
+#include "../../Base/Math/Matrix4.h"
 using namespace Math;
 
 #ifdef __ANDROID__
@@ -36,7 +36,7 @@ namespace Video
 		int GetTexCoordAttributeHandle();
 
 		// set the transform uniform
-		void SetTransformUniform(float *transform);
+		void SetTransformUniform(Matrix4& mat);
 
 		// set the sample uniform
 		void SetSamplerUniform(int sampler);

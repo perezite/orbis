@@ -7,6 +7,9 @@ using namespace Video;
 #include "../../Base/System/Exception.h"
 using namespace System;
 
+#include "../../Base/Math/Matrix4.h"
+using namespace Math;
+
 #include <SDL2\SDL_image.h>
 
 namespace
@@ -83,13 +86,13 @@ namespace
 		return texture;
 	}
 
-	void GetRotationMatrix(float rotation, float* matrix)
+	/*void GetRotationMatrix(float rotation, float* matrix)
 	{
 		matrix[0] = cos(rotation);	matrix[1] = sin(rotation);	matrix[2] = 0.0f,	matrix[3] = 0.0f;
 		matrix[4] = -sin(rotation);	matrix[5] = cos(rotation);	matrix[6] = 0.0f,	matrix[7] = 0.0f;
 		matrix[8] = 0.0f;			matrix[9] = 0.0f;			matrix[10] = 1.0f,	matrix[11] = 0.0f;
 		matrix[12] = 0.0f; 			matrix[13] = 0.0f,			matrix[14] = 0.0f,	matrix[15] = 1.0f;
-	}
+	}*/
 }
 
 namespace Video
@@ -144,15 +147,15 @@ namespace Video
 		glActiveTexture(GL_TEXTURE0);	
 
 		// setup tranform
-		float transformMatrix[4*4];
-		GetRotationMatrix(rotation, transformMatrix);
+		Matrix4 transform;
+		transform.Rotate2D(rotation);
 
 		// setup shader
 		shader->Use();
 		glEnableVertexAttribArray(shader->GetPositionAttributeHandle());
 		glEnableVertexAttribArray(shader->GetTexCoordAttributeHandle());
 		shader->SetSamplerUniform(0);	
-		shader->SetTransformUniform(transformMatrix);
+		shader->SetTransformUniform(transform);
 
 		// setup data
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);

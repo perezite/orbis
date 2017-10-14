@@ -15,14 +15,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix4.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix4.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector3D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h" />

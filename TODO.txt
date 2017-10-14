@@ -1,5 +1,4 @@
 TODO:
-- Array durch Matrix-Klasse ersetzen (siehe jvgs)
 - Transform-Matrix von der Transform-Komponente aus berechnen
 - Rausfinden, wie man GLSL debuggt
 - Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und im Debug-Modus Exceptions wirft

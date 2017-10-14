@@ -19,9 +19,6 @@ namespace
 	// the tex coord attribute handle
 	GLint texCoordAttributeHandle = -1;
 
-	// the rotation uniform handle
-	GLint rotationUniformHandle = -1;
-
 	// the transform uniform handle
 	GLint transformUniformHandle = -1;
 
@@ -100,8 +97,6 @@ namespace Video
 
 		programId = glCreateProgram();
 
-		GLenum test = glGetError();
-
 		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexAssetPath);
 		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER);
 		glAttachShader(programId, vertexShader);
@@ -133,9 +128,10 @@ namespace Video
 		return texCoordAttributeHandle;
 	}
 
-	void Shader::SetTransformUniform(float *transform)
+	void Shader::SetTransformUniform(Matrix4& mat)
 	{
-		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, transform);
+		Matrix4 transposed = mat.Transposed();
+		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, transposed.GetValues());
 	}
 
 	void Shader::SetSamplerUniform(int sampler)
