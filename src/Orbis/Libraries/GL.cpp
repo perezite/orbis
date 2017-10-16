@@ -15,7 +15,7 @@ using namespace System;
 #endif
 
 namespace {
-	// assert that no GL errors have happened
+	// handle GL exceptions
 	void CheckGLError()
 	{
 		GLenum error = glGetError();
@@ -26,7 +26,7 @@ namespace {
 		}
 	}
 
-	// assert that no GL errors have happened
+	// handle GL exceptions
 	#ifdef GL_EXCEPTIONS
 		#define GL_VERIFY() \
 			CheckGLError();

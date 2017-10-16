@@ -1,5 +1,8 @@
 #include "AssetHelper.h"
 
+#include "../Libraries/SDL.h"
+using namespace Libraries;
+
 #include "../../Base/System/EnvironmentHelper.h"
 #include "../../Base/System/Exception.h"
 using namespace System;
@@ -32,7 +35,7 @@ namespace Core
 		std::string filePath = AssetPathToFilePath(assetPath);
 
 		// setup
-		SDL_RWops* reader = SDL_RWFromFile(filePath.c_str(), "r");
+		SDL::File* reader = SDL::OpenFile(filePath.c_str(), "r");
 		Sint64 fileSize = SDL_RWsize(reader);
 		char* data = (char*)malloc((size_t)fileSize + 1);
 	

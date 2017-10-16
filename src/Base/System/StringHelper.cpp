@@ -29,6 +29,11 @@ namespace System
 		return result;
 	}
 
+	bool StringHelper::IsEmpty(std::string str)
+	{
+		return str == "";
+	}
+
 	std::string StringHelper::GetFormattedString(std::string format, int maximalFormattedLength, va_list args)
 	{
 		char *buffer = (char*)malloc(sizeof(char) * (maximalFormattedLength + 1));

@@ -1,6 +1,6 @@
 #pragma once
 
-// remove this define to disable exceptions for GL calls
+// comment out this define to disable exceptions for GL calls
 #define GL_EXCEPTIONS
 
 namespace Libraries

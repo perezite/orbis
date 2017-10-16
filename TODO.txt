@@ -1,5 +1,5 @@
 TODO:
-- Wrapper schreiben, welcher die SDL- und GL-Befehl kapselt und Exceptions wirft
+- Wrapper schreiben, welcher die SDL- und GL-Befehle kapselt und Exceptions wirft
 - Bildverzerrung bei nicht-quadratischer Auflösung fixen
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
