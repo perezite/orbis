@@ -22,5 +22,14 @@ namespace Libraries
 	public:
 		// open a file
 		static File* OpenFile(std::string filePath, std::string options);
+
+		// get the file size
+		static SignedLong GetFileSize(File* file);
+
+		// read from file
+		static size_t ReadFromFile(File* file, void* dest, size_t size, size_t maxnum);
+
+		// close the file
+		static void CloseFile(File* file);
 	};
 }

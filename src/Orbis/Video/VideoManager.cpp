@@ -59,10 +59,10 @@ namespace Video
 
 	void VideoManager::InitializeVideo()
 	{
+		SDL_Init(SDL_INIT_VIDEO);
 		m_windowResolution = GetDefaultWindowResolution();
 
 		#ifdef WIN32	
-			SDL_Init(SDL_INIT_VIDEO);
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -73,7 +73,6 @@ namespace Video
 			glewInit();
 		#endif	
 		#ifdef __ANDROID__
-			SDL_Init(SDL_INIT_VIDEO);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
@@ -87,6 +86,7 @@ namespace Video
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
+
 	}
 
 	Vector2D VideoManager::GetDefaultWindowResolution()

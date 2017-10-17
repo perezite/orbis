@@ -33,7 +33,7 @@ namespace Components
 
 	void SpriteRenderer::Render()
 	{
-		static RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
+		RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
 		static const float omega = MathHelper::GetPi();
 
 		Transform* transform = GetParent()->GetTransform();

@@ -30,7 +30,26 @@ namespace Libraries
 	{
 		File* result = SDL_RWFromFile(filePath.c_str(), "r");
 		SDL_VERIFY();
-
 		return result;
+	}
+
+	SDL::SignedLong SDL::GetFileSize(File * file)
+	{
+		SDL::SignedLong size = SDL_RWsize(file);
+		SDL_VERIFY();
+		return size;
+	}
+	
+	size_t SDL::ReadFromFile(File * file, void* dest, size_t size, size_t maxnum)
+	{
+		size_t sizeRead = SDL_RWread(file, dest, size, maxnum);
+		SDL_VERIFY();
+		return sizeRead;
+	}
+
+	void SDL::CloseFile(File * file)
+	{
+		SDL_RWclose(file);
+		SDL_VERIFY();
 	}
 }

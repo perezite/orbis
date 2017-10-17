@@ -36,26 +36,22 @@ namespace Core
 
 		// setup
 		SDL::File* reader = SDL::OpenFile(filePath.c_str(), "r");
-		Sint64 fileSize = SDL_RWsize(reader);
+		SDL::SignedLong fileSize = SDL::GetFileSize(reader);
 		char* data = (char*)malloc((size_t)fileSize + 1);
 	
-		Sint64 totalSize = 0; 
-		Sint64 lastSize = 0;
+		SDL::SignedLong totalSize = 0; 
+		SDL::SignedLong lastSize = 0;
 
 		// read
 		do
 		{
-			lastSize = SDL_RWread(reader, &data[totalSize], sizeof(char), (size_t)(fileSize - totalSize));
+			lastSize = SDL::ReadFromFile(reader, &data[totalSize], sizeof(char), (size_t)(fileSize - totalSize));
 			totalSize += lastSize;	
 		} while (totalSize < fileSize && lastSize != 0);
 		data[totalSize] = '\0';
 
 		// cleanup
-		SDL_RWclose(reader);
-		if (totalSize != fileSize)
-		{
-			throw Exception("Could not load text file: " + filePath);
-		}
+		SDL::CloseFile(reader);
 
 		return data;
 	}

@@ -130,7 +130,6 @@ namespace Video
 		VideoManager::GetInstance()->ClearScreen();
 
 		// setup rendering
-		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -159,7 +158,6 @@ namespace Video
 		glDisableVertexAttribArray(shader->GetPositionAttributeHandle());
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glDisable(GL_BLEND);
-		glDisable(GL_TEXTURE_2D);
 		shader->Unuse();
 	}
 }
