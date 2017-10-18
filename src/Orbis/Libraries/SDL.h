@@ -31,5 +31,11 @@ namespace Libraries
 
 		// close the file
 		static void CloseFile(File* file);
+
+		// log a message
+		static void Log(const char* format, ...);
+
+		// log a message
+		static void Log(const char* format, va_list args);
 	};
 }

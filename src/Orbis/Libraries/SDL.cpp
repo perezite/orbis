@@ -4,6 +4,8 @@
 #include "../../Base/System/Exception.h"
 using namespace System;
 
+#include <stdarg.h>
+
 namespace Libraries
 {
 	// handle SDL exceptions
@@ -50,6 +52,22 @@ namespace Libraries
 	void SDL::CloseFile(File * file)
 	{
 		SDL_RWclose(file);
+		SDL_VERIFY();
+	}
+
+	void SDL::Log(const char* format, ...)
+	{
+		va_list args;
+		va_start(args, format);
+			Log(format, args);
+		va_end(args);
+	}
+
+	void SDL::Log(const char* format, va_list args)
+	{
+		char buf[1024];
+		vsnprintf(buf, 1024, format, args);
+		SDL_Log(buf);
 		SDL_VERIFY();
 	}
 }

@@ -7,8 +7,6 @@ using namespace Libraries;
 #include "../../Base/System/Exception.h"
 using namespace System;
 
-#include <SDL2/SDL.h>
-
 namespace
 {
 	std::string GetAssetFolderPath()
