@@ -13,9 +13,6 @@ using namespace Game;
 #include "../Base/System/Exception.h"
 using namespace System;
 
-#include "../Orbis/Libraries/SDL.h"
-using namespace Libraries;
-
 #include <iostream>
 
 int main(int argc, char* args[])

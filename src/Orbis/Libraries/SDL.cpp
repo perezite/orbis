@@ -67,7 +67,7 @@ namespace Libraries
 	{
 		char buf[1024];
 		vsnprintf(buf, 1024, format, args);
-		SDL_Log(buf);
+		SDL_Log("%s", buf);
 		SDL_VERIFY();
 	}
 }
