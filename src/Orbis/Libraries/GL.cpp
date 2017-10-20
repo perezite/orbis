@@ -4,18 +4,8 @@
 #include "../../Base/System/StringHelper.h"
 using namespace System;
 
-#ifdef __ANDROID__
-#include <GLES2/gl2.h>	
-#include <GLES2/gl2ext.h>
-#endif 
-#ifdef WIN32
-#include <gl/glew.h>
-#include <SDL2/SDL_opengl.h>
-#include <gl/glu.h>
-#endif
-
 namespace {
-	// handle GL exceptions
+	// handle GL errors
 	void CheckGLError()
 	{
 		GLenum error = glGetError();
@@ -26,20 +16,35 @@ namespace {
 		}
 	}
 
-	// handle GL exceptions
-	#ifdef GL_EXCEPTIONS
+	// handle GL errors
+	#if defined(GL_NORMAL_EXCEPTIONS) || defined(GL_SLOW_EXCEPTIONS)
 		#define GL_VERIFY() \
 			CheckGLError();
 	#else
 		#define	GL_VERIFY();
 	#endif
+
+	// handle GL errors even in performance critical functions
+	#if defined(GL_SLOW_EXCEPTIONS)
+		#define GL_SLOW_VERIFY() \
+			CheckGLError();
+	#else
+		#define GL_SLOW_VERIFY();
+	#endif
+
 }
 
 namespace Libraries
 {
-	void GL::ClearColor(float r, float g, float b, float a)
+	void GL::ClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 	{
 		glClearColor(r, g, b, a);
-		GL_VERIFY()
+		GL_SLOW_VERIFY()
+	}
+
+	void GL::GenerateTextures(GLsizei n, GLuint* textures)
+	{
+		glGenTextures(n, textures);
+		GL_VERIFY();
 	}
 }

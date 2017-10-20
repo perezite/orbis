@@ -17,6 +17,8 @@ using namespace System;
 
 int main(int argc, char* args[])
 {
+	
+
 	#ifdef __SANDBOX__
 		run();
 		return 0;
@@ -33,6 +35,7 @@ int main(int argc, char* args[])
 	{
 		LogHelper::LogMessage("%.1023s", e.what().c_str());
 		LogHelper::ShowMessageBox(e.what(), "Exception");
+		exit(0);
 	}
 
 	return 0;

@@ -6,6 +6,8 @@ using namespace Core;
 #include "..\..\Base\System\Exception.h"
 using namespace System;
 
+#include <iostream>
+
 namespace Game
 {
 	LevelManager::LevelManager() :
@@ -39,7 +41,7 @@ namespace Game
 	{
 		if (m_currentLevel == NULL)
 		{
-			throw Exception("A level must be queued before calling LevelManager::Heartbeat()");
+			throw Exception("A level must be queued before calling LevelManager::" + std::string(__func__));
 		}
 
 		TimeManager::GetInstance()->Update();

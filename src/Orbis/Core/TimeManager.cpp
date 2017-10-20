@@ -1,6 +1,7 @@
 #include "TimeManager.h"
 
-#include "SDL2/SDL.h"
+#include "../Libraries/SDL.h"
+using namespace Libraries;
 
 namespace Core
 {
@@ -13,12 +14,12 @@ namespace Core
 	void TimeManager::Update()
 	{
 		m_lastTicks = m_currentTicks;
-		m_currentTicks = SDL_GetTicks();
+		m_currentTicks = SDL::GetTicks();
 	}
 
 	void TimeManager::Reset()
 	{
-		m_lastTicks = SDL_GetTicks();
+		m_lastTicks = SDL::GetTicks();
 	}
 
 	float TimeManager::GetDeltaSeconds()
@@ -28,6 +29,6 @@ namespace Core
 
 	TimeManager::TimeManager()
 	{
-		m_lastTicks = SDL_GetTicks();
+		m_lastTicks = SDL::GetTicks();
 	}
 }

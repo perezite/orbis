@@ -33,12 +33,12 @@ namespace Core
 		std::string filePath = AssetPathToFilePath(assetPath);
 
 		// setup
-		SDL::File* reader = SDL::OpenFile(filePath.c_str(), "r");
-		SDL::SignedLong fileSize = SDL::GetFileSize(reader);
+		SDL_RWops* reader = SDL::OpenFile(filePath.c_str(), "r");
+		Sint64 fileSize = SDL::GetFileSize(reader);
 		char* data = (char*)malloc((size_t)fileSize + 1);
 	
-		SDL::SignedLong totalSize = 0; 
-		SDL::SignedLong lastSize = 0;
+		Sint64 totalSize = 0; 
+		Sint64 lastSize = 0;
 
 		// read
 		do

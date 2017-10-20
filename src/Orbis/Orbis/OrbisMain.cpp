@@ -1,9 +1,9 @@
 #include "OrbisMain.h"
 
+#include "../Libraries/SDL.h"
 #include "../Game/LevelManager.h"
 using namespace Game;
-
-#include "SDL2/SDL.h"
+using namespace Libraries;
 
 namespace Orbis
 {
@@ -21,7 +21,7 @@ namespace Orbis
 		SDL_Event event;
 		while (!done)
 		{
-			while (SDL_PollEvent(&event))
+			while (SDL::PollEvent(&event))
 			{
 				if (event.type == SDL_QUIT || event.type == SDL_FINGERDOWN)
 				{

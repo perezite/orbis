@@ -15,7 +15,6 @@ using namespace Math;
 #endif 
 #ifdef WIN32
 	#include <gl/glew.h>
-	#include <SDL2/SDL_opengl.h>
 	#include <gl/glu.h>
 #endif
 

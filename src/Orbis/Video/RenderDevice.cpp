@@ -4,13 +4,16 @@
 #include "Shader.h"
 using namespace Video;
 
+#include "../Core/LogHelper.h"
+#include "../Libraries/SDL.h"
+#include "../Libraries/GL.h"
+using namespace Core;
+using namespace Libraries;
+
 #include "../../Base/System/Exception.h"
-using namespace System;
-
 #include "../../Base/Math/Matrix4.h"
+using namespace System;
 using namespace Math;
-
-#include <SDL2\SDL_image.h>
 
 namespace
 {
@@ -29,14 +32,12 @@ namespace
 	// flip an SDL surface
 	SDL_Surface* flipSDLSurface(SDL_Surface* surface)
 	{
-		SDL_Surface *flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel,
+		SDL_Surface *flipped = SDL::CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel,
 			surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
 
 		// lock
-		if (SDL_MUSTLOCK(surface))
-			SDL_LockSurface(surface);
-		if (SDL_MUSTLOCK(flipped))
-			SDL_LockSurface(flipped);
+		SDL::LockSurface(surface);
+		SDL::LockSurface(flipped);
 
 		// copy flipped
 		for (int row = surface->h - 1; row >= 0; row--)
@@ -53,30 +54,28 @@ namespace
 		}
 
 		// unlock
-		if (SDL_MUSTLOCK(flipped))
-			SDL_UnlockSurface(flipped);
-		if (SDL_MUSTLOCK(surface))
-			SDL_UnlockSurface(surface);
+		SDL::UnlockSurface(flipped);
+		SDL::UnlockSurface(surface);
 
 		return flipped;
 	}
 
 	int loadTexture(std::string filePath, bool flipVertically = false)
 	{
-		SDL_Surface* img = IMG_Load(filePath.c_str());
-		SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
-		SDL_FreeSurface(img);
+		SDL_Surface* img = SDL::LoadSurface(filePath.c_str());
+		SDL_Surface* img2 = SDL::ConvertSurfaceFormat(img, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
+		SDL::FreeSurface(img);
 		img = img2;
 
 		if (flipVertically)
 		{
 			SDL_Surface* flipped = flipSDLSurface(img);
-			SDL_FreeSurface(img);
+			SDL::FreeSurface(img);
 			img = flipped;
 		}
 
 		unsigned int texture;
-		glGenTextures(1, &texture);
+		GL::GenerateTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
 		SDL_FreeSurface(img);

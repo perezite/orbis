@@ -16,6 +16,7 @@ namespace Libraries
 		if (!StringHelper::IsEmpty(error))
 		{
 			std::string message = "SDL Error: " + error;
+			SDL_ClearError();
 			throw Exception(message);
 		}
 	}
@@ -28,31 +29,34 @@ namespace Libraries
 		#define	SDL_VERIFY();
 	#endif
 
-	SDL::File* SDL::OpenFile(std::string filePath, std::string options)
+	SDL_RWops* SDL::OpenFile(std::string filePath, std::string options)
 	{
-		File* result = SDL_RWFromFile(filePath.c_str(), "r");
-		SDL_VERIFY();
+		SDL_RWops* result = SDL_RWFromFile(filePath.c_str(), "r");
+		if (result == NULL)
+			SDL_VERIFY();
 		return result;
 	}
 
-	SDL::SignedLong SDL::GetFileSize(File * file)
+	Sint64 SDL::GetFileSize(SDL_RWops* file)
 	{
-		SDL::SignedLong size = SDL_RWsize(file);
-		SDL_VERIFY();
+		Sint64 size = SDL_RWsize(file);
+		if (size < -2)
+			SDL_VERIFY();
 		return size;
 	}
 	
-	size_t SDL::ReadFromFile(File * file, void* dest, size_t size, size_t maxnum)
+	size_t SDL::ReadFromFile(SDL_RWops* file, void* dest, size_t size, size_t maxnum)
 	{
 		size_t sizeRead = SDL_RWread(file, dest, size, maxnum);
-		SDL_VERIFY();
+		if (sizeRead == 0)
+			SDL_VERIFY();
 		return sizeRead;
 	}
 
-	void SDL::CloseFile(File * file)
+	void SDL::CloseFile(SDL_RWops* file)
 	{
-		SDL_RWclose(file);
-		SDL_VERIFY();
+		if (SDL_RWclose(file) != 0) 
+			SDL_VERIFY();
 	}
 
 	void SDL::Log(const char* format, ...)
@@ -68,6 +72,64 @@ namespace Libraries
 		char buf[1024];
 		vsnprintf(buf, 1024, format, args);
 		SDL_Log("%s", buf);
-		SDL_VERIFY();
+	}
+
+	void SDL::ShowSimpleMessageBox(const char* message, const char* title)
+	{
+		if (SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title, message, NULL) != 0)
+			SDL_VERIFY();
+	}
+
+	Uint32 SDL::GetTicks(void)
+	{
+		return SDL_GetTicks();
+	}
+
+	int SDL::PollEvent(SDL_Event * event)
+	{
+		return SDL_PollEvent(event);
+	}
+	SDL_Surface* SDL::CreateRGBSurface(Uint32 flags, int width, int height, int depth, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
+	{
+		SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, depth, Rmask, Gmask, Bmask, Amask);
+		if (surface == NULL)
+			SDL_VERIFY();
+		return surface;
+	}
+
+	void SDL::LockSurface(SDL_Surface* surface)
+	{
+		if (SDL_MUSTLOCK(surface))
+		{
+			if (SDL_LockSurface(surface) != 0)
+				SDL_VERIFY();
+		}
+	}
+
+	void SDL::UnlockSurface(SDL_Surface* surface)
+	{
+		if (SDL_MUSTLOCK(surface))
+			SDL_UnlockSurface(surface);
+	}
+
+	SDL_Surface * SDL::ConvertSurfaceFormat(SDL_Surface * src, Uint32 pixel_format, Uint32 flags)
+	{
+		SDL_Surface* surface = SDL_ConvertSurfaceFormat(src, pixel_format, flags);
+		if (surface == NULL)
+			SDL_VERIFY();
+		return surface;
+	}
+
+	void SDL::FreeSurface(SDL_Surface * surface)
+	{
+		SDL_FreeSurface(surface);
+	}
+
+	SDL_Surface* SDL::LoadSurface(const char* path)
+	{
+		SDL_Surface* surface = IMG_Load(path);
+		if (surface == NULL)
+			SDL_VERIFY();
+		return surface;
 	}
 }
