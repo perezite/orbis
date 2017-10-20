@@ -17,19 +17,19 @@ namespace {
 	}
 
 	// handle GL errors
-	#if defined(GL_NORMAL_EXCEPTIONS) || defined(GL_SLOW_EXCEPTIONS)
+	#if defined(GL_NORMAL_EXCEPTIONS) || defined(GL_PERF_CRITICAL_EXCEPTIONS)
 		#define GL_VERIFY() \
 			CheckGLError();
 	#else
 		#define	GL_VERIFY();
 	#endif
 
-	// handle GL errors even in performance critical functions
-	#if defined(GL_SLOW_EXCEPTIONS)
-		#define GL_SLOW_VERIFY() \
+	// faster version of handling GL errors which only only does error checks if GL_PERF_CRITICAL_EXCEPTIONS is defined
+	#if defined(GL_PERF_CRITICAL_EXCEPTIONS)
+		#define GL_FAST_VERIFY() \
 			CheckGLError();
 	#else
-		#define GL_SLOW_VERIFY();
+		#define GL_FAST_VERIFY();
 	#endif
 
 }
@@ -39,12 +39,36 @@ namespace Libraries
 	void GL::ClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 	{
 		glClearColor(r, g, b, a);
-		GL_SLOW_VERIFY()
+		GL_FAST_VERIFY()
 	}
 
 	void GL::GenerateTextures(GLsizei n, GLuint* textures)
 	{
 		glGenTextures(n, textures);
 		GL_VERIFY();
+	}
+
+	void GL::GenerateBuffers(GLsizei n, GLuint * buffers)
+	{
+		glGenBuffers(n, buffers);
+		GL_VERIFY();
+	}
+
+	void GL::BindTexture(GLenum target, GLuint texture)
+	{
+		glBindTexture(target, texture);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::TextureImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid* data)
+	{
+		glTexImage2D(target, level, internalFormat, width, height, border, format, type, data);
+		GL_VERIFY();
+	}
+
+	void GL::TextureParameter(GLenum target, GLenum pname, GLint param)
+	{
+		glTexParameteri(target, pname, param);
+		GL_FAST_VERIFY();
 	}
 }

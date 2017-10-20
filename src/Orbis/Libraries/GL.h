@@ -5,7 +5,7 @@
 
 // set this define to enable exceptions for all GL calls, including performance critital ones. Only use in debug mode!
 #ifdef _DEBUG
-	#define GL_SLOW_EXCEPTIONS
+	#define GL_PERF_CRITICAL_EXCEPTIONS
 #endif
 
 #ifdef __ANDROID__
@@ -29,5 +29,18 @@ namespace Libraries
 
 		// generate textures
 		static void GenerateTextures(GLsizei n, GLuint * textures);
+
+		// generate buffers
+		static void GenerateBuffers(GLsizei n, GLuint * buffers);
+
+		// bind a texture
+		static void BindTexture(GLenum target, GLuint texture);
+
+		// set a 2D texture image
+		static void TextureImage2D(GLenum target, GLint level, GLint internalFormat,
+			GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid* data);
+			
+		// set a texture parameter
+		static void TextureParameter(GLenum target, GLenum pname, GLint param);
 	};
 }
