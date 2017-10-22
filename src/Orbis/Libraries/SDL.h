@@ -1,7 +1,7 @@
 #pragma once
 
 // comment out this define to disable exceptions for SDL calls
-#define SDL_EXCEPTIONS
+#define NORMAL_SDL_CHECKS
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

@@ -6,15 +6,6 @@
 #include "../../Base/Math/Matrix4.h"
 using namespace Math;
 
-#ifdef __ANDROID__
-#include <GLES2/gl2.h>	
-#include <GLES2/gl2ext.h>
-#endif 
-#ifdef WIN32
-#include <gl/glew.h>
-#include <SDL2/SDL_opengl.h>
-#endif
-
 #include <string>
 #include <vector>
 

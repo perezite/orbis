@@ -9,15 +9,6 @@ using namespace Game;
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
-#ifdef __ANDROID__
-	#include <GLES2/gl2.h>	
-	#include <GLES2/gl2ext.h>
-#endif 
-#ifdef WIN32
-	#include <gl/glew.h>
-	#include <gl/glu.h>
-#endif
-
 #include <vector>
 
 namespace Video

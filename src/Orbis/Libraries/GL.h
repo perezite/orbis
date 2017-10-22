@@ -1,21 +1,24 @@
 #pragma once
 
 // set this define to enable exceptions for non performance critical GL calls
-#define GL_NORMAL_EXCEPTIONS
+#define NORMAL_GL_CHECKS
 
-// set this define to enable exceptions for all GL calls, even performance critical ones. Only this only for diagnosing errors!
-#ifdef _DEBUG
-	#define GL_DIAGNOSTIC_EXCEPTIONS
+// set this define to enable exceptions for all GL calls, even performance critical ones. Only use this for diagnosing errors!
+#define DIAGNOSTIC_GL_CHECKS
+
+// show a warning if diagnost checks are enabled outside debug mode, because they degrade performance severly
+#if !defined(_DEBUG) && defined(DIAGNOSTIC_GL_CHECKS)
+	#pragma message ( "warning: DIAGNOSTIC_GL_CHECKS should only be defined in debug mode because it degrades performance" )
 #endif
 
 #ifdef __ANDROID__
-#include <GLES2/gl2.h>	
-#include <GLES2/gl2ext.h>
+	#include <GLES2/gl2.h>	
+	#include <GLES2/gl2ext.h>
 #endif 
 #ifdef WIN32
-#include <gl/glew.h>
-#include <SDL2/SDL_opengl.h>
-#include <gl/glu.h>
+	#include <gl/glew.h>
+	#include <SDL2/SDL_opengl.h>
+	#include <gl/glu.h>
 #endif
 
 namespace Libraries
@@ -75,5 +78,56 @@ namespace Libraries
 
 		// draw elements
 		static void DrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices);
+
+		// create a shader
+		static GLuint CreateShader(GLenum shaderType);
+
+		// set the shader source code
+		static void ShaderSource(GLuint shader, GLsizei count, const GLchar** string, const GLint *length);
+
+		// compile a shader
+		static void CompileShader(GLuint shader);
+
+		// get a parameter from a shader object
+		static void GetShaderParameter(GLuint shader, GLenum pname, GLint *params);
+
+		// get the shader info log
+		static void GetShaderInfoLog(GLuint shader, GLsizei maxLength, GLsizei *length, GLchar *infoLog);
+
+		// delete a shader
+		static void DeleteShader(GLuint shader);
+
+		// link a program
+		static void LinkProgram(GLuint program);
+
+		// get program parameter
+		static void GetProgramParameter(GLuint program, GLenum pname, GLint *params);
+
+		// get the program info log
+		static void GetProgramInfoLog(GLuint program, GLsizei maxLength, GLsizei *length, GLchar *infoLog);
+
+		// delete a program
+		static void DeleteProgram(GLuint program);
+
+		// create a program
+		static GLuint CreateProgram();
+
+		// use a program
+		static void UseProgram(GLuint program);
+
+		// attach a shader to a program
+		static void AttachShader(GLuint program, GLuint shader);
+
+		// get the location of a shader attribute
+		static GLint GetAttributeLocation(GLuint program, const GLchar *name);
+
+		// get the location of a shader uniform
+		static GLint GetUniformLocation(GLuint program, const GLchar *name);
+
+		// set a matrix4 uniform
+		static void UniformMatrix4(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+
+		// set a scalar uniform
+		static void Uniform(GLint location, GLint v0);
 	};
 }

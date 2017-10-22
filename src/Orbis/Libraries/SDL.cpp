@@ -22,8 +22,8 @@ namespace Libraries
 	}
 
 	// handle SDL exceptions
-	#ifdef SDL_EXCEPTIONS
-		#define SDL_VERIFY() \
+	#ifdef NORMAL_SDL_CHECKS
+		#define CHECK_SDL() \
 			CheckSDLError();
 		#else
 		#define	SDL_VERIFY();
@@ -33,7 +33,7 @@ namespace Libraries
 	{
 		SDL_RWops* result = SDL_RWFromFile(filePath.c_str(), "r");
 		if (result == NULL)
-			SDL_VERIFY();
+			CHECK_SDL();
 		return result;
 	}
 
@@ -41,7 +41,7 @@ namespace Libraries
 	{
 		Sint64 size = SDL_RWsize(file);
 		if (size < -2)
-			SDL_VERIFY();
+			CHECK_SDL();
 		return size;
 	}
 	
@@ -49,14 +49,14 @@ namespace Libraries
 	{
 		size_t sizeRead = SDL_RWread(file, dest, size, maxnum);
 		if (sizeRead == 0)
-			SDL_VERIFY();
+			CHECK_SDL();
 		return sizeRead;
 	}
 
 	void SDL::CloseFile(SDL_RWops* file)
 	{
 		if (SDL_RWclose(file) != 0) 
-			SDL_VERIFY();
+			CHECK_SDL();
 	}
 
 	void SDL::Log(const char* format, ...)
@@ -77,7 +77,7 @@ namespace Libraries
 	void SDL::ShowSimpleMessageBox(const char* message, const char* title)
 	{
 		if (SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title, message, NULL) != 0)
-			SDL_VERIFY();
+			CHECK_SDL();
 	}
 
 	Uint32 SDL::GetTicks(void)
@@ -93,7 +93,7 @@ namespace Libraries
 	{
 		SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, depth, Rmask, Gmask, Bmask, Amask);
 		if (surface == NULL)
-			SDL_VERIFY();
+			CHECK_SDL();
 		return surface;
 	}
 
@@ -102,7 +102,7 @@ namespace Libraries
 		if (SDL_MUSTLOCK(surface))
 		{
 			if (SDL_LockSurface(surface) != 0)
-				SDL_VERIFY();
+				CHECK_SDL();
 		}
 	}
 
@@ -116,7 +116,7 @@ namespace Libraries
 	{
 		SDL_Surface* surface = SDL_ConvertSurfaceFormat(src, pixel_format, flags);
 		if (surface == NULL)
-			SDL_VERIFY();
+			CHECK_SDL();
 		return surface;
 	}
 
@@ -129,7 +129,7 @@ namespace Libraries
 	{
 		SDL_Surface* surface = IMG_Load(path);
 		if (surface == NULL)
-			SDL_VERIFY();
+			CHECK_SDL();
 		return surface;
 	}
 }
