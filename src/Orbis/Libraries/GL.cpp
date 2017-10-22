@@ -6,26 +6,28 @@ using namespace System;
 
 namespace {
 	// handle GL errors
-	void CheckGLError()
-	{
-		GLenum error = glGetError();
-		if (error != GL_NO_ERROR)									
-		{	
-			std::string message = StringHelper::GetFormattedString("OpenGL Error: Error Code %d", 1024, error);
-			throw Exception(message);	
+	#if defined(GL_NORMAL_EXCEPTIONS) || defined(GL_DIAGNOSTIC_EXCEPTIONS)
+		void CheckGLError()
+		{
+			GLenum error = glGetError();
+			if (error != GL_NO_ERROR)									
+			{	
+				std::string message = StringHelper::GetFormattedString("OpenGL Error: Error Code %d", 1024, error);
+				throw Exception(message);	
+			}
 		}
-	}
+	#endif
 
 	// handle GL errors
-	#if defined(GL_NORMAL_EXCEPTIONS) || defined(GL_PERF_CRITICAL_EXCEPTIONS)
+	#if defined(GL_NORMAL_EXCEPTIONS) || defined(GL_DIAGNOSTIC_EXCEPTIONS)
 		#define GL_VERIFY() \
 			CheckGLError();
 	#else
 		#define	GL_VERIFY();
 	#endif
 
-	// faster version of handling GL errors which only only does error checks if GL_PERF_CRITICAL_EXCEPTIONS is defined
-	#if defined(GL_PERF_CRITICAL_EXCEPTIONS)
+	// faster version of handling GL errors which only only does error checks if GL_DIAGNOSTIC_EXCEPTIONS is defined
+	#if defined(GL_DIAGNOSTIC_EXCEPTIONS)
 		#define GL_FAST_VERIFY() \
 			CheckGLError();
 	#else
@@ -40,6 +42,12 @@ namespace Libraries
 	{
 		glClearColor(r, g, b, a);
 		GL_FAST_VERIFY()
+	}
+
+	void GL::Clear(GLbitfield mask)
+	{
+		glClear(mask);
+		GL_FAST_VERIFY();
 	}
 
 	void GL::GenerateTextures(GLsizei n, GLuint* textures)
@@ -69,6 +77,66 @@ namespace Libraries
 	void GL::TextureParameter(GLenum target, GLenum pname, GLint param)
 	{
 		glTexParameteri(target, pname, param);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::BindBuffer(GLenum target, GLuint buffer)
+	{
+		glBindBuffer(target, buffer);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::BufferData(GLenum target, GLsizeiptr size, const GLvoid * data, GLenum usage)
+	{
+		glBufferData(target, size, data, usage);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::VertexAttributePointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid * pointer)
+	{
+		glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::Enable(GLenum cap)
+	{
+		glEnable(cap);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::Disable(GLenum cap)
+	{
+		glDisable(cap);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::BlendFunction(GLenum sfactor, GLenum dfactor)
+	{
+		glBlendFunc(sfactor, dfactor);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::ActiveTexture(GLenum texture)
+	{
+		glActiveTexture(texture);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::EnableVertexAttributeArray(GLuint index)
+	{
+		glEnableVertexAttribArray(index);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::DisableVertexAttribArray(GLuint index)
+	{
+		glDisableVertexAttribArray(index);
+		GL_FAST_VERIFY();
+	}
+
+	void GL::DrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices)
+	{
+		glDrawElements(mode, count, type, indices);
 		GL_FAST_VERIFY();
 	}
 }

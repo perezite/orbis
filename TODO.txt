@@ -1,10 +1,14 @@
 TODO:
 - Wrapper schreiben, welcher die SDL- und GL-Befehle kapselt und Exceptions wirft
 - SDL Fast Exceptions einbauen
-- Texture-Funktionalität extrahieren
+- Performance-Metrik einbauen (zB. FPS oder Triangle-Count)
+- Inline-Funktionen einbauen
+- Header-Includes anpassen
+- Kamera extrahieren
 - Bildverzerrung bei nicht-quadratischer Auflösung fixen
+- Texture-Funktionalität extrahieren
+- Event-System extrahieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen
-- Asset Ordner einbinden in VS Projekt
 - StackOverflow-Nachtrag erstellen für Android VS-Compilation

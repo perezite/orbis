@@ -109,11 +109,11 @@ namespace Video
 			vertices[1].GetX(), vertices[1].GetY(), texCoords[1].GetX(), texCoords[1].GetY(),
 			vertices[2].GetX(), vertices[2].GetY(), texCoords[2].GetX(), texCoords[2].GetY(),
 			vertices[3].GetX(), vertices[3].GetY(), texCoords[3].GetX(), texCoords[3].GetY() };
-		glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-		glBufferData(GL_ARRAY_BUFFER, 2 * 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
+		GL::BindBuffer(GL_ARRAY_BUFFER, gVBO);
+		GL::BufferData(GL_ARRAY_BUFFER, 2 * 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
+		GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
+		GL::BufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
 
 
 		#ifdef WIN32 
@@ -129,34 +129,34 @@ namespace Video
 		VideoManager::GetInstance()->ClearScreen();
 
 		// setup rendering
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		GL::Enable(GL_BLEND);
+		GL::BlendFunction(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// setup textures
 		GL::BindTexture(GL_TEXTURE_2D, gTexture);
-		glActiveTexture(GL_TEXTURE0);
+		GL::ActiveTexture(GL_TEXTURE0);
 
 		// setup shader
 		shader->Use();
-		glEnableVertexAttribArray(shader->GetPositionAttributeHandle());
-		glEnableVertexAttribArray(shader->GetTexCoordAttributeHandle());
+		GL::EnableVertexAttributeArray(shader->GetPositionAttributeHandle());
+		GL::EnableVertexAttributeArray(shader->GetTexCoordAttributeHandle());
 		shader->SetSamplerUniform(0);
 		shader->SetTransformUniform(transform->GetMatrix());
 
 		// setup data
-		glBindBuffer(GL_ARRAY_BUFFER, gVBO);
-		glVertexAttribPointer(shader->GetPositionAttributeHandle(), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), NULL);
-		glVertexAttribPointer(shader->GetTexCoordAttributeHandle(), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), (void*)(0 + 2 * sizeof(GL_FLOAT)));
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
+		GL::BindBuffer(GL_ARRAY_BUFFER, gVBO);
+		GL::VertexAttributePointer(shader->GetPositionAttributeHandle(), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), NULL);
+		GL::VertexAttributePointer(shader->GetTexCoordAttributeHandle(), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), (void*)(0 + 2 * sizeof(GL_FLOAT)));
+		GL::BindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 
 		// render
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+		GL::DrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
 		// cleanup
-		glDisableVertexAttribArray(shader->GetTexCoordAttributeHandle());
-		glDisableVertexAttribArray(shader->GetPositionAttributeHandle());
+		GL::DisableVertexAttribArray(shader->GetTexCoordAttributeHandle());
+		GL::DisableVertexAttribArray(shader->GetPositionAttributeHandle());
 		GL::BindTexture(GL_TEXTURE_2D, 0);
-		glDisable(GL_BLEND);
+		GL::Disable(GL_BLEND);
 		shader->Unuse();
 	}
 }
