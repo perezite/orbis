@@ -1,7 +1,7 @@
 #pragma once
 
 // comment out this define to disable exceptions for SDL calls
-#define NORMAL_SDL_CHECKS
+#define SDL_CHECKS
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -58,5 +58,20 @@ namespace Libraries
 
 		// load an image
 		static SDL_Surface* LoadSurface(const char* path);
+
+		// destroy the SDL window
+		static void DestroyWindow(SDL_Window* window);
+
+		// quit
+		static void Quit();
+
+		// init
+		static void Init(Uint32 flags);
+
+		// swap window with GL context
+		static void GLSwapWindow(SDL_Window* window);
+
+		// set attribute of GL context
+		static void GLSetAttribute(SDL_GLattr attr, int value);
 	};
 }

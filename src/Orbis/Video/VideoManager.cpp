@@ -1,6 +1,7 @@
 #include "VideoManager.h"
 
 #include "../Libraries/GL.h"
+#include "../Libraries/SDL.h"
 using namespace Libraries;
 
 #include "../../Base/System/Exception.h"
@@ -32,8 +33,8 @@ namespace Video
 
 	VideoManager::~VideoManager()
 	{
-		SDL_DestroyWindow(m_sdlWindow);
-		SDL_Quit();
+		SDL::DestroyWindow(m_sdlWindow);
+		SDL::Quit();
 		if (m_renderer)
 			delete m_renderer;
 	}
@@ -54,12 +55,12 @@ namespace Video
 
 	void VideoManager::SwapBuffers()
 	{
-		SDL_GL_SwapWindow(m_sdlWindow);
+		SDL::GLSwapWindow(m_sdlWindow);
 	}
 
 	void VideoManager::InitializeVideo()
 	{
-		SDL_Init(SDL_INIT_VIDEO);
+		SDL::Init(SDL_INIT_VIDEO);
 		m_windowResolution = GetDefaultWindowResolution();
 
 		#ifdef WIN32	

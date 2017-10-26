@@ -1,15 +1,7 @@
 #pragma once
 
-// set this define to enable exceptions for non performance critical GL calls
-#define NORMAL_GL_CHECKS
-
-// set this define to enable exceptions for all GL calls, even performance critical ones. Only use this for diagnosing errors!
-#define DIAGNOSTIC_GL_CHECKS
-
-// show a warning if diagnost checks are enabled outside debug mode, because they degrade performance severly
-#if !defined(_DEBUG) && defined(DIAGNOSTIC_GL_CHECKS)
-	#pragma message ( "warning: DIAGNOSTIC_GL_CHECKS should only be defined in debug mode because it degrades performance" )
-#endif
+// only set this define for diagnosing bad gl calls, do not use in release mode
+#define GL_DIAGNOSTICS 
 
 #ifdef __ANDROID__
 	#include <GLES2/gl2.h>	

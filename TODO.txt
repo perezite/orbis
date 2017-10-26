@@ -1,5 +1,5 @@
 TODO:
-- Wrapper schreiben, welcher die SDL- und GL-Befehle kapselt und Exceptions wirft
+- Wrapper schreiben, welcher die SDL- und GL-Befehle kapselt und Exceptions wirft, als Header-only mit Inline-Funktionen
 - SDL Fast Exceptions einbauen
 - Performance-Metrik einbauen (zB. FPS oder Triangle-Count)
 - Inline-Funktionen einbauen

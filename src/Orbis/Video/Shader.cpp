@@ -4,7 +4,6 @@
 
 #include "../Core/AssetHelper.h"
 #include "../Libraries/GL.h"
-#include "../Libraries/SDL.h"
 using namespace Core;
 using namespace Libraries;
 

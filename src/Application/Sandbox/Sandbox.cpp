@@ -31,6 +31,27 @@ const int SCREEN_WIDTH = 400;
 const int SCREEN_HEIGHT = 400;
 #endif
 
+void test(float a, float b, float c, float d)
+{
+	std::cout << "glClearColor() surrogate" << std::endl;
+}
+
+// define the GL debug call macro
+// #define USE_GL_DEBUG_CALLS
+#if defined(USE_GL_DEBUG_CALLS)
+	#define GL_DEBUG_CALL(call) \
+		std::cout << "GL_DEBUG_CALL" << std::endl; \
+		call;
+#else
+	#define GL_DEBUG_CALL(call) call;
+#endif
+
+
+// redefine an openGL call
+#undef glClearColor
+#define glClearColor(r, g, b, a) GL_DEBUG_CALL(glClearColor(r, g, b, a))
+
+
 const GLchar* vertexShaderSource =
 	"attribute vec2 a_vPosition;	\n \
 	attribute vec2 a_texCoord;		\n \
