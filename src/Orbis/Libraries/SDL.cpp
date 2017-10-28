@@ -1,10 +1,42 @@
 #include "SDL.h"
 
-#include "../../Base/System/StringHelper.h"
-#include "../../Base/System/Exception.h"
-using namespace System;
-
 #include <stdarg.h>
+
+void SDL_HandleError()
+{
+	std::string error = std::string(SDL_GetError());
+	error = StringHelper::IsEmpty(error) ? "Unknown error" : error;
+
+	std::string message = "SDL Error: " + error;
+	SDL_ClearError();
+	throw Exception(message);
+}
+
+int SDL_Verify(int returnValue)
+{
+	if (returnValue != 0)
+		SDL_HandleError();
+
+	return returnValue;
+}
+
+Sint64 SDL_Verify(Sint64 returnValue, Sint64 minimalAllowedValue)
+{
+	if (returnValue < minimalAllowedValue)
+		SDL_HandleError();
+
+	return returnValue;
+}
+
+SDL_RWops* SDL_Verify(SDL_RWops* returnValue)
+{
+	if (returnValue == NULL)
+	{
+		SDL_HandleError();
+	}
+
+	return returnValue;
+}
 
 namespace Libraries
 {
@@ -37,13 +69,14 @@ namespace Libraries
 		return result;
 	}
 
+	/*
 	Sint64 SDL::GetFileSize(SDL_RWops* file)
 	{
 		Sint64 size = SDL_RWsize(file);
 		if (size < -2)
 			SDL_CHECK();
 		return size;
-	}
+	}*/
 	
 	size_t SDL::ReadFromFile(SDL_RWops* file, void* dest, size_t size, size_t maxnum)
 	{

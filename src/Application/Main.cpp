@@ -16,9 +16,7 @@ using namespace System;
 #include <iostream>
 
 int main(int argc, char* args[])
-{
-	
-
+{	
 	#ifdef __SANDBOX__
 		run();
 		return 0;

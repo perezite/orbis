@@ -1,12 +1,37 @@
-#pragma once
+#ifndef _ORBIS_SDL_H
+#define _ORBIS_SDL_H
 
 // comment out this define to disable exceptions for SDL calls
 #define SDL_CHECKS
+
+#include "../../Base/System/Exception.h"
+#include "../../Base/System/StringHelper.h"
+using namespace System;
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
 #include <string>
+#include <iostream>
+
+void SDL_HandleError();
+
+int SDL_Verify(int returnValue);
+
+Sint64 SDL_Verify(Sint64 returnValue, Sint64 minimalAllowedValue);
+
+SDL_RWops* SDL_Verify(SDL_RWops* returnValue);
+
+#undef SDL_RWFromFile
+#define SDL_RWFromFile(a, b) SDL_Verify(SDL_RWFromFile(a, b))
+
+#define SDL_RWsize_old(ctx)		(ctx)->size(ctx)
+#undef SDL_RWsize
+#define SDL_RWsize(a) SDL_Verify(SDL_RWsize_old(a), -1)
+
+#define SDL_RWclose_old(ctx)	(ctx)->close(ctx)
+#undef SDL_RWclose
+#define SDL_RWclose(file) SDL_Verify(SDL_RWclose_old(file))
 
 namespace Libraries
 {
@@ -18,7 +43,7 @@ namespace Libraries
 		static SDL_RWops* OpenFile(std::string filePath, std::string options);
 
 		// get the file size
-		static Sint64 GetFileSize(SDL_RWops* file);
+		// static Sint64 GetFileSize(SDL_RWops* file);
 
 		// read from file
 		static size_t ReadFromFile(SDL_RWops* file, void* dest, size_t size, size_t maxnum);
@@ -75,3 +100,5 @@ namespace Libraries
 		static void GLSetAttribute(SDL_GLattr attr, int value);
 	};
 }
+
+#endif

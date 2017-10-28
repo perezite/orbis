@@ -28,6 +28,11 @@ namespace {
 
 namespace Libraries
 {
+	void GL::Temp()
+	{
+		GL_DIAGNOSTIC_CHECK();
+	}
+
 	void GL::ClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 	{
 		glClearColor(r, g, b, a);

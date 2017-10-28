@@ -37,20 +37,38 @@ void test(float a, float b, float c, float d)
 }
 
 // define the GL debug call macro
-// #define USE_GL_DEBUG_CALLS
+#define USE_GL_DEBUG_CALLS
 #if defined(USE_GL_DEBUG_CALLS)
-	#define GL_DEBUG_CALL(call) \
-		std::cout << "GL_DEBUG_CALL" << std::endl; \
-		call;
+	#define GL_DEBUG_CALL(call)							\
+		(												\
+			std::cout << "GL_DEBUG_CALL" << std::endl,	\
+			(call)										\
+		) 
 #else
-	#define GL_DEBUG_CALL(call) call;
+#define GL_DEBUG_CALL(call) (call);
 #endif
-
 
 // redefine an openGL call
 #undef glClearColor
 #define glClearColor(r, g, b, a) GL_DEBUG_CALL(glClearColor(r, g, b, a))
 
+// define the SDL safe call macro
+int Check_SDL_Return_Value(int return_value)
+{	
+	std::cout << "SDL Debug call" << std::endl;
+	if (return_value != 0)
+		throw "fail";
+	return return_value;
+}
+
+#define SDL_SAFE_CALL(call)										\
+	Check_SDL_Return_Value(call)								\
+
+// redefine an SDL call 
+// #undef SDL_PollEvent
+// #define SDL_PollEvent(window) SDL_SAFE_CALL(SDL_PollEvent(window))
+#undef SDL_GL_SetAttribute
+#define SDL_GL_SetAttribute(a, b) SDL_SAFE_CALL(SDL_GL_SetAttribute(a,b))
 
 const GLchar* vertexShaderSource =
 	"attribute vec2 a_vPosition;	\n \
@@ -267,7 +285,7 @@ void initGL()
 		-0.5f,  0.5f,	// left top pos pos
 		0.0f,  1.0f,	// left top tex
 		0.5f,  0.5f,	// right top pos
-		1.0f,  1.0f	// right top tex
+		1.0f,  1.0f		// right top tex
 	};
 
 	GLuint indexData[] = { 0, 1, 2, 2, 1, 3 };
@@ -326,9 +344,15 @@ void close()
 	SDL_Quit();
 }
 
-void run()
+void main_loop()
 {
 	init();
+
+	// correct sdl call
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+
+	// bad SDL call to provoke an exception
+	SDL_GL_SetAttribute((SDL_GLattr)41, 42);
 
 	bool quit = false;
 
@@ -350,6 +374,19 @@ void run()
 	}
 
 	close();
+}
+
+void run()
+{
+	try
+	{
+		main_loop();
+	}
+	catch(...)
+	{
+		std::cout << "oops!" << std::endl;
+		getchar();
+	}
 }
 
 #endif

@@ -33,8 +33,8 @@ namespace Core
 		std::string filePath = AssetPathToFilePath(assetPath);
 
 		// setup
-		SDL_RWops* reader = SDL::OpenFile(filePath.c_str(), "r");
-		Sint64 fileSize = SDL::GetFileSize(reader);
+		SDL_RWops* reader = SDL_RWFromFile(filePath.c_str(), "r");
+		Sint64 fileSize = SDL_RWsize(reader);
 		char* data = (char*)malloc((size_t)fileSize + 1);
 	
 		Sint64 totalSize = 0; 
@@ -43,13 +43,19 @@ namespace Core
 		// read
 		do
 		{
-			lastSize = SDL::ReadFromFile(reader, &data[totalSize], sizeof(char), (size_t)(fileSize - totalSize));
+			lastSize = SDL_RWread(reader, &data[totalSize], sizeof(char), (size_t)(fileSize - totalSize));
 			totalSize += lastSize;	
 		} while (totalSize < fileSize && lastSize != 0);
 		data[totalSize] = '\0';
 
+		// check
+		if (totalSize != fileSize) {
+			throw Exception("Could not load file '" + assetPath + "'");
+		}
+
 		// cleanup
-		SDL::CloseFile(reader);
+		// SDL::CloseFile(reader);
+		SDL_RWclose(reader);
 
 		return data;
 	}

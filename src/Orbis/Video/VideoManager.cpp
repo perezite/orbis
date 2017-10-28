@@ -33,10 +33,10 @@ namespace Video
 
 	VideoManager::~VideoManager()
 	{
-		SDL::DestroyWindow(m_sdlWindow);
-		SDL::Quit();
 		if (m_renderer)
 			delete m_renderer;
+		SDL::DestroyWindow(m_sdlWindow);
+		SDL::Quit();
 	}
 
 	RenderDevice* VideoManager::GetRenderer()

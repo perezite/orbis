@@ -19,6 +19,8 @@ namespace Libraries
 	class GL
 	{
 	public:
+		static void Temp();
+
 		// clear color
 		static void ClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 
