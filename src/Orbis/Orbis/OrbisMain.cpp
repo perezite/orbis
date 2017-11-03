@@ -21,7 +21,7 @@ namespace Orbis
 		SDL_Event event;
 		while (!done)
 		{
-			while (SDL::PollEvent(&event))
+			while (SDL_PollEvent(&event))
 			{
 				if (event.type == SDL_QUIT || event.type == SDL_FINGERDOWN)
 				{

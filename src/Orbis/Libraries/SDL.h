@@ -22,6 +22,10 @@ Sint64 SDL_Verify(Sint64 returnValue, Sint64 minimalAllowedValue);
 
 SDL_RWops* SDL_Verify(SDL_RWops* returnValue);
 
+SDL_Surface* SDL_Verify(SDL_Surface* returnValue);
+
+SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
+
 #undef SDL_RWFromFile
 #define SDL_RWFromFile(a, b) SDL_Verify(SDL_RWFromFile(a, b))
 
@@ -33,6 +37,16 @@ SDL_RWops* SDL_Verify(SDL_RWops* returnValue);
 #undef SDL_RWclose
 #define SDL_RWclose(file) SDL_Verify(SDL_RWclose_old(file))
 
+#define SDL_ShowSimpleMessageBox(flags, title, message, window) SDL_Verify(SDL_ShowSimpleMessageBox(flags, title, message, window))
+
+#define SDL_CreateRGBSurface(flags, width, height, depth, rmask, gmask, bmask, amask) SDL_Verify(SDL_CreateRGBSurface(flags, width, height, depth, rmask, gmask, bmask, amask))
+
+#define SDL_LockSurface(surface) SDL_Verify(SDL_LockSurface(surface))
+
+#define SDL_ConvertSurfaceFormat(src, pixel_format, flags) SDL_Verify(SDL_ConvertSurfaceFormat(src, pixel_format, flags))
+
+#define IMG_Load(path) IMG_Verify(IMG_Load(path))
+
 namespace Libraries
 {
 	// wrapper class for SDL calls
@@ -42,23 +56,11 @@ namespace Libraries
 		// open a file
 		static SDL_RWops* OpenFile(std::string filePath, std::string options);
 
-		// get the file size
-		// static Sint64 GetFileSize(SDL_RWops* file);
-
 		// read from file
 		static size_t ReadFromFile(SDL_RWops* file, void* dest, size_t size, size_t maxnum);
 
 		// close the file
 		static void CloseFile(SDL_RWops* file);
-
-		// log a message
-		static void Log(const char* format, ...);
-
-		// log a message
-		static void Log(const char* format, va_list args);
-
-		// show a message box
-		static void ShowSimpleMessageBox(const char * message, const char * title);
 
 		// get ticks
 		static Uint32 GetTicks(void);

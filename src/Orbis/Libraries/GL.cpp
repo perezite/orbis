@@ -249,3 +249,14 @@ namespace Libraries
 		GL_DIAGNOSTIC_CHECK();
 	}
 }
+
+void GL_Verify(void)
+{
+	GLenum err;
+
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		std::string message = StringHelper::GetFormattedString("OpenGL Error: Error Code %d", 1024, err);
+		throw Exception(message);
+	}
+}

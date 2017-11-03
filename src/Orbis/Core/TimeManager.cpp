@@ -14,12 +14,12 @@ namespace Core
 	void TimeManager::Update()
 	{
 		m_lastTicks = m_currentTicks;
-		m_currentTicks = SDL::GetTicks();
+		m_currentTicks = SDL_GetTicks();
 	}
 
 	void TimeManager::Reset()
 	{
-		m_lastTicks = SDL::GetTicks();
+		m_lastTicks = SDL_GetTicks();
 	}
 
 	float TimeManager::GetDeltaSeconds()
@@ -29,6 +29,6 @@ namespace Core
 
 	TimeManager::TimeManager()
 	{
-		m_lastTicks = SDL::GetTicks();
+		m_lastTicks = SDL_GetTicks();
 	}
 }

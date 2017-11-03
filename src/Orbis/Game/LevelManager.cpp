@@ -41,7 +41,7 @@ namespace Game
 	{
 		if (m_currentLevel == NULL)
 		{
-			throw Exception("A level must be queued before calling LevelManager::" + std::string(__func__));
+			throw Exception("A level must be queued before calling " + std::string(__func__));
 		}
 
 		TimeManager::GetInstance()->Update();

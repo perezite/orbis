@@ -54,7 +54,6 @@ namespace Core
 		}
 
 		// cleanup
-		// SDL::CloseFile(reader);
 		SDL_RWclose(reader);
 
 		return data;

@@ -12,6 +12,16 @@ void SDL_HandleError()
 	throw Exception(message);
 }
 
+void IMG_HandleError()
+{
+	std::string error = std::string(IMG_GetError());
+	error = StringHelper::IsEmpty(error) ? "Unknown error" : error;
+
+	std::string message = "SDL Image Error: " + error;
+	SDL_ClearError();
+	throw Exception(message);
+}
+
 int SDL_Verify(int returnValue)
 {
 	if (returnValue != 0)
@@ -31,9 +41,23 @@ Sint64 SDL_Verify(Sint64 returnValue, Sint64 minimalAllowedValue)
 SDL_RWops* SDL_Verify(SDL_RWops* returnValue)
 {
 	if (returnValue == NULL)
-	{
 		SDL_HandleError();
-	}
+
+	return returnValue;
+}
+
+SDL_Surface * SDL_Verify(SDL_Surface * returnValue)
+{
+	if (returnValue == NULL)
+		SDL_HandleError();
+
+	return returnValue;
+}
+
+SDL_Surface * IMG_Verify(SDL_Surface * returnValue)
+{
+	if (returnValue == NULL)
+		IMG_HandleError();
 
 	return returnValue;
 }
@@ -92,35 +116,9 @@ namespace Libraries
 			SDL_CHECK();
 	}
 
-	void SDL::Log(const char* format, ...)
-	{
-		va_list args;
-		va_start(args, format);
-			Log(format, args);
-		va_end(args);
-	}
-
-	void SDL::Log(const char* format, va_list args)
-	{
-		char buf[1024];
-		vsnprintf(buf, 1024, format, args);
-		SDL_Log("%s", buf);
-	}
-
-	void SDL::ShowSimpleMessageBox(const char* message, const char* title)
-	{
-		if (SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title, message, NULL) != 0)
-			SDL_CHECK();
-	}
-
 	Uint32 SDL::GetTicks(void)
 	{
 		return SDL_GetTicks();
-	}
-
-	int SDL::PollEvent(SDL_Event * event)
-	{
-		return SDL_PollEvent(event);
 	}
 
 	SDL_Surface* SDL::CreateRGBSurface(Uint32 flags, int width, int height, int depth, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
@@ -145,7 +143,7 @@ namespace Libraries
 		if (SDL_MUSTLOCK(surface))
 			SDL_UnlockSurface(surface);
 	}
-
+	
 	SDL_Surface * SDL::ConvertSurfaceFormat(SDL_Surface * src, Uint32 pixel_format, Uint32 flags)
 	{
 		SDL_Surface* surface = SDL_ConvertSurfaceFormat(src, pixel_format, flags);

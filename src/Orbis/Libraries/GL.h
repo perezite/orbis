@@ -13,6 +13,38 @@
 	#include <gl/glu.h>
 #endif
 
+void GL_Verify();
+
+#define GL_VERIFY(call) \
+	call,				\
+	GL_Verify()			
+
+#if defined(WIN32)
+	#define GLEW_ORIGINAL(call) GLEW_GET_FUN(__glew ## call)
+#else
+	#define GLEW_ORIGINAL(call) gl ## call
+#endif
+
+#define glGenTextures(n, textures) GL_VERIFY(glGenTextures(n, textures))
+
+#define glBindTexture(target, texture) GL_VERIFY(glBindTexture(target, texture))
+
+#define glTexImage2D(target, level, internalFormat, width, height, border, format, type, data) \
+	GL_VERIFY(glTexImage2D(target, level, internalFormat, width, height, border, format, type, data))
+
+#define glTexParameteri(texture, pname, param) GL_VERIFY(glTexParameteri(texture, pname, param))
+
+#undef glGenBuffers
+#define glGenBuffers(n, buffers) GL_VERIFY(GLEW_ORIGINAL(GenBuffers)(n, buffers))
+
+#undef glBindBuffer
+#define glBindBuffer(target, buffer) GL_VERIFY(GLEW_ORIGINAL(BindBuffer)(target, buffer))
+
+#undef glBufferData
+#define glBufferData(target, size, data, usage) GL_VERIFY(GLEW_ORIGINAL(BufferData)(target, size, data, usage))
+
+#define glEnable(cap) GL_VERIFY(glEnable(cap))
+
 namespace Libraries
 {
 	// wrapper class for OpenGL calls

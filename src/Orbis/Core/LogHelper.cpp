@@ -12,12 +12,12 @@ namespace Core
 		va_list args; 
 
 		va_start(args, fmt);
-			SDL::Log(fmt, args);
+			SDL_Log(fmt, args);	
 		va_end(args);
 	}
 
 	void LogHelper::ShowMessageBox(std::string message, std::string title)
 	{
-		SDL::ShowSimpleMessageBox(message.c_str(), title.c_str());
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, message.c_str(), title.c_str(), NULL);
 	}
 }
