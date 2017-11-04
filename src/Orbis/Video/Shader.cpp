@@ -33,26 +33,26 @@ namespace
 		GLuint shader;
 		GLint compiled;
 
-		shader = GL::CreateShader(type);
+		shader = glCreateShader(type);
 		const char* shaderCodeData = shaderCode.c_str();
-		GL::ShaderSource(shader, 1, &shaderCodeData, NULL);
-		GL::CompileShader(shader);
+		glShaderSource(shader, 1, &shaderCodeData, NULL);
+		glCompileShader(shader);
 
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
 		if (!compiled)
 		{
 			GLint infoLen = 0;
-			GL::GetShaderParameter(shader, GL_INFO_LOG_LENGTH, &infoLen);
+			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
 
 			std::string infoLogString;
 			if (infoLen > 1)
 			{
 				char* infoLog = new char[infoLen];
-				GL::GetShaderInfoLog(shader, infoLen, NULL, infoLog);
+				glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
 				infoLogString = std::string(infoLog);
 				delete[] infoLog;
 			}
-			GL::DeleteShader(shader);
+			glDeleteShader(shader);
 
 			throw Exception("Error compiling shader: " + infoLogString);
 		}
@@ -63,7 +63,7 @@ namespace
 	// link the shader program
 	void Link()
 	{
-		GL::LinkProgram(programId);
+		glLinkProgram(programId);
 
 		GLint linked;
 		GL::GetProgramParameter(programId, GL_LINK_STATUS, &linked);

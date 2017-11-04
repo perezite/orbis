@@ -260,3 +260,11 @@ void GL_Verify(void)
 		throw Exception(message);
 	}
 }
+
+GLuint GL_Verify(GLuint returnValue)
+{
+	if (returnValue <= 0)
+		GL_Verify();
+
+	return returnValue;
+}

@@ -15,6 +15,8 @@
 
 void GL_Verify();
 
+GLuint GL_Verify(GLuint returnValue);
+
 #define GL_VERIFY(call) \
 	call,				\
 	GL_Verify()			
@@ -59,6 +61,27 @@ void GL_Verify();
 #define glDisableVertexAttribArray(index) GL_VERIFY(GLEW_ORIGINAL(DisableVertexAttribArray)(index))
 
 #define glDisable(cap) GL_VERIFY(glDisable(cap))
+
+#undef glCreateShader
+#define glCreateShader(type) GL_Verify(GLEW_ORIGINAL(CreateShader)(type))
+
+#undef glShaderSource
+#define glShaderSource(shader, count, string, length) GL_VERIFY(GLEW_ORIGINAL(ShaderSource)(shader, count, string, length))
+
+#undef glCompileShader
+#define glCompileShader(shader) GL_VERIFY(GLEW_ORIGINAL(CompileShader)(shader))
+
+#undef glGetShaderiv
+#define glGetShaderiv(shader, pname, params) GL_VERIFY(GLEW_ORIGINAL(GetShaderiv)(shader, pname, params))
+
+#undef glGetShaderInfoLog
+#define glGetShaderInfoLog(shader, maxLength, length, infoLog) GL_VERIFY(GLEW_ORIGINAL(GetShaderInfoLog)(shader, maxLength, length, infoLog))
+
+#undef glDeleteShader
+#define glDeleteShader(shader) GL_VERIFY(GLEW_ORIGINAL(DeleteShader)(shader))
+
+#undef glLinkProgram
+#define glLinkProgram(program) GL_VERIFY(GLEW_ORIGINAL(LinkProgram)(program))
 
 namespace Libraries
 {
