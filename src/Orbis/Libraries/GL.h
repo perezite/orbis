@@ -1,6 +1,6 @@
 #pragma once
 
-// only set this define for diagnosing bad gl calls, do not use in release mode
+// only set this define for diagnosing opengl errors, do not use in release mode because it degrades performance severely
 // #define GL_DIAGNOSTICS 
 
 #ifdef __ANDROID__
@@ -12,6 +12,8 @@
 	#include <SDL2/SDL_opengl.h>
 	#include <gl/glu.h>
 #endif
+
+void GL_dummy();
 
 #if defined(GL_DIAGNOSTICS)
 
@@ -42,7 +44,8 @@
 
 	#define glTexParameteri(texture, pname, param) GL_VERIFY(glTexParameteri(texture, pname, param))
 
-	#define glActiveTexture(texture) GL_VERIFY(glActiveTexture(texture))
+	#undef glActiveTexture
+	#define glActiveTexture(texture) GL_VERIFY(GLEW_ORIGINAL(ActiveTexture)(texture))
 
 	#undef glGenBuffers
 	#define glGenBuffers(n, buffers) GL_VERIFY(GLEW_ORIGINAL(GenBuffers)(n, buffers))

@@ -3,7 +3,6 @@
 #include "../Libraries/SDL.h"
 #include "../Game/LevelManager.h"
 using namespace Game;
-using namespace Libraries;
 
 namespace Orbis
 {

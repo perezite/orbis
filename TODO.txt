@@ -1,8 +1,4 @@
 TODO:
-- SDL Exceptions für nicht Performance-relevante Funktioenn implementieren
-- GL Exception disable Option implementieren
-- GL Exceptions implementieren
-- Wrapper schreiben, welcher die SDL- und GL-Befehle kapselt und Exceptions wirft, als Header-only mit Inline-Funktionen
 - Rausfinden, wieso in der Sandbox bei einer Exception der Stacktrace unvollständig ist
 - Performance-Metrik einbauen (zB. FPS oder Triangle-Count)
 - Debugging-Ordner mit globalen Debug-Settings einbauen

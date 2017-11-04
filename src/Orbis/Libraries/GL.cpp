@@ -4,9 +4,14 @@
 #include "../../Base/System/StringHelper.h"
 using namespace System;
 
+void GL_dummy()
+{
+	return;
+}
+
 #if defined(GL_DIAGNOSTICS)
 
-	void GL_Verify(void)
+void GL_Verify(void)
 	{
 		GLenum err;
 

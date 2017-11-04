@@ -2,7 +2,6 @@
 
 #include "../Libraries/GL.h"
 #include "../Libraries/SDL.h"
-using namespace Libraries;
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/System/StringHelper.h"
@@ -55,12 +54,12 @@ namespace Video
 
 	void VideoManager::SwapBuffers()
 	{
-		SDL::GLSwapWindow(m_sdlWindow);
+		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
 	void VideoManager::InitializeVideo()
 	{
-		SDL::Init(SDL_INIT_VIDEO);
+		SDL_Init(SDL_INIT_VIDEO);
 		m_windowResolution = GetDefaultWindowResolution();
 
 		#ifdef WIN32	

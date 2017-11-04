@@ -1,7 +1,6 @@
 #include "AssetHelper.h"
 
 #include "../Libraries/SDL.h"
-using namespace Libraries;
 
 #include "../../Base/System/EnvironmentHelper.h"
 #include "../../Base/System/Exception.h"

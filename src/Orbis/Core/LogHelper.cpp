@@ -1,7 +1,6 @@
 #include "LogHelper.h"
 
 #include "../Libraries/SDL.h"
-using namespace Libraries;
 
 #include <stdarg.h>
 

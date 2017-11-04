@@ -8,7 +8,6 @@ using namespace Video;
 #include "../Libraries/SDL.h"
 #include "../Libraries/GL.h"
 using namespace Core;
-using namespace Libraries;
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/Math/Matrix4.h"

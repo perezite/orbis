@@ -1,7 +1,6 @@
 #include "TimeManager.h"
 
 #include "../Libraries/SDL.h"
-using namespace Libraries;
 
 namespace Core
 {
