@@ -263,7 +263,15 @@ void GL_Verify(void)
 
 GLuint GL_Verify(GLuint returnValue)
 {
-	if (returnValue <= 0)
+	if (returnValue < 0)
+		GL_Verify();
+
+	return returnValue;
+}
+
+GLint GL_Verify(GLint returnValue)
+{
+	if (returnValue < 0)
 		GL_Verify();
 
 	return returnValue;

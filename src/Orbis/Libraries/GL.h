@@ -17,6 +17,8 @@ void GL_Verify();
 
 GLuint GL_Verify(GLuint returnValue);
 
+GLint GL_Verify(GLint returnValue);
+
 #define GL_VERIFY(call) \
 	call,				\
 	GL_Verify()			
@@ -82,6 +84,36 @@ GLuint GL_Verify(GLuint returnValue);
 
 #undef glLinkProgram
 #define glLinkProgram(program) GL_VERIFY(GLEW_ORIGINAL(LinkProgram)(program))
+
+#undef glGetProgramiv
+#define glGetProgramiv(program, pname, params) GL_VERIFY(GLEW_ORIGINAL(GetProgramiv)(program, pname, params))
+
+#undef glGetProgramInfoLog
+#define glGetProgramInfoLog(program, maxLength, length, infoLog) GL_VERIFY(GLEW_ORIGINAL(GetProgramInfoLog)(program, maxLength, length, infoLog))
+
+#undef glDeleteProgram
+#define glDeleteProgram(program) GL_VERIFY(GLEW_ORIGINAL(DeleteProgram)(program))
+
+#undef glCreateProgram
+#define glCreateProgram() GL_Verify(GLEW_ORIGINAL(CreateProgram)())
+
+#undef glAttachShader
+#define glAttachShader(program, shader) GL_VERIFY(GLEW_ORIGINAL(AttachShader)(program, shader))
+
+#undef glGetAttribLocation
+#define glGetAttribLocation(program, name) GL_Verify(GLEW_ORIGINAL(GetAttribLocation)(program, name))
+
+#undef glGetUniformLocation
+#define glGetUniformLocation(program, name) GL_Verify(GLEW_ORIGINAL(GetUniformLocation)(program, name))
+
+#undef glUniformMatrix4fv
+#define glUniformMatrix4fv(location, count, transpose, value) GL_VERIFY(GLEW_ORIGINAL(UniformMatrix4fv)(location, count, transpose, value))
+
+#undef glUniform1i
+#define glUniform1i(location, v0) GL_VERIFY(GLEW_ORIGINAL(Uniform1i)(location, v0))
+
+#undef glUseProgram
+#define glUseProgram(program) GL_VERIFY(GLEW_ORIGINAL(UseProgram)(program))
 
 namespace Libraries
 {

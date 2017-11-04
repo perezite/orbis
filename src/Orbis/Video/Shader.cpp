@@ -66,23 +66,23 @@ namespace
 		glLinkProgram(programId);
 
 		GLint linked;
-		GL::GetProgramParameter(programId, GL_LINK_STATUS, &linked);
+		glGetProgramiv(programId, GL_LINK_STATUS, &linked);
 		if (!linked)
 		{
 			GLint infoLen = 0;
 			std::string infoLogString;
 
-			GL::GetProgramParameter(programId, GL_INFO_LOG_LENGTH, &infoLen);
+			glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &infoLen);
 
 			if (infoLen > 1)
 			{
 				char* infoLog = new char[infoLen];
-				GL::GetProgramInfoLog(programId, infoLen, NULL, infoLog);
+				glGetProgramInfoLog(programId, infoLen, NULL, infoLog);
 				infoLogString = std::string(infoLog);
 				delete[] infoLog;
 			}
 
-			GL::DeleteProgram(programId);
+			glDeleteProgram(programId);
 			throw Exception("Error linking shader program: " + infoLogString);
 		}
 	}
@@ -94,22 +94,22 @@ namespace Video
 	{
 		VideoManager::GetInstance();
 
-		programId = GL::CreateProgram();
+		programId = glCreateProgram();
 
 		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexAssetPath);
 		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER);
-		GL::AttachShader(programId, vertexShader);
+		glAttachShader(programId, vertexShader);
 
 		std::string fragmentShaderCode = AssetHelper::LoadTextAsset(fragmentAssetPath);
 		GLuint fragmentShader = Compile(fragmentShaderCode, GL_FRAGMENT_SHADER);
-		GL::AttachShader(programId, fragmentShader);
+		glAttachShader(programId, fragmentShader);
 
 		Link();
 
-		positionAttributeHandle = GL::GetAttributeLocation(programId, "a_vPosition");
-		texCoordAttributeHandle = GL::GetAttributeLocation(programId, "a_vTexCoord");
-		transformUniformHandle = GL::GetUniformLocation(programId, "u_mTransform");
-		samplerUniformHandle = GL::GetUniformLocation(programId, "u_sSampler");
+		positionAttributeHandle = glGetAttribLocation(programId, "a_vPosition");
+		texCoordAttributeHandle = glGetAttribLocation(programId, "a_vTexCoord");
+		transformUniformHandle = glGetUniformLocation(programId, "u_mTransform");
+		samplerUniformHandle = glGetUniformLocation(programId, "u_sSampler");
 	}
 
 	Shader::~Shader()
@@ -130,21 +130,21 @@ namespace Video
 	void Shader::SetTransformUniform(const Matrix4& mat)
 	{
 		Matrix4 transposed = mat.Transposed();
-		GL::UniformMatrix4(transformUniformHandle, 1, GL_FALSE, transposed.GetValues());
+		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, transposed.GetValues());
 	}
 
 	void Shader::SetSamplerUniform(int sampler)
 	{
-		GL::Uniform(samplerUniformHandle, sampler);
+		glUniform1i(samplerUniformHandle, sampler);
 	}
 
 	void Shader::Use()
 	{
-		GL::UseProgram(programId);
+		glUseProgram(programId);
 	}
 
 	void Shader::Unuse()
 	{
-		GL::UseProgram(0);
+		glUseProgram(0);
 	}
 }

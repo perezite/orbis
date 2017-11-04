@@ -18,6 +18,6 @@ namespace Core
 
 	void LogHelper::ShowMessageBox(std::string message, std::string title)
 	{
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, message.c_str(), title.c_str(), NULL);
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title.c_str(), message.c_str(), NULL);
 	}
 }
