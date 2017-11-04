@@ -45,6 +45,21 @@ void GL_Verify();
 
 #define glEnable(cap) GL_VERIFY(glEnable(cap))
 
+#define glBlendFunc(sfactor, dfactor) GL_VERIFY(glBlendFunc(sfactor, dfactor))
+
+#undef glEnableVertexAttribArray
+#define glEnableVertexAttribArray(index) GL_VERIFY(GLEW_ORIGINAL(EnableVertexAttribArray)(index))
+
+#undef glVertexAttribPointer
+#define glVertexAttribPointer(index, size, type, normalized, stride, pointer) GL_VERIFY(GLEW_ORIGINAL(VertexAttribPointer)(index, size, type, normalized, stride, pointer))
+
+#define glDrawElements(mode, count, type, indices) GL_VERIFY(glDrawElements(mode, count, type, indices))
+
+#undef glDisableVertexAttribArray
+#define glDisableVertexAttribArray(index) GL_VERIFY(GLEW_ORIGINAL(DisableVertexAttribArray)(index))
+
+#define glDisable(cap) GL_VERIFY(glDisable(cap))
+
 namespace Libraries
 {
 	// wrapper class for OpenGL calls
