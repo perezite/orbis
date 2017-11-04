@@ -54,6 +54,22 @@ SDL_Surface * SDL_Verify(SDL_Surface * returnValue)
 	return returnValue;
 }
 
+SDL_Window* SDL_Verify(SDL_Window* returnValue)
+{
+	if (returnValue == NULL)
+		SDL_HandleError();
+
+	return returnValue;
+}
+
+SDL_GLContext SDL_Verify(SDL_GLContext returnValue)
+{
+	if (returnValue == NULL)
+		SDL_HandleError();
+
+	return returnValue;
+}
+
 SDL_Surface * IMG_Verify(SDL_Surface * returnValue)
 {
 	if (returnValue == NULL)

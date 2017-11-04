@@ -35,8 +35,8 @@ namespace Video
 	{
 		if (m_renderer)
 			delete m_renderer;
-		SDL::DestroyWindow(m_sdlWindow);
-		SDL::Quit();
+		SDL_DestroyWindow(m_sdlWindow);
+		SDL_Quit();
 	}
 
 	RenderDevice* VideoManager::GetRenderer()
@@ -49,8 +49,8 @@ namespace Video
 
 	void VideoManager::ClearScreen()
 	{
-		GL::ClearColor(0.95f, 0.95f, 0.95f, 1.0f);
-		GL::Clear(GL_COLOR_BUFFER_BIT);
+		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void VideoManager::SwapBuffers()

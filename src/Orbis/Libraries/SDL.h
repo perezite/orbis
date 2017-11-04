@@ -24,6 +24,10 @@ SDL_RWops* SDL_Verify(SDL_RWops* returnValue);
 
 SDL_Surface* SDL_Verify(SDL_Surface* returnValue);
 
+SDL_Window* SDL_Verify(SDL_Window* returnValue);
+
+SDL_GLContext SDL_Verify(SDL_GLContext  returnValue);
+
 SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
 
 #undef SDL_RWFromFile
@@ -44,6 +48,14 @@ SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
 #define SDL_LockSurface(surface) SDL_Verify(SDL_LockSurface(surface))
 
 #define SDL_ConvertSurfaceFormat(src, pixel_format, flags) SDL_Verify(SDL_ConvertSurfaceFormat(src, pixel_format, flags))
+
+#define SDL_GL_SetAttribute(attr, value) SDL_Verify(SDL_GL_SetAttribute(attr, value))
+
+#define SDL_CreateWindow(title, x, y, w, h, flags) SDL_Verify(SDL_CreateWindow(title, x, y, w, h, flags))
+
+#define SDL_GL_CreateContext(window) SDL_Verify(SDL_GL_CreateContext(window))
+
+#define SDL_GetDisplayMode(displayIndex, modeIndex, mode) SDL_Verify(SDL_GetDisplayMode(displayIndex, modeIndex, mode))
 
 #define IMG_Load(path) IMG_Verify(IMG_Load(path))
 

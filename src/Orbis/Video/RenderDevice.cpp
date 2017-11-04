@@ -138,7 +138,7 @@ namespace Video
 
 		// setup textures
 		glBindTexture(GL_TEXTURE_2D, gTexture);
-		GL::ActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0);
 
 		// setup shader
 		shader->Use();

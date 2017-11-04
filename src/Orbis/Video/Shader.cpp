@@ -5,7 +5,6 @@
 #include "../Core/AssetHelper.h"
 #include "../Libraries/GL.h"
 using namespace Core;
-using namespace Libraries;
 
 #include "../../Base/System/Exception.h"
 using namespace System;
@@ -114,7 +113,7 @@ namespace Video
 
 	Shader::~Shader()
 	{
-		GL::DeleteProgram(programId);
+		glDeleteProgram(programId);
 	}
 
 	int Shader::GetPositionAttributeHandle()
