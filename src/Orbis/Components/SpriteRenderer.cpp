@@ -25,8 +25,6 @@ namespace Components
 
 	void SpriteRenderer::Start()
 	{
-		throw Exception("test");
-
 		RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
 
 		std::vector<Vector2D> vertices = { Vector2D(-0.3f, -0.3f), Vector2D(0.3f, -0.3f), Vector2D(-0.3f, 0.3f), Vector2D(0.3f, 0.3f) };

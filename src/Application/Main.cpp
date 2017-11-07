@@ -32,12 +32,12 @@ int main(int argc, char* args[])
 	catch (Exception e)
 	{
 		LogHelper::LogMessage("%.1023s", e.what().c_str());
-		LogHelper::ShowMessageBox(e.what(), "Exception");
 
 		#if defined(_DEBUG)
-			throw e;
+				throw e;
 		#endif
 
+		LogHelper::ShowMessageBox(e.what(), "Exception");
 		exit(0);
 	}
 
