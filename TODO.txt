@@ -1,5 +1,4 @@
 TODO:
-- Rausfinden, wieso in der Sandbox bei einer Exception der Stacktrace unvollständig ist
 - Performance-Metrik einbauen (zB. FPS oder Triangle-Count)
 - Debugging-Ordner mit globalen Debug-Settings einbauen
 - Header-Includes anpassen

@@ -10,7 +10,9 @@ using namespace Video;
 using namespace Game;
 
 #include "..\..\Base\Math\MathHelper.h"
+#include "..\..\Base\System\Exception.h"
 using namespace Math;
+using namespace System;
 
 #include <math.h>
 #include <iostream>
@@ -23,6 +25,8 @@ namespace Components
 
 	void SpriteRenderer::Start()
 	{
+		throw Exception("test");
+
 		RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
 
 		std::vector<Vector2D> vertices = { Vector2D(-0.3f, -0.3f), Vector2D(0.3f, -0.3f), Vector2D(-0.3f, 0.3f), Vector2D(0.3f, 0.3f) };

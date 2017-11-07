@@ -33,6 +33,11 @@ int main(int argc, char* args[])
 	{
 		LogHelper::LogMessage("%.1023s", e.what().c_str());
 		LogHelper::ShowMessageBox(e.what(), "Exception");
+
+		#if defined(_DEBUG)
+			throw e;
+		#endif
+
 		exit(0);
 	}
 
