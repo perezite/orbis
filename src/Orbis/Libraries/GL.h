@@ -1,7 +1,6 @@
 #pragma once
 
-// only set this define for diagnosing opengl errors, do not use in release mode because it degrades performance severely
-// #define GL_DIAGNOSTICS 
+#include "../Settings/Settings.h"
 
 #ifdef __ANDROID__
 	#include <GLES2/gl2.h>	
@@ -15,7 +14,7 @@
 
 void GL_dummy();
 
-#if defined(GL_DIAGNOSTICS)
+#if defined(ORBIS_DEBUG_GL)
 
 	void GL_Verify();
 

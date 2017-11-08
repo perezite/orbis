@@ -4,6 +4,7 @@
 #include "../Core/LogHelper.h"
 #include "../Libraries/SDL.h"
 #include "../Game/LevelManager.h"
+#include "../Settings/Settings.h"
 using namespace Core;
 using namespace Game;
 
@@ -17,13 +18,16 @@ namespace Orbis
 
 	void OrbisMain::Run()
 	{
-		long numFrames = 0;
-		bool done = false;
 		SDL_Event event;
 		LevelManager* levelManager = LevelManager::GetInstance();
-		TimeManager* timeManager = TimeManager::GetInstance();
+		bool done = false;
 
-		long start = TimeManager::GetInstance()->GetTicks();
+		#if defined (ORBIS_LOG_PERFORMANCE)
+			TimeManager* timeManager = TimeManager::GetInstance();
+			long start = timeManager->GetTicks();
+			long numFrames = 0;
+		#endif	
+
 		while (!done)
 		{
 			while (SDL_PollEvent(&event))
@@ -36,7 +40,7 @@ namespace Orbis
 
 			levelManager->Heartbeat();
 
-			#if defined(_DEBUG)
+			#if defined(ORBIS_LOG_PERFORMANCE)
 				numFrames++;
 				if (timeManager->GetTicks() - start > 1000)
 				{

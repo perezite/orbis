@@ -42,6 +42,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\GL.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\SDL.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis\OrbisMain.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Settings\Settings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderMode.h" />

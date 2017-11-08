@@ -19,6 +19,9 @@
     <Filter Include="Libraries">
       <UniqueIdentifier>{101917fe-2a5c-4398-8bdc-d04bfc661aef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Settings">
+      <UniqueIdentifier>{9b94b6f8-85b9-479e-a608-09c18396fe30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.cpp">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\SDL.h">
       <Filter>Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Settings\Settings.h">
+      <Filter>Settings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

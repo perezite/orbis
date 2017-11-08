@@ -9,7 +9,7 @@ void GL_dummy()
 	return;
 }
 
-#if defined(GL_DIAGNOSTICS)
+#if defined(ORBIS_DEBUG_GL)
 
 void GL_Verify(void)
 	{

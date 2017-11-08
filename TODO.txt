@@ -1,5 +1,5 @@
 TODO:
-- Debugging-Ordner mit globalen Debug-Settings einbauen
+- File mit globalen Settings einbauen und gleich Debugging-Settings und Exception-Settings hinzufügen
 - Header-Includes anpassen
 - Kamera extrahieren
 - Bildverzerrung bei nicht-quadratischer Auflösung fixen
