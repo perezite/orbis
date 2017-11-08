@@ -17,6 +17,9 @@ namespace Core
 		// get the seconds elapsed since the last frame
 		float GetDeltaSeconds();
 
+		// get the current time in seconds
+		long GetTicks();
+
 	protected:
 		// singleton ctor
 		TimeManager();

@@ -26,6 +26,11 @@ namespace Core
 		return (m_currentTicks - m_lastTicks) / 1000.0f;
 	}
 
+	long TimeManager::GetTicks()
+	{
+		return SDL_GetTicks();
+	}
+
 	TimeManager::TimeManager()
 	{
 		m_lastTicks = SDL_GetTicks();

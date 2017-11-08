@@ -8,11 +8,14 @@ namespace Core
 {
 	void LogHelper::LogMessage(const char* fmt, ...)
 	{
+		static char buf[1024];
 		va_list args; 
 
 		va_start(args, fmt);
-			SDL_Log(fmt, args);	
+			vsnprintf(buf, 1024, fmt, args);
+			SDL_Log("%s", buf);	
 		va_end(args);
+
 	}
 
 	void LogHelper::ShowMessageBox(std::string message, std::string title)

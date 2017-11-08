@@ -1,5 +1,4 @@
 TODO:
-- Performance-Metrik einbauen (zB. FPS oder Triangle-Count)
 - Debugging-Ordner mit globalen Debug-Settings einbauen
 - Header-Includes anpassen
 - Kamera extrahieren
