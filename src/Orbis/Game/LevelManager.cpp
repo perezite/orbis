@@ -3,7 +3,7 @@
 #include "../Core/TimeManager.h"
 using namespace Core;
 
-#include "..\..\Base\System\Exception.h"
+#include "../../Base/System/Exception.h"
 using namespace System;
 
 #include <iostream>

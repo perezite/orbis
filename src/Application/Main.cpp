@@ -6,11 +6,10 @@ using namespace Levels;
 #include "../Orbis/Orbis/OrbisMain.h"
 #include "../Orbis/Core/LogHelper.h"
 #include "../Orbis/Game/LevelManager.h"
+#include "../Base/System/Exception.h"
 using namespace Orbis;
 using namespace Core;
 using namespace Game;
-
-#include "../Base/System/Exception.h"
 using namespace System;
 
 #include <iostream>

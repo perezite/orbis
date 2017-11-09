@@ -2,10 +2,10 @@
 
 #include "Transform.h"
 
-#include "..\Components\Component.h"
+#include "../Components/Component.h"
 using namespace Components;
 
-#include "..\..\Base\Math\Vector2D.h"
+#include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
 #include <vector>

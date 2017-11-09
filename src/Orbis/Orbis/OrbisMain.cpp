@@ -2,8 +2,8 @@
 
 #include "../Core/TimeManager.h"
 #include "../Core/LogHelper.h"
-#include "../Libraries/SDL.h"
 #include "../Game/LevelManager.h"
+#include "../Libraries/SDL.h"
 #include "../Settings/Settings.h"
 using namespace Core;
 using namespace Game;

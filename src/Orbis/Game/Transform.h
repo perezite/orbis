@@ -1,7 +1,7 @@
 #pragma once
 
-#include "..\..\Base\Math\Vector2D.h"
-#include "..\..\Base\Math\Matrix4.h"
+#include "../../Base/Math/Vector2D.h"
+#include "../../Base/Math/Matrix4.h"
 using namespace Math;
 
 namespace Game

@@ -1,6 +1,6 @@
 #include "Level.h"
 
-#include "..\Video\VideoManager.h"
+#include "../Video/VideoManager.h"
 using namespace Video;
 
 namespace Game

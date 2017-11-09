@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\Game\Entity.h"
+#include "../Game/Entity.h"
 using namespace Game;
 
 #include <vector>

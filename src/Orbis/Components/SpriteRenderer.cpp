@@ -1,16 +1,14 @@
 #include "SpriteRenderer.h"
 
-#include "..\Core\TimeManager.h"
+#include "../Core\TimeManager.h"
+#include "../Video/VideoManager.h"
+#include "../Game/Entity.h"
 using namespace Core;
-
-#include "..\Video\VideoManager.h"
 using namespace Video;
-
-#include "..\Game\Entity.h"
 using namespace Game;
 
-#include "..\..\Base\Math\MathHelper.h"
-#include "..\..\Base\System\Exception.h"
+#include "../../Base/Math/MathHelper.h"
+#include "../../Base/System/Exception.h"
 using namespace Math;
 using namespace System;
 

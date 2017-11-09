@@ -3,19 +3,9 @@
 #ifdef __SANDBOX__
 
 #include "../../Orbis/Core/LogHelper.h"
+#include "../../Orbis/Libraries/GL.h"
+#include "../../Orbis/Libraries/SDL.h"
 using namespace Core;
-
-#include <SDL2\SDL.h>
-#include <SDL2\SDL_image.h>
-#ifdef WIN32
-	#include <gl\glew.h>
-	#include <SDL2\SDL_opengl.h>
-	#include <gl\glu.h>
-#endif
-#ifdef __ANDROID__
-	#include <GLES2/gl2.h>
-	#include <GLES2/gl2ext.h>
-#endif 
 
 #include <stdio.h>
 #include <string>
@@ -27,8 +17,8 @@ void render();
 void close();
 
 #ifdef WIN32
-const int SCREEN_WIDTH = 400;
-const int SCREEN_HEIGHT = 400;
+	const int SCREEN_WIDTH = 400;
+	const int SCREEN_HEIGHT = 400;
 #endif
 
 void test(float a, float b, float c, float d)
@@ -45,7 +35,7 @@ void test(float a, float b, float c, float d)
 			(call)										\
 		) 
 #else
-#define GL_DEBUG_CALL(call) (call);
+	#define GL_DEBUG_CALL(call) (call);
 #endif
 
 // redefine an openGL call
