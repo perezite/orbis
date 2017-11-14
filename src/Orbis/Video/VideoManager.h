@@ -19,7 +19,7 @@ namespace Video
 		virtual ~VideoManager();
 
 		// get the render device
-		RenderDevice* GetRenderer();
+		RenderDevice* GetRenderDevice();
 
 		// clear the screen
 		void ClearScreen();

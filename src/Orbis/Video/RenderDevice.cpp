@@ -7,7 +7,9 @@ using namespace Video;
 #include "../Core/LogHelper.h"
 #include "../Libraries/SDL.h"
 #include "../Libraries/GL.h"
+#include "../Components/Camera.h"
 using namespace Core;
+using namespace Components;
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/Math/Matrix4.h"
@@ -144,7 +146,8 @@ namespace Video
 		glEnableVertexAttribArray(shader->GetPositionAttributeHandle());
 		glEnableVertexAttribArray(shader->GetTexCoordAttributeHandle());
 		shader->SetSamplerUniform(0);
-		shader->SetTransformUniform(transform->GetMatrix());
+		auto test = Camera::GetInverseTransform();
+		shader->SetTransformUniform(Camera::GetInverseTransform() * transform->GetMatrix());
 
 		// setup data
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);

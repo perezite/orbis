@@ -1,4 +1,5 @@
 TODO:
+- Matrix auf 2D umschreiben und eine Expand-Funktion für 4x4 Matrizen hinzufügen
 - Kamera extrahieren
 - Bildverzerrung bei nicht-quadratischer Auflösung fixen
 - Texture-Funktionalität extrahieren

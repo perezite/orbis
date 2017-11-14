@@ -23,23 +23,23 @@ namespace Components
 
 	void SpriteRenderer::Start()
 	{
-		RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
+		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
 
 		std::vector<Vector2D> vertices = { Vector2D(-0.3f, -0.3f), Vector2D(0.3f, -0.3f), Vector2D(-0.3f, 0.3f), Vector2D(0.3f, 0.3f) };
 		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) };
 		std::vector<int> indices = { 0, 1, 2, 1, 3, 2 };
-		renderer->AddGeometry(vertices, texCoords, indices);
+		renderDevice->AddGeometry(vertices, texCoords, indices);
 	}
 
 	void SpriteRenderer::Render()
 	{
-		RenderDevice* renderer = VideoManager::GetInstance()->GetRenderer();
+		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
 		static const float omega = MathHelper::GetPi();
 
 		Transform* transform = GetParent()->GetTransform();
 		float alpha = transform->GetRotation();
 		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
 
-		renderer->Render(GetParent()->GetTransform());
+		renderDevice->Render(GetParent()->GetTransform());
 	}
 }

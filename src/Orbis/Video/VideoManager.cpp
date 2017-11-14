@@ -38,7 +38,7 @@ namespace Video
 		SDL_Quit();
 	}
 
-	RenderDevice* VideoManager::GetRenderer()
+	RenderDevice* VideoManager::GetRenderDevice()
 	{
 		if (m_renderer == NULL)
 			m_renderer = new RenderDevice();

@@ -47,6 +47,14 @@ namespace Math
 			0.0f, 0.0f, 0.0f, 1.0f);
 	}
 
+	void Matrix4::Translate2D(Vector2D trans)
+	{
+		*this *= Matrix4(1.0f, 0.0f, 0.0f, trans.GetX(),
+			0.0f, 1.0f, 0.0f, trans.GetY(),
+			0.0f, 0.0f, 1.0f, 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f);
+	}
+
 	Matrix4 Matrix4::operator*(const Matrix4 & other) const
 	{
 		Matrix4 result;

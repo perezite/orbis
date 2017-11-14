@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector2D.h"
+
 namespace Math
 {
 	class Matrix4 
@@ -29,10 +31,13 @@ namespace Math
 		// apply a 2D-rotation in radians
 		void Rotate2D(float radians);
 
+		// apply a 2D-translation
+		void Translate2D(Vector2D trans);
+
 		// multiply
 		Matrix4 operator*(const Matrix4& other) const;
 
-		// mutliply
+		// multiply
 		const Matrix4& operator*=(const Matrix4 &other);
 
 	private: 
