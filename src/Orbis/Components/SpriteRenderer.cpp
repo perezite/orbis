@@ -34,12 +34,6 @@ namespace Components
 	void SpriteRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		static const float omega = MathHelper::GetPi();
-
-		Transform* transform = GetParent()->GetTransform();
-		float alpha = transform->GetRotation();
-		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
-
 		renderDevice->Render(GetParent()->GetTransform());
 	}
 }

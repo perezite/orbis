@@ -38,7 +38,7 @@ namespace Game
 		void SetScale(Vector2D scale) { m_scale = scale; }
 
 		// get the transformation matrix
-		Matrix4 GetMatrix() const;
+		Matrix3 GetMatrix() const;
 
 	private:
 		// position

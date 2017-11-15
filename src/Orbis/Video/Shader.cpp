@@ -126,10 +126,11 @@ namespace Video
 		return texCoordAttributeHandle;
 	}
 
-	void Shader::SetTransformUniform(const Matrix4& mat)
+	void Shader::SetTransformUniform(const Matrix3& mat)
 	{
-		Matrix4 transposed = mat.Transposed();
-		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, transposed.GetValues());
+		Matrix4 trans = Matrix4::From2DTransform(mat);
+		Matrix4 finalTransform = trans.Transposed();
+		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, finalTransform.GetValues());
 	}
 
 	void Shader::SetSamplerUniform(int sampler)

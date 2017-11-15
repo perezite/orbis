@@ -2,10 +2,14 @@
 
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
+#include "../Core/TimeManager.h"
 using namespace Game;
+using namespace Core;
 
 #include "../../Base/System/Exception.h"
+#include "../../Base/Math/MathHelper.h"
 using namespace System;
+using namespace Math;
 
 namespace
 {
@@ -36,10 +40,10 @@ namespace Components
 		instance = NULL;
 	}
 
-	Matrix4 Camera::GetInverseTransform()
+	Matrix3 Camera::GetInverseTransform()
 	{
 		Transform* transform = GetInstance()->GetParent()->GetTransform();
-		Matrix4 invTransform;
+		Matrix3 invTransform;
 		invTransform.Rotate2D(-transform->GetRotation());
 		invTransform.Translate2D(-transform->GetPosition());
 		return invTransform;
