@@ -27,6 +27,9 @@ namespace Video
 		// swap the video buffers
 		void SwapBuffers();
 
+		// get the orthographic project matrix 
+		Matrix4 GetOrthographicProjectionMatrix();
+
 	protected:
 		// singleton constructor
 		VideoManager();

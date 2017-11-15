@@ -128,9 +128,12 @@ namespace Video
 
 	void Shader::SetTransformUniform(const Matrix3& mat)
 	{
-		Matrix4 trans = Matrix4::From2DTransform(mat);
-		Matrix4 finalTransform = trans.Transposed();
-		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, finalTransform.GetValues());
+		Matrix4 mvMatrix = Matrix4::From2DTransform(mat);		// model view matrix
+		Matrix4 projectionMatrix = 
+			VideoManager::GetInstance()->GetOrthographicProjectionMatrix();
+		Matrix4 mvpMatrix = projectionMatrix * mvMatrix;		// model view projection matrixs
+		Matrix4 finalMatrix = mvpMatrix.Transposed();
+		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, finalMatrix.GetValues());
 	}
 
 	void Shader::SetSamplerUniform(int sampler)

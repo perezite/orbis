@@ -1,5 +1,4 @@
 TODO:
-- SpriteRenderer Bewegung und Kamera-Bewegung extrahieren
 - Bildverzerrung bei nicht-quadratischer Auflösung fixen
 - Texture-Funktionalität extrahieren
 - Event-System extrahieren

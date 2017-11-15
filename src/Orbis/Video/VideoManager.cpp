@@ -15,7 +15,7 @@ using namespace System;
 
 namespace Video
 {
-	const Vector2D VideoManager::m_DefaultWindowResolution(400.0f, 400.0f);
+	const Vector2D VideoManager::m_DefaultWindowResolution(400.0f, 711.0f);
 
 	VideoManager* VideoManager::GetInstance()
 	{
@@ -57,6 +57,17 @@ namespace Video
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
+	// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
+	Matrix4 VideoManager::GetOrthographicProjectionMatrix()
+	{
+		Matrix4 mat(1.0f, 0.0f, 0.0f, 0.0f,
+			0.0f, 9.0f / 16.0f, 0.0f, 0.0f,
+			0.0f, 0.0f, 1.0f, 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f);
+
+		return mat;
+	}
+
 	void VideoManager::InitializeVideo()
 	{
 		SDL_Init(SDL_INIT_VIDEO);
@@ -86,7 +97,6 @@ namespace Video
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
-
 	}
 
 	Vector2D VideoManager::GetDefaultWindowResolution()
