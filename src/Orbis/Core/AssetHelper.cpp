@@ -18,15 +18,15 @@ namespace
 			return "";
 		#endif
 	}
-
-	std::string AssetPathToFilePath(std::string assetPath)
-	{
-		return EnvironmentHelper::CombinePath({ GetAssetFolderPath(), assetPath });
-	}
 }
 
 namespace Core
 {
+	std::string AssetHelper::AssetPathToFilePath(std::string assetPath)
+	{
+		return EnvironmentHelper::CombinePath({ GetAssetFolderPath(), assetPath });
+	}
+
 	std::string AssetHelper::LoadTextAsset(std::string assetPath)
 	{
 		std::string filePath = AssetPathToFilePath(assetPath);

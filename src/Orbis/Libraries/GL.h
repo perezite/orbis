@@ -129,6 +129,8 @@ void GL_dummy();
 
 	#define glViewport(x, y, width, height) GL_VERIFY(glViewport(x, y, width, height))
 
+	#define glDeleteTextures(n, textures) GL_VERIFY(glDeleteTextures(n, textures))
+
 	#if defined(WIN32)
 		#define glewInit() GLEW_Verify(glewInit()) 
 	#endif

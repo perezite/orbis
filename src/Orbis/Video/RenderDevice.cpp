@@ -2,6 +2,7 @@
 
 #include "VideoManager.h"
 #include "Shader.h"
+#include "Texture.h"
 using namespace Video;
 
 #include "../Core/LogHelper.h"
@@ -27,68 +28,8 @@ namespace
 	// the shader
 	Shader* shader;
 
-	// the texture handle
-	GLuint gTexture = 0;
-
-	// flip an SDL surface
-	SDL_Surface* GetFlippedSDLSurface(SDL_Surface* surface)
-	{
-		SDL_Surface *flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel,
-			surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
-
-		// lock
-		if (SDL_MUSTLOCK(surface))
-			SDL_LockSurface(surface);
-		if (SDL_MUSTLOCK(flipped))
-			SDL_LockSurface(flipped);
-
-		// copy flipped
-		for (int row = surface->h - 1; row >= 0; row--)
-		{
-			for (int col = 0; col < surface->w; col++)
-			{
-				size_t sourceOffset = row * surface->w + col;
-				size_t sourceOffsetBytes = sourceOffset * surface->format->BytesPerPixel;
-				size_t destOffset = (surface->h - row - 1) * surface->w + col;
-				size_t destOffsetBytes = destOffset * surface->format->BytesPerPixel;
-
-				memcpy((char*)flipped->pixels + destOffsetBytes, (char*)surface->pixels + sourceOffsetBytes, surface->format->BytesPerPixel);
-			}
-		}
-
-		// unlock
-		if (SDL_MUSTLOCK(surface))
-			SDL_UnlockSurface(surface);
-		if (SDL_MUSTLOCK(flipped))
-			SDL_UnlockSurface(flipped);
-
-		return flipped;
-	}
-
-	int LoadTexture(std::string filePath, bool flipVertically = false)
-	{
-		SDL_Surface* img = IMG_Load(filePath.c_str());
-		SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
-		SDL_FreeSurface(img);
-		img = img2;
-
-		if (flipVertically)
-		{
-			SDL_Surface* flipped = GetFlippedSDLSurface(img);
-			SDL_FreeSurface(img);
-			img = flipped;
-		}
-
-		unsigned int texture;
-		glGenTextures(1, &texture);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-		SDL_FreeSurface(img);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-		return texture;
-	}
+	// the texture 
+	Texture* texture;
 }
 
 namespace Video
@@ -96,6 +37,7 @@ namespace Video
 	RenderDevice::RenderDevice()
 	{
 		shader = new Shader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
+		texture = new Texture("Textures/TestTransparent.png");
 
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 
@@ -119,14 +61,6 @@ namespace Video
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
-
-
-		#ifdef WIN32 
-			gTexture = LoadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\Textures\\TestTransparent.png", true);
-		#endif
-		#ifdef __ANDROID__
-			gTexture = LoadTexture("Textures/TestTransparent.png");
-		#endif
 	}
 
 	void RenderDevice::Render(Transform* transform)
@@ -138,7 +72,7 @@ namespace Video
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// setup textures
-		glBindTexture(GL_TEXTURE_2D, gTexture);
+		glBindTexture(GL_TEXTURE_2D, texture->GetTextureHandle());
 		glActiveTexture(GL_TEXTURE0);
 
 		// setup shader
@@ -160,7 +94,6 @@ namespace Video
 		// cleanup
 		glDisableVertexAttribArray(shader->GetTexCoordAttributeHandle());
 		glDisableVertexAttribArray(shader->GetPositionAttributeHandle());
-		glBindTexture(GL_TEXTURE_2D, 0);
 		glDisable(GL_BLEND);
 		shader->Unuse();
 	}
