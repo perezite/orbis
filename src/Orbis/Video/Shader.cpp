@@ -4,7 +4,9 @@
 
 #include "../Core/AssetHelper.h"
 #include "../Libraries/GL.h"
+#include "../Components/Camera.h"
 using namespace Core;
+using namespace Components;
 
 #include "../../Base/System/Exception.h"
 using namespace System;
@@ -126,12 +128,10 @@ namespace Video
 		return texCoordAttributeHandle;
 	}
 
-	void Shader::SetTransformUniform(const Matrix3& mat)
+	void Shader::SetModelViewMatrix(const Matrix3& mat)
 	{
-		Matrix4 mvMatrix = Matrix4::From2DTransform(mat);		// model view matrix
-		Matrix4 projectionMatrix = 
-			VideoManager::GetInstance()->GetOrthographicProjectionMatrix();
-		Matrix4 mvpMatrix = projectionMatrix * mvMatrix;		// model view projection matrixs
+		Matrix4 modelViewMatrix = Matrix4::From2DTransform(mat);		
+		Matrix4 mvpMatrix = Camera::GetProjectionMatrix() * modelViewMatrix;		
 		Matrix4 finalMatrix = mvpMatrix.Transposed();
 		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, finalMatrix.GetValues());
 	}

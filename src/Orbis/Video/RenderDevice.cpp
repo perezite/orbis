@@ -125,7 +125,7 @@ namespace Video
 			gTexture = LoadTexture("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Assets\\Textures\\TestTransparent.png", true);
 		#endif
 		#ifdef __ANDROID__
-			gTexture = LoadTexture("Textures/TestTransparent.png", true);
+			gTexture = LoadTexture("Textures/TestTransparent.png");
 		#endif
 	}
 
@@ -146,8 +146,7 @@ namespace Video
 		glEnableVertexAttribArray(shader->GetPositionAttributeHandle());
 		glEnableVertexAttribArray(shader->GetTexCoordAttributeHandle());
 		shader->SetSamplerUniform(0);
-		auto test = Camera::GetInverseTransform();
-		shader->SetTransformUniform(Camera::GetInverseTransform() * transform->GetMatrix());
+		shader->SetModelViewMatrix(Camera::GetViewMatrix() * transform->GetMatrix());
 
 		// setup data
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);

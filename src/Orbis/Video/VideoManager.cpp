@@ -57,17 +57,6 @@ namespace Video
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
-	// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
-	Matrix4 VideoManager::GetOrthographicProjectionMatrix()
-	{
-		Matrix4 mat(1.0f, 0.0f, 0.0f, 0.0f,
-			0.0f, 9.0f / 16.0f, 0.0f, 0.0f,
-			0.0f, 0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, 1.0f);
-
-		return mat;
-	}
-
 	void VideoManager::InitializeVideo()
 	{
 		SDL_Init(SDL_INIT_VIDEO);

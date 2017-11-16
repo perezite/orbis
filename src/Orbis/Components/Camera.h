@@ -17,7 +17,10 @@ namespace Components
 		// dtor
 		virtual ~Camera();
 
-		// get the inverse camera transform matrix (the inverse of the transform of the parent entity) 
-		static Matrix3 GetInverseTransform();
+		// get the view matrix (the inverse of the transform of the parent entity) 
+		static Matrix3 GetViewMatrix();
+
+		// get the orthographic projection matrix
+		static Matrix4 GetProjectionMatrix();
 	};
 }

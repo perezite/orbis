@@ -13,7 +13,7 @@ namespace Controllers
 {
 	void CameraController::Update()
 	{
-		static const float omega = -MathHelper::GetPi() / 8.0f;
+		static const float omega = MathHelper::GetPi() / 8.0f;
 
 		Transform* transform = GetParent()->GetTransform();
 		float alpha = transform->GetRotation();

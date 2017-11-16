@@ -18,6 +18,9 @@ namespace Video
 		// destructor
 		virtual ~VideoManager();
 
+		// get the resolution
+		Vector2D GetResolution() { return m_windowResolution; }
+
 		// get the render device
 		RenderDevice* GetRenderDevice();
 
@@ -26,9 +29,6 @@ namespace Video
 
 		// swap the video buffers
 		void SwapBuffers();
-
-		// get the orthographic project matrix 
-		Matrix4 GetOrthographicProjectionMatrix();
 
 	protected:
 		// singleton constructor

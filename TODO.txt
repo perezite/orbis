@@ -1,8 +1,7 @@
 TODO:
+- Texture extrahieren
 - Sprite mit aufgezeichnetem Koordinatensystem einfügen
-- Bildverzerrung bei nicht-quadratischer Auflösung fixen
-- Texture-Funktionalität extrahieren
-- Event-System extrahieren
+- Events extrahieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen
