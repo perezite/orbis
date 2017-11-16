@@ -1,4 +1,5 @@
 TODO:
+- Sprite mit aufgezeichnetem Koordinatensystem einfügen
 - Bildverzerrung bei nicht-quadratischer Auflösung fixen
 - Texture-Funktionalität extrahieren
 - Event-System extrahieren
