@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Packaging.Windows", "Packaging\Windows\Packaging.Windows.vcxproj", "{97C2A5E5-4AF0-4B5E-83DA-48505247E667}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{AEA2BFC2-2BB1-4544-89CF-885471D2995B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{3BBBCD76-8C98-4CF6-8F65-682D0E5205A8}"
@@ -24,8 +26,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base.Windows", "Platform\Windows\Base\Base.Windows.vcxproj", "{91AF648C-1A05-4275-9C88-EB82C74D1DD0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application.Windows", "Platform\Windows\Application\Application.Windows.vcxproj", "{0C624D38-FC5F-49A0-846B-EE5B7B1EBAB9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Packaging.Windows", "Packaging\Windows\Packaging.Windows.vcxproj", "{97C2A5E5-4AF0-4B5E-83DA-48505247E667}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Orbis", "projects\Orbis\Orbis.vcxitems", "{0527DFEE-E806-4CDC-B2EA-6809BA2E081E}"
 EndProject
