@@ -35,6 +35,7 @@ namespace Game
 		else
 		{
 			UpdateEntities();
+			VideoManager::GetInstance()->ClearScreen();
 			RenderEntities();
 		}
 	}

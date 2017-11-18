@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Libraries/GL.h"
+#include "../Libraries/SDL.h"
 
 #include <string>
 
@@ -10,7 +11,7 @@ namespace Video
 	{
 	public:
 		// ctor
-		Texture(std::string filePath, bool flipVertically = true);
+		Texture(std::string assetPath, bool flipVertically = true);
 
 		// dtor
 		virtual ~Texture();
@@ -24,5 +25,8 @@ namespace Video
 	private:
 		// the texture id
 		GLuint m_textureHandle;
+
+		// the image surface
+		SDL_Surface* m_surface;
 	};
 }

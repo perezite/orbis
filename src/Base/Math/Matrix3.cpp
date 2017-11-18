@@ -50,6 +50,13 @@ namespace Math
 			0.0f, 0.0f, 1.0f);
 	}
 
+	void Matrix3::Scale2D(Vector2D scale)
+	{
+		*this *= Matrix3(scale.GetX(), 0.0f, 0.0f,
+			0.0f, scale.GetY(), 0.0f,
+			0.0f, 0.0f, 1.0f);
+	}
+
 	Matrix3 Matrix3::operator*(const Matrix3 & other) const
 	{
 		Matrix3 result;

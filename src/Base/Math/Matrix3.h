@@ -33,6 +33,9 @@ namespace Math
 		// apply a 2D-translation
 		void Translate2D(Vector2D trans);
 
+		// apply a 2D-scaling
+		void Scale2D(Vector2D scale);
+
 		// multiply
 		Matrix3 operator*(const Matrix3& other) const;
 

@@ -47,23 +47,22 @@ namespace Video
 	Texture::Texture(std::string assetPath, bool flipVertically)
 	{
 		std::string filePath = AssetHelper::AssetPathToFilePath(assetPath);
-		static SDL_Surface* img = IMG_Load(filePath.c_str());
-		SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
-		SDL_FreeSurface(img);
-		img = img2;
+		m_surface = IMG_Load(filePath.c_str());
+		SDL_Surface* surface2 = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
+		SDL_FreeSurface(m_surface);
+		m_surface = surface2;
 
 		if (flipVertically)
 		{
-			SDL_Surface* flipped = GetFlippedSDLSurface(img);
-			SDL_FreeSurface(img);
-			img = flipped;
+			SDL_Surface* flipped = GetFlippedSDLSurface(m_surface);
+			SDL_FreeSurface(m_surface);
+			m_surface = flipped;
 		}
 
-		m_textureHandle = 0;
 		glGenTextures(1, &m_textureHandle);
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
-		SDL_FreeSurface(img);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
+		SDL_FreeSurface(m_surface);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	}

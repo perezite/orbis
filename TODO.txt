@@ -1,5 +1,4 @@
 TODO:
-- Sprite mit aufgezeichnetem Koordinatensystem einfügen
 - Events extrahieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
