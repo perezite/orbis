@@ -19,11 +19,15 @@ namespace Components
 {
 	SpriteRenderer::~SpriteRenderer()
 	{
+		if (m_texture)
+			delete m_texture;
 	}
 
 	void SpriteRenderer::Start()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
+
+		m_texture = new Texture(m_textureAssetPath, true);
 
 		std::vector<Vector2D> vertices = { Vector2D(-0.15f, -0.15f), Vector2D(0.15f, -0.15f), Vector2D(-0.15f, 0.15f), Vector2D(0.15f, 0.15f) };
 		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) };
@@ -34,6 +38,6 @@ namespace Components
 	void SpriteRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(GetParent()->GetTransform());
+		renderDevice->Render(GetParent()->GetTransform(), m_texture);
 	}
 }

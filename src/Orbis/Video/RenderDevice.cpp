@@ -27,9 +27,6 @@ namespace
 
 	// the shader
 	Shader* shader;
-
-	// the texture 
-	Texture* texture;
 }
 
 namespace Video
@@ -37,7 +34,6 @@ namespace Video
 	RenderDevice::RenderDevice()
 	{
 		shader = new Shader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
-		texture = new Texture("Textures/TestTransparent.png");
 
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 
@@ -63,7 +59,7 @@ namespace Video
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
 	}
 
-	void RenderDevice::Render(Transform* transform)
+	void RenderDevice::Render(Transform* transform, Texture* texture)
 	{
 		VideoManager::GetInstance()->ClearScreen();
 

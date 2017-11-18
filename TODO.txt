@@ -1,5 +1,4 @@
 TODO:
-- Texture extrahieren
 - Sprite mit aufgezeichnetem Koordinatensystem einfügen
 - Events extrahieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android

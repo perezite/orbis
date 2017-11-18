@@ -25,7 +25,7 @@ namespace Levels
 		// sprite entity
 		Entity* sprite = new Entity();
 		sprite->AddComponent(new SpriteController());
-		sprite->AddComponent(new SpriteRenderer());
+		sprite->AddComponent(new SpriteRenderer("Textures/TestTransparent.png"));
 		this->AddEntity(sprite);
 	}
 }

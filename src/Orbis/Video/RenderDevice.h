@@ -2,6 +2,7 @@
 
 #include "RenderMode.h"
 #include "Shader.h"
+#include "Texture.h"
 
 #include "../Game/Transform.h"
 using namespace Game;
@@ -26,7 +27,7 @@ namespace Video
 		void AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoordinates, std::vector<int> indices);
 
 		// render
-		void Render(Transform* transform);
+		void Render(Transform* transform, Texture* texture);
 
 	private:
 		// the vertices of the primitive
