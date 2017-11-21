@@ -1,5 +1,6 @@
 TODO:
-- Events extrahieren
+- Überprüfen, ob die Performance konstant schlechter geworden ist (war vorher ca 1.5 ms / frame) (dazu ca. 5 Commits früher wiederherstellen)
+- Kamera-Skalierung implementieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen

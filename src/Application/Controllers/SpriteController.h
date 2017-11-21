@@ -9,5 +9,10 @@ namespace Controllers
 	{
 	public:
 		void Update();
+
+		void SetOmega(float omega) { m_omega = omega; }
+
+	public: 
+		float m_omega; 
 	};
 }

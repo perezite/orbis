@@ -19,7 +19,7 @@ namespace Levels
 		Entity* camera = new Entity();
 		camera->AddComponent(new Camera());
 		camera->AddComponent(new CameraController());
-		camera->SetTransform(Transform(Vector2D(0.3f, 0.0f), 0.0f, Vector2D::One));
+		camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
 		this->AddEntity(camera);
 
 		// coordinate-system-sprite entity
@@ -29,9 +29,20 @@ namespace Levels
 
 		// sprite entity
 		Entity* sprite = new Entity("Sprite");
-		sprite->AddComponent(new SpriteController());
+		SpriteController* spriteController = new SpriteController();
+		spriteController->SetOmega(MathHelper::GetPi());
+		sprite->AddComponent(spriteController);
 		sprite->AddComponent(new SpriteRenderer("Textures/TestTransparent.png"));
 		sprite->SetTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(sprite);
+
+		// sprite entity
+		Entity* sprite2 = new Entity("Sprite2");
+		SpriteController* sprite2Controller = new SpriteController();
+		sprite2Controller->SetOmega(-MathHelper::GetPi() / 2.0f);
+		sprite2->AddComponent(sprite2Controller);
+		sprite2->AddComponent(new SpriteRenderer("Textures/TestTransparent2.png"));
+		sprite2->SetTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
+		this->AddEntity(sprite2);
 	}
 }

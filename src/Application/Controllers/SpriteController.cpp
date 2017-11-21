@@ -12,10 +12,8 @@ namespace Controllers
 {
 	void SpriteController::Update()
 	{
-		static const float omega = MathHelper::GetPi();
-
 		Transform* transform = GetParent()->GetTransform();
 		float alpha = transform->GetRotation();
-		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
+		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * m_omega);
 	}
 }
