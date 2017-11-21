@@ -3,10 +3,37 @@
 #include "../Core/TimeManager.h"
 #include "../Core/LogHelper.h"
 #include "../Game/LevelManager.h"
+#include "../Input/InputManager.h"
 #include "../Libraries/SDL.h"
 #include "../Settings/Settings.h"
 using namespace Core;
 using namespace Game;
+using namespace Input;
+
+namespace
+{
+	// start time of current performance log measurement
+	long start;
+
+	// number of frames elapsed since last performance log update
+	long numFrames;
+
+	// the time manager
+	TimeManager* timeManager = TimeManager::GetInstance();
+
+	#if defined(ORBIS_LOG_PERFORMANCE)
+		inline void LogPerformance()
+		{
+			numFrames++;
+			if (timeManager->GetTicks() - start > 1000)
+			{
+				LogHelper::LogMessage("%f ms/frame", 1000.0 / double(numFrames));
+				start += 1000;
+				numFrames = 0;
+			}
+		}
+	#endif
+}
 
 namespace Orbis
 {
@@ -18,36 +45,23 @@ namespace Orbis
 
 	void OrbisMain::Run()
 	{
-		SDL_Event event;
 		LevelManager* levelManager = LevelManager::GetInstance();
-		bool done = false;
+		InputManager* inputManager = InputManager::GetInstance();
 
-		#if defined (ORBIS_LOG_PERFORMANCE)
-			TimeManager* timeManager = TimeManager::GetInstance();
-			long start = timeManager->GetTicks();
-			long numFrames = 0;
-		#endif	
+		start = timeManager->GetTicks();
+		numFrames = 0;
 
-		while (!done)
+		while (true)
 		{
-			while (SDL_PollEvent(&event))
-			{
-				if (event.type == SDL_QUIT || event.type == SDL_FINGERDOWN)
-				{
-					done = true;
-				}
-			}
 
-			levelManager->Heartbeat();
+			inputManager->Update();
+			if (inputManager->HasQuitEvent())
+				break;
+
+			levelManager->Update();
 
 			#if defined(ORBIS_LOG_PERFORMANCE)
-				numFrames++;
-				if (timeManager->GetTicks() - start > 1000)
-				{
-					LogHelper::LogMessage("%f ms/frame", 1000.0 / double(numFrames));
-					start += 1000;
-					numFrames = 0;
-				}
+				LogPerformance();
 			#endif
 		}
 	}

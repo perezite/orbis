@@ -17,7 +17,7 @@ namespace Game
 		void QueueLevel(Level *level);
 
 		// update
-		void Heartbeat();
+		void Update();
 
 	protected:
 		// constructor

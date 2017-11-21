@@ -24,7 +24,7 @@ namespace Game
 		void AddEntity(Entity *entity);
 
 		// update 
-		void Heartbeat();
+		void Update();
 
 	protected:
 		// start the entities

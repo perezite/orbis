@@ -37,7 +37,7 @@ namespace Game
 			SwitchToQueuedLevel();
 	}
 
-	void LevelManager::Heartbeat()
+	void LevelManager::Update()
 	{
 		if (m_currentLevel == NULL)
 		{
@@ -45,7 +45,7 @@ namespace Game
 		}
 
 		TimeManager::GetInstance()->Update();
-		m_currentLevel->Heartbeat();
+		m_currentLevel->Update();
 
 		if (m_queuedLevel != NULL)
 		{

@@ -25,7 +25,7 @@ namespace Game
 		m_entities.push_back(entity);
 	}
 
-	void Level::Heartbeat()
+	void Level::Update()
 	{
 		if (m_isStarted == false)
 		{
