@@ -21,7 +21,8 @@ namespace Levels
 		Texture* coordSystemTexture = new Texture("Textures/CoordinateSystem.png");
 		Texture* yellowBlockTexture = new Texture("Textures/YellowBlock.png");
 		Texture* blueBlockTexture = new Texture("Textures/BlueBlock.png");
-		// Texture* inputStateYellowSpriteRotateLeft
+		Texture* inputStateYellowBlockRotateLeft = new Texture("Textures/InputStateYellowBlockRotateLeft.png");
+		Texture* inputStateYellowBlockRotateRight = new Texture("Textures/InputStateYellowBlockRotateRight.png");
 
 		// camera entity
 		Entity* camera = new Entity();
@@ -30,13 +31,13 @@ namespace Levels
 		camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
 		this->AddEntity(camera);
 
-		// coordinate-system-yellowBlock entity
-		Entity* coordSystem = new Entity("CoordinateSystem");
+		// coordinate system entity
+		Entity* coordSystem = new Entity("Coordinate System");
 		coordSystem->AddComponent(new SpriteRenderer(coordSystemTexture));
 		this->AddEntity(coordSystem);
 
-		// yellowBlock entity
-		Entity* yellowBlock = new Entity("Sprite");
+		// yellow block entity
+		Entity* yellowBlock = new Entity("Yellow Brick");
 		SpriteController* yellowBlockController = new SpriteController();
 		yellowBlockController->SetOmega(MathHelper::GetPi());
 		yellowBlock->AddComponent(yellowBlockController);
@@ -44,13 +45,19 @@ namespace Levels
 		yellowBlock->SetTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(yellowBlock);
 
-		// yellowBlock entity
-		Entity* blueBlock = new Entity("Sprite2");
+		// blue block entity
+		Entity* blueBlock = new Entity("Blue Brick");
 		SpriteController* blueBlockController = new SpriteController();
 		blueBlockController->SetOmega(-MathHelper::GetPi() / 2.0f);
 		blueBlock->AddComponent(blueBlockController);
 		blueBlock->AddComponent(new SpriteRenderer(blueBlockTexture));
 		blueBlock->SetTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
 		this->AddEntity(blueBlock);
+
+		// input mode display entity
+		Entity* inputModeDisplay = new Entity("InputModeDisplay");
+		inputModeDisplay->AddComponent(new SpriteRenderer(inputStateYellowBlockRotateLeft));
+		inputModeDisplay->SetTransform(Transform(Vector2D(-0.25f, -0.25f), 0.0f, Vector2D(0.25f, 0.25f)));
+		this->AddEntity(inputModeDisplay);
 	}
 }

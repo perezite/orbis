@@ -1,6 +1,7 @@
 TODO:
+- Texture Cleanup implementieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
-	- Sprite, welches die aktuelle Transformation anzeigt
+	- Entity, welches mittels Sprite die aktuelle Transformation anzeigt
 	- Tap-Input:
 		- Klick auf Sprite ändert den Transformations-Modus
 		- Tap links unten transformiert negativ
