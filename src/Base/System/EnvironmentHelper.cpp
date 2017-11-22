@@ -20,8 +20,7 @@ namespace System
 
 			// get executable file path
 			HMODULE hModule = GetModuleHandle(NULL);
-			if (hModule == NULL)
-				throw Exception("GetModuleHandle() failed");
+			Exception::Assert(hModule != NULL, "GetModuleHandle() failed");
 			GetModuleFileName(hModule, filePath, (sizeof(filePath)));
 
 			// get file path as string

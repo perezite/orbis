@@ -43,6 +43,11 @@ namespace Orbis
 		return &instance;
 	}
 
+	void OrbisMain::Initialize()
+	{
+		VideoManager::GetInstance()->Initialize();
+	}
+
 	void OrbisMain::Run()
 	{
 		LevelManager* levelManager = LevelManager::GetInstance();
@@ -53,7 +58,6 @@ namespace Orbis
 
 		while (true)
 		{
-
 			inputManager->Update();
 			if (inputManager->HasQuitEvent())
 				break;

@@ -4,6 +4,7 @@
 #include "../Libraries/SDL.h"
 
 #include <string>
+#include <set>
 
 namespace Video
 {
@@ -28,5 +29,14 @@ namespace Video
 
 		// the image surface
 		SDL_Surface* m_surface;
+
+		/*
+	public: 
+		// cleanup all textures
+		static void DeleteAll();
+
+	private:
+		// list of all surfaces
+		static std::set<SDL_Surface*> m_surfaces;*/
 	};
 }

@@ -6,15 +6,23 @@ using namespace Controllers;
 
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/Camera.h"
+#include "../../Orbis/Video/VideoManager.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
 using namespace Components;
 using namespace Math;
+using namespace Video;
 
 namespace Levels
 {
 	Level1::Level1()
 	{
+		// textures
+		Texture* coordSystemTexture = new Texture("Textures/CoordinateSystem.png");
+		Texture* yellowBlockTexture = new Texture("Textures/YellowBlock.png");
+		Texture* blueBlockTexture = new Texture("Textures/BlueBlock.png");
+		// Texture* inputStateYellowSpriteRotateLeft
+
 		// camera entity
 		Entity* camera = new Entity();
 		camera->AddComponent(new Camera());
@@ -22,27 +30,27 @@ namespace Levels
 		camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
 		this->AddEntity(camera);
 
-		// coordinate-system-sprite entity
-		Entity* coordinateSystem = new Entity("CoordinateSystem");
-		coordinateSystem->AddComponent(new SpriteRenderer("Textures/CoordinateSystem.png"));
-		this->AddEntity(coordinateSystem);
+		// coordinate-system-yellowBlock entity
+		Entity* coordSystem = new Entity("CoordinateSystem");
+		coordSystem->AddComponent(new SpriteRenderer(coordSystemTexture));
+		this->AddEntity(coordSystem);
 
-		// sprite entity
-		Entity* sprite = new Entity("Sprite");
-		SpriteController* spriteController = new SpriteController();
-		spriteController->SetOmega(MathHelper::GetPi());
-		sprite->AddComponent(spriteController);
-		sprite->AddComponent(new SpriteRenderer("Textures/TestTransparent.png"));
-		sprite->SetTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(sprite);
+		// yellowBlock entity
+		Entity* yellowBlock = new Entity("Sprite");
+		SpriteController* yellowBlockController = new SpriteController();
+		yellowBlockController->SetOmega(MathHelper::GetPi());
+		yellowBlock->AddComponent(yellowBlockController);
+		yellowBlock->AddComponent(new SpriteRenderer(yellowBlockTexture));
+		yellowBlock->SetTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
+		this->AddEntity(yellowBlock);
 
-		// sprite entity
-		Entity* sprite2 = new Entity("Sprite2");
-		SpriteController* sprite2Controller = new SpriteController();
-		sprite2Controller->SetOmega(-MathHelper::GetPi() / 2.0f);
-		sprite2->AddComponent(sprite2Controller);
-		sprite2->AddComponent(new SpriteRenderer("Textures/TestTransparent2.png"));
-		sprite2->SetTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
-		this->AddEntity(sprite2);
+		// yellowBlock entity
+		Entity* blueBlock = new Entity("Sprite2");
+		SpriteController* blueBlockController = new SpriteController();
+		blueBlockController->SetOmega(-MathHelper::GetPi() / 2.0f);
+		blueBlock->AddComponent(blueBlockController);
+		blueBlock->AddComponent(new SpriteRenderer(blueBlockTexture));
+		blueBlock->SetTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
+		this->AddEntity(blueBlock);
 	}
 }

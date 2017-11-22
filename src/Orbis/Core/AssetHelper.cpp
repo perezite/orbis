@@ -48,10 +48,8 @@ namespace Core
 		data[totalSize] = '\0';
 
 		// check
-		if (totalSize != fileSize) {
-			throw Exception("Could not load file '" + assetPath + "'");
-		}
-
+		Exception::Assert(totalSize == fileSize, "Could not load file '" + assetPath + "'");
+	
 		// cleanup
 		SDL_RWclose(reader);
 

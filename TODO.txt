@@ -1,7 +1,13 @@
 TODO:
-- Überprüfen, ob die Performance konstant schlechter geworden ist (war vorher ca 1.5 ms / frame) (dazu ca. 5 Commits früher wiederherstellen)
-- Kamera-Skalierung implementieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
+	- Sprite, welches die aktuelle Transformation anzeigt
+	- Tap-Input:
+		- Klick auf Sprite ändert den Transformations-Modus
+		- Tap links unten transformiert negativ
+		- Tap rechts unten transformiert positiv
+	- Das gelbe Sprite ist nach links und rechts drehbar
+	- Kamera mit: Drehbarkeit, Verschiebbarkeit (relativ zur Drehung), Zoom
+	- Reset-Funktion
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen
 - StackOverflow-Nachtrag erstellen für Android VS-Compilation

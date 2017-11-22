@@ -14,6 +14,9 @@ namespace Orbis
 		// destructor
 		virtual ~OrbisMain() { };
 
+		// initialize
+		void Initialize();
+
 		// run the engine
 		void Run();
 	};

@@ -15,6 +15,9 @@ namespace Video
 		// get instance
 		static VideoManager* GetInstance();
 
+		// initialize
+		void Initialize();
+
 		// destructor
 		virtual ~VideoManager();
 
@@ -37,9 +40,6 @@ namespace Video
 		// get the default window resolution
 		Vector2D GetDefaultWindowResolution();
 
-		// initialize the video
-		void InitializeVideo();
-
 	private:
 		// the sdl window
 		SDL_Window* m_sdlWindow;
@@ -55,5 +55,8 @@ namespace Video
 
 		// the default window resolution
 		static const Vector2D m_DefaultWindowResolution;
+
+		// is the manager initialized
+		bool m_IsInitialized;
 	};
 }

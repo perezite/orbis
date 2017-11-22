@@ -17,17 +17,9 @@ using namespace System;
 
 namespace Components
 {
-	SpriteRenderer::~SpriteRenderer()
-	{
-		if (m_texture)
-			delete m_texture;
-	}
-
 	void SpriteRenderer::Start()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-
-		m_texture = new Texture(m_textureAssetPath, true);
 
 		std::vector<Vector2D> vertices = { Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) };
 		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) };

@@ -1,5 +1,24 @@
 #include "InputManager.h"
 
+#include "../Video/VideoManager.h"
+using namespace Video;
+
+namespace 
+{
+	// convert pixel coordinates to screen coordinates in the range (-0.5, +0.5)
+	Vector2D PixelCoordinatesToScreenCoordinates(int x, int y)
+	{
+		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
+		return Vector2D(float(x) / resolution.GetX() - 0.5f, float(y) / resolution.GetY() - 0.5f);
+	}
+
+	// convert the range (0, 1) to (-0.5, 0.5)
+	Vector2D FingerCoordinatesToScreenCoordinates(float x, float y)
+	{
+		return Vector2D(x - 0.5f, y - 0.5f);
+	}
+}
+
 namespace Input
 {
 	InputManager* InputManager::GetInstance()
@@ -27,17 +46,22 @@ namespace Input
 					m_pressedKeys.erase((KeyCode)event.key.keysym.sym);
 					break;
 				case SDL_FINGERDOWN:
-					m_touches.insert(event.tfinger.fingerId);
+					m_taps.insert(event.tfinger.fingerId);
 					break;
 				case SDL_FINGERUP:
-					m_touches.erase(event.tfinger.fingerId);
+					m_taps.erase(event.tfinger.fingerId);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					m_clicks.insert(event.button.button);
+					m_taps.insert(event.button.button);
 					break;
 				case SDL_MOUSEBUTTONUP:
-					m_clicks.erase(event.button.button);
+					m_taps.erase(event.button.button);
 					break;
+				case SDL_MOUSEMOTION:
+					m_tapPosition = PixelCoordinatesToScreenCoordinates(event.motion.x, event.motion.y);
+					break;
+				case SDL_FINGERMOTION:
+					m_tapPosition = FingerCoordinatesToScreenCoordinates(event.tfinger.x, event.tfinger.y);
 			}
 		}
 	}
@@ -49,7 +73,13 @@ namespace Input
 
 	bool InputManager::IsTapDown()
 	{
-		return m_touches.size() > 0 || m_clicks.size() > 0;
+		return m_taps.size() > 0;
+	}
+
+	Vector2D InputManager::GetTapPosition()
+	{
+		Exception::Assert(IsTapDown(), "GetTapPosition() can only be called when a tap is down");
+		return m_tapPosition;
 	}
 
 }

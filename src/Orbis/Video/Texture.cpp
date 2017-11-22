@@ -65,15 +65,30 @@ namespace Video
 		SDL_FreeSurface(m_surface);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		//m_surfaces.insert(m_surface);
 	}
 
 	Texture::~Texture()
 	{
 		glDeleteTextures(1, &m_textureHandle);
+		// m_surfaces.erase(m_surface);
 	}
 
 	void Texture::Bind()
 	{
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
+
+	/*
+	void Texture::DeleteAll()
+	{
+		std::set<SDL_Surface*>::iterator it;
+		for (it = m_surfaces.begin(); it != m_surfaces.end(); ++it)
+		{
+			delete *it;
+		}
+
+		m_surfaces.clear();
+	}*/
 }

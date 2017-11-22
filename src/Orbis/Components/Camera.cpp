@@ -20,8 +20,7 @@ namespace
 
 	Components::Camera* GetInstance()
 	{
-		if (instance == NULL)
-			throw Exception("No camera was attached in the level");
+		Exception::Assert(instance != NULL, "No camera was attached in the level");
 
 		return instance;
 	}
@@ -31,9 +30,7 @@ namespace Components
 {
 	Camera::Camera()
 	{
-		if (instance != NULL)
-			throw Exception("Only one camera at a time is allowed");
-
+		Exception::Assert(instance == NULL, "Only one camera at a time is allowed");
 		instance = this;
 	}
 

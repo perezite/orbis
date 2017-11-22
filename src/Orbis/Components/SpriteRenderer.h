@@ -12,10 +12,7 @@ namespace Components
 	{
 	public:
 		// ctor
-		SpriteRenderer(std::string textureAssetPath) { m_textureAssetPath = textureAssetPath; }
-
-		// dtor
-		~SpriteRenderer();
+		SpriteRenderer(Texture* texture) { SetTexture(texture); }
 
 		// update
 		void Start();
@@ -23,10 +20,10 @@ namespace Components
 		// render
 		void Render();
 
-	private:
-		// the texture asset path
-		std::string m_textureAssetPath;
+		// set the texture
+		void SetTexture(Texture* texture) { m_texture = texture; }
 
+	private:
 		// the texture
 		Texture* m_texture;
 	};
