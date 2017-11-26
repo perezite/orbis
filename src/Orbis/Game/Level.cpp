@@ -3,6 +3,9 @@
 #include "../Video/VideoManager.h"
 using namespace Video;
 
+#include "../../Base/System/MemoryManager.h"
+using namespace System;
+
 namespace Game
 {
 	Level::Level() : m_isStarted(false)
@@ -18,6 +21,8 @@ namespace Game
 		}
 
 		m_entities.clear();
+	
+		MemoryManager<Texture>::GetInstance()->DeleteAll();
 	}
 
 	void Level::AddEntity(Entity *entity)

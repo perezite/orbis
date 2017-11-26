@@ -59,7 +59,7 @@ namespace Video
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
 	}
 
-	void RenderDevice::Render(Transform* transform, Texture* texture)
+	void RenderDevice::Render(Transform* transform, Texture* texture, bool applyCameraTransformation)
 	{
 		// setup rendering
 		glEnable(GL_BLEND);
@@ -74,7 +74,8 @@ namespace Video
 		glEnableVertexAttribArray(shader->GetPositionAttributeHandle());
 		glEnableVertexAttribArray(shader->GetTexCoordAttributeHandle());
 		shader->SetSamplerUniform(0);
-		shader->SetModelViewMatrix(Camera::GetViewMatrix() * transform->GetMatrix());
+		Matrix3 viewMatrix = applyCameraTransformation ? Camera::GetViewMatrix() : Matrix3();
+		shader->SetModelViewMatrix(viewMatrix * transform->GetMatrix());
 
 		// setup data
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);

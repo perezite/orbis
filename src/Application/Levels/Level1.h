@@ -10,8 +10,6 @@ namespace Levels
 	public:
 		Level1();
 
-		~Level1() {};
-
 	private:
 	};
 }

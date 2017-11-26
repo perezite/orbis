@@ -12,7 +12,7 @@ namespace Components
 	{
 	public:
 		// ctor
-		SpriteRenderer(Texture* texture) { SetTexture(texture); }
+		SpriteRenderer(Texture* texture, bool applyCameraTransformation = true) { SetTexture(texture); m_applyCameraTransformation = applyCameraTransformation; }
 
 		// update
 		void Start();
@@ -23,8 +23,14 @@ namespace Components
 		// set the texture
 		void SetTexture(Texture* texture) { m_texture = texture; }
 
+		// is the texture transformed in camera coordinates
+		bool ApplyCameraTransformation() const { return m_applyCameraTransformation; }
+
 	private:
 		// the texture
 		Texture* m_texture;
+
+		// is the camera transformation applied to this sprite
+		bool m_applyCameraTransformation;
 	};
 }

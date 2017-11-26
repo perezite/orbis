@@ -21,8 +21,10 @@ namespace Levels
 		Texture* coordSystemTexture = new Texture("Textures/CoordinateSystem.png");
 		Texture* yellowBlockTexture = new Texture("Textures/YellowBlock.png");
 		Texture* blueBlockTexture = new Texture("Textures/BlueBlock.png");
-		Texture* inputStateYellowBlockRotateLeft = new Texture("Textures/InputStateYellowBlockRotateLeft.png");
-		Texture* inputStateYellowBlockRotateRight = new Texture("Textures/InputStateYellowBlockRotateRight.png");
+		Texture* overlayRotateYellowSpriteTex = new Texture("Textures/rotateYellowSprite.png");
+		Texture* overlayForwardTex = new Texture("Textures/overlayForward.png");
+		Texture* overlayLeftTex = new Texture("Textures/overlayLeft.png");
+		Texture* overlayRightTex = new Texture("Textures/overlayRight.png");
 
 		// camera entity
 		Entity* camera = new Entity();
@@ -55,9 +57,27 @@ namespace Levels
 		this->AddEntity(blueBlock);
 
 		// input mode display entity
-		Entity* inputModeDisplay = new Entity("InputModeDisplay");
-		inputModeDisplay->AddComponent(new SpriteRenderer(inputStateYellowBlockRotateLeft));
-		inputModeDisplay->SetTransform(Transform(Vector2D(-0.25f, -0.25f), 0.0f, Vector2D(0.25f, 0.25f)));
-		this->AddEntity(inputModeDisplay);
+		Entity* inputModeOverlay = new Entity("InputModeOverlay");
+		inputModeOverlay->AddComponent(new SpriteRenderer(overlayRotateYellowSpriteTex, false));
+		inputModeOverlay->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f)));
+		this->AddEntity(inputModeOverlay);
+
+		// overlay forward
+		Entity* overlayForward = new Entity("OverlayForward");
+		overlayForward->AddComponent(new SpriteRenderer(overlayForwardTex, false));
+		overlayForward->SetTransform(Transform(Vector2D(-0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f)));
+		this->AddEntity(overlayForward);
+
+		// overlay left
+		Entity* overlayLeft = new Entity("OverlayLeft");
+		overlayLeft->AddComponent(new SpriteRenderer(overlayLeftTex, false));
+		overlayLeft->SetTransform(Transform(Vector2D(-0.25f * Camera::GetSize().GetX(), -0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f)));
+		this->AddEntity(overlayLeft);
+
+		// overlay left
+		Entity* overlayRight = new Entity("OverlayRight");
+		overlayRight->AddComponent(new SpriteRenderer(overlayRightTex, false));
+		overlayRight->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), -0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f)));
+		this->AddEntity(overlayRight);
 	}
 }

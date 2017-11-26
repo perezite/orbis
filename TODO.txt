@@ -1,14 +1,13 @@
 TODO:
-- Texture Cleanup implementieren
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
-	- Entity, welches mittels Sprite die aktuelle Transformation anzeigt
 	- Tap-Input:
-		- Klick auf Sprite ändert den Transformations-Modus
+		- Tap links oben ändert den Transformations-Modus
 		- Tap links unten transformiert negativ
 		- Tap rechts unten transformiert positiv
 	- Das gelbe Sprite ist nach links und rechts drehbar
 	- Kamera mit: Drehbarkeit, Verschiebbarkeit (relativ zur Drehung), Zoom
 	- Reset-Funktion
+- Library Lizenzen einfügen (inkl. font-awesome svg png)
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen
 - StackOverflow-Nachtrag erstellen für Android VS-Compilation

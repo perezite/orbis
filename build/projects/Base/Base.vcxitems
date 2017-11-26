@@ -19,7 +19,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix4.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +28,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h" />
   </ItemGroup>
 </Project>

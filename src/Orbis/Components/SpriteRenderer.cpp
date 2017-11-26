@@ -30,6 +30,6 @@ namespace Components
 	void SpriteRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(GetParent()->GetTransform(), m_texture);
+		renderDevice->Render(GetParent()->GetTransform(), m_texture, m_applyCameraTransformation);
 	}
 }

@@ -63,4 +63,13 @@ namespace Components
 
 		return mat;
 	}
+
+	Vector2D Camera::GetSize()
+	{
+		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
+		Vector2D scale = GetInstance()->GetParent()->GetTransform()->GetScale();
+		float aspectRatio = resolution.GetY() / resolution.GetX();
+		
+		return Vector2D(scale.GetX(), scale.GetY() * aspectRatio);
+	}
 }
