@@ -9,7 +9,7 @@ namespace
 	Vector2D PixelCoordinatesToScreenCoordinates(int x, int y)
 	{
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
-		return Vector2D(float(x) / resolution.GetX() - 0.5f, float(y) / resolution.GetY() - 0.5f);
+		return Vector2D(float(x) / resolution.GetX() - 0.5f, 0.5f - float(y) / resolution.GetY());
 	}
 
 	// convert the range (0, 1) to (-0.5, 0.5)

@@ -8,9 +8,11 @@ namespace Controllers
 	class SpriteController : public Component
 	{
 	public:
-		void Update();
-
+		// set rotation velocity
 		void SetOmega(float omega) { m_omega = omega; }
+
+		// get rotation velocity
+		float GetOmega() const { return m_omega; }
 
 	public: 
 		float m_omega; 

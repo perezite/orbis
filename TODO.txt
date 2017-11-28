@@ -5,8 +5,10 @@ TODO:
 		- Tap links unten transformiert negativ
 		- Tap rechts unten transformiert positiv
 	- Das gelbe Sprite ist nach links und rechts drehbar
+	- Das blaue Sprite ist nach oben und unten verschiebbar
 	- Kamera mit: Drehbarkeit, Verschiebbarkeit (relativ zur Drehung), Zoom
 	- Reset-Funktion
+	- Der Tap funktioniert kontinuerlich auf mobile, auch wenn sich die Tap-Position ändert
 - Library Lizenzen einfügen (inkl. font-awesome svg png)
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen

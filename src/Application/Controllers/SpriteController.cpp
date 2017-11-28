@@ -10,10 +10,4 @@ using namespace Core;
 
 namespace Controllers
 {
-	void SpriteController::Update()
-	{
-		Transform* transform = GetParent()->GetTransform();
-		float alpha = transform->GetRotation();
-		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * m_omega);
-	}
 }
