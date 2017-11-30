@@ -7,29 +7,49 @@ using namespace Controllers;
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/Entity.h"
+#include "../../Orbis/Components/Camera.h"
 using namespace Input;
 using namespace Core;
 using namespace Game;
+using namespace Components;
 
 #include <algorithm>
 
 namespace
 {
-	void Rotate(SpriteController* sprite, bool clockwise)
+	void Rotate(Transform* transform, bool clockwise, float omega)
 	{
-		Transform* transform = sprite->GetParent()->GetTransform();
-		float omega = clockwise ? -sprite->GetOmega() : +sprite->GetOmega();
+		omega = clockwise ? omega : -omega;
 		float alpha = transform->GetRotation();
 		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
 	}	
 
-	void Translate(SpriteController* sprite, bool forward)
+	void Rotate(SpriteController* sprite, bool clockwise)
 	{
-		float speed = forward ? 0.5f : -0.5f;
-		Transform* transform = sprite->GetParent()->GetTransform();
+		Rotate(sprite->GetParent()->GetTransform(), clockwise, sprite->GetOmega());
+	}
+
+	void Rotate(CameraController* camera, bool clockwise)
+	{
+		Rotate(camera->GetParent()->GetTransform(), clockwise, camera->GetOmega());
+	}
+
+	void Translate(Transform* transform, bool forward, float speed)
+	{
+		speed = forward ? speed : -speed;
 		Vector2D position = transform->GetPosition();
 		position = Vector2D(position.GetX() + TimeManager::GetInstance()->GetDeltaSeconds() * speed, position.GetY());
 		transform->SetPosition(position);
+	}
+
+	void Translate(SpriteController* sprite, bool forward)
+	{
+		Translate(sprite->GetParent()->GetTransform(), forward, 0.5f);
+	}
+
+	void Translate(CameraController* camera, bool forward)
+	{
+		Translate(camera->GetParent()->GetTransform(), forward, camera->GetOmega());
 	}
 }
 
@@ -89,6 +109,16 @@ namespace Controllers
 		if (texAssetPath == "Textures/TranslateBlueSprite.png")
 		{
 			Translate(m_blueBrick, positive);
+			return;
+		}
+		if (texAssetPath == "Textures/RotateCamera.png")
+		{
+			Rotate(m_camera, positive);
+			return;
+		}
+		if (texAssetPath == "Textures/TranslateCamera.png")
+		{
+			Translate(m_camera, positive);
 			return;
 		}
 

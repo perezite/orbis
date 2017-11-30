@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SpriteController.h"
+#include "CameraController.h"
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -29,6 +30,9 @@ namespace Controllers
 
 		// set blue brick
 		void SetBlueBrick(SpriteController* const blueBrick) { m_blueBrick = blueBrick; }
+
+		// set camera
+		void SetCamera(CameraController* const camera) { m_camera = camera; }
 	protected:
 		// affect the currently selected entity
 		void Affect(bool positive);
@@ -48,5 +52,8 @@ namespace Controllers
 
 		// the blue brick
 		SpriteController* m_blueBrick;
+
+		// the camera
+		CameraController* m_camera;
 	};
 }

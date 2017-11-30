@@ -8,9 +8,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandbox\Sandbox.cpp">
       <Filter>Sandbox</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
