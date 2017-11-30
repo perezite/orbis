@@ -24,7 +24,6 @@ namespace Levels
 		Texture* blueBlockTexture = new Texture("Textures/BlueBlock.png");
 		Texture* overlayRotateYellowSpriteTex = new Texture("Textures/RotateYellowSprite.png");
 		Texture* overlayTranslateBlueSpriteTex = new Texture("Textures/TranslateBlueSprite.png");
-		Texture* overlayForwardTex = new Texture("Textures/OverlayForward.png");
 		Texture* overlayLeftTex = new Texture("Textures/OverlayLeft.png");
 		Texture* overlayRightTex = new Texture("Textures/OverlayRight.png");
 
@@ -62,14 +61,8 @@ namespace Levels
 		Entity* inputModeOverlay = new Entity("InputModeOverlay");
 		SpriteRenderer* inputModeOverlaySpriteRenderer = new SpriteRenderer(overlayRotateYellowSpriteTex, false);
 		inputModeOverlay->AddComponent(inputModeOverlaySpriteRenderer);
-		inputModeOverlay->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f)));
+		inputModeOverlay->SetTransform(Transform(Vector2D(-0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f)));
 		this->AddEntity(inputModeOverlay);
-
-		// forward overlay sprite
-		Entity* overlayForward = new Entity("OverlayForward");
-		overlayForward->AddComponent(new SpriteRenderer(overlayForwardTex, false));
-		overlayForward->SetTransform(Transform(Vector2D(-0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f)));
-		this->AddEntity(overlayForward);
 
 		// left overlay sprite
 		Entity* overlayLeft = new Entity("OverlayLeft");
@@ -89,6 +82,7 @@ namespace Levels
 		inputController->SetInputModeOverlayTextures({ overlayRotateYellowSpriteTex, overlayTranslateBlueSpriteTex });
 		inputController->SetInputModeOverlaySpriteRenderer(inputModeOverlaySpriteRenderer);
 		inputController->SetYellowBlock(yellowBlockController);
+		inputController->SetBlueBrick(blueBlockController);
 		overlay->AddComponent(inputController);
 		this->AddEntity(overlay);
 	}

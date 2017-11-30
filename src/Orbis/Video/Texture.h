@@ -18,12 +18,18 @@ namespace Video
 		virtual ~Texture();
 
 		// get the texture handle
-		unsigned int GetTextureHandle() { return m_textureHandle; }
+		unsigned int GetTextureHandle() const { return m_textureHandle; }
+
+		// get the asset path
+		std::string GetAssetPath() const { return m_assetPath; }
 
 		// bind this texture
 		void Bind();
 
 	private:
+		// the texture asset path
+		std::string m_assetPath;
+
 		// the texture id
 		GLuint m_textureHandle;
 

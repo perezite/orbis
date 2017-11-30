@@ -18,10 +18,19 @@ namespace
 	void Rotate(SpriteController* sprite, bool clockwise)
 	{
 		Transform* transform = sprite->GetParent()->GetTransform();
-		float omega = clockwise ? sprite->GetOmega() : -sprite->GetOmega();
+		float omega = clockwise ? -sprite->GetOmega() : +sprite->GetOmega();
 		float alpha = transform->GetRotation();
 		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
 	}	
+
+	void Translate(SpriteController* sprite, bool forward)
+	{
+		float speed = forward ? 0.5f : -0.5f;
+		Transform* transform = sprite->GetParent()->GetTransform();
+		Vector2D position = transform->GetPosition();
+		position = Vector2D(position.GetX() + TimeManager::GetInstance()->GetDeltaSeconds() * speed, position.GetY());
+		transform->SetPosition(position);
+	}
 }
 
 namespace Controllers
@@ -34,20 +43,16 @@ namespace Controllers
 		{
 			Vector2D tapPosition = inputManager->GetTapPosition();
 
-			// left top tap
-			if (tapPosition.GetX() < 0 && tapPosition.GetY() >= 0.0f)
-				return;
-
 			// transform negative
 			if (tapPosition.GetX() < 0 && tapPosition.GetY() < 0.0f)
 			{
-				Affect(true);
+				Affect(false);
 			}
 
 			// right bottom tap
 			if (tapPosition.GetX() >= 0 && tapPosition.GetY() < 0.0f)
 			{
-				Affect(false);
+				Affect(true);
 			}
 		}
 
@@ -55,8 +60,8 @@ namespace Controllers
 		{
 			Vector2D tapPosition = inputManager->GetTapPosition();
 
-			// right top tap
-			if (tapPosition.GetX() >= 0 && tapPosition.GetY() >= 0.0f)
+			// left top tap
+			if (tapPosition.GetX() < 0 && tapPosition.GetY() >= 0.0f)
 				Cycle();
 		}
 	}
@@ -74,6 +79,19 @@ namespace Controllers
 
 	void InputController::Affect(bool positive)
 	{
-		Rotate(m_yellowBrick, positive);
+		std::string texAssetPath = m_inputModeOverlaySpriteRenderer->GetTexture()->GetAssetPath();
+		
+		if (texAssetPath == "Textures/RotateYellowSprite.png")
+		{
+			Rotate(m_yellowBrick, positive);
+			return;
+		}
+		if (texAssetPath == "Textures/TranslateBlueSprite.png")
+		{
+			Translate(m_blueBrick, positive);
+			return;
+		}
+
+		throw Exception("The given texture asset path is not supported!");
 	}
 }

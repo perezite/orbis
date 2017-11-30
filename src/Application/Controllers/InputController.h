@@ -24,9 +24,6 @@ namespace Controllers
 		// set the input mode overlay sprite renderer
 		void SetInputModeOverlaySpriteRenderer(SpriteRenderer* const spriteRenderer) { m_inputModeOverlaySpriteRenderer = spriteRenderer; }
 
-		// set input mode overlay contorller
-		// void SetInputModeOverlaySpriteController(SpriteController* const spriteController) { m_inputModeOverlaySpriteController = spriteController; }
-
 		// set yellow brick
 		void SetYellowBlock(SpriteController* const yellowBrick) { m_yellowBrick = yellowBrick; }
 
@@ -42,9 +39,6 @@ namespace Controllers
 	private:
 		// input mode overlay sprite renderer
 		SpriteRenderer* m_inputModeOverlaySpriteRenderer;
-
-		// input mode overlay sprite controller
-		SpriteController* m_inputModeOverlaySpriteController;
 
 		// available input mode overlay textures
 		std::vector<Texture*> m_inputModeOverlayTextures;
