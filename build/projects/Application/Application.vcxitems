@@ -17,7 +17,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandbox\Sandbox.cpp" />

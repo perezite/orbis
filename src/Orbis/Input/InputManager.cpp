@@ -32,6 +32,8 @@ namespace Input
 	{
 		SDL_Event event;
 
+		m_tapsDown.clear();
+
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
@@ -46,16 +48,18 @@ namespace Input
 					m_pressedKeys.erase((KeyCode)event.key.keysym.sym);
 					break;
 				case SDL_FINGERDOWN:
-					m_taps.insert(event.tfinger.fingerId);
+					m_pressedTaps.insert(event.tfinger.fingerId);
+					m_tapsDown.insert(event.tfinger.fingerId);
 					break;
 				case SDL_FINGERUP:
-					m_taps.erase(event.tfinger.fingerId);
+					m_pressedTaps.erase(event.tfinger.fingerId);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					m_taps.insert(event.button.button);
+					m_pressedTaps.insert(event.button.button);
+					m_tapsDown.insert(event.button.button);
 					break;
 				case SDL_MOUSEBUTTONUP:
-					m_taps.erase(event.button.button);
+					m_pressedTaps.erase(event.button.button);
 					break;
 				case SDL_MOUSEMOTION:
 					m_tapPosition = PixelCoordinatesToScreenCoordinates(event.motion.x, event.motion.y);
@@ -66,19 +70,24 @@ namespace Input
 		}
 	}
 
-	bool InputManager::IsKeyDown(KeyCode keyCode)
+	bool InputManager::IsKeyPressed(KeyCode keyCode)
 	{
 		return m_pressedKeys.count(keyCode) == 1;
 	}
 
+	bool InputManager::IsTapPressed()
+	{
+		return m_pressedTaps.size() > 0;
+	}
+
 	bool InputManager::IsTapDown()
 	{
-		return m_taps.size() > 0;
+		return m_tapsDown.size() > 0;
 	}
 
 	Vector2D InputManager::GetTapPosition()
 	{
-		Exception::Assert(IsTapDown(), "GetTapPosition() can only be called when a tap is down");
+		Exception::Assert(IsTapPressed(), "GetTapPosition() can only be called when a tap is pressed or down");
 		return m_tapPosition;
 	}
 

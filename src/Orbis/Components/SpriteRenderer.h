@@ -23,6 +23,9 @@ namespace Components
 		// set the texture
 		void SetTexture(Texture* texture) { m_texture = texture; }
 
+		// get the texture
+		Texture* GetTexture(void) const { return m_texture; }
+
 		// is the texture transformed in camera coordinates
 		bool ApplyCameraTransformation() const { return m_applyCameraTransformation; }
 

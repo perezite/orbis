@@ -11,9 +11,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>

@@ -11,6 +11,8 @@ using namespace Input;
 using namespace Core;
 using namespace Game;
 
+#include <algorithm>
+
 namespace
 {
 	void Rotate(SpriteController* sprite, bool clockwise)
@@ -19,7 +21,7 @@ namespace
 		float omega = clockwise ? sprite->GetOmega() : -sprite->GetOmega();
 		float alpha = transform->GetRotation();
 		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
-	}
+	}	
 }
 
 namespace Controllers
@@ -28,7 +30,7 @@ namespace Controllers
 	{
 		static InputManager* inputManager = InputManager::GetInstance();
 
-		if (inputManager->IsTapDown())
+		if (inputManager->IsTapPressed())
 		{
 			Vector2D tapPosition = inputManager->GetTapPosition();
 
@@ -36,21 +38,42 @@ namespace Controllers
 			if (tapPosition.GetX() < 0 && tapPosition.GetY() >= 0.0f)
 				return;
 
-			// right top tap
-			if (tapPosition.GetX() >= 0 && tapPosition.GetY() >= 0.0f)
-				return;
-
 			// transform negative
 			if (tapPosition.GetX() < 0 && tapPosition.GetY() < 0.0f)
 			{
-				Rotate(m_yellowBrick, true);
+				Affect(true);
 			}
 
 			// right bottom tap
 			if (tapPosition.GetX() >= 0 && tapPosition.GetY() < 0.0f)
 			{
-				Rotate(m_yellowBrick, false);
+				Affect(false);
 			}
 		}
+
+		if (inputManager->IsTapDown())
+		{
+			Vector2D tapPosition = inputManager->GetTapPosition();
+
+			// right top tap
+			if (tapPosition.GetX() >= 0 && tapPosition.GetY() >= 0.0f)
+				Cycle();
+		}
+	}
+
+	void InputController::Cycle()
+	{
+		// get new texture
+		std::vector<Texture*>::iterator previousTextureIt = std::find(m_inputModeOverlayTextures.begin(), m_inputModeOverlayTextures.end(), m_inputModeOverlaySpriteRenderer->GetTexture());
+		std::vector<Texture*>::iterator currentTextureIt = ++previousTextureIt;
+
+		// update sprite renderer
+		Texture* nextTexture = currentTextureIt != m_inputModeOverlayTextures.end() ? (*currentTextureIt) : m_inputModeOverlayTextures.front();
+		m_inputModeOverlaySpriteRenderer->SetTexture(nextTexture);
+	}
+
+	void InputController::Affect(bool positive)
+	{
+		Rotate(m_yellowBrick, positive);
 	}
 }

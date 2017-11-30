@@ -21,10 +21,13 @@ namespace Input
 		// has the input a quit event
 		bool HasQuitEvent() const { return m_hasQuitEvent; }
 
-		// is key down
-		bool IsKeyDown(KeyCode keyCode);
+		// is key pressed
+		bool IsKeyPressed(KeyCode keyCode);
 
-		// has the input a tap event
+		// is a tap pressed
+		bool IsTapPressed();
+
+		// is a tap down
 		bool IsTapDown();
 
 		// get the normalized tap position
@@ -34,8 +37,11 @@ namespace Input
 		// list of currently pressed keys
 		std::set<KeyCode> m_pressedKeys;
 
-		// list of current taps
-		std::set<Sint64> m_taps;
+		// list of currently pressed taps
+		std::set<Sint64> m_pressedTaps;
+
+		// list of taps down 
+		std::set<Sint64> m_tapsDown;
 
 		// the last recorded tap position
 		Vector2D m_tapPosition;

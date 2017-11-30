@@ -4,7 +4,6 @@ TODO:
 		- Tap links oben ändert den Transformations-Modus
 		- Tap links unten transformiert negativ
 		- Tap rechts unten transformiert positiv
-	- Das gelbe Sprite ist nach links und rechts drehbar
 	- Das blaue Sprite ist nach oben und unten verschiebbar
 	- Kamera mit: Drehbarkeit, Verschiebbarkeit (relativ zur Drehung), Zoom
 	- Reset-Funktion

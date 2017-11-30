@@ -23,6 +23,7 @@ namespace Levels
 		Texture* yellowBlockTexture = new Texture("Textures/YellowBlock.png");
 		Texture* blueBlockTexture = new Texture("Textures/BlueBlock.png");
 		Texture* overlayRotateYellowSpriteTex = new Texture("Textures/RotateYellowSprite.png");
+		Texture* overlayTranslateBlueSpriteTex = new Texture("Textures/TranslateBlueSprite.png");
 		Texture* overlayForwardTex = new Texture("Textures/OverlayForward.png");
 		Texture* overlayLeftTex = new Texture("Textures/OverlayLeft.png");
 		Texture* overlayRightTex = new Texture("Textures/OverlayRight.png");
@@ -59,7 +60,8 @@ namespace Levels
 
 		// input mode overlay sprite
 		Entity* inputModeOverlay = new Entity("InputModeOverlay");
-		inputModeOverlay->AddComponent(new SpriteRenderer(overlayRotateYellowSpriteTex, false));
+		SpriteRenderer* inputModeOverlaySpriteRenderer = new SpriteRenderer(overlayRotateYellowSpriteTex, false);
+		inputModeOverlay->AddComponent(inputModeOverlaySpriteRenderer);
 		inputModeOverlay->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f)));
 		this->AddEntity(inputModeOverlay);
 
@@ -84,6 +86,8 @@ namespace Levels
 		// input entity
 		Entity* overlay = new Entity("Input Controller");
 		InputController* inputController = new InputController();
+		inputController->SetInputModeOverlayTextures({ overlayRotateYellowSpriteTex, overlayTranslateBlueSpriteTex });
+		inputController->SetInputModeOverlaySpriteRenderer(inputModeOverlaySpriteRenderer);
 		inputController->SetYellowBlock(yellowBlockController);
 		overlay->AddComponent(inputController);
 		this->AddEntity(overlay);
