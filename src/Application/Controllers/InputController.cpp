@@ -8,10 +8,12 @@ using namespace Controllers;
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Components/Camera.h"
+#include "../../Base/Math/Matrix3.h"
 using namespace Input;
 using namespace Core;
 using namespace Game;
 using namespace Components;
+using namespace Math;
 
 #include <algorithm>
 
@@ -19,10 +21,26 @@ namespace
 {
 	void Rotate(Transform* transform, bool clockwise, float omega)
 	{
-		omega = clockwise ? omega : -omega;
+		omega = clockwise ? -omega : omega;
 		float alpha = transform->GetRotation();
 		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
 	}	
+
+	void Translate(Transform* transform, bool forward, float speed)
+	{
+		speed = forward ? speed : -speed;
+		Vector2D position = transform->GetPosition();
+		Vector2D translation = Matrix3::Rotation2D(transform->GetRotation()) * Vector2D(TimeManager::GetInstance()->GetDeltaSeconds() * speed, 0.0f);
+		transform->SetPosition(position + translation);
+	}
+
+	void Scale(CameraController *camera, bool positive)
+	{
+		float factor = positive ? 0.99f : -0.99f;
+		Transform* transform = camera->GetParent()->GetTransform();
+		Vector2D scale = transform->GetScale();
+		transform->SetScale(scale * factor);
+	}
 
 	void Rotate(SpriteController* sprite, bool clockwise)
 	{
@@ -32,14 +50,6 @@ namespace
 	void Rotate(CameraController* camera, bool clockwise)
 	{
 		Rotate(camera->GetParent()->GetTransform(), clockwise, camera->GetOmega());
-	}
-
-	void Translate(Transform* transform, bool forward, float speed)
-	{
-		speed = forward ? speed : -speed;
-		Vector2D position = transform->GetPosition();
-		position = Vector2D(position.GetX() + TimeManager::GetInstance()->GetDeltaSeconds() * speed, position.GetY());
-		transform->SetPosition(position);
 	}
 
 	void Translate(SpriteController* sprite, bool forward)
@@ -106,6 +116,11 @@ namespace Controllers
 			Rotate(m_yellowBrick, positive);
 			return;
 		}
+		if (texAssetPath == "Textures/TranslateYellowSprite.png")
+		{
+			Translate(m_yellowBrick, positive);
+			return;
+		}
 		if (texAssetPath == "Textures/TranslateBlueSprite.png")
 		{
 			Translate(m_blueBrick, positive);
@@ -119,6 +134,12 @@ namespace Controllers
 		if (texAssetPath == "Textures/TranslateCamera.png")
 		{
 			Translate(m_camera, positive);
+			return;
+		}
+
+		if (texAssetPath == "Textures/ScaleCamera.png")
+		{
+			Scale(m_camera, positive);
 			return;
 		}
 

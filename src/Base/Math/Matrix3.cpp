@@ -4,7 +4,14 @@
 
 namespace Math
 {
-	Matrix3::Matrix3(float m00, float m01, float m02, 
+	Matrix3 Matrix3::Rotation2D(float rad)
+	{
+		return Matrix3(cosf(rad), -sinf(rad), 0.0f,
+			sinf(rad), cosf(rad), 0.0f,
+			0.0f, 0.0f, 1.0f);
+	}
+
+	Matrix3::Matrix3(float m00, float m01, float m02,
 		float m10, float m11, float m12, 
 		float m20, float m21, float m22)
 	{
@@ -38,9 +45,7 @@ namespace Math
 
 	void Matrix3::Rotate2D(float rad)
 	{
-		*this *= Matrix3(cosf(rad), -sinf(rad), 0.0f, 
-			sinf(rad), cosf(rad), 0.0f, 
-			0.0f, 0.0f, 1.0f);
+		*this *= Rotation2D(rad);
 	}
 
 	void Matrix3::Translate2D(Vector2D trans)
@@ -78,4 +83,12 @@ namespace Math
 		*this = result;
 		return *this;
 	}
+
+	Vector2D Matrix3::operator*(const Vector2D & vec) const
+	{
+		float x = this->GetValue(0, 0) * vec.GetX() + this->GetValue(0, 1) * vec.GetY() + this->GetValue(0, 2);
+		float y = this->GetValue(1, 0) * vec.GetX() + this->GetValue(1, 1) * vec.GetY() + this->GetValue(1, 2);
+		return Vector2D(x, y);
+	}
+
 }

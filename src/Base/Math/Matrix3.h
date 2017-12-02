@@ -7,6 +7,9 @@ namespace Math
 	class Matrix3 
 	{
 	public:
+		// get a 2d rotation
+		static Matrix3 Rotation2D(float radians);
+
 		// ctor
 		Matrix3(float m00, float m01, float m02,
 			float m10, float m11, float m12, 
@@ -41,6 +44,9 @@ namespace Math
 
 		// multiply
 		const Matrix3& operator*=(const Matrix3 &other);
+
+		// multiply with vector
+		Vector2D operator*(const Vector2D& vec) const;
 
 	private: 
 		// the matrix values

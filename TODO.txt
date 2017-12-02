@@ -1,6 +1,6 @@
 TODO:
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
-	- Kamera mit: Drehbarkeit, Verschiebbarkeit (relativ zur Drehung), Zoom
+	- Kamera mit: Zoom
 	- Reset-Funktion
 	- Der Tap funktioniert kontinuerlich auf mobile, auch wenn sich die Tap-Position ändert
 - Library Lizenzen einfügen (inkl. font-awesome svg png)
