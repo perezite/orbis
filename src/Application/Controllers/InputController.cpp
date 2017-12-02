@@ -36,7 +36,8 @@ namespace
 
 	void Scale(CameraController *camera, bool positive)
 	{
-		float factor = positive ? 0.99f : -0.99f;
+		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
 		Transform* transform = camera->GetParent()->GetTransform();
 		Vector2D scale = transform->GetScale();
 		transform->SetScale(scale * factor);
