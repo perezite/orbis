@@ -1,5 +1,4 @@
 TODO:
-- Library Lizenzen einfügen (inkl. font-awesome svg png)
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen
 - StackOverflow-Nachtrag erstellen für Android VS-Compilation
