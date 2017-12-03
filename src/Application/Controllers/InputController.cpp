@@ -5,10 +5,12 @@ using namespace Controllers;
 
 #include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Core/TimeManager.h"
+#include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Base/Math/Matrix3.h"
+#include "../../Base/System/StringHelper.h"
 using namespace Input;
 using namespace Core;
 using namespace Game;
@@ -78,11 +80,11 @@ namespace Controllers
 	{
 		static InputManager* inputManager = InputManager::GetInstance();
 
-		if (inputManager->IsTapPressed())
+		if (inputManager->IsTapDown())
 		{
 			Vector2D tapPosition = inputManager->GetTapPosition();
 
-			// transform negative
+			// left bottom tap
 			if (tapPosition.GetX() < 0 && tapPosition.GetY() < 0.0f)
 			{
 				Affect(false);
@@ -95,7 +97,7 @@ namespace Controllers
 			}
 		}
 
-		if (inputManager->IsTapDown())
+		if (inputManager->IsTapGoingDown())
 		{
 			Vector2D tapPosition = inputManager->GetTapPosition();
 

@@ -12,10 +12,10 @@ namespace
 		return Vector2D(float(x) / resolution.GetX() - 0.5f, 0.5f - float(y) / resolution.GetY());
 	}
 
-	// convert the range (0, 1) to (-0.5, 0.5)
+	// convert finger coordinates to screen coordinates in the range (-0.5, +0.5)
 	Vector2D FingerCoordinatesToScreenCoordinates(float x, float y)
 	{
-		return Vector2D(x - 0.5f, y - 0.5f);
+		return Vector2D(x - 0.5f, 0.5f - y);
 	}
 }
 
@@ -32,7 +32,7 @@ namespace Input
 	{
 		SDL_Event event;
 
-		m_tapsDown.clear();
+		m_tapsGoingDown.clear();
 
 		while (SDL_PollEvent(&event))
 		{
@@ -42,53 +42,64 @@ namespace Input
 					m_hasQuitEvent = true;
 					break;
 				case SDL_KEYDOWN:
-					m_pressedKeys.insert((KeyCode)event.key.keysym.sym);
+					m_keysDown.insert((KeyCode)event.key.keysym.sym);
 					break;
 				case SDL_KEYUP:
-					m_pressedKeys.erase((KeyCode)event.key.keysym.sym);
+					m_keysDown.erase((KeyCode)event.key.keysym.sym);
 					break;
 				case SDL_FINGERDOWN:
-					m_pressedTaps.insert(event.tfinger.fingerId);
 					m_tapsDown.insert(event.tfinger.fingerId);
+					m_tapsGoingDown.insert(event.tfinger.fingerId);
 					break;
 				case SDL_FINGERUP:
-					m_pressedTaps.erase(event.tfinger.fingerId);
+					m_tapsDown.erase(event.tfinger.fingerId);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
-					m_pressedTaps.insert(event.button.button);
 					m_tapsDown.insert(event.button.button);
+					m_tapsGoingDown.insert(event.button.button);
 					break;
 				case SDL_MOUSEBUTTONUP:
-					m_pressedTaps.erase(event.button.button);
+					m_tapsDown.erase(event.button.button);
 					break;
 				case SDL_MOUSEMOTION:
 					m_tapPosition = PixelCoordinatesToScreenCoordinates(event.motion.x, event.motion.y);
 					break;
 				case SDL_FINGERMOTION:
 					m_tapPosition = FingerCoordinatesToScreenCoordinates(event.tfinger.x, event.tfinger.y);
+					break;
+				case SDL_WINDOWEVENT:
+					switch (event.window.event)
+					{
+						case SDL_WINDOWEVENT_ENTER:
+							m_isCursorInsideWindow = true;
+							break;
+						case SDL_WINDOWEVENT_LEAVE:
+							m_isCursorInsideWindow = false;
+							break;
+					}
+					break;
 			}
 		}
 	}
 
-	bool InputManager::IsKeyPressed(KeyCode keyCode)
+	bool InputManager::IsKeyDown(KeyCode keyCode)
 	{
-		return m_pressedKeys.count(keyCode) == 1;
-	}
-
-	bool InputManager::IsTapPressed()
-	{
-		return m_pressedTaps.size() > 0;
+		return m_keysDown.count(keyCode) == 1;
 	}
 
 	bool InputManager::IsTapDown()
 	{
-		return m_tapsDown.size() > 0;
+		return m_isCursorInsideWindow && m_tapsDown.size() > 0;
+	}
+
+	bool InputManager::IsTapGoingDown()
+	{
+		return m_isCursorInsideWindow && m_tapsGoingDown.size() > 0;
 	}
 
 	Vector2D InputManager::GetTapPosition()
 	{
-		Exception::Assert(IsTapPressed(), "GetTapPosition() can only be called when a tap is pressed or down");
+		Exception::Assert(IsTapDown(), "GetTapPosition() can only be called when a tap is pressed or down");
 		return m_tapPosition;
 	}
-
 }

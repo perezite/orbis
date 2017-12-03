@@ -22,29 +22,35 @@ namespace Input
 		bool HasQuitEvent() const { return m_hasQuitEvent; }
 
 		// is key pressed
-		bool IsKeyPressed(KeyCode keyCode);
+		bool IsKeyDown(KeyCode keyCode);
 
 		// is a tap pressed
-		bool IsTapPressed();
+		bool IsTapDown();
 
 		// is a tap down
-		bool IsTapDown();
+		bool IsTapGoingDown();
 
 		// get the normalized tap position
 		Vector2D GetTapPosition();
 
 	private:
+		// singleton ctor
+		InputManager() : m_isCursorInsideWindow(true) {};
+
 		// list of currently pressed keys
-		std::set<KeyCode> m_pressedKeys;
+		std::set<KeyCode> m_keysDown;
 
 		// list of currently pressed taps
-		std::set<Sint64> m_pressedTaps;
+		std::set<Sint64> m_tapsDown;
 
 		// list of taps down 
-		std::set<Sint64> m_tapsDown;
+		std::set<Sint64> m_tapsGoingDown;
 
 		// the last recorded tap position
 		Vector2D m_tapPosition;
+
+		// is cursor inside the window
+		bool m_isCursorInsideWindow;
 
 		// has the input a quit event
 		bool m_hasQuitEvent;
