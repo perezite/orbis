@@ -128,12 +128,9 @@ namespace Video
 		return texCoordAttributeHandle;
 	}
 
-	void Shader::SetModelViewMatrix(const Matrix3& mat)
+	void Shader::SetModelViewMatrix(const Matrix4& mat)
 	{
-		Matrix4 modelViewMatrix = Matrix4::From2DTransform(mat);		
-		Matrix4 mvpMatrix = Camera::GetProjectionMatrix() * modelViewMatrix;		
-		Matrix4 finalMatrix = mvpMatrix.Transposed();
-		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, finalMatrix.GetValues());
+		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, mat.GetValues());
 	}
 
 	void Shader::SetSamplerUniform(int sampler)

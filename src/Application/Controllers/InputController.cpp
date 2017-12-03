@@ -62,6 +62,14 @@ namespace
 	{
 		Translate(camera->GetParent()->GetTransform(), forward, camera->GetOmega());
 	}
+
+	void Reset(std::map<Entity*, Transform> initialTransforms)
+	{
+		std::map<Entity*, Transform>::iterator it;
+
+		for (it = initialTransforms.begin(); it != initialTransforms.end(); it++)
+			it->first->SetTransform(it->second);
+	}
 }
 
 namespace Controllers
@@ -108,6 +116,12 @@ namespace Controllers
 		m_inputModeOverlaySpriteRenderer->SetTexture(nextTexture);
 	}
 
+	void InputController::InitializeComponent(Component * component)
+	{
+		Entity* parent = component->GetParent();
+		m_initialTransforms.insert(std::make_pair(parent, *parent->GetTransform()));
+	}
+
 	void InputController::Affect(bool positive)
 	{
 		std::string texAssetPath = m_inputModeOverlaySpriteRenderer->GetTexture()->GetAssetPath();
@@ -141,6 +155,12 @@ namespace Controllers
 		if (texAssetPath == "Textures/ScaleCamera.png")
 		{
 			Scale(m_camera, positive);
+			return;
+		}
+
+		if (texAssetPath == "Textures/Reset.png")
+		{
+			Reset(m_initialTransforms);
 			return;
 		}
 

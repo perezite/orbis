@@ -27,7 +27,7 @@ namespace Video
 		int GetTexCoordAttributeHandle();
 
 		// set the transform uniform
-		void SetModelViewMatrix(const Matrix3& mat);
+		void SetModelViewMatrix(const Matrix4& mat);
 
 		// set the sample uniform
 		void SetSamplerUniform(int sampler);

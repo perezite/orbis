@@ -14,6 +14,8 @@ using namespace Components;
 using namespace Math;
 using namespace Video;
 
+#include <map>
+
 namespace Levels
 {
 	Level1::Level1()
@@ -27,6 +29,7 @@ namespace Levels
 		Texture* overlayTranslateBlueSpriteTex = new Texture("Textures/TranslateBlueSprite.png");
 		Texture* overlayRotateCameraTex = new Texture("Textures/RotateCamera.png");
 		Texture* overlayTranslateCameraTex = new Texture("Textures/TranslateCamera.png");
+		Texture* overlayResetTex = new Texture("Textures/Reset.png");
 		Texture* overlayScaleCameraTex = new Texture("Textures/ScaleCamera.png");
 		Texture* overlayLeftTex = new Texture("Textures/OverlayLeft.png");
 		Texture* overlayRightTex = new Texture("Textures/OverlayRight.png");
@@ -36,7 +39,7 @@ namespace Levels
 		camera->AddComponent(new Camera());
 		CameraController* cameraController = new CameraController();
 		camera->AddComponent(cameraController);
-		// camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
+		camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
 		this->AddEntity(camera);
 
 		// coordinate system entity
@@ -84,7 +87,7 @@ namespace Levels
 		// input entity
 		Entity* overlay = new Entity("Input Controller");
 		InputController* inputController = new InputController();
-		inputController->SetInputModeOverlayTextures({ overlayRotateYellowSpriteTex, overlayTranslateYellowSpriteTex, overlayTranslateBlueSpriteTex, overlayRotateCameraTex, overlayTranslateCameraTex, overlayScaleCameraTex });
+		inputController->SetInputModeOverlayTextures({ overlayRotateYellowSpriteTex, overlayTranslateYellowSpriteTex, overlayTranslateBlueSpriteTex, overlayRotateCameraTex, overlayTranslateCameraTex, overlayScaleCameraTex, overlayResetTex });
 		inputController->SetInputModeOverlaySpriteRenderer(inputModeOverlaySpriteRenderer);
 		inputController->SetYellowBlock(yellowBlockController);
 		inputController->SetBlueBrick(blueBlockController);

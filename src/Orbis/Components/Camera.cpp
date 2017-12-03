@@ -49,9 +49,9 @@ namespace Components
 	}
 
 	// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
-	Matrix4 Camera::GetProjectionMatrix()
+	Matrix4 Camera::GetProjectionMatrix(bool applyScaling)
 	{
-		Vector2D scale = GetInstance()->GetParent()->GetTransform()->GetScale();
+		Vector2D scale = applyScaling ? GetInstance()->GetParent()->GetTransform()->GetScale() : Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.GetX(), 1.0f / scale.GetY());
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
 		float inverseAspect = resolution.GetX() / resolution.GetY();

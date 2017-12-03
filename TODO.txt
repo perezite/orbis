@@ -1,8 +1,8 @@
 TODO:
 - Die ursprüngliche Orbis-Funktionalität re-implementieren für Windows und Android
-	- Overlay vom Zoom der Kamera unabhängig machen
-	- Reset-Funktion
 	- Der Tap funktioniert kontinuerlich auf mobile, auch wenn sich die Tap-Position ändert
+	- Tap wird nur gemeldet, wenn sich der Cursor innerhalb des Bildschirms befindet
+	- Auf Mobile wird ein Tap links oben nicht mehr fälschlicherweise als Tap links unten erkannt
 - Library Lizenzen einfügen (inkl. font-awesome svg png)
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen

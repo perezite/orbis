@@ -74,8 +74,12 @@ namespace Video
 		glEnableVertexAttribArray(shader->GetPositionAttributeHandle());
 		glEnableVertexAttribArray(shader->GetTexCoordAttributeHandle());
 		shader->SetSamplerUniform(0);
-		Matrix3 viewMatrix = applyCameraTransformation ? Camera::GetViewMatrix() : Matrix3();
-		shader->SetModelViewMatrix(viewMatrix * transform->GetMatrix());
+
+		// compute mvp matrix
+		Matrix4 modelMatrix = Matrix4::From2DTransform(transform->GetMatrix());
+		Matrix4 viewMatrix = Matrix4::From2DTransform(applyCameraTransformation ? Camera::GetViewMatrix() : Matrix3());
+		Matrix4 mvpMatrix = Camera::GetProjectionMatrix(applyCameraTransformation) * viewMatrix * modelMatrix;
+		shader->SetModelViewMatrix(mvpMatrix.Transposed());
 
 		// setup data
 		glBindBuffer(GL_ARRAY_BUFFER, gVBO);
