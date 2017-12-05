@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}</ItemsProjectGuid>
+    <ItemsProjectName>Application</ItemsProjectName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandbox\Sandbox.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandbox\Sandbox.h" />
+  </ItemGroup>
+</Project>

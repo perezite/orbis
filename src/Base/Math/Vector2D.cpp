@@ -1,5 +1,9 @@
 #include "Vector2D.h"
 
+#include "MathHelper.h"
+
+#include <math.h>
+
 namespace Math
 {
 	const Vector2D Vector2D::Zero = Vector2D(0.0f, 0.0f);
@@ -11,6 +15,14 @@ namespace Math
 		m_x = other.m_x;
 		m_y = other.m_y;
 		return *this;
+	}
+
+	const Vector2D Vector2D::Rotated(float alphaDegrees) const
+	{
+		float alpha = MathHelper::DegreesToRadian(alphaDegrees);
+		float x = cosf(alpha)*GetX() - sinf(alpha)*GetY();
+		float y = sinf(alpha)*GetX() + cosf(alpha)*GetY();
+		return Vector2D(x, y);
 	}
 
 	const Vector2D Vector2D::operator+(const Vector2D & other) const

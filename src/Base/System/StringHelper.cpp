@@ -1,6 +1,8 @@
 #include "StringHelper.h"
 
 #include <stdarg.h>
+#include <stdlib.h>
+#include <string>
 #include <memory.h>
 #include <iostream>
 
@@ -9,7 +11,6 @@ namespace System
 	std::string StringHelper::GetFormattedString(std::string format, int maximalFormattedLength, ...)
 	{
 		va_list args;
-
 		va_start(args, maximalFormattedLength);
 		std::string result = GetFormattedString(format, maximalFormattedLength, args);
 		va_end(args);
@@ -39,4 +40,10 @@ namespace System
 
 		return result;
 	}
+
+	bool StringHelper::IsEmpty(std::string str)
+	{
+		return str == "";
+	}
+
 }

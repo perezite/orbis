@@ -2,8 +2,9 @@
 
 #include "Component.h"
 
-#include "..\Game\Entity.h"
-using namespace Game;
+#include "../../Base/Math/Matrix4.h"
+#include "../../Base/Math/Vector2D.h"
+using namespace Math;
 
 namespace Components
 {
@@ -11,10 +12,19 @@ namespace Components
 	class Camera : public Component
 	{
 	public:
-		// update
-		void Update();
+		// ctor
+		Camera();
 
-		// render
-		void Render() { };
+		// dtor
+		virtual ~Camera();
+
+		// get the view matrix (the inverse of the transform of the parent entity) 
+		static Matrix3 GetViewMatrix();
+
+		// get the orthographic projection matrix
+		static Matrix4 GetProjectionMatrix(bool applyScaling);
+
+		// get the size of the camera in word coordinates
+		static Vector2D GetSize();
 	};
 }

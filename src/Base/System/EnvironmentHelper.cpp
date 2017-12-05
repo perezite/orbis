@@ -3,12 +3,10 @@
 #include "Exception.h"
 #include "StringHelper.h"
 
-
-#ifdef _WIN32
+#ifdef WIN32
 	#include <windows.h>
 	#include <direct.h>
 #endif
-
 #include <string>
 
 namespace System
@@ -17,13 +15,12 @@ namespace System
 
 	std::string System::EnvironmentHelper::GetExecutableDirectoryPath()
 	{
-		#ifdef _WIN32
+		#ifdef WIN32
 			wchar_t filePath[MAX_PATH];
 
 			// get executable file path
 			HMODULE hModule = GetModuleHandle(NULL);
-			if (hModule == NULL)
-				throw Exception("GetModuleHandle() failed");
+			Exception::Assert(hModule != NULL, "GetModuleHandle() failed");
 			GetModuleFileName(hModule, filePath, (sizeof(filePath)));
 
 			// get file path as string
@@ -36,5 +33,37 @@ namespace System
 
 			return directoryPathAsString;
 		#endif
+
+		#ifdef __ANDROID__
+			throw Exception("This functionality is not supported on Android");
+		#endif
+	}
+
+	bool EnvironmentHelper::IsMobile()
+	{
+		#if defined WIN32
+			return false;
+		#elif defined __ANDROID__
+			return true;
+		#else
+			throw Exception("The current operating system is not supported");
+		#endif
+	}
+
+	std::string EnvironmentHelper::CombinePath(std::vector<std::string> parts)
+	{
+		std::string result;
+		for (unsigned int i = 0; i < parts.size() - 1; i++)
+		{
+			if (parts[i].size() > 0)
+			{
+				result += parts[i];
+				result += PathSeparator;
+			}
+		}
+
+		result += parts[parts.size() - 1];
+
+		return result;
 	}
 }

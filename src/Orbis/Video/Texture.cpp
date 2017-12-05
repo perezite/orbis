@@ -1,69 +1,87 @@
 #include "Texture.h"
-#include "GraphicsAdapter.h"
 
-#include "..\..\Base\System\Exception.h"
-#include "..\..\Base\System\EnvironmentHelper.h"
+#include "../Libraries/SDL.h"
+#include "../Core/AssetHelper.h"
+using namespace Core;
+
+#include "../../Base/System/MemoryManager.h"
 using namespace System;
 
-#include <SDL_image.h>
+namespace
+{
+	// flip an SDL surface
+	SDL_Surface* GetFlippedSDLSurface(SDL_Surface* surface)
+	{
+		SDL_Surface *flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel,
+			surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
+
+		// lock
+		if (SDL_MUSTLOCK(surface))
+			SDL_LockSurface(surface);
+		if (SDL_MUSTLOCK(flipped))
+			SDL_LockSurface(flipped);
+
+		// copy flipped
+		for (int row = surface->h - 1; row >= 0; row--)
+		{
+			for (int col = 0; col < surface->w; col++)
+			{
+				size_t sourceOffset = row * surface->w + col;
+				size_t sourceOffsetBytes = sourceOffset * surface->format->BytesPerPixel;
+				size_t destOffset = (surface->h - row - 1) * surface->w + col;
+				size_t destOffsetBytes = destOffset * surface->format->BytesPerPixel;
+
+				memcpy((char*)flipped->pixels + destOffsetBytes, (char*)surface->pixels + sourceOffsetBytes, surface->format->BytesPerPixel);
+			}
+		}
+
+		// unlock
+		if (SDL_MUSTLOCK(surface))
+			SDL_UnlockSurface(surface);
+		if (SDL_MUSTLOCK(flipped))
+			SDL_UnlockSurface(flipped);
+
+		return flipped;
+	}
+}
 
 namespace Video
 {
-	GLuint Texture::m_highestTextureId = -1;
-
-	Texture::Texture(std::string filePath) : m_filePath(filePath)
+	Texture::Texture(std::string assetPath, bool flipVertically)
 	{
-		// get absolute asset path on windows
-		std::string relativeAssetPath = ".." + EnvironmentHelper::PathSeparator + ".." 
-			+ EnvironmentHelper::PathSeparator + "Assets";
-		std::string absoluteAssetPath = EnvironmentHelper::GetExecutableDirectoryPath() 
-			+ EnvironmentHelper::PathSeparator + relativeAssetPath + EnvironmentHelper::PathSeparator + m_filePath;
+		m_assetPath = assetPath;
 
-		// load the image into an SDL surface
-		m_surface = IMG_Load(absoluteAssetPath.c_str());
-		if (!m_surface)
+		std::string filePath = AssetHelper::AssetPathToFilePath(assetPath);
+		m_surface = IMG_Load(filePath.c_str());
+		SDL_Surface* surface2 = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
+		SDL_FreeSurface(m_surface);
+		m_surface = surface2;
+
+		if (flipVertically)
 		{
-			throw Exception("Loading the following texture file failed: " + absoluteAssetPath);
+			SDL_Surface* flipped = GetFlippedSDLSurface(m_surface);
+			SDL_FreeSurface(m_surface);
+			m_surface = flipped;
 		}
 
-		// blit the loaded surface into an auxiliary surface with known color settings
-		#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-			Uint32 colorMasks[4] = { 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff };
-		#else
-			Uint32 colorMasks[4] = { 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000 };
-		#endif
-		SDL_Surface* auxiliarySurface = SDL_CreateRGBSurface(0, m_surface->w, m_surface->h, 32, colorMasks[0], colorMasks[1], colorMasks[2], colorMasks[3]);
-		if (!auxiliarySurface)
-			throw Exception("Creating the surface failed");
-		SDL_Rect area = { 0, 0, m_surface->w, m_surface->h };
-		if (SDL_BlitSurface(m_surface, &area, auxiliarySurface, &area) < 0)
-			throw Exception("Blitting the surface failed");
-
-		// create texture from surface
-		m_textureId = m_highestTextureId + 1;
-		m_highestTextureId = m_textureId;
-		glGenTextures(1, &m_textureId);
-		glBindTexture(GL_TEXTURE_2D, m_textureId);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, auxiliarySurface->pixels);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		GraphicsAdapter::AssertNoError();
-
-		// cleanup
-		SDL_FreeSurface(auxiliarySurface);
+		glGenTextures(1, &m_textureHandle);
+		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
 		SDL_FreeSurface(m_surface);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		MemoryManager<Texture>::GetInstance()->Add(this);
 	}
 
 	Texture::~Texture()
 	{
-		glDeleteTextures(1, &m_textureId);
-			
-		if (m_textureId == m_highestTextureId)
-			m_highestTextureId = m_highestTextureId - 1;
+		glDeleteTextures(1, &m_textureHandle);
+		SDL_FreeSurface(m_surface);
 	}
 
-	void Texture::SetActive()
+	void Texture::Bind()
 	{
-		glBindTexture(GL_TEXTURE_2D, m_textureId);
+		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
 }

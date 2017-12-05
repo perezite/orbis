@@ -1,47 +1,36 @@
 #pragma once
 
-#include "GraphicsAdapter.h"
+#include "RenderMode.h"
+#include "Shader.h"
 #include "Texture.h"
 
-#include "..\..\Base\Math\Vector2D.h"
+#include "../Game/Transform.h"
+using namespace Game;
+
+#include "../../Base/Math/Vector2D.h"
 using namespace Math;
+
+#include <vector>
 
 namespace Video
 {
 	class RenderDevice
 	{
 	public:
-		// constructor
-		RenderDevice() : m_texturedRendering(false) { };
-		
-		// destructor
-		virtual ~RenderDevice() { };
+		// ctor
+		RenderDevice();
 
-		// begin primitive
-		void BeginPrimitive(RenderMode renderMode, bool texturedRendering);
+		// dtor
+		virtual ~RenderDevice();
 
-		// end primitive
-		void EndPrimitive();
+		// add geometry to the renderer
+		void AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoordinates, std::vector<int> indices);
 
-		// set texture coordinate
-		void SetTextureCoordinate(Vector2D position);
-
-		// set vertex 2d
-		void SetVertex2D(Vector2D position);
-
-		// translate all vertices
-		void ApplyGlobalTranslation(Vector2D translation);
-
-		// scale all vertices
-		void ApplyGlobalScale(Vector2D scale);
-
-		// rotate all vertices
-		void ApplyGlobalRotation(float rotation);
-
-		// reset global transformations
-		void ResetGlobalTransforms();
+		// render
+		void Render(Transform* transform, Texture* texture, bool applyCameraTransformation = true);
 
 	private:
-		bool m_texturedRendering;
+		// the vertices of the primitive
+		std::vector<Vector2D> vertices;
 	};
 }

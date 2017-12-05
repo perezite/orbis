@@ -1,7 +1,10 @@
 #include "Level.h"
 
-#include "..\Video\VideoManager.h"
+#include "../Video/VideoManager.h"
 using namespace Video;
+
+#include "../../Base/System/MemoryManager.h"
+using namespace System;
 
 namespace Game
 {
@@ -12,12 +15,14 @@ namespace Game
 
 	Level::~Level()
 	{
-		for each (Entity *entity in m_entities)
+		for(unsigned int i = 0; i < m_entities.size(); i++)
 		{
-			delete entity;
+			delete m_entities[i];
 		}
 
 		m_entities.clear();
+	
+		MemoryManager<Texture>::GetInstance()->DeleteAll();
 	}
 
 	void Level::AddEntity(Entity *entity)
@@ -35,24 +40,24 @@ namespace Game
 		else
 		{
 			UpdateEntities();
-
+			VideoManager::GetInstance()->ClearScreen();
 			RenderEntities();
 		}
 	}
 
 	void Level::StartEntities()
 	{
-		for each (Entity *entity in m_entities)
+		for(unsigned int i = 0; i < m_entities.size(); i++)
 		{
-			entity->Start();
+			m_entities[i]->Start();
 		}
 	}
 
 	void Level::UpdateEntities()
 	{
-		for each (Entity *entity in m_entities)
+		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{
-			entity->Update();
+			m_entities[i]->Update();
 		}
 	}
 
@@ -62,10 +67,9 @@ namespace Game
 
 		videoManager->ClearScreen();
 
-		for each (Entity *entity in m_entities)
+		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{
-	
-			entity->Render();
+			m_entities[i]->Render();
 		}
 
 		videoManager->SwapBuffers();

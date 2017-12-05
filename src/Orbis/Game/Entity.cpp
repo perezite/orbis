@@ -4,9 +4,9 @@ namespace Game
 {
 	Entity::~Entity()
 	{
-		for each (Component *component in m_components)
+		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			delete component;
+			delete m_components[i];
 		}
 
 		m_components.clear();
@@ -20,25 +20,25 @@ namespace Game
 
 	void Entity::Start()
 	{
-		for each (Component *component in m_components)
+		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			component->Start();
+			m_components[i]->Start();
 		}
 	}
 
 	void Entity::Update()
 	{
-		for each (Component *component in m_components)
+		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			component->Update();
+			m_components[i]->Update();
 		}
 	}
 
 	void Entity::Render()
 	{
-		for each (Component *component in m_components)
+		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			component->Render();
+			m_components[i]->Render();
 		}
 	}
 }

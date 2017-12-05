@@ -1,70 +1,110 @@
 #include "VideoManager.h"
 
-#include "GraphicsAdapter.h"
+#include "../Libraries/GL.h"
+#include "../Libraries/SDL.h"
 
-#include "..\..\Base\System\Exception.h"
-#include "..\..\Base\System\StringHelper.h"
+#include "../../Base/System/Exception.h"
+#include "../../Base/System/StringHelper.h"
+#include "../../Base/System/EnvironmentHelper.h"
+#include "../../Base/Math/Vector2D.h"
+#include "../../Base/Math/MathHelper.h"
+using namespace Math;
 using namespace System;
-
-#include "..\Input\InputManager.h"
-using namespace Input;
 
 #include <iostream>
 
 namespace Video
 {
+	const Vector2D VideoManager::m_DefaultWindowResolution(400.0f, 711.0f);
+
 	VideoManager* VideoManager::GetInstance()
 	{
 		static VideoManager instance;
-
 		return &instance;
 	}
 
-	VideoManager::VideoManager() : m_defaultWindowSize(Vector2D(100.0f, 100.0f))
+	VideoManager::VideoManager()
 	{
-		InitializeVideo((int)m_defaultWindowSize.GetX(), (int)m_defaultWindowSize.GetY());
+		Initialize();
 	}
 
 	VideoManager::~VideoManager()
 	{
-		QuitVideo();
-	}
+		if (m_renderer)
+			delete m_renderer;
 
-	void VideoManager::QuitVideo()
-	{
-		GraphicsAdapter::QuitGraphics();
-	}
+		SDL_DestroyWindow(m_sdlWindow);
+		SDL_Quit();
 
-	void VideoManager::SetWindowResolution(int windowWidth, int windowHeight)
-	{
-		QuitVideo();
-		InitializeVideo(windowWidth, windowHeight);
+		// Texture::DeleteAll();
 	}
 
 	RenderDevice* VideoManager::GetRenderDevice()
 	{
-		return &m_renderDevice;
+		if (m_renderer == NULL)
+			m_renderer = new RenderDevice();
+
+		return m_renderer;
 	}
 
 	void VideoManager::ClearScreen()
 	{
-		GraphicsAdapter::ClearScreen();
+		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void VideoManager::SwapBuffers()
 	{
-		GraphicsAdapter::SwapBuffers();
+		SDL_GL_SwapWindow(m_sdlWindow);
 	}
-	
-	void VideoManager::InitializeVideo(int windowWidth, int windowHeight)
+
+	void VideoManager::Initialize()
 	{
-		GraphicsAdapter::InitializeGraphics(windowWidth, windowHeight);
+		if (m_IsInitialized)
+			return;
 
-		GraphicsAdapter::SetMatrixMode(MatrixMode::Projection);
-		GraphicsAdapter::SafeLoadIdentityMatrix();
-		GraphicsAdapter::SetMatrixMode(MatrixMode::Modelview);
-		GraphicsAdapter::SafeLoadIdentityMatrix();
+		m_renderer = NULL;
 
-		GraphicsAdapter::SafeSetClearColor(Color::Black);
+		SDL_Init(SDL_INIT_VIDEO);
+		m_windowResolution = GetDefaultWindowResolution();
+
+		#ifdef WIN32	
+			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+			m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
+			glewInit();
+		#endif	
+		#ifdef __ANDROID__
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+			SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+			m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
+		#endif
+
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
+		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
+
+		m_IsInitialized = true;
+	}
+
+	Vector2D VideoManager::GetDefaultWindowResolution()
+	{
+		if (EnvironmentHelper::IsMobile())
+		{
+			SDL_DisplayMode mode;
+			SDL_GetDisplayMode(0, 0, &mode);
+			return Vector2D((float)mode.w, (float)mode.h);
+		}
+
+		else return m_DefaultWindowResolution;
 	}
 }

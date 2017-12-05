@@ -1,8 +1,11 @@
 #pragma once
 
-#include "EventAdapter.h"
+#include "KeyCode.h"
 
-#include <map>
+#include "../../Base/Math/Vector2D.h"
+using namespace Math;
+
+#include <set>
 
 namespace Input
 {
@@ -15,24 +18,41 @@ namespace Input
 		// update
 		void Update();
 
-		// is key down
+		// has the input a quit event
+		bool HasQuitEvent() const { return m_hasQuitEvent; }
+
+		// is key pressed
 		bool IsKeyDown(KeyCode keyCode);
 
-		// has manager caught a quit event
-		bool HasQuitEvent();
+		// is a tap pressed
+		bool IsTapDown();
 
-		// Destructor
-		virtual ~InputManager();
+		// is a tap down
+		bool IsTapGoingDown();
 
-	protected:
-		// Singleton Constructor
-		InputManager();
+		// get the normalized tap position
+		Vector2D GetTapPosition();
 
 	private:
-		// has manager caught a quit event
-		bool m_hasQuitEvent;
+		// singleton ctor
+		InputManager() : m_isCursorInsideWindow(true) {};
 
-		// pressed keys
-		std::map<KeyCode, bool> m_pressedKeys;
+		// list of currently pressed keys
+		std::set<KeyCode> m_keysDown;
+
+		// list of currently pressed taps
+		std::set<Sint64> m_tapsDown;
+
+		// list of taps down 
+		std::set<Sint64> m_tapsGoingDown;
+
+		// the last recorded tap position
+		Vector2D m_tapPosition;
+
+		// is cursor inside the window
+		bool m_isCursorInsideWindow;
+
+		// has the input a quit event
+		bool m_hasQuitEvent;
 	};
 }

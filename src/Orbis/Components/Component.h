@@ -12,11 +12,14 @@ namespace Components
 	class Component
 	{
 	public:
-		// default constructor
+		// default ctor
 		Component() : m_parent(NULL) { }
 
-		// constructor
+		// ctor
 		Component(Game::Entity* parent) : m_parent(parent) { };
+
+		// dtor
+		virtual ~Component() { };
 
 		// start
 		virtual void Start() { };

@@ -21,6 +21,9 @@ namespace Math
 		// assignment
 		const Vector2D& operator=(const Vector2D &other);
 
+		// get a vector rotated by alpha degrees
+		const Vector2D Rotated(float alphaDegrees) const;
+
 		// addition
 		const Vector2D operator+(const Vector2D &other) const;
 

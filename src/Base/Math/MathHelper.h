@@ -13,6 +13,6 @@ namespace Math
 		static float RadianToDegrees(float radian);
 
 		// convert angle in degrees to angle in radian
-		float DegreesToRadian(float degrees);
+		static float DegreesToRadian(float degrees);
 	};
 }

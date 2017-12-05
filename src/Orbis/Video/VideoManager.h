@@ -2,11 +2,10 @@
 
 #include "RenderDevice.h"
 
-#include "..\..\Base\Math\Vector2D.h"
+#include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
-#include "..\Game\Entity.h"
-using namespace Game;
+#include "SDL2/SDL.h"
 
 namespace Video
 {
@@ -16,37 +15,48 @@ namespace Video
 		// get instance
 		static VideoManager* GetInstance();
 
+		// initialize
+		void Initialize();
+
 		// destructor
 		virtual ~VideoManager();
+
+		// get the resolution
+		Vector2D GetResolution() { return m_windowResolution; }
 
 		// get the render device
 		RenderDevice* GetRenderDevice();
 
-		// quit video
-		void QuitVideo();
-
-		// set resolution
-		void SetWindowResolution(int widthInPixels, int heightInPixels);
-
-		// clear screen
+		// clear the screen
 		void ClearScreen();
 
-		// swap buffers
+		// swap the video buffers
 		void SwapBuffers();
 
 	protected:
 		// singleton constructor
 		VideoManager();
 
-		// initialize SDL
-		void InitializeVideo(int windowWidth, int windowHeight);
+		// get the default window resolution
+		Vector2D GetDefaultWindowResolution();
 
 	private:
-		// window size
-		const Vector2D m_defaultWindowSize;
+		// the sdl window
+		SDL_Window* m_sdlWindow;
 
-		// render device
-		RenderDevice m_renderDevice;
+		// the opengl context
+		SDL_GLContext m_openGlContext;
 
+		// the attached render device
+		RenderDevice* m_renderer;
+
+		// the window resolution
+		Vector2D m_windowResolution;
+
+		// the default window resolution
+		static const Vector2D m_DefaultWindowResolution;
+
+		// is the manager initialized
+		bool m_IsInitialized;
 	};
 }

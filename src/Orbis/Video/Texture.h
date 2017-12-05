@@ -1,34 +1,39 @@
 #pragma once
 
+#include "../Libraries/GL.h"
+#include "../Libraries/SDL.h"
+
 #include <string>
-#include <SDL_opengl.h>
-#include <SDL.h>
+#include <set>
 
 namespace Video
 {
 	class Texture
 	{
 	public:
-		// constructor
-		Texture(std::string filePath);
-		
-		// destructor
+		// ctor
+		Texture(std::string assetPath, bool flipVertically = true);
+
+		// dtor
 		virtual ~Texture();
 
-		// set the texture active
-		void SetActive();
+		// get the texture handle
+		unsigned int GetTextureHandle() const { return m_textureHandle; }
+
+		// get the asset path
+		std::string GetAssetPath() const { return m_assetPath; }
+
+		// bind this texture
+		void Bind();
 
 	private:
-		// path to texture file
-		std::string m_filePath;
-
-		// the SDL surface containing the image
-		SDL_Surface* m_surface;
+		// the texture asset path
+		std::string m_assetPath;
 
 		// the texture id
-		GLuint m_textureId;
+		GLuint m_textureHandle;
 
-		// the highest texture ID used
-		static GLuint m_highestTextureId;
+		// the image surface
+		SDL_Surface* m_surface;
 	};
 }

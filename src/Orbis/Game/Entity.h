@@ -2,13 +2,14 @@
 
 #include "Transform.h"
 
-#include "..\Components\Component.h"
+#include "../Components/Component.h"
 using namespace Components;
 
-#include "..\..\Base\Math\Vector2D.h"
+#include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
 #include <vector>
+#include <string>
 
 namespace Game
 {
@@ -18,7 +19,7 @@ namespace Game
 	{
 	public:
 		// constructor
-		Entity() { }
+		Entity(std::string name = "") { m_name = name; }
 
 		// destructor
 		virtual ~Entity();
@@ -28,6 +29,9 @@ namespace Game
 
 		// get transform
 		Transform* GetTransform() { return &m_transform; }
+
+		// get the name
+		std::string GetName() const { return m_name; }
 
 		// add component
 		void AddComponent(Component *component);
@@ -47,5 +51,8 @@ namespace Game
 
 		// components of the entity
 		std::vector<Component*> m_components;
+
+		// name of the entity
+		std::string m_name;
 	};
 }
