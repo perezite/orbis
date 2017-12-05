@@ -99,7 +99,7 @@ namespace Input
 
 	Vector2D InputManager::GetTapPosition()
 	{
-		Exception::Assert(IsTapDown(), "GetTapPosition() can only be called when a tap is pressed or down");
+		Exception::Assert(IsTapDown(), "GetTapPosition() can only be called when a tap is pressed or going down");
 		return m_tapPosition;
 	}
 }

@@ -1,4 +1,5 @@
 TODO:
+- Orbis-Lizenz hinzufügen
 - Feature-Branch orbis/cross-platform nach master mergen
 - Lokalen orbis.master Ordner wieder löschen
 - StackOverflow-Nachtrag erstellen für Android VS-Compilation
