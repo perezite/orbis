@@ -70,7 +70,9 @@ JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jc
 	/* Do not issue an exit or the whole application will terminate instead of just the SDL thread */
 	/* exit(status); */
 
-	return status;
+	// well, we do it anyways...
+	exit(0);
+	// return status;
 }
 
 #endif /* __ANDROID__ */

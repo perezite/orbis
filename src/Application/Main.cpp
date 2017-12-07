@@ -24,7 +24,7 @@ int main(int argc, char* args[])
 	try
 	{
 		OrbisMain::GetInstance()->Initialize();
-
+		
 		Level1* level1 = new Level1();
 		LevelManager::GetInstance()->QueueLevel(level1);
 
@@ -39,7 +39,6 @@ int main(int argc, char* args[])
 		#endif
 
 		LogHelper::ShowMessageBox(e.what(), "Exception");
-		exit(0);
 	}
 
 	return 0;

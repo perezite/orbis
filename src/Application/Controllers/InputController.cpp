@@ -80,6 +80,15 @@ namespace Controllers
 	{
 		static InputManager* inputManager = InputManager::GetInstance();
 
+		if (inputManager->IsTapGoingDown())
+		{
+			Vector2D tapPosition = inputManager->GetTapPosition();
+
+			// left top tap
+			if (tapPosition.GetX() < 0 && tapPosition.GetY() >= 0.0f)
+				Cycle();
+		}
+
 		if (inputManager->IsTapDown())
 		{
 			Vector2D tapPosition = inputManager->GetTapPosition();
@@ -95,15 +104,6 @@ namespace Controllers
 			{
 				Affect(true);
 			}
-		}
-
-		if (inputManager->IsTapGoingDown())
-		{
-			Vector2D tapPosition = inputManager->GetTapPosition();
-
-			// left top tap
-			if (tapPosition.GetX() < 0 && tapPosition.GetY() >= 0.0f)
-				Cycle();
 		}
 	}
 

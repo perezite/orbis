@@ -20,7 +20,7 @@ namespace Game
 		
 		return &instance;
 	}
-
+	
 	LevelManager::~LevelManager()
 	{
 		if (m_currentLevel != NULL)
@@ -49,7 +49,7 @@ namespace Game
 			SwitchToQueuedLevel();
 		}
 	}
-	
+
 	void LevelManager::SwitchToQueuedLevel()
 	{
 		if (m_currentLevel != NULL)

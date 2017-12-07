@@ -21,6 +21,9 @@ namespace Input
 		// has the input a quit event
 		bool HasQuitEvent() const { return m_hasQuitEvent; }
 
+		// set the quit event to true
+		void SetQuitEvent();
+
 		// is key pressed
 		bool IsKeyDown(KeyCode keyCode);
 

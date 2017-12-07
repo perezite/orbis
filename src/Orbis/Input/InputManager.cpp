@@ -82,6 +82,15 @@ namespace Input
 		}
 	}
 
+	void InputManager::SetQuitEvent()
+	{
+		#ifdef __ANDROID__
+			throw Exception("calling SetQuitEvent() is not allowed on Android");
+		#endif	
+
+		m_hasQuitEvent = true;
+	}
+
 	bool InputManager::IsKeyDown(KeyCode keyCode)
 	{
 		return m_keysDown.count(keyCode) == 1;

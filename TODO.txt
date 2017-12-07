@@ -1,2 +1,3 @@
 TODO:
-- Rausfinden, wie man die Applikation auf Android vollständig terminiert
+- Minimalisierte Android-Navigation anzeigen
+- Datei Laden Caseinsensitiv machen auf Android
