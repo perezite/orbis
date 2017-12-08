@@ -1,3 +1,2 @@
 TODO:
-- Minimalisierte Android-Navigation anzeigen
 - Datei Laden Caseinsensitiv machen auf Android

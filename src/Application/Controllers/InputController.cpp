@@ -87,6 +87,12 @@ namespace Controllers
 			// left top tap
 			if (tapPosition.GetX() < 0 && tapPosition.GetY() >= 0.0f)
 				Cycle();
+
+			// right top tap
+			if (tapPosition.GetX() >= 0 && tapPosition.GetY() >= 0)
+			{
+				InputManager::GetInstance()->SetQuitEvent();
+			}
 		}
 
 		if (inputManager->IsTapDown())

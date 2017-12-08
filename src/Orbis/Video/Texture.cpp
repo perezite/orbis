@@ -53,9 +53,9 @@ namespace Video
 
 		std::string filePath = AssetHelper::AssetPathToFilePath(assetPath);
 		m_surface = IMG_Load(filePath.c_str());
-		SDL_Surface* surface2 = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
+		SDL_Surface* converted = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
 		SDL_FreeSurface(m_surface);
-		m_surface = surface2;
+		m_surface = converted;
 
 		if (flipVertically)
 		{
@@ -77,7 +77,6 @@ namespace Video
 	Texture::~Texture()
 	{
 		glDeleteTextures(1, &m_textureHandle);
-		SDL_FreeSurface(m_surface);
 	}
 
 	void Texture::Bind()

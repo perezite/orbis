@@ -84,9 +84,7 @@ namespace Input
 
 	void InputManager::SetQuitEvent()
 	{
-		#ifdef __ANDROID__
-			throw Exception("calling SetQuitEvent() is not allowed on Android");
-		#endif	
+		throw Exception("calling SetQuitEvent() is not allowed on Android");	
 
 		m_hasQuitEvent = true;
 	}
