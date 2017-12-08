@@ -33,6 +33,7 @@ namespace Levels
 		Texture* overlayScaleCameraTex = new Texture("Textures/ScaleCamera.png");
 		Texture* overlayLeftTex = new Texture("Textures/OverlayLeft.png");
 		Texture* overlayRightTex = new Texture("Textures/OverlayRight.png");
+		Texture* overlayCloseTex = new Texture("Textures/OverlayClose.png");
 
 		// camera entity
 		Entity* camera = new Entity();
@@ -83,6 +84,12 @@ namespace Levels
 		overlayRight->AddComponent(new SpriteRenderer(overlayRightTex, false));
 		overlayRight->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), -0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f)));
 		this->AddEntity(overlayRight);
+
+		// close overlay sprite
+		Entity* overlayClose = new Entity("OverlayClose");
+		overlayClose->AddComponent(new SpriteRenderer(overlayCloseTex, false));
+		overlayClose->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f)));
+		this->AddEntity(overlayClose);
 
 		// input entity
 		Entity* overlay = new Entity("Input Controller");

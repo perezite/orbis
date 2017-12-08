@@ -1,2 +1,1 @@
 TODO:
-- Datei Laden Caseinsensitiv machen auf Android
