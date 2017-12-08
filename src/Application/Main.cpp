@@ -1,6 +1,7 @@
 #include "Sandbox/Sandbox.h"
 
 #include "Levels/Level1.h"
+#include "Levels/Level2.h"
 using namespace Levels;
 
 #include "../Orbis/Orbis/OrbisMain.h"
@@ -25,8 +26,8 @@ int main(int argc, char* args[])
 	{
 		OrbisMain::GetInstance()->Initialize();
 		
-		Level1* level1 = new Level1();
-		LevelManager::GetInstance()->QueueLevel(level1);
+		Level2* level = new Level2();
+		LevelManager::GetInstance()->QueueLevel(level);
 
 		OrbisMain::GetInstance()->Run();
 	}

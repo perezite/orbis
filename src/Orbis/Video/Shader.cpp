@@ -13,23 +13,8 @@ using namespace System;
 
 namespace
 {
-	// the shader program id
-	GLuint programId = -1;
-
-	// the vertex position attribute handle
-	GLint positionAttributeHandle = -1;
-
-	// the tex coord attribute handle
-	GLint texCoordAttributeHandle = -1;
-
-	// the transform uniform handle
-	GLint transformUniformHandle = -1;
-
-	// the sample uniform handle
-	GLint samplerUniformHandle = -1;
-
 	// compile the shader code
-	GLuint Compile(std::string shaderCode, GLenum type)
+	GLuint Compile(std::string shaderCode, GLenum type, GLuint programId)
 	{
 		GLuint shader;
 		GLint compiled;
@@ -62,7 +47,7 @@ namespace
 	}
 
 	// link the shader program
-	void Link()
+	void Link(GLuint programId)
 	{
 		glLinkProgram(programId);
 
@@ -95,52 +80,52 @@ namespace Video
 	{
 		VideoManager::GetInstance();
 
-		programId = glCreateProgram();
+		m_programId = glCreateProgram();
 
 		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexAssetPath);
-		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER);
-		glAttachShader(programId, vertexShader);
+		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
+		glAttachShader(m_programId, vertexShader);
 
 		std::string fragmentShaderCode = AssetHelper::LoadTextAsset(fragmentAssetPath);
-		GLuint fragmentShader = Compile(fragmentShaderCode, GL_FRAGMENT_SHADER);
-		glAttachShader(programId, fragmentShader);
+		GLuint fragmentShader = Compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
+		glAttachShader(m_programId, fragmentShader);
 
-		Link();
-
-		positionAttributeHandle = glGetAttribLocation(programId, "a_vPosition");
-		texCoordAttributeHandle = glGetAttribLocation(programId, "a_vTexCoord");
-		transformUniformHandle = glGetUniformLocation(programId, "u_mTransform");
-		samplerUniformHandle = glGetUniformLocation(programId, "u_sSampler");
+		Link(m_programId);
 	}
 
 	Shader::~Shader()
 	{
-		glDeleteProgram(programId);
+		glDeleteProgram(m_programId);
 	}
 
-	int Shader::GetPositionAttributeHandle()
+	int Shader::GetAttributeHandle(std::string id)
 	{
-		return positionAttributeHandle;
+		GLint location = glGetAttribLocation(m_programId, id.c_str());
+		return location;
 	}
 
-	int Shader::GetTexCoordAttributeHandle()
+	void Shader::SetUniform(std::string id, int value)
 	{
-		return texCoordAttributeHandle;
+		GLint handle = glGetUniformLocation(m_programId, id.c_str());
+		glUniform1i(handle, value);
 	}
 
-	void Shader::SetModelViewMatrix(const Matrix4& mat)
+	void Shader::SetUniform(std::string id, const Color & color)
 	{
-		glUniformMatrix4fv(transformUniformHandle, 1, GL_FALSE, mat.GetValues());
+		GLint handle = glGetUniformLocation(m_programId, id.c_str());
+
+		glUniform4f(handle, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 	}
 
-	void Shader::SetSamplerUniform(int sampler)
+	void Shader::SetUniform(std::string id, const Matrix4 & mat)
 	{
-		glUniform1i(samplerUniformHandle, sampler);
+		GLint handle = glGetUniformLocation(m_programId, id.c_str());
+		glUniformMatrix4fv(handle, 1, GL_FALSE, mat.GetValues());
 	}
 
 	void Shader::Use()
 	{
-		glUseProgram(programId);
+		glUseProgram(m_programId);
 	}
 
 	void Shader::Unuse()

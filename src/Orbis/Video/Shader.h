@@ -20,22 +20,26 @@ namespace Video
 		// dtor
 		~Shader();
 
-		// get the position attribute location
-		int GetPositionAttributeHandle();
+		// get an attribute handle
+		int GetAttributeHandle(std::string id);
 
-		// get the tex coord attribute handle
-		int GetTexCoordAttributeHandle();
+		// set a uniform value
+		void SetUniform(std::string id, int value);
 
-		// set the transform uniform
-		void SetModelViewMatrix(const Matrix4& mat);
+		// set a uniform
+		void SetUniform(std::string id, const Color& color);
 
-		// set the sample uniform
-		void SetSamplerUniform(int sampler);
+		// set a uniform value
+		void SetUniform(std::string id, const Matrix4& mat);
 
 		// enable the shader
 		void Use();
 
 		// disable the shader
 		void Unuse();
+
+	private: 
+		// the shader program id
+		GLuint m_programId = -1;
 	};
 }

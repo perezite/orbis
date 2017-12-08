@@ -1,1 +1,17 @@
 TODO:
+- Texture Atlas implementieren
+	- Line Renderer implementieren
+	- Packing-Algorithmus direkt im Level implementieren mithilfe graphischer Darstellung
+		-- Referenz: https://www.youtube.com/watch?v=rVp5--Gx6Ks
+	- Texture Atlas Klasse implementieren
+		- AddRange Methode implementieren, welche mehrere Textures hinzufügt
+		- Generate Methode implementieren, welche den Atlas berechnet. Dazu die vorher geschrieben Logik verwenden
+		- Die Texture-Klasse so umschreiben, dass sie ggf. den SpriteAtlas verwendet zu dem sie hinzugefügt wurde.
+	- RenderDevice anpassen, so dass pro TextureAtlas nur ein einziger DrawCall ausgeführt wird
+	- Texture Atlassing in Level1 einbinden  
+- Logik in SpriteRenderer und RectangleRenderer fixen (aktuell wird bei jeder Instanz der VBO neu gesetzt mit den immer gleichen Daten)
+- Material-Klasse einbinden, die die Argumente für RenderDevice::Render zusammenfasst (Texture, Shader, Color)
+- Apply CameraTransformation als Property des RenderDevices setzen
+- Coroutinen implementieren
+- Partikelsystem implementieren
+- Orbis in Bibliothek versiegeln

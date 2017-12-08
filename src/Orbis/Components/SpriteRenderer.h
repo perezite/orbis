@@ -3,16 +3,20 @@
 #include "Component.h"
 
 #include "../Video/Texture.h"
+#include "../Video/Shader.h"
 using namespace Video;
 
 namespace Components
 {
-	// A renderer which renders a triangle
+	// A renderer which renders a textured quad
 	class SpriteRenderer : public Component
 	{
 	public:
 		// ctor
 		SpriteRenderer(Texture* texture, bool applyCameraTransformation = true) { SetTexture(texture); m_applyCameraTransformation = applyCameraTransformation; }
+
+		// dtor
+		virtual ~SpriteRenderer() { delete m_shader; }
 
 		// update
 		void Start();
@@ -32,6 +36,9 @@ namespace Components
 	private:
 		// the texture
 		Texture* m_texture;
+
+		// the shader
+		Shader* m_shader;
 
 		// is the camera transformation applied to this sprite
 		bool m_applyCameraTransformation;

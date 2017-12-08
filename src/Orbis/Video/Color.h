@@ -6,11 +6,12 @@ namespace Video
 	{
 	public:
 		// ctor
-		Color(float red, float green, float blue, float alpha) :
+		Color(float red, float green, float blue, float alpha = 1.0f) :
 			m_red(red), m_green(green), m_blue(blue), m_alpha(alpha)
 		{ }
 
-		Color() : 
+		// ctor
+		Color() :
 			m_red(0.0f), m_green(0.0f), m_blue(0.0f), m_alpha(1.0f)
 		{ }
 
@@ -38,7 +39,11 @@ namespace Video
 		// set alpha
 		void SetAlpha(float alpha) { m_alpha = alpha; }
 
-	private: 
+	public:
+		// white color
+		static const Color White;
+
+	private:
 		// red
 		float m_red;
 
@@ -51,4 +56,5 @@ namespace Video
 		// alpha
 		float m_alpha;
 	};
+
 }

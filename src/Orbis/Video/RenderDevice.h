@@ -27,7 +27,7 @@ namespace Video
 		void AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoordinates, std::vector<int> indices);
 
 		// render
-		void Render(Transform* transform, Texture* texture, bool applyCameraTransformation = true);
+		void Render(Transform* transform, Texture* texture, Shader* shader, const Color& color, bool useColor, bool applyCameraTransformation);
 
 	private:
 		// the vertices of the primitive
