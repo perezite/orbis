@@ -6,6 +6,7 @@ namespace Video
 {
 	enum RenderMode
 	{
-		Triangle = GL_TRIANGLES
+		Triangles = GL_TRIANGLES,
+		Lines = GL_LINES
 	};
 }

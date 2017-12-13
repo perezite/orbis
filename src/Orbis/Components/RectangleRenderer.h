@@ -4,6 +4,7 @@
 
 #include "../Video/Shader.h"
 #include "../Video/Color.h"
+#include "../Video/Mesh.h"
 using namespace Video;
 
 namespace Components
@@ -30,5 +31,8 @@ namespace Components
 
 		// the shader
 		Shader* m_shader;
+
+		// the mesh
+		Mesh* m_mesh;
 	};
 }

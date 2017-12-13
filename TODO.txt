@@ -1,6 +1,10 @@
 TODO:
+- Mehrere Geometrien implementieren
+	- Beim ersten Aufruf von RenderDevices::Render() die Mesh-Daten in den VBO und IBO laden
+	- Exception werfen, falls man danach nochmals RenderDevice::RegisterMesh(Mesh* mesh) aufrufen will
 - Texture Atlas implementieren
 	- Line Renderer implementieren
+	- Material-Klasse einführen für Renderer
 	- Packing-Algorithmus direkt im Level implementieren mithilfe graphischer Darstellung
 		-- Referenz: https://www.youtube.com/watch?v=rVp5--Gx6Ks
 	- Texture Atlas Klasse implementieren

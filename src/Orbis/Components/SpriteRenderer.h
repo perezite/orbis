@@ -4,6 +4,7 @@
 
 #include "../Video/Texture.h"
 #include "../Video/Shader.h"
+#include "../Video/Mesh.h"
 using namespace Video;
 
 namespace Components
@@ -39,6 +40,9 @@ namespace Components
 
 		// the shader
 		Shader* m_shader;
+
+		// the mesh
+		Mesh* m_mesh;
 
 		// is the camera transformation applied to this sprite
 		bool m_applyCameraTransformation;

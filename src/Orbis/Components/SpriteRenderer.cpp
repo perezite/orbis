@@ -22,15 +22,16 @@ namespace Components
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
 		m_shader = new Shader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
 
-		std::vector<Vector2D> vertices = { Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) };
+		/*std::vector<Vector2D> vertices = { Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) };
 		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) };
-		std::vector<int> indices = { 0, 1, 2, 1, 3, 2 };
-		renderDevice->AddGeometry(vertices, texCoords, indices);
+		std::vector<int> indices = { 0, 1, 2, 1, 3, 2 };*/
+		m_mesh = &Mesh::TexturedQuad;
+		m_mesh->Initialize();
 	}
 
 	void SpriteRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(GetParent()->GetTransform(), m_texture, m_shader, Color::White, false, m_applyCameraTransformation);
+		renderDevice->Render(m_mesh, GetParent()->GetTransform(), m_texture, m_shader, Color::White, RenderMode::Triangles, false, m_applyCameraTransformation);
 	}
 }

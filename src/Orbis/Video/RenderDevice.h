@@ -3,6 +3,7 @@
 #include "RenderMode.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Mesh.h"
 
 #include "../Game/Transform.h"
 using namespace Game;
@@ -23,14 +24,26 @@ namespace Video
 		// dtor
 		virtual ~RenderDevice();
 
-		// add geometry to the renderer
-		void AddGeometry(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoordinates, std::vector<int> indices);
+		// add a mesh to the renderer
+		void AddMesh(Mesh* const mesh);
+
+		// initialize the buffers
+		void InitializedBuffers();
 
 		// render
-		void Render(Transform* transform, Texture* texture, Shader* shader, const Color& color, bool useColor, bool applyCameraTransformation);
+		void Render(Mesh* mesh, Transform* transform, Texture* texture, Shader* shader, const Color& color, RenderMode renderMode, bool useColor, bool applyCameraTransformation);
 
 	private:
-		// the vertices of the primitive
-		std::vector<Vector2D> vertices;
+		// the meshes used in the renderer
+		std::vector<Mesh*> m_meshes;
+
+		// the vertex buffer object
+		GLuint m_vertexBufferHandle;
+
+		// the index buffer object
+		GLuint m_indexBufferHandle;
+
+		// are the vertex and index buffers initialized
+		bool m_areBuffersInitialized;
 	};
 }
