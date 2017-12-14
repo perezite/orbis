@@ -1,7 +1,8 @@
 TODO:
 - Mehrere Geometrien implementieren
-	- Beim ersten Aufruf von RenderDevices::Render() die Mesh-Daten in den VBO und IBO laden
-	- Exception werfen, falls man danach nochmals RenderDevice::RegisterMesh(Mesh* mesh) aufrufen will
+	- Fixen
+	- Hilfsfunktionen in Mesh-Klasse verfrachten
+- Shader statisch machen
 - Texture Atlas implementieren
 	- Line Renderer implementieren
 	- Material-Klasse einführen für Renderer

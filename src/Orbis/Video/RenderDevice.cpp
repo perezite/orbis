@@ -19,17 +19,17 @@ using namespace Math;
 
 namespace 
 {
-	// get size in bytes required to hold the vertex data of a mesh
-	int GetVertexBufferSize(Mesh* const mesh)
+	// get len required to hold the vertex data of a mesh
+	int GetVertexBufferLength(Mesh* const mesh)
 	{
 		int numVertexComponents = mesh->GetVertices().size() * 2;
 		int numTexComponents = mesh->GetTexCoords().size() * 2;
-		int size = numVertexComponents * sizeof(float) + numTexComponents * sizeof(float);
-		return size;
+		int len = numVertexComponents + numTexComponents;
+		return len;
 	}
 
 	// fills a preallocated buffer with a mesh's vertex data
-	void GetVertexData(Mesh* const mesh, float* const buffer) 
+	void FillVertexData(Mesh* const mesh, float* const buffer) 
 	{	
 		Exception::Assert(mesh->GetTexCoords().size() == 0 || mesh->GetVertices().size() == mesh->GetTexCoords().size(),
 			"A mesh must either contain no texture coordinates or the number of vertices and texture coordinates must match");
@@ -46,21 +46,21 @@ namespace
 			if (i < numTexCoords)
 			{
 				Vector2D texCoord = mesh->GetTexCoords().at(i);
-				buffer[offset + 2] = texCoord.GetX();
-				buffer[offset + 3] = texCoord.GetY();
+				buffer[offset] = texCoord.GetX();
+				buffer[offset + 1] = texCoord.GetY();
 				offset += 2;
 			}
 		}
 	}
 
-	// get the size in bytes required to hold the index data of a mesh
-	int GetIndexBufferSize(Mesh* const mesh)
+	// get the len required to hold the index data of a mesh
+	int GetIndexBufferLength(Mesh* const mesh)
 	{
-		return mesh->GetIndices().size() * sizeof(int);
+		return mesh->GetIndices().size();
 	}
 
 	// fills a preallocated buffer with a mesh's index data
-	void GetIndexData(Mesh* const mesh, int* const buffer)
+	void FillIndexData(Mesh* const mesh, int* const buffer)
 	{
 		for (unsigned int i = 0; i < mesh->GetIndices().size(); i++)
 		{
@@ -68,49 +68,49 @@ namespace
 		}
 	}
 
-	// get the total vertex buffer size of a mesh list in bytes
-	int GetVertexBufferSize(std::vector<Mesh*> meshes)
+	// get the total vertex buffer len of a mesh list
+	int GetVertexBufferLength(std::vector<Mesh*> meshes)
 	{
-		int size = 0;
+		int len = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			size += GetVertexBufferSize(meshes.at(i));
+			len += GetVertexBufferLength(meshes.at(i));
 		}
 	
-		return size;
+		return len;
 	}
 
-	// get the total index buffer size of a mesh list in bytes
-	int GetIndexBufferSize(std::vector<Mesh*> meshes)
+	// get the total index buffer len of a mesh list
+	int GetIndexBufferLength(std::vector<Mesh*> meshes)
 	{
-		int size = 0;
+		int len = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			size += GetIndexBufferSize(meshes.at(i));
+			len += GetIndexBufferLength(meshes.at(i));
 		}
 
-		return size;
+		return len;
 	}
 
 	// fills a preallocated buffer with a mesh list's vertex data
-	void GetVertexData(std::vector<Mesh*> meshes, float* const buffer)
+	void FillVertexData(std::vector<Mesh*> meshes, float* const buffer)
 	{
 		unsigned int offset = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++) 
 		{
-			GetVertexData(meshes.at(i), buffer + offset);
-			offset += GetVertexBufferSize(meshes.at(i));
+			FillVertexData(meshes.at(i), buffer + offset);
+			offset += GetVertexBufferLength(meshes.at(i));
 		}
 	}
 
 	// fills a preallocated buffer with a mesh list's index data
-	void GetIndexData(std::vector<Mesh*> meshes, int* const buffer)
+	void FillIndexData(std::vector<Mesh*> meshes, int* const buffer)
 	{
 		unsigned int offset = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			GetIndexData(meshes.at(i), buffer + offset);
-			offset += GetIndexBufferSize(meshes.at(i));
+			FillIndexData(meshes.at(i), buffer + offset);
+			offset += GetIndexBufferLength(meshes.at(i));
 		}
 	}
 
@@ -119,7 +119,6 @@ namespace
 	{
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			auto temp = meshes.at(i);
 			if (meshes.at(i) == mesh)
 				return i;
 		}
@@ -127,28 +126,39 @@ namespace
 		throw new Exception("Mesh was not found");
 	}
 
-	// get the buffer offset for a given mesh within a list of meshes in bytes
-	int GetMeshOffset(std::vector<Mesh*> meshes, Mesh* const mesh)
+	// get the vertex buffer offset for a given mesh
+	int GetMeshVertexOffset(std::vector<Mesh*> meshes, Mesh* const mesh)
+	{
+		int index = GetMeshIndex(meshes, mesh);
+		int offset = 0;
+		for (int i = 0; i < index; i++)
+		{
+			offset += GetVertexBufferLength(meshes.at(i));
+		}
+
+		return offset;
+	}
+
+	// get the mesh's vertex stride
+	int GetMeshVertexStride(Mesh* const mesh)
+	{
+		bool hasTexCoords = mesh->GetTexCoords().size() > 0;
+		int numVertexComponents = 2;
+		int numTexComponents = hasTexCoords ? 2 : 0;
+		int stride = (numVertexComponents + numTexComponents);
+		return stride;
+	}
+
+	// get the index buffer offset for a given mesh
+	int GetMeshIndexOffset(std::vector<Mesh*> meshes, Mesh* const mesh)
 	{
 		int index = GetMeshIndex(meshes, mesh);
 		int byteOffset = 0;
 		for (int i = 0; i < index; i++)
 		{
-			byteOffset += GetVertexBufferSize(meshes.at(i));
-			byteOffset += GetIndexBufferSize(meshes.at(i));
+			byteOffset += GetIndexBufferLength(meshes.at(i));
 		}
-
 		return byteOffset;
-	}
-
-	// get the mesh meshStride in bytes
-	int GetMeshStride(Mesh* const mesh)
-	{
-		bool hasTexCoords = mesh->GetTexCoords().size() > 0;
-		int numVertexComponents = 2;
-		int numTexComponents = hasTexCoords ? 2 : 0;
-		int stride = (numVertexComponents + numTexComponents) * sizeof(GLfloat);
-		return stride;
 	}
 }
 
@@ -206,20 +216,21 @@ namespace Video
 
 		// compute the mesh's buffer offset
 		// TODO: Precompute and buffer this
-		int meshOffset = GetMeshOffset(m_meshes, mesh);
-		int meshStride = GetMeshStride(mesh);
+		int meshVertexOffset = GetMeshVertexOffset(m_meshes, mesh);
+		int meshVertexStride = GetMeshVertexStride(mesh);
+		int meshIndexOffset = GetMeshIndexOffset(m_meshes, mesh);
 
 		// render
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
 		// glVertexAttribPointer(shader->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), NULL);
-		glVertexAttribPointer(shader->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, meshStride, (void*)meshOffset);
+		glVertexAttribPointer(shader->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat)));
 		if (texture != NULL)
 		{
 			// glVertexAttribPointer(shader->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), (void*)(0 + 2 * sizeof(GL_FLOAT)));
-			glVertexAttribPointer(shader->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, meshStride, (void*)(meshOffset + 2 * sizeof(GL_FLOAT)));
+			glVertexAttribPointer(shader->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat) + 2 * sizeof(GLfloat)));
 		}
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
-		glDrawElements(renderMode, 6, GL_UNSIGNED_INT, NULL);
+		glDrawElements(renderMode, 6, GL_UNSIGNED_INT, (void*)(meshIndexOffset * sizeof(GLint)));
 
 		// cleanup
 		glDisableVertexAttribArray(shader->GetAttributeHandle("a_vPosition"));
@@ -234,19 +245,19 @@ namespace Video
 	void RenderDevice::InitializedBuffers()
 	{
 		// generate the vertex buffer
-		int vertexBufferSize = GetVertexBufferSize(m_meshes);
+		int vertexBufferSize = GetVertexBufferLength(m_meshes);
 		float* vertexBufferData = new float[vertexBufferSize];
-		GetVertexData(m_meshes, vertexBufferData);
+		FillVertexData(m_meshes, vertexBufferData);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
-		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize, vertexBufferData, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize * sizeof(GLfloat), vertexBufferData, GL_STATIC_DRAW);
 		delete[] vertexBufferData;
 
 		// generate the index buffer
-		int indexBufferSize = GetIndexBufferSize(m_meshes);
+		int indexBufferSize = GetIndexBufferLength(m_meshes);
 		int* indexBufferData = new int[indexBufferSize];
-		GetIndexData(m_meshes, indexBufferData);
+		FillIndexData(m_meshes, indexBufferData);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize, indexBufferData, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_STATIC_DRAW);
 		delete[] indexBufferData;
 	}
 }
