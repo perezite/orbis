@@ -19,8 +19,8 @@ namespace Components
 {
 	void SpriteRenderer::Start()
 	{
-		m_shader = new Shader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
-		m_mesh = &Mesh::TexturedQuad;
+		m_shader = Shader::GetDiffuseShader();
+		m_mesh = Mesh::GetTexturedQuad();
 		m_mesh->Initialize();
 	}
 

@@ -20,8 +20,8 @@ namespace Components
 {
 	void RectangleRenderer::Start()
 	{
-		m_shader = new Shader("Shaders/Flat.vs", "Shaders/Flat.frag");
-		m_mesh = &Mesh::FlatQuad;
+		m_shader = Shader::GetFlatShader();
+		m_mesh = Mesh::GetFlatQuad();
 		m_mesh->Initialize();
 	}
 

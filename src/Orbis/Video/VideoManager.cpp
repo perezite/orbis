@@ -35,8 +35,6 @@ namespace Video
 
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
-
-		// Texture::DeleteAll();
 	}
 
 	RenderDevice* VideoManager::GetRenderDevice()

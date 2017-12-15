@@ -76,6 +76,18 @@ namespace
 
 namespace Video
 {
+	Shader* Shader::GetDiffuseShader()
+	{
+		static Shader diffuseShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
+		return &diffuseShader;
+	}
+
+	Shader* Shader::GetFlatShader()
+	{
+		static Shader flatShader("Shaders/Flat.vs", "Shaders/Flat.frag");
+		return &flatShader;
+	}
+
 	Shader::Shader(std::string vertexAssetPath, std::string fragmentAssetPath)
 	{
 		VideoManager::GetInstance();

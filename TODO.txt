@@ -1,5 +1,6 @@
 TODO:
-- Shader 'verassetisieren' (statisch machen)
+- Statisches Meshes mit Getter holen
+- Statische Getter für Meshes machen
 - Texture Atlas implementieren
 	- Line Renderer implementieren
 	- Material-Klasse einführen für Renderer
@@ -16,4 +17,5 @@ TODO:
 - Apply CameraTransformation als Property des RenderDevices setzen
 - Coroutinen implementieren
 - Partikelsystem implementieren
+- Asset-Funktionalität implementieren für Meshes, Shaders und Texturen
 - Orbis in Bibliothek versiegeln

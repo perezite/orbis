@@ -14,11 +14,11 @@ namespace Video
 	class Mesh 
 	{
 	public:
-		// a textured quad
-		static Mesh TexturedQuad;
+		// get a static textured quad
+		static Mesh* GetTexturedQuad();
 
-		// a flat quad without texture
-		static Mesh FlatQuad;
+		// get a static flat quad
+		static Mesh* GetFlatQuad();
 
 	public:
 		// ctor

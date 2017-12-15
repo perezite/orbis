@@ -4,19 +4,29 @@
 
 namespace Video
 {
-	// a textured quad
-	Mesh Mesh::TexturedQuad = Mesh(
-		{ Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) },
-		{ Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) },
-		{ 0, 1, 2, 1, 3, 2 }
-	);
+	// get a static textured quad
+	Mesh* Mesh::GetTexturedQuad()
+	{
+		static Mesh texturedQuad(
+			{ Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) },
+			{ Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) },
+			{ 0, 1, 2, 1, 3, 2 }
+		);
 
-	// a flat quad
-	Mesh Mesh::FlatQuad = Mesh(
-		{ Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) },
-		{},
-		{ 0, 1, 2, 1, 3, 2 }
-	);
+		return &texturedQuad;
+	}
+
+	// get a static flat quad
+	Mesh* Mesh::GetFlatQuad()
+	{
+		static Mesh flatQuad(
+			{ Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) },
+			{},
+			{ 0, 1, 2, 1, 3, 2 }
+		);
+
+		return &flatQuad;
+	}
 
 	void Mesh::Initialize()
 	{

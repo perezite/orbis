@@ -14,6 +14,13 @@ namespace Video
 	class Shader
 	{
 	public:
+		// get static diffuse shader
+		static Shader* GetDiffuseShader();
+
+		// get static flat shader
+		static Shader* GetFlatShader();
+
+	public:
 		// ctor
 		Shader(std::string vertexAssetPath, std::string fragmentAssetPath);
 
@@ -26,7 +33,7 @@ namespace Video
 		// set a uniform value
 		void SetUniform(std::string id, int value);
 
-		// set a uniform
+		// set a uniform value
 		void SetUniform(std::string id, const Color& color);
 
 		// set a uniform value
