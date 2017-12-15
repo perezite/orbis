@@ -1,7 +1,5 @@
 TODO:
-- Mehrere Geometrien implementieren
-	- Hilfsfunktionen in Mesh-Klasse verfrachten
-- Shader statisch machen
+- Shader 'verassetisieren' (statisch machen)
 - Texture Atlas implementieren
 	- Line Renderer implementieren
 	- Material-Klasse einführen für Renderer

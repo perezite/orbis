@@ -19,98 +19,49 @@ using namespace Math;
 
 namespace 
 {
-	// get len required to hold the vertex data of a mesh
-	int GetVertexBufferLength(Mesh* const mesh)
-	{
-		int numVertexComponents = mesh->GetVertices().size() * 2;
-		int numTexComponents = mesh->GetTexCoords().size() * 2;
-		int len = numVertexComponents + numTexComponents;
-		return len;
-	}
-
-	// fills a preallocated buffer with a mesh's vertex data
-	void FillVertexData(Mesh* const mesh, float* const buffer) 
-	{	
-		Exception::Assert(mesh->GetTexCoords().size() == 0 || mesh->GetVertices().size() == mesh->GetTexCoords().size(),
-			"A mesh must either contain no texture coordinates or the number of vertices and texture coordinates must match");
-
-		unsigned int numTexCoords = mesh->GetTexCoords().size();
-		unsigned int offset = 0;
-		for (unsigned int i = 0; i < mesh->GetVertices().size(); i++)
-		{
-			Vector2D vertex = mesh->GetVertices().at(i);
-			buffer[offset] = vertex.GetX();
-			buffer[offset + 1] = vertex.GetY();
-			offset += 2;
-
-			if (i < numTexCoords)
-			{
-				Vector2D texCoord = mesh->GetTexCoords().at(i);
-				buffer[offset] = texCoord.GetX();
-				buffer[offset + 1] = texCoord.GetY();
-				offset += 2;
-			}
-		}
-	}
-
-	// get the len required to hold the index data of a mesh
-	int GetIndexBufferLength(Mesh* const mesh)
-	{
-		return mesh->GetIndices().size();
-	}
-
-	// fills a preallocated buffer with a mesh's index data
-	void FillIndexData(Mesh* const mesh, int* const buffer)
-	{
-		for (unsigned int i = 0; i < mesh->GetIndices().size(); i++)
-		{
-			buffer[i] = mesh->GetIndices().at(i);
-		}
-	}
-
-	// get the total vertex buffer len of a mesh list
-	int GetVertexBufferLength(std::vector<Mesh*> meshes)
+	// get the total vertex buffer length of a mesh list
+	int GetTotalVertexBufferLength(std::vector<Mesh*> meshes)
 	{
 		int len = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			len += GetVertexBufferLength(meshes.at(i));
+			len += meshes.at(i)->GetVertexBufferLength();
 		}
 	
 		return len;
 	}
 
-	// get the total index buffer len of a mesh list
-	int GetIndexBufferLength(std::vector<Mesh*> meshes)
+	// get the total index buffer length of a mesh list
+	int GetTotalIndexBufferLength(std::vector<Mesh*> meshes)
 	{
 		int len = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			len += GetIndexBufferLength(meshes.at(i));
+			len += meshes.at(i)->GetIndexBufferLength();
 		}
 
 		return len;
 	}
 
 	// fills a preallocated buffer with a mesh list's vertex data
-	void FillVertexData(std::vector<Mesh*> meshes, float* const buffer)
+	void FillGlobalVertexBuffer(std::vector<Mesh*> meshes, float* const buffer)
 	{
 		unsigned int offset = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++) 
 		{
-			FillVertexData(meshes.at(i), buffer + offset);
-			offset += GetVertexBufferLength(meshes.at(i));
+			meshes.at(i)->FillVertexBuffer(buffer + offset);
+			offset += meshes.at(i)->GetVertexBufferLength();
 		}
 	}
 
 	// fills a preallocated buffer with a mesh list's index data
-	void FillIndexData(std::vector<Mesh*> meshes, int* const buffer)
+	void FillGlobalIndexBuffer(std::vector<Mesh*> meshes, int* const buffer)
 	{
 		unsigned int offset = 0;
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			FillIndexData(meshes.at(i), buffer + offset);
-			offset += GetIndexBufferLength(meshes.at(i));
+			meshes.at(i)->FillIndexBuffer(buffer + offset);
+			offset += meshes.at(i)->GetIndexBufferLength();
 		}
 	}
 
@@ -133,20 +84,10 @@ namespace
 		int offset = 0;
 		for (int i = 0; i < index; i++)
 		{
-			offset += GetVertexBufferLength(meshes.at(i));
+			offset += meshes.at(i)->GetVertexBufferLength();
 		}
 
 		return offset;
-	}
-
-	// get the mesh's vertex stride
-	int GetMeshVertexStride(Mesh* const mesh)
-	{
-		bool hasTexCoords = mesh->GetTexCoords().size() > 0;
-		int numVertexComponents = 2;
-		int numTexComponents = hasTexCoords ? 2 : 0;
-		int stride = (numVertexComponents + numTexComponents);
-		return stride;
 	}
 
 	// get the index buffer offset for a given mesh
@@ -156,7 +97,7 @@ namespace
 		int byteOffset = 0;
 		for (int i = 0; i < index; i++)
 		{
-			byteOffset += GetIndexBufferLength(meshes.at(i));
+			byteOffset += meshes.at(i)->GetIndexBufferLength();
 		}
 		return byteOffset;
 	}
@@ -217,7 +158,7 @@ namespace Video
 		// compute the mesh's buffer offset
 		// TODO: Precompute and buffer this
 		int meshVertexOffset = GetMeshVertexOffset(m_meshes, mesh);
-		int meshVertexStride = GetMeshVertexStride(mesh);
+		int meshVertexStride = mesh->GetVertexStride();
 		int meshIndexOffset = GetMeshIndexOffset(m_meshes, mesh);
 
 		// render
@@ -245,17 +186,17 @@ namespace Video
 	void RenderDevice::InitializedBuffers()
 	{
 		// generate the vertex buffer
-		int vertexBufferSize = GetVertexBufferLength(m_meshes);
+		int vertexBufferSize = GetTotalVertexBufferLength(m_meshes);
 		float* vertexBufferData = new float[vertexBufferSize];
-		FillVertexData(m_meshes, vertexBufferData);
+		FillGlobalVertexBuffer(m_meshes, vertexBufferData);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
 		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize * sizeof(GLfloat), vertexBufferData, GL_STATIC_DRAW);
 		delete[] vertexBufferData;
 
 		// generate the index buffer
-		int indexBufferSize = GetIndexBufferLength(m_meshes);
+		int indexBufferSize = GetTotalIndexBufferLength(m_meshes);
 		int* indexBufferData = new int[indexBufferSize];
-		FillIndexData(m_meshes, indexBufferData);
+		FillGlobalIndexBuffer(m_meshes, indexBufferData);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_STATIC_DRAW);
 		delete[] indexBufferData;

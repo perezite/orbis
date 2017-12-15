@@ -5,6 +5,7 @@
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
+#include <set>
 #include <vector>
 
 namespace Video
@@ -21,9 +22,9 @@ namespace Video
 
 	public:
 		// ctor
-		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices) 
-			: m_vertices(vertices),  m_texCoords(texCoords), m_indices(indices), m_isInitialized(false)
-			{}
+		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices)
+			: m_vertices(vertices), m_texCoords(texCoords), m_indices(indices), m_isInitialized(false)
+		{}
 
 		// get vertices
 		std::vector<Vector2D> GetVertices() const { return m_vertices; }
@@ -33,6 +34,21 @@ namespace Video
 
 		// get indices
 		std::vector<int> GetIndices() const { return m_indices; }
+
+		// get vertex buffer length required to store the mesh's vertex data
+		int GetVertexBufferLength();
+
+		// get index buffer length required to store the mesh's vertex data
+		int GetIndexBufferLength();
+
+		// fills a preallocated buffer with the mesh's vertex data
+		void FillVertexBuffer(float* const buffer);
+
+		// fills a preallocated buffer with the mesh's index data
+		void FillIndexBuffer(int* const buffer);
+
+		// get the mesh's vertex stride
+		int GetVertexStride();
 
 		// initialize the mesh. Must be called before rendering
 		void Initialize();
