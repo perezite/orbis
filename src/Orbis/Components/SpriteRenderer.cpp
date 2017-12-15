@@ -19,12 +19,7 @@ namespace Components
 {
 	void SpriteRenderer::Start()
 	{
-		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
 		m_shader = new Shader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
-
-		/*std::vector<Vector2D> vertices = { Vector2D(-0.5f, -0.5f), Vector2D(0.5f, -0.5f), Vector2D(-0.5f, 0.5f), Vector2D(0.5f, 0.5f) };
-		std::vector<Vector2D> texCoords = { Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f), Vector2D(0.0f, 1.0f), Vector2D(1.0f, 1.0f) };
-		std::vector<int> indices = { 0, 1, 2, 1, 3, 2 };*/
 		m_mesh = &Mesh::TexturedQuad;
 		m_mesh->Initialize();
 	}

@@ -1,6 +1,5 @@
 TODO:
 - Mehrere Geometrien implementieren
-	- Fixen
 	- Hilfsfunktionen in Mesh-Klasse verfrachten
 - Shader statisch machen
 - Texture Atlas implementieren

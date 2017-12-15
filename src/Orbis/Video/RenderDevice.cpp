@@ -165,7 +165,7 @@ namespace
 namespace Video
 {
 	RenderDevice::RenderDevice() :
-		m_areBuffersInitialized(false), m_vertexBufferHandle(0), m_indexBufferHandle(0)
+		m_vertexBufferHandle(0), m_indexBufferHandle(0), m_areBuffersInitialized(false)
 	{
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 
