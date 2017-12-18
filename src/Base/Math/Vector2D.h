@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+
 namespace Math
 {
 	// Represents a 2D vector
@@ -42,6 +44,9 @@ namespace Math
 		// get y
 		float GetY() const { return m_y; }
 
+		// get length
+		float GetLength() const { return sqrtf(m_x * m_x + m_y * m_y);  }
+
 		// set x
 		void SetX(float x) { m_x = x; }
 
@@ -56,7 +61,10 @@ namespace Math
 		static const Vector2D One;
 
 	private:
+		// the x component 
 		float m_x;
+
+		// the y component
 		float m_y;
 	};
 }

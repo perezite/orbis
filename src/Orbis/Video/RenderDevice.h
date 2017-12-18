@@ -28,7 +28,7 @@ namespace Video
 		void AddMesh(Mesh* const mesh);
 
 		// initialize the buffers
-		void InitializedBuffers();
+		void InitializeBuffers();
 
 		// render
 		void Render(Mesh* mesh, Transform* transform, Texture* texture, Shader* shader, const Color& color, RenderMode renderMode, bool useColor, bool applyCameraTransformation);

@@ -183,7 +183,7 @@ namespace Video
 		shader->Unuse();
 	}
 
-	void RenderDevice::InitializedBuffers()
+	void RenderDevice::InitializeBuffers()
 	{
 		// generate the vertex buffer
 		int vertexBufferSize = GetTotalVertexBufferLength(m_meshes);

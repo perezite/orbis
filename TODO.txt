@@ -1,8 +1,5 @@
 TODO:
-- Statisches Meshes mit Getter holen
-- Statische Getter für Meshes machen
 - Texture Atlas implementieren
-	- Line Renderer implementieren
 	- Material-Klasse einführen für Renderer
 	- Packing-Algorithmus direkt im Level implementieren mithilfe graphischer Darstellung
 		-- Referenz: https://www.youtube.com/watch?v=rVp5--Gx6Ks
