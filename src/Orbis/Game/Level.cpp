@@ -35,7 +35,6 @@ namespace Game
 		if (m_isStarted == false)
 		{
 			StartEntities();
-			VideoManager::GetInstance()->GetRenderDevice()->InitializeBuffers();
 			m_isStarted = true;
 		}
 		else
@@ -67,12 +66,14 @@ namespace Game
 		VideoManager* videoManager = VideoManager::GetInstance();
 
 		videoManager->ClearScreen();
+		videoManager->GetRenderDevice()->Begin();
 
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{
 			m_entities[i]->Render();
 		}
 
+		videoManager->GetRenderDevice()->Finalize();
 		videoManager->SwapBuffers();
 	}
 

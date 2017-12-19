@@ -13,6 +13,7 @@ using namespace Game;
 using namespace Math;
 
 #include <vector>
+#include <tuple>
 
 namespace Video
 {
@@ -25,26 +26,30 @@ namespace Video
 		// dtor
 		virtual ~RenderDevice();
 
-		// add a mesh to the renderer
-		void AddMesh(Mesh* const mesh);
-
-		// initialize the buffers
-		void InitializeBuffers();
-
 		// render
 		void Render(Transform* transform, Mesh* mesh, Material* material);
 
+		// render single data
+		void RenderSingle(Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList);
+
+		// begin
+		void Begin();
+
+		// finalize
+		void Finalize();
+
+	protected:
+		// update buffers
+		void UpdateBuffers(std::vector<Mesh> meshes);
+
 	private:
-		// the meshes used in the renderer
-		std::vector<Mesh*> m_meshes;
+		// the data to be rendered
+		std::vector<std::tuple<Transform, Mesh*, Material*>> m_renderData;
 
 		// the vertex buffer object
 		GLuint m_vertexBufferHandle;
 
 		// the index buffer object
 		GLuint m_indexBufferHandle;
-
-		// are the vertex and index buffers initialized
-		bool m_areBuffersInitialized;
 	};
 }

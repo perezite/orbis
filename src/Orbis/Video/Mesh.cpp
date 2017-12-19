@@ -1,5 +1,8 @@
 #include "Mesh.h"
 
+#include "../Components/Camera.h"
+using namespace Components;
+
 #include "VideoManager.h"
 
 namespace Video
@@ -33,19 +36,30 @@ namespace Video
 		static Mesh lineMesh(
 		{ Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f) },
 		{},
-		{ 1, 2 },
+		{ 0, 1 },
 		RenderMode::Lines);
 
 		return &lineMesh;
 	}
 
-	void Mesh::Initialize()
+	Mesh Mesh::Transformed(Transform* transform)
 	{
-		if (!m_isInitialized)
+		Mesh transformed = *this;
+
+		// compute mvp matrix
+		bool isWorldSpaceTransformation = transform->GetTransformSpace() == TransformSpace::WorldSpace;
+		Matrix3 modelMatrix = transform->GetMatrix();
+		Matrix3 viewMatrix = isWorldSpaceTransformation ? Camera::GetViewMatrix() : Matrix3();
+		Matrix3 mvpMatrix = Camera::GetProjectionMatrix_v2(isWorldSpaceTransformation) * viewMatrix * modelMatrix;
+
+		// apply mvp matrix to all vertices
+		std::vector<Vector2D> transformedVertices = transformed.GetVertices();
+		for (unsigned int i = 0; i < transformed.GetVertices().size(); i++)
 		{
-			VideoManager::GetInstance()->GetRenderDevice()->AddMesh(this);
-			m_isInitialized = true;
+			*transformed.GetVertex(i) = mvpMatrix * (*transformed.GetVertex(i));
 		}
+
+		return transformed;
 	}
 
 	int Mesh::GetVertexBufferLength()
@@ -101,5 +115,15 @@ namespace Video
 		int numTexComponents = hasTexCoords ? 2 : 0;
 		int stride = (numVertexComponents + numTexComponents);
 		return stride;
+	}
+
+	int Mesh::GetNumElements()
+	{
+		if (m_renderMode == RenderMode::Triangles)
+			return 6;
+		else if (m_renderMode == RenderMode::Lines)
+			return 2;
+
+		throw Exception("Number of primitive elements is not defined for given render mode");
 	}
 }

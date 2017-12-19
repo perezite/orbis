@@ -3,6 +3,9 @@
 #include "Color.h"
 #include "RenderMode.h"
 
+#include "../Game/Transform.h"
+using namespace Game;
+
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
@@ -27,11 +30,14 @@ namespace Video
 	public:
 		// ctor
 		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices, RenderMode renderMode = RenderMode::Triangles)
-			: m_vertices(vertices), m_texCoords(texCoords), m_indices(indices), m_renderMode(renderMode), m_isInitialized(false)
+			: m_vertices(vertices), m_texCoords(texCoords), m_indices(indices), m_renderMode(renderMode)
 		{}
 
 		// get vertices
 		std::vector<Vector2D> GetVertices() const { return m_vertices; }
+
+		// get vertex pointer
+		Vector2D* GetVertex(int index) { return &m_vertices.at(index); }
 
 		// get tex corodinates
 		std::vector<Vector2D> GetTexCoords() const { return m_texCoords; }
@@ -57,8 +63,11 @@ namespace Video
 		// get the mesh's vertex stride
 		int GetVertexStride();
 
-		// initialize the mesh. Must be called before rendering
-		void Initialize();
+		// apply the given transformation on the mesh
+		Mesh Transformed(Transform* transform);
+
+		// get number of elements per primitive
+		int GetNumElements();
 
 	private:
 		// the vertex coordinates
@@ -72,8 +81,5 @@ namespace Video
 
 		// the render mode
 		RenderMode m_renderMode;
-
-		// is the mesh initialized
-		bool m_isInitialized;
 	};
 }

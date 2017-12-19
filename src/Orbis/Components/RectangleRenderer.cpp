@@ -23,7 +23,6 @@ namespace Components
 		m_material.SetShader(Shader::GetFlatShader());
 		m_material.SetIsColorUsed(true);
 		m_mesh = Mesh::GetFlatQuad();
-		m_mesh->Initialize();
 		GetParent()->GetTransform()->SetTransformSpace(TransformSpace::WorldSpace);
 	}
 

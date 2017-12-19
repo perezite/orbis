@@ -21,7 +21,6 @@ namespace Components
 	{
 		m_material.SetShader(Shader::GetDiffuseShader());
 		m_mesh = Mesh::GetTexturedQuad();
-		m_mesh->Initialize();
 	}
 
 	void SpriteRenderer::Render()

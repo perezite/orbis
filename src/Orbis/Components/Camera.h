@@ -24,6 +24,9 @@ namespace Components
 		// get the orthographic projection matrix
 		static Matrix4 GetProjectionMatrix(bool applyScaling);
 
+		// get the orthographic projection matrix
+		static Matrix3 GetProjectionMatrix_v2(bool applyScaling);
+
 		// get the size of the camera in word coordinates
 		static Vector2D GetSize();
 	};
