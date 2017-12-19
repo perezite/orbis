@@ -2,10 +2,13 @@
 
 #include "Component.h"
 
-#include "../Video/Texture.h"
-#include "../Video/Shader.h"
+#include "../Video/Material.h"
 #include "../Video/Mesh.h"
 using namespace Video;
+
+#include "../../Orbis/Game/Entity.h"
+#include "../../Orbis/Game/TransformSpace.h"
+using namespace Game;
 
 namespace Components
 {
@@ -14,10 +17,7 @@ namespace Components
 	{
 	public:
 		// ctor
-		SpriteRenderer(Texture* texture, bool applyCameraTransformation = true) { SetTexture(texture); m_applyCameraTransformation = applyCameraTransformation; }
-
-		// dtor
-		virtual ~SpriteRenderer() { delete m_shader; }
+		SpriteRenderer(Texture* texture) { m_material.SetTexture(texture);}
 
 		// update
 		void Start();
@@ -26,25 +26,16 @@ namespace Components
 		void Render();
 
 		// set the texture
-		void SetTexture(Texture* texture) { m_texture = texture; }
+		void SetTexture(Texture* texture) { m_material.SetTexture(texture); }
 
 		// get the texture
-		Texture* GetTexture(void) const { return m_texture; }
-
-		// is the texture transformed in camera coordinates
-		bool ApplyCameraTransformation() const { return m_applyCameraTransformation; }
+		Texture* GetTexture(void) const { return m_material.GetTexture(); }
 
 	private:
-		// the texture
-		Texture* m_texture;
-
-		// the shader
-		Shader* m_shader;
+		// the material
+		Material m_material;
 
 		// the mesh
 		Mesh* m_mesh;
-
-		// is the camera transformation applied to this sprite
-		bool m_applyCameraTransformation;
 	};
 }

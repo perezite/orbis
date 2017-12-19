@@ -167,5 +167,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\LineRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Material.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\TransformSpace.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

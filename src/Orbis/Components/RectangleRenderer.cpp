@@ -20,14 +20,16 @@ namespace Components
 {
 	void RectangleRenderer::Start()
 	{
-		m_shader = Shader::GetFlatShader();
+		m_material.SetShader(Shader::GetFlatShader());
+		m_material.SetIsColorUsed(true);
 		m_mesh = Mesh::GetFlatQuad();
 		m_mesh->Initialize();
+		GetParent()->GetTransform()->SetTransformSpace(TransformSpace::WorldSpace);
 	}
 
 	void RectangleRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(m_mesh, GetParent()->GetTransform(), NULL, m_shader, m_color, RenderMode::Triangles, true, false);
+		renderDevice->Render(GetParent()->GetTransform(), m_mesh, &m_material);
 	}
 }

@@ -2,8 +2,7 @@
 
 #include "Component.h"
 
-#include "../Video/Shader.h"
-#include "../Video/Color.h"
+#include "../Video/Material.h"
 #include "../Video/Mesh.h"
 using namespace Video;
 
@@ -14,10 +13,7 @@ namespace Components
 	{
 	public:
 		// ctor
-		RectangleRenderer(Color const &color) { m_color = color; }
-
-		// dtor
-		virtual ~RectangleRenderer() { delete m_shader; }
+		RectangleRenderer(const Color& color) { m_material.SetColor(color); }
 
 		// update
 		void Start();
@@ -26,11 +22,8 @@ namespace Components
 		void Render();
 
 	private:
-		// the color
-		Color m_color;
-
-		// the shader
-		Shader* m_shader;
+		// the material
+		Material m_material;
 
 		// the mesh
 		Mesh* m_mesh;

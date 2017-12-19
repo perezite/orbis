@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Mesh.h"
+#include "Material.h"
 
 #include "../Game/Transform.h"
 using namespace Game;
@@ -31,7 +32,7 @@ namespace Video
 		void InitializeBuffers();
 
 		// render
-		void Render(Mesh* mesh, Transform* transform, Texture* texture, Shader* shader, const Color& color, RenderMode renderMode, bool useColor, bool applyCameraTransformation);
+		void Render(Transform* transform, Mesh* mesh, Material* material);
 
 	private:
 		// the meshes used in the renderer

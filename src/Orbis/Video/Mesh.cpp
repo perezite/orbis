@@ -28,6 +28,17 @@ namespace Video
 		return &flatQuad;
 	}
 
+	Mesh* Mesh::GetLineMesh()
+	{
+		static Mesh lineMesh(
+		{ Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f) },
+		{},
+		{ 1, 2 },
+		RenderMode::Lines);
+
+		return &lineMesh;
+	}
+
 	void Mesh::Initialize()
 	{
 		if (!m_isInitialized)

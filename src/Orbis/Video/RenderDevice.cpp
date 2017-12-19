@@ -126,61 +126,59 @@ namespace Video
 		m_meshes.push_back(mesh);
 	}
 
-	void RenderDevice::Render(Mesh* mesh, Transform* transform, Texture* texture, Shader* shader, const Color& color, RenderMode renderMode, bool useColor, bool applyCameraTransformation)
+	void RenderDevice::Render(Transform* transform, Mesh* mesh, Material* material)
 	{
 		// setup rendering
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// setup shader
-		shader->Use();
-		glEnableVertexAttribArray(shader->GetAttributeHandle("a_vPosition"));
+		material->GetShader()->Use();
+		glEnableVertexAttribArray(material->GetShader()->GetAttributeHandle("a_vPosition"));
 
 		// setup texture
-		if (texture != NULL)
+		if (material->GetTexture() != NULL)
 		{
-			glBindTexture(GL_TEXTURE_2D, texture->GetTextureHandle());
+			glBindTexture(GL_TEXTURE_2D, material->GetTexture()->GetTextureHandle());
 			glActiveTexture(GL_TEXTURE0);
-			glEnableVertexAttribArray(shader->GetAttributeHandle("a_vTexCoord"));
-			shader->SetUniform("u_sSampler", 0);
+			glEnableVertexAttribArray(material->GetShader()->GetAttributeHandle("a_vTexCoord"));
+			material->GetShader()->SetUniform("u_sSampler", 0);
 		}
 
 		// setup color
-		if (useColor)
-			shader->SetUniform("u_vColor", color);
+		if (material->GetIsColorUsed())
+			material->GetShader()->SetUniform("u_vColor", material->GetColor());
 
 		// compute mvp matrix
+		bool isWorldSpaceTransformation = transform->GetTransformSpace() == TransformSpace::WorldSpace;
 		Matrix4 modelMatrix = Matrix4::From2DTransform(transform->GetMatrix());
-		Matrix4 viewMatrix = Matrix4::From2DTransform(applyCameraTransformation ? Camera::GetViewMatrix() : Matrix3());
-		Matrix4 mvpMatrix = Camera::GetProjectionMatrix(applyCameraTransformation) * viewMatrix * modelMatrix;
-		shader->SetUniform("u_mTransform", mvpMatrix.Transposed());
+		Matrix4 viewMatrix = Matrix4::From2DTransform(isWorldSpaceTransformation ? Camera::GetViewMatrix() : Matrix3());
+		Matrix4 mvpMatrix = Camera::GetProjectionMatrix(isWorldSpaceTransformation) * viewMatrix * modelMatrix;
+		material->GetShader()->SetUniform("u_mTransform", mvpMatrix.Transposed());
 
 		// compute the mesh's buffer offset
-		// TODO: Precompute and buffer this
 		int meshVertexOffset = GetMeshVertexOffset(m_meshes, mesh);
 		int meshVertexStride = mesh->GetVertexStride();
 		int meshIndexOffset = GetMeshIndexOffset(m_meshes, mesh);
 
 		// render
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
-		// glVertexAttribPointer(shader->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), NULL);
-		glVertexAttribPointer(shader->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat)));
-		if (texture != NULL)
+		glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat)));
+		if (material->GetTexture() != NULL)
 		{
-			// glVertexAttribPointer(shader->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, 2 * 2 * sizeof(GLfloat), (void*)(0 + 2 * sizeof(GL_FLOAT)));
-			glVertexAttribPointer(shader->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat) + 2 * sizeof(GLfloat)));
+			glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat) + 2 * sizeof(GLfloat)));
 		}
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
-		glDrawElements(renderMode, 6, GL_UNSIGNED_INT, (void*)(meshIndexOffset * sizeof(GLint)));
+		glDrawElements(mesh->GetRenderMode(), 6, GL_UNSIGNED_INT, (void*)(meshIndexOffset * sizeof(GLint)));
 
 		// cleanup
-		glDisableVertexAttribArray(shader->GetAttributeHandle("a_vPosition"));
-		if (texture != NULL) {
+		glDisableVertexAttribArray(material->GetShader()->GetAttributeHandle("a_vPosition"));
+		if (material->GetTexture() != NULL) {
 			glBindTexture(GL_TEXTURE_2D, 0);
-			glDisableVertexAttribArray(shader->GetAttributeHandle("a_vTexCoord"));
+			glDisableVertexAttribArray(material->GetShader()->GetAttributeHandle("a_vTexCoord"));
 		}
 		glDisable(GL_BLEND);
-		shader->Unuse();
+		material->GetShader()->Unuse();
 	}
 
 	void RenderDevice::InitializeBuffers()

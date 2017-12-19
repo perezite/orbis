@@ -2,7 +2,7 @@
 
 #include "Component.h"
 
-#include "../Video/Shader.h"
+#include "../Video/Material.h"
 #include "../Video/Mesh.h"
 using namespace Video;
 
@@ -23,12 +23,12 @@ namespace Components
 		// render
 		void Render();
 
-	private: 
-		// the shader
-		Shader* m_shader;
-
+	private:
 		// the mesh
 		Mesh* m_mesh;
+
+		// the material
+		Material m_material;
 
 		// the lines
 		std::vector<std::pair<Vector2D, Vector2D>> m_lines;

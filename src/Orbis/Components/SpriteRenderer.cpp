@@ -19,7 +19,7 @@ namespace Components
 {
 	void SpriteRenderer::Start()
 	{
-		m_shader = Shader::GetDiffuseShader();
+		m_material.SetShader(Shader::GetDiffuseShader());
 		m_mesh = Mesh::GetTexturedQuad();
 		m_mesh->Initialize();
 	}
@@ -27,6 +27,6 @@ namespace Components
 	void SpriteRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(m_mesh, GetParent()->GetTransform(), m_texture, m_shader, Color::White, RenderMode::Triangles, false, m_applyCameraTransformation);
+		renderDevice->Render(GetParent()->GetTransform(), m_mesh, &m_material);
 	}
 }

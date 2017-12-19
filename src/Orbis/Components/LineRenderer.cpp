@@ -13,12 +13,10 @@ namespace Components
 {
 	void LineRenderer::Start()
 	{
-		m_shader = Shader::GetFlatShader();
-		m_mesh = new Mesh(
-			{ Vector2D(0.0f, 0.0f), Vector2D(1.0f, 0.0f)}, 
-			{}, 
-			{ 1, 2 }
-		);
+		m_material.SetShader(Shader::GetFlatShader());
+		m_material.SetColor(Color(1.0f, 0.0, 0.0f));
+		m_material.SetIsColorUsed(true);
+		m_mesh = Mesh::GetLineMesh();
 		m_mesh->Initialize();
 	}
 
@@ -40,7 +38,7 @@ namespace Components
 			GetParent()->GetTransform()->SetRotation(rotation);
 			GetParent()->GetTransform()->SetScale(Vector2D(length, 0.0f));
 
-			renderDevice->Render(m_mesh, GetParent()->GetTransform(), NULL, m_shader, Color(1.0f, 0.0f, 0.0f), RenderMode::Lines, true, false);
+			renderDevice->Render(GetParent()->GetTransform(), m_mesh, &m_material);
 		}
 	}
 }
