@@ -3,6 +3,7 @@
 #include "VideoManager.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "MeshHelper.h"
 using namespace Video;
 
 #include "../Core/LogHelper.h"
@@ -16,92 +17,6 @@ using namespace Components;
 #include "../../Base/Math/Matrix4.h"
 using namespace System;
 using namespace Math;
-
-namespace 
-{
-	// get the total vertex buffer length of a mesh list
-	int GetTotalVertexBufferLength(std::vector<Mesh> meshes)
-	{
-		int len = 0;
-		for (unsigned int i = 0; i < meshes.size(); i++)
-		{
-			len += meshes.at(i).GetVertexBufferLength();
-		}
-	
-		return len;
-	}
-
-	// get the total index buffer length of a mesh list
-	int GetTotalIndexBufferLength(std::vector<Mesh> meshes)
-	{
-		int len = 0;
-		for (unsigned int i = 0; i < meshes.size(); i++)
-		{
-			len += meshes.at(i).GetIndexBufferLength();
-		}
-
-		return len;
-	}
-
-	// fills a preallocated buffer with a mesh list's vertex data
-	void FillGlobalVertexBuffer(std::vector<Mesh> meshes, float* const buffer)
-	{
-		unsigned int offset = 0;
-		for (unsigned int i = 0; i < meshes.size(); i++) 
-		{
-			meshes.at(i).FillVertexBuffer(buffer + offset);
-			offset += meshes.at(i).GetVertexBufferLength();
-		}
-	}
-
-	// fills a preallocated buffer with a mesh list's index data
-	void FillGlobalIndexBuffer(std::vector<Mesh> meshes, int* const buffer)
-	{
-		unsigned int offset = 0;
-		for (unsigned int i = 0; i < meshes.size(); i++)
-		{
-			meshes.at(i).FillIndexBuffer(buffer + offset);
-			offset += meshes.at(i).GetIndexBufferLength();
-		}
-	}
-
-	// get the index of a mesh within the mesh list
-	int GetMeshIndex(std::vector<Mesh>* meshes, Mesh* const mesh)
-	{
-		for (unsigned int i = 0; i < meshes->size(); i++)
-		{
-			if (&meshes->at(i) == mesh)
-				return i;
-		}
-
-		throw new Exception("Mesh was not found");
-	}
-
-	// get the vertex buffer offset for a given mesh
-	int GetMeshVertexOffset(std::vector<Mesh>* meshes, Mesh* const mesh)
-	{
-		int index = GetMeshIndex(meshes, mesh);
-		int offset = 0;
-		for (int i = 0; i < index; i++)
-		{
-			offset += meshes->at(i).GetVertexBufferLength();
-		}
-
-		return offset;
-	}
-
-	// get the index buffer offset for a given mesh
-	int GetMeshIndexOffset(std::vector<Mesh>* meshes, Mesh* const mesh)
-	{
-		int index = GetMeshIndex(meshes, mesh);
-		int byteOffset = 0;
-		for (int i = 0; i < index; i++)
-		{
-			byteOffset += meshes->at(i).GetIndexBufferLength();
-		}
-		return byteOffset;
-	}
-}
 
 namespace Video
 {
@@ -125,6 +40,11 @@ namespace Video
 		m_renderData.clear();
 	}
 
+	void RenderDevice::Render(Transform* transform, Mesh* mesh, Material* material)
+	{
+		m_renderData.push_back(std::make_tuple(*transform, mesh, material));
+	}
+
 	void RenderDevice::Finalize()
 	{
 		// compute transformed meshes
@@ -141,7 +61,7 @@ namespace Video
 		UpdateVertexBuffer(transformedMeshes);
 		if (m_isRefreshing)
 		{
-			UpdateIndexBuffer(transformedMeshes);
+			RefreshBuffers(transformedMeshes);
 			m_isRefreshing = false;
 		}
 
@@ -151,11 +71,6 @@ namespace Video
 			std::tuple<Transform, Mesh*, Material*> data = m_renderData.at(i);
 			RenderSingle(&std::get<0>(data), &transformedMeshes.at(i), std::get<2>(data), &transformedMeshes);
 		}
-	}
-
-	void RenderDevice::Render(Transform* transform, Mesh* mesh, Material* material)
-	{
-		m_renderData.push_back(std::make_tuple(*transform, mesh, material));
 	}
 
 	void RenderDevice::RenderSingle(Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList)
@@ -182,18 +97,18 @@ namespace Video
 			material->GetShader()->SetUniform("u_vColor", material->GetColor());
 
 		// compute the mesh's buffer offset
-		int meshVertexOffset = GetMeshVertexOffset(meshList, mesh);
+		int meshVertexOffset = MeshHelper::GetMeshVertexOffset(meshList, mesh);
 		int meshVertexStride = mesh->GetVertexStride();
-		int meshIndexOffset = GetMeshIndexOffset(meshList, mesh);
+		int meshIndexOffset = MeshHelper::GetMeshIndexOffset(meshList, mesh);
 
 		// prepare render
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
 		glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat)));
 		if (material->GetTexture() != NULL)
 		{
 			glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat) + 2 * sizeof(GLfloat)));
 		}
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
 
 		// render
 		glDrawElements(mesh->GetRenderMode(), mesh->GetNumElements(), GL_UNSIGNED_INT, (void*)(meshIndexOffset * sizeof(GLint)));
@@ -210,20 +125,25 @@ namespace Video
 
 	void RenderDevice::UpdateVertexBuffer(std::vector<Mesh> meshes)
 	{
-		int vertexBufferSize = GetTotalVertexBufferLength(meshes);
+		int vertexBufferSize = MeshHelper::GetVertexBufferLength(meshes);
 		float* vertexBufferData = new float[vertexBufferSize];
-		FillGlobalVertexBuffer(meshes, vertexBufferData);
+		MeshHelper::FillVertexBufferData(meshes, vertexBufferData);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
-		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize * sizeof(GLfloat), NULL, GL_DYNAMIC_DRAW);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, vertexBufferSize * sizeof(GLfloat), vertexBufferData);
 		delete[] vertexBufferData;
 	}
 
-	void RenderDevice::UpdateIndexBuffer(std::vector<Mesh> meshes)
+	void RenderDevice::RefreshBuffers(std::vector<Mesh> meshes)
 	{
-		int indexBufferSize = GetTotalIndexBufferLength(meshes);
+		// refresh vertex buffer size
+		int vertexBufferSize = MeshHelper::GetVertexBufferLength(meshes);
+		float* vertexBufferData = new float[vertexBufferSize];
+		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize * sizeof(GLfloat), NULL, GL_DYNAMIC_DRAW);
+
+		// refresh index buffer size and data
+		int indexBufferSize = MeshHelper::GetIndexBufferLength(meshes);
 		int* indexBufferData = new int[indexBufferSize];
-		FillGlobalIndexBuffer(meshes, indexBufferData);
+		MeshHelper::FillIndexBufferData(meshes, indexBufferData);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_STATIC_DRAW);
 		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indexBufferSize * sizeof(GLint), indexBufferData);

@@ -26,14 +26,11 @@ namespace Video
 		// dtor
 		virtual ~RenderDevice();
 
-		// render
-		void Render(Transform* transform, Mesh* mesh, Material* material);
-
-		// render single data
-		void RenderSingle(Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList);
-
 		// begin
 		void Begin();
+
+		// render
+		void Render(Transform* transform, Mesh* mesh, Material* material);
 
 		// finalize
 		void Finalize();
@@ -42,11 +39,14 @@ namespace Video
 		void Refresh() { m_isRefreshing = true; }
 
 	protected:
+		// render single data
+		void RenderSingle(Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList);
+
 		// update vertex buffer
 		void UpdateVertexBuffer(std::vector<Mesh> meshes);
 
 		// update index buffer
-		void UpdateIndexBuffer(std::vector<Mesh> meshes);
+		void RefreshBuffers(std::vector<Mesh> meshes);
 
 	private:
 		// the data to be rendered
