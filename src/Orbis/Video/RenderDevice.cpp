@@ -225,7 +225,7 @@ namespace Video
 		int* indexBufferData = new int[indexBufferSize];
 		FillGlobalIndexBuffer(meshes, indexBufferData);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_STATIC_DRAW);
 		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indexBufferSize * sizeof(GLint), indexBufferData);
 		delete[] indexBufferData;
 	}

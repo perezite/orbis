@@ -56,7 +56,7 @@ namespace Video
 		bool isWorldSpaceTransformation = transform->GetTransformSpace() == TransformSpace::WorldSpace;
 		Matrix3 modelMatrix = transform->GetMatrix();
 		Matrix3 viewMatrix = isWorldSpaceTransformation ? Camera::GetViewMatrix() : Matrix3();
-		Matrix3 mvpMatrix = Camera::GetProjectionMatrix_v2(isWorldSpaceTransformation) * viewMatrix * modelMatrix;
+		Matrix3 mvpMatrix = Camera::GetProjectionMatrix(isWorldSpaceTransformation) * viewMatrix * modelMatrix;
 
 		// apply mvp matrix to all vertices
 		std::vector<Vector2D> transformedVertices = transformed.GetVertices();

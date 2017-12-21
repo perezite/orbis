@@ -1,7 +1,5 @@
 TODO:
 - Rendering für Dynamische Vertices anpassen
-	- Streamed Rendering mit GL_DYNAMIC_DRAW VBO's und Buffer Orphaning implementieren
-		- Update mit Buffer Orphaning implementieren
 	- v2 Funktionen aufräumen
 	-- Referenz:
 		- https://www.youtube.com/watch?v=2xWCvn9MZlg (ab 15:00): VBO update mit Buffer Orphaning
@@ -10,6 +8,7 @@ TODO:
 		-- Für SpriteBatching kann ich kein ShaderUniform mehr verwenden für die MVP-Matrix, denn pro DrawCall wird der Wert unterschiedlich sein
 		-- Die einzige Möglichkeit, die MVP-Matrix hochzuladen ist dann also, dass ich sie als ShaderAttribute für jeden Vertex setze, was viel zu viele Uploads gibt
 		-- Die einzige logische Lösung aus meiner Sicht ist: Die Multiplikation MVP * Vertex auf der CPU machen und die Koordinaten dann pro Frame in ein dynamischs VBO hochladen
+- RenderDevice Code refactoren
 - RenderBatch implementieren (vorerst ohne Atlassing) 
 	- RenderBatch-Klasse schreiben: Enthält Meshes, Material, Vertex und Index Offets
 	- RenderDevice::FinalizeRendering umschreiben, so dass vor dem Erstellen des VBO und IBO die RenderBatches berechnet werden. In der Schleife wird dann ein Aufruf pro Batch gemacht
