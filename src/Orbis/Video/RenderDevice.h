@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "Material.h"
+#include "RenderBatch.h"
 
 #include "../Game/Transform.h"
 using namespace Game;
@@ -40,7 +41,7 @@ namespace Video
 
 	protected:
 		// render single data
-		void RenderSingle(Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList);
+		void RenderSingle(const Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList);
 
 		// update vertex buffer
 		void UpdateVertexBuffer(std::vector<Mesh> meshes);
@@ -49,8 +50,8 @@ namespace Video
 		void RefreshBuffers(std::vector<Mesh> meshes);
 
 	private:
-		// the data to be rendered
-		std::vector<std::tuple<Transform, Mesh*, Material*>> m_renderData;
+		// the render batches
+		std::vector<RenderBatch> m_renderBatches;
 
 		// the vertex buffer object
 		GLuint m_vertexBufferHandle;

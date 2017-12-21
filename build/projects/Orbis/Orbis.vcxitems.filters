@@ -179,5 +179,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\MeshHelper.h">
       <Filter>Video</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderBatch.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

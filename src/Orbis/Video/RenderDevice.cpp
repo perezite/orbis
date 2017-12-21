@@ -37,27 +37,26 @@ namespace Video
 
 	void RenderDevice::Begin()
 	{
-		m_renderData.clear();
+		m_renderBatches.clear();
 	}
 
 	void RenderDevice::Render(Transform* transform, Mesh* mesh, Material* material)
 	{
-		m_renderData.push_back(std::make_tuple(*transform, mesh, material));
+		m_renderBatches.push_back(RenderBatch(*transform, mesh, material));
 	}
 
 	void RenderDevice::Finalize()
 	{
 		// compute transformed meshes
 		std::vector<Mesh> transformedMeshes;
-		for (unsigned int i = 0; i < m_renderData.size(); i++)
+		for (unsigned int i = 0; i < m_renderBatches.size(); i++)
 		{
-			std::tuple<Transform, Mesh*, Material*> data = m_renderData.at(i);
-			Transform* transform = &std::get<0>(data);
-			Mesh mesh = std::get<1>(data)->Transformed(transform);
-			transformedMeshes.push_back(mesh);
+			RenderBatch batch = m_renderBatches[i];
+			Mesh transformedMesh = batch.GetMesh()->Transformed(&batch.GetTransform());
+			transformedMeshes.push_back(transformedMesh);
 		}
 
-		// update index and vertex buffers
+		// update buffers
 		UpdateVertexBuffer(transformedMeshes);
 		if (m_isRefreshing)
 		{
@@ -65,15 +64,15 @@ namespace Video
 			m_isRefreshing = false;
 		}
 
-		// perform rendering
-		for (unsigned int i = 0; i < m_renderData.size(); i++)
+		// render batches
+		for (unsigned int i = 0; i < m_renderBatches.size(); i++)
 		{
-			std::tuple<Transform, Mesh*, Material*> data = m_renderData.at(i);
-			RenderSingle(&std::get<0>(data), &transformedMeshes.at(i), std::get<2>(data), &transformedMeshes);
+			RenderBatch batch = m_renderBatches[i];
+			RenderSingle(&batch.GetTransform(), &transformedMeshes[i], batch.GetMaterial(), &transformedMeshes);
 		}
 	}
 
-	void RenderDevice::RenderSingle(Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList)
+	void RenderDevice::RenderSingle(const Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList)
 	{
 		// setup rendering
 		glEnable(GL_BLEND);

@@ -48,7 +48,7 @@ namespace Video
 		VideoManager::GetInstance()->GetRenderDevice()->Refresh();
 	}
 
-	Mesh Mesh::Transformed(Transform* transform)
+	Mesh Mesh::Transformed(const Transform* transform)
 	{
 		Mesh transformed = *this;
 

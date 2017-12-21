@@ -1,5 +1,4 @@
 TODO:
-- Funktion MeshHelper schreiben für die std::vector<Mesh> Funktionen
 - RenderBatch-Klasse implementieren: Enthält Meshes, Material, Vertex und Index Offets und verwenden in RenderSingle
 - Batching implementieren (vorerst ohne Atlassing) 
 	- RenderDevice::FinalizeRendering umschreiben, so dass vor dem Erstellen des VBO und IBO die RenderBatches berechnet werden. In der Schleife wird dann ein Aufruf pro Batch gemacht

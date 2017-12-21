@@ -62,7 +62,7 @@ namespace Video
 		int GetVertexStride();
 
 		// apply the given transformation on the mesh
-		Mesh Transformed(Transform* transform);
+		Mesh Transformed(const Transform* transform);
 
 		// get number of elements per primitive
 		int GetNumElements();
