@@ -32,6 +32,9 @@ namespace Video
 
 		// swap the video buffers
 		void SwapBuffers();
+		
+		// is the manager initialized
+		bool IsInitialized() const { return m_IsInitialized; }
 
 	protected:
 		// singleton constructor

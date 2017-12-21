@@ -3,8 +3,7 @@
 #include "VideoManager.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "MeshHelper.h"
-using namespace Video;
+#include "RenderBatchHelper.h"
 
 #include "../Core/LogHelper.h"
 #include "../Libraries/SDL.h"
@@ -48,39 +47,51 @@ namespace Video
 	void RenderDevice::Finalize()
 	{
 		// compute transformed meshes
-		std::vector<Mesh> transformedMeshes;
 		for (unsigned int i = 0; i < m_renderBatches.size(); i++)
 		{
-			RenderBatch batch = m_renderBatches[i];
-			Mesh transformedMesh = batch.GetMesh()->Transformed(&batch.GetTransform());
-			transformedMeshes.push_back(transformedMesh);
+			m_renderBatches.at(i).CalculateTransformedMeshes();
 		}
 
-		// update buffers
-		UpdateVertexBuffer(transformedMeshes);
+		// refresh buffers
 		if (m_isRefreshing)
 		{
-			RefreshBuffers(transformedMeshes);
+			RefreshBuffers(m_renderBatches);
 			m_isRefreshing = false;
 		}
+
+		// update vertex buffer
+		UpdateVertexBuffer(m_renderBatches);
 
 		// render batches
 		for (unsigned int i = 0; i < m_renderBatches.size(); i++)
 		{
-			RenderBatch batch = m_renderBatches[i];
-			RenderSingle(&batch.GetTransform(), &transformedMeshes[i], batch.GetMaterial(), &transformedMeshes);
+			RenderBatched(&m_renderBatches.at(i));
 		}
+
+		m_renderBatches.clear();
 	}
 
-	void RenderDevice::RenderSingle(const Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList)
+	void RenderDevice::RenderBatched(RenderBatch* renderBatch)
 	{
+		Material* material = renderBatch->GetMaterial();
+
 		// setup rendering
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+		// compute the mesh's buffer offsets
+		int vboOffset = RenderBatchHelper::GetVertexBufferOffset(&m_renderBatches, renderBatch);
+		int iboOffset = RenderBatchHelper::GetIndexBufferOffset(&m_renderBatches, renderBatch);
+		int vertexStride = renderBatch->GetVertexStride();
+
 		// setup shader
 		material->GetShader()->Use();
 		glEnableVertexAttribArray(material->GetShader()->GetAttributeHandle("a_vPosition"));
+		glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, vertexStride * sizeof(GLfloat), (void*)(vboOffset * sizeof(GLfloat)));
+		if (material->GetTexture() != NULL)
+		{
+			glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, vertexStride * sizeof(GLfloat), (void*)(vboOffset * sizeof(GLfloat) + 2 * sizeof(GLfloat)));
+		}
 
 		// setup texture
 		if (material->GetTexture() != NULL)
@@ -95,22 +106,10 @@ namespace Video
 		if (material->GetIsColorUsed())
 			material->GetShader()->SetUniform("u_vColor", material->GetColor());
 
-		// compute the mesh's buffer offset
-		int meshVertexOffset = MeshHelper::GetMeshVertexOffset(meshList, mesh);
-		int meshVertexStride = mesh->GetVertexStride();
-		int meshIndexOffset = MeshHelper::GetMeshIndexOffset(meshList, mesh);
-
-		// prepare render
+		// render
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
-		glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vPosition"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat)));
-		if (material->GetTexture() != NULL)
-		{
-			glVertexAttribPointer(material->GetShader()->GetAttributeHandle("a_vTexCoord"), 2, GL_FLOAT, GL_FALSE, meshVertexStride * sizeof(GLfloat), (void*)(meshVertexOffset * sizeof(GLfloat) + 2 * sizeof(GLfloat)));
-		}
-
-		// render
-		glDrawElements(mesh->GetRenderMode(), mesh->GetNumElements(), GL_UNSIGNED_INT, (void*)(meshIndexOffset * sizeof(GLint)));
+		glDrawElements(renderBatch->GetRenderMode(), renderBatch->GetNumIndices(), GL_UNSIGNED_INT, (void*)(iboOffset * sizeof(GLint)));
 
 		// cleanup
 		glDisableVertexAttribArray(material->GetShader()->GetAttributeHandle("a_vPosition"));
@@ -122,27 +121,27 @@ namespace Video
 		material->GetShader()->Unuse();
 	}
 
-	void RenderDevice::UpdateVertexBuffer(std::vector<Mesh> meshes)
+	void RenderDevice::UpdateVertexBuffer(std::vector<RenderBatch> batches)
 	{
-		int vertexBufferSize = MeshHelper::GetVertexBufferLength(meshes);
+		int vertexBufferSize = RenderBatchHelper::GetVertexBufferLength(batches);
 		float* vertexBufferData = new float[vertexBufferSize];
-		MeshHelper::FillVertexBufferData(meshes, vertexBufferData);
+		RenderBatchHelper::FillVertexBufferData(batches, vertexBufferData);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, vertexBufferSize * sizeof(GLfloat), vertexBufferData);
 		delete[] vertexBufferData;
 	}
 
-	void RenderDevice::RefreshBuffers(std::vector<Mesh> meshes)
+	void RenderDevice::RefreshBuffers(std::vector<RenderBatch> batches)
 	{
 		// refresh vertex buffer size
-		int vertexBufferSize = MeshHelper::GetVertexBufferLength(meshes);
-		float* vertexBufferData = new float[vertexBufferSize];
+		int vertexBufferSize = RenderBatchHelper::GetVertexBufferLength(batches);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
 		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize * sizeof(GLfloat), NULL, GL_DYNAMIC_DRAW);
 
 		// refresh index buffer size and data
-		int indexBufferSize = MeshHelper::GetIndexBufferLength(meshes);
+		int indexBufferSize = RenderBatchHelper::GetIndexBufferLength(batches);
 		int* indexBufferData = new int[indexBufferSize];
-		MeshHelper::FillIndexBufferData(meshes, indexBufferData);
+		RenderBatchHelper::FillIndexBufferData(batches, indexBufferData);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_STATIC_DRAW);
 		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indexBufferSize * sizeof(GLint), indexBufferData);

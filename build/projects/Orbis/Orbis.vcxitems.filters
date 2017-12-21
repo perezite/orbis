@@ -90,7 +90,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\LineRenderer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\MeshHelper.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderBatch.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderBatchHelper.cpp">
       <Filter>Video</Filter>
     </ClCompile>
   </ItemGroup>
@@ -176,10 +179,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\TransformSpace.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\MeshHelper.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderBatch.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderBatch.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderBatchHelper.h">
       <Filter>Video</Filter>
     </ClInclude>
   </ItemGroup>

@@ -53,19 +53,16 @@ namespace Video
 		int GetIndexBufferLength();
 
 		// fills a preallocated buffer with the mesh's vertex data
-		void FillVertexBuffer(float* const buffer);
+		void FillVertexBufferData(float* const buffer);
 
 		// fills a preallocated buffer with the mesh's index data
-		void FillIndexBuffer(int* const buffer);
+		void FillIndexBufferData(int* const buffer);
 
 		// get the mesh's vertex stride
 		int GetVertexStride();
 
 		// apply the given transformation on the mesh
 		Mesh Transformed(const Transform* transform);
-
-		// get number of elements per primitive
-		int GetNumElements();
 
 	private:
 		// the vertex coordinates

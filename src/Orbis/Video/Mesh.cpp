@@ -59,7 +59,6 @@ namespace Video
 		Matrix3 mvpMatrix = Camera::GetProjectionMatrix(isWorldSpaceTransformation) * viewMatrix * modelMatrix;
 
 		// apply mvp matrix to all vertices
-		std::vector<Vector2D> transformedVertices = transformed.GetVertices();
 		for (unsigned int i = 0; i < transformed.GetVertices().size(); i++)
 		{
 			*transformed.GetVertex(i) = mvpMatrix * (*transformed.GetVertex(i));
@@ -81,7 +80,7 @@ namespace Video
 		return GetIndices().size();
 	}
 
-	void Mesh::FillVertexBuffer(float* const buffer)
+	void Mesh::FillVertexBufferData(float* const buffer)
 	{
 		Exception::Assert(GetTexCoords().size() == 0 || GetVertices().size() == GetTexCoords().size(),
 			"A mesh must either contain no texture coordinates or the number of vertices and texture coordinates must match");
@@ -105,7 +104,7 @@ namespace Video
 		}
 	}
 
-	void Mesh::FillIndexBuffer(int * const buffer)
+	void Mesh::FillIndexBufferData(int * const buffer)
 	{		
 		for (unsigned int i = 0; i < GetIndices().size(); i++)
 		{
@@ -121,15 +120,5 @@ namespace Video
 		int numTexComponents = hasTexCoords ? 2 : 0;
 		int stride = (numVertexComponents + numTexComponents);
 		return stride;
-	}
-
-	int Mesh::GetNumElements()
-	{
-		if (m_renderMode == RenderMode::Triangles)
-			return 6;
-		else if (m_renderMode == RenderMode::Lines)
-			return 2;
-
-		throw Exception("Number of primitive elements is not defined for given render mode");
 	}
 }

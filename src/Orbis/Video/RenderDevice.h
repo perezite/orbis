@@ -40,14 +40,14 @@ namespace Video
 		void Refresh() { m_isRefreshing = true; }
 
 	protected:
-		// render single data
-		void RenderSingle(const Transform* transform, Mesh* mesh, Material* material, std::vector<Mesh>* meshList);
+		// render a batch
+		void RenderBatched(RenderBatch* renderBatch);
 
 		// update vertex buffer
-		void UpdateVertexBuffer(std::vector<Mesh> meshes);
+		void UpdateVertexBuffer(std::vector<RenderBatch> batches);
 
 		// update index buffer
-		void RefreshBuffers(std::vector<Mesh> meshes);
+		void RefreshBuffers(std::vector<RenderBatch> batches);
 
 	private:
 		// the render batches
