@@ -38,9 +38,15 @@ namespace Video
 		// finalize
 		void Finalize();
 
+		// refresh the device
+		void Refresh() { m_isRefreshing = true; }
+
 	protected:
-		// update buffers
-		void UpdateBuffers(std::vector<Mesh> meshes);
+		// update vertex buffer
+		void UpdateVertexBuffer(std::vector<Mesh> meshes);
+
+		// update index buffer
+		void UpdateIndexBuffer(std::vector<Mesh> meshes);
 
 	private:
 		// the data to be rendered
@@ -51,5 +57,8 @@ namespace Video
 
 		// the index buffer object
 		GLuint m_indexBufferHandle;
+
+		// is the device refreshing
+		bool m_isRefreshing;
 	};
 }

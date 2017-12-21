@@ -1,8 +1,7 @@
 TODO:
 - Rendering für Dynamische Vertices anpassen
 	- Streamed Rendering mit GL_DYNAMIC_DRAW VBO's und Buffer Orphaning implementieren
-		- RenderDevice::FinalizeRendering hinzufügen, welche zuerst den kompletten VBO und IBO updated und dann pro (Transform, Mesh, Material) die Funktion RenderSingle aufruft
-		- Updated mit Buffer Orphaning implementieren
+		- Update mit Buffer Orphaning implementieren
 	- v2 Funktionen aufräumen
 	-- Referenz:
 		- https://www.youtube.com/watch?v=2xWCvn9MZlg (ab 15:00): VBO update mit Buffer Orphaning

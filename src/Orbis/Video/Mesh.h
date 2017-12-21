@@ -29,9 +29,7 @@ namespace Video
 
 	public:
 		// ctor
-		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices, RenderMode renderMode = RenderMode::Triangles)
-			: m_vertices(vertices), m_texCoords(texCoords), m_indices(indices), m_renderMode(renderMode)
-		{}
+		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices, RenderMode renderMode = RenderMode::Triangles);
 
 		// get vertices
 		std::vector<Vector2D> GetVertices() const { return m_vertices; }

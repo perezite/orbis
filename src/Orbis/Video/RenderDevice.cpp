@@ -106,7 +106,7 @@ namespace
 namespace Video
 {
 	RenderDevice::RenderDevice() :
-		m_vertexBufferHandle(0), m_indexBufferHandle(0)
+		m_vertexBufferHandle(0), m_indexBufferHandle(0), m_isRefreshing(false)
 	{
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 
@@ -137,8 +137,13 @@ namespace Video
 			transformedMeshes.push_back(mesh);
 		}
 
-		// update vbo and ibo
-		UpdateBuffers(transformedMeshes);
+		// update index and vertex buffers
+		UpdateVertexBuffer(transformedMeshes);
+		if (m_isRefreshing)
+		{
+			UpdateIndexBuffer(transformedMeshes);
+			m_isRefreshing = false;
+		}
 
 		// perform rendering
 		for (unsigned int i = 0; i < m_renderData.size(); i++)
@@ -203,22 +208,25 @@ namespace Video
 		material->GetShader()->Unuse();
 	}
 
-	void RenderDevice::UpdateBuffers(std::vector<Mesh> meshes)
+	void RenderDevice::UpdateVertexBuffer(std::vector<Mesh> meshes)
 	{
-		// generate the vertex buffer
 		int vertexBufferSize = GetTotalVertexBufferLength(meshes);
 		float* vertexBufferData = new float[vertexBufferSize];
 		FillGlobalVertexBuffer(meshes, vertexBufferData);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferHandle);
-		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize * sizeof(GLfloat), vertexBufferData, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize * sizeof(GLfloat), NULL, GL_DYNAMIC_DRAW);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, vertexBufferSize * sizeof(GLfloat), vertexBufferData);
 		delete[] vertexBufferData;
+	}
 
-		// generate the index buffer
+	void RenderDevice::UpdateIndexBuffer(std::vector<Mesh> meshes)
+	{
 		int indexBufferSize = GetTotalIndexBufferLength(meshes);
 		int* indexBufferData = new int[indexBufferSize];
 		FillGlobalIndexBuffer(meshes, indexBufferData);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferHandle);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize * sizeof(GLint), indexBufferData, GL_DYNAMIC_DRAW);
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indexBufferSize * sizeof(GLint), indexBufferData);
 		delete[] indexBufferData;
 	}
 }
