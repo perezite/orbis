@@ -41,7 +41,11 @@ namespace Video
 
 	void RenderDevice::Render(Transform* transform, Mesh* mesh, Material* material)
 	{
-		m_renderBatches.push_back(RenderBatch(*transform, mesh, material));
+		RenderBatch* matchingRenderBatch = RenderBatchHelper::FindMatchingRenderBatch(mesh, material, &m_renderBatches);
+		if (matchingRenderBatch != NULL)
+			matchingRenderBatch->AddItem(*transform, mesh, material);
+		else
+			m_renderBatches.push_back(RenderBatch(*transform, mesh, material));
 	}
 
 	void RenderDevice::Finalize()

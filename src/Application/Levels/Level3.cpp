@@ -34,11 +34,10 @@ namespace Levels
 		yellowBlock2->SetTransform(Transform(Vector2D(-0.2f, 0.2f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(yellowBlock2);
 
-		// blue block entity 2
-		Entity* blueBlock = new Entity("Blue Brick");
-		blueBlock->AddComponent(new SpriteRenderer(blueBlockTexture));
-		blueBlock->SetTransform(Transform(Vector2D(-0.0f, -0.2f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(blueBlock);
-
+		//// blue block entity 2
+		//Entity* blueBlock = new Entity("Blue Brick");
+		//blueBlock->AddComponent(new SpriteRenderer(blueBlockTexture));
+		//blueBlock->SetTransform(Transform(Vector2D(-0.0f, -0.2f), 0.0f, Vector2D(0.33f, 0.33f)));
+		//this->AddEntity(blueBlock);
 	}
 }

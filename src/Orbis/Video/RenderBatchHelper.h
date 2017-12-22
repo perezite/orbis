@@ -30,5 +30,8 @@ namespace Video
 
 		// get the index buffer offset for a given render batch
 		static int GetIndexBufferOffset(std::vector<RenderBatch>* batches, RenderBatch* const batch);
+
+		// find a matching render batch or NULL for the given render item
+		static RenderBatch* FindMatchingRenderBatch(Mesh * mesh, Material * material, std::vector<RenderBatch>* batches);
 	};
 }

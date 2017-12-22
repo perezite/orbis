@@ -104,13 +104,12 @@ namespace Video
 		}
 	}
 
-	void Mesh::FillIndexBufferData(int * const buffer)
+	void Mesh::FillIndexBufferData(int* const buffer, int indexOffset)
 	{		
 		for (unsigned int i = 0; i < GetIndices().size(); i++)
 		{
-			buffer[i] = GetIndices().at(i);
-		}
-		
+			buffer[i] = GetIndices().at(i) + indexOffset;
+		}	
 	}
 
 	int Mesh::GetVertexStride()

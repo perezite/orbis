@@ -46,6 +46,9 @@ namespace Video
 		// get the number of vertices
 		int GetNumIndices();
 
+		// add a render item to the batch
+		void AddItem(const Transform& transform, Mesh* mesh, Material* material);
+
 		// fill the index buffer with the batch data
 		void FillVertexBufferData(float* const buffer);
 

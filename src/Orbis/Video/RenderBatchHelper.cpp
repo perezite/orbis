@@ -80,4 +80,20 @@ namespace Video
 		}
 		return offset;
 	}
+
+	RenderBatch* RenderBatchHelper::FindMatchingRenderBatch(Mesh* mesh, Material* material, std::vector<RenderBatch>* batches)
+	{
+		for (unsigned int i = 0; i < batches->size(); i++)
+		{
+			RenderBatch batch = batches->at(i);
+			if (*material == *batch.GetMaterial()
+				&& mesh->GetVertexStride() == batch.GetVertexStride()
+				&& mesh->GetRenderMode() == batch.GetRenderMode())
+			{
+				return &batches->at(i);
+			}
+		}
+
+		return NULL;
+	}
 }

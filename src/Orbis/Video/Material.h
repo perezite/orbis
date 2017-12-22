@@ -28,13 +28,18 @@ namespace Video
 		void SetColor(const Color& color) { m_color = color; }
 
 		// get color
-		Color& GetColor() { return m_color; }
+		const Color& GetColor() const { return m_color; }
 
 		// set is color used
 		void SetIsColorUsed(bool isColorUsed) { m_isColorUsed = isColorUsed; }
 
 		// get is color used
 		bool GetIsColorUsed() const { return m_isColorUsed; }
+
+		// equality 
+		bool operator==(const Material& other) const {
+			return m_texture == other.GetTexture() && m_shader == other.GetShader() && m_color == other.GetColor() && m_isColorUsed == other.GetIsColorUsed();
+		}
 
 	private:
 		// the texture

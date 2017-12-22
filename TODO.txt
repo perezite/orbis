@@ -1,8 +1,4 @@
 TODO:
-- Batching implementieren (vorerst ohne Atlassing) 
-	- RenderDevice::FinalizeRendering umschreiben, so dass vor dem Erstellen des VBO und IBO die RenderBatches berechnet werden. In der Schleife wird dann ein Aufruf pro Batch gemacht
-	- RenderDevice::RenderBatched erstellen, welches einen einzelnen Batch rendert
-- Überprüfen, ob MeshHelper neu RenderBatchHelper heissen soll
 - Texture Atlas implementieren
 	- Mesh Offsets etc. buffern (siehe RenderDevice::Render)
 	- Beide Shader gleichschalten, so dass sie die gleichen Uniforms verwenden (selbst wenn diese nicht verwendet werden)

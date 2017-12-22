@@ -56,7 +56,7 @@ namespace Video
 		void FillVertexBufferData(float* const buffer);
 
 		// fills a preallocated buffer with the mesh's index data
-		void FillIndexBufferData(int* const buffer);
+		void FillIndexBufferData(int* const buffer, int indexOffset);
 
 		// get the mesh's vertex stride
 		int GetVertexStride();
