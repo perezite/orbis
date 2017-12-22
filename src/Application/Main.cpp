@@ -18,7 +18,7 @@ using namespace System;
 int main(int argc, char* args[])
 {	
 	#ifdef __SANDBOX__
-		run();
+		Sandbox::run();
 		return 0;
 	#endif
 

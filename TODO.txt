@@ -1,6 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Sandbox neu einrichten
+	- Aktuell nicht problematische Funktionalität in Helper.cpp verfrachten
 	- Rendern eines einzigen Sprites implementieren (hartcodiert)
 	- Rendern von 1000 gelben Bricks implementieren (hartcodiert) und verifizieren, dass das ganze mit 60 FPS auf dem Xperia läuft
 	- Brick-Sprites in 10 Farben erstellen 

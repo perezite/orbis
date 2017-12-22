@@ -1,3 +1,6 @@
-// #define __SANDBOX__
+#define __SANDBOX__
 
-void run();
+namespace Sandbox
+{
+	void run();
+}
