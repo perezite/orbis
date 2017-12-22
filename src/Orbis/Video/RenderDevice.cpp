@@ -17,6 +17,11 @@ using namespace Components;
 using namespace System;
 using namespace Math;
 
+namespace
+{
+	static bool firstFrame = true;
+}
+
 namespace Video
 {
 	RenderDevice::RenderDevice() :
@@ -41,20 +46,21 @@ namespace Video
 
 	void RenderDevice::Render(Transform* transform, Mesh* mesh, Material* material)
 	{
-		RenderBatch* matchingRenderBatch = RenderBatchHelper::FindMatchingRenderBatch(mesh, material, &m_renderBatches);
-		if (matchingRenderBatch != NULL)
-			matchingRenderBatch->AddItem(*transform, mesh, material);
-		else
-			m_renderBatches.push_back(RenderBatch(*transform, mesh, material));
+		if (firstFrame)
+		{
+			RenderBatch* matchingRenderBatch = RenderBatchHelper::FindMatchingRenderBatch(mesh, material, &m_renderBatches);
+			if (matchingRenderBatch != NULL)
+				matchingRenderBatch->AddItem(*transform, mesh, material);
+			else
+				m_renderBatches.push_back(RenderBatch(*transform, mesh, material));
+		}
 	}
 
 	void RenderDevice::Finalize()
 	{
 		// compute transformed meshes
 		for (unsigned int i = 0; i < m_renderBatches.size(); i++)
-		{
 			m_renderBatches.at(i).CalculateTransformedMeshes();
-		}
 
 		// refresh buffers
 		if (m_isRefreshing)
@@ -63,7 +69,7 @@ namespace Video
 			m_isRefreshing = false;
 		}
 
-		// update vertex buffer
+		//update vertex buffer
 		UpdateVertexBuffer(m_renderBatches);
 
 		// render batches

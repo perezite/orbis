@@ -1,4 +1,26 @@
 TODO:
+- Sandbox wiederbeleben
+	- Brach erstellen von vor den Änderungen mit dem RenderBatch
+	- Sandbox neu einrichten
+	- Rendern eines einzigen Sprites implementieren (hartcodiert)
+	- Rendern von 1000 gelben Bricks implementieren (hartcodiert) und verifizieren, dass das ganze mit 60 FPS auf dem Xperia läuft
+	- Brick-Sprites in 10 Farben erstellen 
+	- Rendern von 10*100 Bricks aller Farben implementieren (hartcodiert). Regressionstest der Performance durchführen.
+	- Batched Rendering implementieren (hartcodiert). Regressionstest der Performance durchführen.
+	- Sukkzessive die Klassenstruktur wieder aufbauen. Dabei regelmässig Regressionstest der Performance durchführen
+	- Branch zurückmergen auf master	
+	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 60 FPs auf dem Xperia. 
+	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite, 
+- Gegebenenfalls Performance-Analyse durchführen
+	- Level mit 10 Blocks befüllen
+	- Performance-Analyse mit Funktions-Switching
+	- Stopwatch-Klasse schreiben
+	- Performance-Bottleneck mittels Stopwatch Timing isolieren
+	- Falls das auch nicht hilft: Sandbox schreiben 
+		- Freies ausprobieren:
+			- Rendering gemäss Buch auf Amazon (mit VAO's)
+			- Rendering gemäss http://androidblog.reindustries.com/a-real-opengl-es-2-0-2d-tutorial-part-7-texture-atlas/ (auch mit VAO's)
+			- Andere Ideen
 - Texture Atlas implementieren
 	- Mesh Offsets etc. buffern (siehe RenderDevice::Render)
 	- Beide Shader gleichschalten, so dass sie die gleichen Uniforms verwenden (selbst wenn diese nicht verwendet werden)
@@ -14,4 +36,5 @@ TODO:
 - Coroutinen implementieren
 - Partikelsystem implementieren
 - Asset-Funktionalität implementieren für Meshes, Shaders und Texturen (kontrollierte Erzeugung/Vernichtung)
+	- Besserer Vorschlag: Alle Grafikrelevanten Ressourcen vom VideoManager verwalten lassen
 - Orbis in Bibliothek versiegeln
