@@ -1,6 +1,5 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Release Build einrichten
 	- Performance mit aktivem Index Buffer testen
 	- Rendern eines einzelnen Sprites mit VAO implementieren (hartcodiert). Performance auf Xperia tracke und aufschreiben in OneNote
 	- Performance Logging implementieren
