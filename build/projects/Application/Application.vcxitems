@@ -19,6 +19,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +28,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.h" />
   </ItemGroup>
 </Project>

@@ -14,6 +14,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.cpp">
       <Filter>Sandboxing</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.cpp">
+      <Filter>Sandboxing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -43,6 +46,9 @@
       <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.h">
+      <Filter>Sandboxing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.h">
       <Filter>Sandboxing</Filter>
     </ClInclude>
   </ItemGroup>
