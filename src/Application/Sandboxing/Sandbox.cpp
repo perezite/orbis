@@ -84,7 +84,7 @@ namespace Sandboxing
 		glDisable(GL_BLEND);
 		glUseProgram(0);
 	}
-
+	
 	void Sandbox::InitGL()
 	{
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
