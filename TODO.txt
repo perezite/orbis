@@ -1,7 +1,8 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Aktuell nicht problematische Funktionalität in Helper.cpp verfrachten
-	- Rendern eines einzigen Sprites implementieren (hartcodiert)
+	- Nicht problematische Funktionen in Helper auslagern
+	- Rendern eines einzelnen Sprites mit VAO implementieren (hartcodiert)
+	- Performance Logging implementieren
 	- Rendern von 1000 gelben Bricks implementieren (hartcodiert) und verifizieren, dass das ganze mit 60 FPS auf dem Xperia läuft
 	- Brick-Sprites in 10 Farben erstellen 
 	- Rendern von 10*100 Bricks aller Farben implementieren (hartcodiert). Regressionstest der Performance durchführen.

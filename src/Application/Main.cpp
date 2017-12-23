@@ -1,8 +1,8 @@
-#include "Sandbox/Sandbox.h"
-
+#include "Sandboxing/Sandbox.h"
 #include "Levels/Level1.h"
 #include "Levels/Level2.h"
 using namespace Levels;
+using namespace Sandboxing;
 
 #include "../Orbis/Orbis/OrbisMain.h"
 #include "../Orbis/Core/LogHelper.h"
@@ -18,7 +18,7 @@ using namespace System;
 int main(int argc, char* args[])
 {	
 	#ifdef __SANDBOX__
-		Sandbox::run();
+		Sandbox::Run();
 		return 0;
 	#endif
 
