@@ -2,6 +2,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <stdlib.h>
 
 namespace Math
 {
@@ -18,5 +19,10 @@ namespace Math
 	float MathHelper::DegreesToRadian(float degrees)
 	{
 		return (degrees / 360.0f) * 2.0f * GetPi();
+	}
+
+	float MathHelper::GetRandom()
+	{
+		return (float)rand() / (RAND_MAX);
 	}
 }

@@ -18,7 +18,9 @@ namespace Sandboxing
 
 		static void InitGL();
 
-		static void UpdateVertexArray();
+		static void InitializeIndexArray();
+
+		static void InitializeVertexArray();
 	private:
 		static GLint m_positionHandle;
 		static GLint m_texCoordHandle;
@@ -26,6 +28,8 @@ namespace Sandboxing
 		static GLuint m_texture;
 		static std::vector<GLfloat> m_vertices;
 		static std::vector<GLushort> m_indices;
+		static const int NUM_BLOCKS;
+		static const float BLOCK_EXTENT;
 	};
 
 }

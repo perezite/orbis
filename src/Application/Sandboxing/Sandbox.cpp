@@ -4,7 +4,9 @@
 
 #include "Helper.h"
 
+#include "../../Base/Math/MathHelper.h"
 #include "../../Orbis/Core/TimeManager.h"
+using namespace Math;
 using namespace Core;
 
 #include <stdio.h>
@@ -19,6 +21,8 @@ namespace Sandboxing
 	GLuint Sandbox::m_texture = 0;
 	std::vector<GLfloat> Sandbox::m_vertices;
 	std::vector<GLushort> Sandbox::m_indices;
+	const int Sandbox::NUM_BLOCKS = 1000;
+	const float Sandbox::BLOCK_EXTENT = 0.05f;
 
 	void Sandbox::Run()
 	{
@@ -67,7 +71,6 @@ namespace Sandboxing
 		glUniform1i(m_samplerHandle, 0);
 
 		// set arrays
-		UpdateVertexArray();
 		glEnableVertexAttribArray(m_positionHandle);
 		glEnableVertexAttribArray(m_texCoordHandle);
 		glVertexAttribPointer(m_positionHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[0]));
@@ -75,7 +78,7 @@ namespace Sandboxing
 
 		// draw 
 		glClear(GL_COLOR_BUFFER_BIT);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, &m_indices[0]);
+		glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_SHORT, &m_indices[0]);
 
 		// cleanup
 		glDisableVertexAttribArray(m_texCoordHandle);
@@ -107,17 +110,52 @@ namespace Sandboxing
 		m_texture = Helper::LoadTexture(Helper::GetAssetFilePath("Textures/YellowBlock.png"), true);
 
 		// init arrays
-		m_indices = { 0, 1, 2, 2, 1, 3 };
+		InitializeIndexArray();
+		InitializeVertexArray();
 	}
 
-	void Sandbox::UpdateVertexArray()
+	void Sandbox::InitializeIndexArray()
 	{
-		m_vertices = { 
-			-0.5f, -0.5f, 0.0f, 0.0f,	// left bottom
-			 0.5f, -0.5f, 1.0f, 0.0f,	// right bottom
-			-0.5f,  0.5f, 0.0f, 1.0f,	// left top
-			 0.5f,  0.5f, 1.0f, 1.0f	// right top
+		const int NUM_VERTICES = 4;
+		std::vector<GLshort> indices = { 0, 1, 2, 2, 1, 3 };
+
+		m_indices.clear();
+		m_indices.reserve(NUM_BLOCKS * indices.size());
+		for (int i = 0; i < NUM_BLOCKS; i++)
+		{
+			m_indices.insert(m_indices.end(), indices.begin(), indices.end());
+
+			// compute offset for inserted indices
+			for (unsigned int j = 0; j < indices.size(); j++)
+				m_indices[i * indices.size() + j] += NUM_VERTICES * i;
+		}
+	}
+
+	void Sandbox::InitializeVertexArray()
+	{
+		const int VERTEX_SIZE = 4;
+		std::vector<GLfloat> vertices = { 
+			-BLOCK_EXTENT, -BLOCK_EXTENT, 0.0f, 0.0f,	// left bottom
+			 BLOCK_EXTENT, -BLOCK_EXTENT, 1.0f, 0.0f,	// right bottom
+			-BLOCK_EXTENT,  BLOCK_EXTENT, 0.0f, 1.0f,	// left top
+			 BLOCK_EXTENT,  BLOCK_EXTENT, 1.0f, 1.0f	// right top
 		};
+
+		m_vertices.clear();
+		m_vertices.reserve(NUM_BLOCKS * vertices.size());
+		for (int i = 0; i < NUM_BLOCKS; i++)
+		{
+			m_vertices.insert(m_vertices.end(), vertices.begin(), vertices.end());
+
+			// apply random displacement
+			float horzDisp = MathHelper::GetRandom() * 2.0f - 1.0f; 
+			float vertDisp = MathHelper::GetRandom() * 2.0f - 1.0f;
+			for (unsigned int j = 0; j < vertices.size() / VERTEX_SIZE; j++)
+			{
+				m_vertices[i * vertices.size() + j * VERTEX_SIZE] += horzDisp;
+				m_vertices[i * vertices.size() + j * VERTEX_SIZE + 1] += vertDisp;
+			}
+		}
 	}
 }
 

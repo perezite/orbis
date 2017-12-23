@@ -14,5 +14,8 @@ namespace Math
 
 		// convert angle in degrees to angle in radian
 		static float DegreesToRadian(float degrees);
+
+		// a random value between (0, 1)
+		static float GetRandom();
 	};
 }
