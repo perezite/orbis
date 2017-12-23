@@ -11,6 +11,8 @@ namespace Sandboxing
 	GLuint Helper::m_programHandle = 0;
 	long Helper::m_startTicks = 0;
 	long Helper::m_numFrames = 0;
+	long Helper::m_numSamples = 0;
+	float Helper::m_cumulativePerformance = 0.0f;
 
 	void Helper::Close()
 	{
@@ -190,9 +192,17 @@ namespace Sandboxing
 		m_numFrames++;
 		if (TimeManager::GetInstance()->GetTicks() - m_startTicks > 1000)
 		{
-			LogHelper::LogMessage("%f ms/frame", 1000.0 / double(m_numFrames));
+			// track current performance
+			float currentPerformance = 1000.0f / float(m_numFrames);
+			LogHelper::LogMessage("%f ms/frame", currentPerformance);
 			m_startTicks += 1000;
 			m_numFrames = 0;
+
+			// track average performance
+			m_numSamples++;
+			m_cumulativePerformance += currentPerformance;
+			float average = m_cumulativePerformance / float(m_numSamples);
+			LogHelper::LogMessage("Average: %f ms/frame, samples: %d", average, m_numSamples);
 		}
 	}
 }

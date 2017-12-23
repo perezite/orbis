@@ -32,7 +32,7 @@ namespace Sandboxing
 
 		static std::string GetAssetFilePath(const char* assetPath);
 
-		static void Helper::LogPerformance();
+		static void LogPerformance();
 
 	protected:
 		static SDL_Surface* MirrorSurface(SDL_Surface* surface);
@@ -43,5 +43,7 @@ namespace Sandboxing
 		static SDL_GLContext m_context;
 		static long m_startTicks;
 		static long m_numFrames;
+		static long m_numSamples;
+		static float m_cumulativePerformance;
 	};
 }

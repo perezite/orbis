@@ -53,7 +53,7 @@ namespace Sandboxing
 
 	void Sandbox::Render()
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		// set states
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -75,12 +75,14 @@ namespace Sandboxing
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 
 		// draw 
+		glClear(GL_COLOR_BUFFER_BIT);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
 		// cleanup
 		glDisableVertexAttribArray(m_texCoordHandle);
 		glDisableVertexAttribArray(m_positionHandle);
 		glDisable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
 		glUseProgram(0);
 	}
 
