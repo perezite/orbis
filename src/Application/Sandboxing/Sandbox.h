@@ -4,6 +4,7 @@
 #include "../../Orbis/Libraries/SDL.h"
 
 #include <string>
+#include <vector>
 
 namespace Sandboxing
 {
@@ -17,13 +18,14 @@ namespace Sandboxing
 
 		static void InitGL();
 
+		static void UpdateVertexArray();
 	private:
 		static GLint m_positionHandle;
 		static GLint m_texCoordHandle;
 		static GLint m_samplerHandle;
-		static GLuint m_vbo;
-		static GLuint m_ibo;
 		static GLuint m_texture;
+		static std::vector<GLfloat> m_vertices;
+		static std::vector<GLushort> m_indices;
 	};
 
 }

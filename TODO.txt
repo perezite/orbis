@@ -1,7 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Performance mit aktivem Index Buffer testen
-	- Rendern eines einzelnen Sprites mit VAO implementieren (hartcodiert). Performance auf Xperia tracke und aufschreiben in OneNote
+	- Release-Build für Windows eirichten. Andernfalls gibt es Intellisense Errors wenn man einen Android Release-Build macht
 	- Performance Logging implementieren
 	- Rendern von 1000 gelben Bricks implementieren (hartcodiert) und verifizieren, dass das ganze mit 60 FPS auf dem Xperia läuft
 	- Brick-Sprites in 10 Farben erstellen 
