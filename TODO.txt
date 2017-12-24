@@ -1,5 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
+	- Release apk mit Debug key signieren
 	- Rendern von 1000 dynamischen, gelben Bricks implementieren (hartcodiert) und nachprüfen, wie schnell das ganze auf dem Xperia läuft
 	- Rendern von 1000 gelben Bricks mit Batching implementieren (hartcodiert) und nachprüfen, wie schnell das ganze auf dem Xperia läuft
 	- Brick-Sprites in 10 Farben erstellen 

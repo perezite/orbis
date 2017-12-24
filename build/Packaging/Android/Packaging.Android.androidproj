@@ -97,7 +97,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <AntPackage>
       <AndroidAppLibName>Application</AndroidAppLibName>
-      <AntTarget>release</AntTarget>
+      <AntTarget>debug</AntTarget>
     </AntPackage>
   </ItemDefinitionGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />

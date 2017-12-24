@@ -8,6 +8,14 @@
 
 namespace Sandboxing
 {
+	struct STransform
+	{
+		float positionX;
+		float positionY;
+		float extent;
+		bool isGrowing;
+	};
+
 	class Sandbox
 	{
 	public:
@@ -18,9 +26,13 @@ namespace Sandboxing
 
 		static void InitGL();
 
-		static void InitializeIndexArray();
+		static void InitIndexArray();
 
-		static void InitializeVertexArray();
+		static void UpdateVertexArray();
+
+		static void InitTransforms();
+
+		static void UpdateTransforms();
 	private:
 		static GLint m_positionHandle;
 		static GLint m_texCoordHandle;
@@ -28,8 +40,10 @@ namespace Sandboxing
 		static GLuint m_texture;
 		static std::vector<GLfloat> m_vertices;
 		static std::vector<GLushort> m_indices;
+		static std::vector<STransform> m_transforms;
 		static const int NUM_BLOCKS;
-		static const float BLOCK_EXTENT;
+		static const float MIN_BLOCK_EXTENT;
+		static const float MAX_BLOCK_EXTENT;
 	};
 
 }

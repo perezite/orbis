@@ -21,11 +21,14 @@ namespace Sandboxing
 	GLuint Sandbox::m_texture = 0;
 	std::vector<GLfloat> Sandbox::m_vertices;
 	std::vector<GLushort> Sandbox::m_indices;
+	std::vector<STransform> Sandbox::m_transforms;
 	const int Sandbox::NUM_BLOCKS = 1000;
-	const float Sandbox::BLOCK_EXTENT = 0.05f;
+	const float Sandbox::MIN_BLOCK_EXTENT = 0.01f;
+	const float Sandbox::MAX_BLOCK_EXTENT = 0.05f;
 
 	void Sandbox::Run()
 	{
+		TimeManager::GetInstance()->Reset();
 		Helper::InitSDL();
 		InitGL();
 
@@ -37,6 +40,7 @@ namespace Sandboxing
 
 		while (!quit)
 		{
+			TimeManager::GetInstance()->Update();
 			while (SDL_PollEvent(&e) != 0)
 			{
 				if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN || e.type == SDL_FINGERDOWN)
@@ -71,6 +75,8 @@ namespace Sandboxing
 		glUniform1i(m_samplerHandle, 0);
 
 		// set arrays
+		UpdateTransforms();
+		UpdateVertexArray();
 		glEnableVertexAttribArray(m_positionHandle);
 		glEnableVertexAttribArray(m_texCoordHandle);
 		glVertexAttribPointer(m_positionHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[0]));
@@ -110,11 +116,11 @@ namespace Sandboxing
 		m_texture = Helper::LoadTexture(Helper::GetAssetFilePath("Textures/YellowBlock.png"), true);
 
 		// init arrays
-		InitializeIndexArray();
-		InitializeVertexArray();
+		InitIndexArray();
+		InitTransforms();
 	}
 
-	void Sandbox::InitializeIndexArray()
+	void Sandbox::InitIndexArray()
 	{
 		const int NUM_VERTICES = 4;
 		std::vector<GLshort> indices = { 0, 1, 2, 2, 1, 3 };
@@ -131,14 +137,14 @@ namespace Sandboxing
 		}
 	}
 
-	void Sandbox::InitializeVertexArray()
+	void Sandbox::UpdateVertexArray()
 	{
 		const int VERTEX_SIZE = 4;
 		std::vector<GLfloat> vertices = { 
-			-BLOCK_EXTENT, -BLOCK_EXTENT, 0.0f, 0.0f,	// left bottom
-			 BLOCK_EXTENT, -BLOCK_EXTENT, 1.0f, 0.0f,	// right bottom
-			-BLOCK_EXTENT,  BLOCK_EXTENT, 0.0f, 1.0f,	// left top
-			 BLOCK_EXTENT,  BLOCK_EXTENT, 1.0f, 1.0f	// right top
+			-1, -1, 0.0f, 0.0f,	// left bottom
+			 1, -1, 1.0f, 0.0f,	// right bottom
+			-1,  1, 0.0f, 1.0f,	// left top
+			 1,  1, 1.0f, 1.0f	// right top
 		};
 
 		m_vertices.clear();
@@ -147,14 +153,42 @@ namespace Sandboxing
 		{
 			m_vertices.insert(m_vertices.end(), vertices.begin(), vertices.end());
 
-			// apply random displacement
-			float horzDisp = MathHelper::GetRandom() * 2.0f - 1.0f; 
-			float vertDisp = MathHelper::GetRandom() * 2.0f - 1.0f;
+			// apply scale
 			for (unsigned int j = 0; j < vertices.size() / VERTEX_SIZE; j++)
 			{
-				m_vertices[i * vertices.size() + j * VERTEX_SIZE] += horzDisp;
-				m_vertices[i * vertices.size() + j * VERTEX_SIZE + 1] += vertDisp;
+				m_vertices[i * vertices.size() + j * VERTEX_SIZE] *= m_transforms[i].extent;
+				m_vertices[i * vertices.size() + j * VERTEX_SIZE] += m_transforms[i].positionX;
+				m_vertices[i * vertices.size() + j * VERTEX_SIZE + 1] *= m_transforms[i].extent;
+				m_vertices[i * vertices.size() + j * VERTEX_SIZE + 1] += m_transforms[i].positionY;
 			}
+		}
+	}
+
+	void Sandbox::InitTransforms()
+	{
+		for (unsigned int i = 0; i < NUM_BLOCKS; i++)
+		{
+			STransform transform;
+			transform.extent = MIN_BLOCK_EXTENT + (MAX_BLOCK_EXTENT - MIN_BLOCK_EXTENT) * MathHelper::GetRandom();
+			transform.isGrowing = rand() % 2 == 0 ? true : false;
+			transform.positionX = MathHelper::GetRandom() * 2.0f - 1.0f;
+			transform.positionY = MathHelper::GetRandom() * 2.0f - 1.0f;
+			m_transforms.push_back(transform);
+		}
+	}
+
+	void Sandbox::UpdateTransforms()
+	{
+		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		for (unsigned int i = 0; i < m_transforms.size(); i++)
+		{
+			m_transforms[i].extent += m_transforms[i].isGrowing ? dt * 0.01f : dt * -0.01f;
+
+			if (m_transforms[i].extent < MIN_BLOCK_EXTENT)
+				m_transforms[i].isGrowing = true;
+
+			if (m_transforms[i].extent > MAX_BLOCK_EXTENT)
+				m_transforms[i].isGrowing = false;
 		}
 	}
 }
