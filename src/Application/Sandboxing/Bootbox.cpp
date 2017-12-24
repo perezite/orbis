@@ -7,6 +7,7 @@
 #include "../../Base/Math/MathHelper.h"
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Video/VideoManager_v2.h"
+#include "../../Orbis/Video/Mesh_v2.h"
 using namespace Math;
 using namespace Core;
 using namespace Video;
@@ -91,17 +92,17 @@ namespace Sandboxing
 
 	void Bootbox::InitIndexArray()
 	{
-		std::vector<GLshort> indices = { 0, 1, 2, 2, 1, 3 };
+		const std::vector<GLushort>* quadIndices = Mesh_v2::GetTexturedQuad()->GetIndices();
 
 		m_indices.clear();
-		m_indices.reserve(NUM_SPRITES * indices.size());
+		m_indices.reserve(NUM_SPRITES * quadIndices->size());
 		for (int i = 0; i < NUM_SPRITES; i++)
 		{
-			m_indices.insert(m_indices.end(), indices.begin(), indices.end());
+			m_indices.insert(m_indices.end(), quadIndices->begin(), quadIndices->end());
 
 			// compute offset for inserted indices
-			for (unsigned int j = 0; j < indices.size(); j++)
-				m_indices[i * indices.size() + j] += VERTICES_PER_SPRITE * i;
+			for (unsigned int j = 0; j < quadIndices->size(); j++)
+				m_indices[i * quadIndices->size() + j] += VERTICES_PER_SPRITE * i;
 		}
 	}
 
@@ -151,32 +152,6 @@ namespace Sandboxing
 
 			if (m_entities[i].extent > MAX_BLOCK_EXTENT)
 				m_entities[i].isGrowing = false;
-		}
-	}
-
-	void Bootbox::UpdateVertexArray()
-	{
-		std::vector<GLfloat> vertices = {
-			-1, -1, 0.0f, 0.0f,	// left bottom
-			1, -1, 1.0f, 0.0f,	// right bottom
-			-1,  1, 0.0f, 1.0f,	// left top
-			1,  1, 1.0f, 1.0f	// right top
-		};
-
-		m_vertices.clear();
-		m_vertices.reserve(NUM_SPRITES * vertices.size());
-		for (int i = 0; i < NUM_SPRITES; i++)
-		{
-			m_vertices.insert(m_vertices.end(), vertices.begin(), vertices.end());
-
-			// apply scale
-			for (unsigned int j = 0; j < vertices.size() / VERTICES_PER_SPRITE; j++)
-			{
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] *= m_entities[i].extent;
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] += m_entities[i].positionX;
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] *= m_entities[i].extent;
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] += m_entities[i].positionY;
-			}
 		}
 	}
 

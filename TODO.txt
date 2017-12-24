@@ -1,15 +1,16 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
 	- Sukkzessive die Klassenstruktur bootstrappen in Bootbox als v2-Klassen. Dabei regelmässig Regressionstest der Performance durchführen.
-		- RenderDevice
-		- Mesh
+		- VideoManager: Enthält neu Vertices, Textures, Shaders
+		- Entity
+		- Component
+		- SpriteRenderer
 		- Material
 		- Shader		
 		- Texture		
 		- Camera
 		- Transform
 		- Rectangle Renderer
-		- SpriteRenderer
 		- LineRenderer
 	- Wenn alles fertig implementiert ist: 
 		- Die v2-Klassen in die originalen Klassen übertragen 

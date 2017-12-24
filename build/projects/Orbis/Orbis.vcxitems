@@ -31,6 +31,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis\OrbisMain.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Color.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh_v2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice_v2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Shader.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Material.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh_v2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice_v2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderMode.h" />

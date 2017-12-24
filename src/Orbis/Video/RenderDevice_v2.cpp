@@ -1,9 +1,10 @@
 #include "RenderDevice_v2.h"
 
+#include "Mesh_v2.h"
+
 namespace Video
 {
 	const int RenderDevice_v2::INDICES_PER_SPRITE = 6;
-	const int RenderDevice_v2::NUM_SPRITES = 1000;
 	const int RenderDevice_v2::VERTICES_PER_SPRITE = 4;
 
 	void RenderDevice_v2::Render(GLuint shaderProgram, GLint samplerHandle, GLint positionHandle, GLint texCoordHandle, std::vector<GLfloat>& vertices, const std::vector<GLushort>& indices, const std::vector<Entity_v2>& entities)
@@ -55,26 +56,22 @@ namespace Video
 
 	void RenderDevice_v2::UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Entity_v2>& entities)
 	{
-		std::vector<GLfloat> quad = {
-			-1, -1, 0.0f, 0.0f,	// left bottom
-			1, -1, 1.0f, 0.0f,	// right bottom
-			-1,  1, 0.0f, 1.0f,	// left top
-			1,  1, 1.0f, 1.0f	// right top
-		};
+		Mesh_v2* mesh = Mesh_v2::GetTexturedQuad();
+		const std::vector<GLfloat>* quad = mesh->GetVertexData();
 
 		vertices.clear();
-		vertices.reserve(NUM_SPRITES * quad.size());
-		for (int i = 0; i < NUM_SPRITES; i++)
+		vertices.reserve(entities.size() * quad->size());
+		for (unsigned int i = 0; i < entities.size(); i++)
 		{
-			vertices.insert(vertices.end(), quad.begin(), quad.end());
+			vertices.insert(vertices.end(), quad->begin(), quad->end());
 
 			// apply scale
-			for (unsigned int j = 0; j < quad.size() / VERTICES_PER_SPRITE; j++)
+			for (unsigned int j = 0; j < quad->size() / mesh->GetNumVertices(); j++)
 			{
-				vertices[i * quad.size() + j * VERTICES_PER_SPRITE] *= entities[i].extent;
-				vertices[i * quad.size() + j * VERTICES_PER_SPRITE] += entities[i].positionX;
-				vertices[i * quad.size() + j * VERTICES_PER_SPRITE + 1] *= entities[i].extent;
-				vertices[i * quad.size() + j * VERTICES_PER_SPRITE + 1] += entities[i].positionY;
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] *= entities[i].extent;
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] += entities[i].positionX;
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] *= entities[i].extent;
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] += entities[i].positionY;
 			}
 		}
 	}

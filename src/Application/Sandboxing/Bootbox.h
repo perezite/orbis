@@ -27,8 +27,6 @@ namespace Sandboxing
 
 		static void UpdateEntities();
 
-		static void UpdateVertexArray();
-
 		static int FindLastEntityByTexture(GLuint texture);
 
 	private:
