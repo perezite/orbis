@@ -3,6 +3,8 @@
 #include "../../Orbis/Libraries/GL.h"
 #include "../../Orbis/Libraries/SDL.h"
 
+#include <vector>
+
 namespace Sandboxing
 {
 	class Helper
@@ -24,7 +26,7 @@ namespace Sandboxing
 
 		static GLuint LoadShader(const char *shaderSrc, GLenum type);
 
-		static int LoadTexture(std::string filePath, bool flipVertically = false);
+		static GLuint LoadTexture(std::string filePath, bool flipVertically = false);
 
 		static const char* GetFragmentShaderCode();
 
@@ -39,8 +41,9 @@ namespace Sandboxing
 
 	private:
 		static SDL_Window* m_window;
-		static GLuint m_programHandle;
 		static SDL_GLContext m_context;
+		static GLuint m_programHandle;
+		static std::vector<GLuint> m_textureHandles;
 		static long m_startTicks;
 		static long m_numFrames;
 		static long m_numSamples;

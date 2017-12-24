@@ -1,7 +1,8 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Bricks mit zufälligen Farben erzeugen. Das Rendering Batchen, so dass 10 Batches mit ca. jeweils 100 Sprites gerendert werden. Regressionstest der Performance durchführen.
-	- Sukkzessive die Klassenstruktur wieder aufbauen. Dabei regelmässig Regressionstest der Performance durchführen
+	- Klasse ExtendedSandbox erstellen und Code von Sandbox kopieren
+	- Sukkzessive die Klassenstruktur bootstrappen in ExtendedSandbox. Dabei regelmässig Regressionstest der Performance durchführen.
+	- Neue Klassenstruktur mit vorhandenen Levels 1-3 ausprobieren
 	- Branch zurückmergen auf master	
 	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 60 FPs auf dem Xperia. 
 	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite, 

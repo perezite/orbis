@@ -9,6 +9,7 @@ namespace Sandboxing
 	SDL_Window* Helper::m_window = NULL;
 	SDL_GLContext Helper::m_context = NULL;
 	GLuint Helper::m_programHandle = 0;
+	std::vector<GLuint> Helper::m_textureHandles;
 	long Helper::m_startTicks = 0;
 	long Helper::m_numFrames = 0;
 	long Helper::m_numSamples = 0;
@@ -17,10 +18,11 @@ namespace Sandboxing
 	void Helper::Close()
 	{
 		glDeleteProgram(m_programHandle);
+		for (unsigned int i = 0; i < m_textureHandles.size(); i++)
+			glDeleteTextures(1, &m_textureHandles[i]);
 
 		SDL_DestroyWindow(m_window);
 		m_window = NULL;
-
 		SDL_Quit();
 	}
 
@@ -89,7 +91,7 @@ namespace Sandboxing
 		return shader;
 	}
 
-	int Helper::LoadTexture(std::string filePath, bool mirrorVertically)
+	GLuint Helper::LoadTexture(std::string filePath, bool mirrorVertically)
 	{
 		SDL_Surface* img = IMG_Load(filePath.c_str());
 		SDL_Surface* img2 = SDL_ConvertSurfaceFormat(img, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
@@ -110,6 +112,8 @@ namespace Sandboxing
 		SDL_FreeSurface(img);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		m_textureHandles.push_back(texture);
 
 		return texture;
 	}

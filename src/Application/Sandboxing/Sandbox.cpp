@@ -10,27 +10,30 @@ using namespace Math;
 using namespace Core;
 
 #include <stdio.h>
+#include <time.h>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 namespace Sandboxing
 {
 	GLint Sandbox::m_positionHandle = -1;
 	GLint Sandbox::m_texCoordHandle = -1;
 	GLint Sandbox::m_samplerHandle = -1;
-	GLuint Sandbox::m_texture = 0;
+	std::vector<GLuint> Sandbox::m_textures;
 	std::vector<GLfloat> Sandbox::m_vertices;
 	std::vector<GLushort> Sandbox::m_indices;
-	std::vector<STransform> Sandbox::m_transforms;
+	std::vector<SEntity> Sandbox::m_entities;
 	const int Sandbox::NUM_SPRITES = 1000;
 	const int Sandbox::VERTICES_PER_SPRITE = 4;
 	const int Sandbox::INDICES_PER_SPRITE = 6;
-	const int Sandbox::SPRITES_PER_BATCH = 100;
 	const float Sandbox::MIN_BLOCK_EXTENT = 0.01f;
 	const float Sandbox::MAX_BLOCK_EXTENT = 0.05f;
 
 	void Sandbox::Run()
 	{
+		srand(42);
+
 		TimeManager::GetInstance()->Reset();
 		Helper::InitSDL();
 		InitGL();
@@ -69,14 +72,11 @@ namespace Sandboxing
 
 		// set shader
 		glUseProgram(Helper::GetShaderProgramHandle());
-
-		// set texture
-		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glActiveTexture(GL_TEXTURE0);
 		glUniform1i(m_samplerHandle, 0);
 
 		// set arrays
-		UpdateTransforms();
+		UpdateEntities();
 		UpdateVertexArray();
 		glEnableVertexAttribArray(m_positionHandle);
 		glEnableVertexAttribArray(m_texCoordHandle);
@@ -84,13 +84,26 @@ namespace Sandboxing
 		glVertexAttribPointer(m_texCoordHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[2]));
 
 		// render batched 
-		int spritesRendered = 0;
 		glClear(GL_COLOR_BUFFER_BIT);
-		while (spritesRendered < NUM_SPRITES)
+		for (unsigned int batchBegin = 0; batchBegin < m_entities.size(); batchBegin++)
 		{
-			unsigned int batchSize = spritesRendered + SPRITES_PER_BATCH > NUM_SPRITES ? NUM_SPRITES - spritesRendered : SPRITES_PER_BATCH;
-			glDrawElements(GL_TRIANGLES, batchSize * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &m_indices[spritesRendered * INDICES_PER_SPRITE]);
-			spritesRendered += SPRITES_PER_BATCH;
+			// compute batch
+			unsigned int batchEnd = batchBegin;
+			for (unsigned int j = batchBegin; j < m_entities.size(); j++)
+			{
+				if (m_entities[j].texture != m_entities[batchBegin].texture)
+					break;
+				batchEnd = j;
+			}
+
+			// set texture
+			glBindTexture(GL_TEXTURE_2D, m_entities[batchBegin].texture);
+
+			// draw
+			auto val1 = batchEnd - batchBegin + 1;
+			auto val2 = batchBegin;
+			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &m_indices[batchBegin * INDICES_PER_SPRITE]);
+			batchBegin = batchEnd;
 		}
 
 		// cleanup
@@ -118,13 +131,11 @@ namespace Sandboxing
 		m_positionHandle = glGetAttribLocation(programHandle, "a_vPosition");
 		m_texCoordHandle = glGetAttribLocation(programHandle, "a_texCoord");
 		m_samplerHandle = glGetUniformLocation(programHandle, "s_texture");
-		
-		// init texture
-		m_texture = Helper::LoadTexture(Helper::GetAssetFilePath("Textures/YellowBlock.png"), true);
-
-		// init arrays
+	
+		// init data
+		InitTextures();
 		InitIndexArray();
-		InitTransforms();
+		InitEntities();
 	}
 
 	void Sandbox::InitIndexArray()
@@ -143,13 +154,62 @@ namespace Sandboxing
 		}
 	}
 
+	void Sandbox::InitEntities()
+	{
+		for (unsigned int i = 0; i < NUM_SPRITES; i++)
+		{
+			SEntity entity;
+
+			// set data and insert
+			entity.texture = m_textures[rand() % m_textures.size()];
+			entity.extent = MIN_BLOCK_EXTENT + (MAX_BLOCK_EXTENT - MIN_BLOCK_EXTENT) * MathHelper::GetRandom();
+			entity.isGrowing = rand() % 2 == 0 ? true : false;
+			entity.positionX = MathHelper::GetRandom() * 2.0f - 1.0f;
+			entity.positionY = MathHelper::GetRandom() * 2.0f - 1.0f;
+
+			// insert by texture
+			int lastIndex = FindLastEntityByTexture(entity.texture);
+			int insertIndex = lastIndex >= 0 ? lastIndex + 1 : m_entities.size();
+			m_entities.insert(m_entities.begin() + insertIndex, entity);
+		}
+	}
+
+	void Sandbox::InitTextures()
+	{
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/BlackBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/BlueBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/CyanBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/GreenBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/GreyBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/OrangeBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/PurpleBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/RedBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/VioletBlock.png"), true));
+		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/YellowBlock.png"), true));
+	}
+
+	void Sandbox::UpdateEntities()
+	{
+		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		for (unsigned int i = 0; i < m_entities.size(); i++)
+		{
+			m_entities[i].extent += m_entities[i].isGrowing ? dt * 0.01f : dt * -0.01f;
+
+			if (m_entities[i].extent < MIN_BLOCK_EXTENT)
+				m_entities[i].isGrowing = true;
+
+			if (m_entities[i].extent > MAX_BLOCK_EXTENT)
+				m_entities[i].isGrowing = false;
+		}
+	}
+
 	void Sandbox::UpdateVertexArray()
 	{
-		std::vector<GLfloat> vertices = { 
+		std::vector<GLfloat> vertices = {
 			-1, -1, 0.0f, 0.0f,	// left bottom
-			 1, -1, 1.0f, 0.0f,	// right bottom
+			1, -1, 1.0f, 0.0f,	// right bottom
 			-1,  1, 0.0f, 1.0f,	// left top
-			 1,  1, 1.0f, 1.0f	// right top
+			1,  1, 1.0f, 1.0f	// right top
 		};
 
 		m_vertices.clear();
@@ -161,40 +221,26 @@ namespace Sandboxing
 			// apply scale
 			for (unsigned int j = 0; j < vertices.size() / VERTICES_PER_SPRITE; j++)
 			{
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] *= m_transforms[i].extent;
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] += m_transforms[i].positionX;
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] *= m_transforms[i].extent;
-				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] += m_transforms[i].positionY;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] *= m_entities[i].extent;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] += m_entities[i].positionX;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] *= m_entities[i].extent;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] += m_entities[i].positionY;
 			}
 		}
 	}
 
-	void Sandbox::InitTransforms()
+	int Sandbox::FindLastEntityByTexture(GLuint texture)
 	{
-		for (unsigned int i = 0; i < NUM_SPRITES; i++)
+		if (m_entities.empty())
+			return -1;
+
+		for (int i = (unsigned)m_entities.size() - 1; i >= 0; i--)
 		{
-			STransform transform;
-			transform.extent = MIN_BLOCK_EXTENT + (MAX_BLOCK_EXTENT - MIN_BLOCK_EXTENT) * MathHelper::GetRandom();
-			transform.isGrowing = rand() % 2 == 0 ? true : false;
-			transform.positionX = MathHelper::GetRandom() * 2.0f - 1.0f;
-			transform.positionY = MathHelper::GetRandom() * 2.0f - 1.0f;
-			m_transforms.push_back(transform);
+			if (m_entities[i].texture == texture)
+				return i;
 		}
-	}
 
-	void Sandbox::UpdateTransforms()
-	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
-		for (unsigned int i = 0; i < m_transforms.size(); i++)
-		{
-			m_transforms[i].extent += m_transforms[i].isGrowing ? dt * 0.01f : dt * -0.01f;
-
-			if (m_transforms[i].extent < MIN_BLOCK_EXTENT)
-				m_transforms[i].isGrowing = true;
-
-			if (m_transforms[i].extent > MAX_BLOCK_EXTENT)
-				m_transforms[i].isGrowing = false;
-		}
+		return -1;
 	}
 }
 

@@ -64,8 +64,8 @@ namespace Video
 			m_surface = flipped;
 		}
 
-		glGenTextures(1, &m_textureHandle);
-		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
 		SDL_FreeSurface(m_surface);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -76,11 +76,11 @@ namespace Video
 
 	Texture::~Texture()
 	{
-		glDeleteTextures(1, &m_textureHandle);
+		glDeleteTextures(1, &texture);
 	}
 
 	void Texture::Bind()
 	{
-		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
+		glBindTexture(GL_TEXTURE_2D, texture);
 	}
 }
