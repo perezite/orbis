@@ -100,8 +100,6 @@ namespace Sandboxing
 			glBindTexture(GL_TEXTURE_2D, m_entities[batchBegin].texture);
 
 			// draw
-			auto val1 = batchEnd - batchBegin + 1;
-			auto val2 = batchBegin;
 			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &m_indices[batchBegin * INDICES_PER_SPRITE]);
 			batchBegin = batchEnd;
 		}
