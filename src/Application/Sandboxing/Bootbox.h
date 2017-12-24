@@ -3,20 +3,13 @@
 #define __SANDBOX__
 
 #include "../../Orbis/Libraries/GL.h"
+#include "../../Orbis/Game/Entity_v2.h"
+using namespace Game;
 
 #include <vector>
 
 namespace Sandboxing
 {
-	struct BEntity
-	{
-		float positionX;
-		float positionY;
-		float extent;
-		bool isGrowing;
-		GLuint texture;
-	};
-
 	// a class for bootstrapping code from the original sandbox class
 	class Bootbox
 	{
@@ -24,8 +17,6 @@ namespace Sandboxing
 		static void Run();
 
 	protected:
-		static void Render();
-
 		static void InitGL();
 
 		static void InitIndexArray();
@@ -47,7 +38,7 @@ namespace Sandboxing
 		static std::vector<GLuint> m_textures;
 		static std::vector<GLfloat> m_vertices;
 		static std::vector<GLushort> m_indices;
-		static std::vector<BEntity> m_entities;
+		static std::vector<Entity_v2> m_entities;
 		static const int NUM_SPRITES;
 		static const int VERTICES_PER_SPRITE;
 		static const int INDICES_PER_SPRITE;

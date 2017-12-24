@@ -25,7 +25,7 @@ namespace Sandboxing
 	std::vector<GLuint> Bootbox::m_textures;
 	std::vector<GLfloat> Bootbox::m_vertices;
 	std::vector<GLushort> Bootbox::m_indices;
-	std::vector<BEntity> Bootbox::m_entities;
+	std::vector<Entity_v2> Bootbox::m_entities;
 	const int Bootbox::NUM_SPRITES = 1000;
 	const int Bootbox::VERTICES_PER_SPRITE = 4;
 	const int Bootbox::INDICES_PER_SPRITE = 6;
@@ -55,62 +55,16 @@ namespace Sandboxing
 					quit = true;
 			}
 
+			UpdateEntities();
+
 			VideoManager_v2::GetInstance()->ClearScreen();
-			Render();
+			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(Helper::GetShaderProgramHandle(), m_samplerHandle, m_positionHandle, m_texCoordHandle, m_vertices, m_indices, m_entities);
 			VideoManager_v2::GetInstance()->SwapBuffers();
 
 			Helper::LogPerformance();
 		}
 
 		Helper::Close();
-	}
-
-	void Bootbox::Render()
-	{
-		// set states
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		// set shader
-		glUseProgram(Helper::GetShaderProgramHandle());
-		glActiveTexture(GL_TEXTURE0);
-		glUniform1i(m_samplerHandle, 0);
-
-		// set arrays
-		UpdateEntities();
-		UpdateVertexArray();
-		glEnableVertexAttribArray(m_positionHandle);
-		glEnableVertexAttribArray(m_texCoordHandle);
-		glVertexAttribPointer(m_positionHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[0]));
-		glVertexAttribPointer(m_texCoordHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[2]));
-
-		// render batched 
-		for (unsigned int batchBegin = 0; batchBegin < m_entities.size(); batchBegin++)
-		{
-			// compute batch
-			unsigned int batchEnd = batchBegin;
-			for (unsigned int j = batchBegin; j < m_entities.size(); j++)
-			{
-				if (m_entities[j].texture != m_entities[batchBegin].texture)
-					break;
-				batchEnd = j;
-			}
-
-			// set texture
-			glBindTexture(GL_TEXTURE_2D, m_entities[batchBegin].texture);
-
-			// draw
-			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &m_indices[batchBegin * INDICES_PER_SPRITE]);
-			batchBegin = batchEnd;
-		}
-
-		// cleanup
-		glDisableVertexAttribArray(m_texCoordHandle);
-		glDisableVertexAttribArray(m_positionHandle);
-		glDisable(GL_TEXTURE_2D);
-		glDisable(GL_BLEND);
-		glUseProgram(0);
 	}
 
 	void Bootbox::InitGL()
@@ -155,7 +109,7 @@ namespace Sandboxing
 	{
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
-			BEntity entity;
+			Entity_v2 entity;
 
 			// set data and insert
 			entity.texture = m_textures[rand() % m_textures.size()];

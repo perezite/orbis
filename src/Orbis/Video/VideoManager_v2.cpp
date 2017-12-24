@@ -37,11 +37,6 @@ namespace Video
 		SDL_Quit();
 	}
 
-	RenderDevice* VideoManager_v2::GetRenderDevice()
-	{
-		throw Exception("Not implemented!");
-	}
-
 	void VideoManager_v2::ClearScreen()
 	{
 		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
@@ -57,8 +52,6 @@ namespace Video
 	{
 		if (m_IsInitialized)
 			return;
-
-		m_renderDevice = NULL;
 
 		SDL_Init(SDL_INIT_VIDEO);
 		m_windowResolution = GetDefaultWindowResolution();
@@ -87,6 +80,8 @@ namespace Video
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
+
+		m_renderDevice = new RenderDevice_v2();
 
 		m_IsInitialized = true;
 	}

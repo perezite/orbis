@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RenderDevice.h"
+#include "RenderDevice_v2.h"
 
 #include "../Libraries/SDL.h"
 
@@ -25,7 +25,7 @@ namespace Video
 		Vector2D GetResolution() { return m_windowResolution; }
 
 		// get the render device
-		RenderDevice* GetRenderDevice();
+		RenderDevice_v2* GetRenderDevice() const { return m_renderDevice; }
 
 		// clear the screen
 		void ClearScreen();
@@ -48,7 +48,7 @@ namespace Video
 		SDL_GLContext m_openGlContext;
 
 		// the attached render device
-		RenderDevice* m_renderDevice;
+		RenderDevice_v2* m_renderDevice;
 
 		// the window resolution
 		Vector2D m_windowResolution;
