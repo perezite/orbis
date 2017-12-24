@@ -1,4 +1,5 @@
 #include "Sandboxing/Sandbox.h"
+#include "Sandboxing/Bootbox.h"
 #include "Levels/Level1.h"
 #include "Levels/Level2.h"
 using namespace Levels;
@@ -18,7 +19,7 @@ using namespace System;
 int main(int argc, char* args[])
 {	
 	#ifdef __SANDBOX__
-		Sandbox::Run();
+		Bootbox::Run();
 		return 0;
 	#endif
 

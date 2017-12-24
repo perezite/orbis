@@ -1,7 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Klasse ExtendedSandbox erstellen und Code von Sandbox kopieren
-	- Sukkzessive die Klassenstruktur bootstrappen in ExtendedSandbox. Dabei regelmässig Regressionstest der Performance durchführen.
+	- Sukkzessive die Klassenstruktur bootstrappen in Bootbox. Dabei regelmässig Regressionstest der Performance durchführen.
 	- Neue Klassenstruktur mit vorhandenen Levels 1-3 ausprobieren
 	- Branch zurückmergen auf master	
 	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 60 FPs auf dem Xperia. 

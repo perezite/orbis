@@ -1,14 +1,14 @@
-// #define __SANDBOX__
+#pragma once
+
+#define __SANDBOX__
 
 #include "../../Orbis/Libraries/GL.h"
-#include "../../Orbis/Libraries/SDL.h"
 
-#include <string>
 #include <vector>
 
 namespace Sandboxing
 {
-	struct SEntity
+	struct BEntity
 	{
 		float positionX;
 		float positionY;
@@ -17,8 +17,8 @@ namespace Sandboxing
 		GLuint texture;
 	};
 
-	// a sandbox for testing bare-bones code
-	class Sandbox
+	// a class for bootstrapping code from the original sandbox class
+	class Bootbox
 	{
 	public:
 		static void Run();
@@ -47,7 +47,7 @@ namespace Sandboxing
 		static std::vector<GLuint> m_textures;
 		static std::vector<GLfloat> m_vertices;
 		static std::vector<GLushort> m_indices;
-		static std::vector<SEntity> m_entities;
+		static std::vector<BEntity> m_entities;
 		static const int NUM_SPRITES;
 		static const int VERTICES_PER_SPRITE;
 		static const int INDICES_PER_SPRITE;
