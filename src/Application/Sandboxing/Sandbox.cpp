@@ -22,7 +22,10 @@ namespace Sandboxing
 	std::vector<GLfloat> Sandbox::m_vertices;
 	std::vector<GLushort> Sandbox::m_indices;
 	std::vector<STransform> Sandbox::m_transforms;
-	const int Sandbox::NUM_BLOCKS = 1000;
+	const int Sandbox::NUM_SPRITES = 1000;
+	const int Sandbox::VERTICES_PER_SPRITE = 4;
+	const int Sandbox::INDICES_PER_SPRITE = 6;
+	const int Sandbox::SPRITES_PER_BATCH = 100;
 	const float Sandbox::MIN_BLOCK_EXTENT = 0.01f;
 	const float Sandbox::MAX_BLOCK_EXTENT = 0.05f;
 
@@ -43,10 +46,8 @@ namespace Sandboxing
 			TimeManager::GetInstance()->Update();
 			while (SDL_PollEvent(&e) != 0)
 			{
-				if (e.type == SDL_QUIT || e.type == SDL_KEYDOWN || e.type == SDL_FINGERDOWN)
-				{
+				if (e.type == SDL_QUIT)
 					quit = true;
-				}
 			}
 
 			Render();
@@ -82,9 +83,15 @@ namespace Sandboxing
 		glVertexAttribPointer(m_positionHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[0]));
 		glVertexAttribPointer(m_texCoordHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[2]));
 
-		// draw 
+		// render batched 
+		int spritesRendered = 0;
 		glClear(GL_COLOR_BUFFER_BIT);
-		glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_SHORT, &m_indices[0]);
+		while (spritesRendered < NUM_SPRITES)
+		{
+			unsigned int batchSize = spritesRendered + SPRITES_PER_BATCH > NUM_SPRITES ? NUM_SPRITES - spritesRendered : SPRITES_PER_BATCH;
+			glDrawElements(GL_TRIANGLES, batchSize * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &m_indices[spritesRendered * INDICES_PER_SPRITE]);
+			spritesRendered += SPRITES_PER_BATCH;
+		}
 
 		// cleanup
 		glDisableVertexAttribArray(m_texCoordHandle);
@@ -122,24 +129,22 @@ namespace Sandboxing
 
 	void Sandbox::InitIndexArray()
 	{
-		const int NUM_VERTICES = 4;
 		std::vector<GLshort> indices = { 0, 1, 2, 2, 1, 3 };
 
 		m_indices.clear();
-		m_indices.reserve(NUM_BLOCKS * indices.size());
-		for (int i = 0; i < NUM_BLOCKS; i++)
+		m_indices.reserve(NUM_SPRITES * indices.size());
+		for (int i = 0; i < NUM_SPRITES; i++)
 		{
 			m_indices.insert(m_indices.end(), indices.begin(), indices.end());
 
 			// compute offset for inserted indices
 			for (unsigned int j = 0; j < indices.size(); j++)
-				m_indices[i * indices.size() + j] += NUM_VERTICES * i;
+				m_indices[i * indices.size() + j] += VERTICES_PER_SPRITE * i;
 		}
 	}
 
 	void Sandbox::UpdateVertexArray()
 	{
-		const int VERTEX_SIZE = 4;
 		std::vector<GLfloat> vertices = { 
 			-1, -1, 0.0f, 0.0f,	// left bottom
 			 1, -1, 1.0f, 0.0f,	// right bottom
@@ -148,25 +153,25 @@ namespace Sandboxing
 		};
 
 		m_vertices.clear();
-		m_vertices.reserve(NUM_BLOCKS * vertices.size());
-		for (int i = 0; i < NUM_BLOCKS; i++)
+		m_vertices.reserve(NUM_SPRITES * vertices.size());
+		for (int i = 0; i < NUM_SPRITES; i++)
 		{
 			m_vertices.insert(m_vertices.end(), vertices.begin(), vertices.end());
 
 			// apply scale
-			for (unsigned int j = 0; j < vertices.size() / VERTEX_SIZE; j++)
+			for (unsigned int j = 0; j < vertices.size() / VERTICES_PER_SPRITE; j++)
 			{
-				m_vertices[i * vertices.size() + j * VERTEX_SIZE] *= m_transforms[i].extent;
-				m_vertices[i * vertices.size() + j * VERTEX_SIZE] += m_transforms[i].positionX;
-				m_vertices[i * vertices.size() + j * VERTEX_SIZE + 1] *= m_transforms[i].extent;
-				m_vertices[i * vertices.size() + j * VERTEX_SIZE + 1] += m_transforms[i].positionY;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] *= m_transforms[i].extent;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE] += m_transforms[i].positionX;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] *= m_transforms[i].extent;
+				m_vertices[i * vertices.size() + j * VERTICES_PER_SPRITE + 1] += m_transforms[i].positionY;
 			}
 		}
 	}
 
 	void Sandbox::InitTransforms()
 	{
-		for (unsigned int i = 0; i < NUM_BLOCKS; i++)
+		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
 			STransform transform;
 			transform.extent = MIN_BLOCK_EXTENT + (MAX_BLOCK_EXTENT - MIN_BLOCK_EXTENT) * MathHelper::GetRandom();

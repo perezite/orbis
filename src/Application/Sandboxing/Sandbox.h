@@ -41,7 +41,10 @@ namespace Sandboxing
 		static std::vector<GLfloat> m_vertices;
 		static std::vector<GLushort> m_indices;
 		static std::vector<STransform> m_transforms;
-		static const int NUM_BLOCKS;
+		static const int NUM_SPRITES;
+		static const int VERTICES_PER_SPRITE;
+		static const int INDICES_PER_SPRITE;
+		static const int SPRITES_PER_BATCH;
 		static const float MIN_BLOCK_EXTENT;
 		static const float MAX_BLOCK_EXTENT;
 	};
