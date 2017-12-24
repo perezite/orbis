@@ -6,8 +6,10 @@
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Orbis/Core/TimeManager.h"
+#include "../../Orbis/Video/VideoManager_v2.h"
 using namespace Math;
 using namespace Core;
+using namespace Video;
 
 #include <stdio.h>
 #include <time.h>
@@ -35,7 +37,7 @@ namespace Sandboxing
 		srand(42);
 
 		TimeManager::GetInstance()->Reset();
-		Helper::InitSDL();
+		VideoManager_v2::GetInstance()->Initialize();
 		InitGL();
 
 		bool quit = false;
@@ -53,9 +55,9 @@ namespace Sandboxing
 					quit = true;
 			}
 
+			VideoManager_v2::GetInstance()->ClearScreen();
 			Render();
-
-			SDL_GL_SwapWindow(Helper::GetWindow());
+			VideoManager_v2::GetInstance()->SwapBuffers();
 
 			Helper::LogPerformance();
 		}
@@ -84,7 +86,6 @@ namespace Sandboxing
 		glVertexAttribPointer(m_texCoordHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertices[2]));
 
 		// render batched 
-		glClear(GL_COLOR_BUFFER_BIT);
 		for (unsigned int batchBegin = 0; batchBegin < m_entities.size(); batchBegin++)
 		{
 			// compute batch
@@ -114,8 +115,6 @@ namespace Sandboxing
 
 	void Bootbox::InitGL()
 	{
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
 		// init shaders
 		GLuint programHandle = Helper::CreateShaderProgram();
 		GLuint vertexShader = Helper::LoadShader(Helper::GetVertexShaderCode(), GL_VERTEX_SHADER);

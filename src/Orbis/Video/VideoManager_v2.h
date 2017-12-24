@@ -7,19 +7,19 @@
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
-namespace Video
+namespace Video 
 {
-	class VideoManager
+	class VideoManager_v2
 	{
 	public:
 		// get instance
-		static VideoManager* GetInstance();
+		static VideoManager_v2* GetInstance();
 
 		// initialize
 		void Initialize();
 
 		// destructor
-		virtual ~VideoManager();
+		virtual ~VideoManager_v2();
 
 		// get the resolution
 		Vector2D GetResolution() { return m_windowResolution; }
@@ -35,7 +35,7 @@ namespace Video
 
 	protected:
 		// singleton constructor
-		VideoManager();
+		VideoManager_v2();
 
 		// get the default window resolution
 		Vector2D GetDefaultWindowResolution();
@@ -60,3 +60,4 @@ namespace Video
 		bool m_IsInitialized;
 	};
 }
+

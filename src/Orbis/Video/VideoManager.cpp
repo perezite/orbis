@@ -30,8 +30,8 @@ namespace Video
 
 	VideoManager::~VideoManager()
 	{
-		if (m_renderer)
-			delete m_renderer;
+		if (m_renderDevice)
+			delete m_renderDevice;
 
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
@@ -39,10 +39,10 @@ namespace Video
 
 	RenderDevice* VideoManager::GetRenderDevice()
 	{
-		if (m_renderer == NULL)
-			m_renderer = new RenderDevice();
+		if (m_renderDevice == NULL)
+			m_renderDevice = new RenderDevice();
 
-		return m_renderer;
+		return m_renderDevice;
 	}
 
 	void VideoManager::ClearScreen()
@@ -61,7 +61,7 @@ namespace Video
 		if (m_IsInitialized)
 			return;
 
-		m_renderer = NULL;
+		m_renderDevice = NULL;
 
 		SDL_Init(SDL_INIT_VIDEO);
 		m_windowResolution = GetDefaultWindowResolution();

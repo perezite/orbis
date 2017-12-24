@@ -1,7 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
 	- Sukkzessive die Klassenstruktur bootstrappen in Bootbox als v2-Klassen. Dabei regelmässig Regressionstest der Performance durchführen.
-		- VideoManager	
 		- RenderDevice
 		- Mesh
 		- Material
