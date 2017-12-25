@@ -43,7 +43,8 @@ namespace Video
 			}
 
 			// set texture
-			glBindTexture(GL_TEXTURE_2D, entities[batchBegin].texture);
+			entities[batchBegin].texture->Bind();
+			// glBindTexture(GL_TEXTURE_2D, entities[batchBegin].texture);
 
 			// draw
 			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &indices[batchBegin * INDICES_PER_SPRITE]);

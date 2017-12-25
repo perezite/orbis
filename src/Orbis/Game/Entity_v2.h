@@ -4,6 +4,7 @@
 
 #include "../Libraries/GL.h"
 #include "../Video/Mesh_v2.h"
+#include "../Video/Texture.h"
 using namespace Video;
 
 namespace Game
@@ -12,7 +13,7 @@ namespace Game
 	{
 		Transform_v2 transform;
 
-		GLuint texture;
+		Texture* texture;
 
 		Mesh_v2* mesh;
 

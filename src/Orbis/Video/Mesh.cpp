@@ -64,7 +64,7 @@ namespace Video
 	void Mesh::FillVertexBuffer(float* const buffer)
 	{
 		Exception::Assert(GetTexCoords().size() == 0 || GetVertices().size() == GetTexCoords().size(),
-			"A mesh must either contain no texture coordinates or the number of vertices and texture coordinates must match");
+			"A mesh must either contain no textureHandle coordinates or the number of vertices and textureHandle coordinates must match");
 
 		unsigned int numTexCoords = GetTexCoords().size();
 		unsigned int offset = 0;

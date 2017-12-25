@@ -21,7 +21,7 @@ using namespace Video;
 namespace Sandboxing
 {
 	Shader_v2* Bootbox::m_shader;
-	std::vector<GLuint> Bootbox::m_textures;
+	std::vector<Texture*> Bootbox::m_textures;
 	std::vector<Entity_v2> Bootbox::m_entities;
 	const int Bootbox::NUM_SPRITES = 1000;
 	const float Bootbox::MIN_BLOCK_SCALE = 0.02f;
@@ -96,8 +96,6 @@ namespace Sandboxing
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
 			Entity_v2 entity;
-
-			// set data and insert
 			entity.texture = m_textures[rand() % m_textures.size()];
 			entity.mesh = Mesh_v2::GetTexturedQuad();
 			float scale = MIN_BLOCK_SCALE + (MAX_BLOCK_SCALE - MIN_BLOCK_SCALE) * MathHelper::GetRandom();
@@ -105,25 +103,22 @@ namespace Sandboxing
 			entity.transform.position = Vector2D(MathHelper::GetRandom() * 2.0f - 1.0f, MathHelper::GetRandom() * 2.0f - 1.0f);
 			entity.isGrowing = rand() % 2 == 0 ? true : false;
 
-			// insert batched by texture
-			int lastIndex = FindLastBatchEntityByTexture(entity.texture);
-			int insertIndex = lastIndex >= 0 ? lastIndex + 1 : m_entities.size();
-			m_entities.insert(m_entities.begin() + insertIndex, entity);
+			AddEntity(&entity);
 		}
 	}
 
 	void Bootbox::InitTextures()
 	{
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/BlackBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/BlueBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/CyanBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/GreenBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/GreyBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/OrangeBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/PurpleBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/RedBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/VioletBlock.png"), true));
-		m_textures.push_back(Helper::LoadTexture(Helper::GetAssetFilePath("Textures/YellowBlock.png"), true));
+		m_textures.push_back(new Texture("Textures/BlackBlock.png", true));
+		m_textures.push_back(new Texture("Textures/BlueBlock.png", true));
+		m_textures.push_back(new Texture("Textures/CyanBlock.png", true));
+		m_textures.push_back(new Texture("Textures/GreenBlock.png", true));
+		m_textures.push_back(new Texture("Textures/GreyBlock.png", true));
+		m_textures.push_back(new Texture("Textures/OrangeBlock.png", true));
+		m_textures.push_back(new Texture("Textures/PurpleBlock.png", true));
+		m_textures.push_back(new Texture("Textures/RedBlock.png", true));
+		m_textures.push_back(new Texture("Textures/VioletBlock.png", true));
+		m_textures.push_back(new Texture("Textures/YellowBlock.png", true));
 	}
 
 	void Bootbox::UpdateEntities()
@@ -142,7 +137,15 @@ namespace Sandboxing
 		}
 	}
 
-	int Bootbox::FindLastBatchEntityByTexture(GLuint texture)
+	void Bootbox::AddEntity(Entity_v2 * entity)
+	{
+		// insert batched by texture
+		int lastIndex = FindLastBatchEntityByTexture(entity->texture);
+		int insertIndex = lastIndex >= 0 ? lastIndex + 1 : m_entities.size();
+		m_entities.insert(m_entities.begin() + insertIndex, *entity);
+	}
+
+	int Bootbox::FindLastBatchEntityByTexture(Texture* texture)
 	{
 		if (m_entities.empty())
 			return -1;
