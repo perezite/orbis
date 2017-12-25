@@ -9,6 +9,7 @@ using namespace Math;
 
 namespace Video
 {
+	// a collection of data describing the untransformed physical appearance of an entity
 	class Mesh_v2
 	{
 	public:

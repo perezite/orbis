@@ -38,6 +38,9 @@ namespace Math
 		// additive inverse
 		const Vector2D operator-() const;
 
+		// inline addition 
+		const Vector2D operator+=(const Vector2D &other);
+
 		// get x
 		float GetX() const { return m_x; }
 

@@ -68,10 +68,10 @@ namespace Video
 			// apply scale
 			for (unsigned int j = 0; j < quad->size() / mesh->GetNumVertices(); j++)
 			{
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] *= entities[i].extent;
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] += entities[i].positionX;
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] *= entities[i].extent;
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] += entities[i].positionY;
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] *= entities[i].transform.scale.GetX() / 2.0f;
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] += entities[i].transform.position.GetX();
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] *= entities[i].transform.scale.GetY() / 2.0f;
+				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] += entities[i].transform.position.GetY();
 			}
 		}
 	}

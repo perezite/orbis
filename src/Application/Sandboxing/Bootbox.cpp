@@ -24,21 +24,18 @@ namespace Sandboxing
 	GLint Bootbox::m_texCoordHandle = -1;
 	GLint Bootbox::m_samplerHandle = -1;
 	std::vector<GLuint> Bootbox::m_textures;
-	std::vector<GLfloat> Bootbox::m_vertices;
-	std::vector<GLushort> Bootbox::m_indices;
 	std::vector<Entity_v2> Bootbox::m_entities;
 	const int Bootbox::NUM_SPRITES = 1000;
-	const int Bootbox::VERTICES_PER_SPRITE = 4;
-	const int Bootbox::INDICES_PER_SPRITE = 6;
-	const float Bootbox::MIN_BLOCK_EXTENT = 0.01f;
-	const float Bootbox::MAX_BLOCK_EXTENT = 0.05f;
+	const float Bootbox::MIN_BLOCK_SCALE = 0.02f;
+	const float Bootbox::MAX_BLOCK_SCALE = 0.1f;
 
 	void Bootbox::Run()
 	{
 		srand(42);
 
 		TimeManager::GetInstance()->Reset();
-		VideoManager_v2::GetInstance()->Initialize();
+		VideoManager_v2* videoManager = VideoManager_v2::GetInstance();
+		videoManager->Initialize();
 		InitGL();
 
 		bool quit = false;
@@ -59,7 +56,7 @@ namespace Sandboxing
 			UpdateEntities();
 
 			VideoManager_v2::GetInstance()->ClearScreen();
-			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(Helper::GetShaderProgramHandle(), m_samplerHandle, m_positionHandle, m_texCoordHandle, m_vertices, m_indices, m_entities);
+			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(Helper::GetShaderProgramHandle(), m_samplerHandle, m_positionHandle, m_texCoordHandle, videoManager->GetVertexArray(), videoManager->GetIndexArray(), m_entities);
 			VideoManager_v2::GetInstance()->SwapBuffers();
 
 			Helper::LogPerformance();
@@ -86,23 +83,24 @@ namespace Sandboxing
 
 		// init data
 		InitTextures();
-		InitIndexArray();
 		InitEntities();
+		InitIndexArray();
 	}
 
 	void Bootbox::InitIndexArray()
 	{
-		const std::vector<GLushort>* quadIndices = Mesh_v2::GetTexturedQuad()->GetIndices();
+		std::vector<GLushort>& indexArray = VideoManager_v2::GetInstance()->GetIndexArray();
 
-		m_indices.clear();
-		m_indices.reserve(NUM_SPRITES * quadIndices->size());
-		for (int i = 0; i < NUM_SPRITES; i++)
+		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{
-			m_indices.insert(m_indices.end(), quadIndices->begin(), quadIndices->end());
+			Video::Mesh_v2* mesh = m_entities[i].mesh;
+			const std::vector<GLushort>* MeshIndices = mesh->GetIndices();
+
+			indexArray.insert(indexArray.end(), MeshIndices->begin(), MeshIndices->end());
 
 			// compute offset for inserted indices
-			for (unsigned int j = 0; j < quadIndices->size(); j++)
-				m_indices[i * quadIndices->size() + j] += VERTICES_PER_SPRITE * i;
+			for (unsigned int j = 0; j < MeshIndices->size(); j++)
+				indexArray[i * MeshIndices->size() + j] += mesh->GetNumVertices() * i;
 		}
 	}
 
@@ -114,13 +112,14 @@ namespace Sandboxing
 
 			// set data and insert
 			entity.texture = m_textures[rand() % m_textures.size()];
-			entity.extent = MIN_BLOCK_EXTENT + (MAX_BLOCK_EXTENT - MIN_BLOCK_EXTENT) * MathHelper::GetRandom();
+			entity.mesh = Mesh_v2::GetTexturedQuad();
+			float scale = MIN_BLOCK_SCALE + (MAX_BLOCK_SCALE - MIN_BLOCK_SCALE) * MathHelper::GetRandom();
+			entity.transform.scale = Vector2D(scale, scale);
+			entity.transform.position = Vector2D(MathHelper::GetRandom() * 2.0f - 1.0f, MathHelper::GetRandom() * 2.0f - 1.0f);
 			entity.isGrowing = rand() % 2 == 0 ? true : false;
-			entity.positionX = MathHelper::GetRandom() * 2.0f - 1.0f;
-			entity.positionY = MathHelper::GetRandom() * 2.0f - 1.0f;
 
-			// insert by texture
-			int lastIndex = FindLastEntityByTexture(entity.texture);
+			// insert batched by texture
+			int lastIndex = FindLastBatchEntityByTexture(entity.texture);
 			int insertIndex = lastIndex >= 0 ? lastIndex + 1 : m_entities.size();
 			m_entities.insert(m_entities.begin() + insertIndex, entity);
 		}
@@ -145,17 +144,18 @@ namespace Sandboxing
 		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{
-			m_entities[i].extent += m_entities[i].isGrowing ? dt * 0.01f : dt * -0.01f;
+			float deltaScale = m_entities[i].isGrowing ? dt * 0.01f : dt * -0.01f;
+			m_entities[i].transform.scale += Vector2D(deltaScale, deltaScale);
 
-			if (m_entities[i].extent < MIN_BLOCK_EXTENT)
+			if (m_entities[i].transform.scale.GetX() < MIN_BLOCK_SCALE)
 				m_entities[i].isGrowing = true;
 
-			if (m_entities[i].extent > MAX_BLOCK_EXTENT)
+			if (m_entities[i].transform.scale.GetX() > MAX_BLOCK_SCALE)
 				m_entities[i].isGrowing = false;
 		}
 	}
 
-	int Bootbox::FindLastEntityByTexture(GLuint texture)
+	int Bootbox::FindLastBatchEntityByTexture(GLuint texture)
 	{
 		if (m_entities.empty())
 			return -1;
