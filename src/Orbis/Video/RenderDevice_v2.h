@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RenderMode.h"
-#include "Shader.h"
+#include "Shader_v2.h"
 #include "Texture.h"
 #include "Mesh.h"
 #include "Material.h"
@@ -23,7 +23,7 @@ namespace Video
 	{
 	public:
 		// render
-		void Render(GLuint shaderProgram, GLint samplerHandle, GLint positionHandle, GLint texCoordHandle, std::vector<GLfloat>& vertices, const std::vector<GLushort>& indices, const std::vector<Entity_v2>& entities);
+		void Render(Shader_v2* shader, std::vector<GLfloat>& vertices, const std::vector<GLushort>& indices, const std::vector<Entity_v2>& entities);
 
 	protected:
 		// update vertex array

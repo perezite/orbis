@@ -1,30 +1,34 @@
 #include "RenderDevice_v2.h"
 
 #include "Mesh_v2.h"
+#include "Shader.h"
 
 namespace Video
 {
 	const int RenderDevice_v2::INDICES_PER_SPRITE = 6;
 	const int RenderDevice_v2::VERTICES_PER_SPRITE = 4;
 
-	void RenderDevice_v2::Render(GLuint shaderProgram, GLint samplerHandle, GLint positionHandle, GLint texCoordHandle, std::vector<GLfloat>& vertices, const std::vector<GLushort>& indices, const std::vector<Entity_v2>& entities)
+	void RenderDevice_v2::Render(Shader_v2* shader, std::vector<GLfloat>& vertices, const std::vector<GLushort>& indices, const std::vector<Entity_v2>& entities)
 	{
+		int positionAttribHandle = shader->GetAttributeHandle("a_vPosition");
+		int texCoordAttribHandle = shader->GetAttributeHandle("a_vTexCoord");
+
 		// set states
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// set shader
-		glUseProgram(shaderProgram);
+		shader->Use();
 		glActiveTexture(GL_TEXTURE0);
-		glUniform1i(samplerHandle, 0);
+		shader->SetUniform("u_sSampler", 0);
 
 		// set arrays
 		UpdateVertices(vertices, entities);
-		glEnableVertexAttribArray(positionHandle);
-		glEnableVertexAttribArray(texCoordHandle);
-		glVertexAttribPointer(positionHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertices[0]));
-		glVertexAttribPointer(texCoordHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertices[2]));
+		glEnableVertexAttribArray(positionAttribHandle);
+		glEnableVertexAttribArray(texCoordAttribHandle);
+		glVertexAttribPointer(positionAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertices[0]));
+		glVertexAttribPointer(texCoordAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertices[2]));
 
 		// render batched 
 		for (unsigned int batchBegin = 0; batchBegin < entities.size(); batchBegin++)
@@ -47,11 +51,11 @@ namespace Video
 		}
 
 		// cleanup
-		glDisableVertexAttribArray(texCoordHandle);
-		glDisableVertexAttribArray(positionHandle);
+		glDisableVertexAttribArray(texCoordAttribHandle);
+		glDisableVertexAttribArray(positionAttribHandle);
 		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
-		glUseProgram(0);
+		shader->Unuse();
 	}
 
 	void RenderDevice_v2::UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Entity_v2>& entities)

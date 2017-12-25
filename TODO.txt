@@ -1,10 +1,7 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
 	- Sukkzessive die Klassenstruktur bootstrappen in Bootbox als v2-Klassen. Dabei regelmässig Regressionstest der Performance durchführen.
-		- Shader		
-			- Shaderliste im VideoManager verwalten
-		- Texture		
-			- Textureliste im VideoManager verwalten	
+		- Texture			
 		- Material
 		- Camera
 		- Component
@@ -17,7 +14,7 @@ TODO:
 		- Die v2-Klassen löschen
 		- Neue Klassenstruktur mit vorhandenen Levels 1-3 ausprobieren, inkl. Regressionstest der Performance
 	- Branch zurückmergen auf master	
-	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 60 FPs auf dem Xperia. 
+	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 56 FPs auf dem Xperia (maximale FPS-Rate) 
 	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite, 
 - Math-Klassen zu structs machen
 - Analysieren, ob weiter Klassen zu structs gemacht werden können	
@@ -45,6 +42,5 @@ TODO:
 - Logik in SpriteRenderer und RectangleRenderer fixen (aktuell wird bei jeder Instanz der VBO neu gesetzt mit den immer gleichen Daten)
 - Coroutinen implementieren
 - Partikelsystem implementieren
-- Asset-Funktionalität implementieren für Meshes, Shaders und Texturen (kontrollierte Erzeugung/Vernichtung)
-	- Besserer Vorschlag: Alle Grafikrelevanten Ressourcen vom VideoManager verwalten lassen
+- Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln

@@ -4,7 +4,9 @@
 
 #include "../../Orbis/Libraries/GL.h"
 #include "../../Orbis/Game/Entity_v2.h"
+#include "../../Orbis/Video/Shader_v2.h"
 using namespace Game;
+using namespace Video;
 
 #include <vector>
 
@@ -29,10 +31,10 @@ namespace Sandboxing
 
 		static int FindLastBatchEntityByTexture(GLuint texture);
 
+		static void Close();
+
 	private:
-		static GLint m_positionHandle;
-		static GLint m_texCoordHandle;
-		static GLint m_samplerHandle;
+		static Shader_v2* m_shader;
 		static std::vector<GLuint> m_textures;
 		static std::vector<Entity_v2> m_entities;
 		static const int NUM_SPRITES;

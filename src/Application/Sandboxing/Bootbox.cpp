@@ -20,9 +20,7 @@ using namespace Video;
 
 namespace Sandboxing
 {
-	GLint Bootbox::m_positionHandle = -1;
-	GLint Bootbox::m_texCoordHandle = -1;
-	GLint Bootbox::m_samplerHandle = -1;
+	Shader_v2* Bootbox::m_shader;
 	std::vector<GLuint> Bootbox::m_textures;
 	std::vector<Entity_v2> Bootbox::m_entities;
 	const int Bootbox::NUM_SPRITES = 1000;
@@ -56,7 +54,7 @@ namespace Sandboxing
 			UpdateEntities();
 
 			VideoManager_v2::GetInstance()->ClearScreen();
-			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(Helper::GetShaderProgramHandle(), m_samplerHandle, m_positionHandle, m_texCoordHandle, videoManager->GetVertexArray(), videoManager->GetIndexArray(), m_entities);
+			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(m_shader, videoManager->GetVertexArray(), videoManager->GetIndexArray(), m_entities);
 			VideoManager_v2::GetInstance()->SwapBuffers();
 
 			Helper::LogPerformance();
@@ -67,19 +65,8 @@ namespace Sandboxing
 
 	void Bootbox::InitGL()
 	{
-		// init shaders
-		GLuint programHandle = Helper::CreateShaderProgram();
-		GLuint vertexShader = Helper::LoadShader(Helper::GetVertexShaderCode(), GL_VERTEX_SHADER);
-		GLuint fragmentShader = Helper::LoadShader(Helper::GetFragmentShaderCode(), GL_FRAGMENT_SHADER);
-		glAttachShader(programHandle, vertexShader);
-		glAttachShader(programHandle, fragmentShader);
-		glLinkProgram(programHandle);
-		glUseProgram(programHandle);
-
-		// get shader handles
-		m_positionHandle = glGetAttribLocation(programHandle, "a_vPosition");
-		m_texCoordHandle = glGetAttribLocation(programHandle, "a_texCoord");
-		m_samplerHandle = glGetUniformLocation(programHandle, "s_texture");
+		// init shader
+		m_shader = new Shader_v2("Shaders/Diffuse_v2.vs", "Shaders/Diffuse_v2.frag");
 
 		// init data
 		InitTextures();
@@ -167,6 +154,12 @@ namespace Sandboxing
 		}
 
 		return -1;
+	}
+
+	void Bootbox::Close()
+	{
+		if (m_shader)
+			delete m_shader;
 	}
 }
 
