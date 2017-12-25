@@ -18,7 +18,7 @@ namespace Video
 		virtual ~Texture();
 
 		// get the texture handle
-		unsigned int GetTextureHandle() const { return textureHandle; }
+		unsigned int GetTextureHandle() const { return m_textureHandle; }
 
 		// get the asset path
 		std::string GetAssetPath() const { return m_assetPath; }
@@ -34,7 +34,7 @@ namespace Video
 		std::string m_assetPath;
 
 		// the texture id
-		GLuint textureHandle;
+		GLuint m_textureHandle = 0;
 
 		// the image surface
 		SDL_Surface* m_surface;

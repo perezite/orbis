@@ -56,7 +56,7 @@ namespace Sandboxing
 			UpdateEntities();
 
 			VideoManager_v2::GetInstance()->ClearScreen();
-			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(m_shader, videoManager->GetVertexArray(), videoManager->GetIndexArray(), m_entities);
+			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(m_entities);
 			VideoManager_v2::GetInstance()->SwapBuffers();
 
 			Helper::LogPerformance();
@@ -140,22 +140,22 @@ namespace Sandboxing
 		}
 	}
 
-	void Bootbox::AddEntity(Entity_v2 * entity)
+	void Bootbox::AddEntity(Entity_v2* entity)
 	{
 		// insert batched by texture
-		int lastIndex = FindLastBatchEntityByTexture(entity->texture);
+		int lastIndex = FindIndexOfLastBatchEntity(entity);
 		int insertIndex = lastIndex >= 0 ? lastIndex + 1 : m_entities.size();
 		m_entities.insert(m_entities.begin() + insertIndex, *entity);
 	}
 
-	int Bootbox::FindLastBatchEntityByTexture(Texture* texture)
+	int Bootbox::FindIndexOfLastBatchEntity(Entity_v2* entity)
 	{
 		if (m_entities.empty())
 			return -1;
 
 		for (int i = (unsigned)m_entities.size() - 1; i >= 0; i--)
 		{
-			if (m_entities[i].texture == texture)
+			if (m_entities[i].texture == entity->texture && m_entities[i].shader == entity->shader)
 				return i;
 		}
 

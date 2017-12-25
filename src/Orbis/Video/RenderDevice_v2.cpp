@@ -2,19 +2,18 @@
 
 #include "Mesh_v2.h"
 #include "Shader.h"
+#include "VideoManager_v2.h"
 
 #include "../Components/Camera_v2.h"
 using namespace Components;
 
 namespace Video
 {
-	const int RenderDevice_v2::INDICES_PER_SPRITE = 6;
-	const int RenderDevice_v2::VERTICES_PER_SPRITE = 4;
-
-	void RenderDevice_v2::Render(Shader_v2* shader, std::vector<GLfloat>& vertices, const std::vector<GLushort>& indices, const std::vector<Entity_v2>& entities)
+	void RenderDevice_v2::Render(const std::vector<Entity_v2>& entities)
 	{
-		int positionAttribHandle = shader->GetAttributeHandle("a_vPosition");
-		int texCoordAttribHandle = shader->GetAttributeHandle("a_vTexCoord");
+		Shader_v2* shader = entities[0].shader;
+		std::vector<GLfloat>& vertexArray = VideoManager_v2::GetInstance()->GetVertexArray();
+		std::vector<GLushort>& indexArray = VideoManager_v2::GetInstance()->GetIndexArray();
 
 		// set states
 		glEnable(GL_TEXTURE_2D);
@@ -23,15 +22,18 @@ namespace Video
 
 		// set shader
 		shader->Use();
+		int positionAttribHandle = entities[0].shader->GetAttributeHandle("a_vPosition");
+		int texCoordAttribHandle = entities[0].shader->GetAttributeHandle("a_vTexCoord");
 		glActiveTexture(GL_TEXTURE0);
 		shader->SetUniform("u_sSampler", 0);
 
 		// set arrays
-		UpdateVertices(vertices, entities);
+		UpdateVertices(vertexArray, entities);
+
 		glEnableVertexAttribArray(positionAttribHandle);
 		glEnableVertexAttribArray(texCoordAttribHandle);
-		glVertexAttribPointer(positionAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertices[0]));
-		glVertexAttribPointer(texCoordAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertices[2]));
+		glVertexAttribPointer(positionAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[0]));
+		glVertexAttribPointer(texCoordAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[2]));
 
 		// render batched 
 		for (unsigned int batchBegin = 0; batchBegin < entities.size(); batchBegin++)
@@ -49,7 +51,8 @@ namespace Video
 			entities[batchBegin].texture->Bind();
 
 			// draw
-			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &indices[batchBegin * INDICES_PER_SPRITE]);
+			unsigned int numIndices = entities[batchBegin].mesh->GetIndices()->size();
+			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) *numIndices, GL_UNSIGNED_SHORT, &indexArray[batchBegin * numIndices]);
 			batchBegin = batchEnd;
 		}
 
@@ -77,7 +80,7 @@ namespace Video
 			// apply transformation
 			for (unsigned int j = 0; j < quad->size() / mesh->GetNumVertices(); j++)
 			{
-				int index = i * quad->size() + j * VERTICES_PER_SPRITE;
+				int index = i * quad->size() + j * entities[j].mesh->GetNumVertices();
 				Vector2D vertex = mvpMatrix * Vector2D(vertices[index], vertices[index + 1]);
 				vertices[index] = vertex.GetX();
 				vertices[index + 1] = vertex.GetY();

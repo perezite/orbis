@@ -144,4 +144,9 @@ namespace Video
 	{
 		glUseProgram(0);
 	}
+
+	const bool Shader_v2::operator==(const Shader_v2 &other) const
+	{
+		return m_programId > 0 && m_programId == other.m_programId;
+	}
 }

@@ -34,7 +34,7 @@ namespace Sandboxing
 
 		static void AddEntity(Entity_v2* entity);
 
-		static int FindLastBatchEntityByTexture(Texture* texture);
+		static int FindIndexOfLastBatchEntity(Entity_v2* entity);
 
 		static void Close();
 

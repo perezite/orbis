@@ -45,8 +45,11 @@ namespace Video
 		// disable the shader
 		void Unuse();
 
+		// equality
+		const bool operator==(const Shader_v2 &other) const;
+
 	private:
 		// the shader program id
-		GLuint m_programId = -1;
+		GLuint m_programId = 0;
 	};
 }

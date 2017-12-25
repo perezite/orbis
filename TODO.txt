@@ -1,15 +1,9 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Sukkzessive die Klassenstruktur bootstrappen in Bootbox als v2-Klassen. Dabei regelmässig Regressionstest der Performance durchführen.	
-		- Component
-		- SpriteRenderer		
-		- Rectangle Renderer
-		- LineRenderer
-		-- Die Bootbox-Klasse repräsentiert im Prinzip das Level
-	- Wenn alles fertig implementiert ist: 
-		- Die v2-Klassen in die originalen Klassen übertragen 
-		- Die v2-Klassen löschen
-		- Neue Klassenstruktur mit vorhandenen Levels 1-3 ausprobieren, inkl. Regressionstest der Performance
+	- Shader-Swithcing in RenderDevice_v2 implementieren
+	- Die alten Klassen in Bootbox einbinden, dabei rekursiv depth-first alle abhängigen Klassen refactoren. Nach jeder gerafactoreten Klasse einen Performanceregressionstest ausführen
+	- Depth-First Refactoring Strategie dokumentieren
+	- Level1 und Level 2 wieder zum Laufen bringen
 	- Branch zurückmergen auf master	
 	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 56 FPs auf dem Xperia (maximale FPS-Rate) 
 	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite, 
