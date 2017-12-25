@@ -77,9 +77,9 @@ namespace Video
 		m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 #endif
 
+		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
-		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 
 		m_renderDevice = new RenderDevice_v2();
 

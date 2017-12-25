@@ -11,34 +11,21 @@ namespace Video
 {
 	void RenderDevice_v2::Render(const std::vector<Entity_v2>& entities)
 	{
-		Shader_v2* shader = entities[0].shader;
 		std::vector<GLfloat>& vertexArray = VideoManager_v2::GetInstance()->GetVertexArray();
 		std::vector<GLushort>& indexArray = VideoManager_v2::GetInstance()->GetIndexArray();
 
 		// set states
-		glEnable(GL_TEXTURE_2D);
+		glActiveTexture(GL_TEXTURE0);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		// set shader
-		shader->Use();
-		int positionAttribHandle = entities[0].shader->GetAttributeHandle("a_vPosition");
-		int texCoordAttribHandle = entities[0].shader->GetAttributeHandle("a_vTexCoord");
-		glActiveTexture(GL_TEXTURE0);
-		shader->SetUniform("u_sSampler", 0);
-
-		// set arrays
+		// update vertices
 		UpdateVertices(vertexArray, entities);
 
-		glEnableVertexAttribArray(positionAttribHandle);
-		glEnableVertexAttribArray(texCoordAttribHandle);
-		glVertexAttribPointer(positionAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[0]));
-		glVertexAttribPointer(texCoordAttribHandle, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[2]));
-
-		// render batched 
+		// render batched
 		for (unsigned int batchBegin = 0; batchBegin < entities.size(); batchBegin++)
 		{
-			// compute batch
+			// compute batch indices
 			unsigned int batchEnd = batchBegin;
 			for (unsigned int j = batchBegin; j < entities.size(); j++)
 			{
@@ -48,20 +35,42 @@ namespace Video
 			}
 
 			// set texture
-			entities[batchBegin].texture->Bind();
+			const Entity_v2& batchEntity = entities[batchBegin];
+			if (batchEntity.texture != NULL) 
+				batchEntity.texture->Bind();
+
+			// set shader
+			batchEntity.shader->Use();
+			batchEntity.shader->SetUniform("u_sSampler", 0);
+
+			// set position attribute
+			int positionAttribLocation = batchEntity.shader->GetAttributePosition("a_vPosition");
+			glEnableVertexAttribArray(positionAttribLocation);
+			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[0]));
+
+			// set texture coordinate attribute
+			if (batchEntity.texture != NULL)
+			{
+				int texCoordAttribLocation = batchEntity.shader->GetAttributePosition("a_vTexCoord");
+				glEnableVertexAttribArray(texCoordAttribLocation);
+				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[2]));
+			}
 
 			// draw
-			unsigned int numIndices = entities[batchBegin].mesh->GetIndices()->size();
-			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) *numIndices, GL_UNSIGNED_SHORT, &indexArray[batchBegin * numIndices]);
+			unsigned int numIndices = batchEntity.mesh->GetIndices()->size();
+			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * numIndices, GL_UNSIGNED_SHORT, &indexArray[batchBegin * numIndices]);
+
+			// cleanup
+			batchEntity.shader->Unuse();
+			if (batchEntity.texture != NULL)
+				glDisableVertexAttribArray(batchEntity.shader->GetAttributePosition("a_vTexCoord"));
+			glDisableVertexAttribArray(positionAttribLocation);
+
 			batchBegin = batchEnd;
 		}
 
 		// cleanup
-		glDisableVertexAttribArray(texCoordAttribHandle);
-		glDisableVertexAttribArray(positionAttribHandle);
-		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
-		shader->Unuse();
 	}
 
 	void RenderDevice_v2::UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Entity_v2>& entities)
@@ -80,7 +89,7 @@ namespace Video
 			// apply transformation
 			for (unsigned int j = 0; j < quad->size() / mesh->GetNumVertices(); j++)
 			{
-				int index = i * quad->size() + j * entities[j].mesh->GetNumVertices();
+				int index = i * quad->size() + j * entities[i].mesh->GetNumVertices();
 				Vector2D vertex = mvpMatrix * Vector2D(vertices[index], vertices[index + 1]);
 				vertices[index] = vertex.GetX();
 				vertices[index + 1] = vertex.GetY();
@@ -88,3 +97,4 @@ namespace Video
 		}
 	}
 }
+

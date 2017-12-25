@@ -1,12 +1,15 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Shader-Swithcing in RenderDevice_v2 implementieren
 	- Die alten Klassen in Bootbox einbinden, dabei rekursiv depth-first alle abhängigen Klassen refactoren. Nach jeder gerafactoreten Klasse einen Performanceregressionstest ausführen
 	- Depth-First Refactoring Strategie dokumentieren
 	- Level1 und Level 2 wieder zum Laufen bringen
 	- Branch zurückmergen auf master	
 	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 56 FPs auf dem Xperia (maximale FPS-Rate) 
-	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite, 
+	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite
+- Shader-Klasse refactoren
+	- Jeder Shader muss eine Fixe Location für a_vPosition und a_vTexCoord haben (wird vom Renderer so angenommen)
+	- Shader-Basisklasse implementieren, die mittels Assertions sicherstellet, dass die Attribute vorhanden sind und die korrekten Locations haben
+	-- Die Locations sind fix aus folgendem Grund: Wenn der Shader gewechselt wird
 - Math-Klassen zu structs machen
 - Analysieren, ob weiter Klassen zu structs gemacht werden können	
 - Gegebenenfalls Performance-Analyse durchführen

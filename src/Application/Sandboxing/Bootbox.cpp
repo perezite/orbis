@@ -23,6 +23,7 @@ namespace Sandboxing
 {
 	Camera_v2* Bootbox::m_camera;
 	Shader_v2* Bootbox::m_shader;
+	Shader_v2* Bootbox::m_untexturedShader;
 	std::vector<Texture*> Bootbox::m_textures;
 	std::vector<Entity_v2> Bootbox::m_entities;
 	const int Bootbox::NUM_SPRITES = 1000;
@@ -31,7 +32,7 @@ namespace Sandboxing
 
 	void Bootbox::Run()
 	{
-		srand(42);
+		srand(41);
 
 		TimeManager::GetInstance()->Reset();
 		VideoManager_v2* videoManager = VideoManager_v2::GetInstance();
@@ -69,6 +70,7 @@ namespace Sandboxing
 	{
 		m_camera = Camera_v2::GetInstance();
 		m_shader = new Shader_v2("Shaders/Diffuse_v2.vs", "Shaders/Diffuse_v2.frag");
+		m_untexturedShader = new Shader_v2("Shaders/Diffuse_v3.vs", "Shaders/Diffuse_v3.frag");
 
 		// init data
 		InitTextures();
@@ -98,12 +100,15 @@ namespace Sandboxing
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
 			Entity_v2 entity;
-			entity.texture = m_textures[rand() % m_textures.size()];
-			entity.shader = m_shader;
+			static int counter = 0;
+			bool hasTexture = ++counter % 2 == 0;
+
+			entity.texture = hasTexture ? m_textures[rand() % m_textures.size()] : NULL;
+			entity.shader = hasTexture ? m_shader : m_untexturedShader;
 			entity.mesh = Mesh_v2::GetTexturedQuad();
 			float scale = MIN_BLOCK_SCALE + (MAX_BLOCK_SCALE - MIN_BLOCK_SCALE) * MathHelper::GetRandom();
 			entity.transform.scale = Vector2D(scale, scale);
-			entity.transform.position = Vector2D(MathHelper::GetRandom() * 2.0f - 1.0f, MathHelper::GetRandom() * 2.0f - 1.0f);
+			entity.transform.position = Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f);
 			entity.isGrowing = rand() % 2 == 0 ? true : false;
 
 			AddEntity(&entity);

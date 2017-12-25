@@ -41,6 +41,7 @@ namespace Sandboxing
 	private:
 		static Camera_v2* m_camera;
 		static Shader_v2* m_shader;
+		static Shader_v2* m_untexturedShader;
 		static std::vector<Texture*> m_textures;
 		static std::vector<Entity_v2> m_entities;
 		static const int NUM_SPRITES;

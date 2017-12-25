@@ -110,7 +110,7 @@ namespace Video
 		glDeleteProgram(m_programId);
 	}
 
-	int Shader_v2::GetAttributeHandle(std::string id)
+	int Shader_v2::GetAttributePosition(std::string id)
 	{
 		GLint location = glGetAttribLocation(m_programId, id.c_str());
 		return location;
