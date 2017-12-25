@@ -6,8 +6,10 @@
 #include "../../Orbis/Game/Entity_v2.h"
 #include "../../Orbis/Video/Shader_v2.h"
 #include "../../Orbis/Video/Texture.h"
+#include "../../Orbis/Components/Camera_v2.h"
 using namespace Game;
 using namespace Video;
+using namespace Components;
 
 #include <vector>
 
@@ -20,7 +22,7 @@ namespace Sandboxing
 		static void Run();
 
 	protected:
-		static void InitGL();
+		static void Init();
 
 		static void InitIndexArray();
 
@@ -37,6 +39,7 @@ namespace Sandboxing
 		static void Close();
 
 	private:
+		static Camera_v2* m_camera;
 		static Shader_v2* m_shader;
 		static std::vector<Texture*> m_textures;
 		static std::vector<Entity_v2> m_entities;

@@ -1,9 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
 	- Sukkzessive die Klassenstruktur bootstrappen in Bootbox als v2-Klassen. Dabei regelmässig Regressionstest der Performance durchführen.	
-		- Methode Bootbox::AddEntity hinzufügen (wie bei Level)
-		- Material
-		- Camera
 		- Component
 		- SpriteRenderer		
 		- Rectangle Renderer

@@ -3,6 +3,9 @@
 #include "Mesh_v2.h"
 #include "Shader.h"
 
+#include "../Components/Camera_v2.h"
+using namespace Components;
+
 namespace Video
 {
 	const int RenderDevice_v2::INDICES_PER_SPRITE = 6;
@@ -44,7 +47,6 @@ namespace Video
 
 			// set texture
 			entities[batchBegin].texture->Bind();
-			// glBindTexture(GL_TEXTURE_2D, entities[batchBegin].texture);
 
 			// draw
 			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * INDICES_PER_SPRITE, GL_UNSIGNED_SHORT, &indices[batchBegin * INDICES_PER_SPRITE]);
@@ -61,6 +63,7 @@ namespace Video
 
 	void RenderDevice_v2::UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Entity_v2>& entities)
 	{
+		Matrix3 vpMatrix = Camera_v2::GetInstance()->GetProjectionMatrix() * Camera_v2::GetInstance()->GetViewMatrix();
 		Mesh_v2* mesh = Mesh_v2::GetTexturedQuad();
 		const std::vector<GLfloat>* quad = mesh->GetVertexData();
 
@@ -68,15 +71,16 @@ namespace Video
 		vertices.reserve(entities.size() * quad->size());
 		for (unsigned int i = 0; i < entities.size(); i++)
 		{
+			Matrix3 mvpMatrix = vpMatrix * entities[i].transform.GetModelMatrix();
 			vertices.insert(vertices.end(), quad->begin(), quad->end());
 
-			// apply scale
+			// apply transformation
 			for (unsigned int j = 0; j < quad->size() / mesh->GetNumVertices(); j++)
 			{
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] *= entities[i].transform.scale.GetX() / 2.0f;
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE] += entities[i].transform.position.GetX();
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] *= entities[i].transform.scale.GetY() / 2.0f;
-				vertices[i * quad->size() + j * VERTICES_PER_SPRITE + 1] += entities[i].transform.position.GetY();
+				int index = i * quad->size() + j * VERTICES_PER_SPRITE;
+				Vector2D vertex = mvpMatrix * Vector2D(vertices[index], vertices[index + 1]);
+				vertices[index] = vertex.GetX();
+				vertices[index + 1] = vertex.GetY();
 			}
 		}
 	}

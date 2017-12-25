@@ -47,7 +47,7 @@ namespace Game
 		void SetTransformSpace(TransformSpace space) { m_transformSpace = space; }
 
 		// get the transformation matrix
-		Matrix3 GetMatrix() const;
+		Matrix3 GetModelMatrix() const;
 
 	private:
 		// position

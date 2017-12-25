@@ -151,7 +151,7 @@ namespace Video
 
 		// compute mvp matrix
 		bool isWorldSpaceTransformation = transform->GetTransformSpace() == TransformSpace::WorldSpace;
-		Matrix4 modelMatrix = Matrix4::From2DTransform(transform->GetMatrix());
+		Matrix4 modelMatrix = Matrix4::From2DTransform(transform->GetModelMatrix());
 		Matrix4 viewMatrix = Matrix4::From2DTransform(isWorldSpaceTransformation ? Camera::GetViewMatrix() : Matrix3());
 		Matrix4 mvpMatrix = Camera::GetProjectionMatrix(isWorldSpaceTransformation) * viewMatrix * modelMatrix;
 		material->GetShader()->SetUniform("u_mTransform", mvpMatrix.Transposed());
