@@ -31,9 +31,6 @@ namespace Video
 
 	VideoManager::~VideoManager()
 	{
-		if (m_renderDevice)
-			delete m_renderDevice;
-
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
 	}
@@ -117,8 +114,6 @@ namespace Video
 		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
-
-		m_renderDevice = new RenderDevice();
 
 		m_IsInitialized = true;
 	}

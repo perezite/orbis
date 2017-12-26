@@ -1,5 +1,7 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
+	- VideoManager refactoren:
+		- m_vertexArray, m_indexArray, m_rendereres inkl. zugehörige Funktionen gehören in das RenderDevice
 	- Facadenobjekte entfernen: Mesh_v2, NewRectangleRenderer, NewSpriteRenderer, Diffuse_v2, Flat_v2
 	- Bootbox als reguläres Level implementieren und austesten
 	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen

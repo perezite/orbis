@@ -27,7 +27,7 @@ namespace Video
 		Vector2D GetResolution() { return m_windowResolution; }
 
 		// get the render device
-		RenderDevice* GetRenderDevice() const { return m_renderDevice; }
+		RenderDevice* GetRenderDevice() { return &m_renderDevice; }
 
 		// get the vertex array
 		std::vector<GLfloat>& GetVertexArray() { return m_vertexArray; }
@@ -82,7 +82,7 @@ namespace Video
 		SDL_GLContext m_openGlContext;
 
 		// the attached render device
-		RenderDevice* m_renderDevice;
+		RenderDevice m_renderDevice;
 
 		// the window resolution
 		Vector2D m_windowResolution;
