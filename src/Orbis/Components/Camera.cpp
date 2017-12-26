@@ -1,7 +1,6 @@
 #include "Camera.h"
 
 #include "../Game/Transform.h"
-#include "../Game/Entity_v2.h"
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
 using namespace Game;

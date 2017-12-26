@@ -8,6 +8,8 @@
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/Mesh_v2.h"
+#include "../../Orbis/Components/NewSpriteRenderer.h"
+#include "../../Orbis/Components/NewRectangleRenderer.h"
 using namespace Math;
 using namespace Core;
 using namespace Video;
@@ -17,14 +19,11 @@ using namespace Components;
 #include <time.h>
 #include <string>
 #include <iostream>
-#include <algorithm>
 
 namespace Sandboxing
 {
-	Shader* Bootbox::m_shader;
-	Shader* Bootbox::m_untexturedShader;
 	std::vector<Texture*> Bootbox::m_textures;
-	std::vector<Entity_v2> Bootbox::m_entities;
+	std::vector<Entity*> Bootbox::m_entities;
 	const int Bootbox::NUM_SPRITES = 1000;
 	const float Bootbox::MIN_BLOCK_SCALE = 0.01f;
 	const float Bootbox::MAX_BLOCK_SCALE = 0.05f;
@@ -56,7 +55,7 @@ namespace Sandboxing
 			UpdateEntities();
 
 			videoManager->ClearScreen();
-			videoManager->GetRenderDevice()->Render(m_entities);
+			videoManager->GetRenderDevice()->Render();
 			videoManager->SwapBuffers();
 
 			Helper::LogPerformance();
@@ -67,49 +66,27 @@ namespace Sandboxing
 
 	void Bootbox::Init()
 	{
-		m_shader = new Shader("Shaders/Diffuse_v2.vs", "Shaders/Diffuse_v2.frag");
-		m_untexturedShader = new Shader("Shaders/Diffuse_v3.vs", "Shaders/Diffuse_v3.frag");
-
 		// init data
 		InitTextures();
 		InitEntities();
-		InitIndexArray();
 	}
-
-	void Bootbox::InitIndexArray()
-	{
-		std::vector<GLushort>& indexArray = VideoManager::GetInstance()->GetIndexArray();
-
-		for (unsigned int i = 0; i < m_entities.size(); i++)
-		{
-			Video::Mesh_v2* mesh = m_entities[i].mesh;
-			const std::vector<GLushort>* MeshIndices = mesh->GetIndices();
-
-			indexArray.insert(indexArray.end(), MeshIndices->begin(), MeshIndices->end());
-
-			// compute offset for inserted indices
-			for (unsigned int j = 0; j < MeshIndices->size(); j++)
-				indexArray[i * MeshIndices->size() + j] += mesh->GetNumVertices() * i;
-		}
-	}
-
+	
 	void Bootbox::InitEntities()
 	{
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
-			Entity_v2 entity;
+			Entity* entity = new Entity();
 			static int counter = 0;
 			bool hasTexture = ++counter % 2 == 0;
 
-			entity.texture = hasTexture ? m_textures[rand() % m_textures.size()] : NULL;
-			entity.shader = hasTexture ? m_shader : m_untexturedShader;
-			entity.mesh = Mesh_v2::GetTexturedQuad();
 			float scale = MIN_BLOCK_SCALE + (MAX_BLOCK_SCALE - MIN_BLOCK_SCALE) * MathHelper::GetRandom();
-			entity.transform.scale = Vector2D(scale, scale);
-			entity.transform.position = Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f);
-			entity.isGrowing = rand() % 2 == 0 ? true : false;
+			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D(scale, scale));
+			entity->SetTransform(trans);
+	
+			Texture* texture = hasTexture ? m_textures[rand() % m_textures.size()] : NULL; 
+			entity->AddComponent(hasTexture ? (Renderer*)new NewSpriteRenderer(texture) : (Renderer*)new NewRectangleRenderer());
 
-			AddEntity(&entity);
+			m_entities.push_back(entity);
 		}
 	}
 
@@ -129,46 +106,19 @@ namespace Sandboxing
 
 	void Bootbox::UpdateEntities()
 	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
 		for (unsigned int i = 0; i < m_entities.size(); i++)
-		{
-			float deltaScale = m_entities[i].isGrowing ? dt * 0.01f : dt * -0.01f;
-			m_entities[i].transform.scale += Vector2D(deltaScale, deltaScale);
-
-			if (m_entities[i].transform.scale.GetX() < MIN_BLOCK_SCALE)
-				m_entities[i].isGrowing = true;
-
-			if (m_entities[i].transform.scale.GetX() > MAX_BLOCK_SCALE)
-				m_entities[i].isGrowing = false;
-		}
-	}
-
-	void Bootbox::AddEntity(Entity_v2* entity)
-	{
-		// insert batched by texture
-		int lastIndex = FindIndexOfLastBatchEntity(entity);
-		int insertIndex = lastIndex >= 0 ? lastIndex + 1 : m_entities.size();
-		m_entities.insert(m_entities.begin() + insertIndex, *entity);
-	}
-
-	int Bootbox::FindIndexOfLastBatchEntity(Entity_v2* entity)
-	{
-		if (m_entities.empty())
-			return -1;
-
-		for (int i = (unsigned)m_entities.size() - 1; i >= 0; i--)
-		{
-			if (m_entities[i].texture == entity->texture && m_entities[i].shader == entity->shader)
-				return i;
-		}
-
-		return -1;
+			m_entities[i]->Update();
 	}
 
 	void Bootbox::Close()
 	{
-		if (m_shader)
-			delete m_shader;
+		for (unsigned int i = 0; i < m_textures.size(); i++)
+			delete m_textures[i];
+		m_textures.clear();
+
+		for (unsigned int i = 0; i < m_entities.size(); i++)
+			delete m_entities[i];
+		m_entities.clear();
 	}
 }
 

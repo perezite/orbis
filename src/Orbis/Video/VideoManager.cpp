@@ -23,7 +23,8 @@ namespace Video
 		return &instance;
 	}
 
-	VideoManager::VideoManager()
+	VideoManager::VideoManager() 
+		: m_isIndexArrayDirty(false)
 	{
 		Initialize();
 	}
@@ -37,6 +38,13 @@ namespace Video
 		SDL_Quit();
 	}
 
+	void VideoManager::AddRenderer(Renderer* renderer)
+	{
+		int position = FindFirstIndexInBatch(renderer);
+		m_renderers.insert(m_renderers.begin() + position, renderer);
+		m_isIndexArrayDirty = true;
+	}
+
 	void VideoManager::ClearScreen()
 	{
 		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
@@ -47,6 +55,35 @@ namespace Video
 	{
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
+
+	void VideoManager::UpdateIndexArray()
+	{
+		if (m_isIndexArrayDirty)
+		{
+			m_indexArray.clear();
+			ReserveIndexArray();
+
+			unsigned int totalNumIndices = 0;
+			GLushort valueOffset = 0;
+			for (unsigned int i = 0; i < m_renderers.size(); i++)
+			{
+				Mesh_v2* mesh = m_renderers[i]->GetMesh();
+				for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
+				{
+					GLushort value = mesh->GetIndices()->at(j) + valueOffset;
+					m_indexArray.insert(m_indexArray.begin() + totalNumIndices, value);
+					totalNumIndices++;
+				}
+				
+				valueOffset += mesh->GetNumVertices();
+			}
+
+			m_isIndexArrayDirty = false;
+		}
+
+		m_isIndexArrayDirty = false;
+	}
+
 
 	void VideoManager::Initialize()
 	{
@@ -96,5 +133,25 @@ namespace Video
 		}
 
 		else return m_DefaultWindowResolution;
+	}
+
+	int VideoManager::FindFirstIndexInBatch(Renderer* renderer)
+	{
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
+		{
+			if (renderer->IsBatchEqualTo(m_renderers[i]))
+				return i;
+		}
+
+		return m_renderers.size();
+	}
+
+	void VideoManager::ReserveIndexArray()
+	{
+		unsigned int size = 0;
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
+			size += m_renderers[i]->GetMesh()->GetIndices()->size();
+
+		m_indexArray.reserve(size);
 	}
 }

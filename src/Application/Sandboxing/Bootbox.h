@@ -3,7 +3,7 @@
 #define __SANDBOX__
 
 #include "../../Orbis/Libraries/GL.h"
-#include "../../Orbis/Game/Entity_v2.h"
+#include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Video/Shader.h"
 #include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Components/Camera.h"
@@ -22,9 +22,8 @@ namespace Sandboxing
 		static void Run();
 
 	protected:
-		static void Init();
 
-		static void InitIndexArray();
+		static void Init();
 
 		static void InitEntities();
 
@@ -32,17 +31,11 @@ namespace Sandboxing
 
 		static void UpdateEntities();
 
-		static void AddEntity(Entity_v2* entity);
-
-		static int FindIndexOfLastBatchEntity(Entity_v2* entity);
-
 		static void Close();
 
 	private:
-		static Shader* m_shader;
-		static Shader* m_untexturedShader;
 		static std::vector<Texture*> m_textures;
-		static std::vector<Entity_v2> m_entities;
+		static std::vector<Entity*> m_entities;
 		static const int NUM_SPRITES;
 		static const float MIN_BLOCK_SCALE;
 		static const float MAX_BLOCK_SCALE;

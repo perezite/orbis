@@ -1,8 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Die alten Klassen in Bootbox einbinden, dabei rekursiv depth-first alle abhängigen Klassen refactoren. Nach jeder gerafactoreten Klasse einen Performanceregressionstest ausführen
-		-- Bei Klassen, welche ich refactore die Interfaces zum alten Code wegmocken
-		-- Bei Interface-Kollision (geicher Name, andere Signatur): Das alte Interface mit *_old benennen
+	- Facadenobjekte entfernen: Mesh_v2, NewRectangleRenderer, NewSpriteRenderer, Diffuse_v2, Flat_v2
 	- Bootbox als reguläres Level implementieren und austesten
 	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen
 		- Alle Funktionen mit _old bzw. TODO Kommentar weg-refactoren

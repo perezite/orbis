@@ -7,8 +7,10 @@
 #include "Material.h"
 
 #include "../Game/Transform.h"
-#include "../Game/Entity_v2.h"
+#include "../Game/Entity.h"
+#include "../Components/Renderer.h"
 using namespace Game;
+using namespace Components;
 
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
@@ -33,10 +35,13 @@ namespace Video
 		void Render_old(Transform* transform, Mesh* mesh, Material* material) {};
 
 		// render
-		void Render(const std::vector<Entity_v2>& entities);
+		void Render();
 
 	protected:
 		// update vertex array
-		void UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Entity_v2>& entities);
+		void UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Renderer*>& renderers);
+
+		// reserver the vertex buffer to hold the renderer data
+		void ReserveVertexArray(std::vector<GLfloat>& vertices, const std::vector<Renderer*>& renderers);
 	};
 }

@@ -26,9 +26,6 @@ namespace Video
 		// bind this texture
 		void Bind();
 
-		// equality
-		const bool operator==(const Texture &other) const;
-
 	private:
 		// the texture asset path
 		std::string m_assetPath;

@@ -83,9 +83,4 @@ namespace Video
 	{
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
-
-	const bool Texture::operator==(const Texture & other) const
-	{
-		return m_textureHandle > 0 && m_textureHandle == other.m_textureHandle;
-	}
 }
