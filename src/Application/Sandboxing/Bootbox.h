@@ -6,7 +6,7 @@
 #include "../../Orbis/Game/Entity_v2.h"
 #include "../../Orbis/Video/Shader_v2.h"
 #include "../../Orbis/Video/Texture.h"
-#include "../../Orbis/Components/Camera_v2.h"
+#include "../../Orbis/Components/Camera.h"
 using namespace Game;
 using namespace Video;
 using namespace Components;
@@ -39,7 +39,6 @@ namespace Sandboxing
 		static void Close();
 
 	private:
-		static Camera_v2* m_camera;
 		static Shader_v2* m_shader;
 		static Shader_v2* m_untexturedShader;
 		static std::vector<Texture*> m_textures;

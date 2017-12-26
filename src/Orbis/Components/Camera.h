@@ -12,19 +12,29 @@ namespace Components
 	class Camera : public Component
 	{
 	public:
-		// ctor
-		Camera();
 
-		// dtor
-		virtual ~Camera();
+		// get singleton
+		static Camera* GetInstance();
 
 		// get the view matrix (the inverse of the transform of the parent entity) 
-		static Matrix3 GetViewMatrix();
+		// TODO: Remove after refactoring
+		static Matrix3 GetViewMatrix_old() { return Matrix3(); }
 
 		// get the orthographic projection matrix
-		static Matrix4 GetProjectionMatrix(bool applyScaling);
+		// TODO: Remove after refactoring
+		static Matrix4 GetProjectionMatrix_old(bool applyScaling) { return Matrix4(); }
 
 		// get the size of the camera in word coordinates
-		static Vector2D GetSize();
+		// TODO: Remove after refactoring
+		static Vector2D GetSize_old() { return Vector2D(); }
+
+		// get the view matrix (the inverse of the transform of the parent entity)
+		Matrix3 GetViewMatrix();
+
+		// get the orthographic projection matrix
+		Matrix3 GetProjectionMatrix();
+
+		// get the size of the camera in word coordinates
+		Vector2D GetSize();
 	};
 }

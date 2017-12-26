@@ -21,7 +21,6 @@ using namespace Components;
 
 namespace Sandboxing
 {
-	Camera_v2* Bootbox::m_camera;
 	Shader_v2* Bootbox::m_shader;
 	Shader_v2* Bootbox::m_untexturedShader;
 	std::vector<Texture*> Bootbox::m_textures;
@@ -68,7 +67,6 @@ namespace Sandboxing
 
 	void Bootbox::Init()
 	{
-		m_camera = Camera_v2::GetInstance();
 		m_shader = new Shader_v2("Shaders/Diffuse_v2.vs", "Shaders/Diffuse_v2.frag");
 		m_untexturedShader = new Shader_v2("Shaders/Diffuse_v3.vs", "Shaders/Diffuse_v3.frag");
 

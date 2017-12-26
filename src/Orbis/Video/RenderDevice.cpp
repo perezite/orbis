@@ -4,7 +4,7 @@
 #include "Shader.h"
 #include "VideoManager.h"
 
-#include "../Components/Camera_v2.h"
+#include "../Components/Camera.h"
 using namespace Components;
 
 namespace Video
@@ -75,7 +75,7 @@ namespace Video
 
 	void RenderDevice::UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Entity_v2>& entities)
 	{
-		Matrix3 vpMatrix = Camera_v2::GetInstance()->GetProjectionMatrix() * Camera_v2::GetInstance()->GetViewMatrix();
+		Matrix3 vpMatrix = Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix();
 		Mesh_v2* mesh = Mesh_v2::GetTexturedQuad();
 		const std::vector<GLfloat>* quad = mesh->GetVertexData();
 
