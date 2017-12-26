@@ -25,7 +25,13 @@ namespace Video
 		Vector2D GetResolution() { return m_windowResolution; }
 
 		// get the render device
-		RenderDevice* GetRenderDevice();
+		RenderDevice* GetRenderDevice() const { return m_renderDevice; }
+
+		// get the vertex array
+		std::vector<GLfloat>& GetVertexArray() { return m_vertexArray; }
+
+		// get the index array
+		std::vector<GLushort>& GetIndexArray() { return m_indexArray; }
 
 		// clear the screen
 		void ClearScreen();
@@ -41,6 +47,12 @@ namespace Video
 		Vector2D GetDefaultWindowResolution();
 
 	private:
+		// the vertex array
+		std::vector<GLfloat> m_vertexArray;
+
+		// the index array
+		std::vector<GLushort> m_indexArray;
+
 		// the sdl window
 		SDL_Window* m_sdlWindow;
 
@@ -60,3 +72,4 @@ namespace Video
 		bool m_IsInitialized;
 	};
 }
+

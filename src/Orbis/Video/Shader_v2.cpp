@@ -1,6 +1,6 @@
 #include "Shader_v2.h"
 
-#include "VideoManager_v2.h"
+#include "VideoManager.h"
 
 #include "../Core/AssetHelper.h"
 #include "../Libraries/GL.h"
@@ -90,8 +90,6 @@ namespace Video
 
 	Shader_v2::Shader_v2(std::string vertexAssetPath, std::string fragmentAssetPath)
 	{
-		VideoManager_v2::GetInstance();
-
 		m_programId = glCreateProgram();
 
 		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexAssetPath);

@@ -38,7 +38,7 @@ namespace Components
 			GetParent()->GetTransform()->SetRotation(rotation);
 			GetParent()->GetTransform()->SetScale(Vector2D(length, 0.0f));
 
-			renderDevice->Render(GetParent()->GetTransform(), m_mesh, &m_material);
+			renderDevice->Render_old(GetParent()->GetTransform(), m_mesh, &m_material);
 		}
 	}
 }

@@ -27,6 +27,6 @@ namespace Components
 	void SpriteRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(GetParent()->GetTransform(), m_mesh, &m_material);
+		renderDevice->Render_old(GetParent()->GetTransform(), m_mesh, &m_material);
 	}
 }

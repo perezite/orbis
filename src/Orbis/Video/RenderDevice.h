@@ -7,6 +7,7 @@
 #include "Material.h"
 
 #include "../Game/Transform.h"
+#include "../Game/Entity_v2.h"
 using namespace Game;
 
 #include "../../Base/Math/Vector2D.h"
@@ -19,32 +20,23 @@ namespace Video
 	class RenderDevice
 	{
 	public:
-		// ctor
-		RenderDevice();
-
-		// dtor
-		virtual ~RenderDevice();
-
 		// add a mesh to the renderer
-		void AddMesh(Mesh* const mesh);
+		// TODO: remove after refactoring
+		void AddMesh(Mesh* const mesh) {};
 
 		// initialize the buffers
-		void InitializeBuffers();
+		// TODO: Remove after refactoring
+		void InitializeBuffers() {};
 
 		// render
-		void Render(Transform* transform, Mesh* mesh, Material* material);
+		// TODO: remove after refactoring
+		void Render_old(Transform* transform, Mesh* mesh, Material* material) {};
 
-	private:
-		// the meshes used in the renderer
-		std::vector<Mesh*> m_meshes;
+		// render
+		void Render(const std::vector<Entity_v2>& entities);
 
-		// the vertex buffer object
-		GLuint m_vertexBufferHandle;
-
-		// the index buffer object
-		GLuint m_indexBufferHandle;
-
-		// are the vertex and index buffers initialized
-		bool m_areBuffersInitialized;
+	protected:
+		// update vertex array
+		void UpdateVertices(std::vector<GLfloat>& vertices, const std::vector<Entity_v2>& entities);
 	};
 }

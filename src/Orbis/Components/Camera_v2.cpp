@@ -3,7 +3,7 @@
 #include "../Game/Transform_v2.h"
 #include "../Game/Entity_v2.h"
 #include "../Core/TimeManager.h"
-#include "../Video/VideoManager_v2.h"
+#include "../Video/VideoManager.h"
 using namespace Game;
 using namespace Core;
 using namespace Video;
@@ -35,7 +35,7 @@ namespace Components
 	{
 		Vector2D scale = Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.GetX(), 1.0f / scale.GetY());
-		Vector2D resolution = VideoManager_v2::GetInstance()->GetResolution();
+		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
 		float inverseAspect = resolution.GetX() / resolution.GetY();
 
 		Matrix3 mat(2.0f * inverseScale.GetX(), 0.0f, 0.0f,
@@ -47,7 +47,7 @@ namespace Components
 
 	Vector2D Camera_v2::GetSize()
 	{
-		Vector2D resolution = VideoManager_v2::GetInstance()->GetResolution();
+		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
 		Vector2D scale = Vector2D::One;
 		float aspectRatio = resolution.GetY() / resolution.GetX();
 

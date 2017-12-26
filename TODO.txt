@@ -1,8 +1,11 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
 	- Die alten Klassen in Bootbox einbinden, dabei rekursiv depth-first alle abhängigen Klassen refactoren. Nach jeder gerafactoreten Klasse einen Performanceregressionstest ausführen
+		-- Bei Klassen, welche ich refactore die Interfaces zum alten Code wegmocken
+		-- Bei Interface-Kollision (geicher Name, andere Signatur): Das alte Interface mit *_old benennen
+	- Bootbox als reguläres Level implementieren und austesten
+	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen
 	- Depth-First Refactoring Strategie dokumentieren
-	- Level1 und Level 2 wieder zum Laufen bringen
 	- Branch zurückmergen auf master	
 	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 56 FPs auf dem Xperia (maximale FPS-Rate) 
 	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite

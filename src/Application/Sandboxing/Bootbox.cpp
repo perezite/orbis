@@ -6,7 +6,7 @@
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Orbis/Core/TimeManager.h"
-#include "../../Orbis/Video/VideoManager_v2.h"
+#include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/Mesh_v2.h"
 using namespace Math;
 using namespace Core;
@@ -35,7 +35,7 @@ namespace Sandboxing
 		srand(41);
 
 		TimeManager::GetInstance()->Reset();
-		VideoManager_v2* videoManager = VideoManager_v2::GetInstance();
+		VideoManager* videoManager = VideoManager::GetInstance();
 		videoManager->Initialize();
 		Init();
 
@@ -56,9 +56,9 @@ namespace Sandboxing
 
 			UpdateEntities();
 
-			VideoManager_v2::GetInstance()->ClearScreen();
-			VideoManager_v2::GetInstance()->GetRenderDevice()->Render(m_entities);
-			VideoManager_v2::GetInstance()->SwapBuffers();
+			videoManager->ClearScreen();
+			videoManager->GetRenderDevice()->Render(m_entities);
+			videoManager->SwapBuffers();
 
 			Helper::LogPerformance();
 		}
@@ -80,7 +80,7 @@ namespace Sandboxing
 
 	void Bootbox::InitIndexArray()
 	{
-		std::vector<GLushort>& indexArray = VideoManager_v2::GetInstance()->GetIndexArray();
+		std::vector<GLushort>& indexArray = VideoManager::GetInstance()->GetIndexArray();
 
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{

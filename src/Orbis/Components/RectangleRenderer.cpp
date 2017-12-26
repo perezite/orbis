@@ -30,6 +30,6 @@ namespace Components
 	void RectangleRenderer::Render()
 	{
 		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(GetParent()->GetTransform(), m_mesh, &m_material);
+		renderDevice->Render_old(GetParent()->GetTransform(), m_mesh, &m_material);
 	}
 }
