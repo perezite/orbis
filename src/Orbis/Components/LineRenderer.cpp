@@ -34,9 +34,9 @@ namespace Components
 			float rotation = atan2(triangleHeight, triangleWidth);
 			float length = (end - begin).GetLength();
 
-			GetParent()->GetTransform()->SetPosition(begin);
-			GetParent()->GetTransform()->SetRotation(rotation);
-			GetParent()->GetTransform()->SetScale(Vector2D(length, 0.0f));
+			GetParent()->GetTransform()->position = begin;
+			GetParent()->GetTransform()->rotation = rotation;
+			GetParent()->GetTransform()->scale = Vector2D(length, 0.0f);
 
 			renderDevice->Render_old(GetParent()->GetTransform(), m_mesh, &m_material);
 		}

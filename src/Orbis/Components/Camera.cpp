@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-#include "../Game/Transform_v2.h"
+#include "../Game/Transform.h"
 #include "../Game/Entity_v2.h"
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
@@ -23,7 +23,8 @@ namespace Components
 
 	Matrix3 Camera::GetViewMatrix()
 	{
-		Transform_v2 transform;
+		// TODO: Use transform of the parent here
+		Transform transform;
 		Matrix3 invTransform;
 		invTransform.Rotate2D(0.0f);
 		invTransform.Translate2D(Vector2D::Zero);

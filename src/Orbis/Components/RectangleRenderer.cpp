@@ -24,7 +24,7 @@ namespace Components
 		m_material.SetIsColorUsed(true);
 		m_mesh = Mesh::GetFlatQuad();
 		m_mesh->Initialize();
-		GetParent()->GetTransform()->SetTransformSpace(TransformSpace::WorldSpace);
+		GetParent()->GetTransform()->transformSpace = TransformSpace::WorldSpace;
 	}
 
 	void RectangleRenderer::Render()

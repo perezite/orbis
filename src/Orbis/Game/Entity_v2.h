@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Transform_v2.h"
+#include "Transform.h"
 
 #include "../Libraries/GL.h"
 #include "../Video/Mesh_v2.h"
@@ -12,7 +12,7 @@ namespace Game
 {
 	struct Entity_v2
 	{
-		Transform_v2 transform;
+		Transform transform;
 
 		Shader* shader;
 

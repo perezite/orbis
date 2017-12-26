@@ -15,7 +15,7 @@ TODO:
 	- Shader-Basisklasse implementieren, die mittels Assertions sicherstellet, dass die Attribute vorhanden sind und die korrekten Locations haben
 	-- Die Locations sind fix aus folgendem Grund: Wenn der Shader gewechselt wird
 - Math-Klassen zu structs machen
-- Analysieren, ob weiter Klassen zu structs gemacht werden können	
+- Analysieren, ob weiter Klassen zu structs gemacht werden sollten	
 - Gegebenenfalls Performance-Analyse durchführen
 	- Level mit 10 Blocks befüllen
 	- Performance-Analyse mit Funktions-Switching
