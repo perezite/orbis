@@ -21,8 +21,8 @@ using namespace Components;
 
 namespace Sandboxing
 {
-	Shader_v2* Bootbox::m_shader;
-	Shader_v2* Bootbox::m_untexturedShader;
+	Shader* Bootbox::m_shader;
+	Shader* Bootbox::m_untexturedShader;
 	std::vector<Texture*> Bootbox::m_textures;
 	std::vector<Entity_v2> Bootbox::m_entities;
 	const int Bootbox::NUM_SPRITES = 1000;
@@ -67,8 +67,8 @@ namespace Sandboxing
 
 	void Bootbox::Init()
 	{
-		m_shader = new Shader_v2("Shaders/Diffuse_v2.vs", "Shaders/Diffuse_v2.frag");
-		m_untexturedShader = new Shader_v2("Shaders/Diffuse_v3.vs", "Shaders/Diffuse_v3.frag");
+		m_shader = new Shader("Shaders/Diffuse_v2.vs", "Shaders/Diffuse_v2.frag");
+		m_untexturedShader = new Shader("Shaders/Diffuse_v3.vs", "Shaders/Diffuse_v3.frag");
 
 		// init data
 		InitTextures();

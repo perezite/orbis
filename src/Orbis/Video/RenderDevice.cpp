@@ -44,14 +44,14 @@ namespace Video
 			batchEntity.shader->SetUniform("u_sSampler", 0);
 
 			// set position attribute
-			int positionAttribLocation = batchEntity.shader->GetAttributePosition("a_vPosition");
+			int positionAttribLocation = batchEntity.shader->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
 			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[0]));
 
 			// set texture coordinate attribute
 			if (batchEntity.texture != NULL)
 			{
-				int texCoordAttribLocation = batchEntity.shader->GetAttributePosition("a_vTexCoord");
+				int texCoordAttribLocation = batchEntity.shader->GetAttributeLocation("a_vTexCoord");
 				glEnableVertexAttribArray(texCoordAttribLocation);
 				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(vertexArray[2]));
 			}
@@ -63,7 +63,7 @@ namespace Video
 			// cleanup
 			batchEntity.shader->Unuse();
 			if (batchEntity.texture != NULL)
-				glDisableVertexAttribArray(batchEntity.shader->GetAttributePosition("a_vTexCoord"));
+				glDisableVertexAttribArray(batchEntity.shader->GetAttributeLocation("a_vTexCoord"));
 			glDisableVertexAttribArray(positionAttribLocation);
 
 			batchBegin = batchEnd;

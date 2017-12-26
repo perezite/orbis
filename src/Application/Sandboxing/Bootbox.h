@@ -4,7 +4,7 @@
 
 #include "../../Orbis/Libraries/GL.h"
 #include "../../Orbis/Game/Entity_v2.h"
-#include "../../Orbis/Video/Shader_v2.h"
+#include "../../Orbis/Video/Shader.h"
 #include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Components/Camera.h"
 using namespace Game;
@@ -39,8 +39,8 @@ namespace Sandboxing
 		static void Close();
 
 	private:
-		static Shader_v2* m_shader;
-		static Shader_v2* m_untexturedShader;
+		static Shader* m_shader;
+		static Shader* m_untexturedShader;
 		static std::vector<Texture*> m_textures;
 		static std::vector<Entity_v2> m_entities;
 		static const int NUM_SPRITES;

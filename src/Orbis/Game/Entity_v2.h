@@ -4,7 +4,7 @@
 
 #include "../Libraries/GL.h"
 #include "../Video/Mesh_v2.h"
-#include "../Video/Shader_v2.h"
+#include "../Video/Shader.h"
 #include "../Video/Texture.h"
 using namespace Video;
 
@@ -14,7 +14,7 @@ namespace Game
 	{
 		Transform_v2 transform;
 
-		Shader_v2* shader;
+		Shader* shader;
 
 		Texture* texture;
 

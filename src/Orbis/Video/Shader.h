@@ -28,7 +28,7 @@ namespace Video
 		~Shader();
 
 		// get an attribute handle
-		int GetAttributeHandle(std::string id);
+		int GetAttributeLocation(std::string id);
 
 		// set a uniform value
 		void SetUniform(std::string id, int value);

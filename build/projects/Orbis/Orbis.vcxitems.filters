@@ -93,9 +93,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh_v2.cpp">
       <Filter>Video</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Shader_v2.cpp">
-      <Filter>Video</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Transform_v2.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -190,9 +187,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Transform_v2.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Shader_v2.h">
-      <Filter>Video</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
