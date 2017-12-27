@@ -17,4 +17,20 @@ namespace Video
 
 		return &texturedQuad;
 	}
+
+	Mesh_v2* Mesh_v2::GetFlatQuad()
+	{
+		static Mesh_v2 flatQuad(
+			{
+				-1, -1,					// left bottom
+				 1, -1,					// right bottom
+				-1,  1, 				// left top
+				 1,  1					// right top
+			},
+			2,
+			{ 0, 1, 2, 2, 1, 3 }
+		);
+
+		return &flatQuad;
+	}
 }

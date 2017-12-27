@@ -47,10 +47,10 @@ namespace Video
 
 	protected:
 		// update vertex array
-		void UpdateVertexArray(std::vector<GLfloat>& vertices, const std::vector<Renderer*>& renderers);
+		void UpdateVertexArray();
 
 		// reserver the vertex buffer to hold the renderer data
-		void ReserveVertexArray(std::vector<GLfloat>& vertices, const std::vector<Renderer*>& renderers);
+		void ReserveVertexArray();
 
 		// insert renderers indices at position in index array
 		void UpdateIndexArray();

@@ -25,9 +25,11 @@ namespace Video
 
 		// update arrays
 		UpdateIndexArray();
-		UpdateVertexArray(m_vertexArray, m_renderers);
+		UpdateVertexArray();
 
 		// render batched
+		unsigned int vaoStartIndex = 0;
+		unsigned int lastBatchBegin = 0;
 		for (unsigned int batchBegin = 0; batchBegin < m_renderers.size(); batchBegin++)
 		{
 			// compute batch indices
@@ -38,6 +40,10 @@ namespace Video
 					break;
 				batchEnd = j;
 			}
+
+			// accumulate the current vertex start index
+			for (unsigned int i = lastBatchBegin; i < batchBegin; i++)
+				vaoStartIndex += m_renderers[i]->GetMesh()->GetVertexData()->size();
 
 			// set batch texture
 			const Renderer* prototype = m_renderers[batchBegin];
@@ -51,14 +57,14 @@ namespace Video
 			// set batch position attribute
 			int positionAttribLocation = prototype->GetShader()->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
-			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertexArray[0]));
+			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex]));
 
 			// set batch texture coordinate attribute
 			if (prototype->GetTexture() != NULL)
 			{
 				int texCoordAttribLocation = prototype->GetShader()->GetAttributeLocation("a_vTexCoord");
 				glEnableVertexAttribArray(texCoordAttribLocation);
-				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), &(m_vertexArray[2]));
+				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex + 2]));
 			}
 
 			// draw batched
@@ -71,6 +77,7 @@ namespace Video
 				glDisableVertexAttribArray(prototype->GetShader()->GetAttributeLocation("a_vTexCoord"));
 			glDisableVertexAttribArray(positionAttribLocation);
 
+			lastBatchBegin = batchBegin;
 			batchBegin = batchEnd;
 		}
 
@@ -78,41 +85,44 @@ namespace Video
 		glDisable(GL_BLEND);
 	}
 
-	void RenderDevice::UpdateVertexArray(std::vector<GLfloat>& vertices, const std::vector<Renderer*>& renderers)
+	void RenderDevice::UpdateVertexArray()
 	{
 		Matrix3 vpMatrix = Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix();
-		Mesh_v2* mesh = Mesh_v2::GetTexturedQuad();
-		const std::vector<GLfloat>* quad = mesh->GetVertexData();
 
-		vertices.clear();
-		ReserveVertexArray(vertices, renderers);
+		m_vertexArray.clear();
+		ReserveVertexArray();
 
-		for (unsigned int i = 0; i < renderers.size(); i++)
+		unsigned int current = 0;
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			Entity* entity = renderers[i]->GetParent();
+			Mesh_v2* mesh = m_renderers[i]->GetMesh();
+			const std::vector<GLfloat>* mvd = mesh->GetVertexData();
+			Entity* entity = m_renderers[i]->GetParent();
 			Matrix3 mvpMatrix = vpMatrix * entity->GetTransform()->GetModelMatrix();
-			vertices.insert(vertices.end(), quad->begin(), quad->end());
+
+			m_vertexArray.insert(m_vertexArray.end(), mvd->begin(), mvd->end());
 
 			// apply transformation in vertex array
-			for (unsigned int j = 0; j < quad->size() / mesh->GetNumVertices(); j++)
+			for (unsigned int j = 0; j < mesh->GetNumVertices(); j++)
 			{
-				int index = i * quad->size() + j * renderers[i]->GetMesh()->GetNumVertices();
-				Vector2D vertex = mvpMatrix * Vector2D(vertices[index], vertices[index + 1]);
-				vertices[index] = vertex.GetX();
-				vertices[index + 1] = vertex.GetY();
+				Vector2D pos = mvpMatrix * Vector2D(m_vertexArray[current], m_vertexArray[current + 1]);
+				// Vector2D pos = Vector2D(m_vertexArray[current], m_vertexArray[current + 1]);
+				m_vertexArray[current] = pos.GetX();
+				m_vertexArray[current + 1] = pos.GetY();
+				current += mesh->GetVertexSize();
 			}
 		}
 	}
 
-	void RenderDevice::ReserveVertexArray(std::vector<GLfloat>& vertexArray, const std::vector<Renderer*>& renderers)
+	void RenderDevice::ReserveVertexArray()
 	{
 		unsigned int vertexArraySize = 0;
-		for (unsigned int i = 0; i < renderers.size(); i++)
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			vertexArraySize += renderers[i]->GetMesh()->GetNumVertices();
+			vertexArraySize += m_renderers[i]->GetMesh()->GetNumVertices();
 		}
 
-		vertexArray.reserve(vertexArraySize);
+		m_vertexArray.reserve(vertexArraySize);
 	}
 
 	void RenderDevice::UpdateIndexArray()
@@ -126,10 +136,14 @@ namespace Video
 			GLushort valueOffset = 0;
 			for (unsigned int i = 0; i < m_renderers.size(); i++)
 			{
+				// reset value offet when switching batch
+				if (i == 0 || !m_renderers[i]->IsBatchEqualTo(m_renderers[i - 1]))
+					valueOffset = 0;
+
 				Mesh_v2* mesh = m_renderers[i]->GetMesh();
 				for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
 				{
-					GLushort value = mesh->GetIndices()->at(j) + valueOffset;
+					GLushort value = valueOffset + mesh->GetIndices()->at(j);
 					m_indexArray.insert(m_indexArray.begin() + totalNumIndices, value);
 					totalNumIndices++;
 				}
