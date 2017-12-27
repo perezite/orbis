@@ -10,12 +10,16 @@ using namespace Game;
 
 namespace Components
 {
-	const float NewSpriteRenderer::MIN_BLOCK_SCALE = 0.01f;
-	const float NewSpriteRenderer::MAX_BLOCK_SCALE = 0.05f;
+	const float NewSpriteRenderer::MIN_SCALE = 0.01f;
+	const float NewSpriteRenderer::MAX_SCALE = 0.05f;
 
-	NewSpriteRenderer::NewSpriteRenderer(Texture* texture) : Renderer()
+	NewSpriteRenderer::NewSpriteRenderer(Texture* texture) 
+		: Renderer(), m_texture(texture)
+	{}
+
+	void NewSpriteRenderer::Start()
 	{
-		GetMaterial()->SetTexture(texture);
+		GetMaterial()->SetTexture(m_texture);
 		GetMaterial()->SetShader(Shader::GetDiffuseShader());
 		SetMesh(Mesh::GetTexturedQuad());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
@@ -31,10 +35,10 @@ namespace Components
 		float deltaScale = m_isGrowing ? dt * 0.01f : dt * -0.01f;
 		GetParent()->GetTransform()->scale += Vector2D(deltaScale, deltaScale);
 
-		if (trans->scale.GetX() < MIN_BLOCK_SCALE)
+		if (trans->scale.GetX() < MIN_SCALE)
 			m_isGrowing = true;
 
-		if (trans->scale.GetX() > MAX_BLOCK_SCALE)
+		if (trans->scale.GetX() > MAX_SCALE)
 			m_isGrowing = false;
 	}
 }

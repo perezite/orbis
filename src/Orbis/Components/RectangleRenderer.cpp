@@ -2,34 +2,37 @@
 
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
-#include "../Video/Mesh.h"
-#include "../Game/Entity.h"
 using namespace Core;
 using namespace Video;
-using namespace Game;
-
-#include "../../Base/Math/MathHelper.h"
-#include "../../Base/System/Exception.h"
-using namespace Math;
-using namespace System;
-
-#include <math.h>
-#include <iostream>
 
 namespace Components
 {
+	const float RectangleRenderer::MIN_SCALE = 0.01f;
+	const float RectangleRenderer::MAX_SCALE = 0.05f;
+
 	void RectangleRenderer::Start()
 	{
-		m_material.SetShader(Shader::GetFlatShader());
-		m_material.HasColor(true);
-		m_mesh = Mesh::GetFlatQuad();
-		m_mesh->Initialize();
-		GetParent()->GetTransform()->transformSpace = TransformSpace::WorldSpace;
+		GetMaterial()->SetTexture(NULL);
+		GetMaterial()->SetShader(Shader::GetFlatShader());
+		GetMaterial()->SetColor(m_color);
+		SetMesh(Mesh::GetFlatQuad());
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
+
+		m_isGrowing = rand() % 2 == 0 ? true : false;
 	}
 
-	void RectangleRenderer::Render()
+	void RectangleRenderer::Update()
 	{
-		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render_old(GetParent()->GetTransform(), m_mesh, &m_material);
+		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		Transform* trans = GetParent()->GetTransform();
+
+		float deltaScale = m_isGrowing ? dt * 0.01f : dt * -0.01f;
+		GetParent()->GetTransform()->scale += Vector2D(deltaScale, deltaScale);
+
+		if (trans->scale.GetX() < MIN_SCALE)
+			m_isGrowing = true;
+
+		if (trans->scale.GetX() > MAX_SCALE)
+			m_isGrowing = false;
 	}
 }

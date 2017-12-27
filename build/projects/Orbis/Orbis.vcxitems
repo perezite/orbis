@@ -16,7 +16,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\LineRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewRectangleRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\RectangleRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SpriteRenderer.cpp" />
@@ -43,7 +42,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Camera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\LineRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewRectangleRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\RectangleRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Renderer.h" />

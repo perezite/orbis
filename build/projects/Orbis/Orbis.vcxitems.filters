@@ -93,9 +93,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewSpriteRenderer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewRectangleRenderer.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Material.cpp">
       <Filter>Video</Filter>
     </ClCompile>
@@ -186,9 +183,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewSpriteRenderer.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\NewRectangleRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

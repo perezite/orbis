@@ -32,7 +32,7 @@ namespace Video
 		// render batched
 		#ifdef ORBIS_DEBUG_RENDER_DEVICE
 			int count = 0;
-		#endif
+		#endif // ORBIS_DEBUG_RENDER_DEVICE 
 		unsigned int vaoStartIndex = 0;
 		unsigned int lastBatchBegin = 0;
 		for (unsigned int batchBegin = 0; batchBegin < m_renderers.size(); batchBegin++)
@@ -87,12 +87,12 @@ namespace Video
 
 			#ifdef ORBIS_DEBUG_RENDER_DEVICE
 				count++;
-			#endif ORBIS_DEBUG_RENDER_DEVICE
+			#endif // ORBIS_DEBUG_RENDER_DEVICE
 		}
 
 		#ifdef ORBIS_DEBUG_RENDER_DEVICE
 			std::cout << count << std::endl;
-		#endif ORBIS_DEBUG_RENDER_DEVICE
+		#endif // ORBIS_DEBUG_RENDER_DEVICE
 
 		// cleanup
 		glDisable(GL_BLEND);

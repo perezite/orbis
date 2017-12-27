@@ -10,12 +10,19 @@ namespace Components
 		// ctor
 		NewSpriteRenderer(Texture* texture);
 
+		// start
+		void Start();
+
 		// update
 		void Update();
+
 	private: 
 		bool m_isGrowing;
 
-		static const float MIN_BLOCK_SCALE;
-		static const float MAX_BLOCK_SCALE;
+		// the texture
+		Texture* m_texture;
+
+		static const float MIN_SCALE;
+		static const float MAX_SCALE;
 	};
 }

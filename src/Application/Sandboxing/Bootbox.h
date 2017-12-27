@@ -25,6 +25,8 @@ namespace Sandboxing
 
 		static void Init();
 
+		static void StartEntities();
+
 		static void InitEntities();
 
 		static void InitTextures();

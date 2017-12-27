@@ -9,7 +9,7 @@
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/Mesh.h"
 #include "../../Orbis/Components/NewSpriteRenderer.h"
-#include "../../Orbis/Components/NewRectangleRenderer.h"
+#include "../../Orbis/Components/RectangleRenderer.h"
 using namespace Math;
 using namespace Core;
 using namespace Video;
@@ -36,6 +36,7 @@ namespace Sandboxing
 		VideoManager* videoManager = VideoManager::GetInstance();
 		videoManager->Initialize();
 		Init();
+		StartEntities();
 
 		bool quit = false;
 		SDL_Event e;
@@ -70,6 +71,12 @@ namespace Sandboxing
 		InitTextures();
 		InitEntities();
 	}
+
+	void Bootbox::StartEntities()
+	{
+		for (unsigned int i = 0; i < m_entities.size(); i++)
+			m_entities[i]->Start();
+	}
 	
 	void Bootbox::InitEntities()
 	{
@@ -84,7 +91,7 @@ namespace Sandboxing
 			entity->SetTransform(trans);
 	
 			Texture* texture = hasTexture ? m_textures[rand() % m_textures.size()] : NULL; 
-			entity->AddComponent(hasTexture ? (Renderer*)new NewSpriteRenderer(texture) : (Renderer*)new NewRectangleRenderer());
+			entity->AddComponent(hasTexture ? (Renderer*)new NewSpriteRenderer(texture) : (Renderer*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
 
 			m_entities.push_back(entity);
 		}
