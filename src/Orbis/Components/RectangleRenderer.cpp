@@ -12,6 +12,8 @@ namespace Components
 
 	void RectangleRenderer::Start()
 	{
+		Renderer::Start();
+
 		GetMaterial()->SetTexture(NULL);
 		GetMaterial()->SetShader(Shader::GetFlatShader());
 		GetMaterial()->SetColor(m_color);
@@ -23,6 +25,8 @@ namespace Components
 
 	void RectangleRenderer::Update()
 	{
+		Renderer::Update();
+
 		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
 		Transform* trans = GetParent()->GetTransform();
 

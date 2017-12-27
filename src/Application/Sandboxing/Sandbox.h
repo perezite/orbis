@@ -1,5 +1,7 @@
 // #define __SANDBOX__
 
+#pragma once
+
 #include "../../Orbis/Libraries/GL.h"
 #include "../../Orbis/Libraries/SDL.h"
 

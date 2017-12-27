@@ -2,7 +2,7 @@ TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
 	- Bootbox als reguläres Level implementieren und austesten
 	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen
-		- Alle Funktionen mit _old bzw. TODO Kommentar weg-refactoren
+	- Alle Funktionen mit _old bzw. TODO Kommentar entfernen
 	- Depth-First Refactoring Strategie dokumentieren
 	- Branch zurückmergen auf master	
 	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 56 FPs auf dem Xperia (maximale FPS-Rate) 

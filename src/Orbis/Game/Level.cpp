@@ -73,6 +73,8 @@ namespace Game
 			m_entities[i]->Render();
 		}
 
+		videoManager->GetRenderDevice()->Render();
+
 		videoManager->SwapBuffers();
 	}
 

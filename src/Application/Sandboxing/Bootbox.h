@@ -1,6 +1,6 @@
-#pragma once
+// #define __SANDBOX__
 
-#define __SANDBOX__
+#pragma once
 
 #include "../../Orbis/Libraries/GL.h"
 #include "../../Orbis/Game/Entity.h"
@@ -43,3 +43,5 @@ namespace Sandboxing
 		static const float MAX_BLOCK_SCALE;
 	};
 }
+
+void Bootbox_Dummy();

@@ -10,31 +10,6 @@ using namespace Core;
 using namespace Game;
 using namespace Input;
 
-namespace
-{
-	// start time of current performance log measurement
-	long start;
-
-	// number of frames elapsed since last performance log update
-	long numFrames;
-
-	// the time manager
-	TimeManager* timeManager = TimeManager::GetInstance();
-
-	#if defined(ORBIS_LOG_PERFORMANCE)
-		inline void LogPerformance()
-		{
-			numFrames++;
-			if (timeManager->GetTicks() - start > 1000)
-			{
-				LogHelper::LogMessage("%f ms/frame", 1000.0 / double(numFrames));
-				start += 1000;
-				numFrames = 0;
-			}
-		}
-	#endif
-}
-
 namespace Orbis
 {
 	OrbisMain* OrbisMain::GetInstance()
@@ -53,8 +28,8 @@ namespace Orbis
 		LevelManager* levelManager = LevelManager::GetInstance();
 		InputManager* inputManager = InputManager::GetInstance();
 
-		start = timeManager->GetTicks();
-		numFrames = 0;
+		m_startTicks = TimeManager::GetInstance()->GetTicks();
+		m_numFrames = 0;
 
 		while (true)
 		{
@@ -69,4 +44,23 @@ namespace Orbis
 			#endif
 		}
 	}
+
+	void OrbisMain::LogPerformance()
+	{
+		m_numFrames++;
+		if (TimeManager::GetInstance()->GetTicks() - m_startTicks > 1000)
+		{
+			// track current performance
+			float currentPerformance = 1000.0f / float(m_numFrames);
+			LogHelper::LogMessage("%f ms/frame", currentPerformance);
+			m_startTicks += 1000;
+			m_numFrames = 0;
+
+			// track average performance
+			m_numSamples++;
+			m_cumulativePerformance += currentPerformance;
+			float average = m_cumulativePerformance / float(m_numSamples);
+			LogHelper::LogMessage("Average: %f ms/frame, samples: %d", average, m_numSamples);
+		}
+	}	
 }

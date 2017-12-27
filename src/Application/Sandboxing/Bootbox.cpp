@@ -129,4 +129,9 @@ namespace Sandboxing
 	}
 }
 
-#endif // __Bootbox__
+#endif // __SANDBOX__
+
+void Bootbox_Dummy()
+{
+
+}
