@@ -18,7 +18,7 @@ namespace Components
 		SetTexture(NULL);
 		SetShader(Shader::GetFlatShader());
 		SetMesh(Mesh_v2::GetTexturedQuad());
-		VideoManager::GetInstance()->AddRenderer(this);
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 
 		m_isGrowing = rand() % 2 == 0 ? true : false;
 	}
