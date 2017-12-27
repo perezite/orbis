@@ -1,5 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
+	- DebugLineRenderer implementieren und in Level3 austesten
 	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen
 	- Alle Funktionen mit _old bzw. TODO Kommentar entfernen
 	- Depth-First Refactoring Strategie dokumentieren

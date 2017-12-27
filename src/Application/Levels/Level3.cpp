@@ -1,9 +1,11 @@
 #include "Level3.h"
 
+#include "../Controllers/DebugLineTester.h"
+using namespace Controllers;
+
 #include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
-
 using namespace Video;
 
 #include "../../Base/Math/MathHelper.h"
@@ -19,6 +21,7 @@ namespace Levels
 
 	Level3::Level3()
 	{
+		// init textures
 		std::vector<Texture*> textures;
 		textures.push_back(new Texture("Textures/BlackBlock.png", true));
 		textures.push_back(new Texture("Textures/BlueBlock.png", true));
@@ -31,6 +34,7 @@ namespace Levels
 		textures.push_back(new Texture("Textures/VioletBlock.png", true));
 		textures.push_back(new Texture("Textures/YellowBlock.png", true));	
 
+		// init blocks
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
 			Entity* entity = new Entity();
@@ -46,5 +50,12 @@ namespace Levels
 
 			this->AddEntity(entity);
 		}
+
+		// init debug line tester
+		#ifdef _DEBUG
+			Entity* entity = new Entity();
+			entity->AddComponent(new DebugLineTester());
+			AddEntity(entity);
+		#endif
 	}
 }

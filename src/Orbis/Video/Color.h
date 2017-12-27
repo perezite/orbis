@@ -43,6 +43,9 @@ namespace Video
 		// white color
 		static const Color White;
 
+		// green color
+		static const Color Green;
+
 	private:
 		// red
 		float m_red;

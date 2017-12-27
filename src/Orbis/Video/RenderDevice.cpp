@@ -59,12 +59,12 @@ namespace Video
 			prototype->GetMaterial()->GetShader()->Use();
 			prototype->GetMaterial()->PrepareShaderVariables();
 
-			// set batch position attribute
+			// set batch position shader variable
 			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
 			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex]));
 
-			// set batch texture coordinate attribute
+			// set batch texture coordinate shader variable
 			if (prototype->GetMaterial()->GetTexture() != NULL)
 			{
 				int texCoordAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord");
@@ -98,9 +98,35 @@ namespace Video
 		glDisable(GL_BLEND);
 	}
 
+	void RenderDevice::DrawDebugLine(Vector2D start, Vector2D end, Color color)
+	{
+		// compute vertex array
+		Matrix3 camMatrix = Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix();
+		start = camMatrix * start;
+		end = camMatrix * end;
+		GLfloat vertexArray[4] = { start.GetX(), start.GetY(), end.GetX(), end.GetY() };
+
+		// prepare
+		glDisable(GL_BLEND);
+		glLineWidth(3);
+		Shader* shader = Shader::GetFlatShader();
+		shader->Use();
+		shader->SetUniform("u_vColor", color);
+		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");
+		glEnableVertexAttribArray(positionAttribLocation);
+		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
+
+		// draw
+		glDrawArrays(GL_LINES, 0, 2);
+
+		// cleanup
+		glDisableVertexAttribArray(positionAttribLocation);
+		shader->Unuse();
+	}
+
 	void RenderDevice::UpdateVertexArray()
 	{
-		Matrix3 vpMatrix = Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix();
+		Matrix3 camMatrix = Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix();
 
 		m_vertexArray.clear();
 		ReserveVertexArray();
@@ -111,7 +137,7 @@ namespace Video
 			Mesh* mesh = m_renderers[i]->GetMesh();
 			const std::vector<GLfloat>* mvd = mesh->GetVertexData();
 			Entity* entity = m_renderers[i]->GetParent();
-			Matrix3 mvpMatrix = vpMatrix * entity->GetTransform()->GetModelMatrix();
+			Matrix3 mvpMatrix = camMatrix * entity->GetTransform()->GetModelMatrix();
 
 			m_vertexArray.insert(m_vertexArray.end(), mvd->begin(), mvd->end());
 
@@ -119,7 +145,6 @@ namespace Video
 			for (unsigned int j = 0; j < mesh->GetNumVertices(); j++)
 			{
 				Vector2D pos = mvpMatrix * Vector2D(m_vertexArray[current], m_vertexArray[current + 1]);
-				// Vector2D pos = Vector2D(m_vertexArray[current], m_vertexArray[current + 1]);
 				m_vertexArray[current] = pos.GetX();
 				m_vertexArray[current + 1] = pos.GetY();
 				current += mesh->GetVertexSize();

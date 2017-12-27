@@ -45,6 +45,9 @@ namespace Video
 		// render
 		void Render();
 
+		// draw a debug line
+		void DrawDebugLine(Vector2D start, Vector2D end, Color color);
+
 	protected:
 		// update vertex array
 		void UpdateVertexArray();
