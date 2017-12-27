@@ -1,6 +1,7 @@
 #include "Level3.h"
 
 #include "../Controllers/DebugLineTester.h"
+#include "../Controllers/WobbleController.h"
 using namespace Controllers;
 
 #include "../../Orbis/Video/Texture.h"
@@ -41,12 +42,12 @@ namespace Levels
 			static int counter = 0;
 			bool hasTexture = ++counter % 2 == 0;
 
-			float scale = MIN_BLOCK_SCALE + (MAX_BLOCK_SCALE - MIN_BLOCK_SCALE) * MathHelper::GetRandom();
-			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D(scale, scale));
+			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D::One);
 			entity->SetTransform(trans);
 
 			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
 			entity->AddComponent(hasTexture ? (Renderer*)new SpriteRenderer(texture) : (Renderer*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
+			entity->AddComponent(new WobbleController());
 
 			this->AddEntity(entity);
 		}

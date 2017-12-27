@@ -17,9 +17,6 @@ namespace Components
 		// start
 		void Start();
 
-		// update
-		void Update();
-
 		// set the texture
 		// TODO: remove after refactoring
 		void SetTexture(Texture* texture) { }
@@ -29,14 +26,7 @@ namespace Components
 		Texture* GetTexture(void) const { return NULL; }
 
 	private:
-		// TODO: remove after refactoring
-		bool m_isGrowing;
-
 		// the texture
 		Texture* m_texture;
-
-		// TODO: remove after refactoring
-		static const float MIN_SCALE;
-		static const float MAX_SCALE;
 	};
 }
