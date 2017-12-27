@@ -36,7 +36,7 @@ namespace Video
 			unsigned int batchEnd = batchBegin;
 			for (unsigned int j = batchBegin; j < m_renderers.size(); j++)
 			{
-				if (!m_renderers[batchBegin]->IsBatchEqualTo(m_renderers[j]))
+				if (!m_renderers[batchBegin]->GetMaterial()->IsBatchEqualTo(m_renderers[j]->GetMaterial()))
 					break;
 				batchEnd = j;
 			}
@@ -46,23 +46,23 @@ namespace Video
 				vaoStartIndex += m_renderers[i]->GetMesh()->GetVertexData()->size();
 
 			// set batch texture
-			const Renderer* prototype = m_renderers[batchBegin];
-			if (prototype->GetTexture() != NULL)
-				prototype->GetTexture()->Bind();
+			Renderer* prototype = m_renderers[batchBegin];
+			if (prototype->GetMaterial()->GetTexture() != NULL)
+				prototype->GetMaterial()->GetTexture()->Bind();
 
 			// set batch shader
-			prototype->GetShader()->Use();
-			prototype->GetShader()->SetUniform("u_sSampler", 0);
+			prototype->GetMaterial()->GetShader()->Use();
+			prototype->GetMaterial()->GetShader()->SetUniform("u_sSampler", 0);
 
 			// set batch position attribute
-			int positionAttribLocation = prototype->GetShader()->GetAttributeLocation("a_vPosition");
+			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
 			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex]));
 
 			// set batch texture coordinate attribute
-			if (prototype->GetTexture() != NULL)
+			if (prototype->GetMaterial()->GetTexture() != NULL)
 			{
-				int texCoordAttribLocation = prototype->GetShader()->GetAttributeLocation("a_vTexCoord");
+				int texCoordAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord");
 				glEnableVertexAttribArray(texCoordAttribLocation);
 				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex + 2]));
 			}
@@ -72,9 +72,9 @@ namespace Video
 			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * numIndices, GL_UNSIGNED_SHORT, &m_indexArray[batchBegin * numIndices]);
 
 			// cleanup batch
-			prototype->GetShader()->Unuse();
-			if (prototype->GetTexture() != NULL)
-				glDisableVertexAttribArray(prototype->GetShader()->GetAttributeLocation("a_vTexCoord"));
+			prototype->GetMaterial()->GetShader()->Unuse();
+			if (prototype->GetMaterial()->GetTexture() != NULL)
+				glDisableVertexAttribArray(prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord"));
 			glDisableVertexAttribArray(positionAttribLocation);
 
 			lastBatchBegin = batchBegin;
@@ -137,7 +137,7 @@ namespace Video
 			for (unsigned int i = 0; i < m_renderers.size(); i++)
 			{
 				// reset value offet when switching batch
-				if (i == 0 || !m_renderers[i]->IsBatchEqualTo(m_renderers[i - 1]))
+				if (i == 0 || !m_renderers[i]->GetMaterial()->IsBatchEqualTo(m_renderers[i - 1]->GetMaterial()))
 					valueOffset = 0;
 
 				Mesh* mesh = m_renderers[i]->GetMesh();
@@ -168,7 +168,7 @@ namespace Video
 	{
 		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			if (renderer->IsBatchEqualTo(m_renderers[i]))
+			if (renderer->GetMaterial()->IsBatchEqualTo(m_renderers[i]->GetMaterial()))
 				return i;
 		}
 

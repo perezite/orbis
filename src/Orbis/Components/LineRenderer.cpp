@@ -15,7 +15,7 @@ namespace Components
 	{
 		m_material.SetShader(Shader::GetFlatShader());
 		m_material.SetColor(Color(1.0f, 0.0, 0.0f));
-		m_material.SetIsColorUsed(true);
+		m_material.HasColor(true);
 		m_mesh = Mesh::GetLineMesh();
 		m_mesh->Initialize();
 	}

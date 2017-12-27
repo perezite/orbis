@@ -21,7 +21,7 @@ namespace Components
 	void RectangleRenderer::Start()
 	{
 		m_material.SetShader(Shader::GetFlatShader());
-		m_material.SetIsColorUsed(true);
+		m_material.HasColor(true);
 		m_mesh = Mesh::GetFlatQuad();
 		m_mesh->Initialize();
 		GetParent()->GetTransform()->transformSpace = TransformSpace::WorldSpace;

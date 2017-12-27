@@ -15,8 +15,8 @@ namespace Components
 
 	NewSpriteRenderer::NewSpriteRenderer(Texture* texture) : Renderer()
 	{
-		SetTexture(texture);
-		SetShader(Shader::GetDiffuseShader());
+		GetMaterial()->SetTexture(texture);
+		GetMaterial()->SetShader(Shader::GetDiffuseShader());
 		SetMesh(Mesh::GetTexturedQuad());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 

@@ -25,4 +25,9 @@ namespace Math
 	{
 		return (float)rand() / (RAND_MAX);
 	}
+
+	float MathHelper::Approx(float val1, float val2, float eps)
+	{
+		return fabs(val1 - val2) < eps;
+	}
 }

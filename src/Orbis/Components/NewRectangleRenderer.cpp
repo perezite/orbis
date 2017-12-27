@@ -8,6 +8,9 @@ using namespace Core;
 using namespace Game;
 using namespace Video;
 
+#include "../../Base/Math/MathHelper.h"
+using namespace Math;
+
 namespace Components
 {
 	const float NewRectangleRenderer::MIN_BLOCK_SCALE = 0.01f;
@@ -15,8 +18,8 @@ namespace Components
 
 	NewRectangleRenderer::NewRectangleRenderer() : Renderer()
 	{
-		SetTexture(NULL);
-		SetShader(Shader::GetFlatShader());
+		GetMaterial()->SetTexture(NULL);
+		GetMaterial()->SetShader(Shader::GetFlatShader());
 		SetMesh(Mesh::GetFlatQuad());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 

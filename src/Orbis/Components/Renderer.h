@@ -2,8 +2,7 @@
 
 #include "Component.h"
 
-#include "../Video/Shader.h"
-#include "../Video/Texture.h"
+#include "../Video/Material.h"
 #include "../Video/Mesh.h"
 using namespace Video;
 
@@ -15,36 +14,18 @@ namespace Components
 	class Renderer : public Component
 	{
 	public:
-		// ctor
-		Renderer();
-
-		// get the shader
-		Shader* GetShader() const { return m_shader; }
-
-		// get the texture
-		Texture* GetTexture() const { return m_texture; }
-
 		// get the mesh
 		Mesh* GetMesh() const { return m_mesh; }
-
-		// set the shader
-		void SetShader(Shader* shader) { m_shader = shader; }
-
-		// set the texture
-		void SetTexture(Texture* texture) { m_texture = texture; }
 
 		// set the mesh
 		void SetMesh(Mesh* mesh) { m_mesh = mesh; }
 
-		// check if renderer belongs to same batch as given renderer
-		bool IsBatchEqualTo(Renderer* const other) const;
+		// get the material
+		Material* GetMaterial() { return &m_material; }
 
 	private: 
-		// the shader
-		Shader* m_shader;
-
-		// the texture
-		Texture* m_texture;
+		// the material
+		Material m_material;
 
 		// the mesh
 		Mesh* m_mesh;
