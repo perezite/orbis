@@ -78,15 +78,13 @@ namespace Video
 {
 	Shader* Shader::GetDiffuseShader()
 	{
-		// TODO: use the original shader after refactoring
-		static Shader diffuseShader("Shaders/Diffuse_v2.vs", "Shaders/Diffuse_v2.frag");
+		static Shader diffuseShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
 		return &diffuseShader;
 	}
 
 	Shader* Shader::GetFlatShader()
 	{
-		// TODO: use the original shader after refactoring
-		static Shader flatShader("Shaders/Flat_v2.vs", "Shaders/Flat_v2.frag");
+		static Shader flatShader("Shaders/Flat.vs", "Shaders/Flat.frag");
 		return &flatShader;
 	}
 

@@ -1,6 +1,5 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Facadenobjekte entfernen: NewRectangleRenderer, NewSpriteRenderer, Diffuse_v2, Flat_v2
 	- Glushort in GLuint umwandeln
 	- Bootbox als reguläres Level implementieren und austesten
 	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen
