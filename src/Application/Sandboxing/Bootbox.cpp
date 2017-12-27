@@ -7,7 +7,7 @@
 #include "../../Base/Math/MathHelper.h"
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Video/VideoManager.h"
-#include "../../Orbis/Video/Mesh_v2.h"
+#include "../../Orbis/Video/Mesh.h"
 #include "../../Orbis/Components/NewSpriteRenderer.h"
 #include "../../Orbis/Components/NewRectangleRenderer.h"
 using namespace Math;

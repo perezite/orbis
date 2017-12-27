@@ -1,6 +1,6 @@
 #include "RenderDevice.h"
 
-#include "Mesh_v2.h"
+#include "Mesh.h"
 #include "Shader.h"
 #include "VideoManager.h"
 
@@ -95,7 +95,7 @@ namespace Video
 		unsigned int current = 0;
 		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			Mesh_v2* mesh = m_renderers[i]->GetMesh();
+			Mesh* mesh = m_renderers[i]->GetMesh();
 			const std::vector<GLfloat>* mvd = mesh->GetVertexData();
 			Entity* entity = m_renderers[i]->GetParent();
 			Matrix3 mvpMatrix = vpMatrix * entity->GetTransform()->GetModelMatrix();
@@ -140,7 +140,7 @@ namespace Video
 				if (i == 0 || !m_renderers[i]->IsBatchEqualTo(m_renderers[i - 1]))
 					valueOffset = 0;
 
-				Mesh_v2* mesh = m_renderers[i]->GetMesh();
+				Mesh* mesh = m_renderers[i]->GetMesh();
 				for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
 				{
 					GLushort value = valueOffset + mesh->GetIndices()->at(j);

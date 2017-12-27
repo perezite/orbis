@@ -22,58 +22,80 @@ namespace Video
 		static Mesh* GetFlatQuad();
 
 		// get a static line mesh
-		static Mesh* GetLineMesh();
+		static Mesh* GetLineMesh() { return NULL; }
 
 	public:
 		// ctor
+		// TODO: Remove after refactoring
 		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices, RenderMode renderMode = RenderMode::Triangles)
-			: m_vertices(vertices), m_texCoords(texCoords), m_indices(indices), m_renderMode(renderMode), m_isInitialized(false)
 		{}
 
+		// ctor
+		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLushort> indices)
+			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices)
+		{}
+
+
 		// get vertices
-		std::vector<Vector2D> GetVertices() const { return m_vertices; }
+		// TODO: Remove after refactoring
+		std::vector<Vector2D> GetVertices() const { return std::vector<Vector2D>(); }
 
 		// get tex corodinates
-		std::vector<Vector2D> GetTexCoords() const { return m_texCoords; }
+		// TODO: Remove after refactoring
+		std::vector<Vector2D> GetTexCoords() const { return std::vector<Vector2D>(); }
 
 		// get indices
-		std::vector<int> GetIndices() const { return m_indices; }
+		// TODO: Remove after refactoring
+		std::vector<int> GetIndices_old() const { return std::vector<int>(); }
 
 		// get render mode
-		RenderMode GetRenderMode() const { return m_renderMode; }
+		// TODO: remove after refactoring
+		RenderMode GetRenderMode() const { return RenderMode::Triangles; }
 
 		// get vertex buffer length required to store the mesh's vertex data
-		int GetVertexBufferLength();
+		// TODO: remove after refactoring
+		int GetVertexBufferLength() { return 42; }
 
 		// get index buffer length required to store the mesh's vertex data
-		int GetIndexBufferLength();
-
+		// TODO: remove after refactoring
+		int GetIndexBufferLength() { return 42; }
+		
 		// fills a preallocated buffer with the mesh's vertex data
-		void FillVertexBuffer(float* const buffer);
+		// TODO: remove after refactoring
+		void FillVertexBuffer(float* const buffer) { }
 
 		// fills a preallocated buffer with the mesh's index data
-		void FillIndexBuffer(int* const buffer);
+		// TODO: remove after refactoring
+		void FillIndexBuffer(int* const buffer) { }
 
 		// get the mesh's vertex stride
-		int GetVertexStride();
+		// TODO: remove after refactoring
+		int GetVertexStride() { return 42; };
 
 		// initialize the mesh. Must be called before rendering
-		void Initialize();
+		// TODO: remove after refactoring
+		void Initialize() { };
+
+		// get vertexData
+		const std::vector<GLfloat>* GetVertexData() const { return &m_vertexData; }
+
+		// get num vertices
+		unsigned int GetNumVertices() const { return m_vertexData.size() / m_vertexSize; }
+
+		// get vertex size
+		unsigned int GetVertexSize() const { return m_vertexSize; }
+
+		// get indices
+		const std::vector<GLushort>* GetIndices() const { return &m_indices; }
 
 	private:
-		// the vertex coordinates
-		std::vector<Vector2D> m_vertices;
+		// vertex data
+		std::vector<GLfloat> m_vertexData;
 
-		// the texture coordinates
-		std::vector<Vector2D> m_texCoords;
+		// size (number of elements) per vertex
+		unsigned int m_vertexSize;
 
-		// the vertex indices
-		std::vector<int> m_indices;
-
-		// the render mode
-		RenderMode m_renderMode;
-
-		// is the mesh initialized
-		bool m_isInitialized;
+		// indices
+		std::vector<GLushort> m_indices;
 	};
 }

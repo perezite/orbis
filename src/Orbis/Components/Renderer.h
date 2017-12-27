@@ -4,7 +4,7 @@
 
 #include "../Video/Shader.h"
 #include "../Video/Texture.h"
-#include "../Video/Mesh_v2.h"
+#include "../Video/Mesh.h"
 using namespace Video;
 
 #include <iostream>
@@ -25,7 +25,7 @@ namespace Components
 		Texture* GetTexture() const { return m_texture; }
 
 		// get the mesh
-		Mesh_v2* GetMesh() const { return m_mesh; }
+		Mesh* GetMesh() const { return m_mesh; }
 
 		// set the shader
 		void SetShader(Shader* shader) { m_shader = shader; }
@@ -34,7 +34,7 @@ namespace Components
 		void SetTexture(Texture* texture) { m_texture = texture; }
 
 		// set the mesh
-		void SetMesh(Mesh_v2* mesh) { m_mesh = mesh; }
+		void SetMesh(Mesh* mesh) { m_mesh = mesh; }
 
 		// check if renderer belongs to same batch as given renderer
 		bool IsBatchEqualTo(Renderer* const other) const;
@@ -47,6 +47,6 @@ namespace Components
 		Texture* m_texture;
 
 		// the mesh
-		Mesh_v2* m_mesh;
+		Mesh* m_mesh;
 	};
 }
