@@ -7,6 +7,8 @@
 #include "../Components/Camera.h"
 using namespace Components;
 
+#define ORBIS_DEBUG_RENDER_DEVICE
+
 namespace Video
 {
 	void RenderDevice::AddRenderer(Renderer* renderer)
@@ -28,6 +30,9 @@ namespace Video
 		UpdateVertexArray();
 
 		// render batched
+		#ifdef ORBIS_DEBUG_RENDER_DEVICE
+			int count = 0;
+		#endif
 		unsigned int vaoStartIndex = 0;
 		unsigned int lastBatchBegin = 0;
 		for (unsigned int batchBegin = 0; batchBegin < m_renderers.size(); batchBegin++)
@@ -52,7 +57,7 @@ namespace Video
 
 			// set batch shader
 			prototype->GetMaterial()->GetShader()->Use();
-			prototype->GetMaterial()->GetShader()->SetUniform("u_sSampler", 0);
+			prototype->GetMaterial()->PrepareShaderVariables();
 
 			// set batch position attribute
 			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
@@ -79,7 +84,15 @@ namespace Video
 
 			lastBatchBegin = batchBegin;
 			batchBegin = batchEnd;
+
+			#ifdef ORBIS_DEBUG_RENDER_DEVICE
+				count++;
+			#endif ORBIS_DEBUG_RENDER_DEVICE
 		}
+
+		#ifdef ORBIS_DEBUG_RENDER_DEVICE
+			std::cout << count << std::endl;
+		#endif ORBIS_DEBUG_RENDER_DEVICE
 
 		// cleanup
 		glDisable(GL_BLEND);

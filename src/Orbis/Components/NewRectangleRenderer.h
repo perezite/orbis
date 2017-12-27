@@ -16,9 +16,6 @@ namespace Components
 	private:
 		bool m_isGrowing;
 
-		// the flat color
-		Color m_color;
-
 		static const float MIN_BLOCK_SCALE;
 		static const float MAX_BLOCK_SCALE;
 	};

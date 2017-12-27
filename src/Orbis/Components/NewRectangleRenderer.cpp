@@ -20,6 +20,7 @@ namespace Components
 	{
 		GetMaterial()->SetTexture(NULL);
 		GetMaterial()->SetShader(Shader::GetFlatShader());
+		GetMaterial()->SetColor(Color(1.0f, 0.0f, 0.0f));
 		SetMesh(Mesh::GetFlatQuad());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 

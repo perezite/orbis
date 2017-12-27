@@ -25,7 +25,7 @@ namespace Video
 		Shader* GetShader() const { return m_shader; }
 
 		// set color
-		void SetColor(const Color& color) { m_color = color; }
+		void SetColor(const Color& color) { m_hasColor = true; m_color = color; }
 
 		// get color
 		Color& GetColor() { return m_color; }
@@ -38,6 +38,9 @@ namespace Video
 
 		// can the materials be batched
 		bool IsBatchEqualTo(Material* const other) const;
+
+		// set the variables of the shader according to the shader properties
+		void PrepareShaderVariables();
 
 	private:
 		// the texture

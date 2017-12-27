@@ -24,4 +24,15 @@ namespace Video
 
 		return areTexturesBatchEqual && areShadersBatchEqual && areColorsBatchEqual;
 	}
+
+	void Material::PrepareShaderVariables()
+	{
+		// note: vertex and tex coord data is set directly in the render device
+		if (m_texture != NULL)
+			m_shader->SetUniform("u_sSampler", 0);
+
+		if (m_hasColor)
+			m_shader->SetUniform("u_vColor", m_color);
+			
+	}
 }
