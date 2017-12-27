@@ -8,7 +8,7 @@
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/Mesh.h"
-#include "../../Orbis/Components/NewSpriteRenderer.h"
+#include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
 using namespace Math;
 using namespace Core;
@@ -91,7 +91,7 @@ namespace Sandboxing
 			entity->SetTransform(trans);
 	
 			Texture* texture = hasTexture ? m_textures[rand() % m_textures.size()] : NULL; 
-			entity->AddComponent(hasTexture ? (Renderer*)new NewSpriteRenderer(texture) : (Renderer*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
+			entity->AddComponent(hasTexture ? (Renderer*)new SpriteRenderer(texture) : (Renderer*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
 
 			m_entities.push_back(entity);
 		}

@@ -1,41 +1,42 @@
 #pragma once
 
-#include "Component.h"
+#include "Renderer.h"
 
-#include "../Video/Material.h"
-#include "../Video/Mesh.h"
+#include "../Video/Texture.h"
 using namespace Video;
-
-#include "../../Orbis/Game/Entity.h"
-#include "../../Orbis/Game/TransformSpace.h"
-using namespace Game;
 
 namespace Components
 {
 	// A renderer which renders a textured quad
-	class SpriteRenderer : public Component
+	class SpriteRenderer : public Renderer
 	{
 	public:
 		// ctor
-		SpriteRenderer(Texture* texture) { m_material.SetTexture(texture);}
+		SpriteRenderer(Texture* texture);
 
-		// update
+		// start
 		void Start();
 
-		// render
-		void Render();
+		// update
+		void Update();
 
 		// set the texture
-		void SetTexture(Texture* texture) { m_material.SetTexture(texture); }
+		// TODO: remove after refactoring
+		void SetTexture(Texture* texture) { }
 
 		// get the texture
-		Texture* GetTexture(void) const { return m_material.GetTexture(); }
+		// TODO: remove after refactoring
+		Texture* GetTexture(void) const { return NULL; }
 
 	private:
-		// the material
-		Material m_material;
+		// TODO: remove after refactoring
+		bool m_isGrowing;
 
-		// the mesh
-		Mesh* m_mesh;
+		// the texture
+		Texture* m_texture;
+
+		// TODO: remove after refactoring
+		static const float MIN_SCALE;
+		static const float MAX_SCALE;
 	};
 }

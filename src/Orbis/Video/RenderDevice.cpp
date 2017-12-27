@@ -7,7 +7,7 @@
 #include "../Components/Camera.h"
 using namespace Components;
 
-#define ORBIS_DEBUG_RENDER_DEVICE
+// #define ORBIS_DEBUG_RENDER_DEVICE
 
 namespace Video
 {
