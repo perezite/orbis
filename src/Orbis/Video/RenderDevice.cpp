@@ -74,7 +74,7 @@ namespace Video
 
 			// draw batched
 			unsigned int numIndices = prototype->GetMesh()->GetIndices()->size();
-			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * numIndices, GL_UNSIGNED_SHORT, &m_indexArray[batchBegin * numIndices]);
+			glDrawElements(GL_TRIANGLES, (batchEnd - batchBegin + 1) * numIndices, GL_UNSIGNED_INT, &m_indexArray[batchBegin * numIndices]);
 
 			// cleanup batch
 			prototype->GetMaterial()->GetShader()->Unuse();
@@ -146,7 +146,7 @@ namespace Video
 			ReserveIndexArray();
 
 			unsigned int totalNumIndices = 0;
-			GLushort valueOffset = 0;
+			GLuint valueOffset = 0;
 			for (unsigned int i = 0; i < m_renderers.size(); i++)
 			{
 				// reset value offet when switching batch
@@ -156,7 +156,7 @@ namespace Video
 				Mesh* mesh = m_renderers[i]->GetMesh();
 				for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
 				{
-					GLushort value = valueOffset + mesh->GetIndices()->at(j);
+					GLuint value = valueOffset + mesh->GetIndices()->at(j);
 					m_indexArray.insert(m_indexArray.begin() + totalNumIndices, value);
 					totalNumIndices++;
 				}

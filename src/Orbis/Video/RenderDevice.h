@@ -66,7 +66,7 @@ namespace Video
 		std::vector<GLfloat> m_vertexArray;
 
 		// the index array
-		std::vector<GLushort> m_indexArray;
+		std::vector<GLuint> m_indexArray;
 
 		// is the index array in dirty state
 		bool m_isIndexArrayDirty;

@@ -1,6 +1,5 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Glushort in GLuint umwandeln
 	- Bootbox als reguläres Level implementieren und austesten
 	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen
 		- Alle Funktionen mit _old bzw. TODO Kommentar weg-refactoren

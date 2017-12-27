@@ -31,7 +31,7 @@ namespace Video
 		{}
 
 		// ctor
-		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLushort> indices)
+		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLuint> indices)
 			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices)
 		{}
 
@@ -86,7 +86,7 @@ namespace Video
 		unsigned int GetVertexSize() const { return m_vertexSize; }
 
 		// get indices
-		const std::vector<GLushort>* GetIndices() const { return &m_indices; }
+		const std::vector<GLuint>* GetIndices() const { return &m_indices; }
 
 	private:
 		// vertex data
@@ -96,6 +96,6 @@ namespace Video
 		unsigned int m_vertexSize;
 
 		// indices
-		std::vector<GLushort> m_indices;
+		std::vector<GLuint> m_indices;
 	};
 }
