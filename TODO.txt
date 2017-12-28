@@ -1,15 +1,4 @@
 TODO:
-- Analysieren, welche Klassen zu Structs gemacht werden können und diese umwandeln
-- Gegebenenfalls Performance-Analyse durchführen
-	- Level mit 10 Blocks befüllen
-	- Performance-Analyse mit Funktions-Switching
-	- Stopwatch-Klasse schreiben
-	- Performance-Bottleneck mittels Stopwatch Timing isolieren
-	- Falls das auch nicht hilft: Sandbox schreiben 
-		- Freies ausprobieren:
-			- Rendering gemäss Buch auf Amazon (mit VAO's)
-			- Rendering gemäss http://androidblog.reindustries.com/a-real-opengl-es-2-0-2d-tutorial-part-7-texture-atlas/ (auch mit VAO's)
-			- Andere Ideen
 - Texture Atlas implementieren
 	- Mesh Offsets etc. buffern (siehe RenderDevice::Render)
 	- Beide Shader gleichschalten, so dass sie die gleichen Uniforms verwenden (selbst wenn diese nicht verwendet werden)
