@@ -15,7 +15,7 @@ using namespace System;
 
 namespace Video
 {
-	const Vector2D VideoManager::m_DefaultWindowResolution(400.0f, 711.0f);
+	const Vector2D VideoManager::DESKTOP_DEFAULT_RESOLUTION(400, 711);
 
 	VideoManager* VideoManager::GetInstance()
 	{
@@ -23,15 +23,24 @@ namespace Video
 		return &instance;
 	}
 
-	VideoManager::VideoManager() 
+	VideoManager::VideoManager()
 	{
 		Initialize();
 	}
 
 	VideoManager::~VideoManager()
 	{
-		SDL_DestroyWindow(m_sdlWindow);
-		SDL_Quit();
+		Shutdown();
+	}
+
+	void VideoManager::SetResolution(Vector2D resolution)
+	{
+		if (EnvironmentHelper::IsMobile())
+			return;
+
+		m_windowResolution = resolution;
+		Shutdown();
+		Initialize(false);
 	}
 
 	void VideoManager::ClearScreen()
@@ -45,13 +54,20 @@ namespace Video
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
-	void VideoManager::Initialize()
+	void VideoManager::Shutdown()
 	{
-		if (m_IsInitialized)
+		SDL_DestroyWindow(m_sdlWindow);
+		SDL_Quit();
+		m_isInitialized = false;
+	}
+
+	void VideoManager::Initialize(bool useDefaultResolution)
+	{
+		if (m_isInitialized)
 			return;
 
 		SDL_Init(SDL_INIT_VIDEO);
-		m_windowResolution = GetDefaultWindowResolution();
+		m_windowResolution = useDefaultResolution ? GetDefaultWindowResolution() : m_windowResolution;
 
 #ifdef WIN32	
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -78,7 +94,7 @@ namespace Video
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 
-		m_IsInitialized = true;
+		m_isInitialized = true;
 	}
 
 	Vector2D VideoManager::GetDefaultWindowResolution()
@@ -90,6 +106,6 @@ namespace Video
 			return Vector2D((float)mode.w, (float)mode.h);
 		}
 
-		else return m_DefaultWindowResolution;
+		else return DESKTOP_DEFAULT_RESOLUTION;
 	}
 }

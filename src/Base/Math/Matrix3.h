@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector2D.h"
+#include "Rect.h"
 
 namespace Math
 {
@@ -39,6 +40,9 @@ namespace Math
 
 		// multiply with vector
 		Vector2D operator*(const Vector2D& vec) const;
+
+		// multiply with rect
+		Rect operator*(const Rect& rect) const;
 
 	protected:
 		// get value at given row/column

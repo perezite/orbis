@@ -114,9 +114,11 @@ namespace Video
 		end = camMatrix * end;
 		GLfloat vertexArray[4] = { start.x, start.y, end.x, end.y };
 
-		// prepare
-		glDisable(GL_BLEND);
 		glLineWidth(3);
+		DrawDebugPrimitive(vertexArray, 4, color, RenderMode::Lines);
+
+		/*// prepare
+		glDisable(GL_BLEND);
 		Shader* shader = Shader::GetFlatShader();
 		shader->Use();
 		shader->SetUniform("u_vColor", color);
@@ -125,11 +127,41 @@ namespace Video
 		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
 
 		// draw
-		glDrawArrays(GL_LINES, 0, 2);
+		glDrawArrays(RenderMode::Lines, 0, 2);
 
 		// cleanup
 		glDisableVertexAttribArray(positionAttribLocation);
-		shader->Unuse();
+		shader->Unuse();*/
+	}
+
+	void RenderDevice::DrawDebugRect(Rect rect, Color color)
+	{
+		// compute vertex array
+		Matrix3 camMatrix = Camera::GetInstance()->CalcCamMatrix();
+		rect = camMatrix * rect;
+		GLfloat vertexArray[12] = { 
+			rect.leftBottom.x , rect.leftBottom.y, rect.GetRightBottom().x, rect.GetRightBottom().y, rect.GetLeftTop().x, rect.GetLeftTop().y,
+			rect.GetRightBottom().x, rect.GetRightBottom().y, rect.rightTop.x, rect.rightTop.y, rect.GetLeftTop().x, rect.GetLeftTop().y
+		};
+
+		DrawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
+
+		/*
+		// prepare
+		glDisable(GL_BLEND);
+		Shader* shader = Shader::GetFlatShader();
+		shader->Use();
+		shader->SetUniform("u_vColor", color);
+		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");
+		glEnableVertexAttribArray(positionAttribLocation);
+		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
+
+		// draw
+		glDrawArrays(RenderMode::Triangles, 0, 6);
+
+		// cleanup
+		glDisableVertexAttribArray(positionAttribLocation);
+		shader->Unuse();*/
 	}
 
 	void RenderDevice::UpdateVertexArray()
@@ -221,6 +253,25 @@ namespace Video
 		}
 
 		return m_renderers.size();
+	}
+
+	void RenderDevice::DrawDebugPrimitive(GLfloat * vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode)
+	{
+		// prepare
+		glDisable(GL_BLEND);
+		Shader* shader = Shader::GetFlatShader();
+		shader->Use();
+		shader->SetUniform("u_vColor", color);
+		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");
+		glEnableVertexAttribArray(positionAttribLocation);
+		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
+
+		// draw
+		glDrawArrays(renderMode, 0, vertexArraySize / 2);
+
+		// cleanup
+		glDisableVertexAttribArray(positionAttribLocation);
+		shader->Unuse();
 	}
 
 }

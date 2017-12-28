@@ -13,6 +13,7 @@ using namespace Game;
 using namespace Components;
 
 #include "../../Base/Math/Vector2D.h"
+#include "../../Base/Math/Rect.h"
 using namespace Math;
 
 #include <vector>
@@ -36,8 +37,11 @@ namespace Video
 		// render
 		void Render();
 
-		// draw a debug line
+		// draw a debug line (slow!)
 		void DrawDebugLine(Vector2D start, Vector2D end, Color color);
+
+		// draw a debug rect (slow!)
+		void DrawDebugRect(Rect rect, Color color);
 
 	protected:
 		// update vertex array
@@ -54,6 +58,9 @@ namespace Video
 
 		// find index of first renderer in render batch
 		int FindFirstIndexInBatch(Renderer* renderer);
+
+		// draw a debug primitve
+		void DrawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
 
 	private:
 		// the vertex array

@@ -82,4 +82,9 @@ namespace Math
 		float y = this->GetValue(1, 0) * vec.x + this->GetValue(1, 1) * vec.y + this->GetValue(1, 2);
 		return Vector2D(x, y);
 	}
+
+	Rect Matrix3::operator*(const Rect & rect) const
+	{
+		return Rect(*this * rect.leftBottom, *this * rect.rightTop);
+	}
 }

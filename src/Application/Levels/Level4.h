@@ -5,9 +5,9 @@ using namespace Game;
 
 namespace Levels
 {
-	class Level2 : public Level
+	class Level4 : public Level
 	{
 	public:
-		Level2();
+		Level4();
 	};
 }

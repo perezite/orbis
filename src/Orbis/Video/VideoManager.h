@@ -18,13 +18,16 @@ namespace Video
 		static VideoManager* GetInstance();
 
 		// initialize
-		void Initialize();
+		void Initialize(bool useDefaultResolution = true);
 
 		// destructor
 		virtual ~VideoManager();
 
 		// get the resolution
 		Vector2D GetResolution() { return m_windowResolution; }
+
+		// change the window resultion
+		void SetResolution(Vector2D resolution);
 
 		// get the render device
 		RenderDevice* GetRenderDevice() { return &m_renderDevice; }
@@ -35,12 +38,18 @@ namespace Video
 		// swap the video buffers
 		void SwapBuffers();
 
+		// shutdown video
+		void Shutdown();
+
 	protected:
 		// singleton constructor
 		VideoManager();
 
 		// get the default window resolution
 		Vector2D GetDefaultWindowResolution();
+
+		// initialize SDL video subsystem
+		void InitSDL();
 	private:
 		// the sdl window
 		SDL_Window* m_sdlWindow;
@@ -54,11 +63,11 @@ namespace Video
 		// the window resolution
 		Vector2D m_windowResolution;
 
-		// the default window resolution
-		static const Vector2D m_DefaultWindowResolution;
-
 		// is the manager initialized
-		bool m_IsInitialized;
+		bool m_isInitialized;
+
+		// the default window resolution
+		static const Vector2D DESKTOP_DEFAULT_RESOLUTION;
 	};
 }
 
