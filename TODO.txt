@@ -1,6 +1,5 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Depth-First Refactoring Strategie dokumentieren
 	- Branch zurückmergen auf master	
 	-- Das Ziel ist: Rendern von 1000 Sprites auf dem Bildschirm. Die Sprites teilen sich auf in 10 Batches. Die Framerate liegt bei ca. 56 FPs auf dem Xperia (maximale FPS-Rate) 
 	-- Code-Inspiration: C:\Users\simon_000\Google Drive\docs\Indie\Bildung\Code Android NDK Beginners Guide Second Edition\Chapter 6\DroidBlaster -> DroidBlaster, GraphicsManager, SpriteBAtch, Sprite
