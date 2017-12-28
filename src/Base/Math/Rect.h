@@ -27,7 +27,14 @@ namespace Math
 		// get the right bottom corner
 		Vector2D GetRightBottom() const { return Vector2D(rightTop.x, leftBottom.y); }
 
+		// get the width of the rect
+		float GetWidth() const { return rightTop.x - leftBottom.x; }
 
+		// get the height of the rect
+		float GetHeight() const { return rightTop.y - leftBottom.y; }
+
+		// get the area
+		float GetArea() const { return GetWidth() * GetHeight(); }
 	public:
 		// the left bottom corner
 		Vector2D leftBottom;

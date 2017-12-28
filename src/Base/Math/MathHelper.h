@@ -18,6 +18,9 @@ namespace Math
 		// a random value between (0, 1)
 		static float GetRandom();
 
+		// a random value within the given range
+		static float GetRandom(float low, float hight);
+
 		// check whether two values are closer than eps
 		static float Approx(float val1, float val2, float eps);
 	};

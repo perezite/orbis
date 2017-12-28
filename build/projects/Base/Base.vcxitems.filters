@@ -53,5 +53,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Rect.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Range.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
