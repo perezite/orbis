@@ -6,6 +6,12 @@ using namespace Video;
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
+#ifdef _DEBUG
+	#define ORBIS_DEBUG(call) {call}
+#else
+	#define ORBIS_DEBUG(call) 
+#endif
+
 namespace Core
 {
 	class DebugHelper

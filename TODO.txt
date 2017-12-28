@@ -1,6 +1,5 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Level 2 wieder zum Laufen bringen
 	- Alle Funktionen mit _old bzw. TODO Kommentar entfernen
 	- Depth-First Refactoring Strategie dokumentieren
 	- Branch zurückmergen auf master	

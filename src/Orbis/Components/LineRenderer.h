@@ -6,6 +6,7 @@
 #include "../Video/Mesh.h"
 using namespace Video;
 
+// TODO: Remove this class after refactoring
 namespace Components
 {
 	class LineRenderer : public Component

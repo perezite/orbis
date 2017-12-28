@@ -62,10 +62,8 @@ namespace Levels
 		}
 
 		// init debug line tester
-		#ifdef _DEBUG
-			Entity* entity = new Entity();
-			entity->AddComponent(new DebugLineTester());
-			AddEntity(entity);
-		#endif
+		Entity* entity = new Entity();
+		entity->AddComponent(new DebugLineTester());
+		AddEntity(entity);
 	}
 }

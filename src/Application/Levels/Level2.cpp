@@ -3,11 +3,11 @@
 #include "../Controllers/CameraController.h"
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/InputController.h"
+#include "../Controllers/DebugLineTester.h"
 using namespace Controllers;
 
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
-#include "../../Orbis/Components/LineRenderer.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Base/Math/Vector2D.h"
@@ -55,11 +55,8 @@ namespace Levels
 		this->AddEntity(greenRect);
 
 		// line renderer
-		Entity* lineRendererEntity = new Entity("Line Renderer");
-		LineRenderer* lineRenderer = new LineRenderer();
-		lineRenderer->AddLine(Vector2D(0.1f, 0.2f), Vector2D(-0.3f, 0.4f));
-		lineRenderer->AddLine(Vector2D(-0.1f, 0.2f), Vector2D(0.2f, -0.3f));
-		lineRendererEntity->AddComponent(lineRenderer);
-		this->AddEntity(lineRendererEntity);
+		Entity* debugLineEntity = new Entity("Debug Lines");
+		debugLineEntity->AddComponent(new DebugLineTester());
+		this->AddEntity(debugLineEntity);
 	}
 }
