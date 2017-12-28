@@ -12,8 +12,8 @@ using namespace Math;
 
 namespace Controllers
 {
-	const float WobbleController::MIN_SCALE = 0.01f;
-	const float WobbleController::MAX_SCALE = 0.05f;
+	const float WobbleController::MIN_SCALE = 0.02f;
+	const float WobbleController::MAX_SCALE = 0.1f;
 
 	void WobbleController::Start()
 	{

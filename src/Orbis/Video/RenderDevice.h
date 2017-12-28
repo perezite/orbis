@@ -38,6 +38,9 @@ namespace Video
 		// add a renderer
 		void AddRenderer(Renderer* renderer);
 
+		// update a renderer
+		void UpdateRenderer(Renderer* renderer);
+
 		// render
 		// TODO: remove after refactoring
 		void Render_old(Transform* transform, Mesh* mesh, Material* material) {};

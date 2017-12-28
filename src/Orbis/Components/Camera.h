@@ -2,6 +2,9 @@
 
 #include "Component.h"
 
+#include "../../Orbis/Game/TransformSpace.h"
+using namespace Game;
+
 #include "../../Base/Math/Matrix4.h"
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
@@ -12,9 +15,14 @@ namespace Components
 	class Camera : public Component
 	{
 	public:
-
-		// get singleton
+		// get singleton component
 		static Camera* GetInstance();
+
+		// ctor
+		Camera();
+
+		// dtor
+		virtual ~Camera();
 
 		// get the view matrix (the inverse of the transform of the parent entity) 
 		// TODO: Remove after refactoring
@@ -29,12 +37,19 @@ namespace Components
 		static Vector2D GetSize_old() { return Vector2D(); }
 
 		// get the view matrix (the inverse of the transform of the parent entity)
-		Matrix3 GetViewMatrix();
+		Matrix3 CalcViewMatrix(TransformSpace space = TransformSpace::WorldSpace);
 
 		// get the orthographic projection matrix
-		Matrix3 GetProjectionMatrix();
+		Matrix3 CalcProjectionMatrix(TransformSpace space = TransformSpace::WorldSpace);
+
+		// get the view-projection matrix
+		Matrix3 CalcCamMatrix(TransformSpace space = TransformSpace::WorldSpace);
 
 		// get the size of the camera in word coordinates
 		Vector2D GetSize();
+
+	private:
+		// singleton component instance
+		static Camera* m_instance;
 	};
 }

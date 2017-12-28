@@ -7,6 +7,10 @@ namespace Math
 	class Matrix3 
 	{
 	public:
+		// get eye matrix
+		static const Matrix3& GetEye();
+
+	public:
 		// get a 2d rotation
 		static Matrix3 Rotation2D(float radians);
 

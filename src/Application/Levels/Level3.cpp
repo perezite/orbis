@@ -5,9 +5,11 @@
 using namespace Controllers;
 
 #include "../../Orbis/Video/Texture.h"
+#include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 using namespace Video;
+using namespace Components;
 
 #include "../../Base/Math/MathHelper.h"
 using namespace Math;
@@ -35,12 +37,19 @@ namespace Levels
 		textures.push_back(new Texture("Textures/VioletBlock.png", true));
 		textures.push_back(new Texture("Textures/YellowBlock.png", true));	
 
+		// init camera
+		Entity* camEntity = new Entity();
+		camEntity->AddComponent(new Camera());
+		AddEntity(camEntity);
+
 		// init blocks
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
 			Entity* entity = new Entity();
 			static int counter = 0;
 			bool hasTexture = ++counter % 2 == 0;
+
+			auto test = Vector2D::One * 2.0f;
 
 			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D::One);
 			entity->SetTransform(trans);

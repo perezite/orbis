@@ -7,6 +7,8 @@
 #include "../Components/Camera.h"
 using namespace Components;
 
+#include <algorithm>
+
 // #define ORBIS_DEBUG_RENDER_DEVICE
 
 namespace Video
@@ -16,6 +18,12 @@ namespace Video
 		int position = FindFirstIndexInBatch(renderer);
 		m_renderers.insert(m_renderers.begin() + position, renderer);
 		m_isIndexArrayDirty = true;
+	}
+
+	void RenderDevice::UpdateRenderer(Renderer* renderer)
+	{
+		m_renderers.erase(std::remove(m_renderers.begin(), m_renderers.end(), renderer), m_renderers.end());
+		AddRenderer(renderer);
 	}
 
 	void RenderDevice::Render()
@@ -101,7 +109,7 @@ namespace Video
 	void RenderDevice::DrawDebugLine(Vector2D start, Vector2D end, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix();
+		Matrix3 camMatrix = Camera::GetInstance()->CalcCamMatrix();
 		start = camMatrix * start;
 		end = camMatrix * end;
 		GLfloat vertexArray[4] = { start.GetX(), start.GetY(), end.GetX(), end.GetY() };
@@ -126,7 +134,8 @@ namespace Video
 
 	void RenderDevice::UpdateVertexArray()
 	{
-		Matrix3 camMatrix = Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix();
+		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::WorldSpace);
+		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::CameraSpace);
 
 		m_vertexArray.clear();
 		ReserveVertexArray();
@@ -137,7 +146,8 @@ namespace Video
 			Mesh* mesh = m_renderers[i]->GetMesh();
 			const std::vector<GLfloat>* mvd = mesh->GetVertexData();
 			Entity* entity = m_renderers[i]->GetParent();
-			Matrix3 mvpMatrix = camMatrix * entity->GetTransform()->GetModelMatrix();
+			bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
+			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * entity->GetTransform()->GetModelMatrix();
 
 			m_vertexArray.insert(m_vertexArray.end(), mvd->begin(), mvd->end());
 

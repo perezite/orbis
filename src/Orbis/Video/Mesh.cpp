@@ -8,10 +8,10 @@ namespace Video
 	{
 		static Mesh texturedQuad(
 			{
-				-1, -1, 0.0f, 0.0f,		// left bottom
-				1, -1, 1.0f, 0.0f,		// right bottom
-				-1,  1, 0.0f, 1.0f,		// left top
-				1,  1, 1.0f, 1.0f		// right top
+				-0.5, -0.5, 0.0f, 0.0f,		// left bottom
+				 0.5, -0.5, 1.0f, 0.0f,		// right bottom
+				-0.5,  0.5, 0.0f, 1.0f,		// left top
+				 0.5,  0.5, 1.0f, 1.0f		// right top
 			},
 			4,
 			{ 0, 1, 2, 2, 1, 3 }
@@ -24,10 +24,10 @@ namespace Video
 	{
 		static Mesh flatQuad(
 			{
-				-1, -1,					// left bottom
-				 1, -1,					// right bottom
-				-1,  1, 				// left top
-				 1,  1					// right top
+				-0.5, -0.5,					// left bottom
+				 0.5, -0.5,					// right bottom
+				-0.5,  0.5, 				// left top
+				 0.5,  0.5					// right top
 			},
 			2,
 			{ 0, 1, 2, 2, 1, 3 }

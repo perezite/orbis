@@ -18,14 +18,12 @@ namespace Components
 		void Start();
 
 		// set the texture
-		// TODO: remove after refactoring
-		void SetTexture(Texture* texture) { }
+		void SetTexture(Texture* texture);
 
 		// get the texture
-		// TODO: remove after refactoring
-		Texture* GetTexture(void) const { return NULL; }
+		Texture* GetTexture(void) { return GetMaterial()->GetTexture(); }
 
-	private:
+	private: 
 		// the texture
 		Texture* m_texture;
 	};

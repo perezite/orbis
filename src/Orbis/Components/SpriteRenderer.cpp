@@ -18,4 +18,10 @@ namespace Components
 		SetMesh(Mesh::GetTexturedQuad());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 	}
+
+	void SpriteRenderer::SetTexture(Texture * texture)
+	{
+		GetMaterial()->SetTexture(texture);
+		VideoManager::GetInstance()->GetRenderDevice()->UpdateRenderer(this);
+	}
 }

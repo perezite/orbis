@@ -1,6 +1,6 @@
 TODO:
 - RenderBatching aus Sandbox heraus bootstrappen
-	- Level1 und Level 2 (dh. alten Code) wieder zum Laufen bringen
+	- Level 2 wieder zum Laufen bringen
 	- Alle Funktionen mit _old bzw. TODO Kommentar entfernen
 	- Depth-First Refactoring Strategie dokumentieren
 	- Branch zurückmergen auf master	
@@ -10,6 +10,7 @@ TODO:
 	- Jeder Shader muss eine Fixe Location für a_vPosition und a_vTexCoord haben (wird vom Renderer so angenommen)
 	- Shader-Basisklasse implementieren, die mittels Assertions sicherstellet, dass die Attribute vorhanden sind und die korrekten Locations haben
 	-- Die Locations sind fix aus folgendem Grund: Wenn der Shader gewechselt wird
+- Matrix4 und Vector3 löschen
 - Math-Klassen zu structs machen
 - Analysieren, ob weiter Klassen zu structs gemacht werden sollten	
 - Gegebenenfalls Performance-Analyse durchführen

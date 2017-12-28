@@ -4,6 +4,16 @@
 
 namespace Math
 {
+	const Matrix3& Matrix3::GetEye()
+	{
+		static Matrix3 eye =
+			Matrix3(1.0f, 0.0f, 0.0f,
+				0.0f, 1.0f, 0.0f,
+				0.0f, 0.0f, 1.0f);
+
+		return eye;
+	}
+
 	Matrix3 Matrix3::Rotation2D(float rad)
 	{
 		return Matrix3(cosf(rad), -sinf(rad), 0.0f,
@@ -22,9 +32,7 @@ namespace Math
 
 	Matrix3::Matrix3()
 	{
-		m_values[0] = 1.0f; m_values[1] = 0.0f; m_values[2] = 0.0f; 
-		m_values[3] = 0.0f; m_values[4] = 1.0f; m_values[5] = 0.0f; 
-		m_values[6] = 0.0f; m_values[7] = 0.0f; m_values[8] = 1.0f; 
+		*this = GetEye();
 	}
 
 	const Matrix3 Matrix3::Transposed() const
