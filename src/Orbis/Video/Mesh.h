@@ -26,55 +26,9 @@ namespace Video
 
 	public:
 		// ctor
-		// TODO: Remove after refactoring
-		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices, RenderMode renderMode = RenderMode::Triangles)
-		{}
-
-		// ctor
 		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLuint> indices)
 			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices)
 		{}
-
-
-		// get vertices
-		// TODO: Remove after refactoring
-		std::vector<Vector2D> GetVertices() const { return std::vector<Vector2D>(); }
-
-		// get tex corodinates
-		// TODO: Remove after refactoring
-		std::vector<Vector2D> GetTexCoords() const { return std::vector<Vector2D>(); }
-
-		// get indices
-		// TODO: Remove after refactoring
-		std::vector<int> GetIndices_old() const { return std::vector<int>(); }
-
-		// get render mode
-		// TODO: remove after refactoring
-		RenderMode GetRenderMode() const { return RenderMode::Triangles; }
-
-		// get vertex buffer length required to store the mesh's vertex data
-		// TODO: remove after refactoring
-		int GetVertexBufferLength() { return 42; }
-
-		// get index buffer length required to store the mesh's vertex data
-		// TODO: remove after refactoring
-		int GetIndexBufferLength() { return 42; }
-		
-		// fills a preallocated buffer with the mesh's vertex data
-		// TODO: remove after refactoring
-		void FillVertexBuffer(float* const buffer) { }
-
-		// fills a preallocated buffer with the mesh's index data
-		// TODO: remove after refactoring
-		void FillIndexBuffer(int* const buffer) { }
-
-		// get the mesh's vertex stride
-		// TODO: remove after refactoring
-		int GetVertexStride() { return 42; };
-
-		// initialize the mesh. Must be called before rendering
-		// TODO: remove after refactoring
-		void Initialize() { };
 
 		// get vertexData
 		const std::vector<GLfloat>* GetVertexData() const { return &m_vertexData; }

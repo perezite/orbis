@@ -27,23 +27,11 @@ namespace Video
 			: m_isIndexArrayDirty(false)
 		{}
 
-		// add a mesh to the renderer
-		// TODO: remove after refactoring
-		void AddMesh(Mesh* const mesh) {};
-
-		// initialize the buffers
-		// TODO: Remove after refactoring
-		void InitializeBuffers() {};
-
 		// add a renderer
 		void AddRenderer(Renderer* renderer);
 
 		// update a renderer
 		void UpdateRenderer(Renderer* renderer);
-
-		// render
-		// TODO: remove after refactoring
-		void Render_old(Transform* transform, Mesh* mesh, Material* material) {};
 
 		// render
 		void Render();

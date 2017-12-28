@@ -35,7 +35,6 @@ namespace Game
 		if (m_isStarted == false)
 		{
 			StartEntities();
-			VideoManager::GetInstance()->GetRenderDevice()->InitializeBuffers();
 			m_isStarted = true;
 		}
 		else

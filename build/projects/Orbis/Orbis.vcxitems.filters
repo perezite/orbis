@@ -87,9 +87,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh.cpp">
       <Filter>Video</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\LineRenderer.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Material.cpp">
       <Filter>Video</Filter>
     </ClCompile>
@@ -169,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh.h">
       <Filter>Video</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\LineRenderer.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Material.h">
       <Filter>Video</Filter>
