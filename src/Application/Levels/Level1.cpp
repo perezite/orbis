@@ -36,12 +36,14 @@ namespace Levels
 		Texture* overlayCloseTex = new Texture("Textures/OverlayClose.png");
 
 		// camera entity
-		Entity* camera = new Entity();
-		camera->AddComponent(new Camera());
+		Entity* camEntity = new Entity();
+		Camera* cam = new Camera();
+		camEntity->AddComponent(cam);
 		CameraController* cameraController = new CameraController();
-		camera->AddComponent(cameraController);
-		camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
-		this->AddEntity(camera);
+		camEntity->AddComponent(cameraController);
+		// camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
+		camEntity->SetTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
+		this->AddEntity(camEntity);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");
@@ -70,25 +72,25 @@ namespace Levels
 		Entity* inputModeOverlay = new Entity("InputModeOverlay");
 		SpriteRenderer* inputModeOverlaySpriteRenderer = new SpriteRenderer(overlayRotateYellowSpriteTex);
 		inputModeOverlay->AddComponent(inputModeOverlaySpriteRenderer);
-		inputModeOverlay->SetTransform(Transform(Vector2D(-0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::CameraSpace));
+		inputModeOverlay->SetTransform(Transform(Vector2D(-0.25f * cam->GetSize().GetX(), 0.25f * cam->GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::CameraSpace));
 		this->AddEntity(inputModeOverlay);
 
 		// left overlay sprite
 		Entity* overlayLeft = new Entity("OverlayLeft");
 		overlayLeft->AddComponent(new SpriteRenderer(overlayLeftTex));
-		overlayLeft->SetTransform(Transform(Vector2D(-0.25f * Camera::GetSize().GetX(), -0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::CameraSpace));
+		overlayLeft->SetTransform(Transform(Vector2D(-0.25f * cam->GetSize().GetX(), -0.25f * cam->GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::CameraSpace));
 		this->AddEntity(overlayLeft);
 
 		// right overlay sprite
 		Entity* overlayRight = new Entity("OverlayRight");
 		overlayRight->AddComponent(new SpriteRenderer(overlayRightTex));
-		overlayRight->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), -0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::CameraSpace));
+		overlayRight->SetTransform(Transform(Vector2D(0.25f * cam->GetSize().GetX(), -0.25f * cam->GetSize().GetY()), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::CameraSpace));
 		this->AddEntity(overlayRight);
 
 		// close overlay sprite
 		Entity* overlayClose = new Entity("OverlayClose");
 		overlayClose->AddComponent(new SpriteRenderer(overlayCloseTex));
-		overlayClose->SetTransform(Transform(Vector2D(0.25f * Camera::GetSize().GetX(), 0.25f * Camera::GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::CameraSpace));
+		overlayClose->SetTransform(Transform(Vector2D(0.25f * cam->GetSize().GetX(), 0.25f * cam->GetSize().GetY()), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::CameraSpace));
 		this->AddEntity(overlayClose);
 
 		// input entity

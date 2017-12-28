@@ -31,7 +31,7 @@ namespace Video
 		std::string m_assetPath;
 
 		// the texture id
-		GLuint m_textureHandle;
+		GLuint m_textureHandle = 0;
 
 		// the image surface
 		SDL_Surface* m_surface;

@@ -15,6 +15,7 @@ namespace Math
 		m_values[12] = m30; m_values[13] = m31; m_values[14] = m32; m_values[15] = m33;
 	}
 
+
 	Matrix4::Matrix4()
 	{
 		m_values[0] = 1.0f; m_values[1] = 0.0f; m_values[2] = 0.0f; m_values[3] = 0.0f;

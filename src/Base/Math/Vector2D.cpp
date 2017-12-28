@@ -44,4 +44,11 @@ namespace Math
 	{
 		return Vector2D(-m_x, -m_y);
 	}
+
+	const Vector2D Vector2D::operator+=(const Vector2D & other)
+	{
+		Vector2D result = *this + other;
+		m_x = result.m_x; m_y = result.m_y;
+		return *this + other;
+	}
 }

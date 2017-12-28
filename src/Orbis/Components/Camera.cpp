@@ -13,62 +13,66 @@ using namespace Video;
 using namespace System;
 using namespace Math;
 
-namespace
-{
-	// singleton camera instance
-	static Components::Camera* instance = NULL;
-
-	Components::Camera* GetInstance()
-	{
-		Exception::Assert(instance != NULL, "No camera was attached in the level");
-
-		return instance;
-	}
-}
-
 namespace Components
 {
-	Camera::Camera()
+	Camera* Camera::m_instance = NULL;
+
+	Camera* Camera::GetInstance()
 	{
-		Exception::Assert(instance == NULL, "Only one camera at a time is allowed");
-		instance = this;
+		Exception::Assert(m_instance != NULL, "No camera was attached in the level");
+
+		return m_instance;
+	}
+
+	Camera::Camera() : Component()
+	{
+		Exception::Assert(m_instance == NULL, "Only one camera at a time is allowed");
+		m_instance = this;
 	}
 
 	Camera::~Camera()
 	{
-		instance = NULL;
+		m_instance = NULL;
 	}
 
-	Matrix3 Camera::GetViewMatrix()
+	Matrix3 Camera::CalcViewMatrix(TransformSpace space)
 	{
+		if (space == TransformSpace::CameraSpace)
+			return Matrix3::GetEye();
+
 		Transform* transform = GetInstance()->GetParent()->GetTransform();
 		Matrix3 invTransform;
-		invTransform.Rotate2D(-transform->GetRotation());
-		invTransform.Translate2D(-transform->GetPosition());
+		invTransform.Rotate2D(-transform->rotation);
+		invTransform.Translate2D(-transform->position);
 		return invTransform;
 	}
 
 	// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
-	Matrix3 Camera::GetProjectionMatrix(bool applyScaling)
+	Matrix3 Camera::CalcProjectionMatrix(TransformSpace space)
 	{
-		Vector2D scale = applyScaling ? GetInstance()->GetParent()->GetTransform()->GetScale() : Vector2D::One;
+		Vector2D scale = 
+			space == TransformSpace::WorldSpace ? GetInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.GetX(), 1.0f / scale.GetY());
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
 		float inverseAspect = resolution.GetX() / resolution.GetY();
 
 		Matrix3 mat(2.0f * inverseScale.GetX(), 0.0f, 0.0f, 
-			0.0f, 2.0f * inverseAspect * inverseScale.GetY(), 0.0f,
-			0.0f, 0.0f, 1.0f);
-
+					0.0f, 2.0f * inverseAspect * inverseScale.GetY(), 0.0f, 
+					0.0f, 0.0f, 1.0f);
 		return mat;
+	}
+
+	Matrix3 Camera::CalcCamMatrix(TransformSpace space)
+	{
+		return CalcProjectionMatrix(space) * CalcViewMatrix(space);
 	}
 
 	Vector2D Camera::GetSize()
 	{
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
-		Vector2D scale = GetInstance()->GetParent()->GetTransform()->GetScale();
+		Vector2D scale = GetInstance()->GetParent()->GetTransform()->scale;
 		float aspectRatio = resolution.GetY() / resolution.GetX();
-		
+
 		return Vector2D(scale.GetX(), scale.GetY() * aspectRatio);
 	}
 }

@@ -23,26 +23,15 @@ namespace Video
 		return &instance;
 	}
 
-	VideoManager::VideoManager()
+	VideoManager::VideoManager() 
 	{
 		Initialize();
 	}
 
 	VideoManager::~VideoManager()
 	{
-		if (m_renderer)
-			delete m_renderer;
-
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
-	}
-
-	RenderDevice* VideoManager::GetRenderDevice()
-	{
-		if (m_renderer == NULL)
-			m_renderer = new RenderDevice();
-
-		return m_renderer;
 	}
 
 	void VideoManager::ClearScreen()
@@ -61,35 +50,33 @@ namespace Video
 		if (m_IsInitialized)
 			return;
 
-		m_renderer = NULL;
-
 		SDL_Init(SDL_INIT_VIDEO);
 		m_windowResolution = GetDefaultWindowResolution();
 
-		#ifdef WIN32	
-			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-			m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
-			glewInit();
-		#endif	
-		#ifdef __ANDROID__
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-			SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-			m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
-			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
-		#endif
+#ifdef WIN32	
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+		m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
+		glewInit();
+#endif	
+#ifdef __ANDROID__
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+		m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+		m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
+#endif
 
+		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
-		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
 
 		m_IsInitialized = true;
 	}

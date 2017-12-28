@@ -66,14 +66,14 @@ namespace Game
 		VideoManager* videoManager = VideoManager::GetInstance();
 
 		videoManager->ClearScreen();
-		videoManager->GetRenderDevice()->Begin();
+
+		videoManager->GetRenderDevice()->Render();
 
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{
 			m_entities[i]->Render();
 		}
 
-		videoManager->GetRenderDevice()->Finalize();
 		videoManager->SwapBuffers();
 	}
 

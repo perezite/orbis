@@ -10,7 +10,7 @@ namespace Video
 	{
 	public:
 		// ctor
-		Material() : m_texture(NULL), m_shader(NULL), m_isColorUsed(false) {}
+		Material() : m_texture(NULL), m_shader(NULL), m_hasColor(false) {}
 
 		// set texture
 		void SetTexture(Texture* const texture) { m_texture = texture; }
@@ -25,21 +25,22 @@ namespace Video
 		Shader* GetShader() const { return m_shader; }
 
 		// set color
-		void SetColor(const Color& color) { m_color = color; }
+		void SetColor(const Color& color) { m_hasColor = true; m_color = color; }
 
 		// get color
-		const Color& GetColor() const { return m_color; }
+		Color& GetColor() { return m_color; }
 
 		// set is color used
-		void SetIsColorUsed(bool isColorUsed) { m_isColorUsed = isColorUsed; }
+		void HasColor(bool isColorUsed) { m_hasColor = isColorUsed; }
 
 		// get is color used
-		bool GetIsColorUsed() const { return m_isColorUsed; }
+		bool HasColor() const { return m_hasColor; }
 
-		// equality 
-		bool operator==(const Material& other) const {
-			return m_texture == other.GetTexture() && m_shader == other.GetShader() && m_color == other.GetColor() && m_isColorUsed == other.GetIsColorUsed();
-		}
+		// can the materials be batched
+		bool IsBatchEqualTo(Material* const other) const;
+
+		// set the variables of the shader according to the shader properties
+		void PrepareShaderVariables();
 
 	private:
 		// the texture
@@ -52,6 +53,6 @@ namespace Video
 		Color m_color;
 
 		// is the color used
-		bool m_isColorUsed;
+		bool m_hasColor;
 	};
 }

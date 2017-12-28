@@ -1,31 +1,21 @@
 #pragma once
 
-#include "Component.h"
-
-#include "../Video/Material.h"
-#include "../Video/Mesh.h"
-using namespace Video;
+#include "Renderer.h"
 
 namespace Components
 {
 	// Renders a colored quad
-	class RectangleRenderer : public Component
+	class RectangleRenderer : public Renderer
 	{
 	public:
 		// ctor
-		RectangleRenderer(const Color& color) { m_material.SetColor(color); }
+		RectangleRenderer(const Color& color) : Renderer() { m_color = color; }
 
-		// update
+		// start
 		void Start();
 
-		// render
-		void Render();
-
 	private:
-		// the material
-		Material m_material;
-
-		// the mesh
-		Mesh* m_mesh;
+		// the color 
+		Color m_color;
 	};
 }

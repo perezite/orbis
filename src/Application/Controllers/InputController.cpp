@@ -24,16 +24,16 @@ namespace
 	void Rotate(Transform* transform, bool clockwise, float omega)
 	{
 		omega = clockwise ? -omega : omega;
-		float alpha = transform->GetRotation();
-		transform->SetRotation(alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega);
+		float alpha = transform->rotation;
+		transform->rotation = alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega;
 	}	
 
 	void Translate(Transform* transform, bool forward, float speed)
 	{
 		speed = forward ? speed : -speed;
-		Vector2D position = transform->GetPosition();
-		Vector2D translation = Matrix3::Rotation2D(transform->GetRotation()) * Vector2D(TimeManager::GetInstance()->GetDeltaSeconds() * speed, 0.0f);
-		transform->SetPosition(position + translation);
+		Vector2D position = transform->position;
+		Vector2D translation = Matrix3::Rotation2D(transform->rotation) * Vector2D(TimeManager::GetInstance()->GetDeltaSeconds() * speed, 0.0f);
+		transform->position = position + translation;
 	}
 
 	void Scale(CameraController *camera, bool positive)
@@ -41,8 +41,8 @@ namespace
 		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
 		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
 		Transform* transform = camera->GetParent()->GetTransform();
-		Vector2D scale = transform->GetScale();
-		transform->SetScale(scale * factor);
+		Vector2D scale = transform->scale;
+		transform->scale = scale * factor;
 	}
 
 	void Rotate(SpriteController* sprite, bool clockwise)

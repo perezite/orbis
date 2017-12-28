@@ -5,16 +5,17 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "Material.h"
-#include "RenderBatch.h"
 
 #include "../Game/Transform.h"
+#include "../Game/Entity.h"
+#include "../Components/Renderer.h"
 using namespace Game;
+using namespace Components;
 
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
 #include <vector>
-#include <tuple>
 
 namespace Video
 {
@@ -22,44 +23,49 @@ namespace Video
 	{
 	public:
 		// ctor
-		RenderDevice();
+		RenderDevice()
+			: m_isIndexArrayDirty(false)
+		{}
 
-		// dtor
-		virtual ~RenderDevice();
+		// add a renderer
+		void AddRenderer(Renderer* renderer);
 
-		// begin
-		void Begin();
+		// update a renderer
+		void UpdateRenderer(Renderer* renderer);
 
 		// render
-		void Render(Transform* transform, Mesh* mesh, Material* material);
+		void Render();
 
-		// finalize
-		void Finalize();
-
-		// refresh the device
-		void Refresh() { m_isRefreshing = true; }
+		// draw a debug line
+		void DrawDebugLine(Vector2D start, Vector2D end, Color color);
 
 	protected:
-		// render a batch
-		void RenderBatched(RenderBatch* renderBatch);
+		// update vertex array
+		void UpdateVertexArray();
 
-		// update vertex buffer
-		void UpdateVertexBuffer(std::vector<RenderBatch> batches);
+		// reserver the vertex buffer to hold the renderer data
+		void ReserveVertexArray();
 
-		// update index buffer
-		void RefreshBuffers(std::vector<RenderBatch> batches);
+		// insert renderers indices at position in index array
+		void UpdateIndexArray();
+
+		// reserve index array space
+		void ReserveIndexArray();
+
+		// find index of first renderer in render batch
+		int FindFirstIndexInBatch(Renderer* renderer);
 
 	private:
-		// the render batches
-		std::vector<RenderBatch> m_renderBatches;
+		// the vertex array
+		std::vector<GLfloat> m_vertexArray;
 
-		// the vertex buffer object
-		GLuint m_vertexBufferHandle;
+		// the index array
+		std::vector<GLuint> m_indexArray;
 
-		// the index buffer object
-		GLuint m_indexBufferHandle;
+		// is the index array in dirty state
+		bool m_isIndexArrayDirty;
 
-		// is the device refreshing
-		bool m_isRefreshing;
+		// the renderer components
+		std::vector<Renderer*> m_renderers;
 	};
 }

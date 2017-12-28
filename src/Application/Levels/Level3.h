@@ -11,5 +11,8 @@ namespace Levels
 		Level3();
 
 	private:
+		static const int NUM_SPRITES;
+		static const float MIN_BLOCK_SCALE;
+		static const float MAX_BLOCK_SCALE;
 	};
 }

@@ -3,9 +3,6 @@
 #include "Color.h"
 #include "RenderMode.h"
 
-#include "../Game/Transform.h"
-using namespace Game;
-
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
@@ -25,56 +22,34 @@ namespace Video
 		static Mesh* GetFlatQuad();
 
 		// get a static line mesh
-		static Mesh* GetLineMesh();
+		static Mesh* GetLineMesh() { return NULL; }
 
 	public:
 		// ctor
-		Mesh(std::vector<Vector2D> vertices, std::vector<Vector2D> texCoords, std::vector<int> indices, RenderMode renderMode = RenderMode::Triangles);
+		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLuint> indices)
+			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices)
+		{}
 
-		// get vertices
-		std::vector<Vector2D> GetVertices() const { return m_vertices; }
+		// get vertexData
+		const std::vector<GLfloat>* GetVertexData() const { return &m_vertexData; }
 
-		// get vertex pointer
-		Vector2D* GetVertex(int index) { return &m_vertices.at(index); }
+		// get num vertices
+		unsigned int GetNumVertices() const { return m_vertexData.size() / m_vertexSize; }
 
-		// get tex corodinates
-		std::vector<Vector2D> GetTexCoords() const { return m_texCoords; }
+		// get vertex size
+		unsigned int GetVertexSize() const { return m_vertexSize; }
 
 		// get indices
-		std::vector<int> GetIndices() const { return m_indices; }
-
-		// get render mode
-		RenderMode GetRenderMode() const { return m_renderMode; }
-
-		// get vertex buffer length required to store the mesh's vertex data
-		int GetVertexBufferLength();
-
-		// get index buffer length required to store the mesh's vertex data
-		int GetIndexBufferLength();
-
-		// fills a preallocated buffer with the mesh's vertex data
-		void FillVertexBufferData(float* const buffer);
-
-		// fills a preallocated buffer with the mesh's index data
-		void FillIndexBufferData(int* const buffer, int indexOffset);
-
-		// get the mesh's vertex stride
-		int GetVertexStride();
-
-		// apply the given transformation on the mesh
-		Mesh Transformed(const Transform* transform);
+		const std::vector<GLuint>* GetIndices() const { return &m_indices; }
 
 	private:
-		// the vertex coordinates
-		std::vector<Vector2D> m_vertices;
+		// vertex data
+		std::vector<GLfloat> m_vertexData;
 
-		// the texture coordinates
-		std::vector<Vector2D> m_texCoords;
+		// size (number of elements) per vertex
+		unsigned int m_vertexSize;
 
-		// the vertex indices
-		std::vector<int> m_indices;
-
-		// the render mode
-		RenderMode m_renderMode;
+		// indices
+		std::vector<GLuint> m_indices;
 	};
 }

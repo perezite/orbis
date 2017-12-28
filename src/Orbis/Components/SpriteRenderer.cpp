@@ -1,31 +1,27 @@
 #include "SpriteRenderer.h"
 
-#include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
-#include "../Game/Entity.h"
-using namespace Core;
+#include "../Core/TimeManager.h"
 using namespace Video;
-using namespace Game;
-
-#include "../../Base/Math/MathHelper.h"
-#include "../../Base/System/Exception.h"
-using namespace Math;
-using namespace System;
-
-#include <math.h>
-#include <iostream>
+using namespace Core;
 
 namespace Components
 {
+	SpriteRenderer::SpriteRenderer(Texture* texture)
+		: Renderer(), m_texture(texture)
+	{}
+
 	void SpriteRenderer::Start()
 	{
-		m_material.SetShader(Shader::GetDiffuseShader());
-		m_mesh = Mesh::GetTexturedQuad();
+		GetMaterial()->SetTexture(m_texture);
+		GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		SetMesh(Mesh::GetTexturedQuad());
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 	}
 
-	void SpriteRenderer::Render()
+	void SpriteRenderer::SetTexture(Texture * texture)
 	{
-		RenderDevice* renderDevice = VideoManager::GetInstance()->GetRenderDevice();
-		renderDevice->Render(GetParent()->GetTransform(), m_mesh, &m_material);
+		GetMaterial()->SetTexture(texture);
+		VideoManager::GetInstance()->GetRenderDevice()->UpdateRenderer(this);
 	}
 }

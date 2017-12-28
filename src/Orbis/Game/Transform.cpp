@@ -2,12 +2,12 @@
 
 namespace Game
 {
-	Matrix3 Transform::GetMatrix() const
+	Matrix3 Transform::GetModelMatrix() const
 	{
 		Matrix3 mat;
-		mat.Translate2D(m_position);
-		mat.Rotate2D(m_rotation);
-		mat.Scale2D(m_scale);
+		mat.Translate2D(position);
+		mat.Rotate2D(rotation);
+		mat.Scale2D(scale);
 		return mat;
 	}
 }

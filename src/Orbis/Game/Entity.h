@@ -33,6 +33,9 @@ namespace Game
 		// get the name
 		std::string GetName() const { return m_name; }
 
+		// get components
+		const std::vector<Component*>& GetComponents() const { return m_components; }
+
 		// add component
 		void AddComponent(Component *component);
 

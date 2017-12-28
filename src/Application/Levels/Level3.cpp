@@ -1,47 +1,69 @@
 #include "Level3.h"
 
-#include "../../Orbis/Components/SpriteRenderer.h"
+#include "../Controllers/DebugLineTester.h"
+#include "../Controllers/WobbleController.h"
+using namespace Controllers;
+
+#include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Components/Camera.h"
-#include "../../Orbis/Video/VideoManager.h"
-#include "../../Base/Math/Vector2D.h"
-#include "../../Base/Math/MathHelper.h"
-using namespace Components;
-using namespace Math;
+#include "../../Orbis/Components/RectangleRenderer.h"
+#include "../../Orbis/Components/SpriteRenderer.h"
 using namespace Video;
+using namespace Components;
 
-#include <math.h>
+#include "../../Base/Math/MathHelper.h"
+using namespace Math;
 
-namespace
-{
-	// get random number in [0,1]
-	float GetRandom()
-	{
-		float r = (float)(rand()) / (float)(RAND_MAX);
-		return r;
-	}
-}
+#include <iostream>
 
 namespace Levels
 {
+	const int Level3::NUM_SPRITES = 1000;
+	const float Level3::MIN_BLOCK_SCALE = 0.01f;
+	const float Level3::MAX_BLOCK_SCALE = 0.05f;
+
 	Level3::Level3()
 	{
-		// textures
-		Texture* yellowBlockTexture = new Texture("Textures/YellowBlock.png");
-		Texture* blueBlockTexture = new Texture("Textures/BlueBlock.png");
+		// init textures
+		std::vector<Texture*> textures;
+		textures.push_back(new Texture("Textures/BlackBlock.png", true));
+		textures.push_back(new Texture("Textures/BlueBlock.png", true));
+		textures.push_back(new Texture("Textures/CyanBlock.png", true));
+		textures.push_back(new Texture("Textures/GreenBlock.png", true));
+		textures.push_back(new Texture("Textures/GreyBlock.png", true));
+		textures.push_back(new Texture("Textures/OrangeBlock.png", true));
+		textures.push_back(new Texture("Textures/PurpleBlock.png", true));
+		textures.push_back(new Texture("Textures/RedBlock.png", true));
+		textures.push_back(new Texture("Textures/VioletBlock.png", true));
+		textures.push_back(new Texture("Textures/YellowBlock.png", true));	
 
-		// camera entity
-		Entity* camera = new Entity();
-		camera->AddComponent(new Camera());
-		this->AddEntity(camera);
+		// init camera
+		Entity* camEntity = new Entity();
+		camEntity->AddComponent(new Camera());
+		AddEntity(camEntity);
 
-		// yellow block entity 1
-		for (int i = 0; i < 1000; i++)
+		// init blocks
+		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
-			Vector2D pos = Vector2D(GetRandom() - 0.5f, GetRandom() - 0.5f);
-			Entity* yellowBlock = new Entity("Yellow Brick");
-			yellowBlock->AddComponent(new SpriteRenderer(yellowBlockTexture));
-			yellowBlock->SetTransform(Transform(pos, 0.0f, Vector2D(0.33f, 0.33f)));
-			this->AddEntity(yellowBlock);
+			Entity* entity = new Entity();
+			static int counter = 0;
+			bool hasTexture = ++counter % 2 == 0;
+
+			auto test = Vector2D::One * 2.0f;
+
+			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D::One);
+			entity->SetTransform(trans);
+
+			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
+			entity->AddComponent(hasTexture ? (Renderer*)new SpriteRenderer(texture) : (Renderer*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
+			entity->AddComponent(new WobbleController());
+
+			this->AddEntity(entity);
 		}
+
+		// init debug line tester
+		Entity* entity = new Entity();
+		entity->AddComponent(new DebugLineTester());
+		AddEntity(entity);
 	}
 }

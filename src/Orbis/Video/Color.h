@@ -39,14 +39,12 @@ namespace Video
 		// set alpha
 		void SetAlpha(float alpha) { m_alpha = alpha; }
 
-		// equality
-		bool operator==(const Color& other) const { 
-			return m_red == other.GetRed() && m_green == other.GetGreen() && m_blue == other.GetBlue() && m_alpha == other.GetAlpha();
-		}
-
 	public:
 		// white color
 		static const Color White;
+
+		// green color
+		static const Color Green;
 
 	private:
 		// red
