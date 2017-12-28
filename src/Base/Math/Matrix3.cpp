@@ -35,22 +35,6 @@ namespace Math
 		*this = GetEye();
 	}
 
-	const Matrix3 Matrix3::Transposed() const
-	{
-		Matrix3 result;
-
-		for (unsigned int row = 0; row < 3; row++)
-		{
-			for (unsigned int col = 0; col < 3; col++)
-			{
-				float value = this->GetValue(row, col);
-				result.SetValue(col, row, value);
-			}
-		}
-
-		return result;
-	}
-
 	void Matrix3::Rotate2D(float rad)
 	{
 		*this *= Rotation2D(rad);
@@ -58,15 +42,15 @@ namespace Math
 
 	void Matrix3::Translate2D(Vector2D trans)
 	{
-		*this *= Matrix3(1.0f, 0.0f, trans.GetX(),
-			0.0f, 1.0f,  trans.GetY(),
+		*this *= Matrix3(1.0f, 0.0f, trans.x,
+			0.0f, 1.0f,  trans.y,
 			0.0f, 0.0f, 1.0f);
 	}
 
 	void Matrix3::Scale2D(Vector2D scale)
 	{
-		*this *= Matrix3(scale.GetX(), 0.0f, 0.0f,
-			0.0f, scale.GetY(), 0.0f,
+		*this *= Matrix3(scale.x, 0.0f, 0.0f,
+			0.0f, scale.y, 0.0f,
 			0.0f, 0.0f, 1.0f);
 	}
 
@@ -94,9 +78,8 @@ namespace Math
 
 	Vector2D Matrix3::operator*(const Vector2D & vec) const
 	{
-		float x = this->GetValue(0, 0) * vec.GetX() + this->GetValue(0, 1) * vec.GetY() + this->GetValue(0, 2);
-		float y = this->GetValue(1, 0) * vec.GetX() + this->GetValue(1, 1) * vec.GetY() + this->GetValue(1, 2);
+		float x = this->GetValue(0, 0) * vec.x + this->GetValue(0, 1) * vec.y + this->GetValue(0, 2);
+		float y = this->GetValue(1, 0) * vec.x + this->GetValue(1, 1) * vec.y + this->GetValue(1, 2);
 		return Vector2D(x, y);
 	}
-
 }

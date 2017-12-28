@@ -52,12 +52,12 @@ namespace Components
 	{
 		Vector2D scale = 
 			space == TransformSpace::WorldSpace ? GetInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
-		Vector2D inverseScale = Vector2D(1.0f / scale.GetX(), 1.0f / scale.GetY());
+		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
-		float inverseAspect = resolution.GetX() / resolution.GetY();
+		float inverseAspect = resolution.x / resolution.y;
 
-		Matrix3 mat(2.0f * inverseScale.GetX(), 0.0f, 0.0f, 
-					0.0f, 2.0f * inverseAspect * inverseScale.GetY(), 0.0f, 
+		Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f, 
+					0.0f, 2.0f * inverseAspect * inverseScale.y, 0.0f, 
 					0.0f, 0.0f, 1.0f);
 		return mat;
 	}
@@ -71,8 +71,8 @@ namespace Components
 	{
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
 		Vector2D scale = GetInstance()->GetParent()->GetTransform()->scale;
-		float aspectRatio = resolution.GetY() / resolution.GetX();
+		float aspectRatio = resolution.y / resolution.x;
 
-		return Vector2D(scale.GetX(), scale.GetY() * aspectRatio);
+		return Vector2D(scale.x, scale.y * aspectRatio);
 	}
 }

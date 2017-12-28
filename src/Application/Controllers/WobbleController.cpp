@@ -30,10 +30,10 @@ namespace Controllers
 		float deltaScale = m_isGrowing ? dt * 0.01f : dt * -0.01f;
 		GetParent()->GetTransform()->scale += Vector2D(deltaScale, deltaScale);
 
-		if (trans->scale.GetX() < MIN_SCALE)
+		if (trans->scale.x < MIN_SCALE)
 			m_isGrowing = true;
 
-		if (trans->scale.GetX() > MAX_SCALE)
+		if (trans->scale.x > MAX_SCALE)
 			m_isGrowing = false;
 	}
 }

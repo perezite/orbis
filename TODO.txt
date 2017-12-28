@@ -1,7 +1,5 @@
 TODO:
-- Matrix4 und Vector3 löschen
-- Math-Klassen zu structs machen
-- Analysieren, ob weiter Klassen zu structs gemacht werden sollten	
+- Analysieren, welche Klassen zu Structs gemacht werden können und diese umwandeln
 - Gegebenenfalls Performance-Analyse durchführen
 	- Level mit 10 Blocks befüllen
 	- Performance-Analyse mit Funktions-Switching

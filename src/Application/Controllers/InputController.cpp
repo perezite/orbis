@@ -85,11 +85,11 @@ namespace Controllers
 			Vector2D tapPosition = inputManager->GetTapPosition();
 
 			// left top tap
-			if (tapPosition.GetX() < 0 && tapPosition.GetY() >= 0.0f)
+			if (tapPosition.x < 0 && tapPosition.y >= 0.0f)
 				Cycle();
 
 			// right top tap
-			if (tapPosition.GetX() >= 0 && tapPosition.GetY() >= 0)
+			if (tapPosition.x >= 0 && tapPosition.y >= 0)
 			{
 				InputManager::GetInstance()->SetQuitEvent();
 			}
@@ -100,13 +100,13 @@ namespace Controllers
 			Vector2D tapPosition = inputManager->GetTapPosition();
 
 			// left bottom tap
-			if (tapPosition.GetX() < 0 && tapPosition.GetY() < 0.0f)
+			if (tapPosition.x < 0 && tapPosition.y < 0.0f)
 			{
 				Affect(false);
 			}
 
 			// right bottom tap
-			if (tapPosition.GetX() >= 0 && tapPosition.GetY() < 0.0f)
+			if (tapPosition.x >= 0 && tapPosition.y < 0.0f)
 			{
 				Affect(true);
 			}

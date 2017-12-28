@@ -59,7 +59,7 @@ namespace Video
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-		m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+		m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.x, (int)m_windowResolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 		m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 		glewInit();
 #endif	
@@ -70,11 +70,11 @@ namespace Video
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-		m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY(), SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+		m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.x, (int)m_windowResolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
 		m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 #endif
 
-		glViewport(0, 0, (int)m_windowResolution.GetX(), (int)m_windowResolution.GetY());
+		glViewport(0, 0, (int)m_windowResolution.x, (int)m_windowResolution.y);
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 

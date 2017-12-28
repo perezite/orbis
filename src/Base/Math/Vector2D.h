@@ -5,17 +5,24 @@
 namespace Math
 {
 	// Represents a 2D vector
-	class Vector2D
+	struct Vector2D
 	{
 	public:
+		// zero vector
+		static const Vector2D Zero;
+
+		// one vector
+		static const Vector2D One;
+
+	public:
 		// costructor 
-		Vector2D() { m_x = 0.0f, m_y = 0.0f; }
+		Vector2D() { x = 0.0f, y = 0.0f; }
 
 		// constructor
-		Vector2D (float x, float y) : m_x(x), m_y(y) { }
+		Vector2D (float x_, float y_) : x(x_), y(y_) { }
 
 		// constructor 
-		Vector2D(const Vector2D &other) : m_x(other.m_x), m_y(other.m_y) { }
+		Vector2D(const Vector2D &other) : x(other.x), y(other.y) { }
 
 		// destructor
 		virtual ~Vector2D() { };
@@ -24,7 +31,7 @@ namespace Math
 		const Vector2D& operator=(const Vector2D &other);
 
 		// get a vector rotated by alpha degrees
-		const Vector2D Rotated(float alphaDegrees) const;
+		// const Vector2D Rotated(float alphaDegrees) const;
 
 		// addition
 		const Vector2D operator+(const Vector2D &other) const;
@@ -41,33 +48,14 @@ namespace Math
 		// inline addition 
 		const Vector2D operator+=(const Vector2D &other);
 
-		// get x
-		float GetX() const { return m_x; }
-
-		// get y
-		float GetY() const { return m_y; }
-
 		// get length
-		float GetLength() const { return sqrtf(m_x * m_x + m_y * m_y);  }
-
-		// set x
-		void SetX(float x) { m_x = x; }
-
-		// set y
-		void SetY(float y) { m_y = y; }
+		float GetLength() const { return sqrtf(x * x + y * y);  }
 
 	public:
-		// zero vector
-		static const Vector2D Zero;
-
-		// one vector
-		static const Vector2D One;
-
-	private:
 		// the x component 
-		float m_x;
+		float x;
 
 		// the y component
-		float m_y;
+		float y;
 	};
 }

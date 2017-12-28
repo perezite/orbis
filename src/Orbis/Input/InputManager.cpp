@@ -9,7 +9,7 @@ namespace
 	Vector2D PixelCoordinatesToScreenCoordinates(int x, int y)
 	{
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
-		return Vector2D(float(x) / resolution.GetX() - 0.5f, 0.5f - float(y) / resolution.GetY());
+		return Vector2D(float(x) / resolution.x - 0.5f, 0.5f - float(y) / resolution.y);
 	}
 
 	// convert finger coordinates to screen coordinates in the range (-0.5, +0.5)

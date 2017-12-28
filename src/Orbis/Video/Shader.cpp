@@ -126,7 +126,7 @@ namespace Video
 	{
 		GLint handle = glGetUniformLocation(m_programId, id.c_str());
 
-		glUniform4f(handle, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+		glUniform4f(handle, color.r, color.g, color.b, color.a);
 	}
 
 	void Shader::Use()

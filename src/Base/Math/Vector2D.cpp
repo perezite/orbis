@@ -12,43 +12,43 @@ namespace Math
 
 	const Vector2D& Vector2D::operator=(const Vector2D &other)
 	{
-		m_x = other.m_x;
-		m_y = other.m_y;
+		x = other.x;
+		y = other.y;
 		return *this;
 	}
 
-	const Vector2D Vector2D::Rotated(float alphaDegrees) const
-	{
-		float alpha = MathHelper::DegreesToRadian(alphaDegrees);
-		float x = cosf(alpha)*GetX() - sinf(alpha)*GetY();
-		float y = sinf(alpha)*GetX() + cosf(alpha)*GetY();
-		return Vector2D(x, y);
-	}
+	//const Vector2D Vector2D::Rotated(float alphaDegrees) const
+	//{
+	//	float alpha = MathHelper::DegreesToRadian(alphaDegrees);
+	//	float x = cosf(alpha)*x - sinf(alpha)*y;
+	//	float y = sinf(alpha)*x + cosf(alpha)*y;
+	//	return Vector2D(x, y);
+	//}
 
 	const Vector2D Vector2D::operator+(const Vector2D & other) const
 	{
-		return Vector2D(m_x + other.m_x, m_y + other.m_y);
+		return Vector2D(x + other.x, y + other.y);
 	}
 
 	const Vector2D Vector2D::operator-(const Vector2D &other) const
 	{
-		return Vector2D(m_x - other.m_x, m_y - other.m_y);
+		return Vector2D(x - other.x, y - other.y);
 	}
 
 	const Vector2D Vector2D::operator*(float scalar) const
 	{
-		return Vector2D(scalar * m_x, scalar * m_y);
+		return Vector2D(scalar * x, scalar * y);
 	}
 
 	const Vector2D Vector2D::operator-() const
 	{
-		return Vector2D(-m_x, -m_y);
+		return Vector2D(-x, -y);
 	}
 
 	const Vector2D Vector2D::operator+=(const Vector2D & other)
 	{
 		Vector2D result = *this + other;
-		m_x = result.m_x; m_y = result.m_y;
+		x = result.x; y = result.y;
 		return *this + other;
 	}
 }

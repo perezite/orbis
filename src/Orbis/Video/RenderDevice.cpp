@@ -112,7 +112,7 @@ namespace Video
 		Matrix3 camMatrix = Camera::GetInstance()->CalcCamMatrix();
 		start = camMatrix * start;
 		end = camMatrix * end;
-		GLfloat vertexArray[4] = { start.GetX(), start.GetY(), end.GetX(), end.GetY() };
+		GLfloat vertexArray[4] = { start.x, start.y, end.x, end.y };
 
 		// prepare
 		glDisable(GL_BLEND);
@@ -155,8 +155,8 @@ namespace Video
 			for (unsigned int j = 0; j < mesh->GetNumVertices(); j++)
 			{
 				Vector2D pos = mvpMatrix * Vector2D(m_vertexArray[current], m_vertexArray[current + 1]);
-				m_vertexArray[current] = pos.GetX();
-				m_vertexArray[current + 1] = pos.GetY();
+				m_vertexArray[current] = pos.x;
+				m_vertexArray[current + 1] = pos.y;
 				current += mesh->GetVertexSize();
 			}
 		}
