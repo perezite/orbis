@@ -1,7 +1,5 @@
 TODO:
 - Texture Atlas implementieren
-	- Mesh Offsets etc. buffern (siehe RenderDevice::Render)
-	- Beide Shader gleichschalten, so dass sie die gleichen Uniforms verwenden (selbst wenn diese nicht verwendet werden)
 	- Packing-Algorithmus direkt im Level implementieren mithilfe graphischer Darstellung
 		-- Referenz: https://www.youtube.com/watch?v=rVp5--Gx6Ks
 	- Texture Atlas Klasse implementieren
@@ -10,7 +8,6 @@ TODO:
 		- Die Texture-Klasse so umschreiben, dass sie ggf. den SpriteAtlas verwendet zu dem sie hinzugefügt wurde.
 	- RenderDevice anpassen, so dass pro TextureAtlas nur ein einziger DrawCall ausgeführt wird
 	- Texture Atlassing in Level1 einbinden  
-- Logik in SpriteRenderer und RectangleRenderer fixen (aktuell wird bei jeder Instanz der VBO neu gesetzt mit den immer gleichen Daten)
 - Coroutinen implementieren
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
