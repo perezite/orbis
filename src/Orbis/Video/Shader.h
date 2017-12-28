@@ -3,9 +3,6 @@
 #include "Color.h"
 #include "RenderMode.h"
 
-#include "../../Base/Math/Matrix4.h"
-using namespace Math;
-
 #include <string>
 #include <vector>
 
@@ -35,9 +32,6 @@ namespace Video
 
 		// set a uniform value
 		void SetUniform(std::string id, const Color& color);
-
-		// set a uniform value
-		void SetUniform(std::string id, const Matrix4& mat);
 
 		// enable the shader
 		void Use();

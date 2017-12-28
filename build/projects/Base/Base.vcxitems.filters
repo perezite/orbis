@@ -21,9 +21,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix4.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp">
       <Filter>Math</Filter>
     </ClCompile>
@@ -43,9 +40,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix4.h">
-      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.h">
       <Filter>Math</Filter>

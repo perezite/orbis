@@ -129,12 +129,6 @@ namespace Video
 		glUniform4f(handle, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 	}
 
-	void Shader::SetUniform(std::string id, const Matrix4 & mat)
-	{
-		GLint handle = glGetUniformLocation(m_programId, id.c_str());
-		glUniformMatrix4fv(handle, 1, GL_FALSE, mat.GetValues());
-	}
-
 	void Shader::Use()
 	{
 		glUseProgram(m_programId);
