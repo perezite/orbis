@@ -1,7 +1,5 @@
 TODO:
 - Texture Atlas implementieren
-	- Packing-Algorithmus direkt im Level implementieren mithilfe graphischer Darstellung
-		-- Referenz: https://www.youtube.com/watch?v=rVp5--Gx6Ks
 	- Texture Atlas Klasse implementieren
 		- AddRange Methode implementieren, welche mehrere Textures hinzufügt
 		- Generate Methode implementieren, welche den Atlas berechnet. Dazu die vorher geschriebene Logik verwenden

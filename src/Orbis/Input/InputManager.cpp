@@ -33,6 +33,7 @@ namespace Input
 		SDL_Event event;
 
 		m_tapsGoingDown.clear();
+		m_keysGoingDown.clear();
 
 		while (SDL_PollEvent(&event))
 		{
@@ -43,6 +44,7 @@ namespace Input
 					break;
 				case SDL_KEYDOWN:
 					m_keysDown.insert((KeyCode)event.key.keysym.sym);
+					m_keysGoingDown.insert((KeyCode)event.key.keysym.sym);
 					break;
 				case SDL_KEYUP:
 					m_keysDown.erase((KeyCode)event.key.keysym.sym);
@@ -90,6 +92,11 @@ namespace Input
 	bool InputManager::IsKeyDown(KeyCode keyCode)
 	{
 		return m_keysDown.count(keyCode) == 1;
+	}
+
+	bool InputManager::IsKeyGoingDown(KeyCode keyCode)
+	{
+		return m_keysGoingDown.count(keyCode) == 1;
 	}
 
 	bool InputManager::IsTapDown()

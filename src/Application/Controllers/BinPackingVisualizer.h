@@ -23,16 +23,19 @@ namespace Controllers
 		// render
 		void Render();
 
+		// update
+		void Update();
+
 	protected:
-		// perform packing
+		// perform packing up the the given algorithmic step
 		// reference: https://www.youtube.com/watch?v=rVp5--Gx6Ks
-		void Pack();
+		void Pack(unsigned int maxStep);
 
 		// sort rects by area
 		void SortRectsByArea();
 
 		// find the smallest partition where a rect still fits in
-		unsigned int FindSmallestFittingPartition(std::vector<Rect> m_partitions, Rect rect);
+		unsigned int FindSmallestFittingPartition(std::vector<Rect> m_partitionBuffer, Rect rect);
 
 		// translate, such that the rect's bottom left coincides with the given point
 		void TranslateRect(Rect& rect, Vector2D bottomLeftTargetPos);
@@ -47,8 +50,14 @@ namespace Controllers
 		// colors for the recgs
 		std::vector<Color> m_rectColors;
 
+		// all partitions generated during bin packing
+		std::vector<Rect> m_partitionBuffer;
+
 		// the bin to be filled
 		Rect m_bin;
+
+		// current algorithmic bin pack step
+		unsigned int m_currentStep;
 
 		// number of rects
 		static const unsigned int NUM_RECTS;

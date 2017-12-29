@@ -27,10 +27,13 @@ namespace Input
 		// is key pressed
 		bool IsKeyDown(KeyCode keyCode);
 
+		// is key going down
+		bool IsKeyGoingDown(KeyCode keyCode);
+
 		// is a tap pressed
 		bool IsTapDown();
 
-		// is a tap down
+		// is a tap going down
 		bool IsTapGoingDown();
 
 		// get the normalized tap position
@@ -43,10 +46,13 @@ namespace Input
 		// list of currently pressed keys
 		std::set<KeyCode> m_keysDown;
 
+		// list of keys going down
+		std::set<KeyCode> m_keysGoingDown;
+
 		// list of currently pressed taps
 		std::set<Sint64> m_tapsDown;
 
-		// list of taps down 
+		// list of taps going down 
 		std::set<Sint64> m_tapsGoingDown;
 
 		// the last recorded tap position

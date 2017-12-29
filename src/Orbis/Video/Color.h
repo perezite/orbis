@@ -11,6 +11,9 @@ namespace Video
 		// green color
 		static const Color Green;
 
+		// red color
+		static const Color Red;
+
 	public:
 		// ctor
 		Color(float r_, float g_, float b_, float a_ = 1.0f) :
