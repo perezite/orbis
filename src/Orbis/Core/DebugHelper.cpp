@@ -14,7 +14,7 @@ namespace Core
 		VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(start, end, color);
 	}
 
-	void DebugHelper::DrawRect(Rect rect, Color color)
+	void DebugHelper::DrawSolidRect(Rect rect, Color color)
 	{
 		#ifndef _DEBUG
 			throw Exception("DebugHelper::DrawRectangle(): Debug functionality can only be called in debug mode");

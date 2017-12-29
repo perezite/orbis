@@ -22,6 +22,6 @@ namespace Core
 		static void DrawLine(Vector2D start, Vector2D end, Color color = Color::Green);
 
 		// draw a debug wireframe rectangle
-		static void DrawRect(Rect rect, Color color);
+		static void DrawSolidRect(Rect rect, Color color);
 	};
 }

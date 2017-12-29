@@ -35,6 +35,19 @@ namespace Math
 
 		// get the area
 		float GetArea() const { return GetWidth() * GetHeight(); }
+
+		// get left
+		float GetLeft() const { return leftBottom.x; }
+
+		// get bottom
+		float GetBottom() const { return leftBottom.y; }
+	
+		// get right
+		float GetRight() const { return rightTop.x; }
+
+		// get top
+		float GetTop() const { return rightTop.y; }
+
 	public:
 		// the left bottom corner
 		Vector2D leftBottom;

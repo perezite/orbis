@@ -14,7 +14,7 @@ using namespace Core;
 namespace Controllers
 {
 	// number of rects
-	const unsigned int BinPackingVisualizer::NUM_RECTS = 10;
+	const unsigned int BinPackingVisualizer::NUM_RECTS = 14;
 
 	// the range for generated extents
 	const Range BinPackingVisualizer::EXTENTS_RANGE(0.1f, 0.2f);
@@ -22,7 +22,7 @@ namespace Controllers
 	BinPackingVisualizer::BinPackingVisualizer()
 		: m_bin(-0.5f, -0.5f, 0.5f, 0.5f)
 	{
-		// insert rects
+		// insert rects and colors
 		for (unsigned int i = 0; i < NUM_RECTS; i++)
 		{
 			float width = MathHelper::GetRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
@@ -30,6 +30,7 @@ namespace Controllers
 			Vector2D leftBottom(-width / 2.0f, -height / 2.0f);
 			Vector2D rightTop(width / 2.0f, height / 2.0f);
 			m_rects.push_back(Rect(leftBottom, rightTop));
+			m_rectColors.push_back(Color(MathHelper::GetRandom(), MathHelper::GetRandom(), MathHelper::GetRandom()));
 		}
 
 		Pack();
@@ -37,7 +38,10 @@ namespace Controllers
 
 	void BinPackingVisualizer::Render()
 	{
-		DebugHelper::DrawRect(Rect(-0.25f, -0.25f, 0.25f, 0.25f), Color::Green);
+		for (unsigned int i = 0; i < m_rects.size(); i++)
+		{
+			DebugHelper::DrawSolidRect(m_rects[i], m_rectColors[i]);
+		}
 	}
 
 	void BinPackingVisualizer::Pack()
@@ -52,9 +56,17 @@ namespace Controllers
 		{
 			// 3a) find smallest fitting partition for current rect
 			unsigned int partitionIdx = FindSmallestFittingPartition(partitions, m_rects[i]);
-		
+
 			// 3b) move the rect to the bottom left corner of the selected partition
 			TranslateRect(m_rects[i], partitions[partitionIdx].leftBottom);
+
+			// 3c) split the current partition into two parts
+			std::tuple<Rect, Rect> rects = Split(partitions[partitionIdx], m_rects[i]);
+			
+			// 4c) remove the orginal partitions, then add the sub-partitions 
+			partitions.erase(partitions.begin() + partitionIdx);
+			partitions.push_back(std::get<0>(rects));
+			partitions.push_back(std::get<1>(rects));
 		}
 	}
 
@@ -103,5 +115,27 @@ namespace Controllers
 
 		rect.leftBottom += dist;
 		rect.rightTop += dist;
+	}
+	std::tuple<Rect, Rect> BinPackingVisualizer::Split(Rect partition, Rect rect)
+	{
+		bool splitVertical = rect.GetWidth() > rect.GetHeight();
+		Rect smallerBin; Rect largerBin;
+
+		if (splitVertical)
+		{
+			smallerBin = Rect(	rect.GetRight(), partition.GetBottom(),
+								partition.GetRight(), rect.GetTop());
+			largerBin = Rect(	partition.GetLeft(), rect.GetTop(),
+								partition.GetRight(), partition.GetTop());
+		}
+		else
+		{
+			smallerBin = Rect(	partition.GetLeft(), rect.GetTop(),
+								rect.GetRight(), partition.GetTop());
+			largerBin = Rect(	rect.GetRight(), partition.GetBottom(),
+								partition.GetRight(), partition.GetTop());
+		}
+
+		return std::make_tuple(smallerBin, largerBin);
 	}
 }

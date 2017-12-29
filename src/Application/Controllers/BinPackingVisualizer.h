@@ -1,13 +1,16 @@
 #pragma once
 
 #include "../../Orbis/Components/Component.h"
+#include "../../Orbis/Video/Color.h"
 using namespace Components;
+using namespace Video;
 
 #include "../../Base/Math/Rect.h"
 #include "../../Base/Math/Range.h"
 using namespace Math;
 
 #include <vector>
+#include <tuple>
 
 namespace Controllers
 {
@@ -34,9 +37,15 @@ namespace Controllers
 		// translate, such that the rect's bottom left coincides with the given point
 		void TranslateRect(Rect& rect, Vector2D bottomLeftTargetPos);
 
+		// split the given partition with the given rect at the left bottom
+		std::tuple<Rect, Rect> Split(Rect partition, Rect rect);
+
 	private:
 		// the rects to fill into the bin
 		std::vector<Rect> m_rects;
+
+		// colors for the recgs
+		std::vector<Color> m_rectColors;
 
 		// the bin to be filled
 		Rect m_bin;
