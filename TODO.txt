@@ -1,11 +1,13 @@
 TODO:
 - Texture Atlas implementieren
-	- Texture Atlas Klasse implementieren
-		- AddRange Methode implementieren, welche mehrere Textures hinzufügt
-		- Generate Methode implementieren, welche den Atlas berechnet. Dazu die vorher geschriebene Logik verwenden
-		- Die Texture-Klasse so umschreiben, dass sie ggf. den SpriteAtlas verwendet zu dem sie hinzugefügt wurde.
+	- Rausfinden, wie gross ein Atlas in Unity ist
+	- Methode TextureAtlas::Generate hinzufügen. Erstellt aktuell einen trivialen Atlas mit der selben Grösse wie in Unity aber nur einer einzigen Texture links unten
+	- Texture-Klasse updaten, so dass der Atlas verwendet wird. Ausserdem Speicher der Original-Textur freigeben
+	- RenderDevice so anpassen, dass die Texturen wieder korrekt gerendert werden
 	- RenderDevice anpassen, so dass pro TextureAtlas nur ein einziger DrawCall ausgeführt wird
-	- Texture Atlassing in Level1 einbinden  
+	- Texture Atlassing in Level1 einbinden 
+	- Anzahl Draw Calls beim 
+	- Performance Regressionstest durchführen
 - Coroutinen implementieren
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
