@@ -6,9 +6,10 @@ namespace Video
 {
 	const unsigned int TextureAtlas::MAX_ATLAS_SIZE = 1024;
 
-	TextureAtlas::TextureAtlas(std::vector<Texture*> textures)
+	TextureAtlas * TextureAtlas::GetInstance()
 	{
-		AddRange(textures);
+		static TextureAtlas instance;
+		return &instance;
 	}
 
 	void TextureAtlas::AddRange(std::vector<Texture*> textures)

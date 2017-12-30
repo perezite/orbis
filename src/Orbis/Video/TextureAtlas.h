@@ -9,11 +9,15 @@ namespace Video
 	class TextureAtlas
 	{
 	public:
-		// ctor
-		TextureAtlas(std::vector<Texture*> textures);
+		// get singleton instance
+		TextureAtlas* GetInstance();
 
 		// add a range of textures
 		void AddRange(std::vector<Texture*> textures);
+
+	protected:
+		// singleton ctor
+		TextureAtlas() {};
 
 	private:
 		// the textures

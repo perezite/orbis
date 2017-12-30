@@ -16,10 +16,6 @@ namespace Levels
 		Texture* redBlockTex = new Texture("Textures/RedBlock.png", true);
 		Texture* greenBlockTex = new Texture("Textures/GreenBlock.png", true);
 
-		// init atlases
-		// TextureAtlas* atlas1 = new TextureAtlas( { yellowBlockTex } );
-		// TextureAtlas* atlas2 = new TextureAtlas( { redBlockTex } );
-
 		// init camera
 		Entity* cam = new Entity();
 		cam->AddComponent(new Camera());

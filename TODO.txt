@@ -1,7 +1,5 @@
 TODO:
 - Texture Atlas implementieren
-	- Branch erstellen für das Texture-Atlassing
-	- TextureAtlas als Singleton implementieren
 	- Im Atlas eine Page erzeugen mit der maximalen Texture-Grösse auf dem System	
 	- Sicherstellen, dass zu Entwicklungszwecken nur eine Texture in einen Atlas geschoben werden kann
 	- In Texture eine temporäre Variable m_hasAtlas hinzufügen
