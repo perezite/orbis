@@ -8,22 +8,22 @@ using namespace Math;
 
 namespace Algorithms
 {
-	// an algorithm to pack a list of rects into another rect (bin)
+	// an algorithm to tightly pack a list of rects into an unlimited supply of bins of equal size
 	class BinPacking
 	{
 	public:
 		// execute the algorithm
-		static std::vector<Rect> Execute(Rect bin, std::vector<Rect> origRects);
+		static std::vector<std::vector<Rect>> Execute(Rect bin, std::vector<Rect> rects);
 
 		// execute the algorithm up to n steps
-		static std::vector<Rect> Execute(Rect bin, std::vector<Rect> origRects, unsigned int nSteps);
+		static std::vector<std::vector<Rect>> Execute(Rect bin, std::vector<Rect> rects, unsigned int numSteps);
 
-		// get partitions generated during last execution. Can be used for debugging
+		// get partitions generated during last execution of last bin. Can be used for debugging
 		static std::vector<Rect> GetPartitionBuffer() { return m_partitionBuffer; };
 
 	protected:
-		// pack the rects into the bin
-		static std::vector<Rect> Pack(Rect bin, std::vector<Rect> origRects, unsigned int maxSteps);
+		// pack the rects into the bin. Inserted rects are removed from the passed list
+		static std::vector<Rect> Pack(Rect bin, std::vector<Rect>& rects, unsigned int numSteps);
 
 		// sort rects by area
 		static void SortRectsByArea(std::vector<Rect>& rects);
@@ -38,7 +38,7 @@ namespace Algorithms
 		static std::tuple<Rect, Rect> Split(Rect partition, Rect rect);
 
 	private:
-		// partitions generated during last execution. Can be used for debugging
+		// partitions generated during last execution of last bin. Can be used for debugging
 		static std::vector<Rect> m_partitionBuffer;
 	};
 }

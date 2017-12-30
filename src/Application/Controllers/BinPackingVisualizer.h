@@ -32,7 +32,7 @@ namespace Controllers
 		std::vector<Rect> m_origRects;
 
 		// the packed rects after bin packing
-		std::vector<Rect> m_packedRects;
+		std::vector<std::vector<Rect>> m_packedRects;
 
 		// colors for the recgs
 		std::vector<Color> m_rectColors;

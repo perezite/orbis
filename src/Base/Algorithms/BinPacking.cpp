@@ -9,20 +9,28 @@ namespace Algorithms
 {
 	std::vector<Rect> BinPacking::m_partitionBuffer;
 
-	std::vector<Rect> BinPacking::Execute(Rect bin, std::vector<Rect> origRects)
+	std::vector<std::vector<Rect>> BinPacking::Execute(Rect bin, std::vector<Rect> rects)
 	{
-		return Execute(bin, origRects, origRects.size());
+		return Execute(bin, rects, rects.size());
 	}
 
-	std::vector<Rect> BinPacking::Execute(Rect bin, std::vector<Rect> origRects, unsigned int maxSteps)
+	std::vector<std::vector<Rect>> BinPacking::Execute(Rect bin, std::vector<Rect> rects, unsigned int numSteps)
 	{
+		std::vector<std::vector<Rect>> packedRects;
 
-		return Pack(bin, origRects, maxSteps);
+		while (numSteps > 0)
+		{
+			std::vector<Rect> currentPackedRects = Pack(bin, rects, numSteps);
+			packedRects.push_back(currentPackedRects);
+			numSteps -= currentPackedRects.size();
+		}
+
+		return packedRects;
 	}
 
-	std::vector<Rect> BinPacking::Pack(Rect bin, std::vector<Rect> origRects, unsigned int maxSteps)
+	std::vector<Rect> BinPacking::Pack(Rect bin, std::vector<Rect>& rects, unsigned int numSteps)
 	{
-		std::vector<Rect> rects = origRects;
+		std::vector<Rect> packedRects;
 		m_partitionBuffer.clear();
 
 		// 1) sort rects by their area
@@ -32,20 +40,22 @@ namespace Algorithms
 		std::vector<Rect> partitions{ bin };
 		m_partitionBuffer.push_back(bin);
 
-		for (unsigned int i = 0; i < maxSteps; i++)
+		for (unsigned int i = 0; i < numSteps; i++)
 		{
+			Rect& currentRect = rects[0];
+
 			// 3a) find smallest fitting partition for current rect
-			int partitionIdx = FindSmallestFittingPartition(partitions, rects[i]);
+			int partitionIdx = FindSmallestFittingPartition(partitions, currentRect);
 
 			// 3b) if no fitting rect was found, the bin is full and we are done
 			if (partitionIdx == -1)
 				break;
 
 			// 3c) move the rect to the bottom left corner of the selected partition
-			TranslateRect(rects[i], partitions[partitionIdx].leftBottom);
+			TranslateRect(currentRect, partitions[partitionIdx].leftBottom);
 
 			// 3d) split the current partition into two parts
-			std::tuple<Rect, Rect> subPartitions = Split(partitions[partitionIdx], rects[i]);
+			std::tuple<Rect, Rect> subPartitions = Split(partitions[partitionIdx], currentRect);
 
 			// 3e) remove the orginal partition, then add the sub-partitions 
 			partitions.erase(partitions.begin() + partitionIdx);
@@ -55,9 +65,12 @@ namespace Algorithms
 			// store the new partitions for further visualization
 			m_partitionBuffer.push_back(std::get<0>(subPartitions));
 			m_partitionBuffer.push_back(std::get<1>(subPartitions));
+
+			packedRects.push_back(currentRect);
+			rects.erase(rects.begin());
 		}
 
-		return rects;
+		return packedRects;
 	}
 
 	void BinPacking::SortRectsByArea(std::vector<Rect>& rects)

@@ -16,7 +16,7 @@ using namespace Input;
 
 namespace Controllers
 {
-	const unsigned int BinPackingVisualizer::NUM_RECTS = 33;
+	const unsigned int BinPackingVisualizer::NUM_RECTS = 15;
 
 	const Rect BinPackingVisualizer::BIN(-0.2f, -0.2f, 0.2f, 0.2f);
 
@@ -39,8 +39,9 @@ namespace Controllers
 
 	void BinPackingVisualizer::Render()
 	{
-		for (unsigned int i = 0; i < m_currentStep; i++)
-			DebugHelper::DrawSolidRect(m_packedRects[i], m_rectColors[i]);
+		std::vector<Rect> lastBinRects = m_packedRects.empty() ? std::vector<Rect>() : m_packedRects.back();
+		for (unsigned int i = 0; i < lastBinRects.size(); i++)
+			DebugHelper::DrawSolidRect(lastBinRects[i], m_rectColors[i]);
 
 		std::vector<Rect> partitionBuffer = BinPacking::GetPartitionBuffer();
 		for (unsigned int i = 0; i < partitionBuffer.size(); i++)
