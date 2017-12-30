@@ -1,6 +1,4 @@
 TODO:
-- BinPacking Algorithmus refactoren: Keine Exception mehr werfen bei vollem Bin sondern die weiteren Rects in weitere Bins verpacken und am Ende eine Liste von Listen von gepackten Rects zurückgeben
-- Visualizer umschreiben so dass er immer den letzten Bin anzeigt
 - Texture Atlas implementieren
 	- Branch erstellen für das Texture-Atlassing
 	- TextureAtlas als Singleton implementieren
