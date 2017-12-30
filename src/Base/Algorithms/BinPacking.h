@@ -22,11 +22,14 @@ namespace Algorithms
 		static std::vector<Rect> GetPartitionBuffer() { return m_partitionBuffer; };
 
 	protected:
+		// pack the rects into the bin
+		static std::vector<Rect> Pack(Rect bin, std::vector<Rect> origRects, unsigned int maxSteps);
+
 		// sort rects by area
 		static void SortRectsByArea(std::vector<Rect>& rects);
 
-		// find the smallest partition where a rect still fits in
-		static unsigned int FindSmallestFittingPartition(std::vector<Rect> m_partitionBuffer, Rect rect);
+		// find the smallest partition where a rect still fits in or return -1 if no fitting partition was found
+		static int FindSmallestFittingPartition(std::vector<Rect> m_partitionBuffer, Rect rect);
 
 		// translate, such that the rect's bottom left coincides with the given point
 		static void TranslateRect(Rect& rect, Vector2D bottomLeftTargetPos);

@@ -1,19 +1,22 @@
 TODO:
-- BinPacking so umschreiben, dass er soweit wie möglich packt und alle gepackten Rects zurückgibt. Keine  Exception.
+- BinPacking Algorithmus refactoren: Keine Exception mehr werfen bei vollem Bin sondern die weiteren Rects in weitere Bins verpacken und am Ende eine Liste von Listen von gepackten Rects zurückgeben
+- Visualizer umschreiben so dass er immer den letzten Bin anzeigt
 - Texture Atlas implementieren
-	- Methode TextureAtlas::Generate hinzufügen. Erstellt aktuell einen trivialen Atlas mit der selben Grösse wie in Unity aber nur einer einzigen Texture links unten
-	- Texture-Klasse updaten, so dass immer der Atlas verwendet wird. Ausserdem Speicher der Original-Textur freigeben.
-	- Triviales Atlas-Paging imlementieren: Jeder Atlas hat genau eine Page
-	- Exception werfen wenn der Atlas eine Page hat und MAX_ATLAS_SIZE beim Packen überschritten wird
-	- Nach dem Packen den Atlas auf die minimale POT-Grösse zuschneiden
-	- RenderDevice so anpassen, dass die Texturen wieder korrekt gerendert werden
-	- RenderDevice anpassen, so dass pro TextureAtlas nur ein einziger DrawCall ausgeführt wird
-	- Atlas-Paging implementieren
-		- Maximale mögliche Texture-Grösse ermitteln
-		- Falls die maximale mögliche Texture-Grösse kleiner als MAX_ATLAS_SIZE ist: Atlas in mehrere Page unterteilen und die Texturen sukzessive in die mehrern Pages verpacken
-	- Texture Atlassing in Level1 einbinden 
-	- Debug-Optionen hinzufügen, so dass beim Performance-Logging die Anzahl DrawCalls mitgeloggt werden.
-	- Performance Regressionstest durchführen
+	- Branch erstellen für das Texture-Atlassing
+	- TextureAtlas als Singleton implementieren
+	- Im Atlas eine Page erzeugen mit der maximalen Texture-Grösse auf dem System	
+	- Sicherstellen, dass zu Entwicklungszwecken nur eine Texture in einen Atlas geschoben werden kann
+	- In Texture eine temporäre Variable m_hasAtlas hinzufügen
+	- Die erzeugte Atlas-Texture dem Atlas hinzufügen mit Add(). In Add() die Texture in die aktuelle Page einfügen
+	- Eine Funktion TextureAtlas::Generate() hinzufügen, welche vom LevelManager nach dem Erzeugen des Levels aufgerufen wird
+	- Generate 1) führt pro Page den BinPacking Algorithmus aus 2) Schreibt pro Page die gepackten Texturen in ein Surface 3) schneidet pro Page den Surface auf die kleinstmögliche POT-Grösse zu
+	- RenderDevice umschreiben, so dass auch die Atlas-Texture korrekt gerendert wird
+	- Texture und TextureAtlas so erweitern, dass jede Texture den Atlas verwendet. Wenn eine Page voll ist, wechselt der Atlas auf die nächste Page
+	- Korrekts Rendering verifizieren
+	- Verifizieren dass soviele DrawCalls existieren, wie es Atlas Pages gibt
+	- Texture::m_hasAtlas entfernen
+	- Branch zurückmergen
+- Debug-Optionen hinzufügen, so dass beim Performance-Logging die Anzahl DrawCalls mitgeloggt werden.
 - Coroutinen implementieren
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten

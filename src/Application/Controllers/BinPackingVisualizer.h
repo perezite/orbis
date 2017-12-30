@@ -28,9 +28,6 @@ namespace Controllers
 
 
 	private:
-		// the bin to be filled
-		Rect m_bin;
-
 		// the rects to fill into the bin
 		std::vector<Rect> m_origRects;
 
@@ -48,5 +45,8 @@ namespace Controllers
 
 		// the range for generated extents
 		static const Range EXTENTS_RANGE;
+
+		// the size of the bin
+		static const Rect BIN;
 	};
 }

@@ -9,13 +9,18 @@ namespace Algorithms
 {
 	std::vector<Rect> BinPacking::m_partitionBuffer;
 
-
 	std::vector<Rect> BinPacking::Execute(Rect bin, std::vector<Rect> origRects)
 	{
 		return Execute(bin, origRects, origRects.size());
 	}
 
 	std::vector<Rect> BinPacking::Execute(Rect bin, std::vector<Rect> origRects, unsigned int maxSteps)
+	{
+
+		return Pack(bin, origRects, maxSteps);
+	}
+
+	std::vector<Rect> BinPacking::Pack(Rect bin, std::vector<Rect> origRects, unsigned int maxSteps)
 	{
 		std::vector<Rect> rects = origRects;
 		m_partitionBuffer.clear();
@@ -30,15 +35,19 @@ namespace Algorithms
 		for (unsigned int i = 0; i < maxSteps; i++)
 		{
 			// 3a) find smallest fitting partition for current rect
-			unsigned int partitionIdx = FindSmallestFittingPartition(partitions, rects[i]);
+			int partitionIdx = FindSmallestFittingPartition(partitions, rects[i]);
 
-			// 3b) move the rect to the bottom left corner of the selected partition
+			// 3b) if no fitting rect was found, the bin is full and we are done
+			if (partitionIdx == -1)
+				break;
+
+			// 3c) move the rect to the bottom left corner of the selected partition
 			TranslateRect(rects[i], partitions[partitionIdx].leftBottom);
 
-			// 3c) split the current partition into two parts
+			// 3d) split the current partition into two parts
 			std::tuple<Rect, Rect> subPartitions = Split(partitions[partitionIdx], rects[i]);
 
-			// 4c) remove the orginal partition, then add the sub-partitions 
+			// 3e) remove the orginal partition, then add the sub-partitions 
 			partitions.erase(partitions.begin() + partitionIdx);
 			partitions.push_back(std::get<0>(subPartitions));
 			partitions.push_back(std::get<1>(subPartitions));
@@ -68,7 +77,7 @@ namespace Algorithms
 		rects = sorted;
 	}
 
-	unsigned int BinPacking::FindSmallestFittingPartition(std::vector<Rect> partitions, Rect rect)
+	int BinPacking::FindSmallestFittingPartition(std::vector<Rect> partitions, Rect rect)
 	{
 		float minArea = std::numeric_limits<float>::max();
 		int smallest = -1;
@@ -84,8 +93,6 @@ namespace Algorithms
 				}
 			}
 		}
-
-		Exception::Assert(smallest > -1, "The given rects exceed the pack space in the bin");
 
 		return smallest;
 	}

@@ -4,7 +4,7 @@
 
 namespace Video
 {
-	const unsigned int TextureAtlas::MAX_EXTENT = 2048;
+	const unsigned int TextureAtlas::MAX_ATLAS_SIZE = 1024;
 
 	TextureAtlas::TextureAtlas(std::vector<Texture*> textures)
 	{

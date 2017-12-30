@@ -16,14 +16,14 @@ using namespace Input;
 
 namespace Controllers
 {
-	// number of rects
 	const unsigned int BinPackingVisualizer::NUM_RECTS = 33;
 
-	// the range for generated extents
+	const Rect BinPackingVisualizer::BIN(-0.2f, -0.2f, 0.2f, 0.2f);
+
 	const Range BinPackingVisualizer::EXTENTS_RANGE(0.1f, 0.2f);
 
 	BinPackingVisualizer::BinPackingVisualizer()
-		: m_bin(-0.5f, -0.5f, 0.5f, 0.5f), m_currentStep(0)
+		: m_currentStep(0)
 	{
 		// insert rects and colors
 		for (unsigned int i = 0; i < NUM_RECTS; i++)
@@ -53,7 +53,7 @@ namespace Controllers
 		{ 
 			m_currentStep++;
 			m_currentStep = std::min(m_currentStep, m_origRects.size());
-			m_packedRects = BinPacking::Execute(m_bin, m_origRects, m_currentStep);
+			m_packedRects = BinPacking::Execute(BIN, m_origRects, m_currentStep);
 		}
 	}
 }
