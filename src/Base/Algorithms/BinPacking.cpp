@@ -38,7 +38,7 @@ namespace Algorithms
 			// 3c) split the current partition into two parts
 			std::tuple<Rect, Rect> subPartitions = Split(partitions[partitionIdx], rects[i]);
 
-			// 4c) remove the orginal partitions, then add the sub-partitions 
+			// 4c) remove the orginal partition, then add the sub-partitions 
 			partitions.erase(partitions.begin() + partitionIdx);
 			partitions.push_back(std::get<0>(subPartitions));
 			partitions.push_back(std::get<1>(subPartitions));
