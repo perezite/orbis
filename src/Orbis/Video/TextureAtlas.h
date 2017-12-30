@@ -18,5 +18,8 @@ namespace Video
 	private:
 		// the textures
 		std::vector<Texture*> m_textures;
+
+		// maximum page atlas width/height
+		static const unsigned int MAX_ATLAS_SIZE;
 	};
 }

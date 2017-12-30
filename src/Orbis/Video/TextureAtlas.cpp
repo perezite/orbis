@@ -4,6 +4,8 @@
 
 namespace Video
 {
+	const unsigned int TextureAtlas::MAX_EXTENT = 2048;
+
 	TextureAtlas::TextureAtlas(std::vector<Texture*> textures)
 	{
 		AddRange(textures);
