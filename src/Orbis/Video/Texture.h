@@ -35,5 +35,8 @@ namespace Video
 
 		// the image surface
 		SDL_Surface* m_surface;
+
+		// TODO: remove later
+		bool m_hasAtlas;
 	};
 }

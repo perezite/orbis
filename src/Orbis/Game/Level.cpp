@@ -1,6 +1,7 @@
 #include "Level.h"
 
 #include "../Video/VideoManager.h"
+#include "../Video/TextureAtlas.h"
 using namespace Video;
 
 #include "../../Base/System/MemoryManager.h"
@@ -34,6 +35,7 @@ namespace Game
 	{
 		if (m_isStarted == false)
 		{
+			TextureAtlas::GetInstance()->Generate();
 			StartEntities();
 			m_isStarted = true;
 		}

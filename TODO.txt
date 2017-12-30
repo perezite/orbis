@@ -1,10 +1,5 @@
 TODO:
 - Texture Atlas implementieren
-	- Im Atlas eine Page erzeugen mit der maximalen Texture-Grösse auf dem System	
-	- Sicherstellen, dass zu Entwicklungszwecken nur eine Texture in einen Atlas geschoben werden kann
-	- In Texture eine temporäre Variable m_hasAtlas hinzufügen
-	- Die erzeugte Atlas-Texture dem Atlas hinzufügen mit Add(). In Add() die Texture in die aktuelle Page einfügen
-	- Eine Funktion TextureAtlas::Generate() hinzufügen, welche vom LevelManager nach dem Erzeugen des Levels aufgerufen wird
 	- Generate 1) führt pro Page den BinPacking Algorithmus aus 2) Schreibt pro Page die gepackten Texturen in ein Surface 3) schneidet pro Page den Surface auf die kleinstmögliche POT-Grösse zu
 	- RenderDevice umschreiben, so dass auch die Atlas-Texture korrekt gerendert wird
 	- Texture und TextureAtlas so erweitern, dass jede Texture den Atlas verwendet. Wenn eine Page voll ist, wechselt der Atlas auf die nächste Page

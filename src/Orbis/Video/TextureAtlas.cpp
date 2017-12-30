@@ -1,22 +1,37 @@
 #include "TextureAtlas.h"
 
+#include "../Libraries/GL.h"
+
 #include "../../Base/System/Exception.h"
+using namespace System;
 
 namespace Video
 {
-	const unsigned int TextureAtlas::MAX_ATLAS_SIZE = 1024;
+	TextureAtlasPage::TextureAtlasPage()
+	{
+		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &m_maxSize);
+	}
+}
 
+namespace Video
+{
 	TextureAtlas * TextureAtlas::GetInstance()
 	{
 		static TextureAtlas instance;
 		return &instance;
 	}
 
-	void TextureAtlas::AddRange(std::vector<Texture*> textures)
+	void TextureAtlas::Add(Texture * texture)
 	{
-		m_textures.insert(m_textures.begin(), textures.begin(), textures.end());
+		// TODO: remove later
+		static int count = 0;
 
-		// TODO: remove after implementation is finished
-		Exception::Assert(m_textures.size() < 2, "Adding multiple textures to an atlas is not yet alloweds");
+		Exception::Assert(count == 0, "Not yet supported");
+		count++;
+	}
+
+	void TextureAtlas::Generate()
+	{
+		std::cout << "TextureAtlas::Generate()" << std::endl;
 	}
 }

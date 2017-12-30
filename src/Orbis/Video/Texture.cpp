@@ -1,5 +1,7 @@
 #include "Texture.h"
 
+#include "TextureAtlas.h"
+
 #include "../Libraries/SDL.h"
 #include "../Core/AssetHelper.h"
 using namespace Core;
@@ -70,6 +72,15 @@ namespace Video
 		SDL_FreeSurface(m_surface);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		// TODO: remove later
+		static int count = 0;
+		if (count == 0)
+		{
+			TextureAtlas::GetInstance()->Add(this);
+			m_hasAtlas = true;
+			count++;
+		}
 
 		MemoryManager<Texture>::GetInstance()->Add(this);
 	}

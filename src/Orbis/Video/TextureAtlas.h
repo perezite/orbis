@@ -6,24 +6,31 @@
 
 namespace Video
 {
+	class TextureAtlasPage
+	{
+	public:
+		// ctor
+		TextureAtlasPage();
+
+	private:
+		// maximum size
+		int m_maxSize;
+	};
+
 	class TextureAtlas
 	{
 	public:
 		// get singleton instance
-		TextureAtlas* GetInstance();
+		static TextureAtlas* GetInstance();
 
-		// add a range of textures
-		void AddRange(std::vector<Texture*> textures);
+		// add a texture 
+		void Add(Texture* texture);
 
-	protected:
-		// singleton ctor
-		TextureAtlas() {};
+		// generate the atlas
+		void Generate();
 
 	private:
 		// the textures
-		std::vector<Texture*> m_textures;
-
-		// maximum page atlas width/height
-		static const unsigned int MAX_ATLAS_SIZE;
+		std::vector<TextureAtlasPage> m_pages;
 	};
 }
