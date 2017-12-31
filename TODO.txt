@@ -1,6 +1,5 @@
 TODO:
 - Texture Atlas implementieren
-	- TextureAtlasPage in TextureChart umbenennen
 	- Implementieren, dass Texturen im selben Chart gebatched werden
 	- Korrektes Rendering verifizieren
 	- Verifizieren dass soviele DrawCalls existieren, wie es Atlas Pages gibt

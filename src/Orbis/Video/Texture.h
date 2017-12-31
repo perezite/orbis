@@ -13,7 +13,7 @@ using namespace Math;
 
 namespace Video
 {
-	class TextureAtlasPage;
+	class TextureChart;
 
 	class Texture
 	{
@@ -34,7 +34,7 @@ namespace Video
 		SDL_Surface* GetSurface() { return m_surface; }
 
 		// set the textures atlas page
-		void SetTextureAtlasPage(TextureAtlasPage* page) { m_atlasPage = page; }
+		void SetTextureAtlasPage(TextureChart* page) { m_atlasPage = page; }
 
 		// transform texture uv coordinates
 		Vector2D MapUVCoord(Vector2D texUV);
@@ -53,7 +53,7 @@ namespace Video
 		SDL_Surface* m_surface;
 
 		// the atlas page containing the texture
-		TextureAtlasPage* m_atlasPage;
+		TextureChart* m_atlasPage;
 
 		// TODO: remove later
 		bool m_hasAtlas;
