@@ -38,6 +38,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level5.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level6.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -91,6 +94,9 @@
       <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level5.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level6.h">
       <Filter>Levels</Filter>
     </ClInclude>
   </ItemGroup>

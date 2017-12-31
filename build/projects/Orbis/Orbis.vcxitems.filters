@@ -16,14 +16,14 @@
     <Filter Include="Game">
       <UniqueIdentifier>{bc42347f-d9ee-4725-b4ff-c128815552f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries">
-      <UniqueIdentifier>{101917fe-2a5c-4398-8bdc-d04bfc661aef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Settings">
       <UniqueIdentifier>{9b94b6f8-85b9-479e-a608-09c18396fe30}</UniqueIdentifier>
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{7d03d6e0-1fa7-42b9-ae20-34db5ba2d2d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{101917fe-2a5c-4398-8bdc-d04bfc661aef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

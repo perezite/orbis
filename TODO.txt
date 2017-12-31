@@ -1,14 +1,12 @@
 TODO:
 - Texture Atlas implementieren
-	- Chart-Switching mit kleiner fixierter Bin-Grösse austesten
-	- Vertikales Binning mit kleiner langezogener Bin-Grösse austesten
-	- Nochmal verifizieren dass kein Bleeding auftritt mit drei verschiedenen Bleeding-Test Texturen
 	- TextureAtlasPage in TextureChart umbenennen
 	- Implementieren, dass Texturen im selben Chart gebatched werden
 	- Korrektes Rendering verifizieren
 	- Verifizieren dass soviele DrawCalls existieren, wie es Atlas Pages gibt
 	- Texture::m_hasAtlas entfernen
 	- TODO's entfernen
+	- Performance-Regressionstest auf Mobile	
 	- Branch zurückmergen
 - Debug-Optionen hinzufügen, so dass beim Performance-Logging die Anzahl DrawCalls mitgeloggt werden.
 - Coroutinen implementieren

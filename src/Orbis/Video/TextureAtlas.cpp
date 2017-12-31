@@ -7,7 +7,7 @@ using namespace Algorithms;
 
 namespace Video
 {
-	const unsigned int TextureAtlas::PAGE_WIDTH = 128;
+	const unsigned int TextureAtlas::PAGE_WIDTH = 256;
 	const unsigned int TextureAtlas::PAGE_HEIGHT = 256;
 
 	TextureAtlas* TextureAtlas::GetInstance()
@@ -26,10 +26,10 @@ namespace Video
 		// compute the bin / page rect
 		GLint pageSize;
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &pageSize);
-		// Rect bin = Rect(0, 0, (float)pageSize, (float)pageSize);
+		Rect bin = Rect(0, 0, (float)pageSize, (float)pageSize);
 
 		// TODO: remove later
-		Rect bin = Rect(0, 0, (float)PAGE_WIDTH, (float)PAGE_HEIGHT);
+		// Rect bin = Rect(0, 0, (float)PAGE_WIDTH, (float)PAGE_HEIGHT);
 
 		// pack the texture Rects
 		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::Execute(bin, GetTextureRects());
@@ -182,7 +182,6 @@ namespace Video
 			SDL_SetSurfaceBlendMode(textures[i]->GetSurface(), SDL_BLENDMODE_NONE);
 			SDL_BlitSurface(textures[i]->GetSurface(), &sourceRect, pageSurface, &targetRect);
 			SDL_SetSurfaceBlendMode(textures[i]->GetSurface(), origBlendMode);
-
 		}
 	}
 
