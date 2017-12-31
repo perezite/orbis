@@ -1,7 +1,10 @@
 TODO:
 - Texture Atlas implementieren
-	- Mit spezieller Textur verifizieren, dass kein Bleeding auftritt
-	- Texture und TextureAtlas so erweitern, dass jede Texture den Atlas verwendet. Wenn eine Page voll ist, wechselt der Atlas auf die nächste Page
+	- Chart-Switching mit kleiner fixierter Bin-Grösse austesten
+	- Vertikales Binning mit kleiner langezogener Bin-Grösse austesten
+	- Nochmal verifizieren dass kein Bleeding auftritt mit drei verschiedenen Bleeding-Test Texturen
+	- TextureAtlasPage in TextureChart umbenennen
+	- Implementieren, dass Texturen im selben Chart gebatched werden
 	- Korrektes Rendering verifizieren
 	- Verifizieren dass soviele DrawCalls existieren, wie es Atlas Pages gibt
 	- Texture::m_hasAtlas entfernen

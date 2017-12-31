@@ -15,6 +15,44 @@ namespace Video
 {
 	class Texture;
 
+	class TextureAtlasPage;
+
+	class TextureAtlas
+	{
+	public:
+		// get singleton instance
+		static TextureAtlas* GetInstance();
+
+		// add a texture 
+		void Add(Texture* texture);
+
+		// generate the atlas
+		void Generate();
+
+	protected:
+		// singelton ctor
+		virtual ~TextureAtlas();
+
+		// get texture rects
+		std::vector<Rect> GetTextureRects();
+
+		// select textures by indexed rects
+		std::vector<Texture*> SelectTextures(std::vector<Rect> indexedRects);
+
+		// get the rect of an sdl surface
+		SDL_Rect GetSurfaceRect(SDL_Surface* surface);
+
+		// convert sdl rect to orbis rect
+		Rect ToOrbisRect(SDL_Rect rect);
+
+	private:
+		// the textures
+		std::vector<Texture*> m_textures;
+
+		// the pages
+		std::vector<TextureAtlasPage*> m_pages;
+	};
+
 	class TextureAtlasPage
 	{
 	public:
@@ -64,41 +102,5 @@ namespace Video
 
 		// the textures uv rects
 		std::map<Texture*, Rect> m_uvRects;
-	};
-
-	class TextureAtlas
-	{
-	public:
-		// get singleton instance
-		static TextureAtlas* GetInstance();
-
-		// add a texture 
-		void Add(Texture* texture);
-
-		// generate the atlas
-		void Generate();
-
-	protected:
-		// singelton ctor
-		virtual ~TextureAtlas();
-
-		// get texture rects
-		std::vector<Rect> GetTextureRects();
-
-		// select textures by indexed rects
-		std::vector<Texture*> SelectTextures(std::vector<Rect> indexedRects);
-
-		// get the rect of an sdl surface
-		SDL_Rect GetSurfaceRect(SDL_Surface* surface);
-
-		// convert sdl rect to orbis rect
-		Rect ToOrbisRect(SDL_Rect rect);
-
-	private:
-		// the textures
-		std::vector<Texture*> m_textures;
-
-		// the pages
-		std::vector<TextureAtlasPage*> m_pages;
 	};
 }
