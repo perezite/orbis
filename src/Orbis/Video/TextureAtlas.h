@@ -51,6 +51,10 @@ namespace Video
 
 		// the pages
 		std::vector<TextureAtlasPage*> m_pages;
+
+		// TODO: remove later
+		static const unsigned int PAGE_WIDTH;
+		static const unsigned int PAGE_HEIGHT;
 	};
 
 	class TextureAtlasPage

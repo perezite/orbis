@@ -1,7 +1,9 @@
 #include "BinPacking.h"
 
 #include "../System/Exception.h"
+#include "../Math/MathHelper.h"
 using namespace System;
+using namespace Math;
 
 #include <algorithm>
 
@@ -97,7 +99,8 @@ namespace Algorithms
 
 		for (unsigned int i = 0; i < partitions.size(); i++)
 		{
-			if (rect.GetWidth() < partitions[i].GetWidth() && rect.GetHeight() < partitions[i].GetHeight())
+			float eps = 0.001f;
+			if (rect.GetWidth() < (partitions[i].GetWidth() + eps) && rect.GetHeight() < (partitions[i].GetHeight() + eps))
 			{
 				if (partitions[i].GetArea() < minArea)
 				{

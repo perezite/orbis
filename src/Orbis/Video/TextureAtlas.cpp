@@ -7,6 +7,9 @@ using namespace Algorithms;
 
 namespace Video
 {
+	const unsigned int TextureAtlas::PAGE_WIDTH = 128;
+	const unsigned int TextureAtlas::PAGE_HEIGHT = 256;
+
 	TextureAtlas* TextureAtlas::GetInstance()
 	{
 		static TextureAtlas instance;
@@ -23,7 +26,10 @@ namespace Video
 		// compute the bin / page rect
 		GLint pageSize;
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &pageSize);
-		Rect bin = Rect(0, 0, (float)pageSize, (float)pageSize);
+		// Rect bin = Rect(0, 0, (float)pageSize, (float)pageSize);
+
+		// TODO: remove later
+		Rect bin = Rect(0, 0, (float)PAGE_WIDTH, (float)PAGE_HEIGHT);
 
 		// pack the texture Rects
 		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::Execute(bin, GetTextureRects());
