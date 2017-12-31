@@ -1,8 +1,6 @@
 TODO:
-- Texture Atlas implementieren	
-	- Branch zurückmergen
-- Debug-Optionen hinzufügen, so dass beim Performance-Logging die Anzahl DrawCalls mitgeloggt werden.
 - Coroutinen implementieren
+	- Kapitel lesen im NDK-Buch
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln

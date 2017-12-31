@@ -6,12 +6,11 @@
 
 #include "../Components/Camera.h"
 #include "../Core/LogHelper.h"
+#include "../Settings/Settings.h"
 using namespace Components;
 using namespace Core;
 
 #include <algorithm>
-
-// #define ORBIS_DEBUG_RENDER_DEVICE
 
 namespace Video
 {
@@ -40,9 +39,10 @@ namespace Video
 		UpdateVertexArray();
 
 		// render batched
-		#ifdef ORBIS_DEBUG_RENDER_DEVICE
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
 			int count = 0;
 		#endif // ORBIS_DEBUG_RENDER_DEVICE 
+
 		unsigned int vaoStartIndex = 0;
 		unsigned int lastBatchBegin = 0;
 		for (unsigned int batchBegin = 0; batchBegin < m_renderers.size(); batchBegin++)
@@ -95,15 +95,14 @@ namespace Video
 			lastBatchBegin = batchBegin;
 			batchBegin = batchEnd;
 
-			#ifdef ORBIS_DEBUG_RENDER_DEVICE
+			#ifdef ORBIS_DEBUG_RENDERDEVICE
 				count++;
-			#endif // ORBIS_DEBUG_RENDER_DEVICE
+			#endif // ORBIS_DEBUG_RENDERDEVICE
 		}
 
-		#ifdef ORBIS_DEBUG_RENDER_DEVICE
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
 			LogHelper::LogMessage("%d", count);
-			// std::cout << count << std::endl;
-		#endif // ORBIS_DEBUG_RENDER_DEVICE
+		#endif // ORBIS_DEBUG_RENDERDEVICE
 
 		// cleanup
 		glDisable(GL_BLEND);
