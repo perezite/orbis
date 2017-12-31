@@ -1,6 +1,19 @@
 TODO:
 - Coroutinen implementieren
-	- Kapitel lesen im NDK-Buch
+	- Ordner für temporäre Boost-Kompilation erstellen
+	- Boost testweise kompilieren für android-x86 und android-armeabi-v7a mit Anleitung aus Buch
+	- Boost testweise kompilieren für windows-x86, basierend auf meiner Coroutine-Sandbox
+	- Boost testweise nur mit Submodulen kompilieren für android-x86, android-armeabi-v7a 
+	- Boost testweise nur mit Submodulen kompilieren für windows-x86
+	- Ordner für automatisierte Boost-Kompilation erstellen in Sandbox\BoostCoroutine mit Ordnerstruktur BoostCoroutine\build\android\lib-build\boost-coroutine bzw. BoostCoroutine\build\win32\lib-build\boost-coroutine
+	- Die Submodul-Extraktion und Kompilation in Batch-Files automatisieren innerhalb der lib-build Ordner
+	- Ein Testprogramm schreiben für Windows und Android mit dem alten Coroutine-Coe
+	- Die fertigen automatisierten Kompilationsordner verschieben in orbis
+	- Den Coroutine-Code aus der Sandbox in Orbis übernehmen
+	- Testlevel für Testing erstellen 
+	- Mittels Logs verifizieren, dass Coroutinen auf android-x86, android-armeabi-va7 und windows-x86 funktionieren
+	-- http://www.technical-recipes.com/2014/how-to-use-the-boost-compiled-libraries-in-windows/
+	-- http://www.technical-recipes.com/2014/using-subset-boost-in-windows/
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln
