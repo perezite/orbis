@@ -5,7 +5,9 @@
 #include "VideoManager.h"
 
 #include "../Components/Camera.h"
+#include "../Core/LogHelper.h"
 using namespace Components;
+using namespace Core;
 
 #include <algorithm>
 
@@ -99,7 +101,8 @@ namespace Video
 		}
 
 		#ifdef ORBIS_DEBUG_RENDER_DEVICE
-			std::cout << count << std::endl;
+			LogHelper::LogMessage("%d", count);
+			// std::cout << count << std::endl;
 		#endif // ORBIS_DEBUG_RENDER_DEVICE
 
 		// cleanup
@@ -249,4 +252,3 @@ namespace Video
 	}
 
 }
-

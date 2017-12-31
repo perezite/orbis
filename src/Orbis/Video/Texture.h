@@ -34,13 +34,19 @@ namespace Video
 		SDL_Surface* GetSurface() { return m_surface; }
 
 		// set the textures atlas page
-		void SetTextureAtlasPage(TextureChart* page) { m_atlasPage = page; }
+		void SetTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
 
 		// transform texture uv coordinates
 		Vector2D MapUVCoord(Vector2D texUV);
 
 		// bind this texture
 		void Bind();
+
+		// is the texture using atlassing
+		bool UseAtlassing() const { return m_useAtlassing; }
+		
+		// get the atlas texture chart
+		TextureChart* GetAtlasChart() const { return m_atlasChart; }
 
 	private:
 		// the texture asset path
@@ -52,10 +58,10 @@ namespace Video
 		// the image surface
 		SDL_Surface* m_surface;
 
-		// the atlas page containing the texture
-		TextureChart* m_atlasPage;
+		// the texture chart containing the texture
+		TextureChart* m_atlasChart;
 
-		// TODO: remove later
-		bool m_hasAtlas;
+		// is the texture using texture atlassing
+		bool m_useAtlassing;
 	};
 }

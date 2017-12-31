@@ -51,9 +51,5 @@ namespace Video
 
 		// the pages
 		std::vector<TextureChart*> m_charts;
-
-		// TODO: remove later
-		static const unsigned int PAGE_WIDTH;
-		static const unsigned int PAGE_HEIGHT;
 	};
 }

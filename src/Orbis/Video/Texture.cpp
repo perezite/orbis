@@ -49,7 +49,7 @@ namespace
 
 namespace Video
 {
-	Texture::Texture(std::string assetPath, bool flipVertically) : m_hasAtlas(false)
+	Texture::Texture(std::string assetPath, bool flipVertically) : m_useAtlassing(false)
 	{
 		m_assetPath = assetPath;
 
@@ -73,7 +73,7 @@ namespace Video
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 		TextureAtlas::GetInstance()->Add(this);
-		m_hasAtlas = true;
+		m_useAtlassing = true;
 
 		MemoryManager<Texture>::GetInstance()->Add(this);
 	}
@@ -86,9 +86,9 @@ namespace Video
 
 	Vector2D Texture::MapUVCoord(Vector2D texUV)
 	{
-		if (m_hasAtlas)
+		if (m_useAtlassing)
 		{
-			Rect uvRect = m_atlasPage->GetUVRect(this);
+			Rect uvRect = m_atlasChart->GetUVRect(this);
 			Vector2D atlasUV(uvRect.GetLeft() + texUV.x * uvRect.GetWidth(), uvRect.GetBottom() + texUV.y * uvRect.GetHeight());
 			return atlasUV;
 		}
@@ -98,9 +98,10 @@ namespace Video
 
 	void Texture::Bind()
 	{
-		if (m_hasAtlas)
-			m_atlasPage->Bind();
+		if (m_useAtlassing)
+			m_atlasChart->Bind();
 		else 
 			glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
+
 }

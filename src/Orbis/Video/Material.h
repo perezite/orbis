@@ -42,6 +42,10 @@ namespace Video
 		// set the variables of the shader according to the shader properties
 		void PrepareShaderVariables();
 
+	protected:
+		// can the textures be batched
+		bool AreTexturesBatchEqual(Texture* const thisTex, Texture* const otherTex) const;
+
 	private:
 		// the texture
 		Texture* m_texture;

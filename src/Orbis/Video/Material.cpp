@@ -7,9 +7,7 @@ namespace Video
 {
 	bool Material::IsBatchEqualTo(Material * const other) const
 	{
-		bool areTexturesBothNull = m_texture == NULL && other->m_texture == NULL;
-		bool areTexturesEqual = m_texture == other->m_texture;
-		bool areTexturesBatchEqual = areTexturesBothNull || areTexturesEqual;
+		bool areTexturesBatchEqual = AreTexturesBatchEqual(this->GetTexture(), other->GetTexture());
 
 		bool areShadersBatchEqual = m_shader == other->m_shader;
 
@@ -24,6 +22,34 @@ namespace Video
 
 		return areTexturesBatchEqual && areShadersBatchEqual && areColorsBatchEqual;
 	}
+
+	bool Material::AreTexturesBatchEqual(Texture* const thisTex, Texture* const otherTex) const
+	{
+		// compare empty textures
+		if (thisTex == NULL && otherTex != NULL)
+			return false;
+		if (thisTex != NULL && otherTex == NULL)
+			return false;
+		if (thisTex == NULL && otherTex == NULL)
+			return true;
+
+		// compare atlassing
+		if (thisTex->UseAtlassing() && !otherTex->UseAtlassing())
+			return false;
+		if (!thisTex->UseAtlassing() && otherTex->UseAtlassing())
+			return false;
+
+		// compare direct textures
+		if (!thisTex->UseAtlassing() && !otherTex->UseAtlassing())
+			return thisTex == otherTex;
+
+		// compare atlas charts
+		if (thisTex->UseAtlassing() && otherTex->UseAtlassing())
+			return thisTex->GetAtlasChart() == otherTex->GetAtlasChart();
+
+		throw Exception("Something went really wrong!");
+	}
+
 
 	void Material::PrepareShaderVariables()
 	{
