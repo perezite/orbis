@@ -55,6 +55,10 @@ SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
 
 #define SDL_Init(flags) SDL_Verify(SDL_Init(flags))
 
+#define SDL_BlitSurface_old SDL_UpperBlit
+#undef SDL_BlitSurface
+#define SDL_BlitSurface(a, b, c, d) SDL_Verify(SDL_BlitSurface_old(a, b, c, d))
+
 #define IMG_Load(path) IMG_Verify(IMG_Load(path))
 
 #endif

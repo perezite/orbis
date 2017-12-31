@@ -54,5 +54,8 @@ namespace Math
 
 		// the right top corner
 		Vector2D rightTop;
+
+		// an index, can be used to identify rects after a non order-stable algorithm was performed
+		unsigned int index;
 	};
 }

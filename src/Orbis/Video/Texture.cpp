@@ -49,7 +49,7 @@ namespace
 
 namespace Video
 {
-	Texture::Texture(std::string assetPath, bool flipVertically)
+	Texture::Texture(std::string assetPath, bool flipVertically) : m_hasAtlas(false)
 	{
 		m_assetPath = assetPath;
 
@@ -69,7 +69,6 @@ namespace Video
 		glGenTextures(1, &m_textureHandle);
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
-		SDL_FreeSurface(m_surface);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
@@ -88,10 +87,26 @@ namespace Video
 	Texture::~Texture()
 	{
 		glDeleteTextures(1, &m_textureHandle);
+		SDL_FreeSurface(m_surface);
+	}
+
+	Vector2D Texture::MapUVCoord(Vector2D texUV)
+	{
+		if (m_hasAtlas)
+		{
+			Rect uvRect = m_atlasPage->GetUVRect(this);
+			Vector2D atlasUV(uvRect.GetLeft() + texUV.x * uvRect.GetWidth(), uvRect.GetBottom() + texUV.y * uvRect.GetHeight());
+			return atlasUV;
+		}
+		else
+			return texUV;
 	}
 
 	void Texture::Bind()
 	{
-		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
+		if (m_hasAtlas)
+			m_atlasPage->Bind();
+		else 
+			glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
 }

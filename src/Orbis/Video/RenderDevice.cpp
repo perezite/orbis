@@ -116,22 +116,6 @@ namespace Video
 
 		glLineWidth(3);
 		DrawDebugPrimitive(vertexArray, 4, color, RenderMode::Lines);
-
-		/*// prepare
-		glDisable(GL_BLEND);
-		Shader* shader = Shader::GetFlatShader();
-		shader->Use();
-		shader->SetUniform("u_vColor", color);
-		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");
-		glEnableVertexAttribArray(positionAttribLocation);
-		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
-
-		// draw
-		glDrawArrays(RenderMode::Lines, 0, 2);
-
-		// cleanup
-		glDisableVertexAttribArray(positionAttribLocation);
-		shader->Unuse();*/
 	}
 
 	void RenderDevice::DrawDebugRect(Rect rect, Color color)
@@ -145,23 +129,6 @@ namespace Video
 		};
 
 		DrawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
-
-		/*
-		// prepare
-		glDisable(GL_BLEND);
-		Shader* shader = Shader::GetFlatShader();
-		shader->Use();
-		shader->SetUniform("u_vColor", color);
-		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");
-		glEnableVertexAttribArray(positionAttribLocation);
-		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
-
-		// draw
-		glDrawArrays(RenderMode::Triangles, 0, 6);
-
-		// cleanup
-		glDisableVertexAttribArray(positionAttribLocation);
-		shader->Unuse();*/
 	}
 
 	void RenderDevice::UpdateVertexArray()
@@ -176,6 +143,7 @@ namespace Video
 		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
 			Mesh* mesh = m_renderers[i]->GetMesh();
+			Texture* tex = m_renderers[i]->GetMaterial()->GetTexture();
 			const std::vector<GLfloat>* mvd = mesh->GetVertexData();
 			Entity* entity = m_renderers[i]->GetParent();
 			bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
@@ -189,6 +157,12 @@ namespace Video
 				Vector2D pos = mvpMatrix * Vector2D(m_vertexArray[current], m_vertexArray[current + 1]);
 				m_vertexArray[current] = pos.x;
 				m_vertexArray[current + 1] = pos.y;
+				if (tex) {
+					Vector2D uvCoord = Vector2D(m_vertexArray[current + 2], m_vertexArray[current + 3]);
+					uvCoord = tex->MapUVCoord(uvCoord);
+					m_vertexArray[current + 2] = uvCoord.x;
+					m_vertexArray[current + 3] = uvCoord.y;
+				}
 				current += mesh->GetVertexSize();
 			}
 		}

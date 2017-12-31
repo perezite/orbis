@@ -1,11 +1,11 @@
 TODO:
 - Texture Atlas implementieren
-	- Generate 1) führt pro Page den BinPacking Algorithmus aus 2) Schreibt pro Page die gepackten Texturen in ein Surface 3) schneidet pro Page den Surface auf die kleinstmögliche POT-Grösse zu
 	- RenderDevice umschreiben, so dass auch die Atlas-Texture korrekt gerendert wird
 	- Texture und TextureAtlas so erweitern, dass jede Texture den Atlas verwendet. Wenn eine Page voll ist, wechselt der Atlas auf die nächste Page
 	- Korrekts Rendering verifizieren
 	- Verifizieren dass soviele DrawCalls existieren, wie es Atlas Pages gibt
 	- Texture::m_hasAtlas entfernen
+	- TODO's entfernen
 	- Branch zurückmergen
 - Debug-Optionen hinzufügen, so dass beim Performance-Logging die Anzahl DrawCalls mitgeloggt werden.
 - Coroutinen implementieren
