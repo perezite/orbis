@@ -11,8 +11,10 @@ namespace Video
 	{
 		// create a page surface with the smallest possible power of two size
 		Vector2D potSize = GetSmallestPowerOfTwoSize(rects);
-		SDL_PixelFormat* texFormat = textures[0]->GetSurface()->format;
-		SDL_Surface* surface = SDL_CreateRGBSurface(0, (int)potSize.x, (int)potSize.y, texFormat->BitsPerPixel, texFormat->Rmask, texFormat->Gmask, texFormat->Bmask, texFormat->Amask);
+		SDL_Surface* texSurface = textures[0]->GetSurface();
+		SDL_PixelFormat* texFormat = texSurface->format;
+		SDL_Surface* surface = SDL_CreateRGBSurface(texSurface->flags, (int)potSize.x, (int)potSize.y, 
+			texFormat->BitsPerPixel, texFormat->Rmask, texFormat->Gmask, texFormat->Bmask, texFormat->Amask);
 
 		CopySurfaces(textures, rects, surface);
 
@@ -24,9 +26,9 @@ namespace Video
 
 		// cleanup
 		SDL_FreeSurface(surface);
-		// TODO: uncomment this
-		/*for (unsigned int i = 0; i < textures.size(); i++)
-			delete textures[i];*/
+		for (unsigned int i = 0; i < textures.size(); i++)
+			SDL_FreeSurface(textures[i]->GetSurface());
+
 	}
 
 	TextureAtlasPage::~TextureAtlasPage()
@@ -43,7 +45,7 @@ namespace Video
 	{
 		SDL_Rect sdlRect;
 		sdlRect.x = (int)rect.GetLeft();
-		sdlRect.y = (int)rect.GetHeight();
+		sdlRect.y = (int)rect.GetBottom();
 		sdlRect.w = (int)rect.GetWidth();
 		sdlRect.h = (int)rect.GetHeight();
 
@@ -88,9 +90,14 @@ namespace Video
 		// copy the original textures into the page surface
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			SDL_Rect sdlSourceRect = GetSurfaceRect(textures[i]->GetSurface());
-			SDL_Rect sdlTargetRect = ToSDLRect(rects[i]);
-			SDL_BlitSurface(textures[i]->GetSurface(), &sdlSourceRect, pageSurface, &sdlTargetRect);
+			SDL_Rect sourceRect = GetSurfaceRect(textures[i]->GetSurface());
+			SDL_Rect targetRect = ToSDLRect(rects[i]);
+			SDL_BlendMode origBlendMode;
+			SDL_GetSurfaceBlendMode(textures[i]->GetSurface(), &origBlendMode);
+			SDL_SetSurfaceBlendMode(textures[i]->GetSurface(), SDL_BLENDMODE_NONE);
+			SDL_BlitSurface(textures[i]->GetSurface(), &sourceRect, pageSurface, &targetRect);
+			SDL_SetSurfaceBlendMode(textures[i]->GetSurface(), origBlendMode);
+
 		}
 	}
 
@@ -126,7 +133,6 @@ namespace Video
 	{
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			auto test = this;
 			textures[i]->SetTextureAtlasPage(this);
 		}
 	}

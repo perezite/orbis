@@ -1,8 +1,8 @@
 TODO:
 - Texture Atlas implementieren
-	- RenderDevice umschreiben, so dass auch die Atlas-Texture korrekt gerendert wird
+	- Mit spezieller Textur verifizieren, dass kein Bleeding auftritt
 	- Texture und TextureAtlas so erweitern, dass jede Texture den Atlas verwendet. Wenn eine Page voll ist, wechselt der Atlas auf die nächste Page
-	- Korrekts Rendering verifizieren
+	- Korrektes Rendering verifizieren
 	- Verifizieren dass soviele DrawCalls existieren, wie es Atlas Pages gibt
 	- Texture::m_hasAtlas entfernen
 	- TODO's entfernen

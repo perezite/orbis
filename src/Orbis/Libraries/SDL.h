@@ -59,6 +59,11 @@ SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
 #undef SDL_BlitSurface
 #define SDL_BlitSurface(a, b, c, d) SDL_Verify(SDL_BlitSurface_old(a, b, c, d))
 
+#define SDL_GetSurfaceBlendMode(a, b) SDL_Verify(SDL_GetSurfaceBlendMode(a, b))
+
+#define SDL_SetSurfaceBlendMode(a, b) SDL_Verify(SDL_SetSurfaceBlendMode(a, b))
+
+
 #define IMG_Load(path) IMG_Verify(IMG_Load(path))
 
 #endif
