@@ -1,12 +1,13 @@
 TODO:
-- Coroutinen:
-	- Versuche zur Kompilation von Boost für Android in Sandbox versionieren
 - Actors implementieren	
 	- Dummy-Actor 'Ball' implementieren mit den gleichen States wie in Blear.
 		- Zwischen den States kann mittels Tap gewechselt werden
 		- Die States werden als Log-Output angezeigt
 		- State-Machine implementieren
 		- Code analysieren und mögliche Vereinfachungen ermitteln
+- Coroutinen:
+	- Git Submodule in Sandbox einbinden, sobald der Upload abgeschlossen ist
+	- Temp-Ordner auf D: und Z: wieder löschen
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln

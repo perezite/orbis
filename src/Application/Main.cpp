@@ -6,6 +6,7 @@
 #include "Levels/Level4.h"
 #include "Levels/Level5.h"
 #include "Levels/Level6.h"
+#include "Levels/Level7.h"
 using namespace Levels;
 using namespace Sandboxing;
 
@@ -31,7 +32,7 @@ int main(int argc, char* args[])
 	{
 		OrbisMain::GetInstance()->Initialize();
 		
-		Level3* level = new Level3();
+		Level7* level = new Level7();
 		LevelManager::GetInstance()->QueueLevel(level);
 
 		OrbisMain::GetInstance()->Run();
