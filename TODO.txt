@@ -1,26 +1,12 @@
 TODO:
-- Coroutinen implementieren
-	- Boost testweise kompilieren für android-x86 und android-armeabi-v7a mit Anleitung aus Buch
-	- Ordner für automatisierte Boost-Kompilation erstellen in Sandbox\BoostCoroutine mit Ordnerstruktur BoostCoroutine\build\android\lib-build\boost-coroutine bzw. BoostCoroutine\build\win32\lib-build\boost-coroutine
-	- Testweise in Orbis verifizieren, dass android-x86 und android-armeabi-v7a in Orbis eingebunden werden können
-	- Die Kompilation in einem Batch-Files automatisieren innerhalb der lib-build Ordner
-	- Die fertigen automatisierten Kompilationsordner verschieben in orbis
-	- Kompilation von Boost dokumentieren
-	- Path-Fix für Android von hier dokumentieren in Readme.md: https://svn.boost.org/trac10/ticket/12711 
-	- Den Coroutine-Code aus der Sandbox in Orbis übernehmen
-	- Testlevel für Testing erstellen 
-	- Mittels Logs verifizieren, dass Coroutinen auf android-x86, android-armeabi-va7 und windows-x86 funktionieren
-	- Ordner für temporäre Boost-Kompilation wieder löschen
-	-- http://www.technical-recipes.com/2014/how-to-use-the-boost-compiled-libraries-in-windows/
-	-- http://www.technical-recipes.com/2014/using-subset-boost-in-windows/
-	-- Latest Boost scheint nicht out-of-the-box kompilierbar zu sein: https://github.com/boostorg/build/issues/236
-	-- https://stackoverflow.com/questions/37679587/how-to-compile-boost-1-61-for-android-ndk-11	
-	-- http://www.ilikebigbits.com/blog/2016/3/20/coroutines-for-games	
-	-- Hinweis: Submodule extrahieren nicht nötig, da nur die Header-Files extrahiert werden aber nicht die Libs (welche für mich relevant sind). Die Libs können ganz einfach per trial-and-error inkludiert werden. Es kommt ein Kompilationsfehler, wenn die benötigten Libs nicht vorhanden sind.
-	-- Boost hangs with gcc cross compilation: https://svn.boost.org/trac10/ticket/12711
-	-- https://gist.github.com/yizhang82/28842f7dbae34b59fcd7b4d74b4a19d4
-	-- http://munteanumarian.blogspot.ch/2014/10/build-boost-for-android.html
-	-- https://schneide.wordpress.com/2016/09/19/c-coroutines-on-windows-with-the-fiber-api/
+- Coroutinen:
+	- Versuche zur Kompilation von Boost für Android in Sandbox versionieren
+- Actors implementieren	
+	- Dummy-Actor 'Ball' implementieren mit den gleichen States wie in Blear.
+		- Zwischen den States kann mittels Tap gewechselt werden
+		- Die States werden als Log-Output angezeigt
+		- State-Machine implementieren
+		- Code analysieren und mögliche Vereinfachungen ermitteln
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln
