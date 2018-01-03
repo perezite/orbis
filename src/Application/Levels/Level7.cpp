@@ -20,7 +20,10 @@ namespace Levels
 
 		// init ball 
 		Entity* ballEntity = new Entity();
-		ballEntity->AddComponent(new BallController());
+		BallController* ballController = new BallController();
+		BallEffectsController* ballEffectsController = new BallEffectsController();
+		ballController->SetBallEffectsController(ballEffectsController);
+		ballEntity->AddComponent(ballController);
 		AddEntity(ballEntity);
 	}
 }

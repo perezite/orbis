@@ -11,12 +11,14 @@ using namespace Game;
 using namespace Input;
 
 #define __STATE_AIMING
+#define __STATE_FLYING
+#define __STATE_DYING
 
 namespace Controllers
 {
 	void BallController::Update()
 	{
-		switch (m_currentState)
+		switch (m_state)
 		{
 		case State::Aiming_Enter:
 			AimingEnter();
@@ -24,8 +26,17 @@ namespace Controllers
 		case State::Aiming_Run:
 			AimingRun();
 			break;
-		case State::Aiming_Exit:
-			AimingExit();
+		case State::Flying_Enter:
+			FlyingEnter();
+			break;
+		case State::Flying_Run:
+			FlyingRun();
+			break;
+		case State::Dying_Enter:
+			DyingEnter();
+			break;
+		case State::Dying_Run:
+			DyingRun();
 			break;
 		default:
 			throw Exception("State not implemented");
@@ -38,7 +49,7 @@ namespace Controllers
 		{
 			LogHelper::LogMessage("BallController::AimingEnter");
 			GetParent()->GetTransform()->position = Vector2D::Zero;
-			m_currentState = State::Aiming_Run;
+			m_state = State::Aiming_Run;
 		}
 
 		void BallController::AimingRun()
@@ -48,14 +59,47 @@ namespace Controllers
 			GetParent()->GetTransform()->rotation = aimingCurrentAngle;
 
 			if (InputManager::GetInstance()->IsTapGoingDown())
-				m_currentState = State::Aiming_Exit;
-		}
-
-		void BallController::AimingExit()
-		{
-			LogHelper::LogMessage("BallController::AimingExit");
+				m_state = State::Flying_Enter;
 		}
 
 	#endif
 
+	#ifdef __STATE_FLYING
+		
+		void BallController::FlyingEnter()
+		{
+			LogHelper::LogMessage("BallController::FlyingEnter");
+			m_state = State::Flying_Run;
+		}
+
+		void BallController::FlyingRun()
+		{
+			LogHelper::LogMessage("BallController::FlyingRun");
+			if (InputManager::GetInstance()->IsTapGoingDown())
+			{
+				m_state = State::Dying_Enter;
+			}
+		}
+
+	#endif
+
+	#ifdef __STATE_DYING
+
+		void BallController::DyingEnter()
+		{
+			LogHelper::LogMessage("BallController::DyingEnter()");
+			if (m_ballEffectsController->Explode())
+				return;
+			
+			m_state = State::Dying_Run;
+		}
+
+
+		void BallController::DyingRun()
+		{
+			LogHelper::LogMessage("BallController::DyingRun()");
+		}
+
+	#endif
+	
 }
