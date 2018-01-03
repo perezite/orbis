@@ -5,43 +5,57 @@ using namespace System;
 
 #include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Game/Entity.h"
-
+#include "../../orbis/Input/InputManager.h"
 using namespace Core;
 using namespace Game;
+using namespace Input;
+
+#define __STATE_AIMING
 
 namespace Controllers
 {
-	static const float AIMING_ANGLE = 70.0f;
-
-	static const float AIMING_OMEGA = 150.0f;
-
 	void BallController::Update()
 	{
 		switch (m_currentState)
 		{
-		case State::State_PrepareAiming:
-			PrepareAiming();
+		case State::Aiming_Enter:
+			AimingEnter();
 			break;
-		case State::State_Aiming:
-			Aiming();
+		case State::Aiming_Run:
+			AimingRun();
+			break;
+		case State::Aiming_Exit:
+			AimingExit();
 			break;
 		default:
-			throw Exception("Not implemented");
+			throw Exception("State not implemented");
 		}
 	}
 
-	void BallController::PrepareAiming()
-	{
-		LogHelper::LogMessage("BallController::PrepareAiming");
-		GetParent()->GetTransform()->position = Vector2D::Zero;
-		m_currentState = State::State_Aiming;
-	}
+	#ifdef __STATE_AIMING
 
-	void BallController::Aiming()
-	{
-		LogHelper::LogMessage("BallController::Aiming");
-		aimingCurrentAngle = 0.0f;
-		GetParent()->GetTransform()->rotation = aimingCurrentAngle;
+		void BallController::AimingEnter()
+		{
+			LogHelper::LogMessage("BallController::AimingEnter");
+			GetParent()->GetTransform()->position = Vector2D::Zero;
+			m_currentState = State::Aiming_Run;
+		}
 
-	}
+		void BallController::AimingRun()
+		{
+			LogHelper::LogMessage("BallController::AimingRun");
+			aimingCurrentAngle = 0.0f;
+			GetParent()->GetTransform()->rotation = aimingCurrentAngle;
+
+			if (InputManager::GetInstance()->IsTapGoingDown())
+				m_currentState = State::Aiming_Exit;
+		}
+
+		void BallController::AimingExit()
+		{
+			LogHelper::LogMessage("BallController::AimingExit");
+		}
+
+	#endif
+
 }

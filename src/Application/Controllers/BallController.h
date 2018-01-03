@@ -10,32 +10,28 @@ namespace Controllers
 	private:
 		enum State 
 		{
-			State_PrepareAiming,
-			State_Aiming,
-			State_Idle
+			Aiming_Enter,
+			Aiming_Run,
+			Aiming_Exit
 		};
 
 	public:
 		// ctor
 		BallController() 
-			: m_currentState(State::State_PrepareAiming), aimingCurrentAngle(0.0f)
+			: m_currentState(State::Aiming_Enter), aimingCurrentAngle(0.0f)
 		{}
 
 		// override
 		void Update();
 
-		// prepare the aiming state
-		void PrepareAiming();
+		// enter the aiming state
+		void AimingEnter();
 	
-		// the aiming state
-		void Aiming();
+		// run the aiming state
+		void AimingRun();
 
-	private:	
-		// the aiming angle in degrees
-		static const float AIMING_ANGLE;
-
-		// the aiming rotational velocity in degrees
-		static const float AIMING_OMEGA;
+		// exit the aiming state
+		void AimingExit();
 
 	private:
 		// current state

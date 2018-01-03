@@ -6,7 +6,6 @@ TODO:
 		- State-Machine implementieren
 		- Code analysieren und mögliche Vereinfachungen ermitteln
 - Coroutinen:
-	- Git Submodule in Sandbox einbinden, sobald der Upload abgeschlossen ist
 	- Temp-Ordner auf D: und Z: wieder löschen
 - Partikelsystem implementieren
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
