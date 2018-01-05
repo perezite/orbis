@@ -12,12 +12,10 @@ namespace Controllers
 	private:
 		enum State
 		{
-			Aiming_Enter,
-			Aiming_Run,
-			Flying_Enter,
-			Flying_Run,
-			Dying_Enter,
-			Dying_Run
+			Aiming_Enter, Aiming_Run,
+			Flying_Enter, Flying_Run,
+			Dying_Enter, Dying_Run,
+			Paralysed_Enter, Paralysed_Run
 		};
 
 	public:
@@ -32,23 +30,17 @@ namespace Controllers
 		// set the ball effects controller
 		void SetBallEffectsController(BallEffectsController* ballEffectsController) { m_ballEffectsController = ballEffectsController; }
 
-		// enter the aiming state
-		void AimingEnter();
-	
-		// run the aiming state
-		void AimingRun();
+		// aiming
+		void AimingEnter();	void AimingRun();
 
-		// enter the flying state
-		void FlyingEnter();
+		// flying
+		void FlyingEnter(); void FlyingRun();
 
-		// run the flying state
-		void FlyingRun();
+		// dying
+		void DyingEnter();	void DyingRun();
 
-		// enter the dying state
-		void DyingEnter();
-
-		// run the dying state
-		void DyingRun();
+		// enter the paralysed state
+		void ParalysedEnter();	void ParalysedRun();
 
 	private:
 		// current state

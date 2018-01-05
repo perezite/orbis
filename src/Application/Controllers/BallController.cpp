@@ -13,6 +13,7 @@ using namespace Input;
 #define __STATE_AIMING
 #define __STATE_FLYING
 #define __STATE_DYING
+#define __STATE_PARALYSED
 
 namespace Controllers
 {
@@ -20,26 +21,15 @@ namespace Controllers
 	{
 		switch (m_state)
 		{
-		case State::Aiming_Enter:
-			AimingEnter();
-			break;
-		case State::Aiming_Run:
-			AimingRun();
-			break;
-		case State::Flying_Enter:
-			FlyingEnter();
-			break;
-		case State::Flying_Run:
-			FlyingRun();
-			break;
-		case State::Dying_Enter:
-			DyingEnter();
-			break;
-		case State::Dying_Run:
-			DyingRun();
-			break;
-		default:
-			throw Exception("State not implemented");
+		case State::Aiming_Enter: AimingEnter(); break;
+		case State::Aiming_Run: AimingRun(); break;
+		case State::Flying_Enter: FlyingEnter(); break;
+		case State::Flying_Run: FlyingRun(); break;
+		case State::Dying_Enter: DyingEnter(); break;
+		case State::Dying_Run: DyingRun(); break;
+		case State::Paralysed_Enter: ParalysedEnter(); break;
+		case State::Paralysed_Run: ParalysedRun(); break;
+		default: throw Exception("State not implemented");
 		}
 	}
 
@@ -90,7 +80,7 @@ namespace Controllers
 			LogHelper::LogMessage("BallController::DyingEnter()");
 			if (m_ballEffectsController->Explode())
 				return;
-			
+
 			m_state = State::Dying_Run;
 		}
 
@@ -98,8 +88,30 @@ namespace Controllers
 		void BallController::DyingRun()
 		{
 			LogHelper::LogMessage("BallController::DyingRun()");
+
+			if (InputManager::GetInstance()->IsTapGoingDown())
+				m_state = State::Paralysed_Enter;
 		}
 
 	#endif
+
+	#ifdef __STATE_PARALYSED
+
+		void BallController::ParalysedEnter()
+		{
+			LogHelper::LogMessage("BallController::ParalysedEnter");
+			m_state = State::Paralysed_Run;
+
+		}
+
+		void BallController::ParalysedRun()
+		{
+			LogHelper::LogMessage("BallController::ParalysedRun");
+			if (InputManager::GetInstance()->IsTapGoingDown())
+				m_state = State::Aiming_Enter;
+		}
+
+	#endif  
+
 	
 }

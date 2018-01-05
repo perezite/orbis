@@ -64,7 +64,7 @@ namespace Algorithms
 			partitions.push_back(std::get<0>(subPartitions));
 			partitions.push_back(std::get<1>(subPartitions));
 
-			// store the new partitions for further visualization
+			// 3f) store the new partitions for further visualization
 			m_partitionBuffer.push_back(std::get<0>(subPartitions));
 			m_partitionBuffer.push_back(std::get<1>(subPartitions));
 

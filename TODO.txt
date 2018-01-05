@@ -1,9 +1,6 @@
 TODO:
 - Actors implementieren	
 	- Dummy-Actor 'Ball' implementieren mit den gleichen States wie in Blear.
-		- Zwischen den States kann mittels Tap gewechselt werden
-		- Die States werden als Log-Output angezeigt
-		- State-Machine implementieren
 		- Code analysieren und mögliche Vereinfachungen ermitteln
 - Coroutinen:
 	- Temp-Ordner auf D: und Z: wieder löschen

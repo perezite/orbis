@@ -9,6 +9,7 @@ using namespace Math;
 namespace Algorithms
 {
 	// an algorithm to tightly pack a list of rects into an unlimited supply of bins of equal size
+	// reference: https://www.youtube.com/watch?v=rVp5--Gx6Ks
 	class BinPacking
 	{
 	public:

@@ -17,7 +17,10 @@ namespace Controllers
 			m_explosionTimeElapsed += TimeManager::GetInstance()->GetDeltaSeconds();
 
 			if (m_explosionTimeElapsed >= 2.0f)
+			{
+				m_explosionTimeElapsed = 0.0f;
 				return false;
+			}
 
 			return true;
 		}
