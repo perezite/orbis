@@ -1,9 +1,35 @@
 TODO:
-- Actors implementieren	
-	- Dummy-Actor 'Ball' implementieren mit den gleichen States wie in Blear.
-		- Code analysieren und mögliche Vereinfachungen ermitteln
-- Coroutinen:
-	- Temp-Ordner auf D: und Z: wieder löschen
 - Partikelsystem implementieren
+	- Splines lernen mit Youtube-Video
+	- Testlevel erstellen
+	- Trivialen ParticleSystemRenderer erstellen
+	- Component ParticleSystemRenderer erstellen
+	- Trivialen Controller für grünes Partikelsystem implementieren		
+	- Folgende Parameter des ParticleSystemRenderers implementieren und kontinuierlich nachziehen im grünen Controller
+		- Lifetime
+		- ParticleLifetime
+		- InitialSpeed Range
+		- InitialSize Range
+		- InitialAlpha Range
+		- Tint
+		- IsBurst
+		- EmissionRate
+		- VelocityInheritance (in Prozent)
+		- EmissionShape (Sphere, Cone)
+			- Geometry-Klassen dafür erstellen in Base
+		- InitialVelocityBundleShape
+		- DampingThreshold
+		- DampingRate
+		- ColorOverLifetime (ColorGradient)
+		- SizeOverLifetime (Spline)
+		- InitialOmega
+			-- Vorzeichen identische mit Vorzeichen von InitialAlpha
+		- DeathParticleSubSystem
+			- Wird erzeugt beim Tod jedes Partikels des Hauptsystems
+	- Controller für rotes Partikelsystem implementieren
+	- Controller für Hintergrund Partikelsystem implementieren	
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln
+- Neues Projekt erstellen für die Implementation von Blear Level 1
+- Orbis-Library als Submodule einbinden
+- Level1 von Blear implementieren
