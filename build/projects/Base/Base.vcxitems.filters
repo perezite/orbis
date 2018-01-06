@@ -33,6 +33,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.cpp">
       <Filter>Algorithms</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\BezierCurve.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.h">
       <Filter>Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\BezierCurve.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

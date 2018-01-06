@@ -10,7 +10,7 @@ using namespace Components;
 
 namespace Components
 {
-	// can be used to visualize, edit and ultimately dump the data in a bezier curve
+	// can be used to visualize, edit and ultimately dump the data from a bezier curve
 	class BezierCurveEditor : public Component
 	{
 	public:
@@ -26,6 +26,18 @@ namespace Components
 		void Render();
 
 	protected:
+		// add or select a control point at the tapped point 
+		void AddOrSelectControlPoint();
+
+		// move the selected control point to the tapped point
+		void MoveControlPoint();
+
+		// rotate the tangent to the slope defined by the right tapped point
+		void RotateTangent();
+
+		// delete the selected control point
+		void DeleteSelectedControlPoint();
+
 		// get the index of the selected control point or -1 if no point was selected
 		unsigned int GetSelectedControlPoint(Vector2D tapPosition);
 
@@ -35,13 +47,16 @@ namespace Components
 		// control points sorter
 		static bool CompareControlPoints(Vector2D first, Vector2D second) { return first.x < second.x; };
 
-		// render a bezier line segment
-		void RenderBezierSegment(unsigned int endIndex);
+		// render the bezier curve
+		void RenderBezierCurve();
 
-		// get the bezier curve value at parameter t with control points p0, p1
-		Vector2D Bezier(float t, Vector2D p0, Vector2D p1);
+		// render the control points and tangent
+		void RenderControlPoints();
 
-		// get the bezier curve value at parameter t with control points p0, p1, p2, p3
+		// get the bezier curve value at a parameter t
+		Vector2D Bezier(float t);
+
+		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
 		Vector2D Bezier(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
 
 	private:
@@ -66,5 +81,8 @@ namespace Components
 
 		// curve sampling density (number of samples per unit line segment)
 		static const int SAMPLING_DENSITY;
+
+		// number of sampling points per curve segment
+		static const int NUM_SAMPLES;
 	};
 }
