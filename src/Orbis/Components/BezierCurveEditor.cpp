@@ -1,4 +1,4 @@
-#include "BezierCurveVisualizer.h"
+#include "BezierCurveEditor.h"
 
 #include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Video/VideoManager.h"
@@ -10,14 +10,14 @@ using namespace Core;
 #include <iostream>
 #include <algorithm>
 
-namespace Controllers
+namespace Components
 {
-	const float BezierCurveVisualizer::MARK_EXTENT = 0.01f;
-	const float BezierCurveVisualizer::SELECT_RADIUS = 0.05f;
-	const float BezierCurveVisualizer::TANGENT_LENGTH = 0.18f;
-	const int BezierCurveVisualizer::SAMPLING_DENSITY = 100;
+	const float BezierCurveEditor::MARK_EXTENT = 0.01f;
+	const float BezierCurveEditor::SELECT_RADIUS = 0.05f;
+	const float BezierCurveEditor::TANGENT_LENGTH = 0.18f;
+	const int BezierCurveEditor::SAMPLING_DENSITY = 100;
 
-	void BezierCurveVisualizer::Update()
+	void BezierCurveEditor::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
 		TimeManager* time = TimeManager::GetInstance();
@@ -66,7 +66,7 @@ namespace Controllers
 		}
 	}
 
-	void BezierCurveVisualizer::Render()
+	void BezierCurveEditor::Render()
 	{
 		RenderDevice* rd = VideoManager::GetInstance()->GetRenderDevice();
 
@@ -97,7 +97,7 @@ namespace Controllers
 		}
 	}
 
-	unsigned int BezierCurveVisualizer::GetSelectedControlPoint(Vector2D tapPosition)
+	unsigned int BezierCurveEditor::GetSelectedControlPoint(Vector2D tapPosition)
 	{
 		for (unsigned int i = 0; i < m_controlPoints.size(); i++)
 		{
@@ -108,7 +108,7 @@ namespace Controllers
 		return -1;
 	}
 
-	bool BezierCurveVisualizer::IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
+	bool BezierCurveEditor::IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
 	{
 		Vector2D controlPointPos = m_controlPoints[controlPointIndex];
 		if (Vector2D::Distance(controlPointPos, tapPosition) <= SELECT_RADIUS)
@@ -117,7 +117,7 @@ namespace Controllers
 		return false;
 	}
 
-	void BezierCurveVisualizer::RenderBezierSegment(unsigned int endIndex)
+	void BezierCurveEditor::RenderBezierSegment(unsigned int endIndex)
 	{
 		Vector2D segmentStart = m_controlPoints[endIndex - 1];
 		Vector2D segmentEnd = m_controlPoints[endIndex];
@@ -140,13 +140,13 @@ namespace Controllers
 		}
 	}
 
-	Vector2D BezierCurveVisualizer::Bezier(float t, Vector2D p0, Vector2D p1)
+	Vector2D BezierCurveEditor::Bezier(float t, Vector2D p0, Vector2D p1)
 	{
 		Vector2D p = p0 + (p1 - p0) * t;
 		return p;
 	}
 
-	Vector2D BezierCurveVisualizer::Bezier(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3) 
+	Vector2D BezierCurveEditor::Bezier(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3) 
 	{
 		float tt = t * t;
 		float ttt = tt * t;

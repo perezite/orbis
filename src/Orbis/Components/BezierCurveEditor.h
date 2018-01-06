@@ -8,14 +8,14 @@ using namespace Components;
 
 #include <vector>
 
-namespace Controllers
+namespace Components
 {
-	// visualizes a bezier curve
-	class BezierCurveVisualizer : public Component
+	// can be used to visualize, edit and ultimately dump the data in a bezier curve
+	class BezierCurveEditor : public Component
 	{
 	public:
 		// ctor
-		BezierCurveVisualizer()
+		BezierCurveEditor()
 			: Component::Component(), m_selectedControlPoint(-1)
 		{}
 
@@ -66,6 +66,5 @@ namespace Controllers
 
 		// curve sampling density (number of samples per unit line segment)
 		static const int SAMPLING_DENSITY;
-
 	};
 }

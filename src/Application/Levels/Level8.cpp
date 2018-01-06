@@ -1,8 +1,6 @@
 #include "Level8.h"
 
-#include "../Controllers/BezierCurveVisualizer.h"
-using namespace Controllers;
-
+#include "../../Orbis/Components/BezierCurveEditor.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
 using namespace Components;
@@ -23,7 +21,7 @@ namespace Levels
 
 		// add bezier curve visualizer
 		Entity* bcve = new Entity();
-		bcve->AddComponent(new BezierCurveVisualizer());
+		bcve->AddComponent(new BezierCurveEditor());
 		AddEntity(bcve);
 	}
 }

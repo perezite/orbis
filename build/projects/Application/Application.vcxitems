@@ -17,8 +17,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BezierCurveVisualizer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleController.cpp" />
@@ -38,7 +36,6 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BezierCurveVisualizer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.h" />

@@ -1,17 +1,9 @@
 TODO:
 - Partikelsystem implementieren
-	- Bezier-Curve Test-Code implementieren
-		- Testcomponente BezierCurveVisualizer erstellen
-			- Bezierkurve für das erste Kurvensegment implementieren
-			- Beliebige Anzahl an Kontrollpunkten zulassen
-			- Logik in Orbis/Components/BezierCurveEditor verschieben
-			- BezierCurve-Klasse extrahieren
-			- Koordinatensystem-Grafik hinzufügen und Klicks nur innerhalb der Grafik zulassen
-			- Dump-Funktion schreiben, welche die Koordinaten per Tastendruck ins Clipboard dumpt
-		-- https://www.youtube.com/watch?v=dXECQRlmIaE
-		-- https://www.youtube.com/watch?v=2HvH9cmHbG4
-		-- https://www.youtube.com/watch?v=Qu-QK3uoMdY
-		-- http://www.cplusplus.com/forum/beginner/14349/
+	- BezierCurve-Klasse extrahieren
+	- Koordinatensystem-Grafik hinzufügen und Klicks nur innerhalb der Grafik zulassen
+	- Dump-Funktion schreiben, welche die Koordinaten per Tastendruck ins Clipboard dumpt
+	- Controller 'BezierTester' schreiben, welcher den Scale eines gelben Bricks per Bezier-Kurve animiert
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen
 	- Trivialen Controller für grünes Partikelsystem implementieren		
