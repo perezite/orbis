@@ -17,14 +17,6 @@ namespace Math
 		return *this;
 	}
 
-	//const Vector2D Vector2D::Rotated(float alphaDegrees) const
-	//{
-	//	float alpha = MathHelper::DegreesToRadian(alphaDegrees);
-	//	float x = cosf(alpha)*x - sinf(alpha)*y;
-	//	float y = sinf(alpha)*x + cosf(alpha)*y;
-	//	return Vector2D(x, y);
-	//}
-
 	const Vector2D Vector2D::operator+(const Vector2D & other) const
 	{
 		return Vector2D(x + other.x, y + other.y);

@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BezierCurveVisualizer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level5.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level6.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level7.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Bootbox.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.cpp" />
@@ -36,6 +38,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BezierCurveVisualizer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.h" />
@@ -49,6 +52,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level5.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level6.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level7.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Bootbox.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.h" />

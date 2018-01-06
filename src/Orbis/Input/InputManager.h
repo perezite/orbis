@@ -2,6 +2,9 @@
 
 #include "KeyCode.h"
 
+#include "../Game/TransformSpace.h"
+using namespace Game;
+
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
 
@@ -36,8 +39,11 @@ namespace Input
 		// is a tap going down
 		bool IsTapGoingDown();
 
-		// get the normalized tap position
+		// get the tap position in normalized coordinates
 		Vector2D GetTapPosition();
+
+		// get the aspect ratio corrected tap position
+		Vector2D GetAspectCorrectedTapPosition();
 
 	private:
 		// singleton ctor

@@ -15,6 +15,10 @@ namespace Math
 		static const Vector2D One;
 
 	public:
+		// get distance between to points
+		static float Distance(Vector2D point1, Vector2D point2) { return (point2 - point1).GetLength(); }
+
+	public:
 		// costructor 
 		Vector2D() { x = 0.0f, y = 0.0f; }
 
@@ -29,9 +33,6 @@ namespace Math
 
 		// assignment
 		const Vector2D& operator=(const Vector2D &other);
-
-		// get a vector rotated by alpha degrees
-		// const Vector2D Rotated(float alphaDegrees) const;
 
 		// addition
 		const Vector2D operator+(const Vector2D &other) const;

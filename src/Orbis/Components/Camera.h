@@ -36,6 +36,9 @@ namespace Components
 		// get the size of the camera in word coordinates
 		Vector2D GetSize();
 
+		// get the aspect ratio (height / width)
+		float GetAspect();
+
 	private:
 		// singleton component instance
 		static Camera* m_instance;

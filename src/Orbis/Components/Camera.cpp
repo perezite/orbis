@@ -69,10 +69,13 @@ namespace Components
 
 	Vector2D Camera::GetSize()
 	{
-		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
 		Vector2D scale = GetInstance()->GetParent()->GetTransform()->scale;
-		float aspectRatio = resolution.y / resolution.x;
+		return Vector2D(scale.x, scale.y * GetAspect());
+	}
 
-		return Vector2D(scale.x, scale.y * aspectRatio);
+	float Camera::GetAspect()
+	{
+		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
+		return resolution.y / resolution.x;
 	}
 }

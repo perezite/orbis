@@ -1,7 +1,9 @@
 #include "InputManager.h"
 
 #include "../Video/VideoManager.h"
+#include "../Components/Camera.h"
 using namespace Video;
+using namespace Components;
 
 namespace 
 {
@@ -112,6 +114,15 @@ namespace Input
 	Vector2D InputManager::GetTapPosition()
 	{
 		Exception::Assert(IsTapDown(), "GetTapPosition() can only be called when a tap is pressed or going down");
+		
 		return m_tapPosition;
+	}
+
+	Vector2D InputManager::GetAspectCorrectedTapPosition()
+	{
+		Vector2D tapPos = GetTapPosition();
+		Camera* cam = Camera::GetInstance();
+		float aspect = cam->GetAspect();
+		return Vector2D(tapPos.x, aspect * tapPos.y);
 	}
 }
