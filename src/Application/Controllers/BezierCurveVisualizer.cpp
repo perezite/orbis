@@ -8,6 +8,7 @@ using namespace Video;
 using namespace Core;
 
 #include <iostream>
+#include <algorithm>
 
 namespace Controllers
 {
@@ -30,18 +31,33 @@ namespace Controllers
 			if (m_selectedControlPoint == -1)
 			{
 				m_controlPoints.push_back(tap);
+				std::sort(m_controlPoints.begin(), m_controlPoints.end(), CompareControlPoints);
 				m_tangents.push_back(0.0f);
 			}
 		}
 
-		if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
+		else if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
 		{
 			Vector2D tap = input->GetAspectCorrectedTapPosition();
-			Vector2D ctrlPoint = m_controlPoints[m_selectedControlPoint];
-			if (tap.x > ctrlPoint.x)
+
+			// handle tangent rotation
+			if (input->IsKeyDown(KeyCode::t))
 			{
-				float slope = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
-				m_tangents[m_selectedControlPoint] = slope;
+				Vector2D ctrlPoint = m_controlPoints[m_selectedControlPoint];
+				if (tap.x > ctrlPoint.x)
+				{
+					float slope = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
+					m_tangents[m_selectedControlPoint] = slope;
+				}
+			}
+			else // handle control point translation
+			{
+				std::vector<Vector2D> newControlPoints = m_controlPoints;
+				newControlPoints[m_selectedControlPoint] = tap;
+
+				// only update if the translation did not change the order of the control points
+				if (std::is_sorted(std::begin(newControlPoints), std::end(newControlPoints), CompareControlPoints))
+					m_controlPoints = newControlPoints;
 			}
 		}
 	}

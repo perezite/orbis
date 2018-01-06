@@ -32,6 +32,9 @@ namespace Controllers
 		// check whether a control point is selected by the given tap position
 		bool IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition);
 
+		// control points sorter
+		static bool CompareControlPoints(Vector2D first, Vector2D second) { return first.x < second.x; };
+
 	private:
 		// the control points
 		std::vector<Vector2D> m_controlPoints;

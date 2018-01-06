@@ -8,6 +8,10 @@ using namespace Controllers;
 using namespace Components;
 using namespace Video;
 
+#include <iostream>
+#include <algorithm>
+#include <array>
+
 namespace Levels
 {
 	Level8::Level8()
