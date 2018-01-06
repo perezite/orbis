@@ -1,7 +1,13 @@
 TODO:
 - Partikelsystem implementieren
-	- Splines lernen mit Youtube-Video
-	- Testlevel erstellen
+	- Bezier-Curve Test-Code implementieren
+		- Testlevel erstellen
+		- Testcomponente BezierTester erstellen
+			- Erst Bezierkurve mit 2 Kontrollpunkten und 2 Tangenten implementieren
+			- Beliebige Anzahl an Kontrollpunkten hinzufügen
+		-- https://www.youtube.com/watch?v=dXECQRlmIaE
+		-- https://www.youtube.com/watch?v=2HvH9cmHbG4
+	- Testlevel erstellen basierend auf https://www.youtube.com/watch?v=dXECQRlmIaE
 	- Trivialen ParticleSystemRenderer erstellen
 	- Component ParticleSystemRenderer erstellen
 	- Trivialen Controller für grünes Partikelsystem implementieren		
