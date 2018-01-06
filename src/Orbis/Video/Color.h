@@ -5,14 +5,20 @@ namespace Video
 	struct Color
 	{
 	public:
+		// black color
+		static const Color Black;
+
 		// white color
 		static const Color White;
+
+		// red color
+		static const Color Red;
 
 		// green color
 		static const Color Green;
 
-		// red color
-		static const Color Red;
+		// blue color
+		static const Color Blue;
 
 	public:
 		// ctor

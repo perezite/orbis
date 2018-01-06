@@ -79,6 +79,8 @@ namespace Input
 							break;
 						case SDL_WINDOWEVENT_LEAVE:
 							m_isCursorInsideWindow = false;
+							m_tapsDown.clear();
+							m_tapsGoingDown.clear();
 							break;
 					}
 					break;
@@ -106,9 +108,19 @@ namespace Input
 		return m_isCursorInsideWindow && m_tapsDown.size() > 0;
 	}
 
+	bool InputManager::IsTapIndexDown(signed long index)
+	{
+		return m_tapsDown.find(index) != m_tapsDown.end();
+	}
+
 	bool InputManager::IsTapGoingDown()
 	{
 		return m_isCursorInsideWindow && m_tapsGoingDown.size() > 0;
+	}
+
+	bool InputManager::IsTapIndexGoingDown(signed long index)
+	{
+		return m_tapsGoingDown.find(index) != m_tapsGoingDown.end();
 	}
 
 	Vector2D InputManager::GetTapPosition()

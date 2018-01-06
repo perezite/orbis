@@ -2,8 +2,10 @@
 
 #include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Video/VideoManager.h"
+#include "../../Orbis/Core/TimeManager.h"
 using namespace Input;
 using namespace Video;
+using namespace Core;
 
 #include <iostream>
 
@@ -11,29 +13,69 @@ namespace Controllers
 {
 	const float BezierCurveVisualizer::MARK_EXTENT = 0.01f;
 	const float BezierCurveVisualizer::SELECT_RADIUS = 0.05f;
+	const float BezierCurveVisualizer::TANGENT_LENGTH = 0.1f;
+	const float BezierCurveVisualizer::TANGENT_OMEGA = 1.0f;
+
 
 	void BezierCurveVisualizer::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
-		if (input->IsTapGoingDown())
+		TimeManager* time = TimeManager::GetInstance();
+		if (input->IsTapIndexGoingDown(1))
 		{
-			Vector2D position = input->GetAspectCorrectedTapPosition();
-			m_selectedControlPoint = GetSelectedControlPoint(position);
+			Vector2D tap = input->GetAspectCorrectedTapPosition();
+			m_selectedControlPoint = GetSelectedControlPoint(tap);
 			
-			// if now control point was selected by the tap, we add a new control point
+			// if no control point was selected by the tap, we add a new control point
 			if (m_selectedControlPoint == -1)
-				m_controlPoints.push_back(position);
+			{
+				m_controlPoints.push_back(tap);
+				m_tangents.push_back(0.0f);
+			}
+		}
+
+		if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
+		{
+			Vector2D tap = input->GetAspectCorrectedTapPosition();
+			Vector2D ctrlPoint = m_controlPoints[m_selectedControlPoint];
+			if (tap.x > ctrlPoint.x)
+			{
+				float slope = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
+				m_tangents[m_selectedControlPoint] = slope;
+			}
 		}
 	}
 
 	void BezierCurveVisualizer::Render()
 	{
+		RenderDevice* rd = VideoManager::GetInstance()->GetRenderDevice();
+
+		for (unsigned int i = 1; i < m_controlPoints.size(); i++)
+		{
+			Vector2D current = m_controlPoints[i];
+			Vector2D previous = m_controlPoints[i - 1];
+			rd->DrawDebugLine(previous, current, Color::Black);
+		}
+
 		for (unsigned int i = 0; i < m_controlPoints.size(); i++)
 		{
 			Vector2D pos = m_controlPoints[i];
-			Rect rect(pos.x - MARK_EXTENT, pos.y - MARK_EXTENT, pos.x + MARK_EXTENT, pos.y + MARK_EXTENT);
+			Rect rect(pos, MARK_EXTENT);
 			bool isSelected = m_selectedControlPoint == i;
-			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugRect(rect, isSelected ? Color::Red : Color::Green);
+			rd->DrawDebugRect(rect, isSelected ? Color::Red : Color::Green);
+
+			if (isSelected)
+			{
+				Vector2D v(1.0f, m_tangents[i]);
+				v = v.Normalized() * 0.5f * TANGENT_LENGTH;
+				Vector2D tangentStart = pos - v;
+				Vector2D tangentEnd = pos + v;
+				Rect startRect(tangentStart, MARK_EXTENT);
+				Rect endRect(tangentEnd, MARK_EXTENT);
+				rd->DrawDebugLine(tangentStart, tangentEnd, Color::Red);
+				rd->DrawDebugRect(startRect, Color::Red);
+				rd->DrawDebugRect(endRect, Color::Red);
+			}
 		}
 	}
 

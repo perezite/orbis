@@ -1,9 +1,8 @@
 TODO:
 - Partikelsystem implementieren
 	- Bezier-Curve Test-Code implementieren
-		- Testlevel erstellen
 		- Testcomponente BezierCurveVisualizer erstellen
-			- Triviale Implementation implementieren (zwei Punkte platzieren, Tangente hat keinen Effekt)
+			- Gerade Verbindung zwischen Kontrollpunkten implementieren
 			- Bezierkurve mit 2 Kontrollpunkten und 2 Tangenten implementieren
 			- Beliebige Anzahl an Kontrollpunkten zulassen
 			- Koordinatensystem-Grafik hinzufügen und Klicks nur innerhalb der Grafik zulassen

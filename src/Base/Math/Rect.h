@@ -21,6 +21,11 @@ namespace Math
 			: leftBottom(leftBottom_), rightTop(rightTop_)
 		{}
 
+		// ctor - creates a square at the given position with the given extent
+		Rect(Vector2D pos, float extent)
+			: leftBottom(pos.x - extent, pos.y - extent), rightTop(pos.x + extent, pos.y + extent)
+		{}
+
 		// get the left top corner
 		Vector2D GetLeftTop() const { return Vector2D(leftBottom.x, rightTop.y); }
 

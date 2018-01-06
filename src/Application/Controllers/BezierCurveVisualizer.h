@@ -36,6 +36,9 @@ namespace Controllers
 		// the control points
 		std::vector<Vector2D> m_controlPoints;
 
+		// the tangents given as slopes
+		std::vector<float> m_tangents;
+
 		// the index of the selected control point
 		unsigned int m_selectedControlPoint;
 
@@ -45,6 +48,12 @@ namespace Controllers
 
 		// the radius of the selection disk around a control point
 		static const float SELECT_RADIUS;
+
+		// the lenght of the tangent line segment
+		static const float TANGENT_LENGTH;
+
+		// omega of the user tangent rotation
+		static const float TANGENT_OMEGA;
 
 	};
 }

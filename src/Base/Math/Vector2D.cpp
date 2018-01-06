@@ -43,4 +43,10 @@ namespace Math
 		x = result.x; y = result.y;
 		return *this + other;
 	}
+
+	const Vector2D Vector2D::Normalized() const
+	{
+		Vector2D normalized(this->x / this->GetLength(), this->y / this->GetLength());
+		return normalized;
+	}
 }

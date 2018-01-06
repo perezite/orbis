@@ -36,8 +36,14 @@ namespace Input
 		// is a tap pressed
 		bool IsTapDown();
 
+		// is a tap index pressed
+		bool IsTapIndexDown(signed long index);
+
 		// is a tap going down
 		bool IsTapGoingDown();
+
+		// is a tap index going down
+		bool IsTapIndexGoingDown(signed long index);
 
 		// get the tap position in normalized coordinates
 		Vector2D GetTapPosition();

@@ -52,6 +52,9 @@ namespace Math
 		// get length
 		float GetLength() const { return sqrtf(x * x + y * y);  }
 
+		// get normalized
+		const Vector2D Normalized() const;
+
 	public:
 		// the x component 
 		float x;
