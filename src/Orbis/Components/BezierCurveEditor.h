@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Base/Math/Vector2D.h"
+#include "../../Base/Math/BezierCurve.h"
 using namespace Math;
 
 #include "../../Orbis/Components/Component.h"
@@ -29,9 +29,6 @@ namespace Components
 		// add or select a control point at the tapped point 
 		void AddOrSelectControlPoint();
 
-		// move the selected control point to the tapped point
-		void MoveControlPoint();
-
 		// rotate the tangent to the slope defined by the right tapped point
 		void RotateTangent();
 
@@ -39,13 +36,10 @@ namespace Components
 		void DeleteSelectedControlPoint();
 
 		// get the index of the selected control point or -1 if no point was selected
-		unsigned int GetSelectedControlPoint(Vector2D tapPosition);
+		unsigned int ComputeSelectedControlPoint(Vector2D tapPosition);
 
 		// check whether a control point is selected by the given tap position
 		bool IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition);
-
-		// control points sorter
-		static bool CompareControlPoints(Vector2D first, Vector2D second) { return first.x < second.x; };
 
 		// render the bezier curve
 		void RenderBezierCurve();
@@ -53,18 +47,9 @@ namespace Components
 		// render the control points and tangent
 		void RenderControlPoints();
 
-		// get the bezier curve value at a parameter t
-		Vector2D Bezier(float t);
-
-		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
-		Vector2D Bezier(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
-
 	private:
-		// the control points
-		std::vector<Vector2D> m_controlPoints;
-
-		// the tangents given as slopes
-		std::vector<float> m_tangents;
+		// the bezier curve
+		BezierCurve m_curve;
 
 		// the index of the selected control point
 		unsigned int m_selectedControlPoint;

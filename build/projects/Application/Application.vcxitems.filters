@@ -50,6 +50,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

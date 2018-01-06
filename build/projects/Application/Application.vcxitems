@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleController.cpp" />

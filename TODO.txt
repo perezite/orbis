@@ -1,6 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- BezierCurve-Klasse extrahieren
 	- Koordinatensystem-Grafik hinzufügen und Klicks nur innerhalb der Grafik zulassen
 	- Dump-Funktion schreiben, welche die Koordinaten per Tastendruck ins Clipboard dumpt
 	- Controller 'BezierTester' schreiben, welcher den Scale eines gelben Bricks per Bezier-Kurve animiert
