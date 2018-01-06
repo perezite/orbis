@@ -15,13 +15,13 @@ namespace Controllers
 	const float BezierCurveVisualizer::MARK_EXTENT = 0.01f;
 	const float BezierCurveVisualizer::SELECT_RADIUS = 0.05f;
 	const float BezierCurveVisualizer::TANGENT_LENGTH = 0.1f;
-	const float BezierCurveVisualizer::TANGENT_OMEGA = 1.0f;
-
+	const int BezierCurveVisualizer::SAMPLING_DENSITY = 100;
 
 	void BezierCurveVisualizer::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
 		TimeManager* time = TimeManager::GetInstance();
+
 		if (input->IsTapIndexGoingDown(1))
 		{
 			Vector2D tap = input->GetAspectCorrectedTapPosition();
@@ -36,28 +36,25 @@ namespace Controllers
 			}
 		}
 
+		if (input->IsTapIndexDown(1) && m_selectedControlPoint != -1)
+		{
+			Vector2D tap = input->GetAspectCorrectedTapPosition();
+			std::vector<Vector2D> newControlPoints = m_controlPoints;
+			newControlPoints[m_selectedControlPoint] = tap;
+
+			// only update if the translation did not change the order of the control points
+			if (std::is_sorted(std::begin(newControlPoints), std::end(newControlPoints), CompareControlPoints))
+				m_controlPoints = newControlPoints;
+		}
+
 		else if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
 		{
 			Vector2D tap = input->GetAspectCorrectedTapPosition();
-
-			// handle tangent rotation
-			if (input->IsKeyDown(KeyCode::t))
+			Vector2D ctrlPoint = m_controlPoints[m_selectedControlPoint];
+			if (tap.x > ctrlPoint.x)
 			{
-				Vector2D ctrlPoint = m_controlPoints[m_selectedControlPoint];
-				if (tap.x > ctrlPoint.x)
-				{
-					float slope = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
-					m_tangents[m_selectedControlPoint] = slope;
-				}
-			}
-			else // handle control point translation
-			{
-				std::vector<Vector2D> newControlPoints = m_controlPoints;
-				newControlPoints[m_selectedControlPoint] = tap;
-
-				// only update if the translation did not change the order of the control points
-				if (std::is_sorted(std::begin(newControlPoints), std::end(newControlPoints), CompareControlPoints))
-					m_controlPoints = newControlPoints;
+				float slope = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
+				m_tangents[m_selectedControlPoint] = slope;
 			}
 		}
 	}
@@ -68,9 +65,7 @@ namespace Controllers
 
 		for (unsigned int i = 1; i < m_controlPoints.size(); i++)
 		{
-			Vector2D current = m_controlPoints[i];
-			Vector2D previous = m_controlPoints[i - 1];
-			rd->DrawDebugLine(previous, current, Color::Black);
+			RenderBezierSegment(i);
 		}
 
 		for (unsigned int i = 0; i < m_controlPoints.size(); i++)
@@ -115,4 +110,26 @@ namespace Controllers
 		return false;
 	}
 
+	void BezierCurveVisualizer::RenderBezierSegment(unsigned int endIndex)
+	{
+		Vector2D segmentStart = m_controlPoints[endIndex - 1];
+		Vector2D segmentEnd = m_controlPoints[endIndex];
+		unsigned int numSamples = std::max((int)(SAMPLING_DENSITY * Vector2D::Distance(segmentEnd, segmentStart)), SAMPLING_DENSITY);
+		
+		float m = (segmentEnd.y - segmentStart.y) / (segmentEnd.x - segmentStart.x);
+		Vector2D last = segmentStart;
+		for (unsigned int i = 1; i < numSamples; i++)
+		{
+			float t = (float)i / (float)(numSamples - 1);
+			Vector2D current = Bezier(t, segmentStart, segmentEnd);
+			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last, current, Color::Black);
+			last = current;
+		}
+	}
+
+	Vector2D BezierCurveVisualizer::Bezier(float t, Vector2D p0, Vector2D p1)
+	{
+		Vector2D p = p0 + (p1 - p0) * t;
+		return p;
+	}
 }

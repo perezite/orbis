@@ -55,6 +55,9 @@ namespace Math
 		// get normalized
 		const Vector2D Normalized() const;
 
+		// get scaled
+		const Vector2D Scaled(float length) const;
+
 	public:
 		// the x component 
 		float x;

@@ -35,6 +35,12 @@ namespace Controllers
 		// control points sorter
 		static bool CompareControlPoints(Vector2D first, Vector2D second) { return first.x < second.x; };
 
+		// render a bezier line segment
+		void RenderBezierSegment(unsigned int endIndex);
+
+		// get the bezier curve value at parameter t with control points p0, p1
+		Vector2D Bezier(float t, Vector2D p0, Vector2D p1);
+
 	private:
 		// the control points
 		std::vector<Vector2D> m_controlPoints;
@@ -55,8 +61,8 @@ namespace Controllers
 		// the lenght of the tangent line segment
 		static const float TANGENT_LENGTH;
 
-		// omega of the user tangent rotation
-		static const float TANGENT_OMEGA;
+		// curve sampling density (number of samples per unit line segment)
+		static const int SAMPLING_DENSITY;
 
 	};
 }

@@ -2,7 +2,7 @@ TODO:
 - Partikelsystem implementieren
 	- Bezier-Curve Test-Code implementieren
 		- Testcomponente BezierCurveVisualizer erstellen
-			- Bezierkurve mit 2 Kontrollpunkten und 2 Tangenten implementieren
+			- Bezierkurve für das erste Kurvensegment implementieren
 			- Beliebige Anzahl an Kontrollpunkten zulassen
 			- Logik in Orbis/Components/BezierCurveEditor verschieben
 			- BezierCurve-Klasse extrahieren
@@ -10,6 +10,7 @@ TODO:
 			- Dump-Funktion schreiben, welche die Koordinaten per Tastendruck ins Clipboard dumpt
 		-- https://www.youtube.com/watch?v=dXECQRlmIaE
 		-- https://www.youtube.com/watch?v=2HvH9cmHbG4
+		-- https://www.youtube.com/watch?v=Qu-QK3uoMdY
 		-- http://www.cplusplus.com/forum/beginner/14349/
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen

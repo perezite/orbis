@@ -46,7 +46,12 @@ namespace Math
 
 	const Vector2D Vector2D::Normalized() const
 	{
-		Vector2D normalized(this->x / this->GetLength(), this->y / this->GetLength());
-		return normalized;
+		return Scaled(1.0f);
+	}
+
+	const Vector2D Vector2D::Scaled(float length) const
+	{
+		Vector2D scaled((this->x * length) / this->GetLength(), (this->y * length ) / this->GetLength());
+		return scaled;
 	}
 }
