@@ -41,6 +41,9 @@ namespace Controllers
 		// get the bezier curve value at parameter t with control points p0, p1
 		Vector2D Bezier(float t, Vector2D p0, Vector2D p1);
 
+		// get the bezier curve value at parameter t with control points p0, p1, p2, p3
+		Vector2D Bezier(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
+
 	private:
 		// the control points
 		std::vector<Vector2D> m_controlPoints;

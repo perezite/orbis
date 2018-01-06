@@ -14,7 +14,7 @@ namespace Controllers
 {
 	const float BezierCurveVisualizer::MARK_EXTENT = 0.01f;
 	const float BezierCurveVisualizer::SELECT_RADIUS = 0.05f;
-	const float BezierCurveVisualizer::TANGENT_LENGTH = 0.1f;
+	const float BezierCurveVisualizer::TANGENT_LENGTH = 0.18f;
 	const int BezierCurveVisualizer::SAMPLING_DENSITY = 100;
 
 	void BezierCurveVisualizer::Update()
@@ -56,6 +56,13 @@ namespace Controllers
 				float slope = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
 				m_tangents[m_selectedControlPoint] = slope;
 			}
+		}
+
+		if (input->IsKeyGoingDown(KeyCode::d) && m_selectedControlPoint != -1)
+		{
+			m_controlPoints.erase(m_controlPoints.begin() + m_selectedControlPoint);
+			m_tangents.erase(m_tangents.begin() + m_selectedControlPoint);
+			m_selectedControlPoint = -1;
 		}
 	}
 
@@ -114,6 +121,8 @@ namespace Controllers
 	{
 		Vector2D segmentStart = m_controlPoints[endIndex - 1];
 		Vector2D segmentEnd = m_controlPoints[endIndex];
+		Vector2D tangentStart = Vector2D(1, m_tangents[endIndex - 1]).Scaled(TANGENT_LENGTH);
+		Vector2D tangentEnd = Vector2D(1, m_tangents[endIndex]).Scaled(TANGENT_LENGTH);
 		unsigned int numSamples = std::max((int)(SAMPLING_DENSITY * Vector2D::Distance(segmentEnd, segmentStart)), SAMPLING_DENSITY);
 		
 		float m = (segmentEnd.y - segmentStart.y) / (segmentEnd.x - segmentStart.x);
@@ -121,7 +130,11 @@ namespace Controllers
 		for (unsigned int i = 1; i < numSamples; i++)
 		{
 			float t = (float)i / (float)(numSamples - 1);
-			Vector2D current = Bezier(t, segmentStart, segmentEnd);
+			Vector2D p0 = segmentStart;
+			Vector2D p1 = p0 + tangentStart * 0.5f;
+			Vector2D p3 = segmentEnd;
+			Vector2D p2 = p3 - tangentEnd * 0.5f;
+			Vector2D current = Bezier(t, p0, p1, p2, p3);
 			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last, current, Color::Black);
 			last = current;
 		}
@@ -132,4 +145,17 @@ namespace Controllers
 		Vector2D p = p0 + (p1 - p0) * t;
 		return p;
 	}
+
+	Vector2D BezierCurveVisualizer::Bezier(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3) 
+	{
+		float tt = t * t;
+		float ttt = tt * t;
+		float ti = (1 - t);
+		float titi = ti * ti;
+		float tititi = titi * ti;
+		float x = tititi * p0.x + 3 * titi * t * p1.x + 3 * ti * tt * p2.x + ttt * p3.x;
+		float y = tititi * p0.y + 3 * titi * t * p1.y + 3 * ti * tt * p2.y + ttt * p3.y;
+		return Vector2D(x, y);
+	}
+
 }
