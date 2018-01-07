@@ -35,6 +35,7 @@ namespace Math
 			m_points = newControlPoints;
 	}
 
+	// reference: https://www.youtube.com/watch?v=Qu-QK3uoMdY
 	Vector2D BezierCurve::GetValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3)
 	{
 		float tt = t * t;

@@ -33,6 +33,9 @@ namespace Components
 
 		if (input->IsKeyGoingDown(KeyCode::d) && m_selectedControlPoint != -1)
 			DeleteSelectedControlPoint();
+
+		if (input->IsKeyGoingDown(KeyCode::Escape))
+			m_selectedControlPoint = -1;
 	}
 
 	void BezierCurveEditor::Render()
