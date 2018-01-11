@@ -124,7 +124,13 @@ namespace Components
 		unsigned int numCurveSegments = m_curve.GetLength() - 1;
 		float step = 1.0f / (float)NUM_SAMPLES;
 		Vector2D last = m_curve.Get(0).pos;
-		for (float t = 0; t < (float)numCurveSegments; t += step)
+		/*for (float t = 0; t < (float)numCurveSegments; t += step)
+		{
+			Vector2D current = m_curve.GetValue(t);
+			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last, current, Color::Black);
+			last = current;
+		}*/
+		for (float t = 0; t <= 1.0f; t += step)
 		{
 			Vector2D current = m_curve.GetValue(t);
 			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last, current, Color::Black);

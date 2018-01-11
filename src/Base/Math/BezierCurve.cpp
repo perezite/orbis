@@ -8,6 +8,7 @@ namespace Math
 
 	Vector2D BezierCurve::GetValue(float t)
 	{
+		t = float(m_points.size() - 1) * t;	// map [0, 1] onto [0, (#points -1)]
 		int startIdx = (int)t;
 		t = t - (int)t;
 		Vector2D startTangent = Vector2D(1, m_points[startIdx].tangent).Scaled(TANGENT_LENGTH);
