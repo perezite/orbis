@@ -4,6 +4,7 @@
 using namespace Math;
 
 #include "../../Orbis/Components/Component.h"
+#include "../../Orbis/Components/Renderer.h"
 using namespace Components;
 
 #include <vector>
@@ -11,13 +12,16 @@ using namespace Components;
 namespace Components
 {
 	// can be used to visualize, edit and ultimately dump the data from a bezier curve
-	class BezierCurveEditor : public Component
+	class BezierCurveEditor : public Renderer
 	{
 	public:
 		// ctor
 		BezierCurveEditor()
-			: Component::Component(), m_selectedControlPoint(-1)
-		{}
+			: Renderer::Renderer(), m_selectedControlPoint(-1)
+		{}		
+
+		// start
+		void Start();
 
 		// update
 		void Update();
@@ -28,6 +32,9 @@ namespace Components
 	protected:
 		// add or select a control point at the tapped point 
 		void AddOrSelectControlPoint();
+
+		// move control point to the tap position
+		void MoveControlPoint();
 
 		// rotate the tangent to the slope defined by the right tapped point
 		void RotateTangent();
@@ -47,12 +54,18 @@ namespace Components
 		// render the control points and tangent
 		void RenderControlPoints();
 
+		// check if given points is within the clickable rect
+		bool IsClickablePosition(Vector2D position);
+
 	private:
 		// the bezier curve
 		BezierCurve m_curve;
 
 		// the index of the selected control point
 		unsigned int m_selectedControlPoint;
+
+		// the coordinate system texture
+		Texture* m_texture;
 
 	private:
 		// the extent of a marking rectangle for a control point

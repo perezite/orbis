@@ -1,7 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- Rausfinden, wie ich dem BezierCurveEditor eleganter die Texture hinzfügen kann
-	- Auswählbare Koordinaten auf die Intervalle ([0, 1], [0, 1]) beschränken
 	- Dump-Funktion schreiben, welche die Koordinaten per Tastendruck ins Clipboard dumpt
 	- Controller 'BezierTester' schreiben, welcher den Scale eines gelben Bricks per Bezier-Kurve animiert
 	- Component ParticleSystemRenderer erstellen

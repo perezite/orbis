@@ -3,6 +3,7 @@
 #include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/TimeManager.h"
+#include "../Core/DebugHelper.h"
 using namespace Input;
 using namespace Video;
 using namespace Core;
@@ -18,6 +19,17 @@ namespace Components
 	const int BezierCurveEditor::SAMPLING_DENSITY = 100;
 	const int BezierCurveEditor::NUM_SAMPLES = 100;
 
+	void BezierCurveEditor::Start()
+	{
+		ORBIS_RELEASE(throw Exception("Creating a bezier curve editor in release mode is not allowed"); )
+
+		m_texture = new Texture("Textures/CoordinateSystem2.png");
+		GetMaterial()->SetTexture(m_texture);
+		GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		SetMesh(Mesh::GetTexturedQuad());
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
+	}
+
 	void BezierCurveEditor::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
@@ -26,7 +38,7 @@ namespace Components
 			AddOrSelectControlPoint();
 
 		if (input->IsTapIndexDown(1) && m_selectedControlPoint != -1)
-			m_curve.Move(m_selectedControlPoint, InputManager::GetInstance()->GetAspectCorrectedTapPosition());
+			MoveControlPoint();
 
 		if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
 			RotateTangent();
@@ -48,11 +60,23 @@ namespace Components
 	void BezierCurveEditor::AddOrSelectControlPoint()
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
-		m_selectedControlPoint = ComputeSelectedControlPoint(tap);
+		if (IsClickablePosition(tap))
+		{
+			m_selectedControlPoint = ComputeSelectedControlPoint(tap);
 
-		// if no control point was selected by the tap, we add a new control point
-		if (m_selectedControlPoint == -1)
-			m_curve.Add(BezierPoint(tap, 0.0f));
+			// if no control point was selected by the tap, we add a new control point
+			if (m_selectedControlPoint == -1)
+				m_curve.Add(BezierPoint(tap, 0.0f));
+		}
+	}
+
+	void BezierCurveEditor::MoveControlPoint()
+	{
+		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
+		if (IsClickablePosition(tap))
+		{
+			m_curve.Move(m_selectedControlPoint, tap);
+		}
 	}
 
 	void BezierCurveEditor::RotateTangent()
@@ -131,5 +155,11 @@ namespace Components
 				rd->DrawDebugRect(endRect, Color::Red);
 			}
 		}
+	}
+
+	bool BezierCurveEditor::IsClickablePosition(Vector2D position)
+	{
+		Rect clickableRect = Rect(GetParent()->GetTransform()->position, 0.5f);
+		return clickableRect.Contains(position);
 	}
 }

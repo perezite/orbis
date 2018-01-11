@@ -9,8 +9,10 @@ using namespace Math;
 
 #ifdef _DEBUG
 	#define ORBIS_DEBUG(call) {call}
+	#define ORBIS_RELEASE(call)
 #else
-	#define ORBIS_DEBUG(call) 
+	#define ORBIS_DEBUG(call)
+	#define ORBIS_RELEASE(call) {call}
 #endif
 
 namespace Core

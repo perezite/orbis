@@ -35,8 +35,8 @@ namespace Game
 	{
 		if (m_isStarted == false)
 		{
-			TextureAtlas::GetInstance()->Generate();
 			StartEntities();
+			TextureAtlas::GetInstance()->Generate();
 			m_isStarted = true;
 		}
 		else

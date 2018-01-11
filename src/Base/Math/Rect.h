@@ -53,6 +53,9 @@ namespace Math
 		// get top
 		float GetTop() const { return rightTop.y; }
 
+		// check if rect contains point
+		bool Contains(Vector2D point) { return point.x >= GetLeft() && point.x <= GetRight() && point.y >= GetBottom() && point.y <= GetTop(); }
+
 	public:
 		// the left bottom corner
 		Vector2D leftBottom;

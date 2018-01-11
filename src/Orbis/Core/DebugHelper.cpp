@@ -5,7 +5,7 @@ using namespace Video;
 
 #ifndef _DEBUG 
 	#define ORBIS_ASSERT_DEBUG() \
-		throw Exception("DebugHelper functionality can only be called in debug mode"); 
+		throw Exception("Debug functionality can only be called in debug mode"); 
 #else	
 	#define ORBIS_ASSERT_DEBUG() 
 #endif
