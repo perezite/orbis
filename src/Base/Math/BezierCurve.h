@@ -29,6 +29,9 @@ namespace Math
 		// ctor
 		BezierCurve() {};
 
+		// ctor
+		BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints);
+
 		// get the bezier curve value at a parameter t in [0, 1]
 		Vector2D GetValue(float t);
 

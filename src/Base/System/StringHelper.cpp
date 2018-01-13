@@ -52,7 +52,7 @@ namespace System
 	std::string StringHelper::ToString(float val, int precision)
 	{
 		std::stringstream ss;
-		ss << std::fixed << std::setprecision(precision) << val;
+		ss << std::fixed << std::setprecision(precision) << val << "f";
 		std::string result = ss.str();
 		return result;
 	}

@@ -24,6 +24,12 @@ namespace Components
 	const int BezierCurveEditor::SAMPLING_DENSITY = 100;
 	const int BezierCurveEditor::NUM_SAMPLES = 100;
 
+	BezierCurveEditor::BezierCurveEditor(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
+		: BezierCurveEditor::BezierCurveEditor()
+	{
+		m_curve = BezierCurve(controlPoints);
+	}
+
 	void BezierCurveEditor::Start()
 	{
 		ORBIS_RELEASE(throw Exception("Creating a bezier curve editor in release mode is not allowed"); )
@@ -107,13 +113,13 @@ namespace Components
 	void BezierCurveEditor::CopyControlPointsToClipboard()
 	{
 		// collect the string data
-		std::stringstream ss;
+		std::stringstream ss; ss << "{ ";
 		for (unsigned int i = 0; i < m_curve.GetLength(); i++)
 		{
-			ss << "{ " << StringHelper::ToString(m_curve.Get(i).tangent) << ", ";
-			ss << m_curve.Get(i).pos.ToString() << " }" << (i < m_curve.GetLength() - 1 ? ", " : "");
+			ss << "{" << StringHelper::ToString(m_curve.Get(i).tangent) << ", ";
+			ss << m_curve.Get(i).pos.ToString() << "}" << (i < m_curve.GetLength() - 1 ? ", " : "");
 		}
-		ss << std::endl;
+		ss << " }";
 
 		// copy the data to clipboard
 		EnvironmentHelper::WriteToClipboard(ss.str());
@@ -145,7 +151,6 @@ namespace Components
 		if (m_curve.GetLength() < 2)
 			return;
 
-		unsigned int numCurveSegments = m_curve.GetLength() - 1;
 		float step = 1.0f / (float)NUM_SAMPLES;
 		Vector2D last = m_curve.Get(0).pos;
 		for (float t = 0; t <= 1.0f; t += step)

@@ -1,6 +1,6 @@
 TODO:
 - Partikelsystem implementieren
-	- Bezier-Konstruktor schreiben
+	- Bezier-Konstruktor schreiben und austesten
 	- Controller 'BezierTester' schreiben, welcher den Scale eines gelben Bricks per Bezier-Kurve animiert
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen

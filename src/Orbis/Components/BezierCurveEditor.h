@@ -20,6 +20,9 @@ namespace Components
 			: Renderer::Renderer(), m_selectedControlPoint(-1)
 		{}		
 
+		// ctor
+		BezierCurveEditor(std::vector<std::pair<float, std::pair<float, float>>> controlPoints);
+
 		// start
 		void Start();
 

@@ -21,9 +21,14 @@ namespace Levels
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
 
+		// temp
+		std::vector<float> test = { 1.0f, 2.0f, 3.0f };
+		std::pair<float, float> test2 = {1.0f, 1.0f};
+
 		// add bezier curve editor
-		Entity* bcve = new Entity();
-		bcve->AddComponent(new BezierCurveEditor());
-		AddEntity(bcve);
+		Entity* bcee = new Entity();
+		BezierCurveEditor* editor = new BezierCurveEditor({ { -1.31818f,{ -0.45250f, 0.49125f } },{ 0.00000f,{ -0.05750f, 0.12625f } },{ 0.00000f,{ 0.15750f, 0.41125f } },{ 0.00000f,{ 0.38750f, 0.11375f } } });
+		bcee->AddComponent(editor);
+		AddEntity(bcee);
 	}
 }

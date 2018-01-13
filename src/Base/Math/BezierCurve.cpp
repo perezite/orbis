@@ -6,6 +6,17 @@ namespace Math
 {
 	const float BezierCurve::TANGENT_LENGTH = 0.18f;
 
+	BezierCurve::BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
+	{
+		m_points.clear();
+		for (unsigned int i = 0; i < controlPoints.size(); i++)
+		{
+			Vector2D pos(controlPoints[i].second.first, controlPoints[i].second.second);
+			float tangent = controlPoints[i].first;
+			m_points.push_back(BezierPoint(pos, tangent));
+		}
+	}
+
 	Vector2D BezierCurve::GetValue(float t)
 	{
 		t = float(m_points.size() - 1) * t;	// map [0, 1] onto [0, (#points -1)]
