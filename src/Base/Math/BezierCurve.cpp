@@ -6,10 +6,14 @@ namespace Math
 {
 	const float BezierCurve::TANGENT_LENGTH = 0.18f;
 
+	BezierCurve::BezierCurve()
+	{
+		ResetControlPoints();
+	}
+
 	BezierCurve::BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
 	{
-		m_points.clear();
-		for (unsigned int i = 0; i < controlPoints.size(); i++)
+		for (unsigned int i = 0; i < controlPoints.size(); i++)	
 		{
 			Vector2D pos(controlPoints[i].second.first, controlPoints[i].second.second);
 			float tangent = controlPoints[i].first;
@@ -58,5 +62,12 @@ namespace Math
 		float x = tititi * p0.x + 3 * titi * t * p1.x + 3 * ti * tt * p2.x + ttt * p3.x;
 		float y = tititi * p0.y + 3 * titi * t * p1.y + 3 * ti * tt * p2.y + ttt * p3.y;
 		return Vector2D(x, y);
+	}
+
+	void BezierCurve::ResetControlPoints()
+	{
+		m_points.clear();
+		Add(BezierPoint(Vector2D(-0.5f, -0.5f), 0.0f));
+		Add(BezierPoint(Vector2D(0.5f, 0.5f), 0.0f));
 	}
 }

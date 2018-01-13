@@ -63,6 +63,11 @@ namespace Components
 		// check if given points is within the clickable rect
 		bool IsClickablePosition(Vector2D position);
 
+		// is the selected control point the first or last point 
+		bool IsSelectedControlPointOnBoundary();
+
+		// is the given point a valid point for the currently selected control point 
+
 	private:
 		// the bezier curve
 		BezierCurve m_curve;

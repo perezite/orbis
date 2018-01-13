@@ -89,6 +89,13 @@ namespace Components
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
 		if (IsClickablePosition(tap))
 		{
+			// clamp boundary point positions
+			if (m_selectedControlPoint == 0)
+				tap.x = -0.5f;
+			if (m_selectedControlPoint == m_curve.GetLength() - 1)
+				tap.x = 0.5f;
+
+			// move
 			m_curve.Move(m_selectedControlPoint, tap);
 		}
 	}
@@ -97,15 +104,21 @@ namespace Components
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
 		Vector2D ctrlPoint = m_curve.Get(m_selectedControlPoint).pos;
+		float tangent;
 		if (tap.x > ctrlPoint.x)
-		{
-			float tangent = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
-			m_curve.Set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
-		}
+			tangent = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
+		if (tap.x <= ctrlPoint.x)
+			tangent = (ctrlPoint.y - tap.y) / (ctrlPoint.x - tap.x);
+
+		m_curve.Set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
 	}
 
 	void BezierCurveEditor::DeleteSelectedControlPoint()
 	{
+		// the boundary points cannot be deleted
+		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_curve.GetLength() - 1)
+			return;
+
 		m_curve.Delete(m_selectedControlPoint);
 		m_selectedControlPoint = -1;
 	}
@@ -190,5 +203,10 @@ namespace Components
 	{
 		Rect clickableRect = Rect(GetParent()->GetTransform()->position, 0.5f);
 		return clickableRect.Contains(position);
+	}
+
+	bool BezierCurveEditor::IsSelectedControlPointOnBoundary()
+	{
+		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_curve.GetLength() - 1;
 	}
 }

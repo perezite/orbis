@@ -27,7 +27,7 @@ namespace Math
 	{
 	public:
 		// ctor
-		BezierCurve() {};
+		BezierCurve();
 
 		// ctor
 		BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints);
@@ -59,6 +59,9 @@ namespace Math
 
 		// control points sorting function
 		static bool CompareControlPoints(BezierPoint first, BezierPoint second) { return first.pos.x < second.pos.x; };
+
+		// reset the control points
+		void ResetControlPoints();
 
 	private: 
 		// the control points
