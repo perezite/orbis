@@ -67,7 +67,7 @@ namespace Math
 	void BezierCurve::ResetControlPoints()
 	{
 		m_points.clear();
-		Add(BezierPoint(Vector2D(-0.5f, -0.5f), 0.0f));
-		Add(BezierPoint(Vector2D(0.5f, 0.5f), 0.0f));
+		Add(BezierPoint(Vector2D(0.0f, 0.0f), 0.0f));
+		Add(BezierPoint(Vector2D(1.0f, 1.0f), 0.0f));
 	}
 }

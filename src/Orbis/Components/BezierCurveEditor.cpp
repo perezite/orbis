@@ -24,12 +24,6 @@ namespace Components
 	const int BezierCurveEditor::SAMPLING_DENSITY = 100;
 	const int BezierCurveEditor::NUM_SAMPLES = 100;
 
-	BezierCurveEditor::BezierCurveEditor(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
-		: BezierCurveEditor::BezierCurveEditor()
-	{
-		m_curve = BezierCurve(controlPoints);
-	}
-
 	void BezierCurveEditor::Start()
 	{
 		ORBIS_RELEASE(throw Exception("Creating a bezier curve editor in release mode is not allowed"); )
@@ -126,11 +120,12 @@ namespace Components
 	void BezierCurveEditor::CopyControlPointsToClipboard()
 	{
 		// collect the string data
+		BezierCurve shifted = GetShiftedBezierCurve(m_curve, Vector2D(0.5f, 0.5f));
 		std::stringstream ss; ss << "{ ";
-		for (unsigned int i = 0; i < m_curve.GetLength(); i++)
+		for (unsigned int i = 0; i < shifted.GetLength(); i++)
 		{
-			ss << "{" << StringHelper::ToString(m_curve.Get(i).tangent) << ", ";
-			ss << m_curve.Get(i).pos.ToString() << "}" << (i < m_curve.GetLength() - 1 ? ", " : "");
+			ss << "{" << StringHelper::ToString(shifted.Get(i).tangent) << ", ";
+			ss << shifted.Get(i).pos.ToString() << "}" << (i < shifted.GetLength() - 1 ? ", " : "");
 		}
 		ss << " }";
 
@@ -208,5 +203,17 @@ namespace Components
 	bool BezierCurveEditor::IsSelectedControlPointOnBoundary()
 	{
 		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_curve.GetLength() - 1;
+	}
+
+	BezierCurve BezierCurveEditor::GetShiftedBezierCurve(BezierCurve curve, Vector2D shift)
+	{
+		for (unsigned int i = 0; i < curve.GetLength(); i++)
+		{
+			BezierPoint point = curve.Get(i);
+			point.pos += shift;
+			curve.Set(i, point);
+		}
+
+		return curve;
 	}
 }

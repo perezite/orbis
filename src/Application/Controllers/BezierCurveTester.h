@@ -10,13 +10,13 @@ using namespace Game;
 
 namespace Controllers
 {
-	// test the animation of an entity's transform using bezier curves 
+	// test the animation of an entity's scale using bezier curves 
 	class BezierCurveTester : public Component
 	{
 	public:
 		// ctor
-		BezierCurveTester(Entity* entity, BezierCurve* bezierCurve, float duration) 
-			: Component::Component(), m_curve(bezierCurve), m_duration(duration)
+		BezierCurveTester(BezierCurve bezierCurve, float duration) 
+			: Component::Component(), m_curve(bezierCurve), m_duration(duration), m_elapsed(0.0f)
 		{ }
 
 		// override
@@ -30,12 +30,12 @@ namespace Controllers
 		Vector2D m_initialScale;
 
 		// the bezier curve
-		BezierCurve* m_curve;
+		BezierCurve m_curve;
 
 		// duration of the tween
 		float m_duration;
 
-		// start instant of the tween
-		float m_start;
+		// elapsed tween time
+		float m_elapsed;
 	};
 }

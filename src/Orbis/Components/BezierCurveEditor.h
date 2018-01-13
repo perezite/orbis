@@ -18,10 +18,19 @@ namespace Components
 		// ctor
 		BezierCurveEditor()
 			: Renderer::Renderer(), m_selectedControlPoint(-1)
-		{}		
+		{ }		
 
 		// ctor
-		BezierCurveEditor(std::vector<std::pair<float, std::pair<float, float>>> controlPoints);
+		BezierCurveEditor(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
+			: BezierCurveEditor::BezierCurveEditor(BezierCurve(controlPoints))
+		{ }
+
+		// ctor
+		BezierCurveEditor(BezierCurve curve) 
+			: BezierCurveEditor::BezierCurveEditor()
+		{
+			m_curve = GetShiftedBezierCurve(curve, Vector2D(-0.5f, -0.5f));
+		}
 
 		// start
 		void Start();
@@ -66,7 +75,9 @@ namespace Components
 		// is the selected control point the first or last point 
 		bool IsSelectedControlPointOnBoundary();
 
-		// is the given point a valid point for the currently selected control point 
+		// get a bezier curve where all control points are shifted
+		BezierCurve GetShiftedBezierCurve(BezierCurve curve, Vector2D shift);
+
 
 	private:
 		// the bezier curve

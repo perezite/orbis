@@ -1,6 +1,6 @@
 TODO:
 - Partikelsystem implementieren
-	- Controller 'BezierTester' schreiben, welcher den Scale eines gelben Bricks per Bezier-Kurve animiert
+	- BezierCurveAsset implementieren, welches in ein File gespeichert werden kann
 	- Tween-Logik in eigene Klasse extrahieren
 	- BezierTester in TweenTester umbenennen
 	- Component ParticleSystemRenderer erstellen
