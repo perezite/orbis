@@ -42,6 +42,9 @@ namespace Components
 		// delete the selected control point
 		void DeleteSelectedControlPoint();
 
+		// copy the control point coordinates to clipboard
+		void CopyControlPointsToClipboard();
+
 		// get the index of the selected control point or -1 if no point was selected
 		unsigned int ComputeSelectedControlPoint(Vector2D tapPosition);
 

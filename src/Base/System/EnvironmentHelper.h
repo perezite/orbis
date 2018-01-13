@@ -17,6 +17,9 @@ namespace System
 		// combine file or folder paths
 		static std::string CombinePath(std::vector<std::string> parts);
 
+		// write a string to the systems's clipboard
+		static void WriteToClipboard(std::string value);
+
 	public:
 		static const std::string PathSeparator;
 	};

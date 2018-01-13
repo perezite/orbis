@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <math.h>
 
 namespace Math
@@ -57,6 +58,9 @@ namespace Math
 
 		// get scaled
 		const Vector2D Scaled(float length) const;
+
+		// convert to string
+		const std::string ToString(int precision = 5);
 
 	public:
 		// the x component 

@@ -1,6 +1,6 @@
 TODO:
 - Partikelsystem implementieren
-	- Dump-Funktion schreiben, welche die Koordinaten per Tastendruck ins Clipboard dumpt
+	- Bezier-Konstruktor schreiben
 	- Controller 'BezierTester' schreiben, welcher den Scale eines gelben Bricks per Bezier-Kurve animiert
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen

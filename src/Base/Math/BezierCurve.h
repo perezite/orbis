@@ -26,6 +26,9 @@ namespace Math
 	class BezierCurve
 	{
 	public:
+		// ctor
+		BezierCurve() {};
+
 		// get the bezier curve value at a parameter t in [0, 1]
 		Vector2D GetValue(float t);
 

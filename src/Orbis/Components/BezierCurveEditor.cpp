@@ -1,14 +1,19 @@
 #include "BezierCurveEditor.h"
 
+#include "../../Base/System/EnvironmentHelper.h"
+using namespace System;
+
 #include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/TimeManager.h"
+#include "../../Orbis/Core/LogHelper.h"
 #include "../Core/DebugHelper.h"
 using namespace Input;
 using namespace Video;
 using namespace Core;
 
 #include <iostream>
+#include <sstream>
 #include <algorithm>
 
 namespace Components
@@ -48,6 +53,9 @@ namespace Components
 
 		if (input->IsKeyGoingDown(KeyCode::Escape))
 			m_selectedControlPoint = -1;
+
+		if (input->IsKeyGoingDown(KeyCode::c))
+			CopyControlPointsToClipboard();
 	}
 
 	void BezierCurveEditor::Render()
@@ -96,6 +104,22 @@ namespace Components
 		m_selectedControlPoint = -1;
 	}
 
+	void BezierCurveEditor::CopyControlPointsToClipboard()
+	{
+		// collect the string data
+		std::stringstream ss;
+		for (unsigned int i = 0; i < m_curve.GetLength(); i++)
+		{
+			ss << "{ " << StringHelper::ToString(m_curve.Get(i).tangent) << ", ";
+			ss << m_curve.Get(i).pos.ToString() << " }" << (i < m_curve.GetLength() - 1 ? ", " : "");
+		}
+		ss << std::endl;
+
+		// copy the data to clipboard
+		EnvironmentHelper::WriteToClipboard(ss.str());
+		LogHelper::LogMessage("Bezier data copied to clipboard");
+	}
+
 	unsigned int BezierCurveEditor::ComputeSelectedControlPoint(Vector2D tapPosition)
 	{
 		for (unsigned int i = 0; i < m_curve.GetLength(); i++)
@@ -124,12 +148,6 @@ namespace Components
 		unsigned int numCurveSegments = m_curve.GetLength() - 1;
 		float step = 1.0f / (float)NUM_SAMPLES;
 		Vector2D last = m_curve.Get(0).pos;
-		/*for (float t = 0; t < (float)numCurveSegments; t += step)
-		{
-			Vector2D current = m_curve.GetValue(t);
-			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last, current, Color::Black);
-			last = current;
-		}*/
 		for (float t = 0; t <= 1.0f; t += step)
 		{
 			Vector2D current = m_curve.GetValue(t);

@@ -66,4 +66,25 @@ namespace System
 
 		return result;
 	}
+
+	void EnvironmentHelper::WriteToClipboard(std::string value)
+	{
+		#ifdef WIN32
+			HWND windowHandle = GetDesktopWindow();
+			OpenClipboard(windowHandle);
+			EmptyClipboard();
+			HGLOBAL valueHandle = GlobalAlloc(GMEM_MOVEABLE, value.size() + 1);
+			if (!valueHandle) {
+				CloseClipboard();
+				throw Exception("GlobalAlloc() failed");
+			}
+			memcpy(GlobalLock(valueHandle), value.c_str(), value.size() + 1);
+			GlobalUnlock(valueHandle);
+			SetClipboardData(CF_TEXT, valueHandle);
+			CloseClipboard();
+			GlobalFree(valueHandle);
+		#else
+			throw Exception("The current operating system is not supported");
+		#endif
+	}
 }

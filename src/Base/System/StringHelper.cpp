@@ -2,9 +2,12 @@
 
 #include <stdarg.h>
 #include <stdlib.h>
-#include <string>
 #include <memory.h>
+#include <string>
 #include <iostream>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
 
 namespace System
 {
@@ -46,4 +49,11 @@ namespace System
 		return str == "";
 	}
 
+	std::string StringHelper::ToString(float val, int precision)
+	{
+		std::stringstream ss;
+		ss << std::fixed << std::setprecision(precision) << val;
+		std::string result = ss.str();
+		return result;
+	}
 }

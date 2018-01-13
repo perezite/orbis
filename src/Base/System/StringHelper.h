@@ -17,6 +17,9 @@ namespace System
 		// is the string empty
 		static bool IsEmpty(std::string str);
 
+		// convert to string
+		static std::string ToString(float val, int precision = 5);
+
 	protected:
 		// get formatted string
 		static std::string GetFormattedString(std::string format, int maximalFormattedLength, va_list args);

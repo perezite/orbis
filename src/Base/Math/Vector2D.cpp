@@ -2,6 +2,12 @@
 
 #include "MathHelper.h"
 
+#include "../System/StringHelper.h"
+using namespace System;
+
+#include <sstream>
+#include <iostream>
+#include <iomanip>
 #include <math.h>
 
 namespace Math
@@ -54,4 +60,13 @@ namespace Math
 		Vector2D scaled((this->x * length) / this->GetLength(), (this->y * length ) / this->GetLength());
 		return scaled;
 	}
+
+	const std::string Vector2D::ToString(int precision)
+	{
+		std::stringstream ss; 
+		ss << "{" << StringHelper::ToString(x) << ", " << StringHelper::ToString(y) << "}"; 
+		std::string result = ss.str();
+		return result;
+	}
+
 }
