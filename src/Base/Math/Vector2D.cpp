@@ -16,6 +16,18 @@ namespace Math
 
 	const Vector2D Vector2D::One = Vector2D(1.0f, 1.0f);
 
+	Vector2D Vector2D::FromString(std::string json)
+	{
+		std::istringstream is(json);
+		StringHelper::Seek(is, '{');
+		float x = (float)atof(StringHelper::Read(is, 'f').c_str());
+		StringHelper::Seek(is, ',');
+		float y = (float)atof(StringHelper::Read(is, 'f').c_str());
+		StringHelper::Seek(is, '}');
+
+		return Vector2D(x, y);
+	}
+
 	const Vector2D& Vector2D::operator=(const Vector2D &other)
 	{
 		x = other.x;
@@ -68,5 +80,4 @@ namespace Math
 		std::string result = ss.str();
 		return result;
 	}
-
 }

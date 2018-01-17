@@ -1,14 +1,44 @@
 #include "BezierCurve.h"
 
+#include "../System/StringHelper.h"
+using namespace System;
+
 #include <algorithm>
+#include <sstream>
 
 namespace Math
 {
 	const float BezierCurve::TANGENT_LENGTH = 0.18f;
 
+	BezierCurve BezierCurve::FromString(std::string json)
+	{
+		std::vector<BezierPoint> points;
+		std::istringstream is(json);
+
+		StringHelper::Seek(is, '{');
+
+		while(true)
+		{
+			StringHelper::Seek(is, '{');
+			float tangent = (float)atof(StringHelper::Read(is, 'f').c_str());
+			StringHelper::Seek(is, ','); StringHelper::Seek(is, '{');
+			std::string vs = StringHelper::Read(is, '}'); vs = '{' + vs + '}';
+			Vector2D pos = Vector2D::FromString(vs);
+			StringHelper::Seek(is, '}');
+			points.push_back(BezierPoint(pos, tangent));
+
+			if (!StringHelper::Seek(is, ','))
+				break;
+		}
+
+		StringHelper::Seek(is, '}');
+
+		return BezierCurve(points);
+	}
+
 	BezierCurve::BezierCurve()
 	{
-		ResetControlPoints();
+		Reset();
 	}
 
 	BezierCurve::BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
@@ -51,6 +81,26 @@ namespace Math
 			m_points = newControlPoints;
 	}
 
+	std::string BezierCurve::ToString()
+	{
+		std::stringstream ss;
+		ss << "{";
+
+		for (unsigned int i = 0; i < GetLength(); i++)
+		{
+			float tangent = Get(i).tangent;
+			Vector2D pos = Get(i).pos;
+			ss << "{" << StringHelper::ToString(tangent) << "," << pos.ToString() << "}";
+
+			if (i < GetLength() - 1)
+				ss << ",";
+		}
+
+		ss << "}";
+
+		return ss.str();
+	}
+
 	// reference: https://www.youtube.com/watch?v=Qu-QK3uoMdY
 	Vector2D BezierCurve::GetValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3)
 	{
@@ -64,7 +114,7 @@ namespace Math
 		return Vector2D(x, y);
 	}
 
-	void BezierCurve::ResetControlPoints()
+	void BezierCurve::Reset()
 	{
 		m_points.clear();
 		Add(BezierPoint(Vector2D(0.0f, 0.0f), 0.0f));

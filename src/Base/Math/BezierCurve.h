@@ -4,6 +4,7 @@
 using namespace Math;
 
 #include <vector>
+#include <sstream>
 
 namespace Math
 {
@@ -26,11 +27,19 @@ namespace Math
 	class BezierCurve
 	{
 	public:
+		// deserialize from json
+		static BezierCurve FromString(std::string json);
+
+	public:
 		// ctor
 		BezierCurve();
 
 		// ctor
 		BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints);
+
+		// ctor 
+		BezierCurve(std::vector<BezierPoint> points) : m_points(points)
+		{ }
 
 		// get the bezier curve value at a parameter t in [0, 1]
 		Vector2D GetValue(float t);
@@ -53,6 +62,8 @@ namespace Math
 		// move a control point
 		void Move(unsigned int index, Vector2D newPosition);
 
+		// serialize to json
+		std::string ToString();
 	protected:
 		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
 		Vector2D GetValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
@@ -61,7 +72,7 @@ namespace Math
 		static bool CompareControlPoints(BezierPoint first, BezierPoint second) { return first.pos.x < second.pos.x; };
 
 		// reset the control points
-		void ResetControlPoints();
+		void Reset();
 
 	private: 
 		// the control points

@@ -35,7 +35,11 @@ SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
 #undef SDL_RWclose
 #define SDL_RWclose(file) SDL_Verify(SDL_RWclose_old(file))
 
-#define SDL_RWFromFile(a, b) SDL_Verify(SDL_RWFromFile(a, b))
+#define SDL_RWwrite_old(ctx, ptr, size, n)	(ctx)->write(ctx, ptr, size, n)
+#undef SDL_RWwrite
+#define SDL_RWwrite(ctx, ptr, size, n) SDL_Verify(SDL_RWwrite_old(ctx, ptr, size, n), n)
+
+#define SDL_RWFromFile_Checked(a, b) SDL_Verify(SDL_RWFromFile(a, b))
 
 #define SDL_ShowSimpleMessageBox(flags, title, message, window) SDL_Verify(SDL_ShowSimpleMessageBox(flags, title, message, window))
 

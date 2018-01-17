@@ -27,12 +27,23 @@ namespace Core
 		return EnvironmentHelper::CombinePath({ GetAssetFolderPath(), assetPath });
 	}
 
+	void AssetHelper::SaveTextAsset(std::string assetPath, std::string text)
+	{
+		std::string filePath = AssetPathToFilePath(assetPath);
+
+		SDL_RWops *writer = SDL_RWFromFile_Checked(filePath.c_str(), "w");
+		size_t len = SDL_strlen(text.c_str());
+
+		SDL_RWwrite(writer, text.c_str(), 1, len);
+		SDL_RWclose(writer);
+	}
+
 	std::string AssetHelper::LoadTextAsset(std::string assetPath)
 	{
 		std::string filePath = AssetPathToFilePath(assetPath);
 
 		// setup
-		SDL_RWops* reader = SDL_RWFromFile(filePath.c_str(), "r");
+		SDL_RWops* reader = SDL_RWFromFile_Checked(filePath.c_str(), "r");
 		Sint64 fileSize = SDL_RWsize(reader);
 		char* data = (char*)malloc((size_t)fileSize + 1);
 	
@@ -51,8 +62,22 @@ namespace Core
 		Exception::Assert(totalSize == fileSize, "Could not load file '" + assetPath + "'");
 	
 		// cleanup
-		SDL_RWclose(reader);
+		int test = SDL_RWclose(reader);
+		SDL_FreeRW(reader);
 
 		return data;
+	}
+
+	bool AssetHelper::TryLoadTextAsset(std::string assetPath, std::string& loadedText)
+	{
+		std::string filePath = AssetPathToFilePath(assetPath);
+		SDL_RWops* reader;
+
+		if ((reader = SDL_RWFromFile(filePath.c_str(), "r")) == NULL)
+			return false;
+		
+		SDL_RWclose(reader);
+		loadedText = LoadTextAsset(assetPath);
+		return true;
 	}
 }

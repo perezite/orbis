@@ -56,4 +56,25 @@ namespace System
 		std::string result = ss.str();
 		return result;
 	}
+
+	bool StringHelper::Seek(std::istringstream& is, char c)
+	{
+		char r;
+		while (is.get(r) && c != r);
+
+		if (r != c)
+			return false;
+
+		return true;
+	}
+
+	std::string StringHelper::Read(std::istringstream& is, char d)
+	{
+		std::string buf;
+		char r;
+		while (is.get(r) && r != d)
+			buf.push_back(r);
+
+		return buf;
+	}
 }

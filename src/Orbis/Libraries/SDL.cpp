@@ -38,6 +38,15 @@ Sint64 SDL_Verify(Sint64 returnValue, Sint64 minimalAllowedValue)
 	return returnValue;
 }
 
+
+size_t SDL_Verify(size_t result, size_t expected)
+{
+	if (result < expected)
+		SDL_HandleError();
+
+	return result;
+}
+
 SDL_RWops* SDL_Verify(SDL_RWops* returnValue)
 {
 	if (returnValue == NULL)

@@ -1,8 +1,14 @@
 TODO:
 - Partikelsystem implementieren
-	- BezierCurveAsset implementieren, welches in ein File gespeichert werden kann
-	- Tween-Logik in eigene Klasse extrahieren
+	- Problem mit nicht geschlosseneem FileHandle fixen
+	- Tween implementieren, welches 
+		- eine BezierCurve in ein Asset abspeichert
+		- die BezierCurve wieder lädt
+	- Die Clipboard-Funktionalität aus BezierCurveEditor löscht
 	- BezierTester in TweenTester umbenennen
+	- BezierCurveEditor in TweenEditor umbenennen
+	- Der Tween-Klasse die Tween-Logik hinzufügen
+	- Die Tween-Klasse in den TweenTester einbinden
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen
 	- Trivialen Controller für grünes Partikelsystem implementieren		
