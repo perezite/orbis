@@ -27,10 +27,6 @@ namespace Math
 	class BezierCurve
 	{
 	public:
-		// deserialize from json
-		static BezierCurve FromString(std::string json);
-
-	public:
 		// ctor
 		BezierCurve();
 
@@ -62,8 +58,11 @@ namespace Math
 		// move a control point
 		void Move(unsigned int index, Vector2D newPosition);
 
+		// load from json
+		void Load(std::string json);
+
 		// serialize to json
-		std::string ToString();
+		std::string Load();
 	protected:
 		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
 		Vector2D GetValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);

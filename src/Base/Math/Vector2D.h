@@ -20,7 +20,7 @@ namespace Math
 		static float Distance(Vector2D point1, Vector2D point2) { return (point2 - point1).GetLength(); }
 
 		// deserialize from string 
-		static Vector2D FromString(std::string json);
+		static Vector2D Load(std::string json);
 
 	public:
 		// costructor 
@@ -63,7 +63,7 @@ namespace Math
 		const Vector2D Scaled(float length) const;
 
 		// serialize to string
-		const std::string ToString(int precision = 5);
+		const std::string Load(int precision = 5);
 
 	public:
 		// the x component 

@@ -124,8 +124,8 @@ namespace Components
 		std::stringstream ss; ss << "{ ";
 		for (unsigned int i = 0; i < shifted.GetLength(); i++)
 		{
-			ss << "{" << StringHelper::ToString(shifted.Get(i).tangent) << ", ";
-			ss << shifted.Get(i).pos.ToString() << "}" << (i < shifted.GetLength() - 1 ? ", " : "");
+			ss << "{" << StringHelper::Load(shifted.Get(i).tangent) << ", ";
+			ss << shifted.Get(i).pos.Load() << "}" << (i < shifted.GetLength() - 1 ? ", " : "");
 		}
 		ss << " }";
 

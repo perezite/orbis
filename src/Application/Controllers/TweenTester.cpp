@@ -1,4 +1,4 @@
-#include "BezierCurveTester.h"
+#include "TweenTester.h"
 
 #include "../../Orbis/Core/TimeManager.h"
 using namespace Core;
@@ -7,19 +7,19 @@ using namespace Core;
 
 namespace Controllers
 {
-	void BezierCurveTester::Start()
+	void TweenTester::Start()
 	{
 		m_initialScale = GetParent()->GetTransform()->scale;
 	}
 
-	void BezierCurveTester::Update()
+	void TweenTester::Update()
 	{
 		m_elapsed += TimeManager::GetInstance()->GetDeltaSeconds();
 		float t = m_elapsed / m_duration;
 
 		if (t <= 1.0f) 
 		{
-			float factor = m_curve.GetValue(t).y;
+			float factor = m_tween.GetCurve()->GetValue(t).y;
 
 			Vector2D currentScale = m_initialScale * factor;
 			GetParent()->GetTransform()->scale = currentScale;

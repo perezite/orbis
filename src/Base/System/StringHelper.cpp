@@ -49,7 +49,7 @@ namespace System
 		return str == "";
 	}
 
-	std::string StringHelper::ToString(float val, int precision)
+	std::string StringHelper::Load(float val, int precision)
 	{
 		std::stringstream ss;
 		ss << std::fixed << std::setprecision(precision) << val << "f";

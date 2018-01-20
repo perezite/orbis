@@ -16,7 +16,7 @@ namespace Math
 
 	const Vector2D Vector2D::One = Vector2D(1.0f, 1.0f);
 
-	Vector2D Vector2D::FromString(std::string json)
+	Vector2D Vector2D::Load(std::string json)
 	{
 		std::istringstream is(json);
 		StringHelper::Seek(is, '{');
@@ -73,10 +73,10 @@ namespace Math
 		return scaled;
 	}
 
-	const std::string Vector2D::ToString(int precision)
+	const std::string Vector2D::Load(int precision)
 	{
 		std::stringstream ss; 
-		ss << "{" << StringHelper::ToString(x) << ", " << StringHelper::ToString(y) << "}"; 
+		ss << "{" << StringHelper::Load(x) << ", " << StringHelper::Load(y) << "}"; 
 		std::string result = ss.str();
 		return result;
 	}

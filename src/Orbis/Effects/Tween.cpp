@@ -12,7 +12,7 @@ namespace Effects
 {
 	void Tween::Save()
 	{
-		AssetHelper::SaveTextAsset(m_assetPath, m_curve.ToString());
+		AssetHelper::SaveTextAsset(m_assetPath, m_curve.Load());
 	}
 
 	void Tween::TryDeserialize()
@@ -20,7 +20,7 @@ namespace Effects
 		std::string json;
 		if (AssetHelper::TryLoadTextAsset(m_assetPath, json))
 		{
-			m_curve.FromString(json);
+			m_curve.Load(json);
 		}
 	}
 }

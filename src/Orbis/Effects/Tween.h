@@ -17,8 +17,8 @@ namespace Effects
 			TryDeserialize();
 		}
 
-		// set the curve
-		void SetCurve(BezierCurve const curve) { m_curve = curve; }
+		// get the curve
+		BezierCurve* GetCurve() { return &m_curve; }
 
 		// save as asset
 		void Save();

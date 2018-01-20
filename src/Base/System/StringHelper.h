@@ -18,7 +18,7 @@ namespace System
 		static bool IsEmpty(std::string str);
 
 		// convert to string
-		static std::string ToString(float val, int precision = 5);
+		static std::string Load(float val, int precision = 5);
 	
 		// seek the next occurence of c in is
 		static bool Seek(std::istringstream& is, char c);

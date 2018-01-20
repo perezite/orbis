@@ -1,11 +1,8 @@
 TODO:
 - Partikelsystem implementieren
-	- Problem mit nicht geschlosseneem FileHandle fixen
-	- Tween implementieren, welches 
-		- eine BezierCurve in ein Asset abspeichert
-		- die BezierCurve wieder lädt
-	- Die Clipboard-Funktionalität aus BezierCurveEditor löscht
 	- BezierTester in TweenTester umbenennen
+	- Tween in TweenTester einbinden
+	- Die Clipboard-Funktionalität aus BezierCurveEditor wieder löschen
 	- BezierCurveEditor in TweenEditor umbenennen
 	- Der Tween-Klasse die Tween-Logik hinzufügen
 	- Die Tween-Klasse in den TweenTester einbinden
@@ -35,6 +32,7 @@ TODO:
 			- Wird erzeugt beim Tod jedes Partikels des Hauptsystems
 	- Controller für rotes Partikelsystem implementieren
 	- Controller für Hintergrund Partikelsystem implementieren	
+- Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln
 - Neues Projekt erstellen für die Implementation von Blear Level 1
