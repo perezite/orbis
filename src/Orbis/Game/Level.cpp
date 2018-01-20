@@ -2,7 +2,9 @@
 
 #include "../Video/VideoManager.h"
 #include "../Video/TextureAtlas.h"
+#include "../Effects/Tween.h"
 using namespace Video;
+using namespace Effects;
 
 #include "../../Base/System/MemoryManager.h"
 using namespace System;
@@ -24,6 +26,7 @@ namespace Game
 		m_entities.clear();
 	
 		MemoryManager<Texture>::GetInstance()->DeleteAll();
+		MemoryManager<Tween>::GetInstance()->DeleteAll();
 	}
 
 	void Level::AddEntity(Entity *entity)

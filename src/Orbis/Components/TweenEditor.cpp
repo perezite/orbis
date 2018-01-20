@@ -1,4 +1,4 @@
-#include "BezierCurveEditor.h"
+#include "TweenEditor.h"
 
 #include "../../Base/System/EnvironmentHelper.h"
 using namespace System;
@@ -18,15 +18,15 @@ using namespace Core;
 
 namespace Components
 {
-	const float BezierCurveEditor::MARK_EXTENT = 0.01f;
-	const float BezierCurveEditor::SELECT_RADIUS = 0.05f;
-	const float BezierCurveEditor::TANGENT_LENGTH = 0.18f;
-	const int BezierCurveEditor::SAMPLING_DENSITY = 100;
-	const int BezierCurveEditor::NUM_SAMPLES = 100;
+	const float TweenEditor::MARK_EXTENT = 0.01f;
+	const float TweenEditor::SELECT_RADIUS = 0.05f;
+	const float TweenEditor::TANGENT_LENGTH = 0.18f;
+	const int TweenEditor::SAMPLING_DENSITY = 100;
+	const int TweenEditor::NUM_SAMPLES = 100;
 
-	void BezierCurveEditor::Start()
+	void TweenEditor::Start()
 	{
-		ORBIS_RELEASE(throw Exception("Creating a bezier curve editor in release mode is not allowed"); )
+		ORBIS_RELEASE(throw Exception("Creating a tween editor in release mode is not allowed"); )
 
 		m_texture = new Texture("Textures/CoordinateSystem2.png");
 		GetMaterial()->SetTexture(m_texture);
@@ -35,7 +35,7 @@ namespace Components
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 	}
 
-	void BezierCurveEditor::Update()
+	void TweenEditor::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
 
@@ -53,19 +53,19 @@ namespace Components
 
 		if (input->IsKeyGoingDown(KeyCode::Escape))
 			m_selectedControlPoint = -1;
-
-		if (input->IsKeyGoingDown(KeyCode::c))
-			CopyControlPointsToClipboard();
+	
+		if (input->IsKeyGoingDown(KeyCode::s))
+			Save();
 	}
 
-	void BezierCurveEditor::Render()
+	void TweenEditor::Render()
 	{
-		RenderBezierCurve();
+		RenderCurve();
 
 		RenderControlPoints();
 	}
 	
-	void BezierCurveEditor::AddOrSelectControlPoint()
+	void TweenEditor::AddOrSelectControlPoint()
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
 		if (IsClickablePosition(tap))
@@ -74,11 +74,11 @@ namespace Components
 
 			// if no control point was selected by the tap, we add a new control point
 			if (m_selectedControlPoint == -1)
-				m_curve.Add(BezierPoint(tap, 0.0f));
+				m_tween.GetCurve()->Add(BezierPoint(tap, 0.0f));
 		}
 	}
 
-	void BezierCurveEditor::MoveControlPoint()
+	void TweenEditor::MoveControlPoint()
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
 		if (IsClickablePosition(tap))
@@ -86,57 +86,40 @@ namespace Components
 			// clamp boundary point positions
 			if (m_selectedControlPoint == 0)
 				tap.x = -0.5f;
-			if (m_selectedControlPoint == m_curve.GetLength() - 1)
+			if (m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1)
 				tap.x = 0.5f;
 
 			// move
-			m_curve.Move(m_selectedControlPoint, tap);
+			m_tween.GetCurve()->Move(m_selectedControlPoint, tap);
 		}
 	}
 
-	void BezierCurveEditor::RotateTangent()
+	void TweenEditor::RotateTangent()
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
-		Vector2D ctrlPoint = m_curve.Get(m_selectedControlPoint).pos;
+		Vector2D ctrlPoint = m_tween.GetCurve()->Get(m_selectedControlPoint).pos;
 		float tangent;
 		if (tap.x > ctrlPoint.x)
 			tangent = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
 		if (tap.x <= ctrlPoint.x)
 			tangent = (ctrlPoint.y - tap.y) / (ctrlPoint.x - tap.x);
 
-		m_curve.Set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
+		m_tween.GetCurve()->Set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
 	}
 
-	void BezierCurveEditor::DeleteSelectedControlPoint()
+	void TweenEditor::DeleteSelectedControlPoint()
 	{
 		// the boundary points cannot be deleted
-		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_curve.GetLength() - 1)
+		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1)
 			return;
 
-		m_curve.Delete(m_selectedControlPoint);
+		m_tween.GetCurve()->Delete(m_selectedControlPoint);
 		m_selectedControlPoint = -1;
 	}
 
-	void BezierCurveEditor::CopyControlPointsToClipboard()
+	unsigned int TweenEditor::ComputeSelectedControlPoint(Vector2D tapPosition)
 	{
-		// collect the string data
-		BezierCurve shifted = GetShiftedBezierCurve(m_curve, Vector2D(0.5f, 0.5f));
-		std::stringstream ss; ss << "{ ";
-		for (unsigned int i = 0; i < shifted.GetLength(); i++)
-		{
-			ss << "{" << StringHelper::Load(shifted.Get(i).tangent) << ", ";
-			ss << shifted.Get(i).pos.Load() << "}" << (i < shifted.GetLength() - 1 ? ", " : "");
-		}
-		ss << " }";
-
-		// copy the data to clipboard
-		EnvironmentHelper::WriteToClipboard(ss.str());
-		LogHelper::LogMessage("Bezier data copied to clipboard");
-	}
-
-	unsigned int BezierCurveEditor::ComputeSelectedControlPoint(Vector2D tapPosition)
-	{
-		for (unsigned int i = 0; i < m_curve.GetLength(); i++)
+		for (unsigned int i = 0; i < m_tween.GetCurve()->GetLength(); i++)
 		{
 			if (IsControlPointSelected(i, tapPosition))
 				return i;
@@ -145,44 +128,61 @@ namespace Components
 		return -1;
 	}
 
-	bool BezierCurveEditor::IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
+	bool TweenEditor::IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
 	{
-		Vector2D pos = m_curve.Get(controlPointIndex).pos;
+		Vector2D pos = m_tween.GetCurve()->Get(controlPointIndex).pos;
 		if (Vector2D::Distance(pos, tapPosition) <= SELECT_RADIUS)
 			return true;
 
 		return false;
 	}
 
-	void BezierCurveEditor::RenderBezierCurve()
+	/*void TweenEditor::RenderCurve()
 	{
-		if (m_curve.GetLength() < 2)
+		if (m_tween.GetCurve()->GetLength() < 2)
 			return;
 
 		float step = 1.0f / (float)NUM_SAMPLES;
-		Vector2D last = m_curve.Get(0).pos;
+		Vector2D last = m_tween.GetCurve()->Get(0).pos;
 		for (float t = 0; t <= 1.0f; t += step)
 		{
-			Vector2D current = m_curve.GetValue(t);
+			Vector2D current = m_tween.GetCurve()->GetValue(t);
 			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last, current, Color::Black);
+			last = current;
+		}
+	}*/
+
+	void TweenEditor::RenderCurve()
+	{
+		if (m_tween.GetCurve()->GetLength() < 2)
+			return;
+
+		BezierCurve calcCurve = GetShiftedCurve(m_tween.GetCurve(), Vector2D(0.5f, 0.5f));
+
+		float step = 1.0f / (float)NUM_SAMPLES;
+		Vector2D last = calcCurve.Get(0).pos;
+		for (float x = 0.0f; x <= 1.0f; x += step)
+		{
+			Vector2D current = calcCurve.GetValueV2(x);
+			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
 
-	void BezierCurveEditor::RenderControlPoints()
+	void TweenEditor::RenderControlPoints()
 	{
 		RenderDevice* rd = VideoManager::GetInstance()->GetRenderDevice();
 
-		for (unsigned int i = 0; i < m_curve.GetLength(); i++)
+		for (unsigned int i = 0; i < m_tween.GetCurve()->GetLength(); i++)
 		{
-			Vector2D pos = m_curve.Get(i).pos;
+			Vector2D pos = m_tween.GetCurve()->Get(i).pos;
 			Rect rect(pos, MARK_EXTENT);
 			bool isSelected = m_selectedControlPoint == i;
 			rd->DrawDebugRect(rect, isSelected ? Color::Red : Color::Green);
 
 			if (isSelected)
 			{
-				Vector2D v = Vector2D(1.0f, m_curve.Get(i).tangent).Normalized() * 0.5f * TANGENT_LENGTH;
+				Vector2D v = Vector2D(1.0f, m_tween.GetCurve()->Get(i).tangent).Normalized() * 0.5f * TANGENT_LENGTH;
 				Vector2D tangentStart = pos - v;
 				Vector2D tangentEnd = pos + v;
 				Rect startRect(tangentStart, MARK_EXTENT);
@@ -194,26 +194,39 @@ namespace Components
 		}
 	}
 
-	bool BezierCurveEditor::IsClickablePosition(Vector2D position)
+	bool TweenEditor::IsClickablePosition(Vector2D position)
 	{
 		Rect clickableRect = Rect(GetParent()->GetTransform()->position, 0.5f);
 		return clickableRect.Contains(position);
 	}
 
-	bool BezierCurveEditor::IsSelectedControlPointOnBoundary()
+	bool TweenEditor::IsSelectedControlPointOnBoundary()
 	{
-		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_curve.GetLength() - 1;
+		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1;
 	}
 
-	BezierCurve BezierCurveEditor::GetShiftedBezierCurve(BezierCurve curve, Vector2D shift)
+	void TweenEditor::ShiftCurve(BezierCurve* curve, Vector2D shift)
 	{
-		for (unsigned int i = 0; i < curve.GetLength(); i++)
+		for (unsigned int i = 0; i < curve->GetLength(); i++)
 		{
-			BezierPoint point = curve.Get(i);
+			BezierPoint point = curve->Get(i);
 			point.pos += shift;
-			curve.Set(i, point);
+			curve->Set(i, point);
 		}
+	}
 
-		return curve;
+	BezierCurve TweenEditor::GetShiftedCurve(BezierCurve* curve, Vector2D shift)
+	{
+		BezierCurve shifted = *curve;
+		ShiftCurve(&shifted, shift);
+		return shifted;
+	}
+
+	void TweenEditor::Save()
+	{
+		ShiftCurve(m_tween.GetCurve(), Vector2D(0.5f, 0.5f));
+		m_tween.Save();
+		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
+		LogHelper::LogMessage("Tween data saved");
 	}
 }

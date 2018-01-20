@@ -3,7 +3,7 @@
 #include "../Controllers/TweenTester.h"
 using namespace Controllers;
 
-#include "../../Orbis/Components/BezierCurveEditor.h"
+#include "../../Orbis/Components/TweenEditor.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
@@ -23,18 +23,22 @@ namespace Levels
 	{
 		// add assets
 		Texture* brickTex = new Texture("Textures/YellowBlock.png");
-		Tween tween("Tweens/Test1.tween");
+		Tween* tween = new Tween("Tweens/Test1.tween");
 
 		// init camera
 		Entity* cam = new Entity();
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
 
-		// add tweened brick
-		Entity* brick = new Entity();
-		brick->AddComponent(new SpriteRenderer(brickTex));
-		brick->AddComponent(new TweenTester(tween, 6.0f));
-		AddEntity(brick);
+		// add tween editor
+		Entity* tweenEditor = new Entity();
+		tweenEditor->AddComponent(new TweenEditor(tween));
+		AddEntity(tweenEditor);
 
+		// add tweened brick
+		//Entity* brick = new Entity();
+		//brick->AddComponent(new SpriteRenderer(brickTex));
+		//brick->AddComponent(new TweenTester(tween, 6.0f));
+		//AddEntity(brick);
 	}
 }

@@ -15,16 +15,6 @@ namespace Math
 		Reset();
 	}
 
-	BezierCurve::BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
-	{
-		for (unsigned int i = 0; i < controlPoints.size(); i++)	
-		{
-			Vector2D pos(controlPoints[i].second.first, controlPoints[i].second.second);
-			float tangent = controlPoints[i].first;
-			m_points.push_back(BezierPoint(pos, tangent));
-		}
-	}
-
 	Vector2D BezierCurve::GetValue(float t)
 	{
 		t = float(m_points.size() - 1) * t;	// map [0, 1] onto [0, (#points -1)]
@@ -37,6 +27,25 @@ namespace Math
 		Vector2D p3 = m_points[startIdx + 1].pos;
 		Vector2D p2 = p3 - endTangent * 0.5f;
 		return GetValue(t, p0, p1, p2, p3);
+	}
+
+	Vector2D BezierCurve::GetValueV2(float x)
+	{
+		unsigned int startIdx = 0;
+		for (unsigned int i = 0; i < m_points.size() - 1; i++) {
+			float left = m_points[startIdx].pos.x;
+			float right = m_points[startIdx + 1].pos.x;
+			if (x > left && x <= right)
+				startIdx = i;
+		}
+
+		Vector2D startTangent = Vector2D(1, m_points[startIdx].tangent).Scaled(TANGENT_LENGTH);
+		Vector2D endTangent = Vector2D(1, m_points[startIdx + 1].tangent).Scaled(TANGENT_LENGTH);
+		Vector2D p0 = m_points[startIdx].pos;
+		Vector2D p1 = p0 + startTangent * 0.5f;
+		Vector2D p3 = m_points[startIdx + 1].pos;
+		Vector2D p2 = p3 - endTangent * 0.5f;
+		return Vector2D(x, GetValue(x, p0, p1, p2, p3).y);
 	}
 
 	void BezierCurve::Add(BezierPoint bp)

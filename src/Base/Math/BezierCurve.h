@@ -40,6 +40,9 @@ namespace Math
 		// get the bezier curve value at a parameter t in [0, 1]
 		Vector2D GetValue(float t);
 
+		// get the bezier curve value at coordinate x
+		Vector2D GetValueV2(float x);
+
 		// get a control point
 		BezierPoint Get(unsigned int index) const { return m_points[index]; }
 

@@ -102,11 +102,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\TextureChart.cpp">
       <Filter>Video</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\BezierCurveEditor.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Tween.cpp">
       <Filter>Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TweenEditor.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,11 +200,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\TextureChart.h">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\BezierCurveEditor.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Tween.h">
       <Filter>Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TweenEditor.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

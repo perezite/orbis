@@ -1,35 +1,24 @@
 #pragma once
 
-#include "../../Base/Math/BezierCurve.h"
-using namespace Math;
-
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/Renderer.h"
+#include "../../Orbis/Effects/Tween.h"
 using namespace Components;
+using namespace Effects;
 
 #include <vector>
 
 namespace Components
 {
-	// can be used to visualize, edit and ultimately dump the data from a bezier curve
-	class BezierCurveEditor : public Renderer
+	// used to edit a tween
+	class TweenEditor : public Renderer
 	{
 	public:
 		// ctor
-		BezierCurveEditor()
-			: Renderer::Renderer(), m_selectedControlPoint(-1)
-		{ }		
-
-		// ctor
-		BezierCurveEditor(std::vector<std::pair<float, std::pair<float, float>>> controlPoints)
-			: BezierCurveEditor::BezierCurveEditor(BezierCurve(controlPoints))
-		{ }
-
-		// ctor
-		BezierCurveEditor(BezierCurve curve) 
-			: BezierCurveEditor::BezierCurveEditor()
+		TweenEditor(Tween* tween)
+			: Renderer::Renderer(), m_tween(*tween)
 		{
-			m_curve = GetShiftedBezierCurve(curve, Vector2D(-0.5f, -0.5f));
+			ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
 		}
 
 		// start
@@ -54,9 +43,6 @@ namespace Components
 		// delete the selected control point
 		void DeleteSelectedControlPoint();
 
-		// copy the control point coordinates to clipboard
-		void CopyControlPointsToClipboard();
-
 		// get the index of the selected control point or -1 if no point was selected
 		unsigned int ComputeSelectedControlPoint(Vector2D tapPosition);
 
@@ -64,7 +50,7 @@ namespace Components
 		bool IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition);
 
 		// render the bezier curve
-		void RenderBezierCurve();
+		void RenderCurve();
 
 		// render the control points and tangent
 		void RenderControlPoints();
@@ -75,13 +61,17 @@ namespace Components
 		// is the selected control point the first or last point 
 		bool IsSelectedControlPointOnBoundary();
 
-		// get a bezier curve where all control points are shifted
-		BezierCurve GetShiftedBezierCurve(BezierCurve curve, Vector2D shift);
+		// shift a curve by the given vector
+		void ShiftCurve(BezierCurve* curve, Vector2D shift);
 
+		// get a curve shifted by the given vector
+		BezierCurve GetShiftedCurve(BezierCurve* curve, Vector2D shift);
 
+		// save the tween
+		void Save();
 	private:
-		// the bezier curve
-		BezierCurve m_curve;
+		// the tween to be edited
+		Tween m_tween;
 
 		// the index of the selected control point
 		unsigned int m_selectedControlPoint;

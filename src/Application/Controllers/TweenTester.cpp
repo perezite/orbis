@@ -19,7 +19,7 @@ namespace Controllers
 
 		if (t <= 1.0f) 
 		{
-			float factor = m_tween.GetCurve()->GetValue(t).y;
+			float factor = m_tween->GetCurve()->GetValue(t).y;
 
 			Vector2D currentScale = m_initialScale * factor;
 			GetParent()->GetTransform()->scale = currentScale;

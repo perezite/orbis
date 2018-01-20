@@ -1,11 +1,8 @@
 TODO:
 - Partikelsystem implementieren
-	- BezierTester in TweenTester umbenennen
-	- Tween in TweenTester einbinden
-	- Die Clipboard-Funktionalität aus BezierCurveEditor wieder löschen
-	- BezierCurveEditor in TweenEditor umbenennen
+	- Den Tween eindimensional machen
+	- Die Tween-Klasse in den Tween-Editor einbinden
 	- Der Tween-Klasse die Tween-Logik hinzufügen
-	- Die Tween-Klasse in den TweenTester einbinden
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen
 	- Trivialen Controller für grünes Partikelsystem implementieren		

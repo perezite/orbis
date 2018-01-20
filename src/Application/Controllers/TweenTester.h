@@ -14,7 +14,7 @@ namespace Controllers
 	{
 	public:
 		// ctor
-		TweenTester(Tween tween, float duration)
+		TweenTester(Tween* tween, float duration)
 			: Component::Component(), m_tween(tween), m_duration(duration), m_elapsed(0.0f)
 		{ }
 
@@ -29,7 +29,7 @@ namespace Controllers
 		Vector2D m_initialScale;
 
 		// the tween
-		Tween m_tween;
+		Tween* m_tween;
 
 		// duration of the tween
 		float m_duration;
