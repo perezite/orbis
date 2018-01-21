@@ -62,8 +62,7 @@ namespace Core
 		Exception::Assert(totalSize == fileSize, "Could not load file '" + assetPath + "'");
 	
 		// cleanup
-		int test = SDL_RWclose(reader);
-		SDL_FreeRW(reader);
+		SDL_RWclose(reader);
 
 		return data;
 	}
