@@ -1,11 +1,13 @@
 TODO:
 - Partikelsystem implementieren
-	- Component ParticleSystemRenderer erstellen
-	- Triviale Implementation der Componente vornehmen
-	- Trivialen Controller für grünes Partikelsystem implementieren		
-	- Folgende Parameter des ParticleSystemRenderers implementieren und kontinuierlich nachziehen im grünen Controller
-		- Lifetime
+	- Implementieren, dass der ParticleSystemRenderer zwei Versionen des Particles rendern kann (mit leicht verschobenen Positionen und unterschiedlichen Skalierungen)
+		- Plan überlegen
+	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
 		- ParticleLifetime
+		- SizeOverLifetime (Spline)
+	- ParticleSystemInspector implementieren
+	- Weitere Parameter des ParticleSystemRenderers implementieren
+		- Lifetime
 		- InitialSpeed Range
 		- InitialSize Range
 		- InitialAlpha Range
@@ -19,13 +21,10 @@ TODO:
 		- DampingThreshold
 		- DampingRate
 		- ColorOverLifetime (ColorGradient)
-		- SizeOverLifetime (Spline)
 		- InitialOmega
 			-- Vorzeichen identische mit Vorzeichen von InitialAlpha
 		- DeathParticleSubSystem
 			- Wird erzeugt beim Tod jedes Partikels des Hauptsystems
-	- Controller für rotes Partikelsystem implementieren
-	- Controller für Hintergrund Partikelsystem implementieren	
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln
