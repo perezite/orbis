@@ -1,4 +1,4 @@
-#include "TweenEditor.h"
+#include "TweenInspector.h"
 
 #include "../../Base/System/EnvironmentHelper.h"
 using namespace System;
@@ -18,13 +18,13 @@ using namespace Core;
 
 namespace Components
 {
-	const float TweenEditor::MARK_EXTENT = 0.01f;
-	const float TweenEditor::SELECT_RADIUS = 0.05f;
-	const float TweenEditor::TANGENT_LENGTH = 0.18f;
-	const int TweenEditor::SAMPLING_DENSITY = 100;
-	const int TweenEditor::NUM_SAMPLES = 100;
+	const float TweenInspector::MARK_EXTENT = 0.01f;
+	const float TweenInspector::SELECT_RADIUS = 0.05f;
+	const float TweenInspector::TANGENT_LENGTH = 0.18f;
+	const int TweenInspector::SAMPLING_DENSITY = 100;
+	const int TweenInspector::NUM_SAMPLES = 100;
 
-	void TweenEditor::Start()
+	void TweenInspector::Start()
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween editor in release mode is not allowed"); )
 
@@ -35,7 +35,7 @@ namespace Components
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 	}
 
-	void TweenEditor::Update()
+	void TweenInspector::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
 
@@ -58,14 +58,14 @@ namespace Components
 			Save();
 	}
 
-	void TweenEditor::Render()
+	void TweenInspector::Render()
 	{
 		RenderCurve();
 
 		RenderControlPoints();
 	}
 	
-	void TweenEditor::AddOrSelectControlPoint()
+	void TweenInspector::AddOrSelectControlPoint()
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
 		if (IsClickablePosition(tap))
@@ -78,7 +78,7 @@ namespace Components
 		}
 	}
 
-	void TweenEditor::MoveControlPoint()
+	void TweenInspector::MoveControlPoint()
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
 		if (IsClickablePosition(tap))
@@ -94,7 +94,7 @@ namespace Components
 		}
 	}
 
-	void TweenEditor::RotateTangent()
+	void TweenInspector::RotateTangent()
 	{
 		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
 		Vector2D ctrlPoint = m_tween.GetCurve()->Get(m_selectedControlPoint).pos;
@@ -107,7 +107,7 @@ namespace Components
 		m_tween.GetCurve()->Set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
 	}
 
-	void TweenEditor::DeleteSelectedControlPoint()
+	void TweenInspector::DeleteSelectedControlPoint()
 	{
 		// the boundary points cannot be deleted
 		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1)
@@ -117,7 +117,7 @@ namespace Components
 		m_selectedControlPoint = -1;
 	}
 
-	unsigned int TweenEditor::ComputeSelectedControlPoint(Vector2D tapPosition)
+	unsigned int TweenInspector::ComputeSelectedControlPoint(Vector2D tapPosition)
 	{
 		for (unsigned int i = 0; i < m_tween.GetCurve()->GetLength(); i++)
 		{
@@ -128,7 +128,7 @@ namespace Components
 		return -1;
 	}
 
-	bool TweenEditor::IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
+	bool TweenInspector::IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
 	{
 		Vector2D pos = m_tween.GetCurve()->Get(controlPointIndex).pos;
 		if (Vector2D::Distance(pos, tapPosition) <= SELECT_RADIUS)
@@ -137,7 +137,7 @@ namespace Components
 		return false;
 	}
 
-	void TweenEditor::RenderCurve()
+	void TweenInspector::RenderCurve()
 	{
 		if (m_tween.GetCurve()->GetLength() < 2)
 			return;
@@ -154,7 +154,7 @@ namespace Components
 		}
 	}
 
-	void TweenEditor::RenderControlPoints()
+	void TweenInspector::RenderControlPoints()
 	{
 		RenderDevice* rd = VideoManager::GetInstance()->GetRenderDevice();
 
@@ -179,18 +179,18 @@ namespace Components
 		}
 	}
 
-	bool TweenEditor::IsClickablePosition(Vector2D position)
+	bool TweenInspector::IsClickablePosition(Vector2D position)
 	{
 		Rect clickableRect = Rect(GetParent()->GetTransform()->position, 0.5f);
 		return clickableRect.Contains(position);
 	}
 
-	bool TweenEditor::IsSelectedControlPointOnBoundary()
+	bool TweenInspector::IsSelectedControlPointOnBoundary()
 	{
 		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1;
 	}
 
-	void TweenEditor::ShiftCurve(BezierCurve* curve, Vector2D shift)
+	void TweenInspector::ShiftCurve(BezierCurve* curve, Vector2D shift)
 	{
 		for (unsigned int i = 0; i < curve->GetLength(); i++)
 		{
@@ -200,14 +200,14 @@ namespace Components
 		}
 	}
 
-	BezierCurve TweenEditor::GetShiftedCurve(BezierCurve* curve, Vector2D shift)
+	BezierCurve TweenInspector::GetShiftedCurve(BezierCurve* curve, Vector2D shift)
 	{
 		BezierCurve shifted = *curve;
 		ShiftCurve(&shifted, shift);
 		return shifted;
 	}
 
-	void TweenEditor::Save()
+	void TweenInspector::Save()
 	{
 		ShiftCurve(m_tween.GetCurve(), Vector2D(0.5f, 0.5f));
 		m_tween.Save();

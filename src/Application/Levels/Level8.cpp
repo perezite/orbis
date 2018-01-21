@@ -3,7 +3,7 @@
 #include "../Controllers/TweenTester.h"
 using namespace Controllers;
 
-#include "../../Orbis/Components/TweenEditor.h"
+#include "../../Orbis/Components/TweenInspector.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
@@ -31,8 +31,8 @@ namespace Levels
 		AddEntity(cam);
 
 		// add tween editor
-		Entity* tweenEditor = new Entity();
-		tweenEditor->AddComponent(new TweenEditor(tween));
+		Entity* tweenInspector = new Entity();
+		tweenInspector->AddComponent(new TweenInspector(tween));
 		// AddEntity(tweenEditor);
 
 		// add tweened brick

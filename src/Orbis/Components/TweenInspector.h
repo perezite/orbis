@@ -11,11 +11,11 @@ using namespace Effects;
 namespace Components
 {
 	// used to edit a tween
-	class TweenEditor : public Renderer
+	class TweenInspector : public Renderer
 	{
 	public:
 		// ctor
-		TweenEditor(Tween* tween)
+		TweenInspector(Tween* tween)
 			: Renderer::Renderer(), m_tween(*tween)
 		{
 			ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
