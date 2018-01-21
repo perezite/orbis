@@ -14,8 +14,8 @@ namespace Controllers
 	{
 	public:
 		// ctor
-		TweenTester(Tween* tween, float duration)
-			: Component::Component(), m_tween(tween), m_duration(duration), m_elapsed(0.0f)
+		TweenTester(Tween* tween)
+			: Component::Component(), m_tween(tween)
 		{ }
 
 		// override
@@ -25,16 +25,7 @@ namespace Controllers
 		void Update();
 
 	private: 
-		// the initial scale
-		Vector2D m_initialScale;
-
 		// the tween
 		Tween* m_tween;
-
-		// duration of the tween
-		float m_duration;
-
-		// elapsed tween time
-		float m_elapsed;
 	};
 }

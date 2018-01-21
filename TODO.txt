@@ -1,8 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- Den Tween eindimensional machen
-	- Die Tween-Klasse in den Tween-Editor einbinden
-	- Der Tween-Klasse die Tween-Logik hinzufügen
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen
 	- Trivialen Controller für grünes Partikelsystem implementieren		

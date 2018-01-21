@@ -137,21 +137,6 @@ namespace Components
 		return false;
 	}
 
-	/*void TweenEditor::RenderCurve()
-	{
-		if (m_tween.GetCurve()->GetLength() < 2)
-			return;
-
-		float step = 1.0f / (float)NUM_SAMPLES;
-		Vector2D last = m_tween.GetCurve()->Get(0).pos;
-		for (float t = 0; t <= 1.0f; t += step)
-		{
-			Vector2D current = m_tween.GetCurve()->GetValue(t);
-			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last, current, Color::Black);
-			last = current;
-		}
-	}*/
-
 	void TweenEditor::RenderCurve()
 	{
 		if (m_tween.GetCurve()->GetLength() < 2)
@@ -163,7 +148,7 @@ namespace Components
 		Vector2D last = calcCurve.Get(0).pos;
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
-			Vector2D current = calcCurve.GetValueV2(x);
+			Vector2D current = calcCurve.GetValue(x);
 			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}

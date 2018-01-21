@@ -37,11 +37,8 @@ namespace Math
 		BezierCurve(std::vector<BezierPoint> points) : m_points(points)
 		{ }
 
-		// get the bezier curve value at a parameter t in [0, 1]
-		Vector2D GetValue(float t);
-
 		// get the bezier curve value at coordinate x
-		Vector2D GetValueV2(float x);
+		Vector2D GetValue(float x);
 
 		// get a control point
 		BezierPoint Get(unsigned int index) const { return m_points[index]; }
@@ -65,7 +62,7 @@ namespace Math
 		void Load(std::string json);
 
 		// serialize to json
-		std::string Load();
+		std::string ToString();
 	protected:
 		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
 		Vector2D GetValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);

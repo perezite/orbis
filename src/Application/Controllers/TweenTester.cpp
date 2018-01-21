@@ -9,21 +9,12 @@ namespace Controllers
 {
 	void TweenTester::Start()
 	{
-		m_initialScale = GetParent()->GetTransform()->scale;
+		m_tween->SetInitial(GetParent()->GetTransform()->scale);
 	}
 
 	void TweenTester::Update()
 	{
-		m_elapsed += TimeManager::GetInstance()->GetDeltaSeconds();
-		float t = m_elapsed / m_duration;
-
-		if (t <= 1.0f) 
-		{
-			float factor = m_tween->GetCurve()->GetValue(t).y;
-
-			Vector2D currentScale = m_initialScale * factor;
-			GetParent()->GetTransform()->scale = currentScale;
-		}
+		m_tween->Update(&GetParent()->GetTransform()->scale);
 	}
 }
 

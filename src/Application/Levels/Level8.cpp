@@ -23,7 +23,7 @@ namespace Levels
 	{
 		// add assets
 		Texture* brickTex = new Texture("Textures/YellowBlock.png");
-		Tween* tween = new Tween("Tweens/Test1.tween");
+		Tween* tween = new Tween("Tweens/Test1.tween", 6.0f);
 
 		// init camera
 		Entity* cam = new Entity();
@@ -33,12 +33,12 @@ namespace Levels
 		// add tween editor
 		Entity* tweenEditor = new Entity();
 		tweenEditor->AddComponent(new TweenEditor(tween));
-		AddEntity(tweenEditor);
+		// AddEntity(tweenEditor);
 
 		// add tweened brick
-		//Entity* brick = new Entity();
-		//brick->AddComponent(new SpriteRenderer(brickTex));
-		//brick->AddComponent(new TweenTester(tween, 6.0f));
-		//AddEntity(brick);
+		Entity* brick = new Entity();
+		brick->AddComponent(new SpriteRenderer(brickTex));
+		brick->AddComponent(new TweenTester(tween));
+		AddEntity(brick);
 	}
 }
