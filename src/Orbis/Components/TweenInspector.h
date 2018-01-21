@@ -21,8 +21,7 @@ namespace Components
 
 	public:
 		// ctor
-		TweenInspector(Tween* tween)
-			: Renderer::Renderer(), m_tween(*tween)
+		TweenInspector(Tween* tween) : Renderer::Renderer(), m_tween(*tween), m_isActive(false)
 		{
 			ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
 		}
@@ -75,6 +74,9 @@ namespace Components
 
 		// save the tween
 		void Save();
+
+		// toggle the editor
+		void Toggle();
 	private:
 		// the tween to be edited
 		Tween m_tween;
@@ -84,6 +86,9 @@ namespace Components
 
 		// the coordinate system texture
 		Texture* m_texture;
+
+		// is the editor currently active
+		bool m_isActive;
 
 	private:
 		// the extent of a marking rectangle for a control point

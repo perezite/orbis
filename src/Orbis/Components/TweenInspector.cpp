@@ -38,43 +38,53 @@ namespace Components
 
 	void TweenInspector::Start()
 	{
-		ORBIS_RELEASE(throw Exception("Creating a tween editor in release mode is not allowed"); )
+		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
 		m_texture = new Texture("Textures/CoordinateSystem2.png");
 		GetMaterial()->SetTexture(m_texture);
 		GetMaterial()->SetShader(Shader::GetDiffuseShader());
 		SetMesh(Mesh::GetTexturedQuad());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
+		GetParent()->GetTransform()->scale = Vector2D::Zero;
 	}
 
 	void TweenInspector::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
 
-		if (input->IsTapIndexGoingDown(1))
-			AddOrSelectControlPoint();
+		if (input->IsKeyGoingDown(KeyCode::t))
+			Toggle();
 
-		if (input->IsTapIndexDown(1) && m_selectedControlPoint != -1)
-			MoveControlPoint();
+		if (m_isActive)
+		{
+			if (input->IsTapIndexGoingDown(1))
+				AddOrSelectControlPoint();
 
-		if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
-			RotateTangent();
+			if (input->IsTapIndexDown(1) && m_selectedControlPoint != -1)
+				MoveControlPoint();
 
-		if (input->IsKeyGoingDown(KeyCode::d) && m_selectedControlPoint != -1)
-			DeleteSelectedControlPoint();
+			if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
+				RotateTangent();
 
-		if (input->IsKeyGoingDown(KeyCode::Escape))
-			m_selectedControlPoint = -1;
-	
-		if (input->IsKeyGoingDown(KeyCode::s))
-			Save();
+			if (input->IsKeyGoingDown(KeyCode::d) && m_selectedControlPoint != -1)
+				DeleteSelectedControlPoint();
+
+			if (input->IsKeyGoingDown(KeyCode::Escape))
+				m_selectedControlPoint = -1;
+
+			if (input->IsKeyGoingDown(KeyCode::s))
+				Save();
+		}
 	}
 
 	void TweenInspector::Render()
 	{
-		RenderCurve();
+		if (m_isActive)
+		{
+			RenderCurve();
 
-		RenderControlPoints();
+			RenderControlPoints();
+		}
 	}
 	
 	void TweenInspector::AddOrSelectControlPoint()
@@ -225,5 +235,16 @@ namespace Components
 		m_tween.Save();
 		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
 		LogHelper::LogMessage("Tween data saved");
+	}
+
+	void TweenInspector::Toggle()
+	{
+		if (m_isActive)
+			GetParent()->GetTransform()->scale = Vector2D::Zero;
+			
+		else
+			GetParent()->GetTransform()->scale = Vector2D::One;
+
+		m_isActive = !m_isActive;
 	}
 }

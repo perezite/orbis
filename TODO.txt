@@ -1,6 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- TweenInspector per Knopfdruck ein/ausschaltbar machen
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen
 	- Trivialen Controller für grünes Partikelsystem implementieren		
