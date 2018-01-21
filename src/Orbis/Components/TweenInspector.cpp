@@ -24,6 +24,18 @@ namespace Components
 	const int TweenInspector::SAMPLING_DENSITY = 100;
 	const int TweenInspector::NUM_SAMPLES = 100;
 
+	Entity* TweenInspector::TryConstructEntity(Tween* tween)
+	{
+		Entity* entity = NULL;
+
+		ORBIS_DEBUG (
+			entity = new Entity();
+			entity->AddComponent(new TweenInspector(tween));
+		)
+
+		return entity;
+	}
+
 	void TweenInspector::Start()
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween editor in release mode is not allowed"); )

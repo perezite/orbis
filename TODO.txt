@@ -1,6 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- 'FactoryMethod' für TweenInspectorEntity erstellen
 	- TweenInspector per Knopfdruck ein/ausschaltbar machen
 	- Component ParticleSystemRenderer erstellen
 	- Triviale Implementation der Componente vornehmen

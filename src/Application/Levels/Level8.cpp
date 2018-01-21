@@ -9,9 +9,11 @@ using namespace Controllers;
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Effects/Tween.h"
+#include "../../Orbis/Core/DebugHelper.h"
 using namespace Components;
 using namespace Video;
 using namespace Effects;
+using namespace Core;
 
 #include <iostream>
 #include <algorithm>
@@ -30,13 +32,9 @@ namespace Levels
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
 
-		// add tween editor
-		Entity* tweenInspector = new Entity();
-		tweenInspector->AddComponent(new TweenInspector(tween));
-		// AddEntity(tweenEditor);
-
 		// add tweened brick
 		Entity* brick = new Entity();
+		AddEntity(TweenInspector::TryConstructEntity(tween));
 		brick->AddComponent(new SpriteRenderer(brickTex));
 		brick->AddComponent(new TweenTester(tween));
 		AddEntity(brick);

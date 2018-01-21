@@ -31,7 +31,8 @@ namespace Game
 
 	void Level::AddEntity(Entity *entity)
 	{
-		m_entities.push_back(entity);
+		if (entity != NULL)
+			m_entities.push_back(entity);
 	}
 
 	void Level::Update()

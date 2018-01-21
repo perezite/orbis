@@ -2,8 +2,10 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/Renderer.h"
+#include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Effects/Tween.h"
 using namespace Components;
+using namespace Game;
 using namespace Effects;
 
 #include <vector>
@@ -13,6 +15,10 @@ namespace Components
 	// used to edit a tween
 	class TweenInspector : public Renderer
 	{
+	public:
+		// utility for quickly creating an inspector entity. Returns 0 in release mode
+		static Entity* TryConstructEntity(Tween* tween);
+
 	public:
 		// ctor
 		TweenInspector(Tween* tween)
