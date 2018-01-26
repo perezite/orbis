@@ -9,6 +9,7 @@
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
 #include "../Components/Renderer.h"
+#include "../Components/ParticleRenderer.h"
 using namespace Game;
 using namespace Components;
 
@@ -30,6 +31,9 @@ namespace Video
 
 		// add a renderer
 		void AddRenderer(Renderer* renderer);
+
+		// add a particle renderer
+		void AddParticleRenderer(ParticleRenderer* particleRenderer);
 
 		// update a renderer
 		void UpdateRenderer(Renderer* renderer);
@@ -74,5 +78,8 @@ namespace Video
 
 		// the renderer components
 		std::vector<Renderer*> m_renderers;
+
+		// the particle renderer components
+		std::vector<ParticleRenderer*> m_particleRenderers;
 	};
 }

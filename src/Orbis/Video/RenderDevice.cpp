@@ -21,6 +21,10 @@ namespace Video
 		m_isIndexArrayDirty = true;
 	}
 
+	void RenderDevice::AddParticleRenderer(ParticleRenderer* particleRenderer)
+	{
+	}
+
 	void RenderDevice::UpdateRenderer(Renderer* renderer)
 	{
 		m_renderers.erase(std::remove(m_renderers.begin(), m_renderers.end(), renderer), m_renderers.end());

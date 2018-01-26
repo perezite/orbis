@@ -108,7 +108,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TweenInspector.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleSystemRenderer.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleRenderer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,7 +209,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TweenInspector.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleSystemRenderer.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

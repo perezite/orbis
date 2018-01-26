@@ -3,16 +3,20 @@
 #include "Renderer.h"
 
 #include "../Video/Texture.h"
+#include "../Game/Transform.h"
 using namespace Video;
+using namespace Game;
+
+#include <vector>
 
 namespace Components
 {
 	// a renderer which renders a particle system
-	class ParticleSystemRenderer : public Renderer
+	class ParticleRenderer : public Renderer
 	{
 	public:
 		// ctor
-		ParticleSystemRenderer(Texture* texture) : Renderer::Renderer(), m_texture(texture)
+		ParticleRenderer(Texture* texture) : m_texture(texture)
 		{}
 
 		// start
@@ -21,5 +25,8 @@ namespace Components
 	private: 
 		// the texture
 		Texture* m_texture;
+
+		// a list of particle transforms 
+		std::vector<Transform> m_transform;
 	};
 }
