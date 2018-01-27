@@ -14,6 +14,8 @@ using namespace Core;
 
 namespace Video
 {
+	template<> void RenderDevice::ReserveVertexArray(std::vector<ParticleRenderer*> renderers, std::vector<GLfloat>& vertexArray);
+
 	void RenderDevice::AddRenderer(Renderer* renderer)
 	{
 		int position = FindFirstIndexInBatch<Renderer>(renderer, m_renderers);
@@ -37,6 +39,7 @@ namespace Video
 	void RenderDevice::Render()
 	{ 
 		RenderBatched(m_renderers, m_vertexArray, m_indexArray, m_isIndexArrayDirty);
+		RenderBatched(m_particleRenderers, m_particleVertexArray, m_particleIndexArray, m_isParticleIndexArrayDirty);
 	}
 
 	void RenderDevice::DrawDebugLine(Vector2D start, Vector2D end, Color color)
@@ -64,7 +67,7 @@ namespace Video
 		DrawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
 	}
 
-	void RenderDevice::RenderBatched(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray, std::vector<GLuint>& indexArray, bool& indexArrayDirtyFlag)
+	template<class T> void RenderDevice::RenderBatched(std::vector<T*> renderers, std::vector<GLfloat>& vertexArray, std::vector<GLuint>& indexArray, bool& indexArrayDirtyFlag)
 	{
 		#ifdef ORBIS_DEBUG_RENDERDEVICE
 			int count = 0;
@@ -84,8 +87,8 @@ namespace Video
 		for (unsigned int i = 0; i < batches.size(); i++)
 		{
 			unsigned int batchBegin = batches[i].min;
-			unsigned int batchSize = batches[i].Diff();
-			Renderer* prototype = renderers[batchBegin];
+			unsigned int batchSize = batches[i].Diff() + 1;
+			T* prototype = renderers[batchBegin];
 
 			// init batch prototype
 			if (prototype->GetMaterial()->GetTexture() != NULL)
@@ -108,8 +111,9 @@ namespace Video
 			}
 
 			// draw batched
-			unsigned int numIndices = prototype->GetMesh()->GetIndices()->size();
-			glDrawElements(GL_TRIANGLES, (batchSize + 1) * numIndices, GL_UNSIGNED_INT, &indexArray[batchBegin * numIndices]);
+			// unsigned int numIndices = prototype->GetMesh()->GetIndices()->size();
+			unsigned int numIndices = GetNumIndices(prototype);
+			glDrawElements(GL_TRIANGLES, batchSize * numIndices, GL_UNSIGNED_INT, &indexArray[batchBegin * numIndices]);
 
 			// cleanup
 			prototype->GetMaterial()->GetShader()->Unuse();
@@ -129,8 +133,18 @@ namespace Video
 		// cleanup
 		glDisable(GL_BLEND);
 	}
+	
+	unsigned int RenderDevice::GetNumIndices(Renderer* renderer)
+	{
+		return renderer->GetMesh()->GetIndices()->size();
+	}
 
-	void RenderDevice::UpdateVertexArray(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray)
+	unsigned int RenderDevice::GetNumIndices(ParticleRenderer* renderer)
+	{
+		return renderer->GetMesh()->GetIndices()->size() * renderer->GetTransforms()->size();
+	}
+
+	template<class T> void RenderDevice::UpdateVertexArray(std::vector<T*> renderers, std::vector<GLfloat>& vertexArray)
 	{
 		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::WorldSpace);
 		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::CameraSpace);
@@ -144,11 +158,32 @@ namespace Video
 			bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
 			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * entity->GetTransform()->GetModelMatrix();
 
-			UpdateVertexArray(renderers[i], vertexArray, mvpMatrix);
+			InsertIntoVertexArray(renderers[i], vertexArray, mvpMatrix);
 		}
 	}
 
-	void RenderDevice::UpdateVertexArray(Renderer* const renderer, std::vector<GLfloat>& vertexArray, Matrix3& mvpMatrix)
+	template<> void RenderDevice::UpdateVertexArray(std::vector<ParticleRenderer*> renderers, std::vector<GLfloat>& vertexArray)
+	{
+		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::WorldSpace);
+		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::CameraSpace);
+
+		vertexArray.clear();
+		ReserveVertexArray(renderers, vertexArray);
+
+		for (unsigned int i = 0; i < renderers.size(); i++)
+		{
+			std::vector<Transform>* transforms = renderers[i]->GetTransforms();
+			for (unsigned int j = 0; j < transforms->size(); j++)
+			{
+				Entity* entity = renderers[i]->GetParent();
+				bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
+				Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transforms->at(j).GetModelMatrix();
+				InsertIntoVertexArray(renderers[i], vertexArray, mvpMatrix);
+			}
+		}
+	}
+
+	template<class T> void RenderDevice::InsertIntoVertexArray(T* const renderer, std::vector<GLfloat>& vertexArray, Matrix3& mvpMatrix)
 	{
 		Mesh* mesh = renderer->GetMesh();
 		Texture* tex = renderer->GetMaterial()->GetTexture();
@@ -169,7 +204,7 @@ namespace Video
 		vertexArray.insert(vertexArray.end(), data.begin(), data.end());
 	}
 
-	void RenderDevice::ReserveVertexArray(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray)
+	template<class T> void RenderDevice::ReserveVertexArray(std::vector<T*> renderers, std::vector<GLfloat>& vertexArray)
 	{
 		unsigned int vertexArraySize = 0;
 		for (unsigned int i = 0; i < renderers.size(); i++)
@@ -180,7 +215,18 @@ namespace Video
 		vertexArray.reserve(vertexArraySize);
 	}
 
-	void RenderDevice::UpdateIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray, bool& dirtyFlag)
+	template<> void RenderDevice::ReserveVertexArray(std::vector<ParticleRenderer*> renderers, std::vector<GLfloat>& vertexArray)
+	{
+		unsigned int vertexArraySize = 0;
+		for (unsigned int i = 0; i < renderers.size(); i++)
+		{
+			vertexArraySize += renderers[i]->GetMesh()->GetNumVertices() * renderers[i]->GetTransforms()->size();
+		}
+
+		vertexArray.reserve(vertexArraySize);
+	}
+
+	template<class T> void RenderDevice::UpdateIndexArray(std::vector<T*> renderers, std::vector<GLuint>& indexArray, bool& dirtyFlag)
 	{
 		if (dirtyFlag)
 		{
@@ -190,14 +236,14 @@ namespace Video
 			GLuint offset = 0;
 			for (unsigned int i = 0; i < renderers.size(); i++)
 			{
-				UpdateIndexArray(renderers, indexArray, i, offset);
+				InsertIntoIndexArray(renderers, i, indexArray, offset);
 			}
 
 			dirtyFlag = false;
 		}
 	}
 
-	void RenderDevice::UpdateIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray, unsigned int index, unsigned int& offset)
+	template<class T> void RenderDevice::InsertIntoIndexArray(std::vector<T*> renderers, unsigned int index, std::vector<GLuint>& indexArray, unsigned int& offset)
 	{
 		// reset value offet when switching batch
 		if (index == 0 || !renderers[index]->GetMaterial()->IsBatchEqualTo(renderers[index - 1]->GetMaterial()))
@@ -213,7 +259,26 @@ namespace Video
 		offset += mesh->GetNumVertices();
 	}
 
-	void RenderDevice::ReserveIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray)
+	template<> void RenderDevice::InsertIntoIndexArray(std::vector<ParticleRenderer*> renderers, unsigned int index, std::vector<GLuint>& indexArray, unsigned int& offset)
+	{
+		// reset value offet when switching batch
+		if (index == 0 || !renderers[index]->GetMaterial()->IsBatchEqualTo(renderers[index - 1]->GetMaterial()))
+			offset = 0;
+
+		for (unsigned int i = 0; i < renderers[index]->GetTransforms()->size(); i++)
+		{
+			Mesh* mesh = renderers[index]->GetMesh();
+			for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
+			{
+				GLuint value = offset + mesh->GetIndices()->at(j);
+				indexArray.insert(indexArray.end(), value);
+			}
+
+			offset += mesh->GetNumVertices();
+		}
+	}
+
+	template<class T> void RenderDevice::ReserveIndexArray(std::vector<T*> renderers, std::vector<GLuint>& indexArray)
 	{
 		unsigned int size = 0;
 		for (unsigned int i = 0; i < renderers.size(); i++)
@@ -222,7 +287,7 @@ namespace Video
 		indexArray.reserve(size);
 	}
 
-	unsigned int RenderDevice::ComputeVaoStartIndex(std::vector<Renderer*> renderer, unsigned int batchIndex, std::vector<BatchRange> batches)
+	template<class T> unsigned int RenderDevice::ComputeVaoStartIndex(std::vector<T*> renderer, unsigned int batchIndex, std::vector<BatchRange> batches)
 	{
 		unsigned int startIndex = 0;
 
@@ -236,14 +301,14 @@ namespace Video
 		return startIndex;
 	}
 
-	std::vector<BatchRange> RenderDevice::ComputeBatches(std::vector<Renderer*> renderers)
+	template<class T> std::vector<BatchRange> RenderDevice::ComputeBatches(std::vector<T*> renderers)
 	{
 		std::vector<BatchRange> batches;
 		int begin = 0;
 		int current = 0;
 		int last = renderers.size();
 
-		while (true)
+		while (current < last)
 		{
 			while (current < last && renderers[begin]->GetMaterial()->IsBatchEqualTo(renderers[current]->GetMaterial()))
 				current++;
@@ -258,8 +323,7 @@ namespace Video
 		return batches;
 	}
 
-	template <class T>
-	int RenderDevice::FindFirstIndexInBatch(T* renderer, std::vector<T*> renderers)
+	template<class T> int RenderDevice::FindFirstIndexInBatch(T* renderer, std::vector<T*> renderers)
 	{
 		for (unsigned int i = 0; i < renderers.size(); i++)
 		{
