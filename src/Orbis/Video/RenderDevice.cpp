@@ -38,9 +38,9 @@ namespace Video
 		UpdateIndexArray();
 		UpdateVertexArray();
 
-#ifdef ORBIS_DEBUG_RENDERDEVICE
-		int count = 0;
-#endif  
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
+			int count = 0;
+		#endif  
 
 		// render batched
 		std::vector<BatchRange> batches = ComputeBatches();
@@ -80,14 +80,14 @@ namespace Video
 				glDisableVertexAttribArray(prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord"));
 			glDisableVertexAttribArray(positionAttribLocation);
 
-#ifdef ORBIS_DEBUG_RENDERDEVICE
-			count++;
-#endif 
+			#ifdef ORBIS_DEBUG_RENDERDEVICE
+				count++;
+			#endif 
 		}
 
-#ifdef ORBIS_DEBUG_RENDERDEVICE
-		LogHelper::LogMessage("%d", count);
-#endif 
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
+			LogHelper::LogMessage("%d", count);
+		#endif 
 
 		// cleanup
 		glDisable(GL_BLEND);
@@ -175,27 +175,33 @@ namespace Video
 			m_indexArray.clear();
 			ReserveIndexArray();
 
-			unsigned int totalNumIndices = 0;
-			GLuint valueOffset = 0;
+			GLuint offset = 0;
 			for (unsigned int i = 0; i < m_renderers.size(); i++)
 			{
-				// reset value offet when switching batch
-				if (i == 0 || !m_renderers[i]->GetMaterial()->IsBatchEqualTo(m_renderers[i - 1]->GetMaterial()))
-					valueOffset = 0;
-
-				Mesh* mesh = m_renderers[i]->GetMesh();
-				for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
-				{
-					GLuint value = valueOffset + mesh->GetIndices()->at(j);
-					m_indexArray.insert(m_indexArray.begin() + totalNumIndices, value);
-					totalNumIndices++;
-				}
-
-				valueOffset += mesh->GetNumVertices();
+				offset = UpdateIndexArray(i, offset);
 			}
 
 			m_isIndexArrayDirty = false;
 		}
+	}
+
+	unsigned int RenderDevice::UpdateIndexArray(unsigned int index, unsigned int offset)
+	{
+		// reset value offet when switching batch
+		if (index == 0 || !m_renderers[index]->GetMaterial()->IsBatchEqualTo(m_renderers[index - 1]->GetMaterial()))
+			offset = 0;
+
+		Mesh* mesh = m_renderers[index]->GetMesh();
+		for (unsigned int i = 0; i < mesh->GetIndices()->size(); i++)
+		{
+			GLuint value = offset + mesh->GetIndices()->at(i);
+			m_indexArray.insert(m_indexArray.end(), value);
+		}
+
+		offset += mesh->GetNumVertices();
+
+		// return the updated offset
+		return offset;
 	}
 
 	void RenderDevice::ReserveIndexArray()

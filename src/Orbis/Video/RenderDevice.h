@@ -60,6 +60,9 @@ namespace Video
 		// insert renderers indices at position in index array
 		void UpdateIndexArray();
 
+		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
+		unsigned int UpdateIndexArray(unsigned int rendererIndex, unsigned int offset);
+
 		// reserve index array space
 		void ReserveIndexArray();
 
