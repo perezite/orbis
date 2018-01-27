@@ -35,6 +35,9 @@ namespace Video
 		// add a renderer
 		void AddRenderer(Renderer* renderer);
 
+		// add a particle renderer
+		void AddParticleRenderer(ParticleRenderer* particleRenderer);
+
 		// update a renderer
 		void UpdateRenderer(Renderer* renderer);
 
@@ -48,8 +51,11 @@ namespace Video
 		void DrawDebugRect(Rect rect, Color color);
 
 	protected:
+		// render batched
+		void RenderBatched(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray, std::vector<GLuint>& indexArray, bool& indexArrayDirtyFlag);
+
 		// update vertex array
-		void UpdateVertexArray();
+		void UpdateVertexArray(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray);
 
 		// update the vertex array for the renderer with the given index using the given mvp matrix
 		void UpdateVertexArray(unsigned int rendererIndex, Matrix3& mvpMatrix);
@@ -58,13 +64,13 @@ namespace Video
 		void ReserveVertexArray();
 
 		// insert renderers indices at position in index array
-		void UpdateIndexArray();
+		void UpdateIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray, bool& dirtyFlag);
 
 		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
-		unsigned int UpdateIndexArray(unsigned int rendererIndex, unsigned int offset);
+		void UpdateIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray, unsigned int index, unsigned int& offset);
 
 		// reserve index array space
-		void ReserveIndexArray();
+		void ReserveIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray);
 
 		// compute the vao start index for a given batch
 		unsigned int ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
@@ -73,7 +79,8 @@ namespace Video
 		std::vector<BatchRange> ComputeBatches();
 
 		// find index of first renderer in render batch
-		int FindFirstIndexInBatch(Renderer* renderer);
+		template <class T>
+		int FindFirstIndexInBatch(T* renderer, std::vector<T*> renderers);
 
 		// draw a debug primitve
 		void DrawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
@@ -90,6 +97,15 @@ namespace Video
 
 		// the renderer components
 		std::vector<Renderer*> m_renderers;
+
+		// the particle vertex array
+		std::vector<GLfloat> m_particleVertexArray;
+
+		// the particle index array 
+		std::vector<GLuint> m_particleIndexArray;
+
+		// is the particle index array in dirty state
+		bool m_isParticleIndexArrayDirty;
 
 		// the particle renderer components
 		std::vector<ParticleRenderer*> m_particleRenderers;

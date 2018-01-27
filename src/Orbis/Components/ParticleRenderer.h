@@ -22,11 +22,14 @@ namespace Components
 		// start
 		void Start();
 
+		// get transforms
+		std::vector<Transform>* GetTransforms() { return &m_transforms; }
+
 	private: 
 		// the texture
 		Texture* m_texture;
 
 		// a list of particle transforms 
-		std::vector<Transform> m_transform;
+		std::vector<Transform> m_transforms;
 	};
 }
