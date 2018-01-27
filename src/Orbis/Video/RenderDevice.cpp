@@ -213,6 +213,42 @@ namespace Video
 		m_indexArray.reserve(size);
 	}
 
+	unsigned int RenderDevice::ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
+	{
+		unsigned int startIndex = 0;
+
+		for (unsigned int i = 0; i < batchIndex; i++)
+		{
+			unsigned int begin = batches[i].min;
+			unsigned int batchSize = batches[i].Diff() + 1;
+			startIndex += m_renderers[begin]->GetMesh()->GetVertexData()->size() * batchSize;
+		}
+
+		return startIndex;
+	}
+
+	std::vector<BatchRange> RenderDevice::ComputeBatches()
+	{
+		std::vector<BatchRange> batches;
+		int begin = 0;
+		int current = 0;
+		int last = m_renderers.size();
+
+		while (true)
+		{
+			while (current < last && m_renderers[begin]->GetMaterial()->IsBatchEqualTo(m_renderers[current]->GetMaterial()))
+				current++;
+
+			batches.push_back(BatchRange(begin, current - 1));
+			begin = current;
+
+			if (current == last)
+				break;
+		}
+
+		return batches;
+	}
+
 	int RenderDevice::FindFirstIndexInBatch(Renderer* renderer)
 	{
 		for (unsigned int i = 0; i < m_renderers.size(); i++)
@@ -241,42 +277,6 @@ namespace Video
 		// cleanup
 		glDisableVertexAttribArray(positionAttribLocation);
 		shader->Unuse();
-	}
-
-	std::vector<BatchRange> RenderDevice::ComputeBatches()
-	{
-		std::vector<BatchRange> batches;
-		int begin = 0;
-		int current = 0;
-		int last = m_renderers.size();
-
-		while (true)
-		{
-			while (current < last && m_renderers[begin]->GetMaterial()->IsBatchEqualTo(m_renderers[current]->GetMaterial()))
-				current++;
-
-			batches.push_back(BatchRange(begin, current - 1));
-			begin = current;
-
-			if (current == last)
-				break;
-		}
-
-		return batches;
-	}
-
-	unsigned int RenderDevice::ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
-	{
-		unsigned int startIndex = 0;
-
-		for (unsigned int i = 0; i < batchIndex; i++)
-		{
-			unsigned int begin = batches[i].min;
-			unsigned int batchSize = batches[i].Diff() + 1;
-			startIndex += m_renderers[begin]->GetMesh()->GetVertexData()->size() * batchSize;
-		}
-
-		return startIndex;
 	}
 }
 

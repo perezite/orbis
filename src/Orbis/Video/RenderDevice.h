@@ -66,17 +66,17 @@ namespace Video
 		// reserve index array space
 		void ReserveIndexArray();
 
+		// compute the vao start index for a given batch
+		unsigned int ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
+
+		// compute the batches
+		std::vector<BatchRange> ComputeBatches();
+
 		// find index of first renderer in render batch
 		int FindFirstIndexInBatch(Renderer* renderer);
 
 		// draw a debug primitve
 		void DrawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
-
-		// compute the batches
-		std::vector<BatchRange> ComputeBatches();
-
-		// compute the vao start index for a given batch
-		unsigned int ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
 	private:
 		// the vertex array

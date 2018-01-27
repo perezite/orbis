@@ -1,9 +1,6 @@
 TODO:
 - Partikelsystem implementieren
 	- ParticleSystemRenderer testweise mit zwei Particles versehen
-		- RenderDevice refactoren, so dass ich wieder verstehe was abläuft
-			- UpdateIndexArrayFunktion verfeinern
-			-- Nach jedem Schritt Regressionstesting inkl. Performance
 		- Reihenfolge der RenderDevice Funktionen aktualisieren
 		- Dem ParticleRenderer die Möglichkeit geben, eine Liste von Transforms zu halten, welche an das RenderDevice übergeben werden
 		- Die ParticleRenderer im RenderDevice separat verwalten
