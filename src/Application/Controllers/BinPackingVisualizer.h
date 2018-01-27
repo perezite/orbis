@@ -44,7 +44,7 @@ namespace Controllers
 		static const unsigned int NUM_RECTS;
 
 		// the range for generated extents
-		static const Range EXTENTS_RANGE;
+		static const Range<float> EXTENTS_RANGE;
 
 		// the size of the bin
 		static const Rect BIN;

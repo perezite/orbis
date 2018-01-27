@@ -34,7 +34,7 @@ int main(int argc, char* args[])
 	{
 		OrbisMain::GetInstance()->Initialize();
 		
-		Level9* level = new Level9();
+		auto level = new Level9();
 		LevelManager::GetInstance()->QueueLevel(level);
 
 		OrbisMain::GetInstance()->Run();

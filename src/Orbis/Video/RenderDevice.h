@@ -15,12 +15,15 @@ using namespace Components;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
+#include "../../Base/Math/Range.h"
 using namespace Math;
 
 #include <vector>
 
 namespace Video
 {
+	typedef Range<unsigned int> BatchRange;
+
 	class RenderDevice
 	{
 	public:
@@ -31,9 +34,6 @@ namespace Video
 
 		// add a renderer
 		void AddRenderer(Renderer* renderer);
-
-		// add a particle renderer
-		void AddParticleRenderer(ParticleRenderer* particleRenderer);
 
 		// update a renderer
 		void UpdateRenderer(Renderer* renderer);
@@ -51,6 +51,9 @@ namespace Video
 		// update vertex array
 		void UpdateVertexArray();
 
+		// update the vertex array for the renderer with the given index using the given mvp matrix
+		void UpdateVertexArray(unsigned int rendererIndex, Matrix3& mvpMatrix);
+
 		// reserver the vertex buffer to hold the renderer data
 		void ReserveVertexArray();
 
@@ -65,6 +68,12 @@ namespace Video
 
 		// draw a debug primitve
 		void DrawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
+
+		// compute the batches
+		std::vector<BatchRange> ComputeBatches();
+
+		// compute the vao start index for a given batch
+		unsigned int ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
 	private:
 		// the vertex array

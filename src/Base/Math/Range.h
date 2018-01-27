@@ -3,6 +3,7 @@
 namespace Math
 {
 	// represents a mathematical range
+	template <class T>
 	struct Range
 	{
 		// ctor
@@ -11,14 +12,19 @@ namespace Math
 		{}
 
 		// ctor
-		Range(float min_, float max_) 
+		Range(T min_, T max_) 
 			: min(min_), max(max_) 
 		{}
 
+		// compute the difference of the range
+		T Diff() {
+			return max - min;
+		}
+
 		// the minimum of the range
-		float min;
+		T min;
 
 		// the maximum of the range
-		float max;
+		T max;
 	};
 }

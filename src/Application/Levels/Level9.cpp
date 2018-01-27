@@ -9,9 +9,10 @@ namespace Levels
 {
 	Level9::Level9()
 	{
-		// init textures	
+		// init textures
 		Texture* yellowBlockTex = new Texture("Textures/YellowBlock.png", true);
 		Texture* redBlockTex = new Texture("Textures/RedBlock.png", true);
+		Texture* greenParticleTex = new Texture("Textures/GreenParticle.png", true);
 
 		// init camera
 		Entity* cam = new Entity();
@@ -33,5 +34,10 @@ namespace Levels
 		redBlock->AddComponent(new SpriteRenderer(redBlockTex));
 		redBlock->SetTransform(Transform(Vector2D(0.0f, 0.0f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(redBlock);
+
+		Entity* particles = new Entity("Particles");
+		particles->AddComponent(new ParticleRenderer(greenParticleTex));
+		particles->SetTransform(Transform(Vector2D(0.0f, -0.3f), 0.0f, Vector2D(0.1f, 0.1f)));
+		this->AddEntity(particles);
 	}
 }

@@ -2,11 +2,13 @@ TODO:
 - Partikelsystem implementieren
 	- ParticleSystemRenderer testweise mit zwei Particles versehen
 		- RenderDevice refactoren, so dass ich wieder verstehe was abläuft
-			- Testlevel erstellen dafür, welches zwei gebatchede und ein ungebatchedes Sprite enthält 
-		- Dem Renderer die Möglichkeit geben, eine Liste von Transforms zu halten, welche an das RenderDevice übergeben werden
-		- Das RenderDevice so umschreiben, dass es eine triviale Liste von Transforms (also ein Transform) verarbeiten kann
-		- Die Funktionalität regressionstesten
-		- Dem RenderDevice die restlichen 
+			- UpdateIndexArrayFunktion verfeinern
+			-- Nach jedem Schritt Regressionstesting inkl. Performance
+		- Dem ParticleRenderer die Möglichkeit geben, eine Liste von Transforms zu halten, welche an das RenderDevice übergeben werden
+		- Die ParticleRenderer im RenderDevice separat verwalten
+		- Die duplizierte Funktionalität im RenderDevice extrahieren
+		- Regressionstesting
+		- Dem ParticleRenderer eine zweite Transform hinzufügen und das Rendering testen
 	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
 		- ParticleLifetime
 		- SizeOverLifetime (Spline)

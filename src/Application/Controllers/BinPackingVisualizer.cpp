@@ -20,7 +20,7 @@ namespace Controllers
 
 	const Rect BinPackingVisualizer::BIN(-0.2f, -0.2f, 0.2f, 0.2f);
 
-	const Range BinPackingVisualizer::EXTENTS_RANGE(0.1f, 0.2f);
+	const Range<float> BinPackingVisualizer::EXTENTS_RANGE(0.1f, 0.2f);
 
 	BinPackingVisualizer::BinPackingVisualizer()
 		: m_currentStep(0)
