@@ -58,10 +58,10 @@ namespace Video
 		void UpdateVertexArray(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray);
 
 		// update the vertex array for the renderer with the given index using the given mvp matrix
-		void UpdateVertexArray(unsigned int rendererIndex, Matrix3& mvpMatrix);
+		void UpdateVertexArray(Renderer* const renderer, std::vector<GLfloat>& vertexArray, Matrix3& mvpMatrix);
 
 		// reserver the vertex buffer to hold the renderer data
-		void ReserveVertexArray();
+		void ReserveVertexArray(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray);
 
 		// insert renderers indices at position in index array
 		void UpdateIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray, bool& dirtyFlag);
@@ -73,10 +73,10 @@ namespace Video
 		void ReserveIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray);
 
 		// compute the vao start index for a given batch
-		unsigned int ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
+		unsigned int ComputeVaoStartIndex(std::vector<Renderer*> renderer, unsigned int batchIndex, std::vector<BatchRange> batches);
 
 		// compute the batches
-		std::vector<BatchRange> ComputeBatches();
+		std::vector<BatchRange> ComputeBatches(std::vector<Renderer*> renderers);
 
 		// find index of first renderer in render batch
 		template <class T>

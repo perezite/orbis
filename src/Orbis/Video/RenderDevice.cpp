@@ -80,7 +80,7 @@ namespace Video
 		UpdateVertexArray(renderers, vertexArray);
 
 		// render batched
-		std::vector<BatchRange> batches = ComputeBatches();
+		std::vector<BatchRange> batches = ComputeBatches(renderers);
 		for (unsigned int i = 0; i < batches.size(); i++)
 		{
 			unsigned int batchBegin = batches[i].min;
@@ -94,17 +94,17 @@ namespace Video
 			prototype->GetMaterial()->PrepareShaderVariables();
 
 			// set position shader variable
-			unsigned int vaoStartIndex = ComputeVaoStartIndex(i, batches);
+			unsigned int vaoStartIndex = ComputeVaoStartIndex(renderers, i, batches);
 			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
-			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex]));
+			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(vertexArray[vaoStartIndex]));
 
 			// set texture coordinate shader variable
 			if (prototype->GetMaterial()->GetTexture() != NULL)
 			{
 				int texCoordAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord");
 				glEnableVertexAttribArray(texCoordAttribLocation);
-				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex + 2]));
+				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(vertexArray[vaoStartIndex + 2]));
 			}
 
 			// draw batched
@@ -136,7 +136,7 @@ namespace Video
 		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::CameraSpace);
 
 		vertexArray.clear();
-		ReserveVertexArray();
+		ReserveVertexArray(renderers, vertexArray);
 
 		for (unsigned int i = 0; i < renderers.size(); i++)
 		{
@@ -144,14 +144,14 @@ namespace Video
 			bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
 			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * entity->GetTransform()->GetModelMatrix();
 
-			UpdateVertexArray(i, mvpMatrix);
+			UpdateVertexArray(renderers[i], vertexArray, mvpMatrix);
 		}
 	}
 
-	void RenderDevice::UpdateVertexArray(unsigned int index, Matrix3& mvpMatrix)
+	void RenderDevice::UpdateVertexArray(Renderer* const renderer, std::vector<GLfloat>& vertexArray, Matrix3& mvpMatrix)
 	{
-		Mesh* mesh = m_renderers[index]->GetMesh();
-		Texture* tex = m_renderers[index]->GetMaterial()->GetTexture();
+		Mesh* mesh = renderer->GetMesh();
+		Texture* tex = renderer->GetMaterial()->GetTexture();
 
 		// apply transformation on mesh data
 		std::vector<GLfloat> data = *mesh->GetVertexData();
@@ -166,18 +166,18 @@ namespace Video
 			}
 		}
 
-		m_vertexArray.insert(m_vertexArray.end(), data.begin(), data.end());
+		vertexArray.insert(vertexArray.end(), data.begin(), data.end());
 	}
 
-	void RenderDevice::ReserveVertexArray()
+	void RenderDevice::ReserveVertexArray(std::vector<Renderer*> renderers, std::vector<GLfloat>& vertexArray)
 	{
 		unsigned int vertexArraySize = 0;
-		for (unsigned int i = 0; i < m_renderers.size(); i++)
+		for (unsigned int i = 0; i < renderers.size(); i++)
 		{
-			vertexArraySize += m_renderers[i]->GetMesh()->GetNumVertices();
+			vertexArraySize += renderers[i]->GetMesh()->GetNumVertices();
 		}
 
-		m_vertexArray.reserve(vertexArraySize);
+		vertexArray.reserve(vertexArraySize);
 	}
 
 	void RenderDevice::UpdateIndexArray(std::vector<Renderer*> renderers, std::vector<GLuint>& indexArray, bool& dirtyFlag)
@@ -222,7 +222,7 @@ namespace Video
 		indexArray.reserve(size);
 	}
 
-	unsigned int RenderDevice::ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
+	unsigned int RenderDevice::ComputeVaoStartIndex(std::vector<Renderer*> renderer, unsigned int batchIndex, std::vector<BatchRange> batches)
 	{
 		unsigned int startIndex = 0;
 
@@ -230,22 +230,22 @@ namespace Video
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
-			startIndex += m_renderers[begin]->GetMesh()->GetVertexData()->size() * batchSize;
+			startIndex += renderer[begin]->GetMesh()->GetVertexData()->size() * batchSize;
 		}
 
 		return startIndex;
 	}
 
-	std::vector<BatchRange> RenderDevice::ComputeBatches()
+	std::vector<BatchRange> RenderDevice::ComputeBatches(std::vector<Renderer*> renderers)
 	{
 		std::vector<BatchRange> batches;
 		int begin = 0;
 		int current = 0;
-		int last = m_renderers.size();
+		int last = renderers.size();
 
 		while (true)
 		{
-			while (current < last && m_renderers[begin]->GetMaterial()->IsBatchEqualTo(m_renderers[current]->GetMaterial()))
+			while (current < last && renderers[begin]->GetMaterial()->IsBatchEqualTo(renderers[current]->GetMaterial()))
 				current++;
 
 			batches.push_back(BatchRange(begin, current - 1));
