@@ -14,20 +14,11 @@ using namespace Core;
 
 namespace Video
 {
-	template<> void RenderDevice::ReserveVertexArray(std::vector<ParticleRenderer*> renderers, std::vector<GLfloat>& vertexArray);
-
 	void RenderDevice::AddRenderer(Renderer* renderer)
 	{
-		int position = FindFirstIndexInBatch<Renderer>(renderer, m_renderers);
+		int position = FindFirstIndexInBatch(renderer);
 		m_renderers.insert(m_renderers.begin() + position, renderer);
 		m_isIndexArrayDirty = true;
-	}
-
-	void RenderDevice::AddParticleRenderer(ParticleRenderer* particleRenderer)
-	{
-		int position = FindFirstIndexInBatch<ParticleRenderer>(particleRenderer, m_particleRenderers);
-		m_particleRenderers.insert(m_particleRenderers.begin() + position, particleRenderer);
-		m_isParticleIndexArrayDirty = true;
 	}
 
 	void RenderDevice::UpdateRenderer(Renderer* renderer)
@@ -38,8 +29,69 @@ namespace Video
 
 	void RenderDevice::Render()
 	{ 
-		RenderBatched(m_renderers, m_vertexArray, m_indexArray, m_isIndexArrayDirty);
-		RenderBatched(m_particleRenderers, m_particleVertexArray, m_particleIndexArray, m_isParticleIndexArrayDirty);
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
+				int count = 0;
+		#endif 
+
+		// set states
+		glActiveTexture(GL_TEXTURE0);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		// update arrays
+		UpdateIndexArray();
+		UpdateVertexArray();
+
+		// render batched
+		std::vector<BatchRange> batches = ComputeBatches();
+		for (unsigned int i = 0; i < batches.size(); i++)
+		{
+			unsigned int batchBegin = batches[i].min;
+			unsigned int batchSize = batches[i].Diff() + 1;
+			Renderer* prototype = m_renderers[batchBegin];
+
+			// init batch prototype
+			if (prototype->GetMaterial()->GetTexture() != NULL)
+				prototype->GetMaterial()->GetTexture()->Bind();
+			prototype->GetMaterial()->GetShader()->Use();
+			prototype->GetMaterial()->PrepareShaderVariables();
+
+			// set position shader variable
+			unsigned int vaoStartIndex = ComputeVaoStartIndex(i, batches);
+			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
+			glEnableVertexAttribArray(positionAttribLocation);
+			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex]));
+
+			// set texture coordinate shader variable
+			if (prototype->GetMaterial()->GetTexture() != NULL)
+			{
+				int texCoordAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord");
+				glEnableVertexAttribArray(texCoordAttribLocation);
+				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex + 2]));
+			}
+
+			// draw batched
+			// unsigned int numIndices = prototype->GetMesh()->GetIndices()->size();
+			unsigned int numIndices = GetNumIndices(prototype);
+			glDrawElements(GL_TRIANGLES, batchSize * numIndices, GL_UNSIGNED_INT, &m_indexArray[batchBegin * numIndices]);
+
+			// cleanup
+			prototype->GetMaterial()->GetShader()->Unuse();
+			if (prototype->GetMaterial()->GetTexture() != NULL)
+				glDisableVertexAttribArray(prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord"));
+			glDisableVertexAttribArray(positionAttribLocation);
+
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
+					count++;
+		#endif 
+				}
+
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
+				LogHelper::LogMessage("%d", count);
+		#endif 
+
+		// cleanup
+		glDisable(GL_BLEND);
 	}
 
 	void RenderDevice::DrawDebugLine(Vector2D start, Vector2D end, Color color)
@@ -66,73 +118,6 @@ namespace Video
 
 		DrawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
 	}
-
-	template<class T> void RenderDevice::RenderBatched(std::vector<T*> renderers, std::vector<GLfloat>& vertexArray, std::vector<GLuint>& indexArray, bool& indexArrayDirtyFlag)
-	{
-		#ifdef ORBIS_DEBUG_RENDERDEVICE
-			int count = 0;
-		#endif 
-
-		// set states
-		glActiveTexture(GL_TEXTURE0);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		// update arrays
-		UpdateIndexArray(renderers, indexArray, indexArrayDirtyFlag);
-		UpdateVertexArray(renderers, vertexArray);
-
-		// render batched
-		std::vector<BatchRange> batches = ComputeBatches(renderers);
-		for (unsigned int i = 0; i < batches.size(); i++)
-		{
-			unsigned int batchBegin = batches[i].min;
-			unsigned int batchSize = batches[i].Diff() + 1;
-			T* prototype = renderers[batchBegin];
-
-			// init batch prototype
-			if (prototype->GetMaterial()->GetTexture() != NULL)
-				prototype->GetMaterial()->GetTexture()->Bind();
-			prototype->GetMaterial()->GetShader()->Use();
-			prototype->GetMaterial()->PrepareShaderVariables();
-
-			// set position shader variable
-			unsigned int vaoStartIndex = ComputeVaoStartIndex(renderers, i, batches);
-			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
-			glEnableVertexAttribArray(positionAttribLocation);
-			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(vertexArray[vaoStartIndex]));
-
-			// set texture coordinate shader variable
-			if (prototype->GetMaterial()->GetTexture() != NULL)
-			{
-				int texCoordAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord");
-				glEnableVertexAttribArray(texCoordAttribLocation);
-				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(vertexArray[vaoStartIndex + 2]));
-			}
-
-			// draw batched
-			// unsigned int numIndices = prototype->GetMesh()->GetIndices()->size();
-			unsigned int numIndices = GetNumIndices(prototype);
-			glDrawElements(GL_TRIANGLES, batchSize * numIndices, GL_UNSIGNED_INT, &indexArray[batchBegin * numIndices]);
-
-			// cleanup
-			prototype->GetMaterial()->GetShader()->Unuse();
-			if (prototype->GetMaterial()->GetTexture() != NULL)
-				glDisableVertexAttribArray(prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord"));
-			glDisableVertexAttribArray(positionAttribLocation);
-
-			#ifdef ORBIS_DEBUG_RENDERDEVICE
-				count++;
-			#endif 
-		}
-
-		#ifdef ORBIS_DEBUG_RENDERDEVICE
-			LogHelper::LogMessage("%d", count);
-		#endif 
-
-		// cleanup
-		glDisable(GL_BLEND);
-	}
 	
 	unsigned int RenderDevice::GetNumIndices(Renderer* renderer)
 	{
@@ -141,49 +126,32 @@ namespace Video
 
 	unsigned int RenderDevice::GetNumIndices(ParticleRenderer* renderer)
 	{
-		return renderer->GetMesh()->GetIndices()->size() * renderer->GetTransforms()->size();
+		return renderer->GetMesh()->GetIndices()->size() * renderer->GetRenderTransforms().size();
 	}
 
-	template<class T> void RenderDevice::UpdateVertexArray(std::vector<T*> renderers, std::vector<GLfloat>& vertexArray)
+
+	void RenderDevice::UpdateVertexArray()
 	{
 		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::WorldSpace);
 		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::CameraSpace);
 
-		vertexArray.clear();
-		ReserveVertexArray(renderers, vertexArray);
+		m_vertexArray.clear();
+		ReserveVertexArray();
 
-		for (unsigned int i = 0; i < renderers.size(); i++)
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			Entity* entity = renderers[i]->GetParent();
-			bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
-			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * entity->GetTransform()->GetModelMatrix();
-
-			InsertIntoVertexArray(renderers[i], vertexArray, mvpMatrix);
-		}
-	}
-
-	template<> void RenderDevice::UpdateVertexArray(std::vector<ParticleRenderer*> renderers, std::vector<GLfloat>& vertexArray)
-	{
-		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::WorldSpace);
-		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::CameraSpace);
-
-		vertexArray.clear();
-		ReserveVertexArray(renderers, vertexArray);
-
-		for (unsigned int i = 0; i < renderers.size(); i++)
-		{
-			std::vector<Transform>* transforms = renderers[i]->GetTransforms();
-			for (unsigned int j = 0; j < transforms->size(); j++)
+			std::vector<Transform> transforms = m_renderers[i]->GetRenderTransforms();
+			for (unsigned int j = 0; j < transforms.size(); j++)
 			{
-				Entity* entity = renderers[i]->GetParent();
+				Entity* entity = m_renderers[i]->GetParent();
 				bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
-				Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transforms->at(j).GetModelMatrix();
-				InsertIntoVertexArray(renderers[i], vertexArray, mvpMatrix);
+				Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transforms[j].GetModelMatrix();
+				InsertIntoVertexArray(m_renderers[i], mvpMatrix);
 			}
 		}
 	}
 
-	template<class T> void RenderDevice::InsertIntoVertexArray(T* const renderer, std::vector<GLfloat>& vertexArray, Matrix3& mvpMatrix)
+	void RenderDevice::InsertIntoVertexArray(Renderer* const renderer, Matrix3& mvpMatrix)
 	{
 		Mesh* mesh = renderer->GetMesh();
 		Texture* tex = renderer->GetMaterial()->GetTexture();
@@ -201,93 +169,66 @@ namespace Video
 			}
 		}
 
-		vertexArray.insert(vertexArray.end(), data.begin(), data.end());
+		m_vertexArray.insert(m_vertexArray.end(), data.begin(), data.end());
 	}
 
-	template<class T> void RenderDevice::ReserveVertexArray(std::vector<T*> renderers, std::vector<GLfloat>& vertexArray)
+	void RenderDevice::ReserveVertexArray()
 	{
 		unsigned int vertexArraySize = 0;
-		for (unsigned int i = 0; i < renderers.size(); i++)
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			vertexArraySize += renderers[i]->GetMesh()->GetNumVertices();
+			vertexArraySize += m_renderers[i]->GetMesh()->GetNumVertices() * m_renderers[i]->GetRenderTransforms().size();
 		}
 
-		vertexArray.reserve(vertexArraySize);
+		m_vertexArray.reserve(vertexArraySize);
 	}
 
-	template<> void RenderDevice::ReserveVertexArray(std::vector<ParticleRenderer*> renderers, std::vector<GLfloat>& vertexArray)
+	void RenderDevice::UpdateIndexArray()
 	{
-		unsigned int vertexArraySize = 0;
-		for (unsigned int i = 0; i < renderers.size(); i++)
+		if (m_isIndexArrayDirty)
 		{
-			vertexArraySize += renderers[i]->GetMesh()->GetNumVertices() * renderers[i]->GetTransforms()->size();
-		}
-
-		vertexArray.reserve(vertexArraySize);
-	}
-
-	template<class T> void RenderDevice::UpdateIndexArray(std::vector<T*> renderers, std::vector<GLuint>& indexArray, bool& dirtyFlag)
-	{
-		if (dirtyFlag)
-		{
-			indexArray.clear();
-			ReserveIndexArray(renderers, indexArray);
+			m_indexArray.clear();
+			ReserveIndexArray();
 
 			GLuint offset = 0;
-			for (unsigned int i = 0; i < renderers.size(); i++)
+			for (unsigned int i = 0; i < m_renderers.size(); i++)
 			{
-				InsertIntoIndexArray(renderers, i, indexArray, offset);
+				InsertIntoIndexArray(i, offset);
 			}
 
-			dirtyFlag = false;
+			m_isIndexArrayDirty = false;
 		}
 	}
 
-	template<class T> void RenderDevice::InsertIntoIndexArray(std::vector<T*> renderers, unsigned int index, std::vector<GLuint>& indexArray, unsigned int& offset)
+	void RenderDevice::InsertIntoIndexArray(unsigned int index, unsigned int& offset)
 	{
 		// reset value offet when switching batch
-		if (index == 0 || !renderers[index]->GetMaterial()->IsBatchEqualTo(renderers[index - 1]->GetMaterial()))
+		if (index == 0 || !m_renderers[index]->GetMaterial()->IsBatchEqualTo(m_renderers[index - 1]->GetMaterial()))
 			offset = 0;
 
-		Mesh* mesh = renderers[index]->GetMesh();
-		for (unsigned int i = 0; i < mesh->GetIndices()->size(); i++)
+		for (unsigned int i = 0; i < m_renderers[index]->GetRenderTransforms().size(); i++)
 		{
-			GLuint value = offset + mesh->GetIndices()->at(i);
-			indexArray.insert(indexArray.end(), value);
-		}
-
-		offset += mesh->GetNumVertices();
-	}
-
-	template<> void RenderDevice::InsertIntoIndexArray(std::vector<ParticleRenderer*> renderers, unsigned int index, std::vector<GLuint>& indexArray, unsigned int& offset)
-	{
-		// reset value offet when switching batch
-		if (index == 0 || !renderers[index]->GetMaterial()->IsBatchEqualTo(renderers[index - 1]->GetMaterial()))
-			offset = 0;
-
-		for (unsigned int i = 0; i < renderers[index]->GetTransforms()->size(); i++)
-		{
-			Mesh* mesh = renderers[index]->GetMesh();
+			Mesh* mesh = m_renderers[index]->GetMesh();
 			for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
 			{
 				GLuint value = offset + mesh->GetIndices()->at(j);
-				indexArray.insert(indexArray.end(), value);
+				m_indexArray.insert(m_indexArray.end(), value);
 			}
 
 			offset += mesh->GetNumVertices();
 		}
 	}
 
-	template<class T> void RenderDevice::ReserveIndexArray(std::vector<T*> renderers, std::vector<GLuint>& indexArray)
+	void RenderDevice::ReserveIndexArray()
 	{
 		unsigned int size = 0;
-		for (unsigned int i = 0; i < renderers.size(); i++)
-			size += renderers[i]->GetMesh()->GetIndices()->size();
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
+			size += m_renderers[i]->GetMesh()->GetIndices()->size();
 
-		indexArray.reserve(size);
+		m_indexArray.reserve(size);
 	}
 
-	template<class T> unsigned int RenderDevice::ComputeVaoStartIndex(std::vector<T*> renderer, unsigned int batchIndex, std::vector<BatchRange> batches)
+	unsigned int RenderDevice::ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
 	{
 		unsigned int startIndex = 0;
 
@@ -295,22 +236,22 @@ namespace Video
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
-			startIndex += renderer[begin]->GetMesh()->GetVertexData()->size() * batchSize;
+			startIndex += m_renderers[begin]->GetMesh()->GetVertexData()->size() * batchSize;
 		}
 
 		return startIndex;
 	}
 
-	template<class T> std::vector<BatchRange> RenderDevice::ComputeBatches(std::vector<T*> renderers)
+	std::vector<BatchRange> RenderDevice::ComputeBatches()
 	{
 		std::vector<BatchRange> batches;
 		int begin = 0;
 		int current = 0;
-		int last = renderers.size();
+		int last = m_renderers.size();
 
 		while (current < last)
 		{
-			while (current < last && renderers[begin]->GetMaterial()->IsBatchEqualTo(renderers[current]->GetMaterial()))
+			while (current < last && m_renderers[begin]->GetMaterial()->IsBatchEqualTo(m_renderers[current]->GetMaterial()))
 				current++;
 
 			batches.push_back(BatchRange(begin, current - 1));
@@ -323,15 +264,15 @@ namespace Video
 		return batches;
 	}
 
-	template<class T> int RenderDevice::FindFirstIndexInBatch(T* renderer, std::vector<T*> renderers)
+	int RenderDevice::FindFirstIndexInBatch(Renderer* renderer)
 	{
-		for (unsigned int i = 0; i < renderers.size(); i++)
+		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			if (renderer->GetMaterial()->IsBatchEqualTo(renderers[i]->GetMaterial()))
+			if (renderer->GetMaterial()->IsBatchEqualTo(m_renderers[i]->GetMaterial()))
 				return i;
 		}
 
-		return renderers.size();
+		return m_renderers.size();
 	}
 
 	void RenderDevice::DrawDebugPrimitive(GLfloat * vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode)

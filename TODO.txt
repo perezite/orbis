@@ -1,11 +1,10 @@
 TODO:
 - Partikelsystem implementieren
-	- ParticleSystemRenderer testweise mit zwei Particles versehen
-	- Branch erstellen für das Refactoring des RenderDevice
-		- Renderer mit der Möglichkeit für mehrere Transforms versehen
-		- Redundante Funktionen sowie Templates in RenderDevice entfernen
-		- Funktion GetNumVertices in virtuelle Methode im Renderer ziehen
-		- Regressionstest, Performance Regressionstest
+	- Nicht gerenderten Brick in Level9 fixen
+	- Parameter 'index' in InsertIntoIndexArray elliminieren
+	- Funktion GetNumVertices in virtuelle Methode im Renderer ziehen
+	- In ReserveVertexArray die GetNumVertices() Funktion verwenden
+	- Regressionstest, Performance Regressionstest
 	- Branch zurückmergen
 	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
 		- ParticleLifetime

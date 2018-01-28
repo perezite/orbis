@@ -22,8 +22,8 @@ namespace Components
 		// start
 		void Start();
 
-		// get transforms
-		std::vector<Transform>* GetTransforms() { return &m_transforms; }
+		// override
+		std::vector<Transform> GetRenderTransforms() { return m_transforms; }
 
 	private: 
 		// the texture

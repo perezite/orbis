@@ -4,9 +4,13 @@
 
 #include "../Video/Material.h"
 #include "../Video/Mesh.h"
+#include "../Game/Transform.h"
+#include "../Game/Entity.h"
 using namespace Video;
+using namespace Game;
 
 #include <iostream>
+#include <vector>
 
 namespace Components
 {
@@ -22,6 +26,9 @@ namespace Components
 
 		// get the material
 		Material* GetMaterial() { return &m_material; }
+
+		// get the transforms
+		virtual std::vector<Transform> GetRenderTransforms() { return std::vector<Transform> { *GetParent()->GetTransform() }; }
 
 	private: 
 		// the material
