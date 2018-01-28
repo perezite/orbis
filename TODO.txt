@@ -1,8 +1,12 @@
 TODO:
 - Partikelsystem implementieren
 	- ParticleSystemRenderer testweise mit zwei Particles versehen
-		- Performance Regressionstest mit 1000 Partikeln
-		- Evaluieren, ob ich das RenderDevice so refactoren soll, dass keine Templates mehr verwendet werden
+	- Branch erstellen für das Refactoring des RenderDevice
+		- Renderer mit der Möglichkeit für mehrere Transforms versehen
+		- Redundante Funktionen sowie Templates in RenderDevice entfernen
+		- Funktion GetNumVertices in virtuelle Methode im Renderer ziehen
+		- Regressionstest, Performance Regressionstest
+	- Branch zurückmergen
 	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
 		- ParticleLifetime
 		- SizeOverLifetime (Spline)
