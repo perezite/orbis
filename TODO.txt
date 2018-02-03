@@ -4,6 +4,8 @@ TODO:
 		- ParticleLifetime
 		- SizeOverLifetime (Spline)
 	- ParticleSystemInspector implementieren
+		 - FloatInspector in Console implementieren
+		 - TweenInspector über Console ein-/ausschaltbar machen 
 	- Weitere Parameter des ParticleSystemRenderers implementieren
 		- Lifetime
 		- InitialSpeed Range

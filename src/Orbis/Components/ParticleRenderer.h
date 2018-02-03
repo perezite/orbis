@@ -16,8 +16,7 @@ namespace Components
 	{
 	public:
 		// ctor
-		ParticleRenderer(Texture* texture) : m_texture(texture)
-		{}
+		ParticleRenderer(Texture* texture) : m_texture(texture) {}
 
 		// start
 		void Start();
