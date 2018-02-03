@@ -1,6 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- Nicht gerenderten Brick in Level9 fixen
 	- Parameter 'index' in InsertIntoIndexArray elliminieren
 	- Funktion GetNumVertices in virtuelle Methode im Renderer ziehen
 	- In ReserveVertexArray die GetNumVertices() Funktion verwenden

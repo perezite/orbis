@@ -51,9 +51,6 @@ namespace Video
 		// get number of indices for the given renderer
 		unsigned int GetNumIndices(Renderer* renderer);
 
-		// get number of indices for the given particle renderer
-		unsigned int GetNumIndices(ParticleRenderer * renderer);
-
 		// update vertex array
 		void UpdateVertexArray();
 
@@ -74,6 +71,9 @@ namespace Video
 
 		// compute the vao start index for a given batch
 		unsigned int ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
+
+		// compute the ibo (index buffer) start index for a given batch
+		unsigned int ComputeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
 		// compute the batches
 		std::vector<BatchRange> ComputeBatches();

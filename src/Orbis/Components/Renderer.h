@@ -30,7 +30,10 @@ namespace Components
 		// get the transforms
 		virtual std::vector<Transform> GetRenderTransforms() { return std::vector<Transform> { *GetParent()->GetTransform() }; }
 
-	private: 
+		// is the renderer batch equal to another renderer
+		bool IsBatchEqualTo(Renderer* other) { return GetMaterial()->IsBatchEqualTo(other->GetMaterial()) && GetRenderTransforms().size() == other->GetRenderTransforms().size(); }
+
+	private:
 		// the material
 		Material m_material;
 

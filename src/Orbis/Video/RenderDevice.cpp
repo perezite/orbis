@@ -71,9 +71,9 @@ namespace Video
 			}
 
 			// draw batched
-			// unsigned int numIndices = prototype->GetMesh()->GetIndices()->size();
 			unsigned int numIndices = GetNumIndices(prototype);
-			glDrawElements(GL_TRIANGLES, batchSize * numIndices, GL_UNSIGNED_INT, &m_indexArray[batchBegin * numIndices]);
+			unsigned int iboStartIndex = ComputeIboStartIndex(i, batches);
+			glDrawElements(GL_TRIANGLES, batchSize * numIndices, GL_UNSIGNED_INT, &m_indexArray[iboStartIndex]);
 
 			// cleanup
 			prototype->GetMaterial()->GetShader()->Unuse();
@@ -121,14 +121,8 @@ namespace Video
 	
 	unsigned int RenderDevice::GetNumIndices(Renderer* renderer)
 	{
-		return renderer->GetMesh()->GetIndices()->size();
-	}
-
-	unsigned int RenderDevice::GetNumIndices(ParticleRenderer* renderer)
-	{
 		return renderer->GetMesh()->GetIndices()->size() * renderer->GetRenderTransforms().size();
 	}
-
 
 	void RenderDevice::UpdateVertexArray()
 	{
@@ -203,7 +197,7 @@ namespace Video
 	void RenderDevice::InsertIntoIndexArray(unsigned int index, unsigned int& offset)
 	{
 		// reset value offet when switching batch
-		if (index == 0 || !m_renderers[index]->GetMaterial()->IsBatchEqualTo(m_renderers[index - 1]->GetMaterial()))
+		if (index == 0 || !m_renderers[index]->IsBatchEqualTo(m_renderers[index - 1]))
 			offset = 0;
 
 		for (unsigned int i = 0; i < m_renderers[index]->GetRenderTransforms().size(); i++)
@@ -242,6 +236,20 @@ namespace Video
 		return startIndex;
 	}
 
+	unsigned int RenderDevice::ComputeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
+	{
+		unsigned int startIndex = 0;
+
+		for (unsigned int i = 0; i < batchIndex; i++)
+		{
+			unsigned int begin = batches[i].min;
+			unsigned int batchSize = batches[i].Diff() + 1;
+			startIndex += m_renderers[begin]->GetMesh()->GetIndices()->size() * batchSize;
+		}
+
+		return startIndex;
+	}
+
 	std::vector<BatchRange> RenderDevice::ComputeBatches()
 	{
 		std::vector<BatchRange> batches;
@@ -251,7 +259,7 @@ namespace Video
 
 		while (current < last)
 		{
-			while (current < last && m_renderers[begin]->GetMaterial()->IsBatchEqualTo(m_renderers[current]->GetMaterial()))
+			while (current < last && m_renderers[begin]->IsBatchEqualTo(m_renderers[current]))
 				current++;
 
 			batches.push_back(BatchRange(begin, current - 1));
@@ -268,7 +276,7 @@ namespace Video
 	{
 		for (unsigned int i = 0; i < m_renderers.size(); i++)
 		{
-			if (renderer->GetMaterial()->IsBatchEqualTo(m_renderers[i]->GetMaterial()))
+			if (renderer->IsBatchEqualTo(m_renderers[i]))
 				return i;
 		}
 
