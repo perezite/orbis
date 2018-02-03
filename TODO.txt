@@ -1,6 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- Branch zurückmergen
 	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
 		- ParticleLifetime
 		- SizeOverLifetime (Spline)
