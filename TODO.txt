@@ -3,28 +3,35 @@ TODO:
 	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
 		- ParticleLifetime
 		- SizeOverLifetime (Spline)
+		- Performance Regressionstest
+	- Builder Pattern für Particle implementieren
 	- ParticleSystemInspector implementieren
 		 - FloatInspector in Console implementieren
 		 - TweenInspector über Console ein-/ausschaltbar machen 
 	- Weitere Parameter des ParticleSystemRenderers implementieren
 		- Lifetime
 		- InitialSpeed Range
-		- InitialSize Range
+		- InitialSize Range		
+		- Regressionstest
 		- InitialAlpha Range
 		- Tint
+		- Regressionstest
 		- IsBurst
 		- EmissionRate
 		- VelocityInheritance (in Prozent)
+		- Regressionstest
 		- EmissionShape (Sphere, Cone)
 			- Geometry-Klassen dafür erstellen in Base
 		- InitialVelocityBundleShape
 		- DampingThreshold
+		- Regressionstest
 		- DampingRate
 		- ColorOverLifetime (ColorGradient)
 		- InitialOmega
 			-- Vorzeichen identische mit Vorzeichen von InitialAlpha
 		- DeathParticleSubSystem
 			- Wird erzeugt beim Tod jedes Partikels des Hauptsystems
+		- Regressionstest
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln

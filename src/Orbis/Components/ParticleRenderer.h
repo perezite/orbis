@@ -4,8 +4,10 @@
 
 #include "../Video/Texture.h"
 #include "../Game/Transform.h"
+#include "../Effects/Particle.h"
 using namespace Video;
 using namespace Game;
+using namespace Effects;
 
 #include <vector>
 
@@ -16,19 +18,25 @@ namespace Components
 	{
 	public:
 		// ctor
-		ParticleRenderer(Texture* texture) : m_texture(texture) {}
+		ParticleRenderer(Texture* texture, float lifetime) : m_texture(texture), m_lifetime(lifetime) {}
 
-		// start
+		// override
 		void Start();
 
 		// override
-		std::vector<Transform> GetRenderTransforms() { return m_transforms; }
+		void Update();
+
+		// override
+		std::vector<Transform> GetRenderTransforms();
 
 	private: 
 		// the texture
 		Texture* m_texture;
 
-		// a list of particle transforms 
-		std::vector<Transform> m_transforms;
+		// the particles current lifetimes in seconds
+		std::vector<Particle> m_particles;
+
+		// the particles of the particle system
+		float m_lifetime;
 	};
 }

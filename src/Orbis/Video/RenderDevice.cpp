@@ -42,6 +42,10 @@ namespace Video
 		UpdateIndexArray();
 		UpdateVertexArray();
 
+		// skip if nothing to render
+		if (m_vertexArray.size() == 0)
+			return;
+
 		// render batched
 		std::vector<BatchRange> batches = ComputeBatches();
 		for (unsigned int i = 0; i < batches.size(); i++)
@@ -59,7 +63,6 @@ namespace Video
 			prototype->GetMaterial()->PrepareShaderVariables();
 
 			// set position shader variable
-
 			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
 			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex]));

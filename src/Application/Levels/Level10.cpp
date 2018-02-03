@@ -19,7 +19,7 @@ namespace Levels
 
 		// init entities
 		Entity* particles = new Entity("Particles");
-		particles->AddComponent(new ParticleRenderer(greenParticleTex));
+		particles->AddComponent(new ParticleRenderer(greenParticleTex, 1.0f));
 		particles->SetTransform(Transform(Vector2D(0.0f, -0.3f), 0.0f, Vector2D(0.1f, 0.1f)));
 		this->AddEntity(particles);
 	}

@@ -212,5 +212,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Particle.h">
+      <Filter>Effects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
