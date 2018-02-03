@@ -30,6 +30,9 @@ namespace Components
 		// get the transforms
 		virtual std::vector<Transform> GetRenderTransforms() { return std::vector<Transform> { *GetParent()->GetTransform() }; }
 
+		// the the number of indices of the renderer
+		unsigned int GetNumIndices() { return GetMesh()->GetIndices()->size() * GetRenderTransforms().size(); }
+
 		// is the renderer batch equal to another renderer
 		bool IsBatchEqualTo(Renderer* other) { return GetMaterial()->IsBatchEqualTo(other->GetMaterial()) && GetRenderTransforms().size() == other->GetRenderTransforms().size(); }
 

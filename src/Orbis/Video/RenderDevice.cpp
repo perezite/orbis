@@ -48,6 +48,8 @@ namespace Video
 		{
 			unsigned int batchBegin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
+			unsigned int vaoStartIndex = ComputeVaoStartIndex(i, batches);
+			unsigned int iboStartIndex = ComputeIboStartIndex(i, batches);
 			Renderer* prototype = m_renderers[batchBegin];
 
 			// init batch prototype
@@ -57,7 +59,7 @@ namespace Video
 			prototype->GetMaterial()->PrepareShaderVariables();
 
 			// set position shader variable
-			unsigned int vaoStartIndex = ComputeVaoStartIndex(i, batches);
+
 			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
 			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, prototype->GetMesh()->GetVertexSize() * sizeof(GLfloat), &(m_vertexArray[vaoStartIndex]));
@@ -71,9 +73,7 @@ namespace Video
 			}
 
 			// draw batched
-			unsigned int numIndices = GetNumIndices(prototype);
-			unsigned int iboStartIndex = ComputeIboStartIndex(i, batches);
-			glDrawElements(GL_TRIANGLES, batchSize * numIndices, GL_UNSIGNED_INT, &m_indexArray[iboStartIndex]);
+			glDrawElements(GL_TRIANGLES, batchSize * prototype->GetNumIndices(), GL_UNSIGNED_INT, &m_indexArray[iboStartIndex]);
 
 			// cleanup
 			prototype->GetMaterial()->GetShader()->Unuse();
@@ -119,11 +119,6 @@ namespace Video
 		DrawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
 	}
 	
-	unsigned int RenderDevice::GetNumIndices(Renderer* renderer)
-	{
-		return renderer->GetMesh()->GetIndices()->size() * renderer->GetRenderTransforms().size();
-	}
-
 	void RenderDevice::UpdateVertexArray()
 	{
 		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::WorldSpace);
@@ -170,9 +165,7 @@ namespace Video
 	{
 		unsigned int vertexArraySize = 0;
 		for (unsigned int i = 0; i < m_renderers.size(); i++)
-		{
 			vertexArraySize += m_renderers[i]->GetMesh()->GetNumVertices() * m_renderers[i]->GetRenderTransforms().size();
-		}
 
 		m_vertexArray.reserve(vertexArraySize);
 	}

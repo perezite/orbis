@@ -1,9 +1,5 @@
 TODO:
 - Partikelsystem implementieren
-	- Parameter 'index' in InsertIntoIndexArray elliminieren
-	- Funktion GetNumVertices in virtuelle Methode im Renderer ziehen
-	- In ReserveVertexArray die GetNumVertices() Funktion verwenden
-	- Regressionstest, Performance Regressionstest
 	- Branch zurückmergen
 	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
 		- ParticleLifetime
