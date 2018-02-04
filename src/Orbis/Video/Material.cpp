@@ -50,7 +50,6 @@ namespace Video
 		throw Exception("Something went really wrong!");
 	}
 
-
 	void Material::PrepareShaderVariables()
 	{
 		// note: vertex and tex coord data is set directly in the render device
@@ -59,6 +58,5 @@ namespace Video
 
 		if (m_hasColor)
 			m_shader->SetUniform("u_vColor", m_color);
-			
 	}
 }

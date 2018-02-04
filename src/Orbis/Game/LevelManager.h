@@ -16,6 +16,9 @@ namespace Game
 		// queue level
 		void QueueLevel(Level *level);
 
+		// get the current level
+		Level* GetCurrentLevel() { return m_currentLevel; }
+
 		// update
 		void Update();
 

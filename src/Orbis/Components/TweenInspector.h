@@ -1,9 +1,11 @@
 #pragma once
 
+#include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/Renderer.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Effects/Tween.h"
+using namespace Input;
 using namespace Components;
 using namespace Game;
 using namespace Effects;
@@ -17,11 +19,11 @@ namespace Components
 	{
 	public:
 		// utility for quickly creating an inspector entity. Returns 0 in release mode
-		static Entity* TryConstructEntity(Tween* tween);
+		static Entity* TryConstructEntity(Tween* tween, KeyCode activationkey = KeyCode::t);
 
 	public:
 		// ctor
-		TweenInspector(Tween* tween) : Renderer::Renderer(), m_tween(*tween), m_isActive(false)
+		TweenInspector(Tween* tween, KeyCode activationKey = KeyCode::t) : Renderer::Renderer(), m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
 		{
 			ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
 		}
@@ -89,6 +91,9 @@ namespace Components
 
 		// is the editor currently active
 		bool m_isActive;
+
+		// the key for activating the inspector
+		KeyCode m_activationKey;
 
 	private:
 		// the extent of a marking rectangle for a control point

@@ -1,10 +1,10 @@
 TODO:
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
-		- InheritVelocity = 0.25f
-		- SimulationSpace = World
-		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Spline implementieren mit y-Achse = Alphawert)
-	- Im Testlevel die CenterPropulsion des Balls aus Blear nachbauen. Dabei die Werte nach Bedarf tweaken
+		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
+	- Regression & Performanceregression
+- Sinnvolles Inspector-Komponent überlegen
+- Die CenterPropulsion des Balls aus Blear nachbauen. Dabei die Werte nach Bedarf tweaken
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Orbis in Bibliothek versiegeln
 - Neues Projekt erstellen für die Implementation von Blear Level 1

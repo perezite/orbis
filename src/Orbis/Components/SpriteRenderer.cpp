@@ -15,6 +15,7 @@ namespace Components
 	{
 		GetMaterial()->SetTexture(m_texture);
 		GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		GetMaterial()->SetColor(Color::White);
 		SetMesh(Mesh::GetTexturedQuad());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 	}

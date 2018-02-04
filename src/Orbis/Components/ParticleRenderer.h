@@ -5,6 +5,7 @@
 #include "../Video/Texture.h"
 #include "../Game/Transform.h"
 #include "../Effects/Particle.h"
+#include "../Effects/Tween.h"
 using namespace Video;
 using namespace Game;
 using namespace Effects;
@@ -66,5 +67,14 @@ namespace Components
 
 		// the initial size of the partices
 		float m_initialSize;
+
+		// amount of velocity inheritance
+		float m_velocityInheritance;
+
+		// the last position of the entity transforms
+		Vector2D m_lastEntityPos;
+
+		// color alpha over lifetime
+		Tween* m_currentColorAlpha;
 	};
 }

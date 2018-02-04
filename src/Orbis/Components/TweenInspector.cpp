@@ -3,12 +3,10 @@
 #include "../../Base/System/EnvironmentHelper.h"
 using namespace System;
 
-#include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Core/LogHelper.h"
 #include "../Core/DebugHelper.h"
-using namespace Input;
 using namespace Video;
 using namespace Core;
 
@@ -24,13 +22,13 @@ namespace Components
 	const int TweenInspector::SAMPLING_DENSITY = 100;
 	const int TweenInspector::NUM_SAMPLES = 100;
 
-	Entity* TweenInspector::TryConstructEntity(Tween* tween)
+	Entity* TweenInspector::TryConstructEntity(Tween* tween, KeyCode activationKey)
 	{
 		Entity* entity = NULL;
 
 		ORBIS_DEBUG (
 			entity = new Entity();
-			entity->AddComponent(new TweenInspector(tween));
+			entity->AddComponent(new TweenInspector(tween, activationKey));
 		)
 
 		return entity;
@@ -52,7 +50,7 @@ namespace Components
 	{
 		InputManager* input = InputManager::GetInstance();
 
-		if (input->IsKeyGoingDown(KeyCode::t))
+		if (input->IsKeyGoingDown(m_activationKey))
 			Toggle();
 
 		if (m_isActive)
