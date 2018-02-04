@@ -1,42 +1,20 @@
 TODO:
 - Partikelsystem implementieren
-	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
-		- InitialSize Range	
-		- SizeOverLifetime (Spline)
-		- Performance Regressionstest
-	- Builder Pattern für Particle implementieren
-	- Inspectors implementieren
-		- Inspector für das Level implementieren (LevelInspector)
-		- Inspector für die Komponente implementieren (ComponentInspector, ParticleSystemRendererInspector)
-		- Inspector für die InitialSize implementieren (FloatInspector)
-		- Inspector für die InitialSizeRange implementieren (RangeInspector)
-		- Inspector für SizeOverLifetime implementieren (TweenInspectorl)
-	- Weitere Parameter des ParticleSystemRenderers implementieren
-		- DoLoop
-		- InitialSpeed Range	
-		- Regressionstest
-		- InitialAlpha Range
-		- Tint
-		- Regressionstest
-		- IsBurst
-		- EmissionRate
-		- VelocityInheritance (in Prozent)
-		- Regressionstest
-		- EmissionShape (Sphere, Cone)
-			- Geometry-Klassen dafür erstellen in Base
-		- InitialVelocityBundleShape
-		- DampingThreshold
-		- Regressionstest
-		- DampingRate
-		- ColorOverLifetime (ColorGradient)
-		- InitialOmega
-			-- Vorzeichen identische mit Vorzeichen von InitialAlpha
-		- DeathParticleSubSystem
-			- Wird erzeugt beim Tod jedes Partikels des Hauptsystems
-		- Regressionstest
-- Das Propulsion ParticleSystem aus Blear einbinden
+	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
+		- Duration = 1.0f
+		- Looping = true
+		- StartLifetime = 0.5f
+		- StartSpeed = 2.0f
+		- StartSize = 0.33f
+		- StartRotation = 0.0f
+		- InheritVelocity = 0.25f
+		- SimulationSpace = World
+		- MaxParticles = 40
+		- EmissionRate = 40 Particles / Second
+		- EmissionShape = Sphere Shell with Radius 0.31 in RandomDirection
+		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Spline implementieren mit y-Achse = Alphawert)
+	- Im Testlevel die CenterPropulsion des Balls aus Blear nachbauen
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
-- Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln
 - Neues Projekt erstellen für die Implementation von Blear Level 1
 - Orbis-Library als Submodule einbinden
