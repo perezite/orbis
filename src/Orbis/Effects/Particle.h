@@ -3,6 +3,9 @@
 #include "../Game/Transform.h"
 using namespace Game;
 
+#include "../../Base/Math/Range.h"
+using namespace Math;
+
 namespace Effects
 {
 	// a particle in a particle system
@@ -27,5 +30,8 @@ namespace Effects
 
 		// the current lifetime
 		float m_lifetime;
+
+		// the initial size range
+		Range<float> m_initialSize;
 	};
 }

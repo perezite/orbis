@@ -1,17 +1,19 @@
 TODO:
 - Partikelsystem implementieren
 	- Folgende Parameter des ParticleSystemRenderers implementieren und nachziehen im grünen Controller
-		- ParticleLifetime
+		- InitialSize Range	
 		- SizeOverLifetime (Spline)
 		- Performance Regressionstest
 	- Builder Pattern für Particle implementieren
-	- ParticleSystemInspector implementieren
-		 - FloatInspector in Console implementieren
-		 - TweenInspector über Console ein-/ausschaltbar machen 
+	- Inspectors implementieren
+		- Inspector für das Level implementieren (LevelInspector)
+		- Inspector für die Komponente implementieren (ComponentInspector, ParticleSystemRendererInspector)
+		- Inspector für die InitialSize implementieren (FloatInspector)
+		- Inspector für die InitialSizeRange implementieren (RangeInspector)
+		- Inspector für SizeOverLifetime implementieren (TweenInspectorl)
 	- Weitere Parameter des ParticleSystemRenderers implementieren
-		- Lifetime
-		- InitialSpeed Range
-		- InitialSize Range		
+		- DoLoop
+		- InitialSpeed Range	
 		- Regressionstest
 		- InitialAlpha Range
 		- Tint
@@ -32,9 +34,21 @@ TODO:
 		- DeathParticleSubSystem
 			- Wird erzeugt beim Tod jedes Partikels des Hauptsystems
 		- Regressionstest
+- Das Propulsion ParticleSystem aus Blear einbinden
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Erzeugung und Vernichtung von Shaders und Textures im VideoManager verwalten
 - Orbis in Bibliothek versiegeln
 - Neues Projekt erstellen für die Implementation von Blear Level 1
 - Orbis-Library als Submodule einbinden
-- Level1 von Blear implementieren
+- Folgende Element des Level1 von Blear implementieren in dieser Reihenfolge
+	- Frame
+	- Kollisionabfrage	
+	- Ball 
+	- Propulsion des Balles (nur CenterPropulsion)
+	- Schrumpfeffekt des Balles (keine Explosion)
+	- Paddle
+	- Bricks
+	- Schrumpfeffekt der Bricks (keine Explosion)
+	- Hintergrund
+	- Levellogik mit Anzeigen über Console
+	- Resetfunktion mit R
