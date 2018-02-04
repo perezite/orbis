@@ -1,4 +1,10 @@
 TODO:
+- Branch erstellen 'VaoColors'
+- SimpleParticleRenderer implementieren Zwecks Testing
+- Farben im VAO codieren
+- Die Uniform-Farben wieder entfernen
+- Die Funktionalität für Renderer mit mehreren Transforms wieder entfernen
+- Funktionalität 
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
