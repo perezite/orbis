@@ -36,7 +36,7 @@ namespace Levels
 		this->AddEntity(redBlock);
 
 		Entity* particles = new Entity("Particles");
-		particles->AddComponent(new ParticleRenderer(greenParticleTex, 1000.0f));
+		particles->AddComponent(new ParticleRenderer(greenParticleTex));
 		particles->SetTransform(Transform(Vector2D(0.0f, -0.3f), 0.0f, Vector2D(0.1f, 0.1f)));
 		this->AddEntity(particles);
 	}

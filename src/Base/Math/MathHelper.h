@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector2D.h"
+
 namespace Math
 {
 	// Helpers for math
@@ -21,7 +23,10 @@ namespace Math
 		// a random value within the given range
 		static float GetRandom(float low, float hight);
 
+		// a random vector on the unit circle
+		static Vector2D GetRandomOnUnitCircle();
+
 		// check whether two values are closer than eps
-		static float Approx(float val1, float val2, float eps);
+		static bool Approx(float val1, float val2, float eps);
 	};
 }

@@ -33,7 +33,13 @@ namespace Math
 		return MathHelper::GetRandom() * (high - low) + low;
 	}
 
-	float MathHelper::Approx(float val1, float val2, float eps)
+	Vector2D MathHelper::GetRandomOnUnitCircle()
+	{
+		float alpha = GetRandom(0, 2.0f * GetPi());
+		return Vector2D(cosf(alpha), sinf(alpha));
+	}
+
+	bool MathHelper::Approx(float val1, float val2, float eps)
 	{
 		return fabs(val1 - val2) < eps;
 	}

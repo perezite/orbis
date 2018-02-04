@@ -18,7 +18,7 @@ namespace Components
 	{
 	public:
 		// ctor
-		ParticleRenderer(Texture* texture, float lifetime) : m_texture(texture), m_lifetime(lifetime) {}
+		ParticleRenderer(Texture* texture);
 
 		// override
 		void Start();
@@ -29,6 +29,19 @@ namespace Components
 		// override
 		std::vector<Transform> GetRenderTransforms();
 
+	protected:
+		// update the particles
+		void UpdateParticles();
+
+		// delete outdated particles
+		void DeleteOutdatedParticles();
+
+		// emit new particles
+		void EmitParticles();
+
+		// add a particle
+		void AddParticle();
+
 	private: 
 		// the texture
 		Texture* m_texture;
@@ -38,5 +51,20 @@ namespace Components
 
 		// the particles of the particle system
 		float m_lifetime;
+
+		// emission sphere shell radius
+		float m_emissionSphereShellRadius;
+
+		// emission rate in particles per second
+		unsigned int m_emissionRate;
+
+		// time to next particle emission in second
+		float m_timeToNextEmission;
+
+		// the initial speed of the particles
+		float m_initialSpeed;
+
+		// the initial size of the partices
+		float m_initialSize;
 	};
 }

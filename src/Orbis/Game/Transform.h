@@ -36,6 +36,5 @@ namespace Game
 
 		// the transform space
 		TransformSpace transformSpace;
-
 	};
 }

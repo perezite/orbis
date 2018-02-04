@@ -1,5 +1,8 @@
 #include "Level10.h"
 
+#include "../Controllers/ParticleSystemTester.h"
+using namespace Controllers;
+
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/ParticleRenderer.h"
@@ -19,8 +22,9 @@ namespace Levels
 
 		// init entities
 		Entity* particles = new Entity("Particles");
-		particles->AddComponent(new ParticleRenderer(greenParticleTex, 1.0f));
-		particles->SetTransform(Transform(Vector2D(0.0f, -0.3f), 0.0f, Vector2D(0.1f, 0.1f)));
+		particles->AddComponent(new ParticleSystemTester());
+		particles->AddComponent(new ParticleRenderer(greenParticleTex));
+		particles->SetTransform(Transform(Vector2D::Zero, 0.0f, Vector2D(0.1f, 0.1f)));
 		this->AddEntity(particles);
 	}
 }

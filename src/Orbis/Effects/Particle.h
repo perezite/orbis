@@ -8,12 +8,12 @@ using namespace Math;
 
 namespace Effects
 {
-	// a particle in a particle system
+	// a particle in a particle system. The values are currently hardcoded
 	class Particle 
 	{
 	public:
 		// ctor
-		Particle(const Transform& transform, float initialLifetime) : m_transform(transform), m_lifetime(initialLifetime) {}
+		Particle(const Transform& transform, const Vector2D& velocity) : m_transform(transform), m_velocity(velocity), m_lifetime(0.5f) {}
 
 		// get the transforms
 		const Transform& GetTransform() const { return m_transform; }
@@ -28,10 +28,10 @@ namespace Effects
 		// the transform
 		Transform m_transform;
 
+		// the velocity
+		Vector2D m_velocity;
+
 		// the current lifetime
 		float m_lifetime;
-
-		// the initial size range
-		Range<float> m_initialSize;
 	};
 }

@@ -1,19 +1,10 @@
 TODO:
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
-		- Duration = 1.0f
-		- Looping = true
-		- StartLifetime = 0.5f
-		- StartSpeed = 2.0f
-		- StartSize = 0.33f
-		- StartRotation = 0.0f
 		- InheritVelocity = 0.25f
 		- SimulationSpace = World
-		- MaxParticles = 40
-		- EmissionRate = 40 Particles / Second
-		- EmissionShape = Sphere Shell with Radius 0.31 in RandomDirection
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Spline implementieren mit y-Achse = Alphawert)
-	- Im Testlevel die CenterPropulsion des Balls aus Blear nachbauen
+	- Im Testlevel die CenterPropulsion des Balls aus Blear nachbauen. Dabei die Werte nach Bedarf tweaken
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Orbis in Bibliothek versiegeln
 - Neues Projekt erstellen für die Implementation von Blear Level 1
@@ -23,10 +14,8 @@ TODO:
 	- Kollisionabfrage	
 	- Ball 
 	- Propulsion des Balles (nur CenterPropulsion)
-	- Schrumpfeffekt des Balles (keine Explosion)
 	- Paddle
 	- Bricks
-	- Schrumpfeffekt der Bricks (keine Explosion)
 	- Hintergrund
 	- Levellogik mit Anzeigen über Console
 	- Resetfunktion mit R
