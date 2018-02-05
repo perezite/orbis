@@ -1,10 +1,17 @@
 TODO:
-- SimpleParticleRenderer implementieren Zwecks Testing, welcher nur zwei Particles rendern soll
-- Konzept überlegen zum Codieren der Farben im VAO
+- Konzept überlegen zum Codieren der Farben im VAO und unten eintragen
 - Farben im VAO codieren
+	- Implementieren dass ein Renderer so viele Meshes hat wie er Transforms hat
+	- Triviale Implementation für die vorhandenen Renderer
+	- Performance-Regressionstest
+	- Das Mesh mit einem optionalen Color Property versehen
+	- Die abhängigen Funktionen im Mesh entsprechend anpassen
+	- Einen Getter für die Color implementieren
+	- Die Color im RenderDevice::UpdateVertexArray abfüllen
+	- Die Color im RenderDevice::Render in ein Shader Attribute laden
+	- Die Color als ShaderAttribute in den Shadern einbinden
+	- Die Color aus dem Material entfernen
 - Die Uniform-Farben wieder entfernen
-- Die Funktionalität für Renderer mit mehreren Transforms wieder entfernen
-- Funktionalität 
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
