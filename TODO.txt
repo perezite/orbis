@@ -1,5 +1,6 @@
 TODO:
 - SimpleParticleRenderer implementieren Zwecks Testing, welcher nur zwei Particles rendern soll
+- Konzept überlegen zum Codieren der Farben im VAO
 - Farben im VAO codieren
 - Die Uniform-Farben wieder entfernen
 - Die Funktionalität für Renderer mit mehreren Transforms wieder entfernen
