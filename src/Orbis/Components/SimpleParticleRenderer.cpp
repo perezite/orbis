@@ -15,26 +15,35 @@ using namespace Math;
 namespace Components
 {
 	SimpleParticleRenderer::SimpleParticleRenderer(Texture * texture) : m_texture(texture)
+	{ }
+
+	SimpleParticleRenderer::~SimpleParticleRenderer()
 	{
+		for (unsigned int i = 0; i < m_particles.size(); i++)
+			delete m_particles[i];
+
+		for (unsigned int i = 0; i < m_renderables.size(); i++)
+			delete m_renderables[i];
 	}
 
 	void SimpleParticleRenderer::Start()
 	{
-		GetMaterial()->SetTexture(m_texture);
-		GetMaterial()->SetColor(Color(1.0f, 1.0f, 1.0f, 0.5f));
-		GetMaterial()->SetShader(Shader::GetDiffuseShader());
-		SetMesh(Mesh::GetTexturedQuad());
-		m_particles.push_back(Particle(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Vector2D::Zero));
-		m_particles.push_back(Particle(Transform(Vector2D(+0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Vector2D::Zero));
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
+		AddParticle(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)));
+		AddParticle(Transform(Vector2D(+0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)));
 	}
 
-	std::vector<Transform> SimpleParticleRenderer::GetRenderTransforms()
+	void SimpleParticleRenderer::AddParticle(const Transform& transform)
 	{
-		std::vector<Transform> transforms;
-		for (unsigned int i = 0; i < m_particles.size(); i++)
-			transforms.push_back(m_particles[i].GetTransform());
+		Particle* particle = new Particle(transform, Vector2D::Zero);
+		m_particles.push_back(particle);
 
-		return transforms;
+		Renderable* renderable = new Renderable();
+		renderable->GetMaterial()->SetTexture(m_texture);
+		renderable->GetMaterial()->SetColor(Color(1.0f, 1.0f, 1.0f, 0.5f));
+		renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		renderable->SetMesh(Mesh::GetTexturedQuad());
+		renderable->SetTransform(&particle->GetTransform());
+		m_renderables.push_back(renderable);
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(renderable);
 	}
 }
