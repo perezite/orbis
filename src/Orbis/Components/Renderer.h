@@ -24,6 +24,7 @@ namespace Components
 		// set the mesh
 		void SetMesh(Mesh* mesh) { m_mesh = mesh; }
 
+
 		// get the material
 		Material* GetMaterial() { return &m_material; }
 

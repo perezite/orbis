@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "Material.h"
+#include "Renderable.h"
 
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
@@ -38,6 +39,12 @@ namespace Video
 		// update a renderer
 		void UpdateRenderer(Renderer* renderer);
 
+		// add a renderable
+		void AddRenderable(Renderable* renderable);
+
+		// update a renderable
+		void UpdateRenderable(Renderable* renderable);
+
 		// render
 		void Render();
 
@@ -48,14 +55,11 @@ namespace Video
 		void DrawDebugRect(Rect rect, Color color);
 
 	protected:
-		// get number of indices for the given renderer
-		unsigned int GetNumIndices(Renderer* renderer);
-
 		// update vertex array
 		void UpdateVertexArray();
 
 		// update the vertex array for the renderer with the given index using the given mvp matrix
-		void InsertIntoVertexArray(Renderer* const renderer, Matrix3& mvpMatrix);
+		void InsertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix);
 
 		// reserver the vertex buffer to hold the renderer data
 		void ReserveVertexArray();
@@ -79,7 +83,7 @@ namespace Video
 		std::vector<BatchRange> ComputeBatches();
 
 		// find index of first renderer in render batch
-		int FindFirstIndexInBatch(Renderer* renderer);
+		int FindFirstIndexInBatch(Renderable* renderable);
 
 		// draw a debug primitve
 		void DrawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
@@ -94,7 +98,7 @@ namespace Video
 		// is the index array in dirty state
 		bool m_isIndexArrayDirty;
 
-		// the renderer components
-		std::vector<Renderer*> m_renderers;
+		// the renderables
+		std::vector<Renderable*> m_renderables;
 	};
 }

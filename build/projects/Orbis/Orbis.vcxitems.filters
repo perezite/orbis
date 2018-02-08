@@ -221,5 +221,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SimpleParticleRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Renderable.h">
+      <Filter>Video</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

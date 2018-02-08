@@ -16,15 +16,23 @@ namespace Video
 {
 	void RenderDevice::AddRenderer(Renderer* renderer)
 	{
-		int position = FindFirstIndexInBatch(renderer);
-		m_renderers.insert(m_renderers.begin() + position, renderer);
-		m_isIndexArrayDirty = true;
 	}
 
 	void RenderDevice::UpdateRenderer(Renderer* renderer)
 	{
-		m_renderers.erase(std::remove(m_renderers.begin(), m_renderers.end(), renderer), m_renderers.end());
-		AddRenderer(renderer);
+	}
+
+	void RenderDevice::AddRenderable(Renderable* renderable)
+	{
+		int position = FindFirstIndexInBatch(renderable);
+		m_renderables.insert(m_renderables.begin() + position, renderable);
+		m_isIndexArrayDirty = true;
+	}
+
+	void RenderDevice::UpdateRenderable(Renderable* renderable)
+	{
+		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
+		AddRenderable(renderable);
 	}
 
 	void RenderDevice::Render()
@@ -54,7 +62,7 @@ namespace Video
 			unsigned int batchSize = batches[i].Diff() + 1;
 			unsigned int vaoStartIndex = ComputeVaoStartIndex(i, batches);
 			unsigned int iboStartIndex = ComputeIboStartIndex(i, batches);
-			Renderer* prototype = m_renderers[batchBegin];
+			Renderable* prototype = m_renderables[batchBegin];
 
 			// init batch prototype
 			if (prototype->GetMaterial()->GetTexture() != NULL)
@@ -76,7 +84,7 @@ namespace Video
 			}
 
 			// draw batched
-			glDrawElements(GL_TRIANGLES, batchSize * prototype->GetNumIndices(), GL_UNSIGNED_INT, &m_indexArray[iboStartIndex]);
+			glDrawElements(GL_TRIANGLES, batchSize * prototype->GetMesh()->GetIndices()->size(), GL_UNSIGNED_INT, &m_indexArray[iboStartIndex]);
 
 			// cleanup
 			prototype->GetMaterial()->GetShader()->Unuse();
@@ -130,23 +138,19 @@ namespace Video
 		m_vertexArray.clear();
 		ReserveVertexArray();
 
-		for (unsigned int i = 0; i < m_renderers.size(); i++)
+		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
-			std::vector<Transform> transforms = m_renderers[i]->GetRenderTransforms();
-			for (unsigned int j = 0; j < transforms.size(); j++)
-			{
-				Entity* entity = m_renderers[i]->GetParent();
-				bool isWorldSpace = entity->GetTransform()->transformSpace == TransformSpace::WorldSpace ? true : false;
-				Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transforms[j].GetModelMatrix();
-				InsertIntoVertexArray(m_renderers[i], mvpMatrix);
-			}
+			Transform* transform = m_renderables[i]->GetTransform();
+			bool isWorldSpace = transform->transformSpace == TransformSpace::WorldSpace ? true : false;
+			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transform->GetModelMatrix();
+			InsertIntoVertexArray(m_renderables[i], mvpMatrix);
 		}
 	}
 
-	void RenderDevice::InsertIntoVertexArray(Renderer* const renderer, Matrix3& mvpMatrix)
+	void RenderDevice::InsertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix)
 	{
-		Mesh* mesh = renderer->GetMesh();
-		Texture* tex = renderer->GetMaterial()->GetTexture();
+		Mesh* mesh = renderable->GetMesh();
+		Texture* tex = renderable->GetMaterial()->GetTexture();
 
 		// apply transformation on mesh data
 		std::vector<GLfloat> data = *mesh->GetVertexData();
@@ -167,8 +171,8 @@ namespace Video
 	void RenderDevice::ReserveVertexArray()
 	{
 		unsigned int vertexArraySize = 0;
-		for (unsigned int i = 0; i < m_renderers.size(); i++)
-			vertexArraySize += m_renderers[i]->GetMesh()->GetNumVertices() * m_renderers[i]->GetRenderTransforms().size();
+		for (unsigned int i = 0; i < m_renderables.size(); i++)
+			vertexArraySize += m_renderables[i]->GetMesh()->GetNumVertices();
 
 		m_vertexArray.reserve(vertexArraySize);
 	}
@@ -181,7 +185,7 @@ namespace Video
 			ReserveIndexArray();
 
 			GLuint offset = 0;
-			for (unsigned int i = 0; i < m_renderers.size(); i++)
+			for (unsigned int i = 0; i < m_renderables.size(); i++)
 			{
 				InsertIntoIndexArray(i, offset);
 			}
@@ -193,27 +197,24 @@ namespace Video
 	void RenderDevice::InsertIntoIndexArray(unsigned int index, unsigned int& offset)
 	{
 		// reset value offet when switching batch
-		if (index == 0 || !m_renderers[index]->IsBatchEqualTo(m_renderers[index - 1]))
+		if (index == 0 || !m_renderables[index]->IsBatchEqualTo(m_renderables[index - 1]))
 			offset = 0;
 
-		for (unsigned int i = 0; i < m_renderers[index]->GetRenderTransforms().size(); i++)
+		Mesh* mesh = m_renderables[index]->GetMesh();
+		for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
 		{
-			Mesh* mesh = m_renderers[index]->GetMesh();
-			for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
-			{
-				GLuint value = offset + mesh->GetIndices()->at(j);
-				m_indexArray.insert(m_indexArray.end(), value);
-			}
-
-			offset += mesh->GetNumVertices();
+			GLuint value = offset + mesh->GetIndices()->at(j);
+			m_indexArray.insert(m_indexArray.end(), value);
 		}
+
+		offset += mesh->GetNumVertices();
 	}
 
 	void RenderDevice::ReserveIndexArray()
 	{
 		unsigned int size = 0;
-		for (unsigned int i = 0; i < m_renderers.size(); i++)
-			size += m_renderers[i]->GetMesh()->GetIndices()->size();
+		for (unsigned int i = 0; i < m_renderables.size(); i++)
+			size += m_renderables[i]->GetMesh()->GetIndices()->size();
 
 		m_indexArray.reserve(size);
 	}
@@ -226,7 +227,7 @@ namespace Video
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
-			startIndex += m_renderers[begin]->GetMesh()->GetVertexData()->size() * batchSize;
+			startIndex += m_renderables[begin]->GetMesh()->GetVertexData()->size() * batchSize;
 		}
 
 		return startIndex;
@@ -240,7 +241,7 @@ namespace Video
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
-			startIndex += m_renderers[begin]->GetMesh()->GetIndices()->size() * batchSize;
+			startIndex += m_renderables[begin]->GetMesh()->GetIndices()->size() * batchSize;
 		}
 
 		return startIndex;
@@ -251,11 +252,11 @@ namespace Video
 		std::vector<BatchRange> batches;
 		int begin = 0;
 		int current = 0;
-		int last = m_renderers.size();
+		int last = m_renderables.size();
 
 		while (current < last)
 		{
-			while (current < last && m_renderers[begin]->IsBatchEqualTo(m_renderers[current]))
+			while (current < last && m_renderables[begin]->IsBatchEqualTo(m_renderables[current]))
 				current++;
 
 			batches.push_back(BatchRange(begin, current - 1));
@@ -268,15 +269,15 @@ namespace Video
 		return batches;
 	}
 
-	int RenderDevice::FindFirstIndexInBatch(Renderer* renderer)
+	int RenderDevice::FindFirstIndexInBatch(Renderable* renderable)
 	{
-		for (unsigned int i = 0; i < m_renderers.size(); i++)
+		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
-			if (renderer->IsBatchEqualTo(m_renderers[i]))
+			if (renderable->IsBatchEqualTo(m_renderables[i]))
 				return i;
 		}
 
-		return m_renderers.size();
+		return m_renderables.size();
 	}
 
 	void RenderDevice::DrawDebugPrimitive(GLfloat * vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode)

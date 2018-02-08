@@ -8,21 +8,22 @@ using namespace Core;
 namespace Components
 {
 	SpriteRenderer::SpriteRenderer(Texture* texture)
-		: Renderer(), m_texture(texture)
+		: Component(), m_texture(texture)
 	{}
 
 	void SpriteRenderer::Start()
 	{
-		GetMaterial()->SetTexture(m_texture);
-		GetMaterial()->SetShader(Shader::GetDiffuseShader());
-		GetMaterial()->SetColor(Color::White);
-		SetMesh(Mesh::GetTexturedQuad());
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
+		m_renderable.GetMaterial()->SetTexture(m_texture);
+		m_renderable.GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		m_renderable.GetMaterial()->SetColor(Color::White);
+		m_renderable.SetMesh(Mesh::GetTexturedQuad());
+		m_renderable.SetTransform(GetParent()->GetTransform());
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(&m_renderable);
 	}
 
 	void SpriteRenderer::SetTexture(Texture * texture)
 	{
-		GetMaterial()->SetTexture(texture);
-		VideoManager::GetInstance()->GetRenderDevice()->UpdateRenderer(this);
+		m_renderable.GetMaterial()->SetTexture(texture);
+		VideoManager::GetInstance()->GetRenderDevice()->UpdateRenderable(&m_renderable);
 	}
 }
