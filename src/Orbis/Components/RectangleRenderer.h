@@ -1,15 +1,19 @@
 #pragma once
 
-#include "Renderer.h"
+#include "Component.h"
+
+#include "../Video/Color.h"
+#include "../Video/Renderable.h"
+using namespace Video;
 
 namespace Components
 {
 	// Renders a colored quad
-	class RectangleRenderer : public Renderer
+	class RectangleRenderer : public Component
 	{
 	public:
 		// ctor
-		RectangleRenderer(const Color& color) : Renderer() { m_color = color; }
+		RectangleRenderer(const Color& color) : Component() { m_color = color; }
 
 		// start
 		void Start();
@@ -17,5 +21,8 @@ namespace Components
 	private:
 		// the color 
 		Color m_color;
+
+		// the renderable
+		Renderable m_renderable;
 	};
 }

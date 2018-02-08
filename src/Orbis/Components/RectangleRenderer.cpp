@@ -9,12 +9,11 @@ namespace Components
 {
 	void RectangleRenderer::Start()
 	{
-		Renderer::Start();
-
-		GetMaterial()->SetTexture(NULL);
-		GetMaterial()->SetShader(Shader::GetFlatShader());
-		GetMaterial()->SetColor(m_color);
-		SetMesh(Mesh::GetFlatQuad());
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
+		m_renderable.GetMaterial()->SetTexture(NULL);
+		m_renderable.GetMaterial()->SetShader(Shader::GetFlatShader());
+		m_renderable.GetMaterial()->SetColor(m_color);
+		m_renderable.SetMesh(Mesh::GetFlatQuad());
+		m_renderable.SetTransform(GetParent()->GetTransform());
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(&m_renderable);
 	}
 }
