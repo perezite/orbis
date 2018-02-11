@@ -1,9 +1,13 @@
 TODO:
+- Release-Build fixen
 - Renderable implementieren
-	- Renderable für ein einzelnes Particle direkt im Renderable verwalten
-	- Moral dokumentieren: Komposition (Renderable) ist flexibler als Vererbung (Renderer)
+	- Level3 fixen
+	- Hilfsmethoden schreiben für:
+		- Löschen eines Pointers aus einem std::vector
+		- Löschen eines std::vector mit Pointern
 	- Ggf. abstrakte Renderer-Klasse entfernen
 	- Regressionstest
+	- Moral dokumentieren: Komposition (Renderable) ist flexibler als Vererbung (Renderer)	
 - Farben im VAO codieren
 	- Implementieren dass ein Renderer so viele Meshes hat wie er Transforms hat
 	- Triviale Implementation für die vorhandenen Renderer

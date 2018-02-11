@@ -31,9 +31,6 @@ namespace Components
 		// override
 		void Update();
 
-		// override
-		// std::vector<Transform> GetRenderTransforms();
-
 	protected:
 		// update the particles
 		void UpdateParticles();
@@ -47,21 +44,12 @@ namespace Components
 		// add a particle
 		void AddParticle();
 
-		// add a renderable
-		void AddRenderable(Transform* transform);
-
 	private: 
 		// the texture
 		Texture* m_texture;
 
-		// the renderables
-		std::vector<Renderable*> m_renderables;
-
 		// the particles current lifetimes in seconds
 		std::vector<Particle*> m_particles;
-
-		// the particles of the particle system
-		float m_lifetime;
 
 		// emission sphere shell radius
 		float m_emissionSphereShellRadius;

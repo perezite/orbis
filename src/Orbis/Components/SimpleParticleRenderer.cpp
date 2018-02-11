@@ -2,7 +2,6 @@
 
 #include "TweenInspector.h"
 
-#include "../Video/VideoManager.h"
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
 using namespace Video;
@@ -21,8 +20,6 @@ namespace Components
 	{
 		for (unsigned int i = 0; i < m_particles.size(); i++)
 			delete m_particles[i];
-		for (unsigned int i = 0; i < m_renderables.size(); i++)
-			delete m_renderables[i];
 	}
 
 	void SimpleParticleRenderer::Start()
@@ -33,16 +30,7 @@ namespace Components
 
 	void SimpleParticleRenderer::AddParticle(const Transform& transform)
 	{
-		Particle* particle = new Particle(transform, Vector2D::Zero);
+		Particle* particle = new Particle(m_texture, transform, Vector2D::Zero);
 		m_particles.push_back(particle);
-
-		Renderable* renderable = new Renderable();
-		renderable->GetMaterial()->SetTexture(m_texture);
-		renderable->GetMaterial()->SetColor(Color(1.0f, 1.0f, 1.0f, 0.5f));
-		renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
-		renderable->SetMesh(Mesh::GetTexturedQuad());
-		renderable->SetTransform(particle->GetTransform());
-		m_renderables.push_back(renderable);
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(renderable);
 	}
 }

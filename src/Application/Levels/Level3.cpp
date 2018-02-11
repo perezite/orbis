@@ -49,8 +49,6 @@ namespace Levels
 			static int counter = 0;
 			bool hasTexture = ++counter % 2 == 0;
 
-			auto test = Vector2D::One * 2.0f;
-
 			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D::One);
 			entity->SetTransform(trans);
 

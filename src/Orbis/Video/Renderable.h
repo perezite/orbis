@@ -10,12 +10,21 @@ using namespace Game;
 #include <iostream>
 #include <vector>
 
-namespace Components
+namespace Video
 {
 	// an object being rendered by the render device
 	class Renderable
 	{
 	public:
+		// ctor
+		Renderable();
+
+		// dtor
+		virtual ~Renderable();
+
+		// update the renderable
+		void Update();
+
 		// set the transform
 		void SetTransform(Transform* transform) { m_transform = transform; }
 

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "../Game/Transform.h"
+#include "../Video/Renderable.h"
 using namespace Game;
+using namespace Video;
 
 #include "../../Base/Math/Range.h"
 using namespace Math;
@@ -13,7 +15,10 @@ namespace Effects
 	{
 	public:
 		// ctor
-		Particle(const Transform& transform, const Vector2D& velocity) : m_transform(transform), m_velocity(velocity), m_lifetime(0.5f) {}
+		Particle(Texture* texture, const Transform& transform, const Vector2D& velocity);
+
+		// dtor
+		virtual ~Particle();
 
 		// get the transforms
 		Transform* GetTransform() { return &m_transform; }
@@ -27,7 +32,14 @@ namespace Effects
 		// get the velocity
 		const Vector2D& GetVelocity() const { return m_velocity; }
 
+	protected:
+		// add a renderable
+		void AddRenderable(Texture* texture);
+
 	private:
+		// the renderable
+		Renderable* m_renderable;
+
 		// the transform
 		Transform m_transform;
 

@@ -36,9 +36,6 @@ namespace Components
 		// the texture
 		Texture* m_texture;
 
-		// the renderables
-		std::vector<Renderable*> m_renderables;
-
 		// the particles current lifetimes in seconds
 		std::vector<Particle*> m_particles;
 	};
