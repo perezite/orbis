@@ -16,7 +16,7 @@ namespace Effects
 		Particle(const Transform& transform, const Vector2D& velocity) : m_transform(transform), m_velocity(velocity), m_lifetime(0.5f) {}
 
 		// get the transforms
-		Transform& GetTransform() { return m_transform; }
+		Transform* GetTransform() { return &m_transform; }
 
 		// get the current lifetime
 		float GetCurrentLifetime() const { return m_lifetime; }

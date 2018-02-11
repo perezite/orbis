@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Renderer.h"
+#include "Component.h"
 
 #include "../Video/Texture.h"
+#include "../Video/Renderable.h"
 #include "../Game/Transform.h"
 #include "../Effects/Particle.h"
 #include "../Effects/Tween.h"
@@ -15,11 +16,14 @@ using namespace Effects;
 namespace Components
 {
 	// a renderer which renders a particle system
-	class ParticleRenderer : public Renderer
+	class ParticleRenderer : public Component
 	{
 	public:
 		// ctor
 		ParticleRenderer(Texture* texture);
+
+		// dtor
+		virtual ~ParticleRenderer();
 
 		// override
 		void Start();
@@ -28,7 +32,7 @@ namespace Components
 		void Update();
 
 		// override
-		std::vector<Transform> GetRenderTransforms();
+		// std::vector<Transform> GetRenderTransforms();
 
 	protected:
 		// update the particles
@@ -43,12 +47,18 @@ namespace Components
 		// add a particle
 		void AddParticle();
 
+		// add a renderable
+		void AddRenderable(Transform* transform);
+
 	private: 
 		// the texture
 		Texture* m_texture;
 
+		// the renderables
+		std::vector<Renderable*> m_renderables;
+
 		// the particles current lifetimes in seconds
-		std::vector<Particle> m_particles;
+		std::vector<Particle*> m_particles;
 
 		// the particles of the particle system
 		float m_lifetime;

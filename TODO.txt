@@ -1,8 +1,6 @@
 TODO:
 - Renderable implementieren
-	- Renderable einbauen in den restlichen Renderer-Klassen
-		- SimpleParticleRenderer
-		- ParticleRenderer
+	- Renderable für ein einzelnes Particle direkt im Renderable verwalten
 	- Moral dokumentieren: Komposition (Renderable) ist flexibler als Vererbung (Renderer)
 	- Ggf. abstrakte Renderer-Klasse entfernen
 	- Regressionstest
@@ -17,7 +15,8 @@ TODO:
 	- Die Color im RenderDevice::Render in ein Shader Attribute laden
 	- Die Color als ShaderAttribute in den Shadern einbinden
 	- Die Color aus dem Material entfernen
-- Die Uniform-Farben wieder entfernen
+	- Die Uniform-Farben wieder entfernen
+	- Merge auf Main
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)

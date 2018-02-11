@@ -21,7 +21,6 @@ namespace Components
 	{
 		for (unsigned int i = 0; i < m_particles.size(); i++)
 			delete m_particles[i];
-
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 			delete m_renderables[i];
 	}
@@ -42,7 +41,7 @@ namespace Components
 		renderable->GetMaterial()->SetColor(Color(1.0f, 1.0f, 1.0f, 0.5f));
 		renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
 		renderable->SetMesh(Mesh::GetTexturedQuad());
-		renderable->SetTransform(&particle->GetTransform());
+		renderable->SetTransform(particle->GetTransform());
 		m_renderables.push_back(renderable);
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(renderable);
 	}

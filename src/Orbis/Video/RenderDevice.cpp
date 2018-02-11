@@ -31,8 +31,13 @@ namespace Video
 
 	void RenderDevice::UpdateRenderable(Renderable* renderable)
 	{
-		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
+		DeleteRenderable(renderable);
 		AddRenderable(renderable);
+	}
+
+	void RenderDevice::DeleteRenderable(Renderable* renderable)
+	{
+		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
 	}
 
 	void RenderDevice::Render()

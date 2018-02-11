@@ -20,16 +20,16 @@ namespace Components
 		m_currentColorAlpha = new Tween("Tweens/GreenParticlesAlpha.tween", 0.0f);
 	}
 
+	ParticleRenderer::~ParticleRenderer()
+	{
+		for (unsigned int i = 0; i < m_particles.size(); i++)
+			delete m_particles[i];
+		for (unsigned int i = 0; i < m_renderables.size(); i++)
+			delete m_renderables[i];
+	}
+
 	void ParticleRenderer::Start()
 	{
-		GetMaterial()->SetTexture(m_texture);
-		GetMaterial()->SetColor(Color(1.0f, 1.0f, 1.0f, 0.5f));
-		GetMaterial()->SetShader(Shader::GetDiffuseShader());
-		SetMesh(Mesh::GetTexturedQuad());
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
-		m_lastEntityPos = GetParent()->GetTransform()->position;
-		GetParent()->GetTransform()->position = Vector2D(0.1f, 0.1f);
-
 		// add an inspector for the alpha tween
 		LevelManager::GetInstance()->GetCurrentLevel()->AddEntity(TweenInspector::TryConstructEntity(m_currentColorAlpha, KeyCode::b));
 	}
@@ -45,43 +45,34 @@ namespace Components
 		m_lastEntityPos = GetParent()->GetTransform()->position;
 	}
 
-	std::vector<Transform> ParticleRenderer::GetRenderTransforms()
-	{
-		std::vector<Transform> transforms;
-		for (unsigned int i = 0; i < m_particles.size(); i++)
-			transforms.push_back(m_particles[i].GetTransform());
-
-		return transforms;
-	}
-
 	void ParticleRenderer::UpdateParticles()
 	{
 		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
 
 		// update lifetime
 		for (unsigned int i = 0; i < m_particles.size(); i++)
-			m_particles[i].SetCurrentLifetime(m_particles[i].GetCurrentLifetime() - dt);
+			m_particles[i]->SetCurrentLifetime(m_particles[i]->GetCurrentLifetime() - dt);
 
 		// update position
 		for (unsigned int i = 0; i < m_particles.size(); i++)
-			m_particles[i].GetTransform().position += m_particles[i].GetVelocity() * dt;
+			m_particles[i]->GetTransform()->position += m_particles[i]->GetVelocity() * dt;
 	}
 
 	void ParticleRenderer::DeleteOutdatedParticles()
 	{
 		// delete outdated particles
 		bool isDirty = false;
-		for (std::vector<Particle>::iterator it = m_particles.begin(); it < m_particles.end(); )
+		for (unsigned int i = 0; i < m_particles.size();)
 		{
-			if (it->GetCurrentLifetime() <= 0.0f)
-				it = m_particles.erase(it);
+			if (m_particles[i]->GetCurrentLifetime() <= 0.0f)
+			{
+				m_particles.erase(m_particles.begin() + i);
+				VideoManager::GetInstance()->GetRenderDevice()->DeleteRenderable(m_renderables[i]);
+				m_renderables.erase(m_renderables.begin() + i);
+			}
 			else
-				it++;
+				i++;
 		}
-
-		// update the renderer
-		if (isDirty)
-			VideoManager::GetInstance()->GetRenderDevice()->UpdateRenderer(this);
 	}
 
 	void ParticleRenderer::EmitParticles()
@@ -93,6 +84,7 @@ namespace Components
 		if (m_timeToNextEmission < emissionPeriod)
 		{
 			AddParticle();
+			AddRenderable(m_particles.back()->GetTransform());
 			m_timeToNextEmission += emissionPeriod;
 		}
 	}
@@ -105,7 +97,18 @@ namespace Components
 		Vector2D position = GetParent()->GetTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;
 		Vector2D particleVelocity = (MathHelper::GetRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
 		Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
-		m_particles.push_back(Particle(transform, particleVelocity));
-		VideoManager::GetInstance()->GetRenderDevice()->UpdateRenderer(this);
+		m_particles.push_back(new Particle(transform, particleVelocity));
+	}
+
+	void ParticleRenderer::AddRenderable(Transform* transform)
+	{
+		Renderable* renderable = new Renderable();
+		renderable->GetMaterial()->SetTexture(m_texture);
+		renderable->GetMaterial()->SetColor(Color(1.0f, 1.0f, 1.0f, 0.5f));
+		renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		renderable->SetMesh(Mesh::GetTexturedQuad());
+		renderable->SetTransform(transform);
+		m_renderables.push_back(renderable);
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(renderable);
 	}
 }

@@ -45,6 +45,9 @@ namespace Video
 		// update a renderable
 		void UpdateRenderable(Renderable* renderable);
 
+		// delete a renderable
+		void DeleteRenderable(Renderable* renderable);
+
 		// render
 		void Render();
 
