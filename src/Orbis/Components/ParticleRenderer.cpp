@@ -93,5 +93,6 @@ namespace Components
 		Vector2D particleVelocity = (MathHelper::GetRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
 		Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
 		m_particles.push_back(new Particle(m_texture, transform, particleVelocity));
+
 	}
 }

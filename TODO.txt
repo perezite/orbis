@@ -1,11 +1,9 @@
 TODO:
-- Release-Build fixen
 - Renderable implementieren
-	- Level3 fixen
+	- Ggf. abstrakte Renderer-Klasse entfernen
 	- Hilfsmethoden schreiben für:
 		- Löschen eines Pointers aus einem std::vector
 		- Löschen eines std::vector mit Pointern
-	- Ggf. abstrakte Renderer-Klasse entfernen
 	- Regressionstest
 	- Moral dokumentieren: Komposition (Renderable) ist flexibler als Vererbung (Renderer)	
 - Farben im VAO codieren

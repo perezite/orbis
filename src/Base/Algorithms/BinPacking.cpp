@@ -18,7 +18,7 @@ namespace Algorithms
 
 	std::vector<std::vector<Rect>> BinPacking::Execute(Rect bin, std::vector<Rect> rects, unsigned int numSteps)
 	{
-		/*std::vector<std::vector<Rect>> packedRects;
+		std::vector<std::vector<Rect>> packedRects;
 
 		while (numSteps > 0)
 		{
@@ -27,14 +27,12 @@ namespace Algorithms
 			numSteps -= currentPackedRects.size();
 		}
 
-		return packedRects;*/
-
-		return std::vector<std::vector<Rect>>();
+		return packedRects;
 	}
 
 	std::vector<Rect> BinPacking::Pack(Rect bin, std::vector<Rect>& rects, unsigned int numSteps)
 	{
-		/*std::vector<Rect> packedRects;
+		std::vector<Rect> packedRects;
 		m_partitionBuffer.clear();
 
 		// 1) sort rects by their area
@@ -74,14 +72,12 @@ namespace Algorithms
 			rects.erase(rects.begin());
 		}
 
-		return packedRects;*/
-
-		return std::vector<Rect>();
+		return packedRects;
 	}
 
 	void BinPacking::SortRectsByArea(std::vector<Rect>& rects)
 	{
-		/*std::vector<Rect> sorted;
+		std::vector<Rect> sorted;
 		for (unsigned int i = 0; i < rects.size(); i++)
 		{
 			unsigned int j;
@@ -93,12 +89,12 @@ namespace Algorithms
 			sorted.insert(sorted.begin() + j, rects[i]);
 		}
 
-		rects = sorted;*/
+		rects = sorted;
 	}
 
 	int BinPacking::FindSmallestFittingPartition(std::vector<Rect> partitions, Rect rect)
 	{
-		/*float minArea = std::numeric_limits<float>::max();
+		float minArea = std::numeric_limits<float>::max();
 		int smallest = -1;
 
 		for (unsigned int i = 0; i < partitions.size(); i++)
@@ -114,22 +110,20 @@ namespace Algorithms
 			}
 		}
 
-		return smallest;*/
-
-		return 42;
+		return smallest;
 	}
 
 	void BinPacking::TranslateRect(Rect& rect, Vector2D leftBottomTargetPos)
 	{
-		/*Vector2D dist = leftBottomTargetPos - rect.leftBottom;
+		Vector2D dist = leftBottomTargetPos - rect.leftBottom;
 
 		rect.leftBottom += dist;
-		rect.rightTop += dist;*/
+		rect.rightTop += dist;
 	}
 
 	std::tuple<Rect, Rect> BinPacking::Split(Rect partition, Rect rect)
 	{
-		/*bool splitVertical = rect.GetWidth() > rect.GetHeight();
+		bool splitVertical = rect.GetWidth() > rect.GetHeight();
 		Rect smallerBin; Rect largerBin;
 
 		if (splitVertical)
@@ -148,8 +142,5 @@ namespace Algorithms
 		}
 
 		return std::make_tuple(smallerBin, largerBin);
-		*/
-		
-		return std::tuple<Rect, Rect>();
 	}
 }

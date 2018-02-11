@@ -117,9 +117,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Particle.cpp">
       <Filter>Effects</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Renderable.cpp">
-      <Filter>Video</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.h">

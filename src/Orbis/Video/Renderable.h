@@ -16,15 +16,6 @@ namespace Video
 	class Renderable
 	{
 	public:
-		// ctor
-		Renderable();
-
-		// dtor
-		virtual ~Renderable();
-
-		// update the renderable
-		void Update();
-
 		// set the transform
 		void SetTransform(Transform* transform) { m_transform = transform; }
 

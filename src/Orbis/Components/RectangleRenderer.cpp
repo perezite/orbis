@@ -14,6 +14,6 @@ namespace Components
 		m_renderable.GetMaterial()->SetColor(m_color);
 		m_renderable.SetMesh(Mesh::GetFlatQuad());
 		m_renderable.SetTransform(GetParent()->GetTransform());
-		// VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(&m_renderable);
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(&m_renderable);
 	}
 }
