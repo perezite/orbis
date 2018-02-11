@@ -8,7 +8,7 @@ using namespace System;
 
 namespace Math
 {
-	const float BezierCurve::TANGENT_LENGTH = 0.5f;// 0.18f;
+	const float BezierCurve::TANGENT_LENGTH = 0.5f;
 
 	BezierCurve::BezierCurve()
 	{

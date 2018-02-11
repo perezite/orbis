@@ -1,21 +1,22 @@
 #pragma once
 
-#include "../../Orbis/Input/InputManager.h"
-#include "../../Orbis/Components/Component.h"
-#include "../../Orbis/Components/Renderer.h"
-#include "../../Orbis/Game/Entity.h"
-#include "../../Orbis/Effects/Tween.h"
+#include "../Input/InputManager.h"
+#include "../Components/Component.h"
+#include "../Game/Entity.h"
+#include "../Effects/Tween.h"
+#include "../Video/Renderable.h"
 using namespace Input;
 using namespace Components;
 using namespace Game;
 using namespace Effects;
+using namespace Video;
 
 #include <vector>
 
 namespace Components
 {
 	// used to edit a tween
-	class TweenInspector : public Renderer
+	class TweenInspector : Component
 	{
 	public:
 		// utility for quickly creating an inspector entity. Returns 0 in release mode
@@ -23,10 +24,10 @@ namespace Components
 
 	public:
 		// ctor
-		TweenInspector(Tween* tween, KeyCode activationKey = KeyCode::t) : Renderer::Renderer(), m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
-		{
-			ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
-		}
+		TweenInspector(Tween* tween, KeyCode activationKey = KeyCode::t);
+
+		// dtor
+		virtual ~TweenInspector();
 
 		// start
 		void Start();
@@ -79,7 +80,11 @@ namespace Components
 
 		// toggle the editor
 		void Toggle();
+
 	private:
+		// the renderable
+		Renderable* m_renderable;
+
 		// the tween to be edited
 		Tween m_tween;
 

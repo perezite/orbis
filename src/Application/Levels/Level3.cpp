@@ -53,7 +53,7 @@ namespace Levels
 			entity->SetTransform(trans);
 
 			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
-			entity->AddComponent(hasTexture ? (Renderer*)new SpriteRenderer(texture) : (Renderer*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
+			entity->AddComponent(hasTexture ? (Component*)new SpriteRenderer(texture) : (Component*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
 			entity->AddComponent(new WobbleController());
 
 			this->AddEntity(entity);

@@ -34,16 +34,29 @@ namespace Components
 		return entity;
 	}
 
+	TweenInspector::TweenInspector(Tween * tween, KeyCode activationKey) : m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
+	{
+		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
+	}
+
+	TweenInspector::~TweenInspector()
+	{
+		VideoManager::GetInstance()->GetRenderDevice()->DeleteRenderable(m_renderable);
+		delete m_renderable;
+	}
+
 	void TweenInspector::Start()
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
 		m_texture = new Texture("Textures/CoordinateSystem2.png");
-		GetMaterial()->SetTexture(m_texture);
-		GetMaterial()->SetShader(Shader::GetDiffuseShader());
-		SetMesh(Mesh::GetTexturedQuad());
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderer(this);
 		GetParent()->GetTransform()->scale = Vector2D::Zero;
+		m_renderable = new Renderable;
+		m_renderable->GetMaterial()->SetTexture(m_texture);
+		m_renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		m_renderable->SetMesh(Mesh::GetTexturedQuad());
+		m_renderable->SetTransform(GetParent()->GetTransform());
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(m_renderable);
 	}
 
 	void TweenInspector::Update()

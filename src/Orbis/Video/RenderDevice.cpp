@@ -14,14 +14,6 @@ using namespace Core;
 
 namespace Video
 {
-	void RenderDevice::AddRenderer(Renderer* renderer)
-	{
-	}
-
-	void RenderDevice::UpdateRenderer(Renderer* renderer)
-	{
-	}
-
 	void RenderDevice::AddRenderable(Renderable* renderable)
 	{
 		int position = FindFirstIndexInBatch(renderable);

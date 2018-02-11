@@ -197,9 +197,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\TransformSpace.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Renderer.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugHelper.h">
       <Filter>Core</Filter>
     </ClInclude>

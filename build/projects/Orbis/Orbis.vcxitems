@@ -49,7 +49,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\RectangleRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Renderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SimpleParticleRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TweenInspector.h" />

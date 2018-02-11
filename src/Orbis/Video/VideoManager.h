@@ -3,7 +3,6 @@
 #include "RenderDevice.h"
 
 #include "../Libraries/SDL.h"
-#include "../Components/Renderer.h"
 using namespace Components;
 
 #include "../../Base/Math/Vector2D.h"

@@ -9,8 +9,6 @@
 
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
-#include "../Components/Renderer.h"
-#include "../Components/ParticleRenderer.h"
 using namespace Game;
 using namespace Components;
 
@@ -32,12 +30,6 @@ namespace Video
 		RenderDevice()
 			: m_isIndexArrayDirty(false)
 		{}
-
-		// add a renderer
-		void AddRenderer(Renderer* renderer);
-
-		// update a renderer
-		void UpdateRenderer(Renderer* renderer);
 
 		// add a renderable
 		void AddRenderable(Renderable* renderable);

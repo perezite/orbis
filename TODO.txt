@@ -1,6 +1,5 @@
 TODO:
 - Renderable implementieren
-	- Ggf. abstrakte Renderer-Klasse entfernen
 	- Hilfsmethoden schreiben für:
 		- Löschen eines Pointers aus einem std::vector
 		- Löschen eines std::vector mit Pointern
