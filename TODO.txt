@@ -1,11 +1,4 @@
-TODO:
-- Renderable implementieren
-	- Hilfsmethoden schreiben für:
-		- Löschen eines Pointers aus einem std::vector (delete pointer + erase in vector)
-		- Löschen eines std::vector mit Pointern (delete + clear)
-		- Sicheres Löschen eines Pointers (mit Null-Check und Null-Set)
-	- Regressionstest
-	- Moral dokumentieren: Komposition (Renderable) ist flexibler als Vererbung (Renderer)	
+TODO:	
 - Farben im VAO codieren
 	- Implementieren dass ein Renderer so viele Meshes hat wie er Transforms hat
 	- Triviale Implementation für die vorhandenen Renderer
