@@ -9,7 +9,9 @@ using namespace Core;
 using namespace Game;
 
 #include "../../Base/Math/MathHelper.h"
+#include "../../Base/System/MemoryHelper.h"
 using namespace Math;
+using namespace System;
 
 namespace Components
 {
@@ -21,9 +23,7 @@ namespace Components
 
 	ParticleRenderer::~ParticleRenderer()
 	{
-		for (unsigned int i = 0; i < m_particles.size(); i++)
-			delete m_particles[i];
-		m_particles.clear();
+		MemoryHelper::Clear(m_particles);
 	}
 
 	void ParticleRenderer::Start()
@@ -61,11 +61,8 @@ namespace Components
 		// delete outdated particles
 		for (unsigned int i = 0; i < m_particles.size();)
 		{
-			if (m_particles[i]->GetCurrentLifetime() <= 0.0f)
-			{
-				delete m_particles[i];
-				m_particles.erase(m_particles.begin() + i);
-			}
+			if (m_particles[i]->GetCurrentLifetime() <= 0.0f)	
+				MemoryHelper::Remove(m_particles, i);
 			else
 				i++;
 		}

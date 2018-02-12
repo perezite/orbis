@@ -1,6 +1,7 @@
 #include "TextureAtlas.h"
 
 #include "../../Base/System/Exception.h"
+#include "../../Base/System/MemoryHelper.h"
 #include "../../Base/Algorithms/BinPacking.h"
 using namespace System;
 using namespace Algorithms;
@@ -40,8 +41,7 @@ namespace Video
 
 	TextureAtlas::~TextureAtlas()
 	{
-		for (unsigned int i = 0; i < m_charts.size(); i++)
-			delete m_charts[i];
+		MemoryHelper::Clear(m_charts);
 	}
 
 	std::vector<Rect> TextureAtlas::GetTextureRects()

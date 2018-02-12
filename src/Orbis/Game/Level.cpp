@@ -7,6 +7,7 @@ using namespace Video;
 using namespace Effects;
 
 #include "../../Base/System/MemoryManager.h"
+#include "../../Base/System/MemoryHelper.h"
 using namespace System;
 
 namespace Game
@@ -18,13 +19,7 @@ namespace Game
 
 	Level::~Level()
 	{
-		for(unsigned int i = 0; i < m_entities.size(); i++)
-		{
-			delete m_entities[i];
-		}
-
-		m_entities.clear();
-	
+		MemoryHelper::Clear(m_entities);
 		MemoryManager<Texture>::GetInstance()->DeleteAll();
 		MemoryManager<Tween>::GetInstance()->DeleteAll();
 	}

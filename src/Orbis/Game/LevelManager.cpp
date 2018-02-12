@@ -4,6 +4,7 @@
 using namespace Core;
 
 #include "../../Base/System/Exception.h"
+#include "../../Base/System/MemoryHelper.h"
 using namespace System;
 
 #include <iostream>
@@ -23,10 +24,8 @@ namespace Game
 	
 	LevelManager::~LevelManager()
 	{
-		if (m_currentLevel != NULL)
-			delete m_currentLevel;
-		if (m_queuedLevel != NULL)
-			delete m_queuedLevel;
+		MemoryHelper::Delete(m_currentLevel);
+		MemoryHelper::Delete(m_queuedLevel);
 	}
 
 	void LevelManager::QueueLevel(Level *level)
@@ -52,9 +51,7 @@ namespace Game
 
 	void LevelManager::SwitchToQueuedLevel()
 	{
-		if (m_currentLevel != NULL)
-			delete m_currentLevel;
-
+		MemoryHelper::Delete(m_currentLevel);
 		m_currentLevel = m_queuedLevel;
 		m_queuedLevel = NULL;
 

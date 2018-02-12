@@ -1,15 +1,13 @@
 #include "Entity.h"
 
+#include "../../Base/System/MemoryHelper.h"
+using namespace System;
+
 namespace Game
 {
 	Entity::~Entity()
 	{
-		for (unsigned int i = 0; i < m_components.size(); i++)
-		{
-			delete m_components[i];
-		}
-
-		m_components.clear();
+		MemoryHelper::Clear(m_components);
 	}
 
 	void Entity::AddComponent(Component *component)   		
