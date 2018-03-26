@@ -10,7 +10,7 @@ namespace Video
 	{
 	public:
 		// ctor
-		Material() : m_texture(NULL), m_shader(NULL), m_hasColor(false) {}
+		Material() : m_texture(NULL), m_shader(NULL), m_color(Color::White) {}
 
 		// set texture
 		void SetTexture(Texture* const texture) { m_texture = texture; }
@@ -25,16 +25,10 @@ namespace Video
 		Shader* GetShader() const { return m_shader; }
 
 		// set color
-		void SetColor(const Color& color) { m_hasColor = true; m_color = color; }
+		void SetColor(const Color& color) { m_color = color; }
 
 		// get color
 		Color& GetColor() { return m_color; }
-
-		// set is color used
-		void HasColor(bool isColorUsed) { m_hasColor = isColorUsed; }
-
-		// get is color used
-		bool HasColor() const { return m_hasColor; }
 
 		// can the materials be batched
 		bool IsBatchEqualTo(Material* const other) const;
@@ -55,8 +49,5 @@ namespace Video
 
 		// the color
 		Color m_color;
-
-		// is the color used
-		bool m_hasColor;
 	};
 }

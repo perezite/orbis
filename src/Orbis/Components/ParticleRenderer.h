@@ -36,7 +36,7 @@ namespace Components
 		void UpdateParticles();
 
 		// delete outdated particles
-		void DeleteOutdatedParticles();
+		void CleanupParticles();
 
 		// emit new particles
 		void EmitParticles();

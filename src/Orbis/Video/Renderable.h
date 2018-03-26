@@ -2,6 +2,7 @@
 
 #include "../Video/Material.h"
 #include "../Video/Mesh.h"
+#include "../Video/Color.h"
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
 using namespace Video;
@@ -16,6 +17,12 @@ namespace Video
 	class Renderable
 	{
 	public:
+		// dtor
+		virtual ~Renderable() 
+		{
+			delete m_mesh;
+		}
+
 		// set the transform
 		void SetTransform(Transform* transform) { m_transform = transform; }
 

@@ -5,6 +5,10 @@ namespace Video
 	struct Color
 	{
 	public:
+		// get the size of the color
+		static unsigned int GetSize() { return 4; }
+
+	public:
 		// black color
 		static const Color Black;
 

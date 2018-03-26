@@ -14,6 +14,9 @@ namespace Video
 		// get static diffuse shader
 		static Shader* GetDiffuseShader();
 
+		// get static flat particle shader
+		static Shader* GetDiffuseParticleShader();
+
 		// get static flat shader
 		static Shader* GetFlatShader();
 

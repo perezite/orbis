@@ -36,7 +36,7 @@ namespace Components
 	{
 		UpdateParticles();
 
-		DeleteOutdatedParticles();
+		CleanupParticles();
 
 		EmitParticles();
 
@@ -56,7 +56,7 @@ namespace Components
 			m_particles[i]->GetTransform()->position += m_particles[i]->GetVelocity() * dt;
 	}
 
-	void ParticleRenderer::DeleteOutdatedParticles()
+	void ParticleRenderer::CleanupParticles()
 	{
 		// delete outdated particles
 		for (unsigned int i = 0; i < m_particles.size();)
@@ -89,7 +89,7 @@ namespace Components
 		Vector2D position = GetParent()->GetTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;
 		Vector2D particleVelocity = (MathHelper::GetRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
 		Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
-		m_particles.push_back(new Particle(m_texture, transform, particleVelocity));
+		m_particles.push_back(new Particle(m_texture, Color::White, transform, particleVelocity));
 
 	}
 }

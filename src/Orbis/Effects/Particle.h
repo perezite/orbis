@@ -2,6 +2,7 @@
 
 #include "../Game/Transform.h"
 #include "../Video/Renderable.h"
+#include "../Video/Color.h"
 using namespace Game;
 using namespace Video;
 
@@ -15,7 +16,7 @@ namespace Effects
 	{
 	public:
 		// ctor
-		Particle(Texture* texture, const Transform& transform, const Vector2D& velocity);
+		Particle(Texture * texture, const Color& color, const Transform & transform, const Vector2D & velocity);
 
 		// dtor
 		virtual ~Particle();
@@ -48,5 +49,8 @@ namespace Effects
 
 		// the current lifetime
 		float m_lifetime;
+
+		// the color 
+		Color m_color;
 	};
 }

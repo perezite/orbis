@@ -41,7 +41,6 @@ namespace Levels
 		camEntity->AddComponent(cam);
 		CameraController* cameraController = new CameraController();
 		camEntity->AddComponent(cameraController);
-		// camera->SetTransform(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D::One));
 		camEntity->SetTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
 		this->AddEntity(camEntity);
 

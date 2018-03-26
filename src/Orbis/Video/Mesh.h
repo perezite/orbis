@@ -15,19 +15,19 @@ namespace Video
 	class Mesh 
 	{
 	public:
-		// get a static textured quad
-		static Mesh* GetTexturedQuad();
+		// create a vertex color textured quad
+		static Mesh* CreateVertexColoredTexturedQuad(Color color);
 
-		// get a static flat quad
-		static Mesh* GetFlatQuad();
+		// create a textured quad
+		static Mesh* CreateTexturedQuad();
 
-		// get a static line mesh
-		static Mesh* GetLineMesh() { return NULL; }
+		// create a flat quad
+		static Mesh* CreateFlatQuad();
 
 	public:
 		// ctor
-		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLuint> indices)
-			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices)
+		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLuint> indices, bool isVertexColored = false)
+			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices), m_isVertexColored(isVertexColored)
 		{}
 
 		// get vertexData
@@ -36,11 +36,14 @@ namespace Video
 		// get num vertices
 		unsigned int GetNumVertices() const { return m_vertexData.size() / m_vertexSize; }
 
-		// get vertex size
+		// get the size of one vertex
 		unsigned int GetVertexSize() const { return m_vertexSize; }
 
 		// get indices
 		const std::vector<GLuint>* GetIndices() const { return &m_indices; }
+
+		// is vertex colored
+		bool IsVertexColored() const { return m_isVertexColored; }
 
 	private:
 		// vertex data
@@ -51,5 +54,8 @@ namespace Video
 
 		// indices
 		std::vector<GLuint> m_indices;
+
+		// is the mesh vertex color
+		bool m_isVertexColored;
 	};
 }

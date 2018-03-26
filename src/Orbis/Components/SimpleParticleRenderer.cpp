@@ -25,13 +25,13 @@ namespace Components
 
 	void SimpleParticleRenderer::Start()
 	{
-		AddParticle(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)));
-		AddParticle(Transform(Vector2D(+0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)));
+		AddParticle(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 0.5f));
+		AddParticle(Transform(Vector2D(+0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 
-	void SimpleParticleRenderer::AddParticle(const Transform& transform)
+	void SimpleParticleRenderer::AddParticle(const Transform& transform, const Color& color)
 	{
-		Particle* particle = new Particle(m_texture, transform, Vector2D::Zero);
+		Particle* particle = new Particle(m_texture, color, transform, Vector2D::Zero);
 		m_particles.push_back(particle);
 	}
 }

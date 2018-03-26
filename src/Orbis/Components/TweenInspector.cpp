@@ -54,7 +54,7 @@ namespace Components
 		m_renderable = new Renderable;
 		m_renderable->GetMaterial()->SetTexture(m_texture);
 		m_renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
-		m_renderable->SetMesh(Mesh::GetTexturedQuad());
+		m_renderable->SetMesh(Mesh::CreateTexturedQuad());
 		m_renderable->SetTransform(GetParent()->GetTransform());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(m_renderable);
 	}

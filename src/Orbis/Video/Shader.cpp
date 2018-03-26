@@ -82,6 +82,12 @@ namespace Video
 		return &diffuseShader;
 	}
 
+	Shader* Shader::GetDiffuseParticleShader()
+	{
+		static Shader diffuseParticleShader("Shaders/DiffuseParticle.vs", "Shaders/DiffuseParticle.frag");
+		return &diffuseParticleShader;
+	}
+
 	Shader* Shader::GetFlatShader()
 	{
 		static Shader flatShader("Shaders/Flat.vs", "Shaders/Flat.frag");

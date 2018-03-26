@@ -4,9 +4,26 @@
 
 namespace Video
 {
-	Mesh* Mesh::GetTexturedQuad()
+	Mesh* Mesh::CreateVertexColoredTexturedQuad(Color color)
 	{
-		static Mesh texturedQuad(
+		Mesh* mesh = new Mesh(
+			{
+				-0.5, -0.5, 0.0f, 0.0f,	color.r, color.g, color.b, color.a,		// left bottom
+				 0.5, -0.5, 1.0f, 0.0f, color.r, color.g, color.b, color.a,		// right bottom
+				-0.5,  0.5, 0.0f, 1.0f, color.r, color.g, color.b, color.a,		// left top
+				 0.5,  0.5, 1.0f, 1.0f, color.r, color.g, color.b, color.a		// right top
+			},
+			8,
+			{ 0, 1, 2, 2, 1, 3 },
+			true
+		);
+
+		return mesh;
+	}
+
+	Mesh* Mesh::CreateTexturedQuad()
+	{
+		Mesh* mesh = new Mesh(
 			{
 				-0.5, -0.5, 0.0f, 0.0f,		// left bottom
 				 0.5, -0.5, 1.0f, 0.0f,		// right bottom
@@ -17,12 +34,12 @@ namespace Video
 			{ 0, 1, 2, 2, 1, 3 }
 		);
 
-		return &texturedQuad;
+		return mesh;
 	}
 
-	Mesh* Mesh::GetFlatQuad()
+	Mesh* Mesh::CreateFlatQuad()
 	{
-		static Mesh flatQuad(
+		Mesh* mesh = new Mesh(
 			{
 				-0.5, -0.5,					// left bottom
 				 0.5, -0.5,					// right bottom
@@ -33,6 +50,6 @@ namespace Video
 			{ 0, 1, 2, 2, 1, 3 }
 		);
 
-		return &flatQuad;
+		return mesh;
 	}
 }
