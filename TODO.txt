@@ -1,21 +1,13 @@
 TODO:	
-- Level 10 fixen (Vermutung: Vertexfarben müssen auch im Mesh gespeichert werden, denn sie gehören zum Vertex genau wie die Texturekoordinaten)
-- Andere Level fixen
 - Farben im VAO codieren
-	- Im RenderDevice die Renderable-VertexColor in den VertexBuffer schreiben, falls vorhanden
-	- Im DiffuseParticleShader die Color-Uniform entfernen
-	- Die HasColor-Option im Material wieder hinzufügen
-	- Im DiffuseParticleShader die VertexColor als Attribute auslesen
-	- Die Color-Uniform entfernen aus dem DiffuseShader
-	- Das RenderDevice so umschreiben, dass der DiffuseShader wieder korekt funktioniert
-	- Das RenderDevice wenn möglich refactoren
 	- Merge auf Main
+- Demo erstellen (Level-Switching)
 - Refactoring planen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
 	- Regression & Performanceregression
-- Sinnvolles Inspector-Komponent überlegen
+- Sinnvolles Inspector-Konzept überlegen
 - Die CenterPropulsion des Balls aus Blear nachbauen. Dabei die Werte nach Bedarf tweaken
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Orbis in Bibliothek versiegeln
