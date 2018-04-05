@@ -14,9 +14,9 @@ namespace Controllers
 	{
 	public:
 		// ctor
-		TransformButtonController(SpriteRenderer* renderer, SpriteController* yellowBlock, 
+		TransformButtonController(SpriteController* yellowBlock, 
 			SpriteController* blueBlock, CameraController* camera, SpriteRenderer* inputModeRenderer, bool leftDirection)
-			: m_renderer(renderer), m_yellowBlock(yellowBlock), m_blueBlock(blueBlock),
+			: m_yellowBlock(yellowBlock), m_blueBlock(blueBlock),
 			m_camera(camera), m_inputModeSpriteRenderer(inputModeRenderer), m_positiveTransform(leftDirection)
 		{
 			StoreInitialTransforms();
@@ -36,9 +36,6 @@ namespace Controllers
 		void StoreInitialTransform(Component* component);
 
 	private:
-		// the left button sprite renderer
-		SpriteRenderer* m_renderer;
-
 		// the yellow block controller
 		SpriteController* m_yellowBlock;
 

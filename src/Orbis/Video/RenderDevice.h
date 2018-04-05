@@ -63,7 +63,7 @@ namespace Video
 		void UpdateIndexArray();
 
 		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
-		void InsertIntoIndexArray(unsigned int rendererIndex, unsigned int& offset);
+		void InsertIntoIndexArray(unsigned int rendererIndex, unsigned short& offset);
 
 		// reserve index array space
 		void ReserveIndexArray();
@@ -88,7 +88,7 @@ namespace Video
 		std::vector<GLfloat> m_vertexArray;
 
 		// the index array
-		std::vector<GLuint> m_indexArray;
+		std::vector<GLushort> m_indexArray;
 
 		// is the index array in dirty state
 		bool m_isIndexArrayDirty;

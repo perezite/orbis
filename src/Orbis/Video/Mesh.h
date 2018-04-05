@@ -26,7 +26,7 @@ namespace Video
 
 	public:
 		// ctor
-		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLuint> indices, bool isVertexColored = false)
+		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLushort> indices, bool isVertexColored = false)
 			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices), m_isVertexColored(isVertexColored)
 		{}
 
@@ -40,7 +40,7 @@ namespace Video
 		unsigned int GetVertexSize() const { return m_vertexSize; }
 
 		// get indices
-		const std::vector<GLuint>* GetIndices() const { return &m_indices; }
+		const std::vector<GLushort>* GetIndices() const { return &m_indices; }
 
 		// is vertex colored
 		bool IsVertexColored() const { return m_isVertexColored; }
@@ -53,7 +53,7 @@ namespace Video
 		unsigned int m_vertexSize;
 
 		// indices
-		std::vector<GLuint> m_indices;
+		std::vector<GLushort> m_indices;
 
 		// is the mesh vertex color
 		bool m_isVertexColored;

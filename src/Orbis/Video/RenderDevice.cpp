@@ -88,7 +88,7 @@ namespace Video
 			}
 
 			// draw batched
-			glDrawElements(GL_TRIANGLES, batchSize * prototype->GetMesh()->GetIndices()->size(), GL_UNSIGNED_INT, &m_indexArray[iboStartIndex]);
+			glDrawElements(GL_TRIANGLES, batchSize * prototype->GetMesh()->GetIndices()->size(), GL_UNSIGNED_SHORT, &m_indexArray[iboStartIndex]);
 
 			// cleanup
 			prototype->GetMaterial()->GetShader()->Unuse();
@@ -191,7 +191,7 @@ namespace Video
 			m_indexArray.clear();
 			ReserveIndexArray();
 
-			GLuint offset = 0;
+			GLushort offset = 0;
 			for (unsigned int i = 0; i < m_renderables.size(); i++)
 			{
 				InsertIntoIndexArray(i, offset);
@@ -201,7 +201,7 @@ namespace Video
 		}
 	}
 
-	void RenderDevice::InsertIntoIndexArray(unsigned int index, unsigned int& offset)
+	void RenderDevice::InsertIntoIndexArray(unsigned int index, unsigned short& offset)
 	{
 		// reset value offet when switching batch
 		if (index == 0 || !m_renderables[index]->IsBatchEqualTo(m_renderables[index - 1]))
@@ -210,7 +210,7 @@ namespace Video
 		Mesh* mesh = m_renderables[index]->GetMesh();
 		for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
 		{
-			GLuint value = offset + mesh->GetIndices()->at(j);
+			GLushort value = offset + mesh->GetIndices()->at(j);
 			m_indexArray.insert(m_indexArray.end(), value);
 		}
 
