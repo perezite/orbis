@@ -35,7 +35,7 @@ namespace Video
 	void RenderDevice::Render()
 	{ 
 		#ifdef ORBIS_DEBUG_RENDERDEVICE
-				int count = 0;
+			int count = 0;
 		#endif 
 
 		// set states
@@ -157,7 +157,6 @@ namespace Video
 	{
 		Mesh* mesh = renderable->GetMesh();
 		Texture* tex = renderable->GetMaterial()->GetTexture();
-		bool hasVertexColor = renderable->GetMesh()->IsVertexColored();
 
 		// apply transformation on mesh data
 		std::vector<GLfloat> data = *mesh->GetVertexData();

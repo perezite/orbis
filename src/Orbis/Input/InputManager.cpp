@@ -108,6 +108,17 @@ namespace Input
 		return m_isCursorInsideWindow && m_tapsDown.size() > 0;
 	}
 
+	bool InputManager::IsTapDown(Rect rect)
+	{
+		if (IsTapDown())
+		{
+			if (rect.Contains(GetTapPosition()))
+				return true;
+		}
+
+		return false;
+	}
+
 	bool InputManager::IsTapIndexDown(signed long index)
 	{
 		return m_tapsDown.find(index) != m_tapsDown.end();
@@ -118,6 +129,17 @@ namespace Input
 		return m_isCursorInsideWindow && m_tapsGoingDown.size() > 0;
 	}
 
+	bool InputManager::IsTapGoingDown(Rect rect)
+	{
+		if (IsTapGoingDown())
+		{
+			if (rect.Contains(GetTapPosition()))
+				return true;
+		}
+
+		return false;
+	}
+
 	bool InputManager::IsTapIndexGoingDown(signed long index)
 	{
 		return m_tapsGoingDown.find(index) != m_tapsGoingDown.end();
@@ -126,15 +148,9 @@ namespace Input
 	Vector2D InputManager::GetTapPosition()
 	{
 		Exception::Assert(IsTapDown(), "GetTapPosition() can only be called when a tap is pressed or going down");
-		
-		return m_tapPosition;
-	}
 
-	Vector2D InputManager::GetAspectCorrectedTapPosition()
-	{
-		Vector2D tapPos = GetTapPosition();
 		Camera* cam = Camera::GetInstance();
 		float aspect = cam->GetAspect();
-		return Vector2D(tapPos.x, aspect * tapPos.y);
+		return Vector2D(m_tapPosition.x, aspect * m_tapPosition.y);
 	}
 }

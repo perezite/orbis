@@ -6,6 +6,7 @@
 using namespace Game;
 
 #include "../../Base/Math/Vector2D.h"
+#include "../../Base/Math/Rect.h"
 using namespace Math;
 
 #include <set>
@@ -36,20 +37,23 @@ namespace Input
 		// is a tap pressed
 		bool IsTapDown();
 
+		// is a tap pressed in cam coordinates rect
+		bool IsTapDown(Rect rect);
+
 		// is a tap index pressed
 		bool IsTapIndexDown(signed long index);
 
 		// is a tap going down
 		bool IsTapGoingDown();
 
+		// is a tap going down in cam coordinates rect
+		bool IsTapGoingDown(Rect rect);
+
 		// is a tap index going down
 		bool IsTapIndexGoingDown(signed long index);
 
-		// get the tap position in normalized coordinates
+		// get the tap position in camera space ((+/-0.5f, +/-0.5f * aspectRation)) 
 		Vector2D GetTapPosition();
-
-		// get the aspect ratio corrected tap position
-		Vector2D GetAspectCorrectedTapPosition();
 
 	private:
 		// singleton ctor

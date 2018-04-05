@@ -24,6 +24,9 @@ namespace Components
 		// dtor
 		virtual ~Camera();
 
+		// transform coordinates from screen space to camera space
+		Vector2D ScreenSpaceToCameraSpace(Vector2D v);
+
 		// get the view matrix (the inverse of the transform of the parent entity)
 		Matrix3 CalcViewMatrix(TransformSpace space = TransformSpace::WorldSpace);
 

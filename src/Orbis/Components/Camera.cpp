@@ -35,6 +35,11 @@ namespace Components
 		m_instance = NULL;
 	}
 
+	Vector2D Camera::ScreenSpaceToCameraSpace(Vector2D v)
+	{
+		return Vector2D(v.x, GetAspect() * v.y);
+	}
+
 	Matrix3 Camera::CalcViewMatrix(TransformSpace space)
 	{
 		if (space == TransformSpace::CameraSpace)

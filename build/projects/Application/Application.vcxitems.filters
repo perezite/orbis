@@ -5,9 +5,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level2.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
@@ -65,6 +62,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\ParticleSystemTester.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButtonController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -81,13 +84,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.h">
       <Filter>Levels</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputController.h">
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level2.h">
@@ -145,6 +142,15 @@
       <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\ParticleSystemTester.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButtonController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.h">
       <Filter>Controllers</Filter>
     </ClInclude>
   </ItemGroup>

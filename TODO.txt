@@ -1,7 +1,10 @@
 TODO:	
-- Farben im VAO codieren
-	- Merge auf Main
 - Demo erstellen (Level-Switching)
+	- Controller für Quit-Button hinzufügen
+	- Im ersten und zweiten Level je die Switch-Buttons hinzufügen
+	- Switching zw. ersten und zweitem Level implementieren
+	- Allfällige Fehler fixen
+	- Switching für restliche Level hinzufügen
 - Refactoring planen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:

@@ -1,32 +1,25 @@
-#include "InputController.h"
-
-#include "SpriteController.h"
-using namespace Controllers;
+#include "TransformButtonController.h"
 
 #include "../../Orbis/Input/InputManager.h"
 #include "../../Orbis/Core/TimeManager.h"
-#include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Game/Transform.h"
-#include "../../Orbis/Game/Entity.h"
-#include "../../Orbis/Components/Camera.h"
-#include "../../Base/Math/Matrix3.h"
-#include "../../Base/System/StringHelper.h"
+#include "../../Base/Math/Vector2D.h"
+#include "../../Base/Math/Rect.h"
 using namespace Input;
 using namespace Core;
 using namespace Game;
-using namespace Components;
 using namespace Math;
 
-#include <algorithm>
-
-namespace
+namespace 
 {
+	using namespace Controllers;
+
 	void Rotate(Transform* transform, bool clockwise, float omega)
 	{
 		omega = clockwise ? -omega : omega;
 		float alpha = transform->rotation;
 		transform->rotation = alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega;
-	}	
+	}
 
 	void Translate(Transform* transform, bool forward, float speed)
 	{
@@ -76,93 +69,48 @@ namespace
 
 namespace Controllers
 {
-	void InputController::Update()
+	void TransformButtonController::Update()
 	{
-		static InputManager* inputManager = InputManager::GetInstance();
+		InputManager* input = InputManager::GetInstance();
+		Transform* t = GetParent()->GetTransform();
 
-		if (inputManager->IsTapGoingDown())
-		{
-			Vector2D tapPosition = inputManager->GetTapPosition();
-
-			// left top tap
-			if (tapPosition.x < 0 && tapPosition.y >= 0.0f)
-				Cycle();
-
-			// right top tap
-			if (tapPosition.x >= 0 && tapPosition.y >= 0)
-			{
-				InputManager::GetInstance()->SetQuitEvent();
-			}
-		}
-
-		if (inputManager->IsTapDown())
-		{
-			Vector2D tapPosition = inputManager->GetTapPosition();
-
-			// left bottom tap
-			if (tapPosition.x < 0 && tapPosition.y < 0.0f)
-			{
-				Affect(false);
-			}
-
-			// right bottom tap
-			if (tapPosition.x >= 0 && tapPosition.y < 0.0f)
-			{
-				Affect(true);
-			}
-		}
+		if (input->IsTapDown(Rect::Create(t->position, t->scale)))
+			Affect();
 	}
 
-	void InputController::Cycle()
+	void TransformButtonController::Affect()
 	{
-		// get new texture
-		std::vector<Texture*>::iterator previousTextureIt = std::find(m_inputModeOverlayTextures.begin(), m_inputModeOverlayTextures.end(), m_inputModeOverlaySpriteRenderer->GetTexture());
-		std::vector<Texture*>::iterator currentTextureIt = ++previousTextureIt;
+		std::string texAssetPath = m_inputModeSpriteRenderer->GetTexture()->GetAssetPath();
 
-		// update sprite renderer
-		Texture* nextTexture = currentTextureIt != m_inputModeOverlayTextures.end() ? (*currentTextureIt) : m_inputModeOverlayTextures.front();
-		m_inputModeOverlaySpriteRenderer->SetTexture(nextTexture);
-	}
-
-	void InputController::InitializeComponent(Component * component)
-	{
-		Entity* parent = component->GetParent();
-		m_initialTransforms.insert(std::make_pair(parent, *parent->GetTransform()));
-	}
-
-	void InputController::Affect(bool positive)
-	{
-		std::string texAssetPath = m_inputModeOverlaySpriteRenderer->GetTexture()->GetAssetPath();
-		
 		if (texAssetPath == "Textures/RotateYellowSprite.png")
 		{
-			Rotate(m_yellowBrick, positive);
+			Rotate(m_yellowBlock, m_positiveTransform);
 			return;
 		}
 		if (texAssetPath == "Textures/TranslateYellowSprite.png")
 		{
-			Translate(m_yellowBrick, positive);
+			Translate(m_yellowBlock, m_positiveTransform);
 			return;
 		}
 		if (texAssetPath == "Textures/TranslateBlueSprite.png")
 		{
-			Translate(m_blueBrick, positive);
+			Translate(m_blueBlock, m_positiveTransform);
 			return;
 		}
 		if (texAssetPath == "Textures/RotateCamera.png")
 		{
-			Rotate(m_camera, positive);
+			Rotate(m_camera, m_positiveTransform);
 			return;
 		}
 		if (texAssetPath == "Textures/TranslateCamera.png")
 		{
-			Translate(m_camera, positive);
+			Translate(m_camera, m_positiveTransform);
 			return;
 		}
 
 		if (texAssetPath == "Textures/ScaleCamera.png")
 		{
-			Scale(m_camera, positive);
+			Scale(m_camera, m_positiveTransform);
 			return;
 		}
 
@@ -174,4 +122,18 @@ namespace Controllers
 
 		throw Exception("The given texture asset path is not supported!");
 	}
+
+	void TransformButtonController::StoreInitialTransforms()
+	{
+		StoreInitialTransform(m_yellowBlock);
+		StoreInitialTransform(m_blueBlock);
+		StoreInitialTransform(m_camera);
+	}
+
+	void TransformButtonController::StoreInitialTransform(Component * component)
+	{
+		Entity* parent = component->GetParent();
+		m_initialTransforms.insert(std::make_pair(parent, *parent->GetTransform()));
+	}
 }
+

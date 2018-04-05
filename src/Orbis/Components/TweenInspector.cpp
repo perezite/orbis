@@ -100,7 +100,7 @@ namespace Components
 	
 	void TweenInspector::AddOrSelectControlPoint()
 	{
-		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
+		Vector2D tap = InputManager::GetInstance()->GetTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			m_selectedControlPoint = ComputeSelectedControlPoint(tap);
@@ -113,7 +113,7 @@ namespace Components
 
 	void TweenInspector::MoveControlPoint()
 	{
-		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
+		Vector2D tap = InputManager::GetInstance()->GetTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			// clamp boundary point positions
@@ -129,7 +129,7 @@ namespace Components
 
 	void TweenInspector::RotateTangent()
 	{
-		Vector2D tap = InputManager::GetInstance()->GetAspectCorrectedTapPosition();
+		Vector2D tap = InputManager::GetInstance()->GetTapPosition();
 		Vector2D ctrlPoint = m_tween.GetCurve()->Get(m_selectedControlPoint).pos;
 		float tangent;
 		if (tap.x > ctrlPoint.x)

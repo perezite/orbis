@@ -8,6 +8,12 @@ namespace Math
 	struct Rect
 	{
 	public:
+		static Rect Create(Vector2D pos, Vector2D scale)
+		{
+			return Rect(pos - scale * 0.5f, pos + scale * 0.5f);
+		}
+
+	public:
 		// ctor
 		Rect() : leftBottom(), rightTop() {}
 

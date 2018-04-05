@@ -2,7 +2,6 @@
 
 #include "../Controllers/CameraController.h"
 #include "../Controllers/SpriteController.h"
-#include "../Controllers/InputController.h"
 #include "../Controllers/DebugLineTester.h"
 using namespace Controllers;
 
