@@ -18,16 +18,9 @@ namespace Controllers
 	void InputModeButtonController::Update()
 	{
 		InputManager* inputManager = InputManager::GetInstance();
-		Transform* t = GetParent()->GetTransform();
 
-		if (inputManager->IsTapGoingDown(Rect::Create(t->position, t->scale)))
+		if (inputManager->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
 				Cycle();
-
-		// right top tap
-		/*if (tapPosition.x >= 0 && tapPosition.y >= 0)
-		{
-			InputManager::GetInstance()->SetQuitEvent();
-		}*/
 	}
 
 	void InputModeButtonController::Cycle()

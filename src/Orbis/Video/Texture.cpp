@@ -66,8 +66,8 @@ namespace Video
 			m_surface = flipped;
 		}
 
-		glGenTextures(1, &m_textureHandle);
-		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
+		glGenTextures(1, &m_handle);
+		glBindTexture(GL_TEXTURE_2D, m_handle);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -80,8 +80,11 @@ namespace Video
 
 	Texture::~Texture()
 	{
-		glDeleteTextures(1, &m_textureHandle);
-		SDL_FreeSurface(m_surface);
+		if (!m_useAtlassing)
+		{
+			glDeleteTextures(1, &m_handle);
+			SDL_FreeSurface(m_surface);
+		}
 	}
 
 	Vector2D Texture::MapUVCoord(Vector2D texUV)
@@ -101,7 +104,7 @@ namespace Video
 		if (m_useAtlassing)
 			m_atlasChart->Bind();
 		else 
-			glBindTexture(GL_TEXTURE_2D, m_textureHandle);
+			glBindTexture(GL_TEXTURE_2D, m_handle);
 	}
 
 }

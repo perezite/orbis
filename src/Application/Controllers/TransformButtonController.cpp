@@ -72,9 +72,8 @@ namespace Controllers
 	void TransformButtonController::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
-		Transform* t = GetParent()->GetTransform();
 
-		if (input->IsTapDown(Rect::Create(t->position, t->scale)))
+		if (input->IsTapDown(GetParent()->GetTransform()->GetRect()))
 			Affect();
 	}
 

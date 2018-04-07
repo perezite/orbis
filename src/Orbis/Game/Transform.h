@@ -4,6 +4,7 @@
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Matrix3.h"
+#include "../../Base/Math/Rect.h"
 using namespace Math;
 
 namespace Game
@@ -24,6 +25,9 @@ namespace Game
 		// get the model matrix
 		Matrix3 GetModelMatrix() const;
 
+		// get the transform's unrotated rect
+		Rect GetRect() const;
+	
 	public:
 		// the position
 		Vector2D position;

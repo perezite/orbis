@@ -18,6 +18,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButtonController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\ParticleSystemTester.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButtonController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\ParticleSystemTester.h" />

@@ -10,4 +10,9 @@ namespace Game
 		mat.Scale2D(scale);
 		return mat;
 	}
+
+	Rect Transform::GetRect() const
+	{
+		return Rect(position - scale * 0.5f, position + scale * 0.5f);
+	}
 }

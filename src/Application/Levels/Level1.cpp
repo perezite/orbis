@@ -4,6 +4,7 @@
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/InputModeButtonController.h"
 #include "../Controllers/TransformButtonController.h"
+#include "../Controllers/CloseButtonController.h"
 using namespace Controllers;
 
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -105,6 +106,7 @@ namespace Levels
 		// close button
 		Entity* closeButton = new Entity("close button");
 		closeButton->AddComponent(new SpriteRenderer(closeTex));
+		closeButton->AddComponent(new CloseButtonController());
 		closeButton->SetTransform(Transform(Vector2D(0.25f * cam->GetSize().x, 0.25f * cam->GetSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::CameraSpace));
 		this->AddEntity(closeButton);
 	}

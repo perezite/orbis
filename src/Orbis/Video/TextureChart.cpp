@@ -22,7 +22,11 @@ namespace Video
 		// cleanup
 		SDL_FreeSurface(surface);
 		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			GLuint handle = textures[i]->GetHandle();
+			glDeleteTextures(1, &handle);
 			SDL_FreeSurface(textures[i]->GetSurface());
+		}
 	}
 
 	TextureChart::~TextureChart()

@@ -25,13 +25,16 @@ namespace Video
 		virtual ~Texture();
 
 		// get the texture handle
-		unsigned int GetTextureHandle() const { return m_textureHandle; }
+		unsigned int GetTextureHandle() const { return m_handle; }
 
 		// get the asset path
 		std::string GetAssetPath() const { return m_assetPath; }
 
 		// get the sdl surface
 		SDL_Surface* GetSurface() { return m_surface; }
+
+		// get the gl handle
+		GLuint GetHandle() { return m_handle; }
 
 		// set the textures atlas page
 		void SetTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
@@ -43,7 +46,7 @@ namespace Video
 		void Bind();
 
 		// is the texture using atlassing
-		bool UseAtlassing() const { return m_useAtlassing; }
+		bool UsesAtlassing() const { return m_useAtlassing; }
 		
 		// get the atlas texture chart
 		TextureChart* GetAtlasChart() const { return m_atlasChart; }
@@ -53,7 +56,7 @@ namespace Video
 		std::string m_assetPath;
 
 		// the texture id
-		GLuint m_textureHandle = 0;
+		GLuint m_handle = 0;
 
 		// the image surface
 		SDL_Surface* m_surface;

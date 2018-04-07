@@ -32,17 +32,17 @@ namespace Video
 			return true;
 
 		// compare atlassing
-		if (thisTex->UseAtlassing() && !otherTex->UseAtlassing())
+		if (thisTex->UsesAtlassing() && !otherTex->UsesAtlassing())
 			return false;
-		if (!thisTex->UseAtlassing() && otherTex->UseAtlassing())
+		if (!thisTex->UsesAtlassing() && otherTex->UsesAtlassing())
 			return false;
 
 		// compare direct textures
-		if (!thisTex->UseAtlassing() && !otherTex->UseAtlassing())
+		if (!thisTex->UsesAtlassing() && !otherTex->UsesAtlassing())
 			return thisTex == otherTex;
 
 		// compare atlas charts
-		if (thisTex->UseAtlassing() && otherTex->UseAtlassing())
+		if (thisTex->UsesAtlassing() && otherTex->UsesAtlassing())
 			return thisTex->GetAtlasChart() == otherTex->GetAtlasChart();
 
 		throw Exception("Something went really wrong!");
