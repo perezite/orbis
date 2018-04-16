@@ -104,7 +104,7 @@ namespace Video
 				}
 
 		#ifdef ORBIS_DEBUG_RENDERDEVICE
-				LogHelper::LogMessage("%d", count);
+				LogHelper::LogMessage("Number of draw calls: %d", count);
 		#endif 
 
 		// cleanup

@@ -49,7 +49,7 @@ namespace
 
 namespace Video
 {
-	Texture::Texture(std::string assetPath, bool flipVertically) : m_useAtlassing(true)
+	Texture::Texture(std::string assetPath, bool flipVertically)
 	{
 		m_assetPath = assetPath;
 
@@ -72,15 +72,17 @@ namespace Video
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		
-		if (m_useAtlassing)
+		if (UsesAtlassing())
+		{
 			TextureAtlas::GetInstance()->Add(this);
+		}
 
 		MemoryManager<Texture>::GetInstance()->Add(this);
 	}
 
 	Texture::~Texture()
 	{
-		if (!m_useAtlassing)
+		if (!UsesAtlassing())
 		{
 			glDeleteTextures(1, &m_handle);
 			SDL_FreeSurface(m_surface);
@@ -89,22 +91,36 @@ namespace Video
 
 	Vector2D Texture::MapUVCoord(Vector2D texUV)
 	{
-		if (m_useAtlassing)
+		if (UsesAtlassing())
 		{
 			Rect uvRect = m_atlasChart->GetUVRect(this);
 			Vector2D atlasUV(uvRect.GetLeft() + texUV.x * uvRect.GetWidth(), uvRect.GetBottom() + texUV.y * uvRect.GetHeight());
 			return atlasUV;
 		}
 		else
+		{
 			return texUV;
+		}
 	}
 
 	void Texture::Bind()
 	{
-		if (m_useAtlassing)
+		if (UsesAtlassing())
+		{
 			m_atlasChart->Bind();
-		else 
+		}
+		else
+		{
 			glBindTexture(GL_TEXTURE_2D, m_handle);
+		}
 	}
 
+	bool Texture::UsesAtlassing() const
+	{
+		#ifdef ORBIS_USE_TEXTURE_ATLASSING
+			return true;
+		#else
+			return false;
+		#endif
+	}
 }

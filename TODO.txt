@@ -1,7 +1,5 @@
 TODO:	
 - Demo erstellen (Level-Switching)
-	- Konstante USE_TEXTURE_ATLASSING hinzufügen
-	- Texture::ActivateAtlasManagement Funktion hinzufügen 
 	- Im ersten und zweiten Level je die Switch-Buttons hinzufügen
 	- Switching zw. ersten und zweitem Level implementieren
 	- Allfällige Fehler fixen

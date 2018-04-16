@@ -46,18 +46,19 @@ namespace Levels
 		camEntity->SetTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
 		this->AddEntity(camEntity);
 
-		/*
+		
 		// previous level button entity
 		Entity* prevLevel = new Entity("Previous level");
 		prevLevel->AddComponent(new SpriteRenderer(leftArrowTex));
 		prevLevel->SetTransform(Transform(Vector2D(-0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
 		this->AddEntity(prevLevel);
-
+		
+		
 		// next level button entity
 		Entity* nextLevel = new Entity("Next level");
 		nextLevel->AddComponent(new SpriteRenderer(rightArrowTex));
 		nextLevel->SetTransform(Transform(Vector2D(0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
-		this->AddEntity(nextLevel);*/
+		this->AddEntity(nextLevel);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");

@@ -46,7 +46,7 @@ namespace Video
 		void Bind();
 
 		// is the texture using atlassing
-		bool UsesAtlassing() const { return m_useAtlassing; }
+		bool UsesAtlassing() const;
 		
 		// get the atlas texture chart
 		TextureChart* GetAtlasChart() const { return m_atlasChart; }
@@ -57,14 +57,11 @@ namespace Video
 
 		// the texture id
 		GLuint m_handle = 0;
-
+		
 		// the image surface
 		SDL_Surface* m_surface;
 
 		// the texture chart containing the texture
 		TextureChart* m_atlasChart;
-
-		// is the texture using texture atlassing
-		bool m_useAtlassing;
 	};
 }
