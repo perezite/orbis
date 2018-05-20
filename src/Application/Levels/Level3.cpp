@@ -26,16 +26,16 @@ namespace Levels
 	{
 		// init textures
 		std::vector<Texture*> textures;
-		textures.push_back(new Texture("Textures/BlackBlock.png", true));
-		textures.push_back(new Texture("Textures/BlueBlock.png", true));
-		textures.push_back(new Texture("Textures/CyanBlock.png", true));
-		textures.push_back(new Texture("Textures/GreenBlock.png", true));
-		textures.push_back(new Texture("Textures/GreyBlock.png", true));
-		textures.push_back(new Texture("Textures/OrangeBlock.png", true));
-		textures.push_back(new Texture("Textures/PurpleBlock.png", true));
-		textures.push_back(new Texture("Textures/RedBlock.png", true));
-		textures.push_back(new Texture("Textures/VioletBlock.png", true));
-		textures.push_back(new Texture("Textures/YellowBlock.png", true));	
+		textures.push_back(new Texture(this, "Textures/BlackBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/BlueBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/CyanBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/GreenBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/GreyBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/OrangeBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/PurpleBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/RedBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/VioletBlock.png", true));
+		textures.push_back(new Texture(this, "Textures/YellowBlock.png", true));	
 
 		// init camera
 		Entity* camEntity = new Entity();

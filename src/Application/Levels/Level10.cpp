@@ -10,7 +10,7 @@ namespace Levels
 	Level10::Level10()
 	{
 		// init textures
-		Texture* greenParticleTex = new Texture("Textures/GreenParticle.png", true);
+		Texture* greenParticleTex = new Texture(this, "Textures/GreenParticle.png", true);
 
 		// init camera
 		Entity* cam = new Entity();

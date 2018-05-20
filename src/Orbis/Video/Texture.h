@@ -4,12 +4,19 @@
 
 #include "../Libraries/GL.h"
 #include "../Libraries/SDL.h"
+#include "../Game/Level.h"
+using namespace Game;
 
 #include "../../Base/Math/Rect.h"
 using namespace Math;
 
 #include <string>
 #include <set>
+
+namespace Game
+{
+	class Level;
+}
 
 namespace Video
 {
@@ -19,7 +26,7 @@ namespace Video
 	{
 	public:
 		// ctor
-		Texture(std::string assetPath, bool flipVertically = true);
+		Texture(Level* parentLevel, std::string assetPath, bool flipVertically = true);
 
 		// dtor
 		virtual ~Texture();

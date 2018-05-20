@@ -7,9 +7,11 @@
 #include "../Game/Transform.h"
 #include "../Effects/Particle.h"
 #include "../Effects/Tween.h"
+#include "../Game/Level.h"
 using namespace Video;
 using namespace Game;
 using namespace Effects;
+using namespace Game;
 
 #include <vector>
 
@@ -20,7 +22,7 @@ namespace Components
 	{
 	public:
 		// ctor
-		ParticleRenderer(Texture* texture);
+		ParticleRenderer(Level* parentLevel, Texture* texture);
 
 		// dtor
 		virtual ~ParticleRenderer();
@@ -74,5 +76,8 @@ namespace Components
 
 		// color alpha over lifetime
 		Tween* m_currentColorAlpha;
+
+		// the parent level
+		Level* m_parentLevel;
 	};
 }

@@ -15,8 +15,9 @@ using namespace System;
 
 namespace Components
 {
-	ParticleRenderer::ParticleRenderer(Texture * texture)
-		: m_texture(texture), m_emissionSphereShellRadius(0.075f), m_emissionRate(40), m_timeToNextEmission(0.0f), m_initialSpeed(0.2f), m_initialSize(0.1f), m_velocityInheritance(0.25f)
+	ParticleRenderer::ParticleRenderer(Level* parentLevel, Texture * texture) : 
+		m_texture(texture), m_emissionSphereShellRadius(0.075f), m_emissionRate(40), m_timeToNextEmission(0.0f), 
+		m_initialSpeed(0.2f), m_initialSize(0.1f), m_velocityInheritance(0.25f), m_parentLevel(parentLevel)
 	{
 		m_currentColorAlpha = new Tween("Tweens/GreenParticlesAlpha.tween", 0.0f);
 	}
@@ -29,7 +30,7 @@ namespace Components
 	void ParticleRenderer::Start()
 	{
 		// add an inspector for the alpha tween
-		LevelManager::GetInstance()->GetCurrentLevel()->AddEntity(TweenInspector::TryConstructEntity(m_currentColorAlpha, KeyCode::b));
+		LevelManager::GetInstance()->GetCurrentLevel()->AddEntity(TweenInspector::TryConstructEntity(m_parentLevel, m_currentColorAlpha, KeyCode::b));
 	}
 
 	void ParticleRenderer::Update()

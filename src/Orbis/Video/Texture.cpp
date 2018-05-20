@@ -49,7 +49,7 @@ namespace
 
 namespace Video
 {
-	Texture::Texture(std::string assetPath, bool flipVertically)
+	Texture::Texture(Level* parentLevel, std::string assetPath, bool flipVertically)
 	{
 		m_assetPath = assetPath;
 
@@ -74,7 +74,7 @@ namespace Video
 		
 		if (UsesAtlassing())
 		{
-			TextureAtlas::GetInstance()->Add(this);
+			parentLevel->GetTextureAtlas()->Add(this);
 		}
 
 		MemoryManager<Texture>::GetInstance()->Add(this);

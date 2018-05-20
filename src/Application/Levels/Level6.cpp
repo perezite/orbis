@@ -12,10 +12,10 @@ namespace Levels
 	Level6::Level6()
 	{
 		// init textures
-		Texture* bleedingTestBlue = new Texture("Textures/BleedingTestBlue.png", true);
-		Texture* bleedingTestGreen = new Texture("Textures/BleedingTestGreen.png", true);
-		Texture* bleedingTestRed = new Texture("Textures/BleedingTestRed.png", true);
-		Texture* bleedingTestYellow = new Texture("Textures/BleedingTestYellow.png", true);
+		Texture* bleedingTestBlue = new Texture(this, "Textures/BleedingTestBlue.png", true);
+		Texture* bleedingTestGreen = new Texture(this, "Textures/BleedingTestGreen.png", true);
+		Texture* bleedingTestRed = new Texture(this, "Textures/BleedingTestRed.png", true);
+		Texture* bleedingTestYellow = new Texture(this, "Textures/BleedingTestYellow.png", true);
 
 		// init camera
 		Entity* cam = new Entity();

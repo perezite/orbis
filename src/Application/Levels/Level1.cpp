@@ -1,10 +1,13 @@
 #include "Level1.h"
 
+#include "Level2.h"
+
 #include "../Controllers/CameraController.h"
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/InputModeButtonController.h"
 #include "../Controllers/TransformButtonController.h"
 #include "../Controllers/CloseButtonController.h"
+#include "../Controllers/LevelSwitchButtonController.h"
 using namespace Controllers;
 
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -20,22 +23,22 @@ using namespace Video;
 
 namespace Levels
 {
-	Level1::Level1()
+	void Level1::Start()
 	{
 		// textures
-		Texture* coordSystemTexture = new Texture("Textures/CoordinateSystem.png");
-		Texture* yellowBlockTexture = new Texture("Textures/YellowBlock.png");
-		Texture* blueBlockTexture = new Texture("Textures/BlueBlock.png");
-		Texture* rotateYellowSpriteTex = new Texture("Textures/RotateYellowSprite.png");
-		Texture* translateYellowSpriteTex = new Texture("Textures/TranslateYellowSprite.png");
-		Texture* translateBlueSpriteTex = new Texture("Textures/TranslateBlueSprite.png");
-		Texture* rotateCameraTex = new Texture("Textures/RotateCamera.png");
-		Texture* translateCameraTex = new Texture("Textures/TranslateCamera.png");
-		Texture* resetTex = new Texture("Textures/Reset.png");
-		Texture* scaleCameraTex = new Texture("Textures/ScaleCamera.png");
-		Texture* leftArrowTex = new Texture("Textures/OverlayLeft.png");
-		Texture* rightArrowTex = new Texture("Textures/OverlayRight.png");
-		Texture* closeTex = new Texture("Textures/OverlayClose.png");
+		Texture* coordSystemTexture = new Texture(this, "Textures/CoordinateSystem.png");
+		Texture* yellowBlockTexture = new Texture(this, "Textures/YellowBlock.png");
+		Texture* blueBlockTexture = new Texture(this, "Textures/BlueBlock.png");
+		Texture* rotateYellowSpriteTex = new Texture(this, "Textures/RotateYellowSprite.png");
+		Texture* translateYellowSpriteTex = new Texture(this, "Textures/TranslateYellowSprite.png");
+		Texture* translateBlueSpriteTex = new Texture(this, "Textures/TranslateBlueSprite.png");
+		Texture* rotateCameraTex = new Texture(this, "Textures/RotateCamera.png");
+		Texture* translateCameraTex = new Texture(this, "Textures/TranslateCamera.png");
+		Texture* resetTex = new Texture(this, "Textures/Reset.png");
+		Texture* scaleCameraTex = new Texture(this, "Textures/ScaleCamera.png");
+		Texture* leftArrowTex = new Texture(this, "Textures/OverlayLeft.png");
+		Texture* rightArrowTex = new Texture(this, "Textures/OverlayRight.png");
+		Texture* closeTex = new Texture(this, "Textures/OverlayClose.png");
 
 		// camera entity
 		Entity* camEntity = new Entity();
@@ -46,17 +49,19 @@ namespace Levels
 		camEntity->SetTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
 		this->AddEntity(camEntity);
 
-		
+
 		// previous level button entity
-		Entity* prevLevel = new Entity("Previous level");
+		Entity* prevLevel = new Entity("Previous level Button");
 		prevLevel->AddComponent(new SpriteRenderer(leftArrowTex));
+		prevLevel->AddComponent(new LevelSwitchButtonController(false, NULL));
 		prevLevel->SetTransform(Transform(Vector2D(-0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
 		this->AddEntity(prevLevel);
-		
-		
+
+
 		// next level button entity
-		Entity* nextLevel = new Entity("Next level");
+		Entity* nextLevel = new Entity("Next level Button");
 		nextLevel->AddComponent(new SpriteRenderer(rightArrowTex));
+		nextLevel->AddComponent(new LevelSwitchButtonController(true, new Level2()));
 		nextLevel->SetTransform(Transform(Vector2D(0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
 		this->AddEntity(nextLevel);
 
@@ -110,5 +115,6 @@ namespace Levels
 		closeButton->AddComponent(new CloseButtonController());
 		closeButton->SetTransform(Transform(Vector2D(0.25f * cam->GetSize().x, 0.25f * cam->GetSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::CameraSpace));
 		this->AddEntity(closeButton);
+
 	}
 }

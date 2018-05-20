@@ -22,19 +22,20 @@ namespace Components
 	const int TweenInspector::SAMPLING_DENSITY = 100;
 	const int TweenInspector::NUM_SAMPLES = 100;
 
-	Entity* TweenInspector::TryConstructEntity(Tween* tween, KeyCode activationKey)
+	Entity* TweenInspector::TryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationKey)
 	{
 		Entity* entity = NULL;
 
 		ORBIS_DEBUG (
 			entity = new Entity();
-			entity->AddComponent(new TweenInspector(tween, activationKey));
+			entity->AddComponent(new TweenInspector(parentLevel, tween, activationKey));
 		)
 
 		return entity;
 	}
 
-	TweenInspector::TweenInspector(Tween * tween, KeyCode activationKey) : m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
+	TweenInspector::TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey) : 
+		m_tween(*tween), m_parentLevel(parentLevel), m_isActive(false), m_activationKey(activationKey)
 	{
 		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
 	}
@@ -49,7 +50,7 @@ namespace Components
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
-		m_texture = new Texture("Textures/CoordinateSystem2.png");
+		m_texture = new Texture(m_parentLevel, "Textures/CoordinateSystem2.png");
 		GetParent()->GetTransform()->scale = Vector2D::Zero;
 		m_renderable = new Renderable;
 		m_renderable->GetMaterial()->SetTexture(m_texture);

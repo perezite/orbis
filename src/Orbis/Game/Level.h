@@ -1,9 +1,17 @@
 #pragma once
 
 #include "../Game/Entity.h"
+#include "../Video/TextureAtlas.h"
 using namespace Game;
 
 #include <vector>
+
+namespace Video
+{
+	class TextureAtlas;
+}
+
+using namespace Video;
 
 namespace Game
 {
@@ -17,14 +25,17 @@ namespace Game
 		// destructor
 		virtual ~Level();
 
-		// gets called when level is loaded
-		virtual void OnLoad() { };
+		// start
+		virtual void Start() { };
 
 		// add entity
 		void AddEntity(Entity *entity);
 
 		// update 
 		void Update();
+
+		// get the texture atlas
+		Video::TextureAtlas* GetTextureAtlas() { return m_textureAtlas; }
 
 	protected:
 		// start the entities
@@ -35,11 +46,15 @@ namespace Game
 
 		// render entities
 		void RenderEntities();
+
 	private:
 		// entites in the level
 		std::vector<Entity*> m_entities;
 		
 		// is the level started
 		bool m_isStarted;
+
+		// the texture atlas
+		TextureAtlas* m_textureAtlas;
 	};
 }

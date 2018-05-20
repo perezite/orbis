@@ -12,9 +12,9 @@ namespace Levels
 	Level5::Level5()
 	{
 		// init textures
-		Texture* yellowBlockTex = new Texture("Textures/YellowBlock.png", true);
-		Texture* redBlockTex = new Texture("Textures/RedBlock.png", true);
-		Texture* greenBlockTex = new Texture("Textures/GreenBlock.png", true);
+		Texture* yellowBlockTex = new Texture(this, "Textures/YellowBlock.png", true);
+		Texture* redBlockTex = new Texture(this, "Textures/RedBlock.png", true);
+		Texture* greenBlockTex = new Texture(this, "Textures/GreenBlock.png", true);
 
 		// init camera
 		Entity* cam = new Entity();

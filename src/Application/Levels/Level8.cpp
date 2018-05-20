@@ -24,7 +24,7 @@ namespace Levels
 	Level8::Level8()
 	{
 		// add assets
-		Texture* brickTex = new Texture("Textures/YellowBlock.png");
+		Texture* brickTex = new Texture(this, "Textures/YellowBlock.png");
 		Tween* tween = new Tween("Tweens/Test1.tween", 6.0f);
 
 		// init camera
@@ -34,7 +34,7 @@ namespace Levels
 
 		// add tweened brick
 		Entity* brick = new Entity();
-		AddEntity(TweenInspector::TryConstructEntity(tween));
+		AddEntity(TweenInspector::TryConstructEntity(this, tween));
 		brick->AddComponent(new SpriteRenderer(brickTex));
 		brick->AddComponent(new TweenTester(tween));
 		AddEntity(brick);

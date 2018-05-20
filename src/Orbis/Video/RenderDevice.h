@@ -40,6 +40,9 @@ namespace Video
 		// delete a renderable
 		void DeleteRenderable(Renderable* renderable);
 
+		// clear all renderables
+		void ClearRenderables();
+
 		// render
 		void Render();
 

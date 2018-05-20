@@ -2,6 +2,8 @@
 
 #include "Level.h"
 
+#include <map>
+
 namespace Game
 {
 	class LevelManager

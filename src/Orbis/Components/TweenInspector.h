@@ -3,6 +3,7 @@
 #include "../Input/InputManager.h"
 #include "../Components/Component.h"
 #include "../Game/Entity.h"
+#include "../Game/Level.h"
 #include "../Effects/Tween.h"
 #include "../Video/Renderable.h"
 using namespace Input;
@@ -20,11 +21,11 @@ namespace Components
 	{
 	public:
 		// utility for quickly creating an inspector entity. Returns 0 in release mode
-		static Entity* TryConstructEntity(Tween* tween, KeyCode activationkey = KeyCode::t);
+		static Entity* TryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationkey = KeyCode::t);
 
 	public:
 		// ctor
-		TweenInspector(Tween* tween, KeyCode activationKey = KeyCode::t);
+		TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey = KeyCode::t);
 
 		// dtor
 		virtual ~TweenInspector();
@@ -87,6 +88,9 @@ namespace Components
 
 		// the tween to be edited
 		Tween m_tween;
+
+		// the parent level
+		Level* m_parentLevel;
 
 		// the index of the selected control point
 		unsigned int m_selectedControlPoint;

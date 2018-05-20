@@ -20,8 +20,8 @@ namespace Video
 	class TextureAtlas
 	{
 	public:
-		// get singleton instance
-		static TextureAtlas* GetInstance();
+		// dtor
+		virtual ~TextureAtlas();
 
 		// add a texture 
 		void Add(Texture* texture);
@@ -30,9 +30,6 @@ namespace Video
 		void Generate();
 
 	protected:
-		// singelton ctor
-		virtual ~TextureAtlas();
-
 		// get texture rects
 		std::vector<Rect> GetTextureRects();
 

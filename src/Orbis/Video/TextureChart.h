@@ -25,7 +25,9 @@ namespace Video
 		virtual ~TextureChart();
 
 		// get the uv rect of the texture within the page
-		Rect GetUVRect(Texture* tex) { return m_uvRects.find(tex)->second; }
+		Rect GetUVRect(Texture* tex) { 
+			return m_uvRects.find(tex)->second; 
+		}
 
 		// bind the page texture
 		void Bind();

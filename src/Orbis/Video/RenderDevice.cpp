@@ -32,6 +32,11 @@ namespace Video
 		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
 	}
 
+	void RenderDevice::ClearRenderables()
+	{
+		m_renderables.clear();
+	}
+
 	void RenderDevice::Render()
 	{ 
 		#ifdef ORBIS_DEBUG_RENDERDEVICE

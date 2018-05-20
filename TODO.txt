@@ -1,15 +1,33 @@
 TODO:	
+- Refactoring Levelinstanzierung zwecks Level Switching
+	- Level 8 und 9 zum Laufen bringen und einchecken
+	- Switching Level2 -> Level1 zum Laufen bringen
+	- Alle Levels auf Funktionalität durchtesten
+	- Dokumentieren: Auflösen von zirkulären Abhängigkeiten in verschiedenen Namespaces
+	- Dokumentieren: cl.exe abschiessen
+	- TODO fixen 
+	- Initialisierung der Level aus dem Konstruktor rausziehen
+	- In Main.cpp pro Level eine Instanz erzeugen und beim LevelManager mit LevelIndex registrieren
+	- LevelManager::QueueLevel entsprechend anpassen
+- Recherche: Git Stashing
+- Refactoring planen
+	- Memory Management (ownership)
+	- Renderer
+	- DebugRenderer
+	- Include Files zusammenziehen
+	- Inspector-Konzept
 - Demo erstellen (Level-Switching)
-	- Im ersten und zweiten Level je die Switch-Buttons hinzufügen
-	- Switching zw. ersten und zweitem Level implementieren
+	- Im ersten Level die Switch Buttons hinzufügen
+	- Switch Logik implementieren
+	- Im zweiten Level die Switch Buttons hinzufügen
+	- Switch Logik implementieren
 	- Allfällige Fehler fixen
 	- Switching für restliche Level hinzufügen
-- Refactoring planen
+- Include-Files zusammenziehen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
 	- Regression & Performanceregression
-- Sinnvolles Inspector-Konzept überlegen
 - Die CenterPropulsion des Balls aus Blear nachbauen. Dabei die Werte nach Bedarf tweaken
 - Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Orbis in Bibliothek versiegeln

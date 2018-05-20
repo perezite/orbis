@@ -8,12 +8,6 @@ using namespace Algorithms;
 
 namespace Video
 {
-	TextureAtlas* TextureAtlas::GetInstance()
-	{
-		static TextureAtlas instance;
-		return &instance;
-	}
-
 	void TextureAtlas::Add(Texture* texture)
 	{
 		m_textures.push_back(texture);

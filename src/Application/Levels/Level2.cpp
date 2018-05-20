@@ -17,11 +17,11 @@ using namespace Video;
 
 namespace Levels
 {
-	Level2::Level2()
+	void Level2::Start()
 	{
 		// textures
-		Texture* coordSystemTexture = new Texture("Textures/CoordinateSystem.png");
-		Texture* yellowBlockTexture = new Texture("Textures/YellowBlock.png");
+		Texture* coordSystemTexture = new Texture(this, "Textures/CoordinateSystem.png");
+		Texture* yellowBlockTexture = new Texture(this, "Textures/YellowBlock.png");
 
 		// camera entity
 		Entity* camera = new Entity();

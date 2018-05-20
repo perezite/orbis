@@ -1,7 +1,6 @@
 #include "Level.h"
 
 #include "../Video/VideoManager.h"
-#include "../Video/TextureAtlas.h"
 #include "../Effects/Tween.h"
 using namespace Video;
 using namespace Effects;
@@ -14,7 +13,7 @@ namespace Game
 {
 	Level::Level() : m_isStarted(false)
 	{
-		OnLoad();
+		m_textureAtlas = new TextureAtlas();
 	}
 
 	Level::~Level()
@@ -32,10 +31,12 @@ namespace Game
 
 	void Level::Update()
 	{
-		if (m_isStarted == false)
+		if (m_isStarted == false) // TODO: Move this to the manager
 		{
+			VideoManager::GetInstance()->GetRenderDevice()->ClearRenderables();
+			Start();
 			StartEntities();
-			TextureAtlas::GetInstance()->Generate();
+			m_textureAtlas->Generate();
 			m_isStarted = true;
 		}
 		else
