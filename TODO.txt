@@ -1,10 +1,8 @@
 TODO:	
 - Refactoring Levelinstanzierung zwecks Level Switching
-	- Dokumentieren: Auflösen von zirkulären Abhängigkeiten in verschiedenen Namespaces
-	- Dokumentieren: cl.exe abschiessen
-	- Switching Level2 -> Level1 zum Laufen bringen
+	- Switching für alle Levels einbauen
 	- Alle Levels auf Funktionalität durchtesten, auch auf Mobile
-	- TODO fixen 
+	- TODO im Code fixen bzw. Refactoring einplanen (Volltextsuche)
 	- Initialisierung der Level aus dem Konstruktor rausziehen
 	- In Main.cpp pro Level eine Instanz erzeugen und beim LevelManager mit LevelIndex registrieren
 	- LevelManager::QueueLevel entsprechend anpassen
@@ -15,6 +13,7 @@ TODO:
 	- DebugRenderer
 	- Include Files zusammenziehen
 	- Inspector-Konzept
+	- Componenten-Builder
 - Demo erstellen (Level-Switching)
 	- Im ersten Level die Switch Buttons hinzufügen
 	- Switch Logik implementieren

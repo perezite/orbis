@@ -10,7 +10,5 @@ namespace Levels
 	public:		
 		// override
 		void Start();
-
-	private:
 	};
 }

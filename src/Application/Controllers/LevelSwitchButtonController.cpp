@@ -17,22 +17,10 @@ namespace Controllers
 
 		if (input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
 		{
-			LogHelper::LogMessage("LevelSwitchButtonController::Update() clicked %s", m_switchForward ? "forward" : "backward");
+			LogHelper::LogMessage("LevelSwitchButtonController::Update() clicked");
 
-			if (m_switchForward)
-				SwitchForward();
-			else
-				SwitchBackward();
+			if (m_targetLevel)
+				LevelManager::GetInstance()->QueueLevel(m_targetLevel);
 		}
-	}
-	
-	void LevelSwitchButtonController::SwitchForward()
-	{
-		if (m_targetLevel)
-			LevelManager::GetInstance()->QueueLevel(m_targetLevel);
-	}
-
-	void LevelSwitchButtonController::SwitchBackward()
-	{
 	}
 }

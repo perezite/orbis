@@ -1,8 +1,12 @@
 #include "Level2.h"
 
+#include "Level1.h"
+#include "Level3.h"
+
 #include "../Controllers/CameraController.h"
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/DebugLineTester.h"
+#include "../Controllers/LevelSwitchButtonController.h"
 using namespace Controllers;
 
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -22,13 +26,30 @@ namespace Levels
 		// textures
 		Texture* coordSystemTexture = new Texture(this, "Textures/CoordinateSystem.png");
 		Texture* yellowBlockTexture = new Texture(this, "Textures/YellowBlock.png");
+		Texture* leftArrowTex = new Texture(this, "Textures/OverlayLeft.png");
+		Texture* rightArrowTex = new Texture(this, "Textures/OverlayRight.png");
 
 		// camera entity
 		Entity* camera = new Entity();
-		camera->AddComponent(new Camera());
+		Camera* cam = new Camera();
+		camera->AddComponent(cam);
 		CameraController* cameraController = new CameraController();
 		camera->AddComponent(cameraController);
 		this->AddEntity(camera);
+
+		// previous level button entity
+		Entity* prevLevel = new Entity("Previous level Button");
+		prevLevel->AddComponent(new SpriteRenderer(leftArrowTex));
+		prevLevel->AddComponent(new LevelSwitchButtonController(new Level1()));
+		prevLevel->SetTransform(Transform(Vector2D(-0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
+		this->AddEntity(prevLevel);
+
+		// next level button entity
+		Entity* nextLevel = new Entity("Next level Button");
+		nextLevel->AddComponent(new SpriteRenderer(rightArrowTex));
+		nextLevel->AddComponent(new LevelSwitchButtonController(new Level3()));
+		nextLevel->SetTransform(Transform(Vector2D(0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
+		this->AddEntity(nextLevel);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");

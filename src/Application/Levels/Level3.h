@@ -8,7 +8,8 @@ namespace Levels
 	class Level3 : public Level
 	{
 	public:
-		Level3();
+		// override
+		void Start();
 
 	private:
 		static const int NUM_SPRITES;

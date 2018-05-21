@@ -22,7 +22,7 @@ namespace Levels
 	const float Level3::MIN_BLOCK_SCALE = 0.01f;
 	const float Level3::MAX_BLOCK_SCALE = 0.05f;
 
-	Level3::Level3()
+	void Level3::Start()
 	{
 		// init textures
 		std::vector<Texture*> textures;
@@ -35,7 +35,7 @@ namespace Levels
 		textures.push_back(new Texture(this, "Textures/PurpleBlock.png", true));
 		textures.push_back(new Texture(this, "Textures/RedBlock.png", true));
 		textures.push_back(new Texture(this, "Textures/VioletBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/YellowBlock.png", true));	
+		textures.push_back(new Texture(this, "Textures/YellowBlock.png", true));
 
 		// init camera
 		Entity* camEntity = new Entity();
