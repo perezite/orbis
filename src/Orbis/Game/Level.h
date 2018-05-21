@@ -5,9 +5,11 @@
 using namespace Game;
 
 #include <vector>
+#include <string>
 
 namespace Video
 {
+	class Texture;
 	class TextureAtlas;
 }
 
@@ -36,6 +38,9 @@ namespace Game
 
 		// get the texture atlas
 		Video::TextureAtlas* GetTextureAtlas() { return m_textureAtlas; }
+
+		// get a texture
+		Texture* GetTexture(std::string assetPath);
 
 	protected:
 		// start the entities

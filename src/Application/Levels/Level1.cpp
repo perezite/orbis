@@ -36,9 +36,9 @@ namespace Levels
 		Texture* translateCameraTex = new Texture(this, "Textures/TranslateCamera.png");
 		Texture* resetTex = new Texture(this, "Textures/Reset.png");
 		Texture* scaleCameraTex = new Texture(this, "Textures/ScaleCamera.png");
+		Texture* closeTex = new Texture(this, "Textures/OverlayClose.png");
 		Texture* leftArrowTex = new Texture(this, "Textures/OverlayLeft.png");
 		Texture* rightArrowTex = new Texture(this, "Textures/OverlayRight.png");
-		Texture* closeTex = new Texture(this, "Textures/OverlayClose.png");
 
 		// camera entity
 		Entity* camEntity = new Entity();
@@ -49,12 +49,8 @@ namespace Levels
 		camEntity->SetTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
 		this->AddEntity(camEntity);
 
-		// next level button entity
-		Entity* nextLevel = new Entity("Next level Button");
-		nextLevel->AddComponent(new SpriteRenderer(rightArrowTex));
-		nextLevel->AddComponent(new LevelSwitchButtonController(new Level2()));
-		nextLevel->SetTransform(Transform(Vector2D(0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
-		this->AddEntity(nextLevel);
+		// create level switcher
+		AddLevelSwitcher(this, new Level2(), true);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");
@@ -106,6 +102,18 @@ namespace Levels
 		closeButton->AddComponent(new CloseButtonController());
 		closeButton->SetTransform(Transform(Vector2D(0.25f * cam->GetSize().x, 0.25f * cam->GetSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::CameraSpace));
 		this->AddEntity(closeButton);
+	}
 
+	void Level1::AddLevelSwitcher(Level* currentLevel, Level* targetLevel, bool isForward)
+	{
+		Camera* cam = Camera::GetInstance();
+		float horzPos = isForward ? 0.45f * cam->GetSize().x : -0.45f * cam->GetSize().x;
+		Texture* tex = isForward ? currentLevel->GetTexture("Textures/OverlayRight.png") : currentLevel->GetTexture("Textures/OverlayLeft.png");
+
+		Entity* nextLevel = new Entity("Next level Button");
+		nextLevel->AddComponent(new SpriteRenderer(tex));
+		nextLevel->AddComponent(new LevelSwitchButtonController(new Level2()));
+		nextLevel->SetTransform(Transform(Vector2D(horzPos, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
+		currentLevel->AddEntity(nextLevel);
 	}
 }

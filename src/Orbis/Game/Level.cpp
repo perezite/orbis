@@ -7,6 +7,7 @@ using namespace Effects;
 
 #include "../../Base/System/MemoryManager.h"
 #include "../../Base/System/MemoryHelper.h"
+#include "../../Base/System/Exception.h"
 using namespace System;
 
 namespace Game
@@ -77,6 +78,18 @@ namespace Game
 		}
 
 		videoManager->SwapBuffers();
+	}
+
+	Texture* Level::GetTexture(std::string assetPath)
+	{
+		std::vector<Texture*> textures = MemoryManager<Texture>::GetInstance()->GetAll();
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			if (textures[i]->GetAssetPath() == assetPath)
+				return textures[i];
+		}
+
+		throw Exception("The given texture does not exist");
 	}
 
 }

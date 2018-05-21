@@ -1,5 +1,6 @@
 TODO:	
 - Refactoring Levelinstanzierung zwecks Level Switching
+	- Level1::AddLevelSwitcher in Helper rausziehen und überall einbindens
 	- Switching für alle Levels einbauen
 	- Alle Levels auf Funktionalität durchtesten, auch auf Mobile
 	- TODO im Code fixen bzw. Refactoring einplanen (Volltextsuche)
@@ -14,6 +15,7 @@ TODO:
 	- Include Files zusammenziehen
 	- Inspector-Konzept
 	- Componenten-Builder
+	- Helper -> Util
 - Demo erstellen (Level-Switching)
 	- Im ersten Level die Switch Buttons hinzufügen
 	- Switch Logik implementieren

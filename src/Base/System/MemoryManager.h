@@ -16,6 +16,9 @@ namespace System
 		// dtor
 		virtual ~MemoryManager();
 
+		// get all managed objects
+		std::vector<T*> GetAll();
+
 		// add an object to be managed
 		void Add(T* object);
 
@@ -44,6 +47,12 @@ namespace System
 	MemoryManager<T>::~MemoryManager()
 	{
 		DeleteAll();
+	}
+
+	template <class T>
+	std::vector<T*> MemoryManager<T>::GetAll()
+	{
+		return m_objects;
 	}
 
 	template <class T>
