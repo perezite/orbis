@@ -30,6 +30,9 @@ namespace Game
 		// start
 		virtual void Start() { };
 
+		// release
+		virtual void Release() { };
+
 		// add entity
 		void AddEntity(Entity *entity);
 
@@ -38,6 +41,9 @@ namespace Game
 
 		// get the texture atlas
 		Video::TextureAtlas* GetTextureAtlas() { return m_textureAtlas; }
+
+		// has the level a given texture
+		bool HasTexture(std::string assetPath);
 
 		// get a texture
 		Texture* GetTexture(std::string assetPath);

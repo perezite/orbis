@@ -9,7 +9,7 @@ using namespace Video;
 
 namespace Levels
 {
-	Level5::Level5()
+	void Level5::Start()
 	{
 		// init textures
 		Texture* yellowBlockTex = new Texture(this, "Textures/YellowBlock.png", true);

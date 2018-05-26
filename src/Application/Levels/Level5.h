@@ -8,6 +8,7 @@ namespace Levels
 	class Level5 : public Level
 	{
 	public:
-		Level5();
+		// override
+		void Start();
 	};
 }

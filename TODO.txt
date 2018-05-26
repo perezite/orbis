@@ -1,6 +1,7 @@
 TODO:	
 - Refactoring Levelinstanzierung zwecks Level Switching
-	- Level1::AddLevelSwitcher in Helper rausziehen und überall einbindens
+	- Testen auf Emulator
+	- Exception fixen, bei Tap und anschliessendem LevelSwitch (kann simuliert werden durch schnelles Klicken in Level3)
 	- Switching für alle Levels einbauen
 	- Alle Levels auf Funktionalität durchtesten, auch auf Mobile
 	- TODO im Code fixen bzw. Refactoring einplanen (Volltextsuche)
@@ -9,7 +10,10 @@ TODO:
 	- LevelManager::QueueLevel entsprechend anpassen
 - Recherche: Git Stashing
 - Refactoring planen
+	- Mal schauen, wie das bei jvgs gelöst wurde
+	- Überlegen, ob ich alle Manager-Singletons loswerde und stattdessen Systems-Klassen mit Hierarchien mache
 	- Memory Management (ownership)
+		- Temp-Comments entfernen, welche ich durch schlechtes Memory-Management einbauen musste
 	- Renderer
 	- DebugRenderer
 	- Include Files zusammenziehen

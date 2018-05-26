@@ -14,10 +14,11 @@ namespace Controllers
 	void LevelSwitchButtonController::Update()
 	{
 		InputManager* input = InputManager::GetInstance();
+		KeyCode switchKey = m_switchForward ? KeyCode::Right : KeyCode::Left;
 
-		if (input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
+		if (input->IsKeyDown(switchKey) || input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
 		{
-			LogHelper::LogMessage("LevelSwitchButtonController::Update() clicked");
+			LogHelper::LogMessage("LevelSwitchButtonController::Update() hit");
 
 			if (m_targetLevel)
 				LevelManager::GetInstance()->QueueLevel(m_targetLevel);

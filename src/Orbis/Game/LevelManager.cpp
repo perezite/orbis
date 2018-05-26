@@ -51,6 +51,9 @@ namespace Game
 
 	void LevelManager::SwitchToQueuedLevel()
 	{
+		if (m_currentLevel != NULL)
+			m_currentLevel->Release();
+
 		MemoryHelper::Delete(m_currentLevel);
 		m_currentLevel = m_queuedLevel;
 		m_queuedLevel = NULL;

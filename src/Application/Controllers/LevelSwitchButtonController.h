@@ -11,8 +11,8 @@ namespace Controllers
 	class LevelSwitchButtonController : public Component
 	{
 	public:
-		LevelSwitchButtonController(Level* targetLevel) : 
-			Component(), m_targetLevel(targetLevel)
+		LevelSwitchButtonController(Level* targetLevel, bool switchForward) : 
+			Component(), m_targetLevel(targetLevel), m_switchForward(switchForward)
 		{}
 
 		// update
@@ -21,5 +21,8 @@ namespace Controllers
 	private:
 		// next level
 		Level* m_targetLevel;
+
+		// is switching forward
+		bool m_switchForward;
 	};
 }

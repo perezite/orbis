@@ -80,6 +80,18 @@ namespace Game
 		videoManager->SwapBuffers();
 	}
 
+	bool Level::HasTexture(std::string assetPath)
+	{
+		std::vector<Texture*> textures = MemoryManager<Texture>::GetInstance()->GetAll();
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			if (textures[i]->GetAssetPath() == assetPath)
+				return true;
+		}
+
+		return false;
+	}
+
 	Texture* Level::GetTexture(std::string assetPath)
 	{
 		std::vector<Texture*> textures = MemoryManager<Texture>::GetInstance()->GetAll();

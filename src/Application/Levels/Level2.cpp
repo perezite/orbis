@@ -2,6 +2,7 @@
 
 #include "Level1.h"
 #include "Level3.h"
+#include "LevelHelper.h"
 
 #include "../Controllers/CameraController.h"
 #include "../Controllers/SpriteController.h"
@@ -13,9 +14,11 @@ using namespace Controllers;
 #include "../../Orbis/Components/RectangleRenderer.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
+#include "../../Orbis/Core/DebugHelper.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
 using namespace Components;
+using namespace Core;
 using namespace Math;
 using namespace Video;
 
@@ -26,8 +29,6 @@ namespace Levels
 		// textures
 		Texture* coordSystemTexture = new Texture(this, "Textures/CoordinateSystem.png");
 		Texture* yellowBlockTexture = new Texture(this, "Textures/YellowBlock.png");
-		Texture* leftArrowTex = new Texture(this, "Textures/OverlayLeft.png");
-		Texture* rightArrowTex = new Texture(this, "Textures/OverlayRight.png");
 
 		// camera entity
 		Entity* camera = new Entity();
@@ -37,19 +38,9 @@ namespace Levels
 		camera->AddComponent(cameraController);
 		this->AddEntity(camera);
 
-		// previous level button entity
-		Entity* prevLevel = new Entity("Previous level Button");
-		prevLevel->AddComponent(new SpriteRenderer(leftArrowTex));
-		prevLevel->AddComponent(new LevelSwitchButtonController(new Level1()));
-		prevLevel->SetTransform(Transform(Vector2D(-0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
-		this->AddEntity(prevLevel);
-
-		// next level button entity
-		Entity* nextLevel = new Entity("Next level Button");
-		nextLevel->AddComponent(new SpriteRenderer(rightArrowTex));
-		nextLevel->AddComponent(new LevelSwitchButtonController(new Level3()));
-		nextLevel->SetTransform(Transform(Vector2D(0.45f * cam->GetSize().x, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
-		this->AddEntity(nextLevel);
+		// add level switchers
+		LevelHelper::AddLevelSwitcher(this, new Level1(), false);
+		LevelHelper::AddLevelSwitcher(this, new Level3(), true);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");
@@ -75,8 +66,10 @@ namespace Levels
 		this->AddEntity(greenRect);
 
 		// line renderer
-		Entity* debugLineEntity = new Entity("Debug Lines");
-		debugLineEntity->AddComponent(new DebugLineTester());
-		this->AddEntity(debugLineEntity);
+		ORBIS_DEBUG (
+			Entity* debugLineEntity = new Entity("Debug Lines");
+			debugLineEntity->AddComponent(new DebugLineTester());
+			this->AddEntity(debugLineEntity);
+		)
 	}
 }

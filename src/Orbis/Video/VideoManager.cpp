@@ -38,9 +38,12 @@ namespace Video
 		if (EnvironmentHelper::IsMobile())
 			return;
 
+		SDL_DestroyWindow(m_sdlWindow);
 		m_windowResolution = resolution;
-		Shutdown();
-		Initialize(false);
+		CreateSdlWindow();
+
+		SDL_GL_MakeCurrent(m_sdlWindow, m_openGlContext);
+		glViewport(0, 0, (int)m_windowResolution.x, (int)m_windowResolution.y);
 	}
 
 	void VideoManager::ClearScreen()
@@ -56,6 +59,7 @@ namespace Video
 
 	void VideoManager::Shutdown()
 	{
+		SDL_GL_DeleteContext(m_openGlContext);
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
 		m_isInitialized = false;
@@ -75,7 +79,7 @@ namespace Video
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-		m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.x, (int)m_windowResolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+		CreateSdlWindow();		
 		m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 		glewInit();
 #endif	
@@ -86,7 +90,7 @@ namespace Video
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-		m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.x, (int)m_windowResolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+		CreateSdlWindow();
 		m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 #endif
 
@@ -107,5 +111,17 @@ namespace Video
 		}
 
 		else return DESKTOP_DEFAULT_RESOLUTION;
+	}
+
+	void VideoManager::CreateSdlWindow()
+	{
+#ifdef WIN32
+		m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_windowResolution.x, (int)m_windowResolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+#endif
+#ifdef __ANDROID__
+		m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.x, (int)m_windowResolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+#endif
+
+
 	}
 }

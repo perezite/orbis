@@ -8,6 +8,14 @@ namespace Levels
 	class Level4 : public Level
 	{
 	public:
-		Level4();
+		// override
+		void Start();
+
+		// override
+		void Release();
+
+	private:
+		// original window resolution
+		Vector2D m_originalResolution;
 	};
 }

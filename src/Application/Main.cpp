@@ -35,7 +35,7 @@ int main(int argc, char* args[])
 	{
 		OrbisMain::GetInstance()->Initialize();
 		
-		auto level = new Level1();
+		auto level = new Level3();
 		LevelManager::GetInstance()->QueueLevel(level);
 
 		OrbisMain::GetInstance()->Run();
@@ -48,7 +48,7 @@ int main(int argc, char* args[])
 			throw e;
 		#endif
 
-		LogHelper::ShowMessageBox(e.what(), "Exception");
+ 		LogHelper::ShowMessageBox(e.what(), "Exception");
 	}
 
 	return 0;

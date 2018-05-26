@@ -10,9 +10,5 @@ namespace Levels
 	public:		
 		// override
 		void Start();
-
-	private:
-		// add level switch buttons
-		void AddLevelSwitcher(Level* currentLevel, Level* targetLevel, bool isForward);
 	};
 }

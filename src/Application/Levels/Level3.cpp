@@ -1,5 +1,9 @@
 #include "Level3.h"
 
+#include "Level2.h"
+#include "Level4.h"
+#include "LevelHelper.h"
+
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/WobbleController.h"
 using namespace Controllers;
@@ -8,8 +12,10 @@ using namespace Controllers;
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
+#include "../../Orbis/Core/DebugHelper.h"
 using namespace Video;
 using namespace Components;
+using namespace Core;
 
 #include "../../Base/Math/MathHelper.h"
 using namespace Math;
@@ -38,17 +44,17 @@ namespace Levels
 		textures.push_back(new Texture(this, "Textures/YellowBlock.png", true));
 
 		// init camera
-		Entity* camEntity = new Entity();
+		Entity* camEntity = new Entity("Camera");
 		camEntity->AddComponent(new Camera());
 		AddEntity(camEntity);
 
 		// init blocks
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
-			Entity* entity = new Entity();
 			static int counter = 0;
 			bool hasTexture = ++counter % 2 == 0;
 
+			Entity* entity = new Entity(hasTexture ? "Textured sprite" : "Solid sprite");
 			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D::One);
 			entity->SetTransform(trans);
 
@@ -59,9 +65,15 @@ namespace Levels
 			this->AddEntity(entity);
 		}
 
+		// add level switchers. Note: because we have no layering yet, the sprites above must be generated first in order to be batched in the right order
+		LevelHelper::AddLevelSwitcher(this, new Level2(), false);
+		LevelHelper::AddLevelSwitcher(this, new Level4(), true);
+
 		// init debug line tester
-		Entity* entity = new Entity();
-		entity->AddComponent(new DebugLineTester());
-		AddEntity(entity);
+		ORBIS_DEBUG (
+			Entity* entity = new Entity("Debug line tester");
+			entity->AddComponent(new DebugLineTester());
+			AddEntity(entity);
+		);
 	}
 }

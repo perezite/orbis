@@ -47,8 +47,9 @@ namespace Video
 		// get the default window resolution
 		Vector2D GetDefaultWindowResolution();
 
-		// initialize SDL video subsystem
-		void InitSDL();
+		// create the sdl window
+		void CreateSdlWindow();
+
 	private:
 		// the sdl window
 		SDL_Window* m_sdlWindow;
