@@ -1,7 +1,5 @@
 TODO:	
 - Refactoring Levelinstanzierung zwecks Level Switching
-	- Testen auf Emulator
-	- Exception fixen, bei Tap und anschliessendem LevelSwitch (kann simuliert werden durch schnelles Klicken in Level3)
 	- Switching für alle Levels einbauen
 	- Alle Levels auf Funktionalität durchtesten, auch auf Mobile
 	- TODO im Code fixen bzw. Refactoring einplanen (Volltextsuche)
@@ -9,6 +7,7 @@ TODO:
 	- In Main.cpp pro Level eine Instanz erzeugen und beim LevelManager mit LevelIndex registrieren
 	- LevelManager::QueueLevel entsprechend anpassen
 - Recherche: Git Stashing
+- Kompilationszeit verbessern anhand des folgenden Artikels: https://blogs.msdn.microsoft.com/vcblog/2016/10/26/recommendations-to-speed-c-builds-in-visual-studio/
 - Refactoring planen
 	- Mal schauen, wie das bei jvgs gelöst wurde
 	- Überlegen, ob ich alle Manager-Singletons loswerde und stattdessen Systems-Klassen mit Hierarchien mache
