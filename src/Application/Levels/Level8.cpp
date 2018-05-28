@@ -1,5 +1,9 @@
 #include "Level8.h"
 
+#include "LevelHelper.h"
+#include "Level7.h"
+#include "Level9.h"
+
 #include "../Controllers/TweenTester.h"
 using namespace Controllers;
 
@@ -21,7 +25,7 @@ using namespace Core;
 
 namespace Levels
 {
-	Level8::Level8()
+	void Level8::Start()
 	{
 		// add assets
 		Texture* brickTex = new Texture(this, "Textures/YellowBlock.png");
@@ -31,6 +35,10 @@ namespace Levels
 		Entity* cam = new Entity();
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
+
+		// add level switchers
+		LevelHelper::AddLevelSwitcher(this, new Level7(), false);
+		LevelHelper::AddLevelSwitcher(this, new Level9(), true);
 
 		// add tweened brick
 		Entity* brick = new Entity();

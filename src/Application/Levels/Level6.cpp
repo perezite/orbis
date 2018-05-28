@@ -1,5 +1,9 @@
 #include "Level6.h"
 
+#include "LevelHelper.h"
+#include "Level5.h"
+#include "Level7.h"
+
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
@@ -9,7 +13,7 @@ using namespace Video;
 
 namespace Levels
 {
-	Level6::Level6()
+	void Level6::Start()
 	{
 		// init textures
 		Texture* bleedingTestBlue = new Texture(this, "Textures/BleedingTestBlue.png", true);
@@ -21,6 +25,10 @@ namespace Levels
 		Entity* cam = new Entity();
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
+
+		// add level switchers
+		LevelHelper::AddLevelSwitcher(this, new Level5(), false);
+		LevelHelper::AddLevelSwitcher(this, new Level7(), true);
 
 		// init entities
 		Entity* blueEntity = new Entity("Bleeding Test Blue");

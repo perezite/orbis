@@ -1,5 +1,9 @@
 #include "Level7.h"
 
+#include "LevelHelper.h"
+#include "Level6.h"
+#include "Level8.h"
+
 #include "../Controllers/BallController.h"
 using namespace Controllers;
 
@@ -11,12 +15,16 @@ using namespace Video;
 
 namespace Levels
 {
-	Level7::Level7()
+	void Level7::Start()
 	{
 		// init camera
 		Entity* cam = new Entity();
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
+
+		// add level switchers
+		LevelHelper::AddLevelSwitcher(this, new Level6(), false);
+		LevelHelper::AddLevelSwitcher(this, new Level8(), true);
 
 		// init ball 
 		Entity* ballEntity = new Entity();

@@ -1,5 +1,9 @@
 #include "Level9.h"
 
+#include "LevelHelper.h"
+#include "Level8.h"
+#include "Level10.h"
+
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/ParticleRenderer.h"
@@ -7,7 +11,7 @@ using namespace Components;
 
 namespace Levels
 {
-	Level9::Level9()
+	void Level9::Start()
 	{
 		// init textures
 		Texture* yellowBlockTex = new Texture(this, "Textures/YellowBlock.png", true);
@@ -18,6 +22,10 @@ namespace Levels
 		Entity* cam = new Entity();
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
+
+		// add level switchers
+		LevelHelper::AddLevelSwitcher(this, new Level8(), false);
+		LevelHelper::AddLevelSwitcher(this, new Level10(), true);
 
 		// init entities
 		Entity* yellowBlock = new Entity("Yellow Brick");

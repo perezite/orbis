@@ -1,5 +1,9 @@
 #include "Level5.h"
 
+#include "LevelHelper.h"
+#include "Level4.h"
+#include "Level6.h"
+
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
@@ -20,6 +24,10 @@ namespace Levels
 		Entity* cam = new Entity();
 		cam->AddComponent(new Camera());
 		AddEntity(cam);
+
+		// add level switchers
+		LevelHelper::AddLevelSwitcher(this, new Level4(), false);
+		LevelHelper::AddLevelSwitcher(this, new Level6(), true);
 
 		// init entities
 		Entity* yellowBlock = new Entity("Yellow Brick");
