@@ -32,7 +32,7 @@ namespace Game
 
 	void Level::Update()
 	{
-		if (m_isStarted == false) // TODO: Move this to the manager
+		if (m_isStarted == false) 
 		{
 			VideoManager::GetInstance()->GetRenderDevice()->ClearRenderables();
 			Start();
