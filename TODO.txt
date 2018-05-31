@@ -1,6 +1,11 @@
 TODO:	
-- Recherche: Git Stashing
-- Kompilationszeit verbessern anhand des folgenden Artikels: https://blogs.msdn.microsoft.com/vcblog/2016/10/26/recommendations-to-speed-c-builds-in-visual-studio/
+- Kompilationszeit verbessern 
+	- Recherche dazu
+	- Anhand zB. der folgenden Artikel: 
+		- https://blogs.msdn.microsoft.com/vcblog/2016/10/26/recommendations-to-speed-c-builds-in-visual-studio/
+		- http://www.bitsnbites.eu/faster-c-builds/
+		- https://randomascii.wordpress.com/2014/03/22/make-vc-compiles-fast-through-parallel-compilation/
+	- Adressen archivieren
 - Refactoring planen
 	- Mal schauen, wie das bei jvgs gelöst wurde
 	- Überlegen, ob ich alle Manager-Singletons loswerde und stattdessen Systems-Klassen mit Hierarchien mache
@@ -11,10 +16,11 @@ TODO:
 	- Überlegen, ob ich statt LevelManager::QueueLevel(new Level1()) sowas mache wie LevelManager::QueueLevel("Level1");
 	- DebugRenderer
 	- Include Files zusammenziehen
+	- Header und Sourcefiles aufsplitten
 	- Inspector-Konzept
 	- Componenten-Builder
 	- Helper -> Util
-	- Evtl. ein Sandbox-Projekt machen dafür
+	- Evtl. ein Sandbox-Konsoleprojekt machen dafür
 - Demo erstellen (Level-Switching)
 	- Im ersten Level die Switch Buttons hinzufügen
 	- Switch Logik implementieren
