@@ -27,9 +27,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Rect.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.cpp">
       <Filter>Algorithms</Filter>
     </ClCompile>
