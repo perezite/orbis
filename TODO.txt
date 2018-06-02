@@ -1,7 +1,4 @@
 TODO:	
-- Kompilationszeit verbessern 
-	- Auf Android-Build verwenden
-	- Vorkompilierte Header an sinnvolle Stelle verschieben damit sie möglichst nicht im Explorer auftauchen
 - Refactoring planen
 	- Mal schauen, wie das bei jvgs gelöst wurde
 	- Überlegen, ob ich alle Manager-Singletons loswerde und stattdessen Systems-Klassen mit Hierarchien mache
