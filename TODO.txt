@@ -1,33 +1,34 @@
 TODO:	
 - Refactoring planen
-	- Mal schauen, wie das bei jvgs gelöst wurde
-	- Überlegen, ob ich alle Manager-Singletons loswerde und stattdessen Systems-Klassen mit Hierarchien mache
-	- Aufruf von ClearRenderables in Level.cpp an passende Stelle refactoren
-	- Memory Management (ownership)
-		- Temp-Comments entfernen, welche ich durch schlechtes Memory-Management einbauen musste
-	- Renderer
-	- Überlegen, ob ich statt LevelManager::QueueLevel(new Level1()) sowas mache wie LevelManager::QueueLevel("Level1");
-	- DebugRenderer
-	- Include Files zusammenziehen
-	- Header und Sourcefiles aufsplitten
-	- Inspector-Konzept
-	- Componenten-Builder
-	- Helper -> Util
-	- Evtl. ein Sandbox-Konsoleprojekt machen dafür
-- Demo erstellen (Level-Switching)
-	- Im ersten Level die Switch Buttons hinzufügen
-	- Switch Logik implementieren
-	- Im zweiten Level die Switch Buttons hinzufügen
-	- Switch Logik implementieren
-	- Allfällige Fehler fixen
-	- Switching für restliche Level hinzufügen
-- Include-Files zusammenziehen
+	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
+		- Branch erstellen 
+		- Pro-Level Daten in Manager verfrachten, dann wo nötig update(), render() und clear() aufrufen. Pre-Test mit Konsolenprojekt.
+		- Aufruf von ClearRenderables in Level.cpp an passende Stelle refactoren	
+		- if(x) {delete x; } entfernen. Auch auf NULL setzen nach dem Delete sollte vermieden werden da es Fehler maskiert.
+		- bool GetXY() ersetzen bool IsXY(). Setter Parameterlos machen, wenn nur auf true gesetzt werden kann
+		- Methoden kleinschreiben
+		- Erase–remove korrekt verwenden in RenderDevice (hat aktuell MemoryLeaks...)
+		- MemoryHelper-Funktionen vereinfachen und wenn möglich in den Aufruf ziehen
+		- Renderer gesamthaft refactoren
+		- RenderDevice::ClearRenderables umbenennen in RenderDevice::Clear und den aufruf davon in VideoManager::Clear() verschieben
+		- LevelQueue-Logik in Level/LevelManager anpassen
+		- LevelManager::QueueLevel mit String aufrufen anstatt mit Konstruktor
+		- DebugRenderDevice erstellen
+		- Branch mergen
+		- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)
+		- Header und Sourcefiles aufsplitten
+		- Load(), Serialize() etc. Funktionen vereinheitlichen zu DeserializeJson() (befüllen des Objekts mit Json-String), LoadJson (Laden des Strings aus Datei), GetJson (Laden des Strings von Objekt) 
+		- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
+		- StringHelper::Load() in separate Klasse Serialization verschieben
+		- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen
+		- Der Inspector soll an der Komponente hängen, nicht am Entity
+		- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
+- Den kompletten Source-Code inspizieren und falls nötig weiteres Refactoring planen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
 	- Regression & Performanceregression
 - Die CenterPropulsion des Balls aus Blear nachbauen. Dabei die Werte nach Bedarf tweaken
-- Sinnvolles Lifetime Konzept überlegen für Shaders, Textures und Tweens
 - Orbis in Bibliothek versiegeln
 - Neues Projekt erstellen für die Implementation von Blear Level 1
 - Orbis-Library als Submodule einbinden
