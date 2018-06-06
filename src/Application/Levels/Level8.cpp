@@ -12,7 +12,7 @@ using namespace Controllers;
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/Texture.h"
-#include "../../Orbis/Effects/Tween.h"
+#include "../../Orbis/Effects/EffectsManager.h"
 #include "../../Orbis/Core/DebugHelper.h"
 using namespace Components;
 using namespace Video;
@@ -29,7 +29,7 @@ namespace Levels
 	{
 		// add assets
 		Texture* brickTex = new Texture(this, "Textures/YellowBlock.png");
-		Tween* tween = new Tween("Tweens/Test1.tween", 6.0f);
+		Tween* tween = EffectsManager::GetInstance()->GetTween("Tweens/Test1.tween");
 
 		// init camera
 		Entity* cam = new Entity();
@@ -44,7 +44,7 @@ namespace Levels
 		Entity* brick = new Entity();
 		AddEntity(TweenInspector::TryConstructEntity(this, tween));
 		brick->AddComponent(new SpriteRenderer(brickTex));
-		brick->AddComponent(new TweenTester(tween));
+		brick->AddComponent(new TweenTester(tween, 6.0f));
 		AddEntity(brick);
 	}
 }

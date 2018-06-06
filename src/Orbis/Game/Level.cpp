@@ -1,7 +1,7 @@
 #include "Level.h"
 
 #include "../Video/VideoManager.h"
-#include "../Effects/Tween.h"
+#include "../Effects/EffectsManager.h"
 using namespace Video;
 using namespace Effects;
 
@@ -19,9 +19,9 @@ namespace Game
 
 	Level::~Level()
 	{
+		EffectsManager::GetInstance()->Clear();
 		MemoryHelper::Clear(m_entities);
 		MemoryManager<Texture>::GetInstance()->DeleteAll();
-		MemoryManager<Tween>::GetInstance()->DeleteAll();
 	}
 
 	void Level::AddEntity(Entity *entity)

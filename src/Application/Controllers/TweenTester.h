@@ -14,8 +14,8 @@ namespace Controllers
 	{
 	public:
 		// ctor
-		TweenTester(Tween* tween)
-			: Component::Component(), m_tween(tween)
+		TweenTester(Tween* tween, float tweenDuration)
+			: Component::Component(), m_tween(tween), m_duration(tweenDuration)
 		{ }
 
 		// override
@@ -27,5 +27,8 @@ namespace Controllers
 	private: 
 		// the tween
 		Tween* m_tween;
+
+		// the tween duration
+		float m_duration;
 	};
 }

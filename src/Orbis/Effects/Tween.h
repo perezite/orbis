@@ -1,11 +1,10 @@
 #pragma once
 
-#include "../../Base/System/MemoryManager.h"
 #include "../../Base/Math/BezierCurve.h"
-using namespace System;
 using namespace Math;
 
 #include <string>
+#include <iostream>
 
 namespace Effects
 {
@@ -14,11 +13,10 @@ namespace Effects
 	{
 	public:
 		// ctor
-		Tween(std::string assetPath, float duration) :
-			m_assetPath(assetPath), m_duration(duration), m_elapsed(0.0f)
+		Tween(std::string assetPath) :
+			m_assetPath(assetPath), m_elapsed(0.0f)
 		{
 			TryDeserialize();
-			MemoryManager<Tween>::GetInstance()->Add(this);
 		}
 
 		// get the curve
@@ -34,7 +32,7 @@ namespace Effects
 		void Save();
 
 		// update the value
-		void Update(Vector2D* current);
+		void Update(Vector2D* current, float duration);
 
 	protected:
 		// deserialize from asset if existing
@@ -46,9 +44,6 @@ namespace Effects
 
 		// the asset path
 		std::string m_assetPath;
-
-		// duration of the tween
-		float m_duration;
 
 		// elapsed tween time
 		float m_elapsed;

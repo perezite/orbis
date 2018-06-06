@@ -14,7 +14,7 @@ namespace Controllers
 
 	void TweenTester::Update()
 	{
-		m_tween->Update(&GetParent()->GetTransform()->scale);
+		m_tween->Update(&GetParent()->GetTransform()->scale, m_duration);
 	}
 }
 

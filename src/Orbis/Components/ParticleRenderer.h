@@ -6,12 +6,10 @@
 #include "../Video/Renderable.h"
 #include "../Game/Transform.h"
 #include "../Effects/Particle.h"
-#include "../Effects/Tween.h"
 #include "../Game/Level.h"
 using namespace Video;
 using namespace Game;
 using namespace Effects;
-using namespace Game;
 
 #include <vector>
 
@@ -73,9 +71,6 @@ namespace Components
 
 		// the last position of the entity transforms
 		Vector2D m_lastEntityPos;
-
-		// color alpha over lifetime
-		Tween* m_currentColorAlpha;
 
 		// the parent level
 		Level* m_parentLevel;
