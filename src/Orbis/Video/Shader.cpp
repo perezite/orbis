@@ -76,35 +76,17 @@ namespace
 
 namespace Video
 {
-	Shader* Shader::GetDiffuseShader()
-	{
-		static Shader diffuseShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag");
-		return &diffuseShader;
-	}
-
-	Shader* Shader::GetDiffuseParticleShader()
-	{
-		static Shader diffuseParticleShader("Shaders/DiffuseParticle.vs", "Shaders/DiffuseParticle.frag");
-		return &diffuseParticleShader;
-	}
-
-	Shader* Shader::GetFlatShader()
-	{
-		static Shader flatShader("Shaders/Flat.vs", "Shaders/Flat.frag");
-		return &flatShader;
-	}
-
-	Shader::Shader(std::string vertexAssetPath, std::string fragmentAssetPath)
+	Shader::Shader(std::string assetPath)
 	{
 		VideoManager::GetInstance();
 
 		m_programId = glCreateProgram();
 
-		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexAssetPath);
+		std::string vertexShaderCode = AssetHelper::LoadTextAsset(assetPath + ".vs");
 		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
 		glAttachShader(m_programId, vertexShader);
 
-		std::string fragmentShaderCode = AssetHelper::LoadTextAsset(fragmentAssetPath);
+		std::string fragmentShaderCode = AssetHelper::LoadTextAsset(assetPath + ".frag");
 		GLuint fragmentShader = Compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
 		glAttachShader(m_programId, fragmentShader);
 

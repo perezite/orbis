@@ -21,7 +21,7 @@ namespace Controllers
 		BinPackingVisualizer();
 
 		// render
-		void Render();
+		void RenderDebug();
 
 		// update
 		void Update();

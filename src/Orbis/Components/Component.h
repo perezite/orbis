@@ -28,7 +28,7 @@ namespace Components
 		virtual void Update() { };
 
 		// render
-		virtual void Render() { };
+		virtual void RenderDebug() { };
 
 		// set entity
 		void SetParent(Game::Entity* parent) { m_parent = parent; }

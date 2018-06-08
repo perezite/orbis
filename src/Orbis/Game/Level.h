@@ -37,12 +37,6 @@ namespace Game
 		// update 
 		void Update();
 
-		// has the level a given texture
-		bool HasTexture(std::string assetPath);
-
-		// get a texture
-		Texture* GetTexture(std::string assetPath);
-
 	protected:
 		// start the entities
 		void StartEntities();

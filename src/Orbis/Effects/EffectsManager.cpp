@@ -22,7 +22,7 @@ namespace Effects
 			return m_tweens[assetPath];
 
 		Tween* tween = new Tween(assetPath);
-		m_tweens.insert(std::make_pair(assetPath, tween));
+		m_tweens[assetPath] = tween;
 		return tween;
 	}
 }

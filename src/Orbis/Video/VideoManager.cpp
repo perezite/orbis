@@ -36,12 +36,28 @@ namespace Video
 
 	void VideoManager::Clear()
 	{
+		VideoManager::GetInstance()->GetRenderDevice()->ClearRenderables();
+
 		for (std::map<std::string, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 			delete (*it).second;
 		m_textures.clear();
 
+		for (std::map<std::string, Shader*>::iterator it = m_shaders.begin(); it != m_shaders.end(); it++)
+			delete (*it).second;
+		m_shaders.clear();
+
 		delete m_textureAtlas;
 		m_textureAtlas = NULL;
+	}
+
+	void VideoManager::Start()
+	{
+		GetTextureAtlas()->Generate();
+	}
+
+	void VideoManager::Render()
+	{
+		GetRenderDevice()->Render();
 	}
 
 	TextureAtlas* VideoManager::GetTextureAtlas()
@@ -59,8 +75,19 @@ namespace Video
 			return m_textures[assetPath];
 
 		Texture* texture = new Texture(assetPath, flipVertically);
-		m_textures.insert(std::make_pair(assetPath, texture));
+		m_textures[assetPath] = texture;
 		return texture;
+	}
+
+	Shader* VideoManager::GetShader(std::string assetPath)
+	{
+		if (m_shaders[assetPath])
+			return m_shaders[assetPath];
+
+		Shader* shader = new Shader(assetPath);
+		m_shaders[assetPath] = shader;
+		std::cout << m_shaders.size() << std::endl;
+		return shader;
 	}
 
 	void VideoManager::SetResolution(Vector2D resolution)
@@ -151,7 +178,5 @@ namespace Video
 #ifdef __ANDROID__
 		m_sdlWindow = SDL_CreateWindow(NULL, 0, 0, (int)m_windowResolution.x, (int)m_windowResolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
 #endif
-
-
 	}
 }

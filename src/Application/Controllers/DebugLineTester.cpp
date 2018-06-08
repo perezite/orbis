@@ -5,7 +5,7 @@ using namespace Core;
 
 namespace Controllers
 {
-	void DebugLineTester::Render()
+	void DebugLineTester::RenderDebug()
 	{
 		DebugHelper::DrawLine(Vector2D(-0.2f, -0.3f), Vector2D(0.2f, 0.4f));
 		DebugHelper::DrawLine(Vector2D(-0.2f, 0.3f), Vector2D(0.3f, 0.3f));

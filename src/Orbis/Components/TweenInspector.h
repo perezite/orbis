@@ -37,7 +37,7 @@ namespace Components
 		void Update();
 
 		// render
-		void Render();
+		void RenderDebug();
 
 	protected:
 		// add or select a control point at the tapped point 

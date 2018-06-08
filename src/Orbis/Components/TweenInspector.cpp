@@ -53,7 +53,7 @@ namespace Components
 		GetParent()->GetTransform()->scale = Vector2D::Zero;
 		m_renderable = new Renderable;
 		m_renderable->GetMaterial()->SetTexture(texture);
-		m_renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		m_renderable->GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Diffuse"));
 		m_renderable->SetMesh(Mesh::CreateTexturedQuad());
 		m_renderable->SetTransform(GetParent()->GetTransform());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(m_renderable);
@@ -88,7 +88,7 @@ namespace Components
 		}
 	}
 
-	void TweenInspector::Render()
+	void TweenInspector::RenderDebug()
 	{
 		if (m_isActive)
 		{

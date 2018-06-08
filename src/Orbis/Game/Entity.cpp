@@ -32,11 +32,11 @@ namespace Game
 		}
 	}
 
-	void Entity::Render()
+	void Entity::RenderDebug()
 	{
 		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			m_components[i]->Render();
+			m_components[i]->RenderDebug();
 		}
 	}
 }

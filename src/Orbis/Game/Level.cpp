@@ -20,7 +20,6 @@ namespace Game
 		EffectsManager::GetInstance()->Clear();
 		VideoManager::GetInstance()->Clear();
 		MemoryHelper::Clear(m_entities);
-		MemoryManager<Texture>::GetInstance()->DeleteAll();
 	}
 
 	void Level::AddEntity(Entity *entity)
@@ -33,10 +32,10 @@ namespace Game
 	{
 		if (m_isStarted == false) 
 		{
-			VideoManager::GetInstance()->GetRenderDevice()->ClearRenderables();
+			VideoManager::GetInstance()->Clear();
 			Start();
 			StartEntities();
-			VideoManager::GetInstance()->GetTextureAtlas()->Generate();
+			VideoManager::GetInstance()->Start();
 			m_isStarted = true;
 		}
 		else
@@ -65,44 +64,16 @@ namespace Game
 
 	void Level::RenderEntities()
 	{
-		VideoManager* videoManager = VideoManager::GetInstance();
+		VideoManager* video = VideoManager::GetInstance();
 
-		videoManager->ClearScreen();
-
-		videoManager->GetRenderDevice()->Render();
+		video->ClearScreen();
+		video->Render();
 
 		for (unsigned int i = 0; i < m_entities.size(); i++)
-		{
-			m_entities[i]->Render();
-		}
+			m_entities[i]->RenderDebug();
 
-		videoManager->SwapBuffers();
+		video->SwapBuffers();
 	}
-
-	bool Level::HasTexture(std::string assetPath)
-	{
-		std::vector<Texture*> textures = MemoryManager<Texture>::GetInstance()->GetAll();
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			if (textures[i]->GetAssetPath() == assetPath)
-				return true;
-		}
-
-		return false;
-	}
-
-	Texture* Level::GetTexture(std::string assetPath)
-	{
-		std::vector<Texture*> textures = MemoryManager<Texture>::GetInstance()->GetAll();
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			if (textures[i]->GetAssetPath() == assetPath)
-				return textures[i];
-		}
-
-		throw Exception("The given texture does not exist");
-	}
-
 }
 
 

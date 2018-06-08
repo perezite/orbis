@@ -14,7 +14,7 @@ namespace Components
 	void SpriteRenderer::Start()
 	{
 		m_renderable.GetMaterial()->SetTexture(m_texture);
-		m_renderable.GetMaterial()->SetShader(Shader::GetDiffuseShader());
+		m_renderable.GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Diffuse"));
 		m_renderable.GetMaterial()->SetColor(Color::White);
 		m_renderable.SetMesh(Mesh::CreateTexturedQuad());
 		m_renderable.SetTransform(GetParent()->GetTransform());

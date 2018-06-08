@@ -78,8 +78,6 @@ namespace Video
 		{
 			VideoManager::GetInstance()->GetTextureAtlas()->Add(this);
 		}
-
-		MemoryManager<Texture>::GetInstance()->Add(this);
 	}
 
 	Texture::~Texture()

@@ -11,18 +11,8 @@ namespace Video
 	class Shader
 	{
 	public:
-		// get static diffuse shader
-		static Shader* GetDiffuseShader();
-
-		// get static flat particle shader
-		static Shader* GetDiffuseParticleShader();
-
-		// get static flat shader
-		static Shader* GetFlatShader();
-
-	public:
 		// ctor
-		Shader(std::string vertexAssetPath, std::string fragmentAssetPath);
+		Shader(std::string assetPath);
 
 		// dtor
 		~Shader();

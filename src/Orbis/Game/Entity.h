@@ -46,7 +46,7 @@ namespace Game
 		void Update();
 
 		// render the entity
-		void Render();
+		void RenderDebug();
 
 	private: 
 		// transform of the entity

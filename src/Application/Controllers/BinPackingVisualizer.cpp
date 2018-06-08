@@ -37,7 +37,7 @@ namespace Controllers
 		}
 	}
 
-	void BinPackingVisualizer::Render()
+	void BinPackingVisualizer::RenderDebug()
 	{
 		std::vector<Rect> lastBinRects = m_packedRects.empty() ? std::vector<Rect>() : m_packedRects.back();
 		for (unsigned int i = 0; i < lastBinRects.size(); i++)

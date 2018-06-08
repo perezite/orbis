@@ -2,6 +2,7 @@
 
 #include "RenderDevice.h"
 #include "Texture.h"
+#include "Shader.h"
 #include "TextureAtlas.h"
 
 #include "../Libraries/SDL.h"
@@ -30,11 +31,20 @@ namespace Video
 		// clear the manager
 		void Clear();
 
-		// get the texture atlas
+		// start the manager
+		void Start();
+
+		// render
+		void Render();
+
+		// get the texture atla
 		TextureAtlas* GetTextureAtlas();
 
-		// get a texture
+		// get or load a texture
 		Texture* GetTexture(std::string assetPath, bool flipVertically = true);
+
+		// get or load a shader
+		Shader* GetShader(std::string assetPath);
 
 		// get the resolution
 		Vector2D GetResolution() { return m_windowResolution; }
@@ -71,6 +81,9 @@ namespace Video
 		// the textures
 		std::map<std::string, Texture*> m_textures;
 
+		// the shaders
+		std::map<std::string, Shader*> m_shaders;
+
 		// the sdl window
 		SDL_Window* m_sdlWindow;
 
@@ -90,4 +103,3 @@ namespace Video
 		static const Vector2D DESKTOP_DEFAULT_RESOLUTION;
 	};
 }
-

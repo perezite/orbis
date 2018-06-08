@@ -3,6 +3,8 @@ TODO:
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
 		- Pro-Level Daten in Manager verfrachten, dann wo nötig update(), render() und clear() aufrufen. Pre-Test mit Konsolenprojekt.
 			- Textures und Shaders managen
+		- MemoryManager entfernen
+		- Fenster-Logik in Window verfrachten, anstatt im VideoManager handhaben
 		- Aufruf von ClearRenderables in Level.cpp an passende Stelle refactoren	
 		- if(x) {delete x; } entfernen. Auch auf NULL setzen nach dem Delete sollte vermieden werden da es Fehler maskiert.
 		- bool GetXY() ersetzen bool IsXY(). Setter Parameterlos machen, wenn nur auf true gesetzt werden kann
@@ -10,7 +12,6 @@ TODO:
 		- Erase–remove korrekt verwenden in RenderDevice (hat aktuell MemoryLeaks...)
 		- MemoryHelper-Funktionen vereinfachen und wenn möglich in den Aufruf ziehen
 		- Renderer gesamthaft refactoren
-		- RenderDevice::ClearRenderables umbenennen in RenderDevice::Clear und den aufruf davon in VideoManager::Clear() verschieben
 		- LevelQueue-Logik in Level/LevelManager anpassen
 		- LevelManager::QueueLevel mit String aufrufen anstatt mit Konstruktor
 		- DebugRenderDevice erstellen
