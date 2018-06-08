@@ -23,7 +23,7 @@ namespace Video
 		// pack the texture Rects
 		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::Execute(bin, GetTextureRects());
 
-		// create pages
+		// create charts
 		for (unsigned int i = 0; i < pageRectsCollection.size(); i++)
 		{
 			std::vector<Rect> pageRects = pageRectsCollection[i];

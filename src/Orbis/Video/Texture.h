@@ -26,7 +26,7 @@ namespace Video
 	{
 	public:
 		// ctor
-		Texture(Level* parentLevel, std::string assetPath, bool flipVertically = true);
+		Texture(std::string assetPath, bool flipVertically = true);
 
 		// dtor
 		virtual ~Texture();

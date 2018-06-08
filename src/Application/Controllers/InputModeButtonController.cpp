@@ -25,7 +25,7 @@ namespace Controllers
 
 	void InputModeButtonController::Cycle()
 	{
-		// get new texture
+		// get current texture
 		std::vector<Texture*>::iterator previousTextureIt = std::find(m_textures.begin(), m_textures.end(), m_Renderer->GetTexture());
 		std::vector<Texture*>::iterator currentTextureIt = ++previousTextureIt;
 

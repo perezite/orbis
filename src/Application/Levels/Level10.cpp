@@ -6,14 +6,16 @@
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/SimpleParticleRenderer.h"
+#include "../../Orbis/Video/VideoManager.h"
 using namespace Components;
+using namespace Video;
 
 namespace Levels
 {
 	void Level10::Start()
 	{
 		// init textures
-		Texture* greenParticleTex = new Texture(this, "Textures/GreenParticle.png", true);
+		Texture* greenParticleTex = VideoManager::GetInstance()->GetTexture("Textures/GreenParticle.png");
 
 		// init camera
 		Entity* cam = new Entity();

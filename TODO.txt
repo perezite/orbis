@@ -23,6 +23,7 @@ TODO:
 		- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen. Und soll ausserdem nicht mehr Update() heissen!
 		- Der Inspector soll an der Komponente hängen, nicht am Entity
 		- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
+		- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 - Den kompletten Source-Code inspizieren und falls nötig weiteres Refactoring planen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:

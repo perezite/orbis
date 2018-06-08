@@ -23,7 +23,8 @@ namespace Video
 		return &instance;
 	}
 
-	VideoManager::VideoManager()
+	VideoManager::VideoManager() : 
+		m_textureAtlas(NULL)
 	{
 		Initialize();
 	}
@@ -31,6 +32,35 @@ namespace Video
 	VideoManager::~VideoManager()
 	{
 		Shutdown();
+	}
+
+	void VideoManager::Clear()
+	{
+		for (std::map<std::string, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
+			delete (*it).second;
+		m_textures.clear();
+
+		delete m_textureAtlas;
+		m_textureAtlas = NULL;
+	}
+
+	TextureAtlas* VideoManager::GetTextureAtlas()
+	{
+		if (m_textureAtlas)
+			return m_textureAtlas;
+
+		m_textureAtlas = new TextureAtlas();
+		return m_textureAtlas;
+	}
+
+	Texture* VideoManager::GetTexture(std::string assetPath, bool flipVertically)
+	{
+		if (m_textures[assetPath])
+			return m_textures[assetPath];
+
+		Texture* texture = new Texture(assetPath, flipVertically);
+		m_textures.insert(std::make_pair(assetPath, texture));
+		return texture;
 	}
 
 	void VideoManager::SetResolution(Vector2D resolution)

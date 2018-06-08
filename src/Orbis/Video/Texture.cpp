@@ -4,7 +4,9 @@
 
 #include "../Libraries/SDL.h"
 #include "../Core/AssetHelper.h"
+#include "../Video/VideoManager.h"
 using namespace Core;
+using namespace Video;
 
 #include "../../Base/System/MemoryManager.h"
 using namespace System;
@@ -49,7 +51,7 @@ namespace
 
 namespace Video
 {
-	Texture::Texture(Level* parentLevel, std::string assetPath, bool flipVertically)
+	Texture::Texture(std::string assetPath, bool flipVertically)
 	{
 		m_assetPath = assetPath;
 
@@ -74,7 +76,7 @@ namespace Video
 		
 		if (UsesAtlassing())
 		{
-			parentLevel->GetTextureAtlas()->Add(this);
+			VideoManager::GetInstance()->GetTextureAtlas()->Add(this);
 		}
 
 		MemoryManager<Texture>::GetInstance()->Add(this);

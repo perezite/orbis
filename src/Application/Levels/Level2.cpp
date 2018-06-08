@@ -27,8 +27,8 @@ namespace Levels
 	void Level2::Start()
 	{
 		// textures
-		Texture* coordSystemTexture = new Texture(this, "Textures/CoordinateSystem.png");
-		Texture* yellowBlockTexture = new Texture(this, "Textures/YellowBlock.png");
+		Texture* coordSystemTexture = VideoManager::GetInstance()->GetTexture("Textures/CoordinateSystem.png");
+		Texture* yellowBlockTexture = VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png");
 
 		// camera entity
 		Entity* camera = new Entity();

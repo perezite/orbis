@@ -13,13 +13,12 @@ using namespace System;
 namespace Game
 {
 	Level::Level() : m_isStarted(false)
-	{
-		m_textureAtlas = new TextureAtlas();
-	}
+	{}
 
 	Level::~Level()
 	{
 		EffectsManager::GetInstance()->Clear();
+		VideoManager::GetInstance()->Clear();
 		MemoryHelper::Clear(m_entities);
 		MemoryManager<Texture>::GetInstance()->DeleteAll();
 	}
@@ -37,7 +36,7 @@ namespace Game
 			VideoManager::GetInstance()->GetRenderDevice()->ClearRenderables();
 			Start();
 			StartEntities();
-			m_textureAtlas->Generate();
+			VideoManager::GetInstance()->GetTextureAtlas()->Generate();
 			m_isStarted = true;
 		}
 		else

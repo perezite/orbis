@@ -18,11 +18,10 @@ namespace Effects
 
 	Tween* EffectsManager::GetTween(std::string assetPath)
 	{
-		Tween* tween = m_tweens[assetPath];
-		if (tween)
-			return tween;
+		if (m_tweens[assetPath])
+			return m_tweens[assetPath];
 
-		tween = new Tween(assetPath);
+		Tween* tween = new Tween(assetPath);
 		m_tweens.insert(std::make_pair(assetPath, tween));
 		return tween;
 	}

@@ -27,19 +27,19 @@ namespace Levels
 	void Level1::Start()
 	{
 		// textures
-		Texture* coordSystemTexture = new Texture(this, "Textures/CoordinateSystem.png");
-		Texture* yellowBlockTexture = new Texture(this, "Textures/YellowBlock.png");
-		Texture* blueBlockTexture = new Texture(this, "Textures/BlueBlock.png");
-		Texture* rotateYellowSpriteTex = new Texture(this, "Textures/RotateYellowSprite.png");
-		Texture* translateYellowSpriteTex = new Texture(this, "Textures/TranslateYellowSprite.png");
-		Texture* translateBlueSpriteTex = new Texture(this, "Textures/TranslateBlueSprite.png");
-		Texture* rotateCameraTex = new Texture(this, "Textures/RotateCamera.png");
-		Texture* translateCameraTex = new Texture(this, "Textures/TranslateCamera.png");
-		Texture* resetTex = new Texture(this, "Textures/Reset.png");
-		Texture* scaleCameraTex = new Texture(this, "Textures/ScaleCamera.png");
-		Texture* closeTex = new Texture(this, "Textures/OverlayClose.png");
-		Texture* leftArrowTex = new Texture(this, "Textures/OverlayLeft.png");
-		Texture* rightArrowTex = new Texture(this, "Textures/OverlayRight.png");
+		Texture* coordSystemTexture = VideoManager::GetInstance()->GetTexture("Textures/CoordinateSystem.png");
+		Texture* yellowBlockTexture = VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png");
+		Texture* blueBlockTexture = VideoManager::GetInstance()->GetTexture("Textures/BlueBlock.png");
+		Texture* rotateYellowSpriteTex = VideoManager::GetInstance()->GetTexture("Textures/RotateYellowSprite.png");
+		Texture* translateYellowSpriteTex = VideoManager::GetInstance()->GetTexture("Textures/TranslateYellowSprite.png");
+		Texture* translateBlueSpriteTex = VideoManager::GetInstance()->GetTexture("Textures/TranslateBlueSprite.png");
+		Texture* rotateCameraTex = VideoManager::GetInstance()->GetTexture("Textures/RotateCamera.png");
+		Texture* translateCameraTex = VideoManager::GetInstance()->GetTexture("Textures/TranslateCamera.png");
+		Texture* resetTex = VideoManager::GetInstance()->GetTexture("Textures/Reset.png");
+		Texture* scaleCameraTex = VideoManager::GetInstance()->GetTexture("Textures/ScaleCamera.png");
+		Texture* closeTex = VideoManager::GetInstance()->GetTexture("Textures/OverlayClose.png");
+		Texture* leftArrowTex = VideoManager::GetInstance()->GetTexture("Textures/OverlayLeft.png");
+		Texture* rightArrowTex = VideoManager::GetInstance()->GetTexture("Textures/OverlayRight.png");
 
 		// camera entity
 		Entity* camEntity = new Entity();

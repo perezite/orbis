@@ -11,7 +11,6 @@ using namespace Controllers;
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
-#include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Effects/EffectsManager.h"
 #include "../../Orbis/Core/DebugHelper.h"
 using namespace Components;
@@ -28,7 +27,7 @@ namespace Levels
 	void Level8::Start()
 	{
 		// add assets
-		Texture* brickTex = new Texture(this, "Textures/YellowBlock.png");
+		Texture* brickTex = VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png");
 		Tween* tween = EffectsManager::GetInstance()->GetTween("Tweens/Test1.tween");
 
 		// init camera

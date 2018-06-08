@@ -16,9 +16,9 @@ namespace Levels
 	void Level5::Start()
 	{
 		// init textures
-		Texture* yellowBlockTex = new Texture(this, "Textures/YellowBlock.png", true);
-		Texture* redBlockTex = new Texture(this, "Textures/RedBlock.png", true);
-		Texture* greenBlockTex = new Texture(this, "Textures/GreenBlock.png", true);
+		Texture* yellowBlockTex = VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png");
+		Texture* redBlockTex = VideoManager::GetInstance()->GetTexture("Textures/RedBlock.png");
+		Texture* greenBlockTex = VideoManager::GetInstance()->GetTexture("Textures/GreenBlock.png");
 
 		// init camera
 		Entity* cam = new Entity();

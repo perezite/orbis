@@ -8,7 +8,7 @@
 #include "../Controllers/WobbleController.h"
 using namespace Controllers;
 
-#include "../../Orbis/Video/Texture.h"
+#include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -32,16 +32,16 @@ namespace Levels
 	{
 		// init textures
 		std::vector<Texture*> textures;
-		textures.push_back(new Texture(this, "Textures/BlackBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/BlueBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/CyanBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/GreenBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/GreyBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/OrangeBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/PurpleBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/RedBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/VioletBlock.png", true));
-		textures.push_back(new Texture(this, "Textures/YellowBlock.png", true));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/BlackBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/BlueBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/CyanBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/GreenBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/GreyBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/OrangeBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/PurpleBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/RedBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/VioletBlock.png"));
+		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png"));
 
 		// init camera
 		Entity* camEntity = new Entity("Camera");

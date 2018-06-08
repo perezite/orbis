@@ -95,9 +95,6 @@ namespace Components
 		// the index of the selected control point
 		unsigned int m_selectedControlPoint;
 
-		// the coordinate system texture
-		Texture* m_texture;
-
 		// is the editor currently active
 		bool m_isActive;
 

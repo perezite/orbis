@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Game/Entity.h"
-#include "../Video/TextureAtlas.h"
 using namespace Game;
 
 #include <vector>
@@ -10,7 +9,6 @@ using namespace Game;
 namespace Video
 {
 	class Texture;
-	class TextureAtlas;
 }
 
 using namespace Video;
@@ -39,9 +37,6 @@ namespace Game
 		// update 
 		void Update();
 
-		// get the texture atlas
-		Video::TextureAtlas* GetTextureAtlas() { return m_textureAtlas; }
-
 		// has the level a given texture
 		bool HasTexture(std::string assetPath);
 
@@ -64,8 +59,5 @@ namespace Game
 		
 		// is the level started
 		bool m_isStarted;
-
-		// the texture atlas
-		TextureAtlas* m_textureAtlas;
 	};
 }

@@ -16,10 +16,10 @@ namespace Levels
 	void Level6::Start()
 	{
 		// init textures
-		Texture* bleedingTestBlue = new Texture(this, "Textures/BleedingTestBlue.png", true);
-		Texture* bleedingTestGreen = new Texture(this, "Textures/BleedingTestGreen.png", true);
-		Texture* bleedingTestRed = new Texture(this, "Textures/BleedingTestRed.png", true);
-		Texture* bleedingTestYellow = new Texture(this, "Textures/BleedingTestYellow.png", true);
+		Texture* bleedingTestBlue = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestBlue.png");
+		Texture* bleedingTestGreen = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestGreen.png");
+		Texture* bleedingTestRed = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestRed.png");
+		Texture* bleedingTestYellow = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestYellow.png");
 
 		// init camera
 		Entity* cam = new Entity();

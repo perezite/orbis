@@ -1,12 +1,17 @@
 #pragma once
 
 #include "RenderDevice.h"
+#include "Texture.h"
+#include "TextureAtlas.h"
 
 #include "../Libraries/SDL.h"
 using namespace Components;
 
 #include "../../Base/Math/Vector2D.h"
 using namespace Math;
+
+#include <string>
+#include <map>
 
 namespace Video
 {
@@ -21,6 +26,15 @@ namespace Video
 
 		// destructor
 		virtual ~VideoManager();
+
+		// clear the manager
+		void Clear();
+
+		// get the texture atlas
+		TextureAtlas* GetTextureAtlas();
+
+		// get a texture
+		Texture* GetTexture(std::string assetPath, bool flipVertically = true);
 
 		// get the resolution
 		Vector2D GetResolution() { return m_windowResolution; }
@@ -51,6 +65,12 @@ namespace Video
 		void CreateSdlWindow();
 
 	private:
+		// the texture atlas
+		TextureAtlas* m_textureAtlas;
+
+		// the textures
+		std::map<std::string, Texture*> m_textures;
+
 		// the sdl window
 		SDL_Window* m_sdlWindow;
 

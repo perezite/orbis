@@ -1,12 +1,11 @@
 #include "TweenInspector.h"
 
 #include "../../Base/System/EnvironmentHelper.h"
-using namespace System;
-
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Core/LogHelper.h"
 #include "../Core/DebugHelper.h"
+using namespace System;
 using namespace Video;
 using namespace Core;
 
@@ -50,10 +49,10 @@ namespace Components
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
-		m_texture = new Texture(m_parentLevel, "Textures/CoordinateSystem2.png");
+		Texture* texture = VideoManager::GetInstance()->GetTexture("Textures/CoordinateSystem2.png");
 		GetParent()->GetTransform()->scale = Vector2D::Zero;
 		m_renderable = new Renderable;
-		m_renderable->GetMaterial()->SetTexture(m_texture);
+		m_renderable->GetMaterial()->SetTexture(texture);
 		m_renderable->GetMaterial()->SetShader(Shader::GetDiffuseShader());
 		m_renderable->SetMesh(Mesh::CreateTexturedQuad());
 		m_renderable->SetTransform(GetParent()->GetTransform());
