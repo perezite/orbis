@@ -42,7 +42,7 @@ namespace Video
 			delete (*it).second;
 		m_textures.clear();
 
-		for (std::map<std::string, Shader*>::iterator it = m_shaders.begin(); it != m_shaders.end(); it++)
+		for (std::map<std::tuple<std::string, std::string>, Shader*>::iterator it = m_shaders.begin(); it != m_shaders.end(); it++)
 			delete (*it).second;
 		m_shaders.clear();
 
@@ -79,13 +79,14 @@ namespace Video
 		return texture;
 	}
 
-	Shader* VideoManager::GetShader(std::string assetPath)
+	Shader* VideoManager::GetShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
 	{
-		if (m_shaders[assetPath])
-			return m_shaders[assetPath];
+		ShaderPaths shaderPaths = ShaderPaths(vertexShaderAssetPath, fragmentShaderAssetPath);
+		if (m_shaders[shaderPaths])
+			return m_shaders[shaderPaths];
 
-		Shader* shader = new Shader(assetPath);
-		m_shaders[assetPath] = shader;
+		Shader* shader = new Shader(vertexShaderAssetPath, fragmentShaderAssetPath);
+		m_shaders[shaderPaths] = shader;
 		std::cout << m_shaders.size() << std::endl;
 		return shader;
 	}

@@ -21,7 +21,7 @@ namespace Effects
 	{
 		m_renderable = new Renderable();
 		m_renderable->GetMaterial()->SetTexture(texture);
-		m_renderable->GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/DiffuseParticle"));
+		m_renderable->GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/DiffuseParticle.vs", "Shaders/DiffuseParticle.frag"));
 		m_renderable->SetMesh(Mesh::CreateVertexColoredTexturedQuad(m_color));
 		m_renderable->SetTransform(&m_transform);
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(m_renderable);

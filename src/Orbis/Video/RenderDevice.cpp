@@ -296,7 +296,7 @@ namespace Video
 	{
 		// prepare
 		glDisable(GL_BLEND);
-		Shader* shader = VideoManager::GetInstance()->GetShader("Shaders/Flat");
+		Shader* shader = VideoManager::GetInstance()->GetShader("Shaders/Flat.vs", "Shaders/Flat.frag");
 		shader->Use();
 		shader->SetUniform("u_vColor", color);
 		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");

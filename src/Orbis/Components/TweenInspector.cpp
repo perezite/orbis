@@ -53,7 +53,7 @@ namespace Components
 		GetParent()->GetTransform()->scale = Vector2D::Zero;
 		m_renderable = new Renderable;
 		m_renderable->GetMaterial()->SetTexture(texture);
-		m_renderable->GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Diffuse"));
+		m_renderable->GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
 		m_renderable->SetMesh(Mesh::CreateTexturedQuad());
 		m_renderable->SetTransform(GetParent()->GetTransform());
 		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(m_renderable);

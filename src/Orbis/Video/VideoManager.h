@@ -14,6 +14,8 @@ using namespace Math;
 #include <string>
 #include <map>
 
+typedef std::tuple<std::string, std::string> ShaderPaths;
+
 namespace Video
 {
 	class VideoManager
@@ -44,7 +46,7 @@ namespace Video
 		Texture* GetTexture(std::string assetPath, bool flipVertically = true);
 
 		// get or load a shader
-		Shader* GetShader(std::string assetPath);
+		Shader* GetShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath);
 
 		// get the resolution
 		Vector2D GetResolution() { return m_windowResolution; }
@@ -82,7 +84,7 @@ namespace Video
 		std::map<std::string, Texture*> m_textures;
 
 		// the shaders
-		std::map<std::string, Shader*> m_shaders;
+		std::map<ShaderPaths, Shader*> m_shaders;
 
 		// the sdl window
 		SDL_Window* m_sdlWindow;
