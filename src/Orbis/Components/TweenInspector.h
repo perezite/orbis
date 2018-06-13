@@ -27,9 +27,6 @@ namespace Components
 		// ctor
 		TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey = KeyCode::t);
 
-		// dtor
-		virtual ~TweenInspector();
-
 		// start
 		void Start();
 
@@ -84,13 +81,10 @@ namespace Components
 
 	private:
 		// the renderable
-		Renderable* m_renderable;
+		Renderable m_renderable;
 
 		// the tween to be edited
 		Tween m_tween;
-
-		// the parent level
-		Level* m_parentLevel;
 
 		// the index of the selected control point
 		unsigned int m_selectedControlPoint;

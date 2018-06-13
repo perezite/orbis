@@ -2,9 +2,9 @@
 
 namespace Game
 {
-	enum TransformSpace
+	enum class TransformSpace
 	{
-		WorldSpace,
-		CameraSpace
+		World,
+		Camera
 	};
 }

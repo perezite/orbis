@@ -6,7 +6,7 @@
 
 #include "../Components/Camera.h"
 #include "../Core/LogHelper.h"
-#include "../Settings/Settings.h"
+#include "../Orbis/Settings.h"
 using namespace Components;
 using namespace Core;
 
@@ -143,8 +143,8 @@ namespace Video
 	
 	void RenderDevice::UpdateVertexArray()
 	{
-		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::WorldSpace);
-		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::CameraSpace);
+		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::World);
+		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::Camera);
 
 		m_vertexArray.clear();
 		ReserveVertexArray();
@@ -152,7 +152,7 @@ namespace Video
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
 			Transform* transform = m_renderables[i]->GetTransform();
-			bool isWorldSpace = transform->transformSpace == TransformSpace::WorldSpace ? true : false;
+			bool isWorldSpace = transform->transformSpace == TransformSpace::World ? true : false;
 			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transform->GetModelMatrix();
 			InsertIntoVertexArray(m_renderables[i], mvpMatrix);
 		}
@@ -304,7 +304,7 @@ namespace Video
 		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
 
 		// draw
-		glDrawArrays(renderMode, 0, vertexArraySize / 2);
+		glDrawArrays((GLenum)renderMode, 0, vertexArraySize / 2);
 
 		// cleanup
 		glDisableVertexAttribArray(positionAttribLocation);

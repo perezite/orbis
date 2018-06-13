@@ -34,15 +34,9 @@ namespace Components
 	}
 
 	TweenInspector::TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey) : 
-		m_tween(*tween), m_parentLevel(parentLevel), m_isActive(false), m_activationKey(activationKey)
+		m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
 	{
 		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
-	}
-
-	TweenInspector::~TweenInspector()
-	{
-		VideoManager::GetInstance()->GetRenderDevice()->DeleteRenderable(m_renderable);
-		delete m_renderable;
 	}
 
 	void TweenInspector::Start()
@@ -51,12 +45,11 @@ namespace Components
 
 		Texture* texture = VideoManager::GetInstance()->GetTexture("Textures/CoordinateSystem2.png");
 		GetParent()->GetTransform()->scale = Vector2D::Zero;
-		m_renderable = new Renderable;
-		m_renderable->GetMaterial()->SetTexture(texture);
-		m_renderable->GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
-		m_renderable->SetMesh(Mesh::CreateTexturedQuad());
-		m_renderable->SetTransform(GetParent()->GetTransform());
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(m_renderable);
+		m_renderable.GetMaterial()->SetTexture(texture);
+		m_renderable.GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
+		m_renderable.SetMesh(Mesh::CreateTexturedQuad());
+		m_renderable.SetTransform(GetParent()->GetTransform());
+		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(&m_renderable);
 	}
 
 	void TweenInspector::Update()

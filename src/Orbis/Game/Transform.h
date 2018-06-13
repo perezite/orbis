@@ -14,11 +14,11 @@ namespace Game
 	public:
 		// ctor
 		Transform()
-			: position(Vector2D::Zero), rotation(0.0f), scale(Vector2D::One), transformSpace(TransformSpace::WorldSpace)
+			: position(Vector2D::Zero), rotation(0.0f), scale(Vector2D::One), transformSpace(TransformSpace::World)
 		{}
 
 		// ctor
-		Transform(Vector2D position_, float rotation_, Vector2D scale_, TransformSpace transformSpace_ = TransformSpace::WorldSpace)
+		Transform(Vector2D position_, float rotation_, Vector2D scale_, TransformSpace transformSpace_ = TransformSpace::World)
 			: position(position_), rotation(rotation_), scale(scale_), transformSpace(transformSpace_)
 		{}
 

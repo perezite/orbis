@@ -42,7 +42,7 @@ namespace Components
 
 	Matrix3 Camera::CalcViewMatrix(TransformSpace space)
 	{
-		if (space == TransformSpace::CameraSpace)
+		if (space == TransformSpace::Camera)
 			return Matrix3::GetEye();
 
 		Transform* transform = GetInstance()->GetParent()->GetTransform();
@@ -56,7 +56,7 @@ namespace Components
 	Matrix3 Camera::CalcProjectionMatrix(TransformSpace space)
 	{
 		Vector2D scale = 
-			space == TransformSpace::WorldSpace ? GetInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
+			space == TransformSpace::World ? GetInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
 		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
 		float inverseAspect = resolution.x / resolution.y;

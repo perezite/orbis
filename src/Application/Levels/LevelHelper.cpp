@@ -20,7 +20,7 @@ namespace Levels
 		Entity* nextLevel = new Entity(isForward ? "Next level Button" : "Previous level Button");
 		nextLevel->AddComponent(new SpriteRenderer(tex));
 		nextLevel->AddComponent(new LevelSwitchButtonController(targetLevel, isForward));
-		nextLevel->SetTransform(Transform(Vector2D(horzPos, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::CameraSpace));
+		nextLevel->SetTransform(Transform(Vector2D(horzPos, 0.45f * cam->GetSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::Camera));
 		currentLevel->AddEntity(nextLevel);
 	}
 }

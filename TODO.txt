@@ -1,8 +1,9 @@
 TODO:	
 - Refactoring planen
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
-		- Pro-Level Daten in Manager verfrachten, dann wo nötig update(), render() und clear() aufrufen. Pre-Test mit Konsolenprojekt.
-			- Textures und Shaders managen
+		- Alle Pro-Level Daten in Manager verfrachten
+		- In jedem Ordner schauen, ob ein Manager nötig ist und:
+			- Ggf: Start(), Update(), Reset() implementieren
 		- MemoryManager entfernen
 		- Fenster-Logik in Window verfrachten, anstatt im VideoManager handhaben
 		- Aufruf von ClearRenderables in Level.cpp an passende Stelle refactoren	
@@ -18,7 +19,7 @@ TODO:
 		- Branch mergen
 		- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)
 		- Header und Sourcefiles aufsplitten
-		- Load(), Serialize() etc. Funktionen vereinheitlichen zu DeserializeJson() (befüllen des Objekts mit Json-String), LoadJson (Laden des Strings aus Datei), GetJson (Laden des Strings von Objekt) 
+		- Load(), Serialize() etc. Funktionen vereinheitlichen zu LoadFromJson() (Laden des Objekts von Json-String), LoadFromJsonFile (Lades des Ojekts von Json-Datei), SaveToJson (Speichern des Objekts in Json-String), SaveToJsonFile (Speichern des Objekts in Json-File) 
 		- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
 		- StringHelper::Load() in separate Klasse Serialization verschieben
 		- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen. Und soll ausserdem nicht mehr Update() heissen!

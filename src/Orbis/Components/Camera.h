@@ -28,13 +28,13 @@ namespace Components
 		Vector2D ScreenSpaceToCameraSpace(Vector2D v);
 
 		// get the view matrix (the inverse of the transform of the parent entity)
-		Matrix3 CalcViewMatrix(TransformSpace space = TransformSpace::WorldSpace);
+		Matrix3 CalcViewMatrix(TransformSpace space = TransformSpace::World);
 
 		// get the orthographic projection matrix
-		Matrix3 CalcProjectionMatrix(TransformSpace space = TransformSpace::WorldSpace);
+		Matrix3 CalcProjectionMatrix(TransformSpace space = TransformSpace::World);
 
 		// get the view-projection matrix
-		Matrix3 CalcCamMatrix(TransformSpace space = TransformSpace::WorldSpace);
+		Matrix3 CalcCamMatrix(TransformSpace space = TransformSpace::World);
 
 		// get the size of the camera in word coordinates
 		Vector2D GetSize();

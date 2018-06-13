@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Settings/Settings.h"
+#include "../Orbis/Settings.h"
 
 #ifdef __ANDROID__
 	#include <GLES2/gl2.h>	

@@ -5,7 +5,7 @@
 #include "../Game/LevelManager.h"
 #include "../Input/InputManager.h"
 #include "../Libraries/SDL.h"
-#include "../Settings/Settings.h"
+#include "../Orbis/Settings.h"
 using namespace Core;
 using namespace Game;
 using namespace Input;
