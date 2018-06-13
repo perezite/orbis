@@ -66,6 +66,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level7.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Bootbox.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.h" />

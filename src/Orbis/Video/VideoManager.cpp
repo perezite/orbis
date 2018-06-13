@@ -87,7 +87,6 @@ namespace Video
 
 		Shader* shader = new Shader(vertexShaderAssetPath, fragmentShaderAssetPath);
 		m_shaders[shaderPaths] = shader;
-		std::cout << m_shaders.size() << std::endl;
 		return shader;
 	}
 

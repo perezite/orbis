@@ -171,5 +171,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelFactory.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

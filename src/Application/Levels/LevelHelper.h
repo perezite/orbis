@@ -9,6 +9,6 @@ namespace Levels
 	{
 	public:
 		// add level switch buttons
-		static void AddLevelSwitcher(Level* currentLevel, Level* targetLevel, bool isForward);
+		static void AddLevelSwitcher(Level * currentLevel, std::string targetLevelName, bool isForward);
 	};
 }

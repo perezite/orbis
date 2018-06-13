@@ -66,8 +66,8 @@ namespace Levels
 		}
 
 		// add level switchers. Note: because we have no layering yet, the sprites above must be generated first in order to be batched in the right order
-		LevelHelper::AddLevelSwitcher(this, new Level2(), false);
-		LevelHelper::AddLevelSwitcher(this, new Level4(), true);
+		LevelHelper::AddLevelSwitcher(this, "Level2", false);
+		LevelHelper::AddLevelSwitcher(this, "Level4", true);
 
 		// init debug line tester
 		ORBIS_DEBUG (

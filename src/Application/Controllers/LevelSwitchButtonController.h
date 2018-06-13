@@ -1,18 +1,16 @@
 #pragma once
 
 #include "../../Orbis/Components/Component.h"
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Game/Level.h"
 using namespace Components;
-using namespace Game;
 
 namespace Controllers
 {
 	class LevelSwitchButtonController : public Component
 	{
 	public:
-		LevelSwitchButtonController(Level* targetLevel, bool switchForward) : 
-			Component(), m_targetLevel(targetLevel), m_switchForward(switchForward)
+		// ctor
+		LevelSwitchButtonController(std::string targetLevelName, bool switchForward) : 
+			Component(), m_targetLevelName(targetLevelName), m_switchForward(switchForward)
 		{}
 
 		// update
@@ -20,7 +18,7 @@ namespace Controllers
 
 	private:
 		// next level
-		Level* m_targetLevel;
+		std::string m_targetLevelName;
 
 		// is switching forward
 		bool m_switchForward;

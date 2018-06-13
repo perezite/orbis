@@ -27,8 +27,8 @@ namespace Levels
 		AddEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, new Level5(), false);
-		LevelHelper::AddLevelSwitcher(this, new Level7(), true);
+		LevelHelper::AddLevelSwitcher(this, "Level5", false);
+		LevelHelper::AddLevelSwitcher(this, "Level7", true);
 
 		// init entities
 		Entity* blueEntity = new Entity("Bleeding Test Blue");

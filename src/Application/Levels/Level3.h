@@ -3,6 +3,8 @@
 #include "../../Orbis/Game/Level.h"
 using namespace Game;
 
+#include <iostream>
+
 namespace Levels
 {
 	class Level3 : public Level

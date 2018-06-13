@@ -8,11 +8,11 @@ namespace Levels
 	class Level4 : public Level
 	{
 	public:
-		// override
-		void Start();
+		// dtor
+		~Level4();
 
 		// override
-		void Release();
+		void Start();
 
 	private:
 		// original window resolution

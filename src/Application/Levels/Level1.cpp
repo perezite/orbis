@@ -51,7 +51,7 @@ namespace Levels
 		this->AddEntity(camEntity);
 
 		// create level switcher
-		LevelHelper::AddLevelSwitcher(this, new Level2(), true);
+		LevelHelper::AddLevelSwitcher(this, "Level2", true);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");

@@ -15,6 +15,8 @@ using namespace Components;
 using namespace Video;
 using namespace Core;
 
+#include <iostream>
+
 namespace Levels
 {
 	void Level4::Start()
@@ -28,8 +30,8 @@ namespace Levels
 		AddEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, new Level3(), false);
-		LevelHelper::AddLevelSwitcher(this, new Level5(), true);
+		LevelHelper::AddLevelSwitcher(this, "Level3", false);
+		LevelHelper::AddLevelSwitcher(this, "Level5", true);
 
 		// add debug visualizer
 		ORBIS_DEBUG (
@@ -39,7 +41,7 @@ namespace Levels
 		);
 	}
 
-	void Level4::Release()
+	Level4::~Level4()
 	{
 		VideoManager::GetInstance()->SetResolution(m_originalResolution);
 	}

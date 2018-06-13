@@ -23,7 +23,7 @@ namespace Levels
 		AddEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, new Level9(), false);
+		LevelHelper::AddLevelSwitcher(this, "Level9", false);
 
 		// init entities
 		Entity* particles = new Entity("Particles");

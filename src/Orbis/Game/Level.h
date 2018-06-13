@@ -19,23 +19,20 @@ namespace Game
 	class Level
 	{
 	public:
-		// constructor
-		Level();
-
 		// destructor
 		virtual ~Level();
 
-		// start
-		virtual void Start() { };
-
-		// release
-		virtual void Release() { };
+		// init the level
+		void Initialize();
 
 		// add entity
-		void AddEntity(Entity *entity);
+		void AddEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
 
 		// update 
 		void Update();
+
+		// start
+		virtual void Start() = 0;
 
 	protected:
 		// start the entities
@@ -50,8 +47,5 @@ namespace Game
 	private:
 		// entites in the level
 		std::vector<Entity*> m_entities;
-		
-		// is the level started
-		bool m_isStarted;
 	};
 }

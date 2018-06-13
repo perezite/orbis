@@ -26,8 +26,8 @@ namespace Levels
 		AddEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, new Level8(), false);
-		LevelHelper::AddLevelSwitcher(this, new Level10(), true);
+		LevelHelper::AddLevelSwitcher(this, "Level8", false);
+		LevelHelper::AddLevelSwitcher(this, "Level10", true);
 
 		// init entities
 		Entity* yellowBlock = new Entity("Yellow Brick");

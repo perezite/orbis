@@ -2,19 +2,20 @@
 
 #include "../Video/VideoManager.h"
 #include "../Effects/EffectsManager.h"
+#include "../Core/TimeManager.h"
 using namespace Video;
 using namespace Effects;
+using namespace Core;
 
 #include "../../Base/System/MemoryManager.h"
 #include "../../Base/System/MemoryHelper.h"
 #include "../../Base/System/Exception.h"
 using namespace System;
 
+#include <iostream>
+
 namespace Game
 {
-	Level::Level() : m_isStarted(false)
-	{}
-
 	Level::~Level()
 	{
 		EffectsManager::GetInstance()->Clear();
@@ -22,28 +23,21 @@ namespace Game
 		MemoryHelper::Clear(m_entities);
 	}
 
-	void Level::AddEntity(Entity *entity)
+	void Level::Initialize()
 	{
-		if (entity != NULL)
-			m_entities.push_back(entity);
+		TimeManager::GetInstance()->Reset();
+		VideoManager::GetInstance()->Clear();
+		Start();
+		StartEntities();
+		VideoManager::GetInstance()->Start();
 	}
 
 	void Level::Update()
 	{
-		if (m_isStarted == false) 
-		{
-			VideoManager::GetInstance()->Clear();
-			Start();
-			StartEntities();
-			VideoManager::GetInstance()->Start();
-			m_isStarted = true;
-		}
-		else
-		{
-			UpdateEntities();
-			VideoManager::GetInstance()->ClearScreen();
-			RenderEntities();
-		}
+		TimeManager::GetInstance()->Update();
+		UpdateEntities();
+		VideoManager::GetInstance()->ClearScreen();
+		RenderEntities();
 	}
 
 	void Level::StartEntities()

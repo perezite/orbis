@@ -4,7 +4,6 @@
 using namespace Core;
 
 #include "../../Base/System/Exception.h"
-#include "../../Base/System/MemoryHelper.h"
 using namespace System;
 
 #include <iostream>
@@ -12,52 +11,38 @@ using namespace System;
 namespace Game
 {
 	LevelManager::LevelManager() :
-		m_currentLevel(NULL),
-		m_queuedLevel(NULL) { }
+		m_currentLevel(NULL), m_queuedLevel(NULL)
+	{ }
 
 	LevelManager * LevelManager::GetInstance()
 	{
 		static LevelManager instance;
-		
 		return &instance;
 	}
 	
 	LevelManager::~LevelManager()
 	{
-		MemoryHelper::Delete(m_currentLevel);
-		MemoryHelper::Delete(m_queuedLevel);
-	}
-
-	void LevelManager::QueueLevel(Level *level)
-	{
-		m_queuedLevel = level;
-
-		if (m_currentLevel == NULL)
-			SwitchToQueuedLevel();
+		if (m_currentLevel) 
+			delete m_currentLevel;
+		if (m_queuedLevel) 
+			delete m_queuedLevel;
 	}
 
 	void LevelManager::Update()
 	{
-		Exception::Assert(m_currentLevel != NULL, "A level must be queued before calling " + std::string(__func__));
-
-		TimeManager::GetInstance()->Update();
-		m_currentLevel->Update();
+		if (m_currentLevel)
+			m_currentLevel->Update();
 
 		if (m_queuedLevel != NULL)
-		{
 			SwitchToQueuedLevel();
-		}
 	}
 
 	void LevelManager::SwitchToQueuedLevel()
 	{
-		if (m_currentLevel != NULL)
-			m_currentLevel->Release();
-
-		MemoryHelper::Delete(m_currentLevel);
+		if (m_currentLevel)
+			delete m_currentLevel;
 		m_currentLevel = m_queuedLevel;
 		m_queuedLevel = NULL;
-
-		TimeManager::GetInstance()->Reset();
+		m_currentLevel->Initialize();
 	}
 }
