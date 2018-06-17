@@ -14,7 +14,7 @@ namespace Video
 	Window::Window()
 	{
 		SDL_Init(SDL_INIT_VIDEO);
-		SetResolution(GetDefaultResolution());
+		m_resolution = GetDefaultResolution();
 
 		#ifdef WIN32	
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
