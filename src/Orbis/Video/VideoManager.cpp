@@ -10,25 +10,19 @@ namespace Video
 		return &instance;
 	}
 
-	VideoManager::VideoManager() :
-		m_textureAtlas(NULL)
-	{ 
-	}
-
 	void VideoManager::Clear()
 	{
-		VideoManager::GetInstance()->GetRenderDevice()->ClearRenderables();
+		VideoManager::GetInstance()->GetRenderDevice()->Clear();
 
 		for (std::map<std::string, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 			delete (*it).second;
 		m_textures.clear();
 
-		for (std::map<std::tuple<std::string, std::string>, Shader*>::iterator it = m_shaders.begin(); it != m_shaders.end(); it++)
+		for (std::map<ShaderPaths, Shader*>::iterator it = m_shaders.begin(); it != m_shaders.end(); it++)
 			delete (*it).second;
 		m_shaders.clear();
 
-		delete m_textureAtlas;
-		m_textureAtlas = NULL;
+		m_textureAtlas.Clear();
 	}
 
 	void VideoManager::Start()
@@ -39,14 +33,6 @@ namespace Video
 	void VideoManager::Render()
 	{
 		GetRenderDevice()->Render();
-	}
-
-	TextureAtlas* VideoManager::GetTextureAtlas()
-	{
-		if (!m_textureAtlas)
-			m_textureAtlas = new TextureAtlas();
-		
-		return m_textureAtlas;
 	}
 
 	Texture* VideoManager::GetTexture(std::string assetPath, bool flipVertically)

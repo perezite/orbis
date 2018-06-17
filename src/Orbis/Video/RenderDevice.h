@@ -41,7 +41,7 @@ namespace Video
 		void DeleteRenderable(Renderable* renderable);
 
 		// clear all renderables
-		void ClearRenderables();
+		void Clear();
 
 		// render
 		void Render();

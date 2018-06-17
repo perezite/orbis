@@ -13,6 +13,12 @@ namespace Video
 		m_textures.push_back(texture);
 	}
 
+	void TextureAtlas::Clear()
+	{
+		MemoryHelper::Clear(m_charts);
+		m_textures.clear();
+	}
+
 	void TextureAtlas::Generate()
 	{
 		// compute the bin / page rect
@@ -31,11 +37,6 @@ namespace Video
 			TextureChart* page = new TextureChart(pageTextures, pageRects);
 			m_charts.push_back(page);
 		}
-	}
-
-	TextureAtlas::~TextureAtlas()
-	{
-		MemoryHelper::Clear(m_charts);
 	}
 
 	std::vector<Rect> TextureAtlas::GetTextureRects()

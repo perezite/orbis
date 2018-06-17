@@ -21,10 +21,13 @@ namespace Video
 	{
 	public:
 		// dtor
-		virtual ~TextureAtlas();
+		virtual ~TextureAtlas() { };
 
 		// add a texture 
 		void Add(Texture* texture);
+
+		// clear the atlas
+		void Clear();
 
 		// generate the atlas
 		void Generate();

@@ -28,8 +28,8 @@ namespace Video
 		// render
 		void Render();
 
-		// get the texture atla
-		TextureAtlas* GetTextureAtlas();
+		// get the texture atlas
+		TextureAtlas* GetTextureAtlas() { return &m_textureAtlas; }
 
 		// get or load a texture
 		Texture* GetTexture(std::string assetPath, bool flipVertically = true);
@@ -45,17 +45,17 @@ namespace Video
 
 	protected:
 		// singleton constructor
-		VideoManager();
+		VideoManager() { };
 
 	private:
-		// the texture atlas
-		TextureAtlas* m_textureAtlas;
-
 		// the textures
 		std::map<std::string, Texture*> m_textures;
 
 		// the shaders
 		std::map<ShaderPaths, Shader*> m_shaders;
+
+		// the texture atlas
+		TextureAtlas m_textureAtlas;
 
 		// the window
 		Window m_window;

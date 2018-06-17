@@ -32,7 +32,7 @@ namespace Video
 		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
 	}
 
-	void RenderDevice::ClearRenderables()
+	void RenderDevice::Clear()
 	{
 		m_renderables.clear();
 	}
