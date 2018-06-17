@@ -12,8 +12,8 @@ namespace Effects
 		// get instance
 		static EffectsManager* GetInstance();
 
-		// reset the manager
-		void Reset();
+		// clear the manager
+		void Clear();
 
 		// get a tween
 		Tween* GetTween(std::string assetPath);

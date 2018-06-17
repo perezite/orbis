@@ -58,7 +58,7 @@ namespace Components
 		Vector2D scale = 
 			space == TransformSpace::World ? GetInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
-		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
+		Vector2D resolution = VideoManager::GetInstance()->GetWindow()->GetResolution();
 		float inverseAspect = resolution.x / resolution.y;
 
 		Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f, 
@@ -80,7 +80,7 @@ namespace Components
 
 	float Camera::GetAspect()
 	{
-		Vector2D resolution = VideoManager::GetInstance()->GetResolution();
+		Vector2D resolution = VideoManager::GetInstance()->GetWindow()->GetResolution();
 		return resolution.y / resolution.x;
 	}
 }

@@ -8,15 +8,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level2.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.cpp">
-      <Filter>Sandboxing</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.cpp">
-      <Filter>Sandboxing</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Bootbox.cpp">
-      <Filter>Sandboxing</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level3.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
@@ -85,9 +76,6 @@
     <Filter Include="Controllers">
       <UniqueIdentifier>{0d77fe5d-55f2-4aac-a9b6-d7d0c9bf28e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sandboxing">
-      <UniqueIdentifier>{a43b7a5e-9a9b-4ce6-a350-36108209baa8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.h">
@@ -98,15 +86,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level2.h">
       <Filter>Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.h">
-      <Filter>Sandboxing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.h">
-      <Filter>Sandboxing</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Bootbox.h">
-      <Filter>Sandboxing</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level3.h">
       <Filter>Levels</Filter>

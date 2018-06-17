@@ -9,7 +9,7 @@ namespace Effects
 		return &instance;
 	}
 
-	void EffectsManager::Reset()
+	void EffectsManager::Clear()
 	{
 		for (std::map<std::string, Tween*>::iterator it = m_tweens.begin(); it != m_tweens.end(); it++)
 			delete (*it).second;

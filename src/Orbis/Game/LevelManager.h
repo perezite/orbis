@@ -12,14 +12,14 @@ namespace Game
 		// get instance
 		static LevelManager* GetInstance();
 
-		// destructor
-		virtual ~LevelManager();
-
 		// queue level
 		void QueueLevel(Level *level) { m_queuedLevel = level; }
 
 		// get the current level
 		Level* GetCurrentLevel() { return m_currentLevel; }
+
+		// clear
+		void Clear();
 
 		// update
 		void Update();

@@ -12,7 +12,7 @@ namespace Math
 
 	BezierCurve::BezierCurve()
 	{
-		Reset();
+		Clear();
 	}
 
 	Vector2D BezierCurve::GetValue(float x)
@@ -108,7 +108,8 @@ namespace Math
 		return Vector2D(x, y);
 	}
 
-	void BezierCurve::Reset()
+
+	void BezierCurve::Clear()
 	{
 		m_points.clear();
 		Add(BezierPoint(Vector2D(0.0f, 0.0f), 0.0f));

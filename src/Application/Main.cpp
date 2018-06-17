@@ -1,8 +1,5 @@
-#include "Sandboxing/Sandbox.h"
-#include "Sandboxing/Bootbox.h"
 #include "Levels/LevelFactory.h"
 using namespace Levels;
-using namespace Sandboxing;
 
 #include "../Orbis/Orbis/OrbisMain.h"
 #include "../Orbis/Core/LogHelper.h"
@@ -17,17 +14,9 @@ using namespace System;
 
 int main(int argc, char* args[])
 {	
-	#ifdef __SANDBOX__
-		Bootbox::Run();
-		return 0;
-	#endif
-
 	try
 	{
-		OrbisMain::GetInstance()->Initialize();
-		
 		LevelManager::GetInstance()->QueueLevel(LevelFactory::Instantiate("Level1"));
-
 		OrbisMain::GetInstance()->Run();
 	}
 	catch (Exception e)

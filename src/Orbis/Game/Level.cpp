@@ -17,15 +17,15 @@ namespace Game
 {
 	Level::~Level()
 	{
-		EffectsManager::GetInstance()->Reset();
-		VideoManager::GetInstance()->Reset();
+		EffectsManager::GetInstance()->Clear();
+		VideoManager::GetInstance()->Clear();
 		MemoryHelper::Clear(m_entities);
 	}
 
 	void Level::Initialize()
 	{
 		TimeManager::GetInstance()->Reset();
-		VideoManager::GetInstance()->Reset();
+		VideoManager::GetInstance()->Clear();
 		Start();
 		StartEntities();
 		VideoManager::GetInstance()->Start();
@@ -39,7 +39,7 @@ namespace Game
 
 	void Level::Render()
 	{
-		VideoManager::GetInstance()->ClearScreen();
+		VideoManager::GetInstance()->GetWindow()->Clear();
 		RenderEntities();
 	}
 
@@ -63,13 +63,13 @@ namespace Game
 	{
 		VideoManager* video = VideoManager::GetInstance();
 
-		video->ClearScreen();
+		video->GetWindow()->Clear();
 		video->Render();
 
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 			m_entities[i]->RenderDebug();
 
-		video->SwapBuffers();
+		video->GetWindow()->SwapBuffers();
 	}
 }
 

@@ -38,9 +38,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Bootbox.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.h" />
@@ -68,8 +65,5 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Bootbox.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Helper.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Sandboxing\Sandbox.h" />
   </ItemGroup>
 </Project>

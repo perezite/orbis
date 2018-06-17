@@ -18,11 +18,6 @@ namespace Orbis
 		return &instance;
 	}
 
-	void OrbisMain::Initialize()
-	{
-		VideoManager::GetInstance()->Initialize();
-	}
-
 	void OrbisMain::Run()
 	{
 		LevelManager* level = LevelManager::GetInstance();
@@ -44,6 +39,8 @@ namespace Orbis
 				LogPerformance();
 			#endif
 		}
+
+		level->Clear();
 	}
 
 	void OrbisMain::LogPerformance()

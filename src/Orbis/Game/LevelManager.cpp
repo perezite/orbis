@@ -20,11 +20,11 @@ namespace Game
 		return &instance;
 	}
 	
-	LevelManager::~LevelManager()
+	void LevelManager::Clear()
 	{
-		if (m_currentLevel) 
+		if(m_currentLevel)
 			delete m_currentLevel;
-		if (m_queuedLevel) 
+		if (m_queuedLevel)
 			delete m_queuedLevel;
 	}
 

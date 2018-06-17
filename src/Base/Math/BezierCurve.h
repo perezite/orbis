@@ -70,8 +70,8 @@ namespace Math
 		// control points sorting function
 		static bool CompareControlPoints(BezierPoint first, BezierPoint second) { return first.pos.x < second.pos.x; };
 
-		// reset the control points
-		void Reset();
+		// clear the control points
+		void Clear();
 
 	private: 
 		// the control points

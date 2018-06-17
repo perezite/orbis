@@ -1,8 +1,8 @@
 TODO:	
 - Refactoring planen
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
-		- Bootbox und Sandbox löschen. Diese stellen toten Code dar, der trotzdem theoretisch nachgezogen werden müsste. 
-		- Fenster-Logik in Window verfrachten, anstatt im VideoManager handhaben
+		- GetTextureAtlas() Logik vereinfachen
+		- Test auf Mobile
 		- Aufruf von ClearRenderables in Level.cpp an passende Stelle refactoren	
 		- if(x) {delete x; } entfernen. Auch auf NULL setzen nach dem Delete sollte vermieden werden da es Fehler maskiert.
 		- bool GetXY() ersetzen bool IsXY(). Setter Parameterlos machen, wenn nur auf true gesetzt werden kann
@@ -23,6 +23,7 @@ TODO:
 		- Der Inspector soll an der Komponente hängen, nicht am Entity
 		- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
 		- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
+- Intellisense-Problem beheben
 - Den kompletten Source-Code inspizieren und falls nötig weiteres Refactoring planen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
