@@ -15,9 +15,6 @@ namespace Game
 		// destructor
 		virtual ~LevelManager();
 
-		// register a level
-		void RegisterLevel(std::string name, Level* level) { m_levels[name] = level; }
-
 		// queue level
 		void QueueLevel(Level *level) { m_queuedLevel = level; }
 
@@ -27,6 +24,9 @@ namespace Game
 		// update
 		void Update();
 
+		// render
+		void Render();
+
 	protected:
 		// constructor
 		LevelManager();
@@ -35,9 +35,6 @@ namespace Game
 		void SwitchToQueuedLevel();
 
 	private:
-		// the registered levels
-		std::map<std::string, Level*> m_levels;
-
 		// current level
 		Level* m_currentLevel;
 

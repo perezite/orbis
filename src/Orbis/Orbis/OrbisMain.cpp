@@ -25,19 +25,20 @@ namespace Orbis
 
 	void OrbisMain::Run()
 	{
-		LevelManager* levelManager = LevelManager::GetInstance();
-		InputManager* inputManager = InputManager::GetInstance();
+		LevelManager* level = LevelManager::GetInstance();
+		InputManager* input = InputManager::GetInstance();
 
 		m_startTicks = TimeManager::GetInstance()->GetTicks();
 		m_numFrames = 0;
 
 		while (true)
 		{
-			inputManager->Update();
-			if (inputManager->HasQuitEvent())
+			input->Update();
+			if (input->HasQuitEvent())
 				break;
 
-			levelManager->Update();
+			level->Update();
+			level->Render();
 
 			#if defined(ORBIS_LOG_PERFORMANCE)
 				LogPerformance();

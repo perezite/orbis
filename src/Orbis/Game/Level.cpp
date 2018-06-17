@@ -7,7 +7,6 @@ using namespace Video;
 using namespace Effects;
 using namespace Core;
 
-#include "../../Base/System/MemoryManager.h"
 #include "../../Base/System/MemoryHelper.h"
 #include "../../Base/System/Exception.h"
 using namespace System;
@@ -18,15 +17,15 @@ namespace Game
 {
 	Level::~Level()
 	{
-		EffectsManager::GetInstance()->Clear();
-		VideoManager::GetInstance()->Clear();
+		EffectsManager::GetInstance()->Reset();
+		VideoManager::GetInstance()->Reset();
 		MemoryHelper::Clear(m_entities);
 	}
 
 	void Level::Initialize()
 	{
 		TimeManager::GetInstance()->Reset();
-		VideoManager::GetInstance()->Clear();
+		VideoManager::GetInstance()->Reset();
 		Start();
 		StartEntities();
 		VideoManager::GetInstance()->Start();
@@ -36,6 +35,10 @@ namespace Game
 	{
 		TimeManager::GetInstance()->Update();
 		UpdateEntities();
+	}
+
+	void Level::Render()
+	{
 		VideoManager::GetInstance()->ClearScreen();
 		RenderEntities();
 	}

@@ -62,7 +62,7 @@ namespace Components
 		// delete outdated particles
 		for (unsigned int i = 0; i < m_particles.size();)
 		{
-			if (m_particles[i]->GetCurrentLifetime() <= 0.0f)	
+			if (m_particles[i]->GetCurrentLifetime() <= 0.0f)
 				MemoryHelper::Remove(m_particles, i);
 			else
 				i++;
