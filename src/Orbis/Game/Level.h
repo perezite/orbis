@@ -22,7 +22,7 @@ namespace Game
 		// destructor
 		virtual ~Level();
 
-		// init the level
+		// initialize the level
 		void Initialize();
 
 		// add entity
@@ -31,8 +31,11 @@ namespace Game
 		// update 
 		void Update();
 
+		// render
+		void Render();
+
 		// start
-		virtual void Start() = 0;
+		virtual void Start() { }
 
 	protected:
 		// start the entities

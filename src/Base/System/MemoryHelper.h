@@ -8,18 +8,9 @@ namespace System
 	{
 	public:
 		template <class T>
-		static void Delete(T* pointer)
-		{
-			if (pointer)
-				delete pointer;
-			pointer = NULL;
-		}
-
-		template <class T>
 		static void Remove(std::vector<T*>& vec, unsigned int index)
 		{
-			T* pointer = vec.at(index);
-			Delete(pointer);
+			delete vec[index];
 			vec.erase(vec.begin() + index);
 		}
 
@@ -27,11 +18,7 @@ namespace System
 		static void Clear(std::vector<T*>& vec)
 		{
 			for (unsigned int i = 0; i < vec.size(); i++)
-			{
-				T* pointer = vec.at(i);
-				delete pointer;
-			}
-
+				delete vec[i];
 			vec.clear();
 		}
 	};

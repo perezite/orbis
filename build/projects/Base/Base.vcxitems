@@ -33,7 +33,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryHelper.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h" />
   </ItemGroup>
 </Project>

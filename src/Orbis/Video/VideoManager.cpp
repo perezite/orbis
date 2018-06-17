@@ -34,7 +34,7 @@ namespace Video
 		Shutdown();
 	}
 
-	void VideoManager::Clear()
+	void VideoManager::Reset()
 	{
 		VideoManager::GetInstance()->GetRenderDevice()->ClearRenderables();
 

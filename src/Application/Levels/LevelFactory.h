@@ -44,7 +44,7 @@ namespace Levels
 			else if (name == "Level10")
 				return new Level10();
 
-			throw new Exception("The level " + name + " is not registered");
+			throw Exception("The level " + name + " is not registered");
 		}
 	};
 }

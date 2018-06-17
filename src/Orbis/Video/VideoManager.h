@@ -30,8 +30,8 @@ namespace Video
 		// destructor
 		virtual ~VideoManager();
 
-		// clear the manager
-		void Clear();
+		// reset the manager
+		void Reset();
 
 		// start the manager
 		void Start();

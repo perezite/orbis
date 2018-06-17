@@ -8,9 +8,6 @@
 using namespace Core;
 using namespace Video;
 
-#include "../../Base/System/MemoryManager.h"
-using namespace System;
-
 namespace
 {
 	// flip an SDL surface

@@ -30,11 +30,15 @@ namespace Game
 
 	void LevelManager::Update()
 	{
-		if (m_currentLevel)
-			m_currentLevel->Update();
-
 		if (m_queuedLevel != NULL)
 			SwitchToQueuedLevel();
+
+		m_currentLevel->Update();
+	}
+
+	void LevelManager::Render()
+	{
+		m_currentLevel->Render();
 	}
 
 	void LevelManager::SwitchToQueuedLevel()

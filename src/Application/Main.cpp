@@ -26,7 +26,7 @@ int main(int argc, char* args[])
 	{
 		OrbisMain::GetInstance()->Initialize();
 		
-		LevelManager::GetInstance()->QueueLevel(LevelFactory::Instantiate("Level9"));
+		LevelManager::GetInstance()->QueueLevel(LevelFactory::Instantiate("Level1"));
 
 		OrbisMain::GetInstance()->Run();
 	}
