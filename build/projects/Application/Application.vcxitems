@@ -21,7 +21,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButtonController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\LevelSwitchButtonController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\ParticleSystemTester.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButtonController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TweenTester.cpp" />
@@ -36,7 +35,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level7.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +61,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level7.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelFactory.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.h" />
   </ItemGroup>
 </Project>

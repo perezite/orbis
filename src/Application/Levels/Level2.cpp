@@ -39,8 +39,8 @@ namespace Levels
 		this->AddEntity(camera);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, "Level1", false);
-		LevelHelper::AddLevelSwitcher(this, "Level3", true);
+		LevelHelper::AddLevelSwitcher<Level1>(this, false);
+		LevelHelper::AddLevelSwitcher<Level3>(this, true);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");

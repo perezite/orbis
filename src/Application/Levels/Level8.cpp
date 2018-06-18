@@ -36,8 +36,8 @@ namespace Levels
 		AddEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, "Level7", false);
-		LevelHelper::AddLevelSwitcher(this, "Level9", true);
+		LevelHelper::AddLevelSwitcher<Level7>(this, false);
+		LevelHelper::AddLevelSwitcher<Level9>(this, true);
 
 		// add tweened brick
 		Entity* brick = new Entity();

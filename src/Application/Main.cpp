@@ -1,4 +1,13 @@
-#include "Levels/LevelFactory.h"
+#include "Levels/Level1.h"
+#include "Levels/Level2.h"
+#include "Levels/Level3.h"
+#include "Levels/Level4.h"
+#include "Levels/Level5.h"
+#include "Levels/Level6.h"
+#include "Levels/Level7.h"
+#include "Levels/Level8.h"
+#include "Levels/Level9.h"
+#include "Levels/Level10.h"
 using namespace Levels;
 
 #include "../Orbis/Orbis/OrbisMain.h"
@@ -16,7 +25,7 @@ int main(int argc, char* args[])
 {	
 	try
 	{
-		LevelManager::GetInstance()->QueueLevel(LevelFactory::Instantiate("Level1"));
+		LevelManager::GetInstance()->QueueLevel(new Level1());
 		OrbisMain::GetInstance()->Run();
 	}
 	catch (Exception e)

@@ -30,8 +30,8 @@ namespace Levels
 		AddEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, "Level3", false);
-		LevelHelper::AddLevelSwitcher(this, "Level5", true);
+		LevelHelper::AddLevelSwitcher<Level3>(this, false);
+		LevelHelper::AddLevelSwitcher<Level5>(this, true);
 
 		// add debug visualizer
 		ORBIS_DEBUG (

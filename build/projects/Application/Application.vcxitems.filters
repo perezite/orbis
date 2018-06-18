@@ -62,12 +62,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButtonController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\LevelSwitchButtonController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.cpp">
-      <Filter>Levels</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -148,9 +142,6 @@
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.h">
-      <Filter>Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelFactory.h">
       <Filter>Levels</Filter>
     </ClInclude>
   </ItemGroup>

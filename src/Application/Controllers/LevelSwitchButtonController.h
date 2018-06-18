@@ -1,25 +1,37 @@
 #pragma once
 
+#include "LevelSwitchButtonController.h"
+
+#include "../../Orbis/Input/InputManager.h"
+#include "../../Orbis/Game/Transform.h"
+#include "../../Orbis/Game/LevelManager.h"
 #include "../../Orbis/Components/Component.h"
 using namespace Components;
+using namespace Input;
+using namespace Game;
 
 namespace Controllers
 {
+	template <class T>
 	class LevelSwitchButtonController : public Component
 	{
 	public:
 		// ctor
-		LevelSwitchButtonController(std::string targetLevelName, bool switchForward) : 
-			Component(), m_targetLevelName(targetLevelName), m_switchForward(switchForward)
+		LevelSwitchButtonController(bool switchForward) : 
+			Component(), m_switchForward(switchForward)
 		{}
 
 		// update
-		void Update();
+		void Update()
+		{
+			InputManager* input = InputManager::GetInstance();
+			KeyCode switchKey = m_switchForward ? KeyCode::Right : KeyCode::Left;
+
+			if (input->IsKeyDown(switchKey) || input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
+				LevelManager::GetInstance()->QueueLevel(new T());
+		}
 
 	private:
-		// next level
-		std::string m_targetLevelName;
-
 		// is switching forward
 		bool m_switchForward;
 	};

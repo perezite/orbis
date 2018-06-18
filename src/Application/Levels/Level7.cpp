@@ -23,8 +23,8 @@ namespace Levels
 		AddEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher(this, "Level6", false);
-		LevelHelper::AddLevelSwitcher(this, "Level8", true);
+		LevelHelper::AddLevelSwitcher<Level6>(this, false);
+		LevelHelper::AddLevelSwitcher<Level8>(this, true);
 
 		// init ball 
 		Entity* ballEntity = new Entity();
