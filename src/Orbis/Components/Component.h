@@ -22,7 +22,7 @@ namespace Components
 		virtual ~Component() { };
 
 		// start
-		virtual void Start() { };
+		virtual void start() { };
 
 		// update
 		virtual void Update() { };

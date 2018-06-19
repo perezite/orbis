@@ -3,13 +3,13 @@
 
 namespace Effects
 {
-	EffectsManager* EffectsManager::GetInstance()
+	EffectsManager* EffectsManager::getInstance()
 	{
 		static EffectsManager instance;
 		return &instance;
 	}
 
-	void EffectsManager::Clear()
+	void EffectsManager::clear()
 	{
 		for (std::map<std::string, Tween*>::iterator it = m_tweens.begin(); it != m_tweens.end(); it++)
 			delete (*it).second;

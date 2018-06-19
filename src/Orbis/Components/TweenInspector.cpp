@@ -39,22 +39,22 @@ namespace Components
 		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
 	}
 
-	void TweenInspector::Start()
+	void TweenInspector::start()
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
-		Texture* texture = VideoManager::GetInstance()->GetTexture("Textures/CoordinateSystem2.png");
+		Texture* texture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem2.png");
 		GetParent()->GetTransform()->scale = Vector2D::Zero;
 		m_renderable.GetMaterial()->SetTexture(texture);
-		m_renderable.GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
+		m_renderable.GetMaterial()->SetShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
 		m_renderable.SetMesh(Mesh::CreateTexturedQuad());
 		m_renderable.SetTransform(GetParent()->GetTransform());
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(&m_renderable);
+		VideoManager::getInstance()->getRenderDevice()->AddRenderable(&m_renderable);
 	}
 
 	void TweenInspector::Update()
 	{
-		InputManager* input = InputManager::GetInstance();
+		InputManager* input = InputManager::getInstance();
 
 		if (input->IsKeyGoingDown(m_activationKey))
 			Toggle();
@@ -93,7 +93,7 @@ namespace Components
 	
 	void TweenInspector::AddOrSelectControlPoint()
 	{
-		Vector2D tap = InputManager::GetInstance()->GetTapPosition();
+		Vector2D tap = InputManager::getInstance()->GetTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			m_selectedControlPoint = ComputeSelectedControlPoint(tap);
@@ -106,7 +106,7 @@ namespace Components
 
 	void TweenInspector::MoveControlPoint()
 	{
-		Vector2D tap = InputManager::GetInstance()->GetTapPosition();
+		Vector2D tap = InputManager::getInstance()->GetTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			// clamp boundary point positions
@@ -122,7 +122,7 @@ namespace Components
 
 	void TweenInspector::RotateTangent()
 	{
-		Vector2D tap = InputManager::GetInstance()->GetTapPosition();
+		Vector2D tap = InputManager::getInstance()->GetTapPosition();
 		Vector2D ctrlPoint = m_tween.GetCurve()->Get(m_selectedControlPoint).pos;
 		float tangent;
 		if (tap.x > ctrlPoint.x)
@@ -175,14 +175,14 @@ namespace Components
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
 			Vector2D current = calcCurve.GetValue(x);
-			VideoManager::GetInstance()->GetRenderDevice()->DrawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
+			VideoManager::getInstance()->getRenderDevice()->DrawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
 
 	void TweenInspector::RenderControlPoints()
 	{
-		RenderDevice* rd = VideoManager::GetInstance()->GetRenderDevice();
+		RenderDevice* rd = VideoManager::getInstance()->getRenderDevice();
 
 		for (unsigned int i = 0; i < m_tween.GetCurve()->GetLength(); i++)
 		{

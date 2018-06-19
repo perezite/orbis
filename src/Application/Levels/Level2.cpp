@@ -24,11 +24,11 @@ using namespace Video;
 
 namespace Levels
 {
-	void Level2::Start()
+	void Level2::start()
 	{
 		// textures
-		Texture* coordSystemTexture = VideoManager::GetInstance()->GetTexture("Textures/CoordinateSystem.png");
-		Texture* yellowBlockTexture = VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png");
+		Texture* coordSystemTexture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem.png");
+		Texture* yellowBlockTexture = VideoManager::getInstance()->getTexture("Textures/YellowBlock.png");
 
 		// camera entity
 		Entity* camera = new Entity();

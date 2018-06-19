@@ -4,7 +4,7 @@
 
 namespace Core
 {
-	TimeManager* TimeManager::GetInstance()
+	TimeManager* TimeManager::getInstance()
 	{
 		static TimeManager instance;
 		return &instance;

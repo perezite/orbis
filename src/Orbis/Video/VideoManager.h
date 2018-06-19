@@ -17,31 +17,31 @@ namespace Video
 	{
 	public:
 		// get instance
-		static VideoManager* GetInstance();
+		static VideoManager* getInstance();
 
 		// clear the manager
-		void Clear();
+		void clear();
 
 		// start the manager
-		void Start();
+		void start();
 
 		// render
-		void Render();
+		void render();
 
 		// get the texture atlas
-		TextureAtlas* GetTextureAtlas() { return &m_textureAtlas; }
+		TextureAtlas* getTextureAtlas() { return &m_textureAtlas; }
 
 		// get or load a texture
-		Texture* GetTexture(std::string assetPath, bool flipVertically = true);
+		Texture* getTexture(std::string assetPath, bool flipVertically = true);
 
 		// get or load a shader
-		Shader* GetShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath);
+		Shader* getShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath);
 
 		// get the winow
-		Window* GetWindow() { return &m_window; }
+		Window* getWindow() { return &m_window; }
 
 		// get the render device
-		RenderDevice* GetRenderDevice() { return &m_renderDevice; }
+		RenderDevice* getRenderDevice() { return &m_renderDevice; }
 
 	protected:
 		// singleton constructor

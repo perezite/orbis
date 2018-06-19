@@ -41,10 +41,10 @@ namespace Video
 		void DeleteRenderable(Renderable* renderable);
 
 		// clear all renderables
-		void Clear();
+		void clear();
 
 		// render
-		void Render();
+		void render();
 
 		// draw a debug line (slow!)
 		void DrawDebugLine(Vector2D start, Vector2D end, Color color);

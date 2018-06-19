@@ -28,20 +28,20 @@ namespace Levels
 	const float Level3::MIN_BLOCK_SCALE = 0.01f;
 	const float Level3::MAX_BLOCK_SCALE = 0.05f;
 
-	void Level3::Start()
+	void Level3::start()
 	{
 		// init textures
 		std::vector<Texture*> textures;
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/BlackBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/BlueBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/CyanBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/GreenBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/GreyBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/OrangeBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/PurpleBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/RedBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/VioletBlock.png"));
-		textures.push_back(VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/BlackBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/BlueBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/CyanBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/GreenBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/GreyBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/OrangeBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/PurpleBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/RedBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/VioletBlock.png"));
+		textures.push_back(VideoManager::getInstance()->getTexture("Textures/YellowBlock.png"));
 
 		// init camera
 		Entity* camEntity = new Entity("Camera");

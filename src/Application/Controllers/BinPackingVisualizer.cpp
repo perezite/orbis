@@ -50,7 +50,7 @@ namespace Controllers
 
 	void BinPackingVisualizer::Update()
 	{
-		if(InputManager::GetInstance()->IsKeyGoingDown(KeyCode::Return))
+		if(InputManager::getInstance()->IsKeyGoingDown(KeyCode::Return))
 		{ 
 			m_currentStep++;
 			m_currentStep = std::min(m_currentStep, m_origRects.size());

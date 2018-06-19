@@ -26,7 +26,7 @@ namespace Components
 		virtual ~ParticleRenderer();
 
 		// override
-		void Start();
+		void start();
 
 		// override
 		void Update();

@@ -32,12 +32,12 @@ namespace Video
 		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
 	}
 
-	void RenderDevice::Clear()
+	void RenderDevice::clear()
 	{
 		m_renderables.clear();
 	}
 
-	void RenderDevice::Render()
+	void RenderDevice::render()
 	{ 
 		#ifdef ORBIS_DEBUG_RENDERDEVICE
 			int count = 0;
@@ -67,27 +67,27 @@ namespace Video
 			Renderable* prototype = m_renderables[batchBegin];
 
 			// init batch prototype
-			if (prototype->GetMaterial()->GetTexture() != NULL)
-				prototype->GetMaterial()->GetTexture()->Bind();
-			prototype->GetMaterial()->GetShader()->Use();
+			if (prototype->GetMaterial()->getTexture() != NULL)
+				prototype->GetMaterial()->getTexture()->Bind();
+			prototype->GetMaterial()->getShader()->Use();
 			prototype->GetMaterial()->PrepareShaderVariables();
 
 			// set position shader variable
 			unsigned int stride = prototype->GetMesh()->GetVertexData()->size();
-			int positionAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vPosition");
+			int positionAttribLocation = prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
 			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex]));
 
 			// set texture coordinate shader variable
-			if (prototype->GetMaterial()->GetTexture() != NULL) {
-				int texCoordAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord");
+			if (prototype->GetMaterial()->getTexture() != NULL) {
+				int texCoordAttribLocation = prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vTexCoord");
 				glEnableVertexAttribArray(texCoordAttribLocation);
 				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex + 2]));
 			}
 
 			// set vertex color shader variable
 			if (prototype->GetMesh()->IsVertexColored()) {
-				int vertexColorAttribLocation = prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vVertexColor");
+				int vertexColorAttribLocation = prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vVertexColor");
 				glEnableVertexAttribArray(vertexColorAttribLocation);
 				glVertexAttribPointer(vertexColorAttribLocation, 4, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex + 4]));
 			}
@@ -96,11 +96,11 @@ namespace Video
 			glDrawElements(GL_TRIANGLES, batchSize * prototype->GetMesh()->GetIndices()->size(), GL_UNSIGNED_SHORT, &m_indexArray[iboStartIndex]);
 
 			// cleanup
-			prototype->GetMaterial()->GetShader()->Unuse();
-			if (prototype->GetMaterial()->GetTexture() != NULL)
-				glDisableVertexAttribArray(prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vTexCoord"));
+			prototype->GetMaterial()->getShader()->Unuse();
+			if (prototype->GetMaterial()->getTexture() != NULL)
+				glDisableVertexAttribArray(prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vTexCoord"));
 			if (prototype->GetMesh()->IsVertexColored())
-				glDisableVertexAttribArray(prototype->GetMaterial()->GetShader()->GetAttributeLocation("a_vVertexColor"));
+				glDisableVertexAttribArray(prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vVertexColor"));
 			glDisableVertexAttribArray(positionAttribLocation);
 
 		#ifdef ORBIS_DEBUG_RENDERDEVICE
@@ -119,7 +119,7 @@ namespace Video
 	void RenderDevice::DrawDebugLine(Vector2D start, Vector2D end, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::GetInstance()->CalcCamMatrix();
+		Matrix3 camMatrix = Camera::getInstance()->CalcCamMatrix();
 		start = camMatrix * start;
 		end = camMatrix * end;
 		GLfloat vertexArray[4] = { start.x, start.y, end.x, end.y };
@@ -131,7 +131,7 @@ namespace Video
 	void RenderDevice::DrawDebugRect(Rect rect, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::GetInstance()->CalcCamMatrix();
+		Matrix3 camMatrix = Camera::getInstance()->CalcCamMatrix();
 		rect = camMatrix * rect;
 		GLfloat vertexArray[12] = {
 			rect.leftBottom.x , rect.leftBottom.y, rect.GetRightBottom().x, rect.GetRightBottom().y, rect.GetLeftTop().x, rect.GetLeftTop().y,
@@ -143,8 +143,8 @@ namespace Video
 	
 	void RenderDevice::UpdateVertexArray()
 	{
-		Matrix3 worldCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::World);
-		Matrix3 localCamMatrix = Camera::GetInstance()->CalcCamMatrix(TransformSpace::Camera);
+		Matrix3 worldCamMatrix = Camera::getInstance()->CalcCamMatrix(TransformSpace::World);
+		Matrix3 localCamMatrix = Camera::getInstance()->CalcCamMatrix(TransformSpace::Camera);
 
 		m_vertexArray.clear();
 		ReserveVertexArray();
@@ -161,7 +161,7 @@ namespace Video
 	void RenderDevice::InsertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix)
 	{
 		Mesh* mesh = renderable->GetMesh();
-		Texture* tex = renderable->GetMaterial()->GetTexture();
+		Texture* tex = renderable->GetMaterial()->getTexture();
 
 		// apply transformation on mesh data
 		std::vector<GLfloat> data = *mesh->GetVertexData();
@@ -296,7 +296,7 @@ namespace Video
 	{
 		// prepare
 		glDisable(GL_BLEND);
-		Shader* shader = VideoManager::GetInstance()->GetShader("Shaders/Flat.vs", "Shaders/Flat.frag");
+		Shader* shader = VideoManager::getInstance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag");
 		shader->Use();
 		shader->SetUniform("u_vColor", color);
 		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");

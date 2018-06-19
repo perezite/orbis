@@ -13,9 +13,9 @@ namespace Video
 		m_textures.push_back(texture);
 	}
 
-	void TextureAtlas::Clear()
+	void TextureAtlas::clear()
 	{
-		MemoryHelper::Clear(m_charts);
+		MemoryHelper::clear(m_charts);
 		m_textures.clear();
 	}
 

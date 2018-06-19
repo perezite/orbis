@@ -7,7 +7,7 @@ using namespace Core;
 
 namespace Controllers
 {
-	void TweenTester::Start()
+	void TweenTester::start()
 	{
 		m_tween->SetInitial(GetParent()->GetTransform()->scale);
 	}

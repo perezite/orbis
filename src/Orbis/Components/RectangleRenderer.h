@@ -16,7 +16,7 @@ namespace Components
 		RectangleRenderer(const Color& color) : Component() { m_color = color; }
 
 		// start
-		void Start();
+		void start();
 
 	private:
 		// the color 

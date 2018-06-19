@@ -16,13 +16,13 @@ namespace Video
 		void SetTexture(Texture* const texture) { m_texture = texture; }
 
 		// get texture 
-		Texture* GetTexture() const { return m_texture; }
+		Texture* getTexture() const { return m_texture; }
 
 		// set shader
 		void SetShader(Shader* const shader) { m_shader = shader; }
 
 		// get shader 
-		Shader* GetShader() const { return m_shader; }
+		Shader* getShader() const { return m_shader; }
 
 		// set color
 		void SetColor(const Color& color) { m_color = color; }

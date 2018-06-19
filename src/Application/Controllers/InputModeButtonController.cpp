@@ -17,7 +17,7 @@ namespace Controllers
 {
 	void InputModeButtonController::Update()
 	{
-		InputManager* inputManager = InputManager::GetInstance();
+		InputManager* inputManager = InputManager::getInstance();
 
 		if (inputManager->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
 				Cycle();
@@ -26,7 +26,7 @@ namespace Controllers
 	void InputModeButtonController::Cycle()
 	{
 		// get current texture
-		std::vector<Texture*>::iterator previousTextureIt = std::find(m_textures.begin(), m_textures.end(), m_Renderer->GetTexture());
+		std::vector<Texture*>::iterator previousTextureIt = std::find(m_textures.begin(), m_textures.end(), m_Renderer->getTexture());
 		std::vector<Texture*>::iterator currentTextureIt = ++previousTextureIt;
 
 		// update sprite renderer

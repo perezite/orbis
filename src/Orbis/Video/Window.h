@@ -15,22 +15,23 @@ namespace Video
 		virtual ~Window();
 
 		// get the resolution
-		Vector2D GetResolution() { return m_resolution; }
+		Vector2D getResolution() { return m_resolution; }
 
 		// change the window resultion
-		void SetResolution(Vector2D resolution);
+		void setResolution(Vector2D resolution);
 
-		void Clear();
+		// clear
+		void clear();
 
 		// swap the video buffers
-		void SwapBuffers();
+		void swapBuffers();
 
 	protected:		
 		// get the default window resolution
-		Vector2D GetDefaultResolution();
+		Vector2D getDefaultResolution();
 
 		// create the sdl window
-		void CreateSdlWindow();
+		void createSdlWindow();
 
 	private:
 		// the sdl window

@@ -71,7 +71,7 @@ namespace Math
 		static bool CompareControlPoints(BezierPoint first, BezierPoint second) { return first.pos.x < second.pos.x; };
 
 		// clear the control points
-		void Clear();
+		void clear();
 
 	private: 
 		// the control points

@@ -28,7 +28,7 @@ namespace Components
 		TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey = KeyCode::t);
 
 		// start
-		void Start();
+		void start();
 
 		// update
 		void Update();

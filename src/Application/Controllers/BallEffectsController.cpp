@@ -14,7 +14,7 @@ namespace Controllers
 		{
 			float waitSeconds = 2.0f - m_explosionTimeElapsed;
 			LogHelper::LogMessage("BallEffectsController::ExplodingRun(), wait another %f", waitSeconds);
-			m_explosionTimeElapsed += TimeManager::GetInstance()->GetDeltaSeconds();
+			m_explosionTimeElapsed += TimeManager::getInstance()->GetDeltaSeconds();
 
 			if (m_explosionTimeElapsed >= 2.0f)
 			{

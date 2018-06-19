@@ -16,13 +16,13 @@ namespace Components
 		SpriteRenderer(Texture* texture);
 
 		// start
-		void Start();
+		void start();
 
 		// set the texture
 		void SetTexture(Texture* texture);
 
 		// get the texture
-		Texture* GetTexture(void) { return m_renderable.GetMaterial()->GetTexture(); }
+		Texture* getTexture(void) { return m_renderable.GetMaterial()->getTexture(); }
 
 	private: 
 		// the texture

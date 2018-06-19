@@ -17,7 +17,7 @@ namespace Components
 {
 	Camera* Camera::m_instance = NULL;
 
-	Camera* Camera::GetInstance()
+	Camera* Camera::getInstance()
 	{
 		Exception::Assert(m_instance != NULL, "No camera was attached in the level");
 
@@ -45,7 +45,7 @@ namespace Components
 		if (space == TransformSpace::Camera)
 			return Matrix3::GetEye();
 
-		Transform* transform = GetInstance()->GetParent()->GetTransform();
+		Transform* transform = getInstance()->GetParent()->GetTransform();
 		Matrix3 invTransform;
 		invTransform.Rotate2D(-transform->rotation);
 		invTransform.Translate2D(-transform->position);
@@ -56,9 +56,9 @@ namespace Components
 	Matrix3 Camera::CalcProjectionMatrix(TransformSpace space)
 	{
 		Vector2D scale = 
-			space == TransformSpace::World ? GetInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
+			space == TransformSpace::World ? getInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
-		Vector2D resolution = VideoManager::GetInstance()->GetWindow()->GetResolution();
+		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		float inverseAspect = resolution.x / resolution.y;
 
 		Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f, 
@@ -74,13 +74,13 @@ namespace Components
 
 	Vector2D Camera::GetSize()
 	{
-		Vector2D scale = GetInstance()->GetParent()->GetTransform()->scale;
+		Vector2D scale = getInstance()->GetParent()->GetTransform()->scale;
 		return Vector2D(scale.x, scale.y * GetAspect());
 	}
 
 	float Camera::GetAspect()
 	{
-		Vector2D resolution = VideoManager::GetInstance()->GetWindow()->GetResolution();
+		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		return resolution.y / resolution.x;
 	}
 }

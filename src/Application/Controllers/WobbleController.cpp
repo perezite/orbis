@@ -15,7 +15,7 @@ namespace Controllers
 	const float WobbleController::MIN_SCALE = 0.02f;
 	const float WobbleController::MAX_SCALE = 0.1f;
 
-	void WobbleController::Start()
+	void WobbleController::start()
 	{
 		float scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * MathHelper::GetRandom();
 		GetParent()->GetTransform()->scale = Vector2D(scale, scale);
@@ -24,7 +24,7 @@ namespace Controllers
 
 	void WobbleController::Update()
 	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->GetDeltaSeconds();
 		Transform* trans = GetParent()->GetTransform();
 
 		float deltaScale = m_isGrowing ? dt * 0.01f : dt * -0.01f;

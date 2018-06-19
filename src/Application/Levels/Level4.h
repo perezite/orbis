@@ -12,7 +12,7 @@ namespace Levels
 		~Level4();
 
 		// override
-		void Start();
+		void start();
 
 	private:
 		// original window resolution

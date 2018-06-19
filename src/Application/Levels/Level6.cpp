@@ -13,13 +13,13 @@ using namespace Video;
 
 namespace Levels
 {
-	void Level6::Start()
+	void Level6::start()
 	{
 		// init textures
-		Texture* bleedingTestBlue = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestBlue.png");
-		Texture* bleedingTestGreen = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestGreen.png");
-		Texture* bleedingTestRed = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestRed.png");
-		Texture* bleedingTestYellow = VideoManager::GetInstance()->GetTexture("Textures/BleedingTestYellow.png");
+		Texture* bleedingTestBlue = VideoManager::getInstance()->getTexture("Textures/BleedingTestBlue.png");
+		Texture* bleedingTestGreen = VideoManager::getInstance()->getTexture("Textures/BleedingTestGreen.png");
+		Texture* bleedingTestRed = VideoManager::getInstance()->getTexture("Textures/BleedingTestRed.png");
+		Texture* bleedingTestYellow = VideoManager::getInstance()->getTexture("Textures/BleedingTestYellow.png");
 
 		// init camera
 		Entity* cam = new Entity();

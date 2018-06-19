@@ -10,10 +10,10 @@ namespace Effects
 	{
 	public: 
 		// get instance
-		static EffectsManager* GetInstance();
+		static EffectsManager* getInstance();
 
 		// clear the manager
-		void Clear();
+		void clear();
 
 		// get a tween
 		Tween* GetTween(std::string assetPath);

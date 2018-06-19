@@ -19,11 +19,11 @@ namespace Levels
 		template <class T>
 		static void AddLevelSwitcher(Level* currentLevel, bool isForward)
 		{
-			VideoManager* video = VideoManager::GetInstance();
+			VideoManager* video = VideoManager::getInstance();
 
-			Camera* cam = Camera::GetInstance();
+			Camera* cam = Camera::getInstance();
 			float horzPos = isForward ? 0.45f * cam->GetSize().x : -0.45f * cam->GetSize().x;
-			Texture* tex = isForward ? video->GetTexture("Textures/OverlayRight.png") : video->GetTexture("Textures/OverlayLeft.png");
+			Texture* tex = isForward ? video->getTexture("Textures/OverlayRight.png") : video->getTexture("Textures/OverlayLeft.png");
 
 			Entity* nextLevel = new Entity(isForward ? "Next level Button" : "Previous level Button");
 			nextLevel->AddComponent(new SpriteRenderer(tex));

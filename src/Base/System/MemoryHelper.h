@@ -15,7 +15,7 @@ namespace System
 		}
 
 		template <class T>
-		static void Clear(std::vector<T*>& vec)
+		static void clear(std::vector<T*>& vec)
 		{
 			for (unsigned int i = 0; i < vec.size(); i++)
 				delete vec[i];

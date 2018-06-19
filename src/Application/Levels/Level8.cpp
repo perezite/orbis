@@ -24,11 +24,11 @@ using namespace Core;
 
 namespace Levels
 {
-	void Level8::Start()
+	void Level8::start()
 	{
 		// add assets
-		Texture* brickTex = VideoManager::GetInstance()->GetTexture("Textures/YellowBlock.png");
-		Tween* tween = EffectsManager::GetInstance()->GetTween("Tweens/Test1.tween");
+		Texture* brickTex = VideoManager::getInstance()->getTexture("Textures/YellowBlock.png");
+		Tween* tween = EffectsManager::getInstance()->GetTween("Tweens/Test1.tween");
 
 		// init camera
 		Entity* cam = new Entity();

@@ -17,29 +17,29 @@ namespace Game
 {
 	Level::~Level()
 	{
-		EffectsManager::GetInstance()->Clear();
-		VideoManager::GetInstance()->Clear();
-		MemoryHelper::Clear(m_entities);
+		EffectsManager::getInstance()->clear();
+		VideoManager::getInstance()->clear();
+		MemoryHelper::clear(m_entities);
 	}
 
 	void Level::Initialize()
 	{
-		TimeManager::GetInstance()->Reset();
-		VideoManager::GetInstance()->Clear();
-		Start();
+		TimeManager::getInstance()->Reset();
+		VideoManager::getInstance()->clear();
+		start();
 		StartEntities();
-		VideoManager::GetInstance()->Start();
+		VideoManager::getInstance()->start();
 	}
 
 	void Level::Update()
 	{
-		TimeManager::GetInstance()->Update();
+		TimeManager::getInstance()->Update();
 		UpdateEntities();
 	}
 
-	void Level::Render()
+	void Level::render()
 	{
-		VideoManager::GetInstance()->GetWindow()->Clear();
+		VideoManager::getInstance()->getWindow()->clear();
 		RenderEntities();
 	}
 
@@ -47,7 +47,7 @@ namespace Game
 	{
 		for(unsigned int i = 0; i < m_entities.size(); i++)
 		{
-			m_entities[i]->Start();
+			m_entities[i]->start();
 		}
 	}
 
@@ -61,15 +61,15 @@ namespace Game
 
 	void Level::RenderEntities()
 	{
-		VideoManager* video = VideoManager::GetInstance();
+		VideoManager* video = VideoManager::getInstance();
 
-		video->GetWindow()->Clear();
-		video->Render();
+		video->getWindow()->clear();
+		video->render();
 
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 			m_entities[i]->RenderDebug();
 
-		video->GetWindow()->SwapBuffers();
+		video->getWindow()->swapBuffers();
 	}
 }
 

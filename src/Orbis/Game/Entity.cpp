@@ -7,7 +7,7 @@ namespace Game
 {
 	Entity::~Entity()
 	{
-		MemoryHelper::Clear(m_components);
+		MemoryHelper::clear(m_components);
 	}
 
 	void Entity::AddComponent(Component *component)   		
@@ -16,11 +16,11 @@ namespace Game
 		m_components.push_back(component);
 	}
 
-	void Entity::Start()
+	void Entity::start()
 	{
 		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			m_components[i]->Start();
+			m_components[i]->start();
 		}
 	}
 

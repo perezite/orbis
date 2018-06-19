@@ -19,10 +19,10 @@ using namespace Core;
 
 namespace Levels
 {
-	void Level4::Start()
+	void Level4::start()
 	{
-		m_originalResolution = VideoManager::GetInstance()->GetWindow()->GetResolution();
-		VideoManager::GetInstance()->GetWindow()->SetResolution(Vector2D(800, 800));
+		m_originalResolution = VideoManager::getInstance()->getWindow()->getResolution();
+		VideoManager::getInstance()->getWindow()->setResolution(Vector2D(800, 800));
 
 		// add camera
 		Entity* cam = new Entity();
@@ -43,6 +43,6 @@ namespace Levels
 
 	Level4::~Level4()
 	{
-		VideoManager::GetInstance()->GetWindow()->SetResolution(m_originalResolution);
+		VideoManager::getInstance()->getWindow()->setResolution(m_originalResolution);
 	}
 }

@@ -12,10 +12,10 @@ using namespace Video;
 
 namespace Levels
 {
-	void Level10::Start()
+	void Level10::start()
 	{
 		// init textures
-		Texture* greenParticleTex = VideoManager::GetInstance()->GetTexture("Textures/GreenParticle.png");
+		Texture* greenParticleTex = VideoManager::getInstance()->getTexture("Textures/GreenParticle.png");
 
 		// init camera
 		Entity* cam = new Entity();

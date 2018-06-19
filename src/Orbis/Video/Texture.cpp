@@ -73,7 +73,7 @@ namespace Video
 		
 		if (UsesAtlassing())
 		{
-			VideoManager::GetInstance()->GetTextureAtlas()->Add(this);
+			VideoManager::getInstance()->getTextureAtlas()->Add(this);
 		}
 	}
 

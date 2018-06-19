@@ -26,7 +26,7 @@ namespace Components
 		virtual ~SimpleParticleRenderer();
 
 		// override
-		void Start();
+		void start();
 
 	protected:
 		// add a particle

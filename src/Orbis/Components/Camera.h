@@ -16,7 +16,7 @@ namespace Components
 	{
 	public:
 		// get singleton component
-		static Camera* GetInstance();
+		static Camera* getInstance();
 
 		// ctor
 		Camera();

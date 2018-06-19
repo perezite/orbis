@@ -15,7 +15,7 @@ using namespace Video;
 
 namespace Levels
 {
-	void Level7::Start()
+	void Level7::start()
 	{
 		// init camera
 		Entity* cam = new Entity();

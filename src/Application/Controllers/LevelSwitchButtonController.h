@@ -24,11 +24,11 @@ namespace Controllers
 		// update
 		void Update()
 		{
-			InputManager* input = InputManager::GetInstance();
+			InputManager* input = InputManager::getInstance();
 			KeyCode switchKey = m_switchForward ? KeyCode::Right : KeyCode::Left;
 
 			if (input->IsKeyDown(switchKey) || input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
-				LevelManager::GetInstance()->QueueLevel(new T());
+				LevelManager::getInstance()->QueueLevel(new T());
 		}
 
 	private:

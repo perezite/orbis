@@ -10,7 +10,7 @@ namespace
 	// convert pixel coordinates to screen coordinates in the range (-0.5, +0.5)
 	Vector2D PixelCoordinatesToScreenCoordinates(int x, int y)
 	{
-		Vector2D resolution = VideoManager::GetInstance()->GetWindow()->GetResolution();
+		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		return Vector2D(float(x) / resolution.x - 0.5f, 0.5f - float(y) / resolution.y);
 	}
 
@@ -23,7 +23,7 @@ namespace
 
 namespace Input
 {
-	InputManager* InputManager::GetInstance()
+	InputManager* InputManager::getInstance()
 	{
 		static InputManager instance;
 
@@ -149,7 +149,7 @@ namespace Input
 	{
 		Exception::Assert(IsTapDown() || IsTapGoingDown(), "GetTapPosition() can only be called when a tap is pressed or going down");
 
-		Camera* cam = Camera::GetInstance();
+		Camera* cam = Camera::getInstance();
 		float aspect = cam->GetAspect();
 		return Vector2D(m_tapPosition.x, aspect * m_tapPosition.y);
 	}

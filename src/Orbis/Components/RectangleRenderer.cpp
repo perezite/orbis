@@ -7,13 +7,13 @@ using namespace Video;
 
 namespace Components
 {
-	void RectangleRenderer::Start()
+	void RectangleRenderer::start()
 	{
 		m_renderable.GetMaterial()->SetTexture(NULL);
-		m_renderable.GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/Flat.vs", "Shaders/Flat.frag"));
+		m_renderable.GetMaterial()->SetShader(VideoManager::getInstance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag"));
 		m_renderable.GetMaterial()->SetColor(m_color);
 		m_renderable.SetMesh(Mesh::CreateFlatQuad());
 		m_renderable.SetTransform(GetParent()->GetTransform());
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(&m_renderable);
+		VideoManager::getInstance()->getRenderDevice()->AddRenderable(&m_renderable);
 	}
 }

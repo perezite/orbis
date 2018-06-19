@@ -32,10 +32,10 @@ namespace Game
 		void Update();
 
 		// render
-		void Render();
+		void render();
 
 		// start
-		virtual void Start() { }
+		virtual void start() { }
 
 	protected:
 		// start the entities

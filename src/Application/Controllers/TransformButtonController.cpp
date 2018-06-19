@@ -18,20 +18,20 @@ namespace
 	{
 		omega = clockwise ? -omega : omega;
 		float alpha = transform->rotation;
-		transform->rotation = alpha + TimeManager::GetInstance()->GetDeltaSeconds() * omega;
+		transform->rotation = alpha + TimeManager::getInstance()->GetDeltaSeconds() * omega;
 	}
 
 	void Translate(Transform* transform, bool forward, float speed)
 	{
 		speed = forward ? speed : -speed;
 		Vector2D position = transform->position;
-		Vector2D translation = Matrix3::Rotation2D(transform->rotation) * Vector2D(TimeManager::GetInstance()->GetDeltaSeconds() * speed, 0.0f);
+		Vector2D translation = Matrix3::Rotation2D(transform->rotation) * Vector2D(TimeManager::getInstance()->GetDeltaSeconds() * speed, 0.0f);
 		transform->position = position + translation;
 	}
 
 	void Scale(CameraController *camera, bool positive)
 	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->GetDeltaSeconds();
 		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
 		Transform* transform = camera->GetParent()->GetTransform();
 		Vector2D scale = transform->scale;
@@ -71,7 +71,7 @@ namespace Controllers
 {
 	void TransformButtonController::Update()
 	{
-		InputManager* input = InputManager::GetInstance();
+		InputManager* input = InputManager::getInstance();
 
 		if (input->IsTapDown(GetParent()->GetTransform()->GetRect()))
 			Affect();
@@ -79,7 +79,7 @@ namespace Controllers
 
 	void TransformButtonController::Affect()
 	{
-		std::string texAssetPath = m_inputModeSpriteRenderer->GetTexture()->GetAssetPath();
+		std::string texAssetPath = m_inputModeSpriteRenderer->getTexture()->GetAssetPath();
 
 		if (texAssetPath == "Textures/RotateYellowSprite.png")
 		{

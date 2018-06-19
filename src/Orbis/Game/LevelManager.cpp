@@ -14,13 +14,13 @@ namespace Game
 		m_currentLevel(NULL), m_queuedLevel(NULL)
 	{ }
 
-	LevelManager * LevelManager::GetInstance()
+	LevelManager * LevelManager::getInstance()
 	{
 		static LevelManager instance;
 		return &instance;
 	}
 	
-	void LevelManager::Clear()
+	void LevelManager::clear()
 	{
 		if(m_currentLevel)
 			delete m_currentLevel;
@@ -36,9 +36,9 @@ namespace Game
 		m_currentLevel->Update();
 	}
 
-	void LevelManager::Render()
+	void LevelManager::render()
 	{
-		m_currentLevel->Render();
+		m_currentLevel->render();
 	}
 
 	void LevelManager::SwitchToQueuedLevel()

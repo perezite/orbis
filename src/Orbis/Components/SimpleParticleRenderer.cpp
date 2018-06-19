@@ -20,10 +20,10 @@ namespace Components
 
 	SimpleParticleRenderer::~SimpleParticleRenderer()
 	{
-		MemoryHelper::Clear(m_particles);
+		MemoryHelper::clear(m_particles);
 	}
 
-	void SimpleParticleRenderer::Start()
+	void SimpleParticleRenderer::start()
 	{
 		AddParticle(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 0.5f));
 		AddParticle(Transform(Vector2D(+0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 1.0f));

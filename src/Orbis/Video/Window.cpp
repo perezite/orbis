@@ -14,7 +14,7 @@ namespace Video
 	Window::Window()
 	{
 		SDL_Init(SDL_INIT_VIDEO);
-		m_resolution = GetDefaultResolution();
+		m_resolution = getDefaultResolution();
 
 		#ifdef WIN32	
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -22,7 +22,7 @@ namespace Video
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-			CreateSdlWindow();
+			createSdlWindow();
 			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 			glewInit();
 		#endif	
@@ -33,7 +33,7 @@ namespace Video
 			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 			SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-			CreateSdlWindow();
+			createSdlWindow();
 			m_openGlContext = SDL_GL_CreateContext(m_sdlWindow);
 		#endif
 
@@ -47,31 +47,31 @@ namespace Video
 		SDL_DestroyWindow(m_sdlWindow);
 	}
 
-	void Window::SetResolution(Vector2D resolution)
+	void Window::setResolution(Vector2D resolution)
 	{
 		if (EnvironmentHelper::IsMobile())
 			return;
 
 		SDL_DestroyWindow(m_sdlWindow);
 		m_resolution = resolution;
-		CreateSdlWindow();
+		createSdlWindow();
 
 		SDL_GL_MakeCurrent(m_sdlWindow, m_openGlContext);
 		glViewport(0, 0, (int)m_resolution.x, (int)m_resolution.y);
 	}
 
-	void Window::Clear()
+	void Window::clear()
 	{
 		glClearColor(0.95f, 0.95f, 0.95f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	void Window::SwapBuffers()
+	void Window::swapBuffers()
 	{
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
-	Vector2D Window::GetDefaultResolution()
+	Vector2D Window::getDefaultResolution()
 	{
 		if (EnvironmentHelper::IsMobile())
 		{
@@ -84,7 +84,7 @@ namespace Video
 			return DESKTOP_DEFAULT_RESOLUTION;
 	}
 
-	void Window::CreateSdlWindow()
+	void Window::createSdlWindow()
 	{
 		#ifdef WIN32
 			m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)m_resolution.x, (int)m_resolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);

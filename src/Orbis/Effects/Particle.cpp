@@ -13,7 +13,7 @@ namespace Effects
 
 	Particle::~Particle()
 	{
-		VideoManager::GetInstance()->GetRenderDevice()->DeleteRenderable(m_renderable);
+		VideoManager::getInstance()->getRenderDevice()->DeleteRenderable(m_renderable);
 		delete m_renderable;
 	}
 
@@ -21,9 +21,9 @@ namespace Effects
 	{
 		m_renderable = new Renderable();
 		m_renderable->GetMaterial()->SetTexture(texture);
-		m_renderable->GetMaterial()->SetShader(VideoManager::GetInstance()->GetShader("Shaders/DiffuseParticle.vs", "Shaders/DiffuseParticle.frag"));
+		m_renderable->GetMaterial()->SetShader(VideoManager::getInstance()->getShader("Shaders/DiffuseParticle.vs", "Shaders/DiffuseParticle.frag"));
 		m_renderable->SetMesh(Mesh::CreateVertexColoredTexturedQuad(m_color));
 		m_renderable->SetTransform(&m_transform);
-		VideoManager::GetInstance()->GetRenderDevice()->AddRenderable(m_renderable);
+		VideoManager::getInstance()->getRenderDevice()->AddRenderable(m_renderable);
 	}
 }

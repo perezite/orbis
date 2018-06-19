@@ -27,7 +27,7 @@ namespace Video
 		void Add(Texture* texture);
 
 		// clear the atlas
-		void Clear();
+		void clear();
 
 		// generate the atlas
 		void Generate();

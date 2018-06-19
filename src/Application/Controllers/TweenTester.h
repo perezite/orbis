@@ -19,7 +19,7 @@ namespace Controllers
 		{ }
 
 		// override
-		void Start();
+		void start();
 
 		// override
 		void Update();

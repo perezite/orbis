@@ -7,7 +7,7 @@ namespace Video
 {
 	bool Material::IsBatchEqualTo(Material * const other) const
 	{
-		bool areTexturesBatchEqual = AreTexturesBatchEqual(this->GetTexture(), other->GetTexture());
+		bool areTexturesBatchEqual = AreTexturesBatchEqual(this->getTexture(), other->getTexture());
 
 		bool areShadersBatchEqual = m_shader == other->m_shader;
 

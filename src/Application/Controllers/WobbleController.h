@@ -9,7 +9,7 @@ namespace Controllers
 	{
 	public:
 		// start
-		void Start();
+		void start();
 
 		// update
 		void Update();

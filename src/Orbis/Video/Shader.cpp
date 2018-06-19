@@ -78,7 +78,7 @@ namespace Video
 {
 	Shader::Shader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
 	{
-		VideoManager::GetInstance();
+		VideoManager::getInstance();
 
 		m_programId = glCreateProgram();
 

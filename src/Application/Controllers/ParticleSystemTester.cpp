@@ -16,7 +16,7 @@ namespace Controllers
 
 	void ParticleSystemTester::Update()
 	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->GetDeltaSeconds();
 		Vector2D dist = m_currentTarget - GetParent()->GetTransform()->position;
 		Vector2D direction = dist.Normalized();
 		GetParent()->GetTransform()->position += direction * dt * 0.1f;

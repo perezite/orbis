@@ -24,13 +24,13 @@ namespace Components
 
 	ParticleRenderer::~ParticleRenderer()
 	{
-		MemoryHelper::Clear(m_particles);
+		MemoryHelper::clear(m_particles);
 	}
 
-	void ParticleRenderer::Start()
+	void ParticleRenderer::start()
 	{
-		Tween* alphaTween = EffectsManager::GetInstance()->GetTween("Tweens/GreenParticlesAlpha.tween");
-		LevelManager::GetInstance()->GetCurrentLevel()->AddEntity(TweenInspector::TryConstructEntity(m_parentLevel, alphaTween, KeyCode::b));
+		Tween* alphaTween = EffectsManager::getInstance()->GetTween("Tweens/GreenParticlesAlpha.tween");
+		LevelManager::getInstance()->GetCurrentLevel()->AddEntity(TweenInspector::TryConstructEntity(m_parentLevel, alphaTween, KeyCode::b));
 	}
 
 	void ParticleRenderer::Update()
@@ -46,7 +46,7 @@ namespace Components
 
 	void ParticleRenderer::UpdateParticles()
 	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->GetDeltaSeconds();
 
 		// update lifetime
 		for (unsigned int i = 0; i < m_particles.size(); i++)
@@ -71,7 +71,7 @@ namespace Components
 
 	void ParticleRenderer::EmitParticles()
 	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->GetDeltaSeconds();
 		float emissionPeriod = 1.0f / float(m_emissionRate);
 
 		m_timeToNextEmission -= dt;
@@ -84,7 +84,7 @@ namespace Components
 
 	void ParticleRenderer::AddParticle()
 	{
-		float dt = TimeManager::GetInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->GetDeltaSeconds();
 		Vector2D entityVelocity = (m_lastEntityPos - GetParent()->GetTransform()->position) * (1.0f/dt);
 
 		Vector2D position = GetParent()->GetTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;

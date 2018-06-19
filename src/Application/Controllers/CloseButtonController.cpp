@@ -17,7 +17,7 @@ namespace Controllers
 {
 	void CloseButtonController::Update()
 	{
-		InputManager* input = InputManager::GetInstance();
+		InputManager* input = InputManager::getInstance();
 
 		if (input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
 		{

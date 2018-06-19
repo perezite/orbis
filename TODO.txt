@@ -1,10 +1,6 @@
 TODO:	
 - Refactoring planen
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
-		- Test auf Mobile
-		- Aufruf von ClearRenderables in Level.cpp an passende Stelle refactoren	
-		- if(x) {delete x; } entfernen. Auch auf NULL setzen nach dem Delete sollte vermieden werden da es Fehler maskiert.
-		- bool GetXY() ersetzen bool IsXY(). Setter Parameterlos machen, wenn nur auf true gesetzt werden kann
 		- Methoden kleinschreiben
 		- Erase–remove korrekt verwenden in RenderDevice (hat aktuell MemoryLeaks...)
 		- MemoryHelper-Funktionen vereinfachen und wenn möglich in den Aufruf ziehen

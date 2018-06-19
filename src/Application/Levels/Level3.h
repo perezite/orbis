@@ -11,7 +11,7 @@ namespace Levels
 	{
 	public:
 		// override
-		void Start();
+		void start();
 
 	private:
 		static const int NUM_SPRITES;

@@ -27,7 +27,7 @@ namespace Effects
 
 	void Tween::Update(Vector2D* current, float duration)
 	{
-		m_elapsed += TimeManager::GetInstance()->GetDeltaSeconds();
+		m_elapsed += TimeManager::getInstance()->GetDeltaSeconds();
 		float x = m_elapsed / duration;
 
 		if (x <= 1.0f)

@@ -12,7 +12,7 @@ using namespace Input;
 
 namespace Orbis
 {
-	OrbisMain* OrbisMain::GetInstance()
+	OrbisMain* OrbisMain::getInstance()
 	{
 		static OrbisMain instance;
 		return &instance;
@@ -20,10 +20,10 @@ namespace Orbis
 
 	void OrbisMain::Run()
 	{
-		LevelManager* level = LevelManager::GetInstance();
-		InputManager* input = InputManager::GetInstance();
+		LevelManager* level = LevelManager::getInstance();
+		InputManager* input = InputManager::getInstance();
 
-		m_startTicks = TimeManager::GetInstance()->GetTicks();
+		m_startTicks = TimeManager::getInstance()->GetTicks();
 		m_numFrames = 0;
 
 		while (true)
@@ -33,20 +33,20 @@ namespace Orbis
 				break;
 
 			level->Update();
-			level->Render();
+			level->render();
 
 			#if defined(ORBIS_LOG_PERFORMANCE)
 				LogPerformance();
 			#endif
 		}
 
-		level->Clear();
+		level->clear();
 	}
 
 	void OrbisMain::LogPerformance()
 	{
 		m_numFrames++;
-		if (TimeManager::GetInstance()->GetTicks() - m_startTicks > 1000)
+		if (TimeManager::getInstance()->GetTicks() - m_startTicks > 1000)
 		{
 			// track current performance
 			float currentPerformance = 1000.0f / float(m_numFrames);

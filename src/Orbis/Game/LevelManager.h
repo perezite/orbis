@@ -10,22 +10,22 @@ namespace Game
 	{
 	public:
 		// get instance
-		static LevelManager* GetInstance();
+		static LevelManager* getInstance();
 
 		// queue level
 		void QueueLevel(Level *level) { m_queuedLevel = level; }
 
 		// get the current level
 		Level* GetCurrentLevel() { return m_currentLevel; }
-
+		
 		// clear
-		void Clear();
+		void clear();
 
 		// update
 		void Update();
 
 		// render
-		void Render();
+		void render();
 
 	protected:
 		// constructor

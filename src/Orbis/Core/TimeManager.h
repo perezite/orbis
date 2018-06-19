@@ -6,7 +6,7 @@ namespace Core
 	{
 	public:
 		// get the instance
-		static TimeManager* GetInstance();
+		static TimeManager* getInstance();
 
 		// update
 		void Update();

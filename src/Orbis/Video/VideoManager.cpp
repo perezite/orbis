@@ -4,15 +4,15 @@
 
 namespace Video
 {
-	VideoManager* VideoManager::GetInstance()
+	VideoManager* VideoManager::getInstance()
 	{
 		static VideoManager instance;
 		return &instance;
 	}
 
-	void VideoManager::Clear()
+	void VideoManager::clear()
 	{
-		VideoManager::GetInstance()->GetRenderDevice()->Clear();
+		VideoManager::getInstance()->getRenderDevice()->clear();
 
 		for (std::map<std::string, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 			delete (*it).second;
@@ -22,20 +22,20 @@ namespace Video
 			delete (*it).second;
 		m_shaders.clear();
 
-		m_textureAtlas.Clear();
+		m_textureAtlas.clear();
 	}
 
-	void VideoManager::Start()
+	void VideoManager::start()
 	{
-		GetTextureAtlas()->Generate();
+		getTextureAtlas()->Generate();
 	}
 
-	void VideoManager::Render()
+	void VideoManager::render()
 	{
-		GetRenderDevice()->Render();
+		getRenderDevice()->render();
 	}
 
-	Texture* VideoManager::GetTexture(std::string assetPath, bool flipVertically)
+	Texture* VideoManager::getTexture(std::string assetPath, bool flipVertically)
 	{
 		if (m_textures[assetPath])
 			return m_textures[assetPath];
@@ -45,7 +45,7 @@ namespace Video
 		return texture;
 	}
 
-	Shader* VideoManager::GetShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
+	Shader* VideoManager::getShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
 	{
 		ShaderPaths shaderPaths = ShaderPaths(vertexShaderAssetPath, fragmentShaderAssetPath);
 		if (m_shaders[shaderPaths])
