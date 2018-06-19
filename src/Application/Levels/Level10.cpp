@@ -19,15 +19,15 @@ namespace Levels
 
 		// init camera
 		Entity* cam = new Entity();
-		cam->AddComponent(new Camera());
-		AddEntity(cam);
+		cam->addComponent(new Camera());
+		addEntity(cam);
 
 		// add level switchers
 		LevelHelper::AddLevelSwitcher<Level9>(this, false);
 
 		// init entities
 		Entity* particles = new Entity("Particles");
-		particles->AddComponent(new SimpleParticleRenderer(greenParticleTex));
-		this->AddEntity(particles);
+		particles->addComponent(new SimpleParticleRenderer(greenParticleTex));
+		this->addEntity(particles);
 	}
 }

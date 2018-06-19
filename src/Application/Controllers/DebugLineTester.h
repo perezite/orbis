@@ -8,6 +8,6 @@ namespace Controllers
 	class DebugLineTester : public Component
 	{
 	public:
-		void RenderDebug();
+		void renderDebug();
 	};
 }

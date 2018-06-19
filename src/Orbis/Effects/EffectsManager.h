@@ -16,7 +16,7 @@ namespace Effects
 		void clear();
 
 		// get a tween
-		Tween* GetTween(std::string assetPath);
+		Tween* getTween(std::string assetPath);
 
 	protected:
 		// singleton constructor

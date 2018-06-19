@@ -6,7 +6,7 @@
 
 namespace Core
 {
-	void LogHelper::LogMessage(const char* fmt, ...)
+	void LogHelper::logMessage(const char* fmt, ...)
 	{
 		static char buf[1024];
 		va_list args; 
@@ -18,7 +18,7 @@ namespace Core
 
 	}
 
-	void LogHelper::ShowMessageBox(std::string message, std::string title)
+	void LogHelper::showMessageBox(std::string message, std::string title)
 	{
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title.c_str(), message.c_str(), NULL);
 	}

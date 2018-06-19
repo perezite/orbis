@@ -52,7 +52,7 @@ namespace Video
 	{
 		m_assetPath = assetPath;
 
-		std::string filePath = AssetHelper::AssetPathToFilePath(assetPath);
+		std::string filePath = AssetHelper::assetPathToFilePath(assetPath);
 		m_surface = IMG_Load(filePath.c_str());
 		SDL_Surface* converted = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
 		SDL_FreeSurface(m_surface);

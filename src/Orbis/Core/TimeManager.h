@@ -9,16 +9,16 @@ namespace Core
 		static TimeManager* getInstance();
 
 		// update
-		void Update();
+		void update();
 
 		// reset
-		void Reset();
+		void reset();
 
 		// get the seconds elapsed since the last frame
-		float GetDeltaSeconds();
+		float getDeltaSeconds();
 
 		// get the current time in seconds
-		long GetTicks();
+		long getTicks();
 
 	protected:
 		// singleton ctor

@@ -30,7 +30,7 @@ namespace Components
 
 	protected:
 		// add a particle
-		void AddParticle(const Transform& transform, const Color& color);
+		void spawnParticle(const Transform& transform, const Color& color);
 
 	private: 
 		// the texture

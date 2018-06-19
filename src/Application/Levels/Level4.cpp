@@ -26,8 +26,8 @@ namespace Levels
 
 		// add camera
 		Entity* cam = new Entity();
-		cam->AddComponent(new Camera());
-		AddEntity(cam);
+		cam->addComponent(new Camera());
+		addEntity(cam);
 
 		// add level switchers
 		LevelHelper::AddLevelSwitcher<Level3>(this, false);
@@ -36,8 +36,8 @@ namespace Levels
 		// add debug visualizer
 		ORBIS_DEBUG (
 			Entity* visualizer = new Entity();
-			visualizer->AddComponent(new BinPackingVisualizer());
-			AddEntity(visualizer);
+			visualizer->addComponent(new BinPackingVisualizer());
+			addEntity(visualizer);
 		);
 	}
 

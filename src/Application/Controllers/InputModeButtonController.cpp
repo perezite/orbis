@@ -15,11 +15,11 @@ using namespace Math;
 
 namespace Controllers
 {
-	void InputModeButtonController::Update()
+	void InputModeButtonController::update()
 	{
 		InputManager* inputManager = InputManager::getInstance();
 
-		if (inputManager->IsTapGoingDown(GetParent()->getTransform()->GetRect()))
+		if (inputManager->isTapGoingDown(getParent()->getTransform()->getRect()))
 				Cycle();
 	}
 

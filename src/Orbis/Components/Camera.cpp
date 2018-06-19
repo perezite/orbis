@@ -35,17 +35,17 @@ namespace Components
 		m_instance = NULL;
 	}
 
-	Vector2D Camera::ScreenSpaceToCameraSpace(Vector2D v)
+	Vector2D Camera::screenSpaceToCameraSpace(Vector2D v)
 	{
-		return Vector2D(v.x, GetAspect() * v.y);
+		return Vector2D(v.x, getAspect() * v.y);
 	}
 
-	Matrix3 Camera::CalcViewMatrix(TransformSpace space)
+	Matrix3 Camera::calcViewMatrix(TransformSpace space)
 	{
 		if (space == TransformSpace::Camera)
 			return Matrix3::GetEye();
 
-		Transform* transform = getInstance()->GetParent()->getTransform();
+		Transform* transform = getInstance()->getParent()->getTransform();
 		Matrix3 invTransform;
 		invTransform.Rotate2D(-transform->rotation);
 		invTransform.Translate2D(-transform->position);
@@ -53,10 +53,10 @@ namespace Components
 	}
 
 	// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
-	Matrix3 Camera::CalcProjectionMatrix(TransformSpace space)
+	Matrix3 Camera::calcProjectionMatrix(TransformSpace space)
 	{
 		Vector2D scale = 
-			space == TransformSpace::World ? getInstance()->GetParent()->getTransform()->scale : Vector2D::One;
+			space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
 		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		float inverseAspect = resolution.x / resolution.y;
@@ -67,18 +67,18 @@ namespace Components
 		return mat;
 	}
 
-	Matrix3 Camera::CalcCamMatrix(TransformSpace space)
+	Matrix3 Camera::calcCamMatrix(TransformSpace space)
 	{
-		return CalcProjectionMatrix(space) * CalcViewMatrix(space);
+		return calcProjectionMatrix(space) * calcViewMatrix(space);
 	}
 
-	Vector2D Camera::getCount()
+	Vector2D Camera::getSize()
 	{
-		Vector2D scale = getInstance()->GetParent()->getTransform()->scale;
-		return Vector2D(scale.x, scale.y * GetAspect());
+		Vector2D scale = getInstance()->getParent()->getTransform()->scale;
+		return Vector2D(scale.x, scale.y * getAspect());
 	}
 
-	float Camera::GetAspect()
+	float Camera::getAspect()
 	{
 		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		return resolution.y / resolution.x;

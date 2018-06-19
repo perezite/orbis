@@ -31,22 +31,22 @@ namespace Game
 		Transform* getTransform() { return &m_transform; }
 
 		// get the name
-		std::string GetName() const { return m_name; }
+		std::string getName() const { return m_name; }
 
 		// get components
-		const std::vector<Component*>& GetComponents() const { return m_components; }
+		const std::vector<Component*>& getComponents() const { return m_components; }
 
 		// add component
-		void AddComponent(Component *component);
+		void addComponent(Component *component);
 
 		// start the entity
 		void start();
 
 		// update the entity
-		void Update();
+		void update();
 
-		// render the entity
-		void RenderDebug();
+		// debug-render the entity
+		void renderDebug();
 
 	private: 
 		// transform of the entity

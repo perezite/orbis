@@ -22,14 +22,14 @@ namespace
 
 namespace Core
 {
-	std::string AssetHelper::AssetPathToFilePath(std::string assetPath)
+	std::string AssetHelper::assetPathToFilePath(std::string assetPath)
 	{
 		return EnvironmentHelper::CombinePath({ GetAssetFolderPath(), assetPath });
 	}
 
-	void AssetHelper::SaveTextAsset(std::string assetPath, std::string text)
+	void AssetHelper::saveTextAsset(std::string assetPath, std::string text)
 	{
-		std::string filePath = AssetPathToFilePath(assetPath);
+		std::string filePath = assetPathToFilePath(assetPath);
 
 		SDL_RWops *writer = SDL_RWFromFile_Checked(filePath.c_str(), "w");
 		size_t len = SDL_strlen(text.c_str());
@@ -38,9 +38,9 @@ namespace Core
 		SDL_RWclose(writer);
 	}
 
-	std::string AssetHelper::LoadTextAsset(std::string assetPath)
+	std::string AssetHelper::loadTextAsset(std::string assetPath)
 	{
-		std::string filePath = AssetPathToFilePath(assetPath);
+		std::string filePath = assetPathToFilePath(assetPath);
 
 		// setup
 		SDL_RWops* reader = SDL_RWFromFile_Checked(filePath.c_str(), "r");
@@ -67,16 +67,16 @@ namespace Core
 		return data;
 	}
 
-	bool AssetHelper::TryLoadTextAsset(std::string assetPath, std::string& loadedText)
+	bool AssetHelper::tryLoadTextAsset(std::string assetPath, std::string& loadedText)
 	{
-		std::string filePath = AssetPathToFilePath(assetPath);
+		std::string filePath = assetPathToFilePath(assetPath);
 		SDL_RWops* reader;
 
 		if ((reader = SDL_RWFromFile(filePath.c_str(), "r")) == NULL)
 			return false;
 		
 		SDL_RWclose(reader);
-		loadedText = LoadTextAsset(assetPath);
+		loadedText = loadTextAsset(assetPath);
 		return true;
 	}
 }

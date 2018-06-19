@@ -28,12 +28,12 @@ namespace Game
 			delete m_queuedLevel;
 	}
 
-	void LevelManager::Update()
+	void LevelManager::update()
 	{
 		if (m_queuedLevel != NULL)
-			SwitchToQueuedLevel();
+			switchToQueuedLevel();
 
-		m_currentLevel->Update();
+		m_currentLevel->update();
 	}
 
 	void LevelManager::render()
@@ -41,12 +41,12 @@ namespace Game
 		m_currentLevel->render();
 	}
 
-	void LevelManager::SwitchToQueuedLevel()
+	void LevelManager::switchToQueuedLevel()
 	{
 		if (m_currentLevel)
 			delete m_currentLevel;
 		m_currentLevel = m_queuedLevel;
 		m_queuedLevel = NULL;
-		m_currentLevel->Initialize();
+		m_currentLevel->initialize();
 	}
 }

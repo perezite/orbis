@@ -11,28 +11,28 @@ using namespace System;
 
 namespace Effects
 {
-	void Tween::Save()
+	void Tween::save()
 	{
-		AssetHelper::SaveTextAsset(m_assetPath, m_curve.ToString());
+		AssetHelper::saveTextAsset(m_assetPath, m_curve.toString());
 	}
 
-	void Tween::TryDeserialize()
+	void Tween::tryDeserialize()
 	{
 		std::string json;
-		if (AssetHelper::TryLoadTextAsset(m_assetPath, json))
+		if (AssetHelper::tryLoadTextAsset(m_assetPath, json))
 		{
-			m_curve.Load(json);
+			m_curve.load(json);
 		}
 	}
 
-	void Tween::Update(Vector2D* current, float duration)
+	void Tween::update(Vector2D* current, float duration)
 	{
-		m_elapsed += TimeManager::getInstance()->GetDeltaSeconds();
+		m_elapsed += TimeManager::getInstance()->getDeltaSeconds();
 		float x = m_elapsed / duration;
 
 		if (x <= 1.0f)
 		{
-			float factor = m_curve.GetValue(x).y;
+			float factor = m_curve.getValue(x).y;
 
 			*current = m_initial * factor;
 		}

@@ -18,47 +18,47 @@ namespace
 	{
 		omega = clockwise ? -omega : omega;
 		float alpha = transform->rotation;
-		transform->rotation = alpha + TimeManager::getInstance()->GetDeltaSeconds() * omega;
+		transform->rotation = alpha + TimeManager::getInstance()->getDeltaSeconds() * omega;
 	}
 
 	void Translate(Transform* transform, bool forward, float speed)
 	{
 		speed = forward ? speed : -speed;
 		Vector2D position = transform->position;
-		Vector2D translation = Matrix3::Rotation2D(transform->rotation) * Vector2D(TimeManager::getInstance()->GetDeltaSeconds() * speed, 0.0f);
+		Vector2D translation = Matrix3::Rotation2D(transform->rotation) * Vector2D(TimeManager::getInstance()->getDeltaSeconds() * speed, 0.0f);
 		transform->position = position + translation;
 	}
 
 	void Scale(CameraController *camera, bool positive)
 	{
-		float dt = TimeManager::getInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->getDeltaSeconds();
 		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
-		Transform* transform = camera->GetParent()->getTransform();
+		Transform* transform = camera->getParent()->getTransform();
 		Vector2D scale = transform->scale;
 		transform->scale = scale * factor;
 	}
 
 	void Rotate(SpriteController* sprite, bool clockwise)
 	{
-		Rotate(sprite->GetParent()->getTransform(), clockwise, sprite->GetOmega());
+		Rotate(sprite->getParent()->getTransform(), clockwise, sprite->GetOmega());
 	}
 
 	void Rotate(CameraController* camera, bool clockwise)
 	{
-		Rotate(camera->GetParent()->getTransform(), clockwise, camera->GetOmega());
+		Rotate(camera->getParent()->getTransform(), clockwise, camera->GetOmega());
 	}
 
 	void Translate(SpriteController* sprite, bool forward)
 	{
-		Translate(sprite->GetParent()->getTransform(), forward, 0.5f);
+		Translate(sprite->getParent()->getTransform(), forward, 0.5f);
 	}
 
 	void Translate(CameraController* camera, bool forward)
 	{
-		Translate(camera->GetParent()->getTransform(), forward, camera->GetOmega());
+		Translate(camera->getParent()->getTransform(), forward, camera->GetOmega());
 	}
 
-	void Reset(std::map<Entity*, Transform> initialTransforms)
+	void reset(std::map<Entity*, Transform> initialTransforms)
 	{
 		std::map<Entity*, Transform>::iterator it;
 
@@ -69,11 +69,11 @@ namespace
 
 namespace Controllers
 {
-	void TransformButtonController::Update()
+	void TransformButtonController::update()
 	{
 		InputManager* input = InputManager::getInstance();
 
-		if (input->IsTapDown(GetParent()->getTransform()->GetRect()))
+		if (input->isTapDown(getParent()->getTransform()->getRect()))
 			Affect();
 	}
 
@@ -113,9 +113,9 @@ namespace Controllers
 			return;
 		}
 
-		if (texAssetPath == "Textures/Reset.png")
+		if (texAssetPath == "Textures/reset.png")
 		{
-			Reset(m_initialTransforms);
+			reset(m_initialTransforms);
 			return;
 		}
 
@@ -131,7 +131,7 @@ namespace Controllers
 
 	void TransformButtonController::StoreInitialTransform(Component * component)
 	{
-		Entity* parent = component->GetParent();
+		Entity* parent = component->getParent();
 		m_initialTransforms.insert(std::make_pair(parent, *parent->getTransform()));
 	}
 }

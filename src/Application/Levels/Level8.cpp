@@ -28,12 +28,12 @@ namespace Levels
 	{
 		// add assets
 		Texture* brickTex = VideoManager::getInstance()->getTexture("Textures/YellowBlock.png");
-		Tween* tween = EffectsManager::getInstance()->GetTween("Tweens/Test1.tween");
+		Tween* tween = EffectsManager::getInstance()->getTween("Tweens/Test1.tween");
 
 		// init camera
 		Entity* cam = new Entity();
-		cam->AddComponent(new Camera());
-		AddEntity(cam);
+		cam->addComponent(new Camera());
+		addEntity(cam);
 
 		// add level switchers
 		LevelHelper::AddLevelSwitcher<Level7>(this, false);
@@ -41,9 +41,9 @@ namespace Levels
 
 		// add tweened brick
 		Entity* brick = new Entity();
-		AddEntity(TweenInspector::TryConstructEntity(this, tween));
-		brick->AddComponent(new SpriteRenderer(brickTex));
-		brick->AddComponent(new TweenTester(tween, 6.0f));
-		AddEntity(brick);
+		addEntity(TweenInspector::tryConstructEntity(this, tween));
+		brick->addComponent(new SpriteRenderer(brickTex));
+		brick->addComponent(new TweenTester(tween, 6.0f));
+		addEntity(brick);
 	}
 }

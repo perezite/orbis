@@ -25,7 +25,7 @@ namespace Controllers
 		{}
 
 		// override
-		void Update();
+		void update();
 
 		// set the ball effects controller
 		void SetBallEffectsController(BallEffectsController* ballEffectsController) { m_ballEffectsController = ballEffectsController; }

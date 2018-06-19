@@ -19,8 +19,8 @@ namespace Levels
 	{
 		// init camera
 		Entity* cam = new Entity();
-		cam->AddComponent(new Camera());
-		AddEntity(cam);
+		cam->addComponent(new Camera());
+		addEntity(cam);
 
 		// add level switchers
 		LevelHelper::AddLevelSwitcher<Level6>(this, false);
@@ -31,7 +31,7 @@ namespace Levels
 		BallController* ballController = new BallController();
 		BallEffectsController* ballEffectsController = new BallEffectsController();
 		ballController->SetBallEffectsController(ballEffectsController);
-		ballEntity->AddComponent(ballController);
-		AddEntity(ballEntity);
+		ballEntity->addComponent(ballController);
+		addEntity(ballEntity);
 	}
 }

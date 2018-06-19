@@ -21,13 +21,13 @@ namespace Components
 	const int TweenInspector::SAMPLING_DENSITY = 100;
 	const int TweenInspector::NUM_SAMPLES = 100;
 
-	Entity* TweenInspector::TryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationKey)
+	Entity* TweenInspector::tryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationKey)
 	{
 		Entity* entity = NULL;
 
 		ORBIS_DEBUG (
 			entity = new Entity();
-			entity->AddComponent(new TweenInspector(parentLevel, tween, activationKey));
+			entity->addComponent(new TweenInspector(parentLevel, tween, activationKey));
 		)
 
 		return entity;
@@ -36,7 +36,7 @@ namespace Components
 	TweenInspector::TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey) : 
 		m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
 	{
-		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
+		ShiftCurve(m_tween.getCurve(), Vector2D(-0.5f, -0.5f));
 	}
 
 	void TweenInspector::start()
@@ -44,156 +44,156 @@ namespace Components
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
 		Texture* texture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem2.png");
-		GetParent()->getTransform()->scale = Vector2D::Zero;
+		getParent()->getTransform()->scale = Vector2D::Zero;
 		m_renderable.getMaterial()->setTexture(texture);
 		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
 		m_renderable.setMesh(Mesh::createTexturedQuad());
-		m_renderable.setTransform(GetParent()->getTransform());
+		m_renderable.setTransform(getParent()->getTransform());
 		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 
-	void TweenInspector::Update()
+	void TweenInspector::update()
 	{
 		InputManager* input = InputManager::getInstance();
 
-		if (input->IsKeyGoingDown(m_activationKey))
-			Toggle();
+		if (input->isKeyGoingDown(m_activationKey))
+			toggle();
 
 		if (m_isActive)
 		{
-			if (input->IsTapIndexGoingDown(1))
-				AddOrSelectControlPoint();
+			if (input->isTapIndexGoingDown(1))
+				addOrSelectControlPoint();
 
-			if (input->IsTapIndexDown(1) && m_selectedControlPoint != -1)
-				MoveControlPoint();
+			if (input->isTapIndexDown(1) && m_selectedControlPoint != -1)
+				moveControlPoint();
 
-			if (input->IsTapIndexDown(3) && m_selectedControlPoint != -1)
-				RotateTangent();
+			if (input->isTapIndexDown(3) && m_selectedControlPoint != -1)
+				rotateTangent();
 
-			if (input->IsKeyGoingDown(KeyCode::d) && m_selectedControlPoint != -1)
-				DeleteSelectedControlPoint();
+			if (input->isKeyGoingDown(KeyCode::d) && m_selectedControlPoint != -1)
+				deleteSelectedControlPoint();
 
-			if (input->IsKeyGoingDown(KeyCode::Escape))
+			if (input->isKeyGoingDown(KeyCode::Escape))
 				m_selectedControlPoint = -1;
 
-			if (input->IsKeyGoingDown(KeyCode::s))
-				Save();
+			if (input->isKeyGoingDown(KeyCode::s))
+				save();
 		}
 	}
 
-	void TweenInspector::RenderDebug()
+	void TweenInspector::renderDebug()
 	{
 		if (m_isActive)
 		{
-			RenderCurve();
+			renderCurve();
 
-			RenderControlPoints();
+			renderControlPoints();
 		}
 	}
 	
-	void TweenInspector::AddOrSelectControlPoint()
+	void TweenInspector::addOrSelectControlPoint()
 	{
-		Vector2D tap = InputManager::getInstance()->GetTapPosition();
+		Vector2D tap = InputManager::getInstance()->getTapPosition();
 		if (IsClickablePosition(tap))
 		{
-			m_selectedControlPoint = ComputeSelectedControlPoint(tap);
+			m_selectedControlPoint = computeSelectedControlPoint(tap);
 
 			// if no control point was selected by the tap, we add a new control point
 			if (m_selectedControlPoint == -1)
-				m_tween.GetCurve()->add(BezierPoint(tap, 0.0f));
+				m_tween.getCurve()->add(BezierPoint(tap, 0.0f));
 		}
 	}
 
-	void TweenInspector::MoveControlPoint()
+	void TweenInspector::moveControlPoint()
 	{
-		Vector2D tap = InputManager::getInstance()->GetTapPosition();
+		Vector2D tap = InputManager::getInstance()->getTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			// clamp boundary point positions
 			if (m_selectedControlPoint == 0)
 				tap.x = -0.5f;
-			if (m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1)
+			if (m_selectedControlPoint == m_tween.getCurve()->getCount() - 1)
 				tap.x = 0.5f;
 
 			// move
-			m_tween.GetCurve()->Move(m_selectedControlPoint, tap);
+			m_tween.getCurve()->move(m_selectedControlPoint, tap);
 		}
 	}
 
-	void TweenInspector::RotateTangent()
+	void TweenInspector::rotateTangent()
 	{
-		Vector2D tap = InputManager::getInstance()->GetTapPosition();
-		Vector2D ctrlPoint = m_tween.GetCurve()->Get(m_selectedControlPoint).pos;
+		Vector2D tap = InputManager::getInstance()->getTapPosition();
+		Vector2D ctrlPoint = m_tween.getCurve()->get(m_selectedControlPoint).pos;
 		float tangent;
 		if (tap.x > ctrlPoint.x)
 			tangent = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
 		if (tap.x <= ctrlPoint.x)
 			tangent = (ctrlPoint.y - tap.y) / (ctrlPoint.x - tap.x);
 
-		m_tween.GetCurve()->Set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
+		m_tween.getCurve()->set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
 	}
 
-	void TweenInspector::DeleteSelectedControlPoint()
+	void TweenInspector::deleteSelectedControlPoint()
 	{
 		// the boundary points cannot be deleted
-		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1)
+		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.getCurve()->getCount() - 1)
 			return;
 
-		m_tween.GetCurve()->Delete(m_selectedControlPoint);
+		m_tween.getCurve()->remove(m_selectedControlPoint);
 		m_selectedControlPoint = -1;
 	}
 
-	unsigned int TweenInspector::ComputeSelectedControlPoint(Vector2D tapPosition)
+	unsigned int TweenInspector::computeSelectedControlPoint(Vector2D tapPosition)
 	{
-		for (unsigned int i = 0; i < m_tween.GetCurve()->GetLength(); i++)
+		for (unsigned int i = 0; i < m_tween.getCurve()->getCount(); i++)
 		{
-			if (IsControlPointSelected(i, tapPosition))
+			if (isControlPointSelected(i, tapPosition))
 				return i;
 		}
 
 		return -1;
 	}
 
-	bool TweenInspector::IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
+	bool TweenInspector::isControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
 	{
-		Vector2D pos = m_tween.GetCurve()->Get(controlPointIndex).pos;
+		Vector2D pos = m_tween.getCurve()->get(controlPointIndex).pos;
 		if (Vector2D::Distance(pos, tapPosition) <= SELECT_RADIUS)
 			return true;
 
 		return false;
 	}
 
-	void TweenInspector::RenderCurve()
+	void TweenInspector::renderCurve()
 	{
-		if (m_tween.GetCurve()->GetLength() < 2)
+		if (m_tween.getCurve()->getCount() < 2)
 			return;
 
-		BezierCurve calcCurve = GetShiftedCurve(m_tween.GetCurve(), Vector2D(0.5f, 0.5f));
+		BezierCurve calcCurve = GetShiftedCurve(m_tween.getCurve(), Vector2D(0.5f, 0.5f));
 
 		float step = 1.0f / (float)NUM_SAMPLES;
-		Vector2D last = calcCurve.Get(0).pos;
+		Vector2D last = calcCurve.get(0).pos;
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
-			Vector2D current = calcCurve.GetValue(x);
+			Vector2D current = calcCurve.getValue(x);
 			VideoManager::getInstance()->getRenderDevice()->drawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
 
-	void TweenInspector::RenderControlPoints()
+	void TweenInspector::renderControlPoints()
 	{
 		RenderDevice* rd = VideoManager::getInstance()->getRenderDevice();
 
-		for (unsigned int i = 0; i < m_tween.GetCurve()->GetLength(); i++)
+		for (unsigned int i = 0; i < m_tween.getCurve()->getCount(); i++)
 		{
-			Vector2D pos = m_tween.GetCurve()->Get(i).pos;
+			Vector2D pos = m_tween.getCurve()->get(i).pos;
 			Rect rect(pos, MARK_EXTENT);
 			bool isSelected = m_selectedControlPoint == i;
 			rd->drawDebugRect(rect, isSelected ? Color::Red : Color::Green);
 
 			if (isSelected)
 			{
-				Vector2D v = Vector2D(1.0f, m_tween.GetCurve()->Get(i).tangent).Normalized() * 0.5f * TANGENT_LENGTH;
+				Vector2D v = Vector2D(1.0f, m_tween.getCurve()->get(i).tangent).Normalized() * 0.5f * TANGENT_LENGTH;
 				Vector2D tangentStart = pos - v;
 				Vector2D tangentEnd = pos + v;
 				Rect startRect(tangentStart, MARK_EXTENT);
@@ -207,22 +207,22 @@ namespace Components
 
 	bool TweenInspector::IsClickablePosition(Vector2D position)
 	{
-		Rect clickableRect = Rect(GetParent()->getTransform()->position, 0.5f);
+		Rect clickableRect = Rect(getParent()->getTransform()->position, 0.5f);
 		return clickableRect.Contains(position);
 	}
 
 	bool TweenInspector::IsSelectedControlPointOnBoundary()
 	{
-		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.GetCurve()->GetLength() - 1;
+		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.getCurve()->getCount() - 1;
 	}
 
 	void TweenInspector::ShiftCurve(BezierCurve* curve, Vector2D shift)
 	{
-		for (unsigned int i = 0; i < curve->GetLength(); i++)
+		for (unsigned int i = 0; i < curve->getCount(); i++)
 		{
-			BezierPoint point = curve->Get(i);
+			BezierPoint point = curve->get(i);
 			point.pos += shift;
-			curve->Set(i, point);
+			curve->set(i, point);
 		}
 	}
 
@@ -233,21 +233,21 @@ namespace Components
 		return shifted;
 	}
 
-	void TweenInspector::Save()
+	void TweenInspector::save()
 	{
-		ShiftCurve(m_tween.GetCurve(), Vector2D(0.5f, 0.5f));
-		m_tween.Save();
-		ShiftCurve(m_tween.GetCurve(), Vector2D(-0.5f, -0.5f));
-		LogHelper::LogMessage("Tween data saved");
+		ShiftCurve(m_tween.getCurve(), Vector2D(0.5f, 0.5f));
+		m_tween.save();
+		ShiftCurve(m_tween.getCurve(), Vector2D(-0.5f, -0.5f));
+		LogHelper::logMessage("Tween data saved");
 	}
 
-	void TweenInspector::Toggle()
+	void TweenInspector::toggle()
 	{
 		if (m_isActive)
-			GetParent()->getTransform()->scale = Vector2D::Zero;
+			getParent()->getTransform()->scale = Vector2D::Zero;
 			
 		else
-			GetParent()->getTransform()->scale = Vector2D::One;
+			getParent()->getTransform()->scale = Vector2D::One;
 
 		m_isActive = !m_isActive;
 	}

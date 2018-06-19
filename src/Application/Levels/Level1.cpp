@@ -35,7 +35,7 @@ namespace Levels
 		Texture* translateBlueSpriteTex = VideoManager::getInstance()->getTexture("Textures/TranslateBlueSprite.png");
 		Texture* rotateCameraTex = VideoManager::getInstance()->getTexture("Textures/RotateCamera.png");
 		Texture* translateCameraTex = VideoManager::getInstance()->getTexture("Textures/TranslateCamera.png");
-		Texture* resetTex = VideoManager::getInstance()->getTexture("Textures/Reset.png");
+		Texture* resetTex = VideoManager::getInstance()->getTexture("Textures/reset.png");
 		Texture* scaleCameraTex = VideoManager::getInstance()->getTexture("Textures/ScaleCamera.png");
 		Texture* closeTex = VideoManager::getInstance()->getTexture("Textures/OverlayClose.png");
 		Texture* leftArrowTex = VideoManager::getInstance()->getTexture("Textures/OverlayLeft.png");
@@ -45,63 +45,63 @@ namespace Levels
 		Entity* camEntity = new Entity();
 		Camera* cam = new Camera();
 		CameraController* camController = new CameraController();
-		camEntity->AddComponent(cam);
-		camEntity->AddComponent(camController);
+		camEntity->addComponent(cam);
+		camEntity->addComponent(camController);
 		camEntity->setTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
-		this->AddEntity(camEntity);
+		this->addEntity(camEntity);
 
 		// create level switcher
 		LevelHelper::AddLevelSwitcher<Level2>(this, true);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");
-		coordSystem->AddComponent(new SpriteRenderer(coordSystemTexture));
-		this->AddEntity(coordSystem);
+		coordSystem->addComponent(new SpriteRenderer(coordSystemTexture));
+		this->addEntity(coordSystem);
 
 		// yellow block entity
 		Entity* yellowBlock = new Entity("Yellow Brick");
 		SpriteController* yellowBlockController = new SpriteController(MathHelper::GetPi());
-		yellowBlock->AddComponent(yellowBlockController);
-		yellowBlock->AddComponent(new SpriteRenderer(yellowBlockTexture));
+		yellowBlock->addComponent(yellowBlockController);
+		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTexture));
 		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(yellowBlock);
+		this->addEntity(yellowBlock);
 
 		// blue block entity
 		Entity* blueBlock = new Entity("Blue Brick");
 		SpriteController* blueBlockController = new SpriteController(-MathHelper::GetPi() / 2.0f);
-		blueBlock->AddComponent(blueBlockController);
-		blueBlock->AddComponent(new SpriteRenderer(blueBlockTexture));
+		blueBlock->addComponent(blueBlockController);
+		blueBlock->addComponent(new SpriteRenderer(blueBlockTexture));
 		blueBlock->setTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
-		this->AddEntity(blueBlock);
+		this->addEntity(blueBlock);
 
 		// input mode button
 		Entity* inputModeButton = new Entity("input mode button");
 		SpriteRenderer* inputModeButtonRenderer = new SpriteRenderer(rotateYellowSpriteTex);
-		inputModeButton->AddComponent(inputModeButtonRenderer);
+		inputModeButton->addComponent(inputModeButtonRenderer);
 		std::vector<Texture*> inputModeTextures = { rotateYellowSpriteTex, translateYellowSpriteTex, translateBlueSpriteTex, rotateCameraTex, translateCameraTex, scaleCameraTex, resetTex };
-		inputModeButton->AddComponent(new InputModeButtonController(inputModeButtonRenderer, inputModeTextures));
-		inputModeButton->setTransform(Transform(Vector2D(-0.25f * cam->getCount().x, 0.25f * cam->getCount().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
-		this->AddEntity(inputModeButton);
+		inputModeButton->addComponent(new InputModeButtonController(inputModeButtonRenderer, inputModeTextures));
+		inputModeButton->setTransform(Transform(Vector2D(-0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
+		this->addEntity(inputModeButton);
 
 		// left button
 		Entity* leftButton = new Entity("left button");
-		leftButton->AddComponent(new SpriteRenderer(leftArrowTex));
-		leftButton->AddComponent(new TransformButtonController(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, false));
-		leftButton->setTransform(Transform(Vector2D(-0.25f, -0.25f * cam->getCount().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
-		this->AddEntity(leftButton);
+		leftButton->addComponent(new SpriteRenderer(leftArrowTex));
+		leftButton->addComponent(new TransformButtonController(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, false));
+		leftButton->setTransform(Transform(Vector2D(-0.25f, -0.25f * cam->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
+		this->addEntity(leftButton);
 
 		// right button
 		Entity* rightButton = new Entity("right button");
-		rightButton->AddComponent(new SpriteRenderer(rightArrowTex));
-		rightButton->AddComponent(new TransformButtonController(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, true));
-		rightButton->setTransform(Transform(Vector2D(0.25f * cam->getCount().x, -0.25f * cam->getCount().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
-		this->AddEntity(rightButton);
+		rightButton->addComponent(new SpriteRenderer(rightArrowTex));
+		rightButton->addComponent(new TransformButtonController(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, true));
+		rightButton->setTransform(Transform(Vector2D(0.25f * cam->getSize().x, -0.25f * cam->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
+		this->addEntity(rightButton);
 
 		// close button
 		Entity* closeButton = new Entity("close button");
-		closeButton->AddComponent(new SpriteRenderer(closeTex));
-		closeButton->AddComponent(new CloseButtonController());
-		closeButton->setTransform(Transform(Vector2D(0.25f * cam->getCount().x, 0.25f * cam->getCount().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
-		this->AddEntity(closeButton);
+		closeButton->addComponent(new SpriteRenderer(closeTex));
+		closeButton->addComponent(new CloseButtonController());
+		closeButton->setTransform(Transform(Vector2D(0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
+		this->addEntity(closeButton);
 	}
 }

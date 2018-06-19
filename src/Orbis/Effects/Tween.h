@@ -16,27 +16,27 @@ namespace Effects
 		Tween(std::string assetPath) :
 			m_assetPath(assetPath), m_elapsed(0.0f)
 		{
-			TryDeserialize();
+			tryDeserialize();
 		}
 
 		// get the curve
-		BezierCurve* GetCurve() { return &m_curve; }
+		BezierCurve* getCurve() { return &m_curve; }
 
 		// set the curve
-		void SetCurve(BezierCurve curve) { m_curve = curve; }
+		void setCurve(BezierCurve curve) { m_curve = curve; }
 
 		// se the initial value
-		void SetInitial(Vector2D initial) { m_initial = initial; }
+		void setInitial(Vector2D initial) { m_initial = initial; }
 
 		// save as asset
-		void Save();
+		void save();
 
 		// update the value
-		void Update(Vector2D* current, float duration);
+		void update(Vector2D* current, float duration);
 
 	protected:
 		// deserialize from asset if existing
-		void TryDeserialize();
+		void tryDeserialize();
 
 	private:
 		// the curve

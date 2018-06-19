@@ -46,7 +46,7 @@ namespace Math
 
 	protected:
 		// get value at given row/column
-		float GetValue(int row, int column) const { return m_values[row * 3 + column]; }
+		float getValue(int row, int column) const { return m_values[row * 3 + column]; }
 
 		// set the value at the given row/column
 		void SetValue(int row, int column, float value) { m_values[row * 3 + column] = value; }

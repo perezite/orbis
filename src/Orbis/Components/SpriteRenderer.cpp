@@ -17,7 +17,7 @@ namespace Components
 		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
 		m_renderable.getMaterial()->setColor(Color::White);
 		m_renderable.setMesh(Mesh::createTexturedQuad());
-		m_renderable.setTransform(GetParent()->getTransform());
+		m_renderable.setTransform(getParent()->getTransform());
 		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 

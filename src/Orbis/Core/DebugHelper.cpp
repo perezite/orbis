@@ -13,24 +13,24 @@ using namespace Video;
 
 namespace Core
 {
-	void DebugHelper::DrawLine(Vector2D start, Vector2D end, Color color)
+	void DebugHelper::drawLine(Vector2D start, Vector2D end, Color color)
 	{
 		ORBIS_ASSERT_DEBUG();
 
 		VideoManager::getInstance()->getRenderDevice()->drawDebugLine(start, end, color);
 	}
 
-	void DebugHelper::DrawRect(Rect rect, Color color)
+	void DebugHelper::drawRect(Rect rect, Color color)
 	{
 		ORBIS_ASSERT_DEBUG();
 
-		DrawLine(rect.leftBottom, rect.GetRightBottom());
-		DrawLine(rect.GetRightBottom(), rect.rightTop);
-		DrawLine(rect.rightTop, rect.GetLeftTop());
-		DrawLine(rect.GetLeftTop(), rect.leftBottom);
+		drawLine(rect.leftBottom, rect.GetRightBottom());
+		drawLine(rect.GetRightBottom(), rect.rightTop);
+		drawLine(rect.rightTop, rect.GetLeftTop());
+		drawLine(rect.GetLeftTop(), rect.leftBottom);
 	}
 
-	void DebugHelper::DrawSolidRect(Rect rect, Color color)
+	void DebugHelper::drawSolidRect(Rect rect, Color color)
 	{
 		ORBIS_ASSERT_DEBUG();
 

@@ -82,11 +82,11 @@ namespace Video
 
 		m_programId = glCreateProgram();
 
-		std::string vertexShaderCode = AssetHelper::LoadTextAsset(vertexShaderAssetPath);
+		std::string vertexShaderCode = AssetHelper::loadTextAsset(vertexShaderAssetPath);
 		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
 		glAttachShader(m_programId, vertexShader);
 
-		std::string fragmentShaderCode = AssetHelper::LoadTextAsset(fragmentShaderAssetPath);
+		std::string fragmentShaderCode = AssetHelper::loadTextAsset(fragmentShaderAssetPath);
 		GLuint fragmentShader = Compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
 		glAttachShader(m_programId, fragmentShader);
 

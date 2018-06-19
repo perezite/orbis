@@ -23,10 +23,10 @@ namespace Game
 		{}
 
 		// get the model matrix
-		Matrix3 GetModelMatrix() const;
+		Matrix3 getModelMatrix() const;
 
 		// get the transform's unrotated rect
-		Rect GetRect() const;
+		Rect getRect() const;
 	
 	public:
 		// the position

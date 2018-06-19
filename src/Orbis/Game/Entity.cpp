@@ -10,9 +10,9 @@ namespace Game
 		MemoryHelper::clear(m_components);
 	}
 
-	void Entity::AddComponent(Component *component)   		
+	void Entity::addComponent(Component *component)   		
 	{
-		component->SetParent(this);
+		component->setParent(this);
 		m_components.push_back(component);
 	}
 
@@ -24,19 +24,19 @@ namespace Game
 		}
 	}
 
-	void Entity::Update()
+	void Entity::update()
 	{
 		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			m_components[i]->Update();
+			m_components[i]->update();
 		}
 	}
 
-	void Entity::RenderDebug()
+	void Entity::renderDebug()
 	{
 		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			m_components[i]->RenderDebug();
+			m_components[i]->renderDebug();
 		}
 	}
 }

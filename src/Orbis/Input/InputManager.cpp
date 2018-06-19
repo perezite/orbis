@@ -30,7 +30,7 @@ namespace Input
 		return &instance;
 	}
 
-	void InputManager::Update()
+	void InputManager::update()
 	{
 		SDL_Event event;
 
@@ -88,69 +88,69 @@ namespace Input
 		}
 	}
 
-	void InputManager::SetQuitEvent()
+	void InputManager::setQuitEvent()
 	{
 		m_hasQuitEvent = true;
 	}
 
-	bool InputManager::IsKeyDown(KeyCode keyCode)
+	bool InputManager::isKeyDown(KeyCode keyCode)
 	{
 		return m_keysDown.count(keyCode) == 1;
 	}
 
-	bool InputManager::IsKeyGoingDown(KeyCode keyCode)
+	bool InputManager::isKeyGoingDown(KeyCode keyCode)
 	{
 		return m_keysGoingDown.count(keyCode) == 1;
 	}
 
-	bool InputManager::IsTapDown()
+	bool InputManager::isTapDown()
 	{
 		return m_isCursorInsideWindow && m_tapsDown.size() > 0;
 	}
 
-	bool InputManager::IsTapDown(Rect rect)
+	bool InputManager::isTapDown(Rect rect)
 	{
-		if (IsTapDown())
+		if (isTapDown())
 		{
-			if (rect.Contains(GetTapPosition()))
+			if (rect.Contains(getTapPosition()))
 				return true;
 		}
 
 		return false;
 	}
 
-	bool InputManager::IsTapIndexDown(signed long index)
+	bool InputManager::isTapIndexDown(signed long index)
 	{
 		return m_tapsDown.find(index) != m_tapsDown.end();
 	}
 
-	bool InputManager::IsTapGoingDown()
+	bool InputManager::isTapGoingDown()
 	{
 		return m_isCursorInsideWindow && m_tapsGoingDown.size() > 0;
 	}
 
-	bool InputManager::IsTapGoingDown(Rect rect)
+	bool InputManager::isTapGoingDown(Rect rect)
 	{
-		if (IsTapGoingDown())
+		if (isTapGoingDown())
 		{
-			if (rect.Contains(GetTapPosition()))
+			if (rect.Contains(getTapPosition()))
 				return true;
 		}
 
 		return false;
 	}
 
-	bool InputManager::IsTapIndexGoingDown(signed long index)
+	bool InputManager::isTapIndexGoingDown(signed long index)
 	{
 		return m_tapsGoingDown.find(index) != m_tapsGoingDown.end();
 	}
 
-	Vector2D InputManager::GetTapPosition()
+	Vector2D InputManager::getTapPosition()
 	{
-		Exception::Assert(IsTapDown() || IsTapGoingDown(), "GetTapPosition() can only be called when a tap is pressed or going down");
+		Exception::Assert(isTapDown() || isTapGoingDown(), "getTapPosition() can only be called when a tap is pressed or going down");
 
 		Camera* cam = Camera::getInstance();
-		float aspect = cam->GetAspect();
+		float aspect = cam->getAspect();
 		return Vector2D(m_tapPosition.x, aspect * m_tapPosition.y);
 	}
 }

@@ -33,10 +33,10 @@ namespace Levels
 		// camera entity
 		Entity* camera = new Entity();
 		Camera* cam = new Camera();
-		camera->AddComponent(cam);
+		camera->addComponent(cam);
 		CameraController* cameraController = new CameraController();
-		camera->AddComponent(cameraController);
-		this->AddEntity(camera);
+		camera->addComponent(cameraController);
+		this->addEntity(camera);
 
 		// add level switchers
 		LevelHelper::AddLevelSwitcher<Level1>(this, false);
@@ -44,32 +44,32 @@ namespace Levels
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");
-		coordSystem->AddComponent(new SpriteRenderer(coordSystemTexture));
-		this->AddEntity(coordSystem);
+		coordSystem->addComponent(new SpriteRenderer(coordSystemTexture));
+		this->addEntity(coordSystem);
 
 		// yellow block entity
 		Entity* yellowBlock = new Entity("Yellow Brick");
-		yellowBlock->AddComponent(new SpriteRenderer(yellowBlockTexture));
+		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTexture));
 		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(yellowBlock);
+		this->addEntity(yellowBlock);
 
 		// red flat rect entity
 		Entity* redFlatRect = new Entity("Red Flat Rect");
-		redFlatRect->AddComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
+		redFlatRect->addComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
 		redFlatRect->setTransform(Transform(Vector2D(-0.2f, 0.3f), MathHelper::GetPi() / 7.0f, Vector2D(0.2f, 0.2f)));
-		this->AddEntity(redFlatRect);
+		this->addEntity(redFlatRect);
 
 		// green flat rect entity
 		Entity* greenRect = new Entity("Green Flat Rect");
-		greenRect->AddComponent(new RectangleRenderer(Color(0.0f, 1.0f, 0.0f)));
+		greenRect->addComponent(new RectangleRenderer(Color(0.0f, 1.0f, 0.0f)));
 		greenRect->setTransform(Transform(Vector2D(0.2f, -0.3f), 0.f, Vector2D(0.1f, 0.1f)));
-		this->AddEntity(greenRect);
+		this->addEntity(greenRect);
 
 		// line renderer
 		ORBIS_DEBUG (
 			Entity* debugLineEntity = new Entity("Debug Lines");
-			debugLineEntity->AddComponent(new DebugLineTester());
-			this->AddEntity(debugLineEntity);
+			debugLineEntity->addComponent(new DebugLineTester());
+			this->addEntity(debugLineEntity);
 		)
 	}
 }

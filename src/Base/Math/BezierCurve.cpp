@@ -15,7 +15,7 @@ namespace Math
 		clear();
 	}
 
-	Vector2D BezierCurve::GetValue(float x)
+	Vector2D BezierCurve::getValue(float x)
 	{
 		unsigned int startIdx = 0;
 		for (unsigned int i = 0; i < m_points.size() - 1; i++) {
@@ -32,26 +32,26 @@ namespace Math
 		Vector2D p3 = m_points[startIdx + 1].pos;
 		Vector2D p2 = p3 - endTangent * 0.5f;
 		float t = (x - p0.x) / (p3.x - p0.x);
-		return Vector2D(x, GetValue(t, p0, p1, p2, p3).y);
+		return Vector2D(x, getValue(t, p0, p1, p2, p3).y);
 	}
 
 	void BezierCurve::add(BezierPoint bp)
 	{
 		m_points.push_back(BezierPoint(bp.pos, bp.tangent));
-		std::sort(m_points.begin(), m_points.end(), CompareControlPoints);
+		std::sort(m_points.begin(), m_points.end(), compareControlPoints);
 	}
 
-	void BezierCurve::Move(unsigned int index, Vector2D newPosition)
+	void BezierCurve::move(unsigned int index, Vector2D newPosition)
 	{
 		std::vector<BezierPoint> newControlPoints = m_points;
 		newControlPoints[index].pos = newPosition;
 
 		// only update if the translation did not change the order of the control points
-		if (std::is_sorted(std::begin(newControlPoints), std::end(newControlPoints), CompareControlPoints))
+		if (std::is_sorted(std::begin(newControlPoints), std::end(newControlPoints), compareControlPoints))
 			m_points = newControlPoints;
 	}
 
-	void BezierCurve::Load(std::string json)
+	void BezierCurve::load(std::string json)
 	{
 		m_points.clear();
 		std::istringstream is(json);
@@ -64,7 +64,7 @@ namespace Math
 			float tangent = (float)atof(StringHelper::Read(is, 'f').c_str());
 			StringHelper::Seek(is, ','); StringHelper::Seek(is, '{');
 			std::string vs = StringHelper::Read(is, '}'); vs = '{' + vs + '}';
-			Vector2D pos = Vector2D::Load(vs);
+			Vector2D pos = Vector2D::load(vs);
 			StringHelper::Seek(is, '}');
 			m_points.push_back(BezierPoint(pos, tangent));
 
@@ -75,18 +75,18 @@ namespace Math
 		StringHelper::Seek(is, '}');
 	}
 
-	std::string BezierCurve::ToString()
+	std::string BezierCurve::toString()
 	{
 		std::stringstream ss;
 		ss << "{";
 
-		for (unsigned int i = 0; i < GetLength(); i++)
+		for (unsigned int i = 0; i < getCount(); i++)
 		{
-			float tangent = Get(i).tangent;
-			Vector2D pos = Get(i).pos;
-			ss << "{" << StringHelper::Load(tangent) << "," << pos.Load() << "}";
+			float tangent = get(i).tangent;
+			Vector2D pos = get(i).pos;
+			ss << "{" << StringHelper::load(tangent) << "," << pos.load() << "}";
 
-			if (i < GetLength() - 1)
+			if (i < getCount() - 1)
 				ss << ",";
 		}
 
@@ -96,7 +96,7 @@ namespace Math
 	}
 
 	// reference: https://www.youtube.com/watch?v=Qu-QK3uoMdY
-	Vector2D BezierCurve::GetValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3)
+	Vector2D BezierCurve::getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3)
 	{
 		float tt = t * t;
 		float ttt = tt * t;

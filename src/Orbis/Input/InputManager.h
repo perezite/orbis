@@ -20,45 +20,48 @@ namespace Input
 		static InputManager* getInstance();
 
 		// update
-		void Update();
+		void update();
 
 		// has the input a quit event
-		bool HasQuitEvent() const { return m_hasQuitEvent; }
+		bool hasQuitEvent() const { return m_hasQuitEvent; }
 
 		// set the quit event to true
-		void SetQuitEvent();
+		void setQuitEvent();
 
 		// is key pressed
-		bool IsKeyDown(KeyCode keyCode);
+		bool isKeyDown(KeyCode keyCode);
 
 		// is key going down
-		bool IsKeyGoingDown(KeyCode keyCode);
+		bool isKeyGoingDown(KeyCode keyCode);
 
 		// is a tap pressed
-		bool IsTapDown();
+		bool isTapDown();
 
 		// is a tap pressed in cam coordinates rect
-		bool IsTapDown(Rect rect);
+		bool isTapDown(Rect rect);
 
 		// is a tap index pressed
-		bool IsTapIndexDown(signed long index);
+		bool isTapIndexDown(signed long index);
 
 		// is a tap going down
-		bool IsTapGoingDown();
+		bool isTapGoingDown();
 
 		// is a tap going down in cam coordinates rect
-		bool IsTapGoingDown(Rect rect);
+		bool isTapGoingDown(Rect rect);
 
 		// is a tap index going down
-		bool IsTapIndexGoingDown(signed long index);
+		bool isTapIndexGoingDown(signed long index);
 
 		// get the tap position in camera space ((+/-0.5f, +/-0.5f * aspectRation)) 
-		Vector2D GetTapPosition();
+		Vector2D getTapPosition();
+
+	protected:
+		// singleton ctor
+		InputManager() :
+			m_isCursorInsideWindow(true)
+		{};
 
 	private:
-		// singleton ctor
-		InputManager() : m_isCursorInsideWindow(true) {};
-
 		// list of currently pressed keys
 		std::set<KeyCode> m_keysDown;
 

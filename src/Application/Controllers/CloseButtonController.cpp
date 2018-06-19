@@ -15,13 +15,13 @@ using namespace Math;
 
 namespace Controllers
 {
-	void CloseButtonController::Update()
+	void CloseButtonController::update()
 	{
 		InputManager* input = InputManager::getInstance();
 
-		if (input->IsTapGoingDown(GetParent()->getTransform()->GetRect()))
+		if (input->isTapGoingDown(getParent()->getTransform()->getRect()))
 		{
-			input->SetQuitEvent();
+			input->setQuitEvent();
 		}
 	}
 }

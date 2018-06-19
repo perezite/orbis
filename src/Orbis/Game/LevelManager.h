@@ -13,16 +13,16 @@ namespace Game
 		static LevelManager* getInstance();
 
 		// queue level
-		void QueueLevel(Level *level) { m_queuedLevel = level; }
+		void queueLevel(Level *level) { m_queuedLevel = level; }
 
 		// get the current level
-		Level* GetCurrentLevel() { return m_currentLevel; }
+		Level* getCurrentLevel() { return m_currentLevel; }
 		
 		// clear
 		void clear();
 
 		// update
-		void Update();
+		void update();
 
 		// render
 		void render();
@@ -32,7 +32,7 @@ namespace Game
 		LevelManager();
 
 		// switch to queued level
-		void SwitchToQueuedLevel();
+		void switchToQueuedLevel();
 
 	private:
 		// current level

@@ -16,7 +16,7 @@ namespace Effects
 		m_tweens.clear();
 	}
 
-	Tween* EffectsManager::GetTween(std::string assetPath)
+	Tween* EffectsManager::getTween(std::string assetPath)
 	{
 		if (m_tweens[assetPath])
 			return m_tweens[assetPath];

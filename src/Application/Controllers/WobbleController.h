@@ -12,7 +12,7 @@ namespace Controllers
 		void start();
 
 		// update
-		void Update();
+		void update();
 
 	private:
 		// is the entity currently growing

@@ -29,65 +29,65 @@ namespace Components
 
 	void ParticleRenderer::start()
 	{
-		Tween* alphaTween = EffectsManager::getInstance()->GetTween("Tweens/GreenParticlesAlpha.tween");
-		LevelManager::getInstance()->GetCurrentLevel()->AddEntity(TweenInspector::TryConstructEntity(m_parentLevel, alphaTween, KeyCode::b));
+		Tween* alphaTween = EffectsManager::getInstance()->getTween("Tweens/GreenParticlesAlpha.tween");
+		LevelManager::getInstance()->getCurrentLevel()->addEntity(TweenInspector::tryConstructEntity(m_parentLevel, alphaTween, KeyCode::b));
 	}
 
-	void ParticleRenderer::Update()
+	void ParticleRenderer::update()
 	{
-		UpdateParticles();
+		updateParticles();
 
-		CleanupParticles();
+		cleanupParticles();
 
-		EmitParticles();
+		emitParticles();
 
-		m_lastEntityPos = GetParent()->getTransform()->position;
+		m_lastEntityPos = getParent()->getTransform()->position;
 	}
 
-	void ParticleRenderer::UpdateParticles()
+	void ParticleRenderer::updateParticles()
 	{
-		float dt = TimeManager::getInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->getDeltaSeconds();
 
 		// update lifetime
 		for (unsigned int i = 0; i < m_particles.size(); i++)
-			m_particles[i]->SetCurrentLifetime(m_particles[i]->GetCurrentLifetime() - dt);
+			m_particles[i]->setCurrentLifetime(m_particles[i]->getCurrentLifetime() - dt);
 
 		// update position
 		for (unsigned int i = 0; i < m_particles.size(); i++)
-			m_particles[i]->getTransform()->position += m_particles[i]->GetVelocity() * dt;
+			m_particles[i]->getTransform()->position += m_particles[i]->getVelocity() * dt;
 	}
 
-	void ParticleRenderer::CleanupParticles()
+	void ParticleRenderer::cleanupParticles()
 	{
 		// delete outdated particles
 		for (unsigned int i = 0; i < m_particles.size();)
 		{
-			if (m_particles[i]->GetCurrentLifetime() <= 0.0f)
+			if (m_particles[i]->getCurrentLifetime() <= 0.0f)
 				MemoryHelper::Remove(m_particles, i);
 			else
 				i++;
 		}
 	}
 
-	void ParticleRenderer::EmitParticles()
+	void ParticleRenderer::emitParticles()
 	{
-		float dt = TimeManager::getInstance()->GetDeltaSeconds();
+		float dt = TimeManager::getInstance()->getDeltaSeconds();
 		float emissionPeriod = 1.0f / float(m_emissionRate);
 
 		m_timeToNextEmission -= dt;
 		if (m_timeToNextEmission < emissionPeriod)
 		{
-			AddParticle();
+			spawnParticle();
 			m_timeToNextEmission += emissionPeriod;
 		}
 	}
 
-	void ParticleRenderer::AddParticle()
+	void ParticleRenderer::spawnParticle()
 	{
-		float dt = TimeManager::getInstance()->GetDeltaSeconds();
-		Vector2D entityVelocity = (m_lastEntityPos - GetParent()->getTransform()->position) * (1.0f/dt);
+		float dt = TimeManager::getInstance()->getDeltaSeconds();
+		Vector2D entityVelocity = (m_lastEntityPos - getParent()->getTransform()->position) * (1.0f/dt);
 
-		Vector2D position = GetParent()->getTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;
+		Vector2D position = getParent()->getTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;
 		Vector2D particleVelocity = (MathHelper::GetRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
 		Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
 		m_particles.push_back(new Particle(m_texture, Color::White, transform, particleVelocity));

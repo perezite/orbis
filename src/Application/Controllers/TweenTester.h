@@ -22,7 +22,7 @@ namespace Controllers
 		void start();
 
 		// override
-		void Update();
+		void update();
 
 	private: 
 		// the tween

@@ -23,8 +23,8 @@ namespace Levels
 
 		// init camera
 		Entity* cam = new Entity();
-		cam->AddComponent(new Camera());
-		AddEntity(cam);
+		cam->addComponent(new Camera());
+		addEntity(cam);
 
 		// add level switchers
 		LevelHelper::AddLevelSwitcher<Level5>(this, false);
@@ -32,23 +32,23 @@ namespace Levels
 
 		// init entities
 		Entity* blueEntity = new Entity("Bleeding Test Blue");
-		blueEntity->AddComponent(new SpriteRenderer(bleedingTestBlue));
+		blueEntity->addComponent(new SpriteRenderer(bleedingTestBlue));
 		blueEntity->setTransform(Transform(Vector2D(-0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(blueEntity);
+		this->addEntity(blueEntity);
 
 		Entity* greenEntity = new Entity("Bleeding Test Green");
-		greenEntity->AddComponent(new SpriteRenderer(bleedingTestGreen));
+		greenEntity->addComponent(new SpriteRenderer(bleedingTestGreen));
 		greenEntity->setTransform(Transform(Vector2D(0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(greenEntity);
+		this->addEntity(greenEntity);
 
 		Entity* redEntity = new Entity("Bleeding Test Red");
-		redEntity->AddComponent(new SpriteRenderer(bleedingTestRed));
+		redEntity->addComponent(new SpriteRenderer(bleedingTestRed));
 		redEntity->setTransform(Transform(Vector2D(0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(redEntity);
+		this->addEntity(redEntity);
 
 		Entity* yellowEntity = new Entity("Bleeding Test Yellow");
-		yellowEntity->AddComponent(new SpriteRenderer(bleedingTestYellow));
+		yellowEntity->addComponent(new SpriteRenderer(bleedingTestYellow));
 		yellowEntity->setTransform(Transform(Vector2D(-0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(yellowEntity);
+		this->addEntity(yellowEntity);
 	}
 }

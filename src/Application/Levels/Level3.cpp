@@ -45,8 +45,8 @@ namespace Levels
 
 		// init camera
 		Entity* camEntity = new Entity("Camera");
-		camEntity->AddComponent(new Camera());
-		AddEntity(camEntity);
+		camEntity->addComponent(new Camera());
+		addEntity(camEntity);
 
 		// init blocks
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
@@ -59,10 +59,10 @@ namespace Levels
 			entity->setTransform(trans);
 
 			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
-			entity->AddComponent(hasTexture ? (Component*)new SpriteRenderer(texture) : (Component*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
-			entity->AddComponent(new WobbleController());
+			entity->addComponent(hasTexture ? (Component*)new SpriteRenderer(texture) : (Component*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
+			entity->addComponent(new WobbleController());
 
-			this->AddEntity(entity);
+			this->addEntity(entity);
 		}
 
 		// add level switchers. Note: because we have no layering yet, the sprites above must be generated first in order to be batched in the right order
@@ -72,8 +72,8 @@ namespace Levels
 		// init debug line tester
 		ORBIS_DEBUG (
 			Entity* entity = new Entity("Debug line tester");
-			entity->AddComponent(new DebugLineTester());
-			AddEntity(entity);
+			entity->addComponent(new DebugLineTester());
+			addEntity(entity);
 		);
 	}
 }

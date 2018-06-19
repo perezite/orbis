@@ -109,7 +109,7 @@ namespace Video
 				}
 
 		#ifdef ORBIS_DEBUG_RENDERDEVICE
-				LogHelper::LogMessage("Number of draw calls: %d", count);
+				LogHelper::logMessage("Number of draw calls: %d", count);
 		#endif 
 
 		// cleanup
@@ -119,7 +119,7 @@ namespace Video
 	void RenderDevice::drawDebugLine(Vector2D start, Vector2D end, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::getInstance()->CalcCamMatrix();
+		Matrix3 camMatrix = Camera::getInstance()->calcCamMatrix();
 		start = camMatrix * start;
 		end = camMatrix * end;
 		GLfloat vertexArray[4] = { start.x, start.y, end.x, end.y };
@@ -131,7 +131,7 @@ namespace Video
 	void RenderDevice::drawDebugRect(Rect rect, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::getInstance()->CalcCamMatrix();
+		Matrix3 camMatrix = Camera::getInstance()->calcCamMatrix();
 		rect = camMatrix * rect;
 		GLfloat vertexArray[12] = {
 			rect.leftBottom.x , rect.leftBottom.y, rect.GetRightBottom().x, rect.GetRightBottom().y, rect.GetLeftTop().x, rect.GetLeftTop().y,
@@ -143,8 +143,8 @@ namespace Video
 	
 	void RenderDevice::updateVertexArray()
 	{
-		Matrix3 worldCamMatrix = Camera::getInstance()->CalcCamMatrix(TransformSpace::World);
-		Matrix3 localCamMatrix = Camera::getInstance()->CalcCamMatrix(TransformSpace::Camera);
+		Matrix3 worldCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::World);
+		Matrix3 localCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::Camera);
 
 		m_vertexArray.clear();
 		reserveVertexArray();
@@ -153,7 +153,7 @@ namespace Video
 		{
 			Transform* transform = m_renderables[i]->getTransform();
 			bool isWorldSpace = transform->transformSpace == TransformSpace::World ? true : false;
-			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transform->GetModelMatrix();
+			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transform->getModelMatrix();
 			insertIntoVertexArray(m_renderables[i], mvpMatrix);
 		}
 	}

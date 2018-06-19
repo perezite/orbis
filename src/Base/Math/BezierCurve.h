@@ -38,37 +38,37 @@ namespace Math
 		{ }
 
 		// get the bezier curve value at coordinate x
-		Vector2D GetValue(float x);
+		Vector2D getValue(float x);
 
 		// get a control point
-		BezierPoint Get(unsigned int index) const { return m_points[index]; }
+		BezierPoint get(unsigned int index) const { return m_points[index]; }
 
 		// get the number of control points
-		unsigned int GetLength() const { return m_points.size(); }
+		unsigned int getCount() const { return m_points.size(); }
 
 		// set a control point
-		void Set(unsigned int index, BezierPoint p) { m_points[index] = p; }
+		void set(unsigned int index, BezierPoint p) { m_points[index] = p; }
 
 		// delete a control point
-		void Delete(unsigned int index) { m_points.erase(m_points.begin() + index); }
+		void remove(unsigned int index) { m_points.erase(m_points.begin() + index); }
 
 		// add a control point
 		void add(BezierPoint bp);
 
 		// move a control point
-		void Move(unsigned int index, Vector2D newPosition);
+		void move(unsigned int index, Vector2D newPosition);
 
 		// load from json
-		void Load(std::string json);
+		void load(std::string json);
 
 		// serialize to json
-		std::string ToString();
+		std::string toString();
 	protected:
 		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
-		Vector2D GetValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
+		Vector2D getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
 
 		// control points sorting function
-		static bool CompareControlPoints(BezierPoint first, BezierPoint second) { return first.pos.x < second.pos.x; };
+		static bool compareControlPoints(BezierPoint first, BezierPoint second) { return first.pos.x < second.pos.x; };
 
 		// clear the control points
 		void clear();

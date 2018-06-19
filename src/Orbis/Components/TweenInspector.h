@@ -21,7 +21,7 @@ namespace Components
 	{
 	public:
 		// utility for quickly creating an inspector entity. Returns 0 in release mode
-		static Entity* TryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationkey = KeyCode::t);
+		static Entity* tryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationkey = KeyCode::t);
 
 	public:
 		// ctor
@@ -31,35 +31,35 @@ namespace Components
 		void start();
 
 		// update
-		void Update();
+		void update();
 
 		// render
-		void RenderDebug();
+		void renderDebug();
 
 	protected:
-		// add or select a control point at the tapped point 
-		void AddOrSelectControlPoint();
+		// add or select a control point at the tapped position 
+		void addOrSelectControlPoint();
 
 		// move control point to the tap position
-		void MoveControlPoint();
+		void moveControlPoint();
 
 		// rotate the tangent to the slope defined by the right tapped point
-		void RotateTangent();
+		void rotateTangent();
 
 		// delete the selected control point
-		void DeleteSelectedControlPoint();
+		void deleteSelectedControlPoint();
 
 		// get the index of the selected control point or -1 if no point was selected
-		unsigned int ComputeSelectedControlPoint(Vector2D tapPosition);
+		unsigned int computeSelectedControlPoint(Vector2D tapPosition);
 
 		// check whether a control point is selected by the given tap position
-		bool IsControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition);
+		bool isControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition);
 
 		// render the bezier curve
-		void RenderCurve();
+		void renderCurve();
 
 		// render the control points and tangent
-		void RenderControlPoints();
+		void renderControlPoints();
 
 		// check if given points is within the clickable rect
 		bool IsClickablePosition(Vector2D position);
@@ -74,10 +74,10 @@ namespace Components
 		BezierCurve GetShiftedCurve(BezierCurve* curve, Vector2D shift);
 
 		// save the tween
-		void Save();
+		void save();
 
 		// toggle the editor
-		void Toggle();
+		void toggle();
 
 	private:
 		// the renderable

@@ -17,7 +17,7 @@ namespace Controllers
 		{ }
 
 		// override
-		void Update(); 
+		void update(); 
 
 	private: 
 		// the speed

@@ -2,7 +2,7 @@
 
 namespace Game
 {
-	Matrix3 Transform::GetModelMatrix() const
+	Matrix3 Transform::getModelMatrix() const
 	{
 		Matrix3 mat;
 		mat.Translate2D(position);
@@ -11,7 +11,7 @@ namespace Game
 		return mat;
 	}
 
-	Rect Transform::GetRect() const
+	Rect Transform::getRect() const
 	{
 		return Rect(position - scale * 0.5f, position + scale * 0.5f);
 	}

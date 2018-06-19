@@ -61,7 +61,7 @@ namespace Math
 			for (unsigned int col = 0; col < 3; col++) {
 				float sum = 0.0f;
 				for (unsigned int i = 0; i < 3; i++)
-					sum += GetValue(row, i) * other.GetValue(i, col);
+					sum += getValue(row, i) * other.getValue(i, col);
 				result.SetValue(row, col, sum);
 			}
 		}
@@ -78,8 +78,8 @@ namespace Math
 
 	Vector2D Matrix3::operator*(const Vector2D & vec) const
 	{
-		float x = this->GetValue(0, 0) * vec.x + this->GetValue(0, 1) * vec.y + this->GetValue(0, 2);
-		float y = this->GetValue(1, 0) * vec.x + this->GetValue(1, 1) * vec.y + this->GetValue(1, 2);
+		float x = this->getValue(0, 0) * vec.x + this->getValue(0, 1) * vec.y + this->getValue(0, 2);
+		float y = this->getValue(1, 0) * vec.x + this->getValue(1, 1) * vec.y + this->getValue(1, 2);
 		return Vector2D(x, y);
 	}
 

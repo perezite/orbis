@@ -22,6 +22,6 @@ namespace Controllers
 	{
 	public:
 		// update
-		void Update();
+		void update();
 	};
 }

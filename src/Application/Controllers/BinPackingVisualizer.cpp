@@ -37,24 +37,24 @@ namespace Controllers
 		}
 	}
 
-	void BinPackingVisualizer::RenderDebug()
+	void BinPackingVisualizer::renderDebug()
 	{
 		std::vector<Rect> lastBinRects = m_packedRects.empty() ? std::vector<Rect>() : m_packedRects.back();
 		for (unsigned int i = 0; i < lastBinRects.size(); i++)
-			DebugHelper::DrawSolidRect(lastBinRects[i], m_rectColors[i]);
+			DebugHelper::drawSolidRect(lastBinRects[i], m_rectColors[i]);
 
-		std::vector<Rect> partitionBuffer = BinPacking::GetPartitionBuffer();
+		std::vector<Rect> partitionBuffer = BinPacking::getPartitionBuffer();
 		for (unsigned int i = 0; i < partitionBuffer.size(); i++)
-			DebugHelper::DrawRect(partitionBuffer[i], Color::Green);
+			DebugHelper::drawRect(partitionBuffer[i], Color::Green);
 	}
 
-	void BinPackingVisualizer::Update()
+	void BinPackingVisualizer::update()
 	{
-		if(InputManager::getInstance()->IsKeyGoingDown(KeyCode::Return))
+		if(InputManager::getInstance()->isKeyGoingDown(KeyCode::Return))
 		{ 
 			m_currentStep++;
 			m_currentStep = std::min(m_currentStep, m_origRects.size());
-			m_packedRects = BinPacking::Execute(BIN, m_origRects, m_currentStep);
+			m_packedRects = BinPacking::calculate(BIN, m_origRects, m_currentStep);
 		}
 	}
 }

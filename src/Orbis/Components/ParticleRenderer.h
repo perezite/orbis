@@ -29,20 +29,20 @@ namespace Components
 		void start();
 
 		// override
-		void Update();
+		void update();
 
 	protected:
 		// update the particles
-		void UpdateParticles();
+		void updateParticles();
 
 		// delete outdated particles
-		void CleanupParticles();
+		void cleanupParticles();
 
 		// emit new particles
-		void EmitParticles();
+		void emitParticles();
 
 		// add a particle
-		void AddParticle();
+		void spawnParticle();
 
 	private: 
 		// the texture

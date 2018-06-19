@@ -25,22 +25,22 @@ namespace Components
 		virtual ~Camera();
 
 		// transform coordinates from screen space to camera space
-		Vector2D ScreenSpaceToCameraSpace(Vector2D v);
+		Vector2D screenSpaceToCameraSpace(Vector2D v);
 
 		// get the view matrix (the inverse of the transform of the parent entity)
-		Matrix3 CalcViewMatrix(TransformSpace space = TransformSpace::World);
+		Matrix3 calcViewMatrix(TransformSpace space = TransformSpace::World);
 
 		// get the orthographic projection matrix
-		Matrix3 CalcProjectionMatrix(TransformSpace space = TransformSpace::World);
+		Matrix3 calcProjectionMatrix(TransformSpace space = TransformSpace::World);
 
 		// get the view-projection matrix
-		Matrix3 CalcCamMatrix(TransformSpace space = TransformSpace::World);
+		Matrix3 calcCamMatrix(TransformSpace space = TransformSpace::World);
 
-		// get the size of the camera in word coordinates
-		Vector2D getCount();
+		// get the size of the camera in world coordinates
+		Vector2D getSize();
 
 		// get the aspect ratio (height / width)
-		float GetAspect();
+		float getAspect();
 
 	private:
 		// singleton component instance

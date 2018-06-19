@@ -8,9 +8,9 @@ namespace Core
 	{
 	public:
 		// log a message
-		static void LogMessage(const char* fmt, ...);
+		static void logMessage(const char* fmt, ...);
 
 		// show a message box
-		static void ShowMessageBox(std::string message, std::string title);
+		static void showMessageBox(std::string message, std::string title);
 	};
 }

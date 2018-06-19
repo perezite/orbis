@@ -25,16 +25,16 @@ namespace Components
 		virtual void start() { };
 
 		// update
-		virtual void Update() { };
+		virtual void update() { };
 
 		// render
-		virtual void RenderDebug() { };
+		virtual void renderDebug() { };
 
 		// set entity
-		void SetParent(Game::Entity* parent) { m_parent = parent; }
+		void setParent(Game::Entity* parent) { m_parent = parent; }
 
 		// get entity
-		Game::Entity *GetParent() { return m_parent; }
+		Game::Entity *getParent() { return m_parent; }
 
 	private: 
 		// entity which uses the component

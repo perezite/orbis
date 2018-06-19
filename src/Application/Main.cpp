@@ -25,18 +25,18 @@ int main(int argc, char* args[])
 {	
 	try
 	{
-		LevelManager::getInstance()->QueueLevel(new Level1());
+		LevelManager::getInstance()->queueLevel(new Level1());
 		OrbisMain::getInstance()->run();
 	}
 	catch (Exception e)
 	{
-		LogHelper::LogMessage("%.1023s", e.what().c_str());
+		LogHelper::logMessage("%.1023s", e.what().c_str());
 
 		#if defined(_DEBUG)
 			throw e;
 		#endif
 
- 		LogHelper::ShowMessageBox(e.what(), "Exception");
+ 		LogHelper::showMessageBox(e.what(), "Exception");
 	}
 
 	return 0;

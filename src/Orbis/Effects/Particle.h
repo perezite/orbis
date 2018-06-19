@@ -25,13 +25,13 @@ namespace Effects
 		Transform* getTransform() { return &m_transform; }
 
 		// get the current lifetime
-		float GetCurrentLifetime() const { return m_lifetime; }
+		float getCurrentLifetime() const { return m_lifetime; }
 
 		// set the current lifetime
-		void SetCurrentLifetime(float lifetime) { m_lifetime = lifetime; }
+		void setCurrentLifetime(float lifetime) { m_lifetime = lifetime; }
 
 		// get the velocity
-		const Vector2D& GetVelocity() const { return m_velocity; }
+		const Vector2D& getVelocity() const { return m_velocity; }
 
 	protected:
 		// add a renderable

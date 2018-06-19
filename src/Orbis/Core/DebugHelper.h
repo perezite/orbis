@@ -21,12 +21,12 @@ namespace Core
 	{
 	public:
 		// draw a debug line
-		static void DrawLine(Vector2D start, Vector2D end, Color color = Color::Green);
+		static void drawLine(Vector2D start, Vector2D end, Color color = Color::Green);
 
 		// darw a debug wireframe rectangle
-		static void DrawRect(Rect rect, Color color);
+		static void drawRect(Rect rect, Color color);
 
 		// draw a debug solid rectangle
-		static void DrawSolidRect(Rect rect, Color color);
+		static void drawSolidRect(Rect rect, Color color);
 	};
 }

@@ -27,7 +27,7 @@ namespace Controllers
 		{}
 
 		// update
-		void Update();
+		void update();
 
 	protected:
 		// cycle through the input modes

@@ -13,7 +13,7 @@ namespace Components
 		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag"));
 		m_renderable.getMaterial()->setColor(m_color);
 		m_renderable.setMesh(Mesh::createFlatQuad());
-		m_renderable.setTransform(GetParent()->getTransform());
+		m_renderable.setTransform(getParent()->getTransform());
 		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 }

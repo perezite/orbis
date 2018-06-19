@@ -17,10 +17,10 @@ namespace Math
 
 	public:
 		// get distance between to points
-		static float Distance(Vector2D point1, Vector2D point2) { return (point2 - point1).GetLength(); }
+		static float Distance(Vector2D point1, Vector2D point2) { return (point2 - point1).getCount(); }
 
 		// deserialize from string 
-		static Vector2D Load(std::string json);
+		static Vector2D load(std::string json);
 
 	public:
 		// costructor 
@@ -54,7 +54,7 @@ namespace Math
 		const Vector2D operator+=(const Vector2D &other);
 
 		// get length
-		float GetLength() const { return sqrtf(x * x + y * y);  }
+		float getCount() const { return sqrtf(x * x + y * y);  }
 
 		// get normalized
 		const Vector2D Normalized() const;
@@ -63,7 +63,7 @@ namespace Math
 		const Vector2D Scaled(float length) const;
 
 		// serialize to string
-		const std::string Load(int precision = 5);
+		const std::string load(int precision = 5);
 
 	public:
 		// the x component 

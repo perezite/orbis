@@ -23,13 +23,13 @@ namespace Game
 		virtual ~Level();
 
 		// initialize the level
-		void Initialize();
+		void initialize();
 
 		// add entity
-		void AddEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
+		void addEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
 
 		// update 
-		void Update();
+		void update();
 
 		// render
 		void render();
@@ -39,13 +39,13 @@ namespace Game
 
 	protected:
 		// start the entities
-		void StartEntities();
+		void startEntities();
 
 		// update entities
-		void UpdateEntities();
+		void updateEntities();
 
 		// render entities
-		void RenderEntities();
+		void renderEntities();
 
 	private:
 		// entites in the level

@@ -22,8 +22,8 @@ namespace Levels
 
 		// init camera
 		Entity* cam = new Entity();
-		cam->AddComponent(new Camera());
-		AddEntity(cam);
+		cam->addComponent(new Camera());
+		addEntity(cam);
 
 		// add level switchers
 		LevelHelper::AddLevelSwitcher<Level4>(this, false);
@@ -31,18 +31,18 @@ namespace Levels
 
 		// init entities
 		Entity* yellowBlock = new Entity("Yellow Brick");
-		yellowBlock->AddComponent(new SpriteRenderer(yellowBlockTex));
+		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTex));
 		yellowBlock->setTransform(Transform(Vector2D(-0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(yellowBlock);
+		this->addEntity(yellowBlock);
 
 		Entity* redBlock = new Entity("Red Brick");
-		redBlock->AddComponent(new SpriteRenderer(redBlockTex));
+		redBlock->addComponent(new SpriteRenderer(redBlockTex));
 		redBlock->setTransform(Transform(Vector2D(0.0f, 0.0f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(redBlock);
+		this->addEntity(redBlock);
 
 		Entity* greenBlock = new Entity("Green Brick");
-		greenBlock->AddComponent(new SpriteRenderer(greenBlockTex));
+		greenBlock->addComponent(new SpriteRenderer(greenBlockTex));
 		greenBlock->setTransform(Transform(Vector2D(0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->AddEntity(greenBlock);
+		this->addEntity(greenBlock);
 	}
 }

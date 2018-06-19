@@ -23,7 +23,7 @@ namespace Controllers
 		}
 
 		// override
-		void Update();
+		void update();
 
 	protected:
 		// affect the selected entity

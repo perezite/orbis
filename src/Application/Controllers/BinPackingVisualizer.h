@@ -21,10 +21,10 @@ namespace Controllers
 		BinPackingVisualizer();
 
 		// render
-		void RenderDebug();
+		void renderDebug();
 
 		// update
-		void Update();
+		void update();
 
 
 	private:
