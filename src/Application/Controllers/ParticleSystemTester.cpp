@@ -17,13 +17,13 @@ namespace Controllers
 	void ParticleSystemTester::Update()
 	{
 		float dt = TimeManager::getInstance()->GetDeltaSeconds();
-		Vector2D dist = m_currentTarget - GetParent()->GetTransform()->position;
+		Vector2D dist = m_currentTarget - GetParent()->getTransform()->position;
 		Vector2D direction = dist.Normalized();
-		GetParent()->GetTransform()->position += direction * dt * 0.1f;
+		GetParent()->getTransform()->position += direction * dt * 0.1f;
 
-		if (Vector2D::Distance(GetParent()->GetTransform()->position, TopTarget) < 0.001f)
+		if (Vector2D::Distance(GetParent()->getTransform()->position, TopTarget) < 0.001f)
 			m_currentTarget = BottomTarget;
-		else if (Vector2D::Distance(GetParent()->GetTransform()->position, BottomTarget) < 0.001f)
+		else if (Vector2D::Distance(GetParent()->getTransform()->position, BottomTarget) < 0.001f)
 			m_currentTarget = TopTarget;
 	}
 }

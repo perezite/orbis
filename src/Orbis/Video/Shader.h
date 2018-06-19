@@ -18,19 +18,19 @@ namespace Video
 		~Shader();
 
 		// get an attribute handle
-		int GetAttributeLocation(std::string id);
+		int getAttributeLocation(std::string id);
 
 		// set a uniform value
-		void SetUniform(std::string id, int value);
+		void setUniform(std::string id, int value);
 
 		// set a uniform value
-		void SetUniform(std::string id, const Color& color);
+		void setUniform(std::string id, const Color& color);
 
 		// enable the shader
-		void Use();
+		void use();
 
 		// disable the shader
-		void Unuse();
+		void unuse();
 
 	private: 
 		// the shader program id

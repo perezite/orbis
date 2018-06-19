@@ -8,7 +8,7 @@ using namespace Algorithms;
 
 namespace Video
 {
-	void TextureAtlas::Add(Texture* texture)
+	void TextureAtlas::add(Texture* texture)
 	{
 		m_textures.push_back(texture);
 	}
@@ -19,7 +19,7 @@ namespace Video
 		m_textures.clear();
 	}
 
-	void TextureAtlas::Generate()
+	void TextureAtlas::generate()
 	{
 		// compute the bin / page rect
 		GLint pageSize;
@@ -27,25 +27,25 @@ namespace Video
 		Rect bin = Rect(0, 0, (float)pageSize, (float)pageSize);
 
 		// pack the texture Rects
-		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::Execute(bin, GetTextureRects());
+		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::Execute(bin, getTextureRects());
 
 		// create charts
 		for (unsigned int i = 0; i < pageRectsCollection.size(); i++)
 		{
 			std::vector<Rect> pageRects = pageRectsCollection[i];
-			std::vector<Texture*> pageTextures = SelectTextures(pageRects);
+			std::vector<Texture*> pageTextures = selectTextures(pageRects);
 			TextureChart* page = new TextureChart(pageTextures, pageRects);
 			m_charts.push_back(page);
 		}
 	}
 
-	std::vector<Rect> TextureAtlas::GetTextureRects()
+	std::vector<Rect> TextureAtlas::getTextureRects()
 	{
 		std::vector<Rect> textureRects;
 
 		for (unsigned int i = 0; i < m_textures.size(); i++)
 		{
-			Rect rect = ToOrbisRect(GetSurfaceRect(m_textures[i]->GetSurface()));
+			Rect rect = toOrbisRect(getSurfaceRect(m_textures[i]->getSurface()));
 			rect.index = i;
 			textureRects.push_back(rect);
 		}
@@ -53,7 +53,7 @@ namespace Video
 		return textureRects;
 	}
 
-	std::vector<Texture*> TextureAtlas::SelectTextures(std::vector<Rect> indexedRects)
+	std::vector<Texture*> TextureAtlas::selectTextures(std::vector<Rect> indexedRects)
 	{
 		std::vector<Texture*> textures;
 
@@ -66,14 +66,14 @@ namespace Video
 		return textures;
 	}
 
-	SDL_Rect TextureAtlas::GetSurfaceRect(SDL_Surface* surface)
+	SDL_Rect TextureAtlas::getSurfaceRect(SDL_Surface* surface)
 	{
 		SDL_Rect rect;
 		rect.x = 0; rect.y = 0; rect.h = surface->h; rect.w = surface->w;
 		return rect;
 	}
 
-	Rect TextureAtlas::ToOrbisRect(SDL_Rect rect)
+	Rect TextureAtlas::toOrbisRect(SDL_Rect rect)
 	{
 		return Rect((float)rect.x, (float)rect.y, (float)rect.x + (float)rect.w, (float)rect.y + (float)rect.h);
 	}

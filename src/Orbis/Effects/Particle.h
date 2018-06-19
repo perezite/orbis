@@ -22,7 +22,7 @@ namespace Effects
 		virtual ~Particle();
 
 		// get the transforms
-		Transform* GetTransform() { return &m_transform; }
+		Transform* getTransform() { return &m_transform; }
 
 		// get the current lifetime
 		float GetCurrentLifetime() const { return m_lifetime; }
@@ -35,7 +35,7 @@ namespace Effects
 
 	protected:
 		// add a renderable
-		void AddRenderable(Texture* texture);
+		void addRenderable(Texture* texture);
 
 	private:
 		// the renderable

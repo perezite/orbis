@@ -13,17 +13,17 @@ namespace Components
 
 	void SpriteRenderer::start()
 	{
-		m_renderable.GetMaterial()->SetTexture(m_texture);
-		m_renderable.GetMaterial()->SetShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
-		m_renderable.GetMaterial()->SetColor(Color::White);
-		m_renderable.SetMesh(Mesh::CreateTexturedQuad());
-		m_renderable.SetTransform(GetParent()->GetTransform());
-		VideoManager::getInstance()->getRenderDevice()->AddRenderable(&m_renderable);
+		m_renderable.getMaterial()->setTexture(m_texture);
+		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
+		m_renderable.getMaterial()->setColor(Color::White);
+		m_renderable.setMesh(Mesh::createTexturedQuad());
+		m_renderable.setTransform(GetParent()->getTransform());
+		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 
-	void SpriteRenderer::SetTexture(Texture * texture)
+	void SpriteRenderer::setTexture(Texture * texture)
 	{
-		m_renderable.GetMaterial()->SetTexture(texture);
-		VideoManager::getInstance()->getRenderDevice()->UpdateRenderable(&m_renderable);
+		m_renderable.getMaterial()->setTexture(texture);
+		VideoManager::getInstance()->getRenderDevice()->updateRenderable(&m_renderable);
 	}
 }

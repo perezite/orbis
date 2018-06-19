@@ -25,10 +25,10 @@ namespace Game
 		virtual ~Entity();
 
 		// set transform
-		void SetTransform(Transform transform) { m_transform = transform; }
+		void setTransform(Transform transform) { m_transform = transform; }
 
 		// get transform
-		Transform* GetTransform() { return &m_transform; }
+		Transform* getTransform() { return &m_transform; }
 
 		// get the name
 		std::string GetName() const { return m_name; }

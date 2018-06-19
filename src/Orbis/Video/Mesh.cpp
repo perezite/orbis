@@ -4,7 +4,7 @@
 
 namespace Video
 {
-	Mesh* Mesh::CreateVertexColoredTexturedQuad(Color color)
+	Mesh* Mesh::createVertexColoredTexturedQuad(Color color)
 	{
 		Mesh* mesh = new Mesh(
 			{
@@ -21,7 +21,7 @@ namespace Video
 		return mesh;
 	}
 
-	Mesh* Mesh::CreateTexturedQuad()
+	Mesh* Mesh::createTexturedQuad()
 	{
 		Mesh* mesh = new Mesh(
 			{
@@ -37,7 +37,7 @@ namespace Video
 		return mesh;
 	}
 
-	Mesh* Mesh::CreateFlatQuad()
+	Mesh* Mesh::createFlatQuad()
 	{
 		Mesh* mesh = new Mesh(
 			{

@@ -33,22 +33,22 @@ namespace Levels
 		// init entities
 		Entity* blueEntity = new Entity("Bleeding Test Blue");
 		blueEntity->AddComponent(new SpriteRenderer(bleedingTestBlue));
-		blueEntity->SetTransform(Transform(Vector2D(-0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
+		blueEntity->setTransform(Transform(Vector2D(-0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(blueEntity);
 
 		Entity* greenEntity = new Entity("Bleeding Test Green");
 		greenEntity->AddComponent(new SpriteRenderer(bleedingTestGreen));
-		greenEntity->SetTransform(Transform(Vector2D(0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
+		greenEntity->setTransform(Transform(Vector2D(0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(greenEntity);
 
 		Entity* redEntity = new Entity("Bleeding Test Red");
 		redEntity->AddComponent(new SpriteRenderer(bleedingTestRed));
-		redEntity->SetTransform(Transform(Vector2D(0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
+		redEntity->setTransform(Transform(Vector2D(0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(redEntity);
 
 		Entity* yellowEntity = new Entity("Bleeding Test Yellow");
 		yellowEntity->AddComponent(new SpriteRenderer(bleedingTestYellow));
-		yellowEntity->SetTransform(Transform(Vector2D(-0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
+		yellowEntity->setTransform(Transform(Vector2D(-0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(yellowEntity);
 	}
 }

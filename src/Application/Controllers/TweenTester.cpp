@@ -9,12 +9,12 @@ namespace Controllers
 {
 	void TweenTester::start()
 	{
-		m_tween->SetInitial(GetParent()->GetTransform()->scale);
+		m_tween->SetInitial(GetParent()->getTransform()->scale);
 	}
 
 	void TweenTester::Update()
 	{
-		m_tween->Update(&GetParent()->GetTransform()->scale, m_duration);
+		m_tween->Update(&GetParent()->getTransform()->scale, m_duration);
 	}
 }
 

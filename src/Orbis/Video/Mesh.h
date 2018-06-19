@@ -16,13 +16,13 @@ namespace Video
 	{
 	public:
 		// create a vertex color textured quad
-		static Mesh* CreateVertexColoredTexturedQuad(Color color);
+		static Mesh* createVertexColoredTexturedQuad(Color color);
 
 		// create a textured quad
-		static Mesh* CreateTexturedQuad();
+		static Mesh* createTexturedQuad();
 
 		// create a flat quad
-		static Mesh* CreateFlatQuad();
+		static Mesh* createFlatQuad();
 
 	public:
 		// ctor
@@ -31,19 +31,19 @@ namespace Video
 		{}
 
 		// get vertexData
-		const std::vector<GLfloat>* GetVertexData() const { return &m_vertexData; }
+		const std::vector<GLfloat>* getVertexData() const { return &m_vertexData; }
 
 		// get num vertices
-		unsigned int GetNumVertices() const { return m_vertexData.size() / m_vertexSize; }
+		unsigned int getNumVertices() const { return m_vertexData.size() / m_vertexSize; }
 
 		// get the size of one vertex
-		unsigned int GetVertexSize() const { return m_vertexSize; }
+		unsigned int getVertexSize() const { return m_vertexSize; }
 
 		// get indices
-		const std::vector<GLushort>* GetIndices() const { return &m_indices; }
+		const std::vector<GLushort>* getIndices() const { return &m_indices; }
 
 		// is vertex colored
-		bool IsVertexColored() const { return m_isVertexColored; }
+		bool isVertexColored() const { return m_isVertexColored; }
 
 	private:
 		// vertex data

@@ -56,7 +56,7 @@ namespace Levels
 
 			Entity* entity = new Entity(hasTexture ? "Textured sprite" : "Solid sprite");
 			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D::One);
-			entity->SetTransform(trans);
+			entity->setTransform(trans);
 
 			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
 			entity->AddComponent(hasTexture ? (Component*)new SpriteRenderer(texture) : (Component*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));

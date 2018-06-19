@@ -27,7 +27,7 @@ namespace Video
 
 	void VideoManager::start()
 	{
-		getTextureAtlas()->Generate();
+		getTextureAtlas()->generate();
 	}
 
 	void VideoManager::render()

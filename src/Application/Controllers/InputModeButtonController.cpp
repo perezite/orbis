@@ -19,7 +19,7 @@ namespace Controllers
 	{
 		InputManager* inputManager = InputManager::getInstance();
 
-		if (inputManager->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
+		if (inputManager->IsTapGoingDown(GetParent()->getTransform()->GetRect()))
 				Cycle();
 	}
 
@@ -31,6 +31,6 @@ namespace Controllers
 
 		// update sprite renderer
 		Texture* nextTexture = currentTextureIt != m_textures.end() ? (*currentTextureIt) : m_textures.front();
-		m_Renderer->SetTexture(nextTexture);
+		m_Renderer->setTexture(nextTexture);
 	}
 }

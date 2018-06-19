@@ -33,29 +33,29 @@ namespace
 	{
 		float dt = TimeManager::getInstance()->GetDeltaSeconds();
 		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
-		Transform* transform = camera->GetParent()->GetTransform();
+		Transform* transform = camera->GetParent()->getTransform();
 		Vector2D scale = transform->scale;
 		transform->scale = scale * factor;
 	}
 
 	void Rotate(SpriteController* sprite, bool clockwise)
 	{
-		Rotate(sprite->GetParent()->GetTransform(), clockwise, sprite->GetOmega());
+		Rotate(sprite->GetParent()->getTransform(), clockwise, sprite->GetOmega());
 	}
 
 	void Rotate(CameraController* camera, bool clockwise)
 	{
-		Rotate(camera->GetParent()->GetTransform(), clockwise, camera->GetOmega());
+		Rotate(camera->GetParent()->getTransform(), clockwise, camera->GetOmega());
 	}
 
 	void Translate(SpriteController* sprite, bool forward)
 	{
-		Translate(sprite->GetParent()->GetTransform(), forward, 0.5f);
+		Translate(sprite->GetParent()->getTransform(), forward, 0.5f);
 	}
 
 	void Translate(CameraController* camera, bool forward)
 	{
-		Translate(camera->GetParent()->GetTransform(), forward, camera->GetOmega());
+		Translate(camera->GetParent()->getTransform(), forward, camera->GetOmega());
 	}
 
 	void Reset(std::map<Entity*, Transform> initialTransforms)
@@ -63,7 +63,7 @@ namespace
 		std::map<Entity*, Transform>::iterator it;
 
 		for (it = initialTransforms.begin(); it != initialTransforms.end(); it++)
-			it->first->SetTransform(it->second);
+			it->first->setTransform(it->second);
 	}
 }
 
@@ -73,13 +73,13 @@ namespace Controllers
 	{
 		InputManager* input = InputManager::getInstance();
 
-		if (input->IsTapDown(GetParent()->GetTransform()->GetRect()))
+		if (input->IsTapDown(GetParent()->getTransform()->GetRect()))
 			Affect();
 	}
 
 	void TransformButtonController::Affect()
 	{
-		std::string texAssetPath = m_inputModeSpriteRenderer->getTexture()->GetAssetPath();
+		std::string texAssetPath = m_inputModeSpriteRenderer->getTexture()->getAssetPath();
 
 		if (texAssetPath == "Textures/RotateYellowSprite.png")
 		{
@@ -132,7 +132,7 @@ namespace Controllers
 	void TransformButtonController::StoreInitialTransform(Component * component)
 	{
 		Entity* parent = component->GetParent();
-		m_initialTransforms.insert(std::make_pair(parent, *parent->GetTransform()));
+		m_initialTransforms.insert(std::make_pair(parent, *parent->getTransform()));
 	}
 }
 

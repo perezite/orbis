@@ -35,7 +35,7 @@ namespace Math
 		return Vector2D(x, GetValue(t, p0, p1, p2, p3).y);
 	}
 
-	void BezierCurve::Add(BezierPoint bp)
+	void BezierCurve::add(BezierPoint bp)
 	{
 		m_points.push_back(BezierPoint(bp.pos, bp.tangent));
 		std::sort(m_points.begin(), m_points.end(), CompareControlPoints);
@@ -112,7 +112,7 @@ namespace Math
 	void BezierCurve::clear()
 	{
 		m_points.clear();
-		Add(BezierPoint(Vector2D(0.0f, 0.0f), 0.0f));
-		Add(BezierPoint(Vector2D(1.0f, 1.0f), 0.0f));
+		add(BezierPoint(Vector2D(0.0f, 0.0f), 0.0f));
+		add(BezierPoint(Vector2D(1.0f, 1.0f), 0.0f));
 	}
 }

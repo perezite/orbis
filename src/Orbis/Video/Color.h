@@ -6,7 +6,7 @@ namespace Video
 	{
 	public:
 		// get the size of the color
-		static unsigned int GetSize() { return 4; }
+		static unsigned int getCount() { return 4; }
 
 	public:
 		// black color

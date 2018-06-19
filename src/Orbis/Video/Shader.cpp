@@ -98,31 +98,31 @@ namespace Video
 		glDeleteProgram(m_programId);
 	}
 
-	int Shader::GetAttributeLocation(std::string id)
+	int Shader::getAttributeLocation(std::string id)
 	{
 		GLint location = glGetAttribLocation(m_programId, id.c_str());
 		return location;
 	}
 
-	void Shader::SetUniform(std::string id, int value)
+	void Shader::setUniform(std::string id, int value)
 	{
 		GLint handle = glGetUniformLocation(m_programId, id.c_str());
 		glUniform1i(handle, value);
 	}
 
-	void Shader::SetUniform(std::string id, const Color & color)
+	void Shader::setUniform(std::string id, const Color & color)
 	{
 		GLint handle = glGetUniformLocation(m_programId, id.c_str());
 
 		glUniform4f(handle, color.r, color.g, color.b, color.a);
 	}
 
-	void Shader::Use()
+	void Shader::use()
 	{
 		glUseProgram(m_programId);
 	}
 
-	void Shader::Unuse()
+	void Shader::unuse()
 	{
 		glUseProgram(0);
 	}

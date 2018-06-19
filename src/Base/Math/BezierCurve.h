@@ -53,7 +53,7 @@ namespace Math
 		void Delete(unsigned int index) { m_points.erase(m_points.begin() + index); }
 
 		// add a control point
-		void Add(BezierPoint bp);
+		void add(BezierPoint bp);
 
 		// move a control point
 		void Move(unsigned int index, Vector2D newPosition);

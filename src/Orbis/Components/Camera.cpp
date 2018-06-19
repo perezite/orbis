@@ -45,7 +45,7 @@ namespace Components
 		if (space == TransformSpace::Camera)
 			return Matrix3::GetEye();
 
-		Transform* transform = getInstance()->GetParent()->GetTransform();
+		Transform* transform = getInstance()->GetParent()->getTransform();
 		Matrix3 invTransform;
 		invTransform.Rotate2D(-transform->rotation);
 		invTransform.Translate2D(-transform->position);
@@ -56,7 +56,7 @@ namespace Components
 	Matrix3 Camera::CalcProjectionMatrix(TransformSpace space)
 	{
 		Vector2D scale = 
-			space == TransformSpace::World ? getInstance()->GetParent()->GetTransform()->scale : Vector2D::One;
+			space == TransformSpace::World ? getInstance()->GetParent()->getTransform()->scale : Vector2D::One;
 		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
 		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		float inverseAspect = resolution.x / resolution.y;
@@ -72,9 +72,9 @@ namespace Components
 		return CalcProjectionMatrix(space) * CalcViewMatrix(space);
 	}
 
-	Vector2D Camera::GetSize()
+	Vector2D Camera::getCount()
 	{
-		Vector2D scale = getInstance()->GetParent()->GetTransform()->scale;
+		Vector2D scale = getInstance()->GetParent()->getTransform()->scale;
 		return Vector2D(scale.x, scale.y * GetAspect());
 	}
 

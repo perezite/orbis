@@ -38,7 +38,7 @@ namespace Controllers
 		void BallController::AimingEnter()
 		{
 			LogHelper::LogMessage("BallController::AimingEnter");
-			GetParent()->GetTransform()->position = Vector2D::Zero;
+			GetParent()->getTransform()->position = Vector2D::Zero;
 			m_state = State::Aiming_Run;
 		}
 
@@ -46,7 +46,7 @@ namespace Controllers
 		{
 			LogHelper::LogMessage("BallController::AimingRun");
 			aimingCurrentAngle = 0.0f;
-			GetParent()->GetTransform()->rotation = aimingCurrentAngle;
+			GetParent()->getTransform()->rotation = aimingCurrentAngle;
 
 			if (InputManager::getInstance()->IsTapGoingDown())
 				m_state = State::Flying_Enter;

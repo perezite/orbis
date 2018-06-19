@@ -5,27 +5,27 @@ namespace Video
 	TextureChart::TextureChart(std::vector<Texture*> textures, std::vector<Rect> rects)
 	{
 		// create a page surface with the smallest possible power of two size
-		Vector2D potSize = GetSmallestPowerOfTwoSize(rects);
-		SDL_Surface* texSurface = textures[0]->GetSurface();
+		Vector2D potSize = getSmallestPowerOfTwoSize(rects);
+		SDL_Surface* texSurface = textures[0]->getSurface();
 		SDL_PixelFormat* texFormat = texSurface->format;
 		SDL_Surface* surface = SDL_CreateRGBSurface(texSurface->flags, (int)potSize.x, (int)potSize.y,
 			texFormat->BitsPerPixel, texFormat->Rmask, texFormat->Gmask, texFormat->Bmask, texFormat->Amask);
 
-		CopySurfaces(textures, rects, surface);
+		copySurfaces(textures, rects, surface);
 
-		CreatePageTexture(surface);
+		createPageTexture(surface);
 
-		StoreUVRects(textures, rects, surface);
+		storeUVRects(textures, rects, surface);
 
-		RegisterTextures(textures);
+		registerTextures(textures);
 
 		// cleanup
 		SDL_FreeSurface(surface);
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			GLuint handle = textures[i]->GetHandle();
+			GLuint handle = textures[i]->getHandle();
 			glDeleteTextures(1, &handle);
-			SDL_FreeSurface(textures[i]->GetSurface());
+			SDL_FreeSurface(textures[i]->getSurface());
 		}
 	}
 
@@ -34,12 +34,12 @@ namespace Video
 		glDeleteTextures(1, &m_textureHandle);
 	}
 
-	void TextureChart::Bind()
+	void TextureChart::bind()
 	{
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
 
-	SDL_Rect TextureChart::ToSDLRect(Rect rect)
+	SDL_Rect TextureChart::toSDLRect(Rect rect)
 	{
 		SDL_Rect sdlRect;
 		sdlRect.x = (int)rect.GetLeft();
@@ -50,16 +50,16 @@ namespace Video
 		return sdlRect;
 	}
 
-	Vector2D TextureChart::GetSmallestPowerOfTwoSize(std::vector<Rect> rects)
+	Vector2D TextureChart::getSmallestPowerOfTwoSize(std::vector<Rect> rects)
 	{
-		Rect boundary = GetBoundaryRect(rects);
-		int potWidth = GetNextPowerOfTwo((int)boundary.GetWidth());
-		int potHeight = GetNextPowerOfTwo((int)boundary.GetHeight());
+		Rect boundary = getBoundaryRect(rects);
+		int potWidth = getNextPowerOfTwo((int)boundary.GetWidth());
+		int potHeight = getNextPowerOfTwo((int)boundary.GetHeight());
 
 		return Vector2D((float)potWidth, (float)potHeight);
 	}
 
-	Rect TextureChart::GetBoundaryRect(std::vector<Rect> rects)
+	Rect TextureChart::getBoundaryRect(std::vector<Rect> rects)
 	{
 		// get maximal x and y coordinates in packed rects
 		Vector2D max(0, 0);
@@ -74,7 +74,7 @@ namespace Video
 		return Rect(0, 0, max.x, max.y);
 	}
 
-	int TextureChart::GetNextPowerOfTwo(int number)
+	int TextureChart::getNextPowerOfTwo(int number)
 	{
 		int pot = 1;
 		while (pot < number)
@@ -83,22 +83,22 @@ namespace Video
 		return pot;
 	}
 
-	void TextureChart::CopySurfaces(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* pageSurface)
+	void TextureChart::copySurfaces(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* pageSurface)
 	{
 		// copy the original textures into the page surface
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			SDL_Rect sourceRect = GetSurfaceRect(textures[i]->GetSurface());
-			SDL_Rect targetRect = ToSDLRect(rects[i]);
+			SDL_Rect sourceRect = getSurfaceRect(textures[i]->getSurface());
+			SDL_Rect targetRect = toSDLRect(rects[i]);
 			SDL_BlendMode origBlendMode;
-			SDL_GetSurfaceBlendMode(textures[i]->GetSurface(), &origBlendMode);
-			SDL_SetSurfaceBlendMode(textures[i]->GetSurface(), SDL_BLENDMODE_NONE);
-			SDL_BlitSurface(textures[i]->GetSurface(), &sourceRect, pageSurface, &targetRect);
-			SDL_SetSurfaceBlendMode(textures[i]->GetSurface(), origBlendMode);
+			SDL_GetSurfaceBlendMode(textures[i]->getSurface(), &origBlendMode);
+			SDL_SetSurfaceBlendMode(textures[i]->getSurface(), SDL_BLENDMODE_NONE);
+			SDL_BlitSurface(textures[i]->getSurface(), &sourceRect, pageSurface, &targetRect);
+			SDL_SetSurfaceBlendMode(textures[i]->getSurface(), origBlendMode);
 		}
 	}
 
-	void TextureChart::CreatePageTexture(SDL_Surface* surface)
+	void TextureChart::createPageTexture(SDL_Surface* surface)
 	{
 		glGenTextures(1, &m_textureHandle);
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
@@ -107,14 +107,14 @@ namespace Video
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	}
 
-	SDL_Rect TextureChart::GetSurfaceRect(SDL_Surface * surface)
+	SDL_Rect TextureChart::getSurfaceRect(SDL_Surface * surface)
 	{
 		SDL_Rect rect;
 		rect.x = 0; rect.y = 0; rect.h = surface->h; rect.w = surface->w;
 		return rect;
 	}
 
-	void TextureChart::StoreUVRects(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* surface)
+	void TextureChart::storeUVRects(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* surface)
 	{
 		float width = (float)surface->w;
 		float height = (float)surface->h;
@@ -126,11 +126,11 @@ namespace Video
 		}
 	}
 
-	void TextureChart::RegisterTextures(std::vector<Texture*> textures)
+	void TextureChart::registerTextures(std::vector<Texture*> textures)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			textures[i]->SetTextureAtlasPage(this);
+			textures[i]->setTextureAtlasPage(this);
 		}
 	}
 }

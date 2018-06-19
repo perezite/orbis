@@ -44,12 +44,12 @@ namespace Components
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
 		Texture* texture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem2.png");
-		GetParent()->GetTransform()->scale = Vector2D::Zero;
-		m_renderable.GetMaterial()->SetTexture(texture);
-		m_renderable.GetMaterial()->SetShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
-		m_renderable.SetMesh(Mesh::CreateTexturedQuad());
-		m_renderable.SetTransform(GetParent()->GetTransform());
-		VideoManager::getInstance()->getRenderDevice()->AddRenderable(&m_renderable);
+		GetParent()->getTransform()->scale = Vector2D::Zero;
+		m_renderable.getMaterial()->setTexture(texture);
+		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
+		m_renderable.setMesh(Mesh::createTexturedQuad());
+		m_renderable.setTransform(GetParent()->getTransform());
+		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 
 	void TweenInspector::Update()
@@ -100,7 +100,7 @@ namespace Components
 
 			// if no control point was selected by the tap, we add a new control point
 			if (m_selectedControlPoint == -1)
-				m_tween.GetCurve()->Add(BezierPoint(tap, 0.0f));
+				m_tween.GetCurve()->add(BezierPoint(tap, 0.0f));
 		}
 	}
 
@@ -175,7 +175,7 @@ namespace Components
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
 			Vector2D current = calcCurve.GetValue(x);
-			VideoManager::getInstance()->getRenderDevice()->DrawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
+			VideoManager::getInstance()->getRenderDevice()->drawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
@@ -189,7 +189,7 @@ namespace Components
 			Vector2D pos = m_tween.GetCurve()->Get(i).pos;
 			Rect rect(pos, MARK_EXTENT);
 			bool isSelected = m_selectedControlPoint == i;
-			rd->DrawDebugRect(rect, isSelected ? Color::Red : Color::Green);
+			rd->drawDebugRect(rect, isSelected ? Color::Red : Color::Green);
 
 			if (isSelected)
 			{
@@ -198,16 +198,16 @@ namespace Components
 				Vector2D tangentEnd = pos + v;
 				Rect startRect(tangentStart, MARK_EXTENT);
 				Rect endRect(tangentEnd, MARK_EXTENT);
-				rd->DrawDebugLine(tangentStart, tangentEnd, Color::Red);
-				rd->DrawDebugRect(startRect, Color::Red);
-				rd->DrawDebugRect(endRect, Color::Red);
+				rd->drawDebugLine(tangentStart, tangentEnd, Color::Red);
+				rd->drawDebugRect(startRect, Color::Red);
+				rd->drawDebugRect(endRect, Color::Red);
 			}
 		}
 	}
 
 	bool TweenInspector::IsClickablePosition(Vector2D position)
 	{
-		Rect clickableRect = Rect(GetParent()->GetTransform()->position, 0.5f);
+		Rect clickableRect = Rect(GetParent()->getTransform()->position, 0.5f);
 		return clickableRect.Contains(position);
 	}
 
@@ -244,10 +244,10 @@ namespace Components
 	void TweenInspector::Toggle()
 	{
 		if (m_isActive)
-			GetParent()->GetTransform()->scale = Vector2D::Zero;
+			GetParent()->getTransform()->scale = Vector2D::Zero;
 			
 		else
-			GetParent()->GetTransform()->scale = Vector2D::One;
+			GetParent()->getTransform()->scale = Vector2D::One;
 
 		m_isActive = !m_isActive;
 	}

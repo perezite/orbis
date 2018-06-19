@@ -18,17 +18,17 @@ namespace Controllers
 	void WobbleController::start()
 	{
 		float scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * MathHelper::GetRandom();
-		GetParent()->GetTransform()->scale = Vector2D(scale, scale);
+		GetParent()->getTransform()->scale = Vector2D(scale, scale);
 		m_isGrowing = rand() % 2 == 0 ? true : false;
 	}
 
 	void WobbleController::Update()
 	{
 		float dt = TimeManager::getInstance()->GetDeltaSeconds();
-		Transform* trans = GetParent()->GetTransform();
+		Transform* trans = GetParent()->getTransform();
 
 		float deltaScale = m_isGrowing ? dt * 0.01f : dt * -0.01f;
-		GetParent()->GetTransform()->scale += Vector2D(deltaScale, deltaScale);
+		GetParent()->getTransform()->scale += Vector2D(deltaScale, deltaScale);
 
 		if (trans->scale.x < MIN_SCALE)
 			m_isGrowing = true;

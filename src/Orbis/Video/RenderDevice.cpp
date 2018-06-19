@@ -14,20 +14,20 @@ using namespace Core;
 
 namespace Video
 {
-	void RenderDevice::AddRenderable(Renderable* renderable)
+	void RenderDevice::addRenderable(Renderable* renderable)
 	{
-		int position = FindFirstIndexInBatch(renderable);
+		int position = findFirstIndexInBatch(renderable);
 		m_renderables.insert(m_renderables.begin() + position, renderable);
 		m_isIndexArrayDirty = true;
 	}
 
-	void RenderDevice::UpdateRenderable(Renderable* renderable)
+	void RenderDevice::updateRenderable(Renderable* renderable)
 	{
-		DeleteRenderable(renderable);
-		AddRenderable(renderable);
+		deleteRenderable(renderable);
+		addRenderable(renderable);
 	}
 
-	void RenderDevice::DeleteRenderable(Renderable* renderable)
+	void RenderDevice::deleteRenderable(Renderable* renderable)
 	{
 		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
 	}
@@ -49,58 +49,58 @@ namespace Video
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// update arrays
-		UpdateIndexArray();
-		UpdateVertexArray();
+		updateIndexArray();
+		updateVertexArray();
 
 		// skip if nothing to render
 		if (m_vertexArray.size() == 0)
 			return;
 
 		// render batched
-		std::vector<BatchRange> batches = ComputeBatches();
+		std::vector<BatchRange> batches = computeBatches();
 		for (unsigned int i = 0; i < batches.size(); i++)
 		{
 			unsigned int batchBegin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
-			unsigned int vaoStartIndex = ComputeVaoStartIndex(i, batches);
-			unsigned int iboStartIndex = ComputeIboStartIndex(i, batches);
+			unsigned int vaoStartIndex = computeVaoStartIndex(i, batches);
+			unsigned int iboStartIndex = computeIboStartIndex(i, batches);
 			Renderable* prototype = m_renderables[batchBegin];
 
 			// init batch prototype
-			if (prototype->GetMaterial()->getTexture() != NULL)
-				prototype->GetMaterial()->getTexture()->Bind();
-			prototype->GetMaterial()->getShader()->Use();
-			prototype->GetMaterial()->PrepareShaderVariables();
+			if (prototype->getMaterial()->getTexture() != NULL)
+				prototype->getMaterial()->getTexture()->bind();
+			prototype->getMaterial()->getShader()->use();
+			prototype->getMaterial()->prepareShaderVariables();
 
 			// set position shader variable
-			unsigned int stride = prototype->GetMesh()->GetVertexData()->size();
-			int positionAttribLocation = prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vPosition");
+			unsigned int stride = prototype->getMesh()->getVertexData()->size();
+			int positionAttribLocation = prototype->getMaterial()->getShader()->getAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
 			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex]));
 
 			// set texture coordinate shader variable
-			if (prototype->GetMaterial()->getTexture() != NULL) {
-				int texCoordAttribLocation = prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vTexCoord");
+			if (prototype->getMaterial()->getTexture() != NULL) {
+				int texCoordAttribLocation = prototype->getMaterial()->getShader()->getAttributeLocation("a_vTexCoord");
 				glEnableVertexAttribArray(texCoordAttribLocation);
 				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex + 2]));
 			}
 
 			// set vertex color shader variable
-			if (prototype->GetMesh()->IsVertexColored()) {
-				int vertexColorAttribLocation = prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vVertexColor");
+			if (prototype->getMesh()->isVertexColored()) {
+				int vertexColorAttribLocation = prototype->getMaterial()->getShader()->getAttributeLocation("a_vVertexColor");
 				glEnableVertexAttribArray(vertexColorAttribLocation);
 				glVertexAttribPointer(vertexColorAttribLocation, 4, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex + 4]));
 			}
 
 			// draw batched
-			glDrawElements(GL_TRIANGLES, batchSize * prototype->GetMesh()->GetIndices()->size(), GL_UNSIGNED_SHORT, &m_indexArray[iboStartIndex]);
+			glDrawElements(GL_TRIANGLES, batchSize * prototype->getMesh()->getIndices()->size(), GL_UNSIGNED_SHORT, &m_indexArray[iboStartIndex]);
 
 			// cleanup
-			prototype->GetMaterial()->getShader()->Unuse();
-			if (prototype->GetMaterial()->getTexture() != NULL)
-				glDisableVertexAttribArray(prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vTexCoord"));
-			if (prototype->GetMesh()->IsVertexColored())
-				glDisableVertexAttribArray(prototype->GetMaterial()->getShader()->GetAttributeLocation("a_vVertexColor"));
+			prototype->getMaterial()->getShader()->unuse();
+			if (prototype->getMaterial()->getTexture() != NULL)
+				glDisableVertexAttribArray(prototype->getMaterial()->getShader()->getAttributeLocation("a_vTexCoord"));
+			if (prototype->getMesh()->isVertexColored())
+				glDisableVertexAttribArray(prototype->getMaterial()->getShader()->getAttributeLocation("a_vVertexColor"));
 			glDisableVertexAttribArray(positionAttribLocation);
 
 		#ifdef ORBIS_DEBUG_RENDERDEVICE
@@ -116,7 +116,7 @@ namespace Video
 		glDisable(GL_BLEND);
 	}
 
-	void RenderDevice::DrawDebugLine(Vector2D start, Vector2D end, Color color)
+	void RenderDevice::drawDebugLine(Vector2D start, Vector2D end, Color color)
 	{
 		// compute vertex array
 		Matrix3 camMatrix = Camera::getInstance()->CalcCamMatrix();
@@ -125,10 +125,10 @@ namespace Video
 		GLfloat vertexArray[4] = { start.x, start.y, end.x, end.y };
 
 		glLineWidth(3);
-		DrawDebugPrimitive(vertexArray, 4, color, RenderMode::Lines);
+		drawDebugPrimitive(vertexArray, 4, color, RenderMode::Lines);
 	}
 
-	void RenderDevice::DrawDebugRect(Rect rect, Color color)
+	void RenderDevice::drawDebugRect(Rect rect, Color color)
 	{
 		// compute vertex array
 		Matrix3 camMatrix = Camera::getInstance()->CalcCamMatrix();
@@ -138,40 +138,40 @@ namespace Video
 			rect.GetRightBottom().x, rect.GetRightBottom().y, rect.rightTop.x, rect.rightTop.y, rect.GetLeftTop().x, rect.GetLeftTop().y
 		};
 
-		DrawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
+		drawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
 	}
 	
-	void RenderDevice::UpdateVertexArray()
+	void RenderDevice::updateVertexArray()
 	{
 		Matrix3 worldCamMatrix = Camera::getInstance()->CalcCamMatrix(TransformSpace::World);
 		Matrix3 localCamMatrix = Camera::getInstance()->CalcCamMatrix(TransformSpace::Camera);
 
 		m_vertexArray.clear();
-		ReserveVertexArray();
+		reserveVertexArray();
 
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
-			Transform* transform = m_renderables[i]->GetTransform();
+			Transform* transform = m_renderables[i]->getTransform();
 			bool isWorldSpace = transform->transformSpace == TransformSpace::World ? true : false;
 			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transform->GetModelMatrix();
-			InsertIntoVertexArray(m_renderables[i], mvpMatrix);
+			insertIntoVertexArray(m_renderables[i], mvpMatrix);
 		}
 	}
 
-	void RenderDevice::InsertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix)
+	void RenderDevice::insertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix)
 	{
-		Mesh* mesh = renderable->GetMesh();
-		Texture* tex = renderable->GetMaterial()->getTexture();
+		Mesh* mesh = renderable->getMesh();
+		Texture* tex = renderable->getMaterial()->getTexture();
 
 		// apply transformation on mesh data
-		std::vector<GLfloat> data = *mesh->GetVertexData();
-		for (unsigned int i = 0; i < mesh->GetNumVertices(); i++)
+		std::vector<GLfloat> data = *mesh->getVertexData();
+		for (unsigned int i = 0; i < mesh->getNumVertices(); i++)
 		{
-			unsigned int start = i * mesh->GetVertexSize();
+			unsigned int start = i * mesh->getVertexSize();
 			Vector2D pos = mvpMatrix * Vector2D(data[start + 0], data[start + 1]);
 			data[start + 0] = pos.x; data[start + 1] = pos.y;
 			if (tex) {
-				Vector2D uvCoord = tex->MapUVCoord(Vector2D(data[start + 2], data[start + 3]));
+				Vector2D uvCoord = tex->mapUVCoord(Vector2D(data[start + 2], data[start + 3]));
 				data[start + 2] = uvCoord.x; data[start + 3] = uvCoord.y;
 			}
 		}
@@ -179,59 +179,59 @@ namespace Video
 		m_vertexArray.insert(m_vertexArray.end(), data.begin(), data.end());
 	}
 
-	void RenderDevice::ReserveVertexArray()
+	void RenderDevice::reserveVertexArray()
 	{
 		unsigned int vertexArraySize = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++) {
-			vertexArraySize += m_renderables[i]->GetMesh()->GetVertexData()->size();
+			vertexArraySize += m_renderables[i]->getMesh()->getVertexData()->size();
 		}
 
 		m_vertexArray.reserve(vertexArraySize);
 	}
 
-	void RenderDevice::UpdateIndexArray()
+	void RenderDevice::updateIndexArray()
 	{
 		if (m_isIndexArrayDirty)
 		{
 			m_indexArray.clear();
-			ReserveIndexArray();
+			reserveIndexArray();
 
 			GLushort offset = 0;
 			for (unsigned int i = 0; i < m_renderables.size(); i++)
 			{
-				InsertIntoIndexArray(i, offset);
+				insertIntoIndexArray(i, offset);
 			}
 
 			m_isIndexArrayDirty = false;
 		}
 	}
 
-	void RenderDevice::InsertIntoIndexArray(unsigned int index, unsigned short& offset)
+	void RenderDevice::insertIntoIndexArray(unsigned int index, unsigned short& offset)
 	{
 		// reset value offet when switching batch
-		if (index == 0 || !m_renderables[index]->IsBatchEqualTo(m_renderables[index - 1]))
+		if (index == 0 || !m_renderables[index]->isBatchEqualTo(m_renderables[index - 1]))
 			offset = 0;
 
-		Mesh* mesh = m_renderables[index]->GetMesh();
-		for (unsigned int j = 0; j < mesh->GetIndices()->size(); j++)
+		Mesh* mesh = m_renderables[index]->getMesh();
+		for (unsigned int j = 0; j < mesh->getIndices()->size(); j++)
 		{
-			GLushort value = offset + mesh->GetIndices()->at(j);
+			GLushort value = offset + mesh->getIndices()->at(j);
 			m_indexArray.insert(m_indexArray.end(), value);
 		}
 
-		offset += mesh->GetNumVertices();
+		offset += mesh->getNumVertices();
 	}
 
-	void RenderDevice::ReserveIndexArray()
+	void RenderDevice::reserveIndexArray()
 	{
 		unsigned int size = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
-			size += m_renderables[i]->GetMesh()->GetIndices()->size();
+			size += m_renderables[i]->getMesh()->getIndices()->size();
 
 		m_indexArray.reserve(size);
 	}
 
-	unsigned int RenderDevice::ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
+	unsigned int RenderDevice::computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
 	{
 		unsigned int startIndex = 0;
 
@@ -239,13 +239,13 @@ namespace Video
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
-			startIndex += m_renderables[begin]->GetMesh()->GetVertexData()->size() * batchSize;
+			startIndex += m_renderables[begin]->getMesh()->getVertexData()->size() * batchSize;
 		}
 
 		return startIndex;
 	}
 
-	unsigned int RenderDevice::ComputeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
+	unsigned int RenderDevice::computeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
 	{
 		unsigned int startIndex = 0;
 
@@ -253,13 +253,13 @@ namespace Video
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchSize = batches[i].Diff() + 1;
-			startIndex += m_renderables[begin]->GetMesh()->GetIndices()->size() * batchSize;
+			startIndex += m_renderables[begin]->getMesh()->getIndices()->size() * batchSize;
 		}
 
 		return startIndex;
 	}
 
-	std::vector<BatchRange> RenderDevice::ComputeBatches()
+	std::vector<BatchRange> RenderDevice::computeBatches()
 	{
 		std::vector<BatchRange> batches;
 		int begin = 0;
@@ -268,7 +268,7 @@ namespace Video
 
 		while (current < last)
 		{
-			while (current < last && m_renderables[begin]->IsBatchEqualTo(m_renderables[current]))
+			while (current < last && m_renderables[begin]->isBatchEqualTo(m_renderables[current]))
 				current++;
 
 			batches.push_back(BatchRange(begin, current - 1));
@@ -281,25 +281,25 @@ namespace Video
 		return batches;
 	}
 
-	int RenderDevice::FindFirstIndexInBatch(Renderable* renderable)
+	int RenderDevice::findFirstIndexInBatch(Renderable* renderable)
 	{
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
-			if (renderable->IsBatchEqualTo(m_renderables[i]))
+			if (renderable->isBatchEqualTo(m_renderables[i]))
 				return i;
 		}
 
 		return m_renderables.size();
 	}
 
-	void RenderDevice::DrawDebugPrimitive(GLfloat * vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode)
+	void RenderDevice::drawDebugPrimitive(GLfloat * vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode)
 	{
 		// prepare
 		glDisable(GL_BLEND);
 		Shader* shader = VideoManager::getInstance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag");
-		shader->Use();
-		shader->SetUniform("u_vColor", color);
-		int positionAttribLocation = shader->GetAttributeLocation("a_vPosition");
+		shader->use();
+		shader->setUniform("u_vColor", color);
+		int positionAttribLocation = shader->getAttributeLocation("a_vPosition");
 		glEnableVertexAttribArray(positionAttribLocation);
 		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
 
@@ -308,7 +308,7 @@ namespace Video
 
 		// cleanup
 		glDisableVertexAttribArray(positionAttribLocation);
-		shader->Unuse();
+		shader->unuse();
 	}
 }
 

@@ -18,7 +18,7 @@ namespace Orbis
 		return &instance;
 	}
 
-	void OrbisMain::Run()
+	void OrbisMain::run()
 	{
 		LevelManager* level = LevelManager::getInstance();
 		InputManager* input = InputManager::getInstance();
@@ -36,14 +36,14 @@ namespace Orbis
 			level->render();
 
 			#if defined(ORBIS_LOG_PERFORMANCE)
-				LogPerformance();
+				logPerformance();
 			#endif
 		}
 
 		level->clear();
 	}
 
-	void OrbisMain::LogPerformance()
+	void OrbisMain::logPerformance()
 	{
 		m_numFrames++;
 		if (TimeManager::getInstance()->GetTicks() - m_startTicks > 1000)

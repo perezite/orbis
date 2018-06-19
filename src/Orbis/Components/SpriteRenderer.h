@@ -19,10 +19,10 @@ namespace Components
 		void start();
 
 		// set the texture
-		void SetTexture(Texture* texture);
+		void setTexture(Texture* texture);
 
 		// get the texture
-		Texture* getTexture(void) { return m_renderable.GetMaterial()->getTexture(); }
+		Texture* getTexture(void) { return m_renderable.getMaterial()->getTexture(); }
 
 	private: 
 		// the texture

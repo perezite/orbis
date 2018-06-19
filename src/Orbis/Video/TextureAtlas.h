@@ -24,26 +24,26 @@ namespace Video
 		virtual ~TextureAtlas() { };
 
 		// add a texture 
-		void Add(Texture* texture);
+		void add(Texture* texture);
 
 		// clear the atlas
 		void clear();
 
 		// generate the atlas
-		void Generate();
+		void generate();
 
 	protected:
 		// get texture rects
-		std::vector<Rect> GetTextureRects();
+		std::vector<Rect> getTextureRects();
 
 		// select textures by indexed rects
-		std::vector<Texture*> SelectTextures(std::vector<Rect> indexedRects);
+		std::vector<Texture*> selectTextures(std::vector<Rect> indexedRects);
 
 		// get the rect of an sdl surface
-		SDL_Rect GetSurfaceRect(SDL_Surface* surface);
+		SDL_Rect getSurfaceRect(SDL_Surface* surface);
 
 		// convert sdl rect to orbis rect
-		Rect ToOrbisRect(SDL_Rect rect);
+		Rect toOrbisRect(SDL_Rect rect);
 
 	private:
 		// the textures

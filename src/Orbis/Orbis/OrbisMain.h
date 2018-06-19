@@ -15,11 +15,11 @@ namespace Orbis
 		virtual ~OrbisMain() { };
 
 		// run the engine
-		void Run();
+		void run();
 
 	protected:
 		// log the performance 
-			void LogPerformance();
+			void logPerformance();
 
 	private:
 		// start time of current performance log measurement

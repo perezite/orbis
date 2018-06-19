@@ -19,7 +19,7 @@ namespace Controllers
 	{
 		InputManager* input = InputManager::getInstance();
 
-		if (input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
+		if (input->IsTapGoingDown(GetParent()->getTransform()->GetRect()))
 		{
 			input->SetQuitEvent();
 		}

@@ -5,23 +5,23 @@ using namespace Math;
 
 namespace Video
 {
-	bool Material::IsBatchEqualTo(Material * const other) const
+	bool Material::isBatchEqualTo(Material * const other) const
 	{
-		bool areTexturesBatchEqual = AreTexturesBatchEqual(this->getTexture(), other->getTexture());
+		bool texturesBatchEqual = areTexturesBatchEqual(this->getTexture(), other->getTexture());
 
-		bool areShadersBatchEqual = m_shader == other->m_shader;
+		bool shadersBatchEqual = m_shader == other->m_shader;
 
 		float eps = 0.001f;
-		bool areColorsBatchEqual = 
+		bool colorsBatchEqual = 
 			MathHelper::Approx(m_color.r, other->m_color.r, eps)
 			&& MathHelper::Approx(m_color.g, other->m_color.g, eps)
 			&& MathHelper::Approx(m_color.b, other->m_color.b, eps)
 			&& MathHelper::Approx(m_color.a, other->m_color.a, eps);
 
-		return areTexturesBatchEqual && areShadersBatchEqual && areColorsBatchEqual;
+		return texturesBatchEqual && shadersBatchEqual && colorsBatchEqual;
 	}
 
-	bool Material::AreTexturesBatchEqual(Texture* const thisTex, Texture* const otherTex) const
+	bool Material::areTexturesBatchEqual(Texture* const thisTex, Texture* const otherTex) const
 	{
 		// compare empty textures
 		if (thisTex == NULL && otherTex != NULL)
@@ -32,28 +32,28 @@ namespace Video
 			return true;
 
 		// compare atlassing
-		if (thisTex->UsesAtlassing() && !otherTex->UsesAtlassing())
+		if (thisTex->isUsingAtlassing() && !otherTex->isUsingAtlassing())
 			return false;
-		if (!thisTex->UsesAtlassing() && otherTex->UsesAtlassing())
+		if (!thisTex->isUsingAtlassing() && otherTex->isUsingAtlassing())
 			return false;
 
 		// compare direct textures
-		if (!thisTex->UsesAtlassing() && !otherTex->UsesAtlassing())
+		if (!thisTex->isUsingAtlassing() && !otherTex->isUsingAtlassing())
 			return thisTex == otherTex;
 
 		// compare atlas charts
-		if (thisTex->UsesAtlassing() && otherTex->UsesAtlassing())
-			return thisTex->GetAtlasChart() == otherTex->GetAtlasChart();
+		if (thisTex->isUsingAtlassing() && otherTex->isUsingAtlassing())
+			return thisTex->getAtlasChart() == otherTex->getAtlasChart();
 
 		throw Exception("Something went really wrong!");
 	}
 
-	void Material::PrepareShaderVariables()
+	void Material::prepareShaderVariables()
 	{
 		// note: vertex and tex coord data is set directly in the render device
 		if (m_texture != NULL)
-			m_shader->SetUniform("u_sSampler", 0);
+			m_shader->setUniform("u_sSampler", 0);
 
-		m_shader->SetUniform("u_vColor", m_color);
+		m_shader->setUniform("u_vColor", m_color);
 	}
 }

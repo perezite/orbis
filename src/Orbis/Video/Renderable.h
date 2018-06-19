@@ -24,22 +24,22 @@ namespace Video
 		}
 
 		// set the transform
-		void SetTransform(Transform* transform) { m_transform = transform; }
+		void setTransform(Transform* transform) { m_transform = transform; }
 
 		// get the transform
-		Transform* GetTransform() { return m_transform; }
+		Transform* getTransform() { return m_transform; }
 
 		// get the mesh
-		Mesh* GetMesh() const { return m_mesh; }
+		Mesh* getMesh() const { return m_mesh; }
 
 		// set the mesh
-		void SetMesh(Mesh* mesh) { m_mesh = mesh; }
+		void setMesh(Mesh* mesh) { m_mesh = mesh; }
 
 		// get the material
-		Material* GetMaterial() { return &m_material; }
+		Material* getMaterial() { return &m_material; }
 
 		// check if renederable can be batched with another renderable
-		bool IsBatchEqualTo(Renderable* other) { return GetMaterial()->IsBatchEqualTo(other->GetMaterial()); }
+		bool isBatchEqualTo(Renderable* other) { return getMaterial()->isBatchEqualTo(other->getMaterial()); }
 
 	private:
 		// the render transforms

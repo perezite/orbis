@@ -41,7 +41,7 @@ namespace Components
 
 		EmitParticles();
 
-		m_lastEntityPos = GetParent()->GetTransform()->position;
+		m_lastEntityPos = GetParent()->getTransform()->position;
 	}
 
 	void ParticleRenderer::UpdateParticles()
@@ -54,7 +54,7 @@ namespace Components
 
 		// update position
 		for (unsigned int i = 0; i < m_particles.size(); i++)
-			m_particles[i]->GetTransform()->position += m_particles[i]->GetVelocity() * dt;
+			m_particles[i]->getTransform()->position += m_particles[i]->GetVelocity() * dt;
 	}
 
 	void ParticleRenderer::CleanupParticles()
@@ -85,9 +85,9 @@ namespace Components
 	void ParticleRenderer::AddParticle()
 	{
 		float dt = TimeManager::getInstance()->GetDeltaSeconds();
-		Vector2D entityVelocity = (m_lastEntityPos - GetParent()->GetTransform()->position) * (1.0f/dt);
+		Vector2D entityVelocity = (m_lastEntityPos - GetParent()->getTransform()->position) * (1.0f/dt);
 
-		Vector2D position = GetParent()->GetTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;
+		Vector2D position = GetParent()->getTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;
 		Vector2D particleVelocity = (MathHelper::GetRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
 		Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
 		m_particles.push_back(new Particle(m_texture, Color::White, transform, particleVelocity));

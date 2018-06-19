@@ -71,26 +71,26 @@ namespace Video
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		
-		if (UsesAtlassing())
+		if (isUsingAtlassing())
 		{
-			VideoManager::getInstance()->getTextureAtlas()->Add(this);
+			VideoManager::getInstance()->getTextureAtlas()->add(this);
 		}
 	}
 
 	Texture::~Texture()
 	{
-		if (!UsesAtlassing())
+		if (!isUsingAtlassing())
 		{
 			glDeleteTextures(1, &m_handle);
 			SDL_FreeSurface(m_surface);
 		}
 	}
 
-	Vector2D Texture::MapUVCoord(Vector2D texUV)
+	Vector2D Texture::mapUVCoord(Vector2D texUV)
 	{
-		if (UsesAtlassing())
+		if (isUsingAtlassing())
 		{
-			Rect uvRect = m_atlasChart->GetUVRect(this);
+			Rect uvRect = m_atlasChart->getUVRect(this);
 			Vector2D atlasUV(uvRect.GetLeft() + texUV.x * uvRect.GetWidth(), uvRect.GetBottom() + texUV.y * uvRect.GetHeight());
 			return atlasUV;
 		}
@@ -100,11 +100,11 @@ namespace Video
 		}
 	}
 
-	void Texture::Bind()
+	void Texture::bind()
 	{
-		if (UsesAtlassing())
+		if (isUsingAtlassing())
 		{
-			m_atlasChart->Bind();
+			m_atlasChart->bind();
 		}
 		else
 		{
@@ -112,7 +112,7 @@ namespace Video
 		}
 	}
 
-	bool Texture::UsesAtlassing() const
+	bool Texture::isUsingAtlassing() const
 	{
 		#ifdef ORBIS_USE_TEXTURE_ATLASSING
 			return true;

@@ -27,7 +27,7 @@ namespace Controllers
 			InputManager* input = InputManager::getInstance();
 			KeyCode switchKey = m_switchForward ? KeyCode::Right : KeyCode::Left;
 
-			if (input->IsKeyDown(switchKey) || input->IsTapGoingDown(GetParent()->GetTransform()->GetRect()))
+			if (input->IsKeyDown(switchKey) || input->IsTapGoingDown(GetParent()->getTransform()->GetRect()))
 				LevelManager::getInstance()->QueueLevel(new T());
 		}
 

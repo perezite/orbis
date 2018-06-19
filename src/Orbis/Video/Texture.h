@@ -32,31 +32,31 @@ namespace Video
 		virtual ~Texture();
 
 		// get the texture handle
-		unsigned int GetTextureHandle() const { return m_handle; }
+		unsigned int getTextureHandle() const { return m_handle; }
 
 		// get the asset path
-		std::string GetAssetPath() const { return m_assetPath; }
+		std::string getAssetPath() const { return m_assetPath; }
 
 		// get the sdl surface
-		SDL_Surface* GetSurface() { return m_surface; }
+		SDL_Surface* getSurface() { return m_surface; }
 
 		// get the gl handle
-		GLuint GetHandle() { return m_handle; }
+		GLuint getHandle() { return m_handle; }
 
 		// set the textures atlas page
-		void SetTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
+		void setTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
 
 		// transform texture uv coordinates
-		Vector2D MapUVCoord(Vector2D texUV);
+		Vector2D mapUVCoord(Vector2D texUV);
 
 		// bind this texture
-		void Bind();
+		void bind();
 
 		// is the texture using atlassing
-		bool UsesAtlassing() const;
+		bool isUsingAtlassing() const;
 		
 		// get the atlas texture chart
-		TextureChart* GetAtlasChart() const { return m_atlasChart; }
+		TextureChart* getAtlasChart() const { return m_atlasChart; }
 
 	private:
 		// the texture asset path

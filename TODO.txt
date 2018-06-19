@@ -2,6 +2,7 @@ TODO:
 - Refactoring planen
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
 		- Methoden kleinschreiben
+		- Size und Count abstimmen
 		- Erase–remove korrekt verwenden in RenderDevice (hat aktuell MemoryLeaks...)
 		- MemoryHelper-Funktionen vereinfachen und wenn möglich in den Aufruf ziehen
 		- Renderer gesamthaft refactoren

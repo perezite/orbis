@@ -50,19 +50,19 @@ namespace Levels
 		// yellow block entity
 		Entity* yellowBlock = new Entity("Yellow Brick");
 		yellowBlock->AddComponent(new SpriteRenderer(yellowBlockTexture));
-		yellowBlock->SetTransform(Transform(Vector2D(0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
+		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
 		this->AddEntity(yellowBlock);
 
 		// red flat rect entity
 		Entity* redFlatRect = new Entity("Red Flat Rect");
 		redFlatRect->AddComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
-		redFlatRect->SetTransform(Transform(Vector2D(-0.2f, 0.3f), MathHelper::GetPi() / 7.0f, Vector2D(0.2f, 0.2f)));
+		redFlatRect->setTransform(Transform(Vector2D(-0.2f, 0.3f), MathHelper::GetPi() / 7.0f, Vector2D(0.2f, 0.2f)));
 		this->AddEntity(redFlatRect);
 
 		// green flat rect entity
 		Entity* greenRect = new Entity("Green Flat Rect");
 		greenRect->AddComponent(new RectangleRenderer(Color(0.0f, 1.0f, 0.0f)));
-		greenRect->SetTransform(Transform(Vector2D(0.2f, -0.3f), 0.f, Vector2D(0.1f, 0.1f)));
+		greenRect->setTransform(Transform(Vector2D(0.2f, -0.3f), 0.f, Vector2D(0.1f, 0.1f)));
 		this->AddEntity(greenRect);
 
 		// line renderer

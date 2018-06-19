@@ -37,7 +37,7 @@ namespace Components
 		Matrix3 CalcCamMatrix(TransformSpace space = TransformSpace::World);
 
 		// get the size of the camera in word coordinates
-		Vector2D GetSize();
+		Vector2D getCount();
 
 		// get the aspect ratio (height / width)
 		float GetAspect();

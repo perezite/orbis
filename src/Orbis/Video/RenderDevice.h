@@ -32,13 +32,13 @@ namespace Video
 		{}
 
 		// add a renderable
-		void AddRenderable(Renderable* renderable);
+		void addRenderable(Renderable* renderable);
 
 		// update a renderable
-		void UpdateRenderable(Renderable* renderable);
+		void updateRenderable(Renderable* renderable);
 
 		// delete a renderable
-		void DeleteRenderable(Renderable* renderable);
+		void deleteRenderable(Renderable* renderable);
 
 		// clear all renderables
 		void clear();
@@ -47,44 +47,44 @@ namespace Video
 		void render();
 
 		// draw a debug line (slow!)
-		void DrawDebugLine(Vector2D start, Vector2D end, Color color);
+		void drawDebugLine(Vector2D start, Vector2D end, Color color);
 
 		// draw a debug rect (slow!)
-		void DrawDebugRect(Rect rect, Color color);
+		void drawDebugRect(Rect rect, Color color);
 
 	protected:
 		// update vertex array
-		void UpdateVertexArray();
+		void updateVertexArray();
 
 		// update the vertex array for the renderer with the given index using the given mvp matrix
-		void InsertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix);
+		void insertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix);
 
 		// reserver the vertex buffer to hold the renderer data
-		void ReserveVertexArray();
+		void reserveVertexArray();
 
 		// insert renderers indices at position in index array
-		void UpdateIndexArray();
+		void updateIndexArray();
 
 		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
-		void InsertIntoIndexArray(unsigned int rendererIndex, unsigned short& offset);
+		void insertIntoIndexArray(unsigned int rendererIndex, unsigned short& offset);
 
 		// reserve index array space
-		void ReserveIndexArray();
+		void reserveIndexArray();
 
 		// compute the vao start index for a given batch
-		unsigned int ComputeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
+		unsigned int computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
 		// compute the ibo (index buffer) start index for a given batch
-		unsigned int ComputeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
+		unsigned int computeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
 		// compute the batches
-		std::vector<BatchRange> ComputeBatches();
-
+		std::vector<BatchRange> computeBatches();
+	
 		// find index of first renderer in render batch
-		int FindFirstIndexInBatch(Renderable* renderable);
+		int findFirstIndexInBatch(Renderable* renderable);
 
 		// draw a debug primitve
-		void DrawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
+		void drawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
 
 	private:
 		// the vertex array

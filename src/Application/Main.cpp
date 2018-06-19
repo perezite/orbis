@@ -26,7 +26,7 @@ int main(int argc, char* args[])
 	try
 	{
 		LevelManager::getInstance()->QueueLevel(new Level1());
-		OrbisMain::getInstance()->Run();
+		OrbisMain::getInstance()->run();
 	}
 	catch (Exception e)
 	{
