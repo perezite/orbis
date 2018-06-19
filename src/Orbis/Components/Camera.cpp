@@ -19,14 +19,14 @@ namespace Components
 
 	Camera* Camera::getInstance()
 	{
-		Exception::Assert(m_instance != NULL, "No camera was attached in the level");
+		Exception::assert(m_instance != NULL, "No camera was attached in the level");
 
 		return m_instance;
 	}
 
 	Camera::Camera() : Component()
 	{
-		Exception::Assert(m_instance == NULL, "Only one camera at a time is allowed");
+		Exception::assert(m_instance == NULL, "Only one camera at a time is allowed");
 		m_instance = this;
 	}
 
@@ -43,12 +43,12 @@ namespace Components
 	Matrix3 Camera::calcViewMatrix(TransformSpace space)
 	{
 		if (space == TransformSpace::Camera)
-			return Matrix3::GetEye();
+			return Matrix3::getEye();
 
 		Transform* transform = getInstance()->getParent()->getTransform();
 		Matrix3 invTransform;
-		invTransform.Rotate2D(-transform->rotation);
-		invTransform.Translate2D(-transform->position);
+		invTransform.rotate2D(-transform->rotation);
+		invTransform.translate2D(-transform->position);
 		return invTransform;
 	}
 

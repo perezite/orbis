@@ -17,7 +17,7 @@ namespace Math
 
 	public:
 		// get distance between to points
-		static float Distance(Vector2D point1, Vector2D point2) { return (point2 - point1).getCount(); }
+		static float distance(Vector2D point1, Vector2D point2) { return (point2 - point1).getCount(); }
 
 		// deserialize from string 
 		static Vector2D load(std::string json);
@@ -57,10 +57,10 @@ namespace Math
 		float getCount() const { return sqrtf(x * x + y * y);  }
 
 		// get normalized
-		const Vector2D Normalized() const;
+		const Vector2D normalized() const;
 
 		// get scaled
-		const Vector2D Scaled(float length) const;
+		const Vector2D scaled(float length) const;
 
 		// serialize to string
 		const std::string load(int precision = 5);

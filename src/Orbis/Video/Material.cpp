@@ -13,10 +13,10 @@ namespace Video
 
 		float eps = 0.001f;
 		bool colorsBatchEqual = 
-			MathHelper::Approx(m_color.r, other->m_color.r, eps)
-			&& MathHelper::Approx(m_color.g, other->m_color.g, eps)
-			&& MathHelper::Approx(m_color.b, other->m_color.b, eps)
-			&& MathHelper::Approx(m_color.a, other->m_color.a, eps);
+			MathHelper::approx(m_color.r, other->m_color.r, eps)
+			&& MathHelper::approx(m_color.g, other->m_color.g, eps)
+			&& MathHelper::approx(m_color.b, other->m_color.b, eps)
+			&& MathHelper::approx(m_color.a, other->m_color.a, eps);
 
 		return texturesBatchEqual && shadersBatchEqual && colorsBatchEqual;
 	}

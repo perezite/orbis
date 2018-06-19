@@ -18,12 +18,12 @@ namespace Controllers
 	{
 		float dt = TimeManager::getInstance()->getDeltaSeconds();
 		Vector2D dist = m_currentTarget - getParent()->getTransform()->position;
-		Vector2D direction = dist.Normalized();
+		Vector2D direction = dist.normalized();
 		getParent()->getTransform()->position += direction * dt * 0.1f;
 
-		if (Vector2D::Distance(getParent()->getTransform()->position, TopTarget) < 0.001f)
+		if (Vector2D::distance(getParent()->getTransform()->position, TopTarget) < 0.001f)
 			m_currentTarget = BottomTarget;
-		else if (Vector2D::Distance(getParent()->getTransform()->position, BottomTarget) < 0.001f)
+		else if (Vector2D::distance(getParent()->getTransform()->position, BottomTarget) < 0.001f)
 			m_currentTarget = TopTarget;
 	}
 }

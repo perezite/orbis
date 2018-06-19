@@ -11,7 +11,7 @@ using namespace Video;
 namespace
 {
 	// flip an SDL surface
-	SDL_Surface* GetFlippedSDLSurface(SDL_Surface* surface)
+	SDL_Surface* getFlipped(SDL_Surface* surface)
 	{
 		SDL_Surface *flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel,
 			surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
@@ -60,7 +60,7 @@ namespace Video
 
 		if (flipVertically)
 		{
-			SDL_Surface* flipped = GetFlippedSDLSurface(m_surface);
+			SDL_Surface* flipped = getFlipped(m_surface);
 			SDL_FreeSurface(m_surface);
 			m_surface = flipped;
 		}
@@ -91,7 +91,7 @@ namespace Video
 		if (isUsingAtlassing())
 		{
 			Rect uvRect = m_atlasChart->getUVRect(this);
-			Vector2D atlasUV(uvRect.GetLeft() + texUV.x * uvRect.GetWidth(), uvRect.GetBottom() + texUV.y * uvRect.GetHeight());
+			Vector2D atlasUV(uvRect.getLeft() + texUV.x * uvRect.getWidth(), uvRect.getBottom() + texUV.y * uvRect.getHeight());
 			return atlasUV;
 		}
 		else

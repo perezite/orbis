@@ -55,7 +55,7 @@ namespace Levels
 			bool hasTexture = ++counter % 2 == 0;
 
 			Entity* entity = new Entity(hasTexture ? "Textured sprite" : "Solid sprite");
-			Transform trans = Transform(Vector2D(MathHelper::GetRandom() - 0.5f, MathHelper::GetRandom() - 0.5f), 0.0f, Vector2D::One);
+			Transform trans = Transform(Vector2D(MathHelper::getRandom() - 0.5f, MathHelper::getRandom() - 0.5f), 0.0f, Vector2D::One);
 			entity->setTransform(trans);
 
 			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;

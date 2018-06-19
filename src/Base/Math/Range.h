@@ -17,7 +17,7 @@ namespace Math
 		{}
 
 		// compute the difference of the range
-		T Diff() {
+		T diff() {
 			return max - min;
 		}
 

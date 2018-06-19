@@ -83,7 +83,7 @@ namespace Algorithms
 			unsigned int j;
 			for (j = 0; j < sorted.size(); j++)
 			{
-				if (rects[i].GetArea() >= sorted[j].GetArea())
+				if (rects[i].getArea() >= sorted[j].getArea())
 					break;
 			}
 			sorted.insert(sorted.begin() + j, rects[i]);
@@ -100,12 +100,12 @@ namespace Algorithms
 		for (unsigned int i = 0; i < partitions.size(); i++)
 		{
 			float eps = 0.001f;
-			if (rect.GetWidth() < (partitions[i].GetWidth() + eps) && rect.GetHeight() < (partitions[i].GetHeight() + eps))
+			if (rect.getWidth() < (partitions[i].getWidth() + eps) && rect.getHeight() < (partitions[i].getHeight() + eps))
 			{
-				if (partitions[i].GetArea() < minArea)
+				if (partitions[i].getArea() < minArea)
 				{
 					smallest = i;
-					minArea = partitions[i].GetArea();
+					minArea = partitions[i].getArea();
 				}
 			}
 		}
@@ -123,22 +123,22 @@ namespace Algorithms
 
 	std::tuple<Rect, Rect> BinPacking::split(Rect partition, Rect rect)
 	{
-		bool splitVertical = rect.GetWidth() > rect.GetHeight();
+		bool splitVertical = rect.getWidth() > rect.getHeight();
 		Rect smallerBin; Rect largerBin;
 
 		if (splitVertical)
 		{
-			smallerBin = Rect(rect.GetRight(), partition.GetBottom(),
-				partition.GetRight(), rect.GetTop());
-			largerBin = Rect(partition.GetLeft(), rect.GetTop(),
-				partition.GetRight(), partition.GetTop());
+			smallerBin = Rect(rect.getRight(), partition.getBottom(),
+				partition.getRight(), rect.getTop());
+			largerBin = Rect(partition.getLeft(), rect.getTop(),
+				partition.getRight(), partition.getTop());
 		}
 		else
 		{
-			smallerBin = Rect(partition.GetLeft(), rect.GetTop(),
-				rect.GetRight(), partition.GetTop());
-			largerBin = Rect(rect.GetRight(), partition.GetBottom(),
-				partition.GetRight(), partition.GetTop());
+			smallerBin = Rect(partition.getLeft(), rect.getTop(),
+				rect.getRight(), partition.getTop());
+			largerBin = Rect(rect.getRight(), partition.getBottom(),
+				partition.getRight(), partition.getTop());
 		}
 
 		return std::make_tuple(smallerBin, largerBin);

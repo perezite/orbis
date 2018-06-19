@@ -8,38 +8,38 @@
 
 namespace Math
 {
-	float MathHelper::GetPi()
+	float MathHelper::getPi()
 	{
 		return (float)M_PI;
 	}
 
-	float MathHelper::RadianToDegrees(float radian)
+	float MathHelper::radianToDegrees(float radian)
 	{
-		return (radian / (2.0f * GetPi())) * 360.0f;
+		return (radian / (2.0f * getPi())) * 360.0f;
 	}
 
-	float MathHelper::DegreesToRadian(float degrees)
+	float MathHelper::degreesToRadian(float degrees)
 	{
-		return (degrees / 360.0f) * 2.0f * GetPi();
+		return (degrees / 360.0f) * 2.0f * getPi();
 	}
 
-	float MathHelper::GetRandom()
+	float MathHelper::getRandom()
 	{
 		return (float)rand() / (RAND_MAX);
 	}
 
-	float MathHelper::GetRandom(float low, float high)
+	float MathHelper::getRandom(float low, float high)
 	{
-		return MathHelper::GetRandom() * (high - low) + low;
+		return MathHelper::getRandom() * (high - low) + low;
 	}
 
-	Vector2D MathHelper::GetRandomOnUnitCircle()
+	Vector2D MathHelper::getRandomOnUnitCircle()
 	{
-		float alpha = GetRandom(0, 2.0f * GetPi());
+		float alpha = getRandom(0, 2.0f * getPi());
 		return Vector2D(cosf(alpha), sinf(alpha));
 	}
 
-	bool MathHelper::Approx(float val1, float val2, float eps)
+	bool MathHelper::approx(float val1, float val2, float eps)
 	{
 		return fabs(val1 - val2) < eps;
 	}

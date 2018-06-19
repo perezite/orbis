@@ -35,7 +35,7 @@ namespace Levels
 		Texture* translateBlueSpriteTex = VideoManager::getInstance()->getTexture("Textures/TranslateBlueSprite.png");
 		Texture* rotateCameraTex = VideoManager::getInstance()->getTexture("Textures/RotateCamera.png");
 		Texture* translateCameraTex = VideoManager::getInstance()->getTexture("Textures/TranslateCamera.png");
-		Texture* resetTex = VideoManager::getInstance()->getTexture("Textures/reset.png");
+		Texture* resetTex = VideoManager::getInstance()->getTexture("Textures/Reset.png");
 		Texture* scaleCameraTex = VideoManager::getInstance()->getTexture("Textures/ScaleCamera.png");
 		Texture* closeTex = VideoManager::getInstance()->getTexture("Textures/OverlayClose.png");
 		Texture* leftArrowTex = VideoManager::getInstance()->getTexture("Textures/OverlayLeft.png");
@@ -60,7 +60,7 @@ namespace Levels
 
 		// yellow block entity
 		Entity* yellowBlock = new Entity("Yellow Brick");
-		SpriteController* yellowBlockController = new SpriteController(MathHelper::GetPi());
+		SpriteController* yellowBlockController = new SpriteController(MathHelper::getPi());
 		yellowBlock->addComponent(yellowBlockController);
 		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTexture));
 		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
@@ -68,7 +68,7 @@ namespace Levels
 
 		// blue block entity
 		Entity* blueBlock = new Entity("Blue Brick");
-		SpriteController* blueBlockController = new SpriteController(-MathHelper::GetPi() / 2.0f);
+		SpriteController* blueBlockController = new SpriteController(-MathHelper::getPi() / 2.0f);
 		blueBlock->addComponent(blueBlockController);
 		blueBlock->addComponent(new SpriteRenderer(blueBlockTexture));
 		blueBlock->setTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));

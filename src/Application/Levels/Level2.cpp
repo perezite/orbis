@@ -56,7 +56,7 @@ namespace Levels
 		// red flat rect entity
 		Entity* redFlatRect = new Entity("Red Flat Rect");
 		redFlatRect->addComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
-		redFlatRect->setTransform(Transform(Vector2D(-0.2f, 0.3f), MathHelper::GetPi() / 7.0f, Vector2D(0.2f, 0.2f)));
+		redFlatRect->setTransform(Transform(Vector2D(-0.2f, 0.3f), MathHelper::getPi() / 7.0f, Vector2D(0.2f, 0.2f)));
 		this->addEntity(redFlatRect);
 
 		// green flat rect entity

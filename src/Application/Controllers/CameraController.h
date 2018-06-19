@@ -11,6 +11,6 @@ namespace Controllers
 	{
 	public:
 		// get omega
-		float GetOmega() { return MathHelper::GetPi() / 4.0f; };
+		float getOmega() { return MathHelper::getPi() / 4.0f; };
 	};
 }

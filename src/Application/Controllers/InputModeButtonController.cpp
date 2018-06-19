@@ -20,17 +20,17 @@ namespace Controllers
 		InputManager* inputManager = InputManager::getInstance();
 
 		if (inputManager->isTapGoingDown(getParent()->getTransform()->getRect()))
-				Cycle();
+				cycle();
 	}
 
-	void InputModeButtonController::Cycle()
+	void InputModeButtonController::cycle()
 	{
 		// get current texture
-		std::vector<Texture*>::iterator previousTextureIt = std::find(m_textures.begin(), m_textures.end(), m_Renderer->getTexture());
+		std::vector<Texture*>::iterator previousTextureIt = std::find(m_textures.begin(), m_textures.end(), m_renderer->getTexture());
 		std::vector<Texture*>::iterator currentTextureIt = ++previousTextureIt;
 
 		// update sprite renderer
 		Texture* nextTexture = currentTextureIt != m_textures.end() ? (*currentTextureIt) : m_textures.front();
-		m_Renderer->setTexture(nextTexture);
+		m_renderer->setTexture(nextTexture);
 	}
 }

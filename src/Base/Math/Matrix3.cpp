@@ -4,7 +4,7 @@
 
 namespace Math
 {
-	const Matrix3& Matrix3::GetEye()
+	const Matrix3& Matrix3::getEye()
 	{
 		static Matrix3 eye =
 			Matrix3(1.0f, 0.0f, 0.0f,
@@ -14,7 +14,7 @@ namespace Math
 		return eye;
 	}
 
-	Matrix3 Matrix3::Rotation2D(float rad)
+	Matrix3 Matrix3::rotation2D(float rad)
 	{
 		return Matrix3(cosf(rad), -sinf(rad), 0.0f,
 			sinf(rad), cosf(rad), 0.0f,
@@ -32,22 +32,22 @@ namespace Math
 
 	Matrix3::Matrix3()
 	{
-		*this = GetEye();
+		*this = getEye();
 	}
 
-	void Matrix3::Rotate2D(float rad)
+	void Matrix3::rotate2D(float rad)
 	{
-		*this *= Rotation2D(rad);
+		*this *= rotation2D(rad);
 	}
 
-	void Matrix3::Translate2D(Vector2D trans)
+	void Matrix3::translate2D(Vector2D trans)
 	{
 		*this *= Matrix3(1.0f, 0.0f, trans.x,
 			0.0f, 1.0f,  trans.y,
 			0.0f, 0.0f, 1.0f);
 	}
 
-	void Matrix3::Scale2D(Vector2D scale)
+	void Matrix3::scale2D(Vector2D scale)
 	{
 		*this *= Matrix3(scale.x, 0.0f, 0.0f,
 			0.0f, scale.y, 0.0f,
@@ -62,7 +62,7 @@ namespace Math
 				float sum = 0.0f;
 				for (unsigned int i = 0; i < 3; i++)
 					sum += getValue(row, i) * other.getValue(i, col);
-				result.SetValue(row, col, sum);
+				result.setValue(row, col, sum);
 			}
 		}
 

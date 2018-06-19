@@ -17,7 +17,7 @@ namespace Controllers
 
 	void WobbleController::start()
 	{
-		float scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * MathHelper::GetRandom();
+		float scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * MathHelper::getRandom();
 		getParent()->getTransform()->scale = Vector2D(scale, scale);
 		m_isGrowing = rand() % 2 == 0 ? true : false;
 	}

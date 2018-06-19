@@ -42,10 +42,10 @@ namespace Video
 	SDL_Rect TextureChart::toSDLRect(Rect rect)
 	{
 		SDL_Rect sdlRect;
-		sdlRect.x = (int)rect.GetLeft();
-		sdlRect.y = (int)rect.GetBottom();
-		sdlRect.w = (int)rect.GetWidth();
-		sdlRect.h = (int)rect.GetHeight();
+		sdlRect.x = (int)rect.getLeft();
+		sdlRect.y = (int)rect.getBottom();
+		sdlRect.w = (int)rect.getWidth();
+		sdlRect.h = (int)rect.getHeight();
 
 		return sdlRect;
 	}
@@ -53,8 +53,8 @@ namespace Video
 	Vector2D TextureChart::getSmallestPowerOfTwoSize(std::vector<Rect> rects)
 	{
 		Rect boundary = getBoundaryRect(rects);
-		int potWidth = getNextPowerOfTwo((int)boundary.GetWidth());
-		int potHeight = getNextPowerOfTwo((int)boundary.GetHeight());
+		int potWidth = getNextPowerOfTwo((int)boundary.getWidth());
+		int potHeight = getNextPowerOfTwo((int)boundary.getHeight());
 
 		return Vector2D((float)potWidth, (float)potHeight);
 	}
@@ -65,10 +65,10 @@ namespace Video
 		Vector2D max(0, 0);
 		for (unsigned int i = 0; i < rects.size(); i++)
 		{
-			if (rects[i].GetRight() > max.x)
-				max.x = rects[i].GetRight();
-			if (rects[i].GetTop() > max.y)
-				max.y = rects[i].GetTop();
+			if (rects[i].getRight() > max.x)
+				max.x = rects[i].getRight();
+			if (rects[i].getTop() > max.y)
+				max.y = rects[i].getTop();
 		}
 
 		return Rect(0, 0, max.x, max.y);
@@ -121,7 +121,7 @@ namespace Video
 
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			Rect uvRect = Rect(rects[i].GetLeft() / width, rects[i].GetBottom() / height, rects[i].GetRight() / width, rects[i].GetTop() / height);
+			Rect uvRect = Rect(rects[i].getLeft() / width, rects[i].getBottom() / height, rects[i].getRight() / width, rects[i].getTop() / height);
 			m_uvRects.insert(std::make_pair(textures[i], uvRect));
 		}
 	}

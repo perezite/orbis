@@ -28,12 +28,12 @@ namespace Controllers
 		// insert rects and colors
 		for (unsigned int i = 0; i < NUM_RECTS; i++)
 		{
-			float width = MathHelper::GetRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
-			float height = MathHelper::GetRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
+			float width = MathHelper::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
+			float height = MathHelper::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
 			Vector2D leftBottom(-width / 2.0f, -height / 2.0f);
 			Vector2D rightTop(width / 2.0f, height / 2.0f);
 			m_origRects.push_back(Rect(leftBottom, rightTop));
-			m_rectColors.push_back(Color(MathHelper::GetRandom(), MathHelper::GetRandom(), MathHelper::GetRandom()));
+			m_rectColors.push_back(Color(MathHelper::getRandom(), MathHelper::getRandom(), MathHelper::getRandom()));
 		}
 	}
 

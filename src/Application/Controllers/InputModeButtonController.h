@@ -23,7 +23,7 @@ namespace Controllers
 	public:
 		// ctor
 		InputModeButtonController(SpriteRenderer* spriteRenderer, std::vector<Texture*> inputModeTextures)
-			: m_Renderer(spriteRenderer), m_textures(inputModeTextures)
+			: m_renderer(spriteRenderer), m_textures(inputModeTextures)
 		{}
 
 		// update
@@ -31,11 +31,11 @@ namespace Controllers
 
 	protected:
 		// cycle through the input modes
-		void Cycle();
+		void cycle();
 
 	private:
 		// input mode overlay sprite renderer
-		SpriteRenderer* m_Renderer;
+		SpriteRenderer* m_renderer;
 
 		// available input mode overlay textures
 		std::vector<Texture*> m_textures;

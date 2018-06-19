@@ -25,8 +25,8 @@ namespace Math
 				startIdx = i;
 		}
 
-		Vector2D startTangent = Vector2D(1, m_points[startIdx].tangent).Scaled(TANGENT_LENGTH);
-		Vector2D endTangent = Vector2D(1, m_points[startIdx + 1].tangent).Scaled(TANGENT_LENGTH);
+		Vector2D startTangent = Vector2D(1, m_points[startIdx].tangent).scaled(TANGENT_LENGTH);
+		Vector2D endTangent = Vector2D(1, m_points[startIdx + 1].tangent).scaled(TANGENT_LENGTH);
 		Vector2D p0 = m_points[startIdx].pos;
 		Vector2D p1 = p0 + startTangent * 0.5f;
 		Vector2D p3 = m_points[startIdx + 1].pos;
@@ -56,23 +56,23 @@ namespace Math
 		m_points.clear();
 		std::istringstream is(json);
 
-		StringHelper::Seek(is, '{');
+		StringHelper::seek(is, '{');
 
 		while (true)
 		{
-			StringHelper::Seek(is, '{');
-			float tangent = (float)atof(StringHelper::Read(is, 'f').c_str());
-			StringHelper::Seek(is, ','); StringHelper::Seek(is, '{');
-			std::string vs = StringHelper::Read(is, '}'); vs = '{' + vs + '}';
+			StringHelper::seek(is, '{');
+			float tangent = (float)atof(StringHelper::read(is, 'f').c_str());
+			StringHelper::seek(is, ','); StringHelper::seek(is, '{');
+			std::string vs = StringHelper::read(is, '}'); vs = '{' + vs + '}';
 			Vector2D pos = Vector2D::load(vs);
-			StringHelper::Seek(is, '}');
+			StringHelper::seek(is, '}');
 			m_points.push_back(BezierPoint(pos, tangent));
 
-			if (!StringHelper::Seek(is, ','))
+			if (!StringHelper::seek(is, ','))
 				break;
 		}
 
-		StringHelper::Seek(is, '}');
+		StringHelper::seek(is, '}');
 	}
 
 	std::string BezierCurve::toString()

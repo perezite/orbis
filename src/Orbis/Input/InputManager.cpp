@@ -112,7 +112,7 @@ namespace Input
 	{
 		if (isTapDown())
 		{
-			if (rect.Contains(getTapPosition()))
+			if (rect.contains(getTapPosition()))
 				return true;
 		}
 
@@ -133,7 +133,7 @@ namespace Input
 	{
 		if (isTapGoingDown())
 		{
-			if (rect.Contains(getTapPosition()))
+			if (rect.contains(getTapPosition()))
 				return true;
 		}
 
@@ -147,7 +147,7 @@ namespace Input
 
 	Vector2D InputManager::getTapPosition()
 	{
-		Exception::Assert(isTapDown() || isTapGoingDown(), "getTapPosition() can only be called when a tap is pressed or going down");
+		Exception::assert(isTapDown() || isTapGoingDown(), "getTapPosition() can only be called when a tap is pressed or going down");
 
 		Camera* cam = Camera::getInstance();
 		float aspect = cam->getAspect();

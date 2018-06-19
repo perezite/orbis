@@ -14,7 +14,7 @@ namespace Controllers
 		{}
 
 		// epxloding state
-		bool Explode();
+		bool explode();
 
 	protected:
 

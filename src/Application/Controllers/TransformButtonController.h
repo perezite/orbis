@@ -19,7 +19,7 @@ namespace Controllers
 			: m_yellowBlock(yellowBlock), m_blueBlock(blueBlock),
 			m_camera(camera), m_inputModeSpriteRenderer(inputModeRenderer), m_positiveTransform(leftDirection)
 		{
-			StoreInitialTransforms();
+			storeInitialTransforms();
 		}
 
 		// override
@@ -27,13 +27,13 @@ namespace Controllers
 
 	protected:
 		// affect the selected entity
-		void Affect();
+		void affect();
 
 		// store the initial transforms of the attached entities
-		void StoreInitialTransforms();
+		void storeInitialTransforms();
 
 		// store the initial transform of an attached entity
-		void StoreInitialTransform(Component* component);
+		void storeInitialTransform(Component* component);
 
 	private:
 		// the yellow block controller

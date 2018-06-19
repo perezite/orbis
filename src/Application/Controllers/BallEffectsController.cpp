@@ -10,7 +10,7 @@ namespace Controllers
 {
 	#ifdef __STATE_EXPLODING
 
-		bool BallEffectsController::Explode()
+		bool BallEffectsController::explode()
 		{
 			float waitSeconds = 2.0f - m_explosionTimeElapsed;
 			LogHelper::logMessage("BallEffectsController::ExplodingRun(), wait another %f", waitSeconds);

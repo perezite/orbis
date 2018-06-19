@@ -49,7 +49,7 @@ namespace Video
 
 	void Window::setResolution(Vector2D resolution)
 	{
-		if (EnvironmentHelper::IsMobile())
+		if (EnvironmentHelper::isMobile())
 			return;
 
 		SDL_DestroyWindow(m_sdlWindow);
@@ -73,7 +73,7 @@ namespace Video
 
 	Vector2D Window::getDefaultResolution()
 	{
-		if (EnvironmentHelper::IsMobile())
+		if (EnvironmentHelper::isMobile())
 		{
 			SDL_DisplayMode mode;
 			SDL_GetDisplayMode(0, 0, &mode);

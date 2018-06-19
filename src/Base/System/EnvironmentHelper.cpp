@@ -13,14 +13,14 @@ namespace System
 {
 	const std::string EnvironmentHelper::PathSeparator = "\\";
 
-	std::string System::EnvironmentHelper::GetExecutableDirectoryPath()
+	std::string System::EnvironmentHelper::getExecutableDirectoryPath()
 	{
 		#ifdef WIN32
 			wchar_t filePath[MAX_PATH];
 
 			// get executable file path
 			HMODULE hModule = GetModuleHandle(NULL);
-			Exception::Assert(hModule != NULL, "GetModuleHandle() failed");
+			Exception::assert(hModule != NULL, "GetModuleHandle() failed");
 			GetModuleFileName(hModule, filePath, (sizeof(filePath)));
 
 			// get file path as string
@@ -39,7 +39,7 @@ namespace System
 		#endif
 	}
 
-	bool EnvironmentHelper::IsMobile()
+	bool EnvironmentHelper::isMobile()
 	{
 		#if defined WIN32
 			return false;
@@ -50,7 +50,7 @@ namespace System
 		#endif
 	}
 
-	std::string EnvironmentHelper::CombinePath(std::vector<std::string> parts)
+	std::string EnvironmentHelper::combinePath(std::vector<std::string> parts)
 	{
 		std::string result;
 		for (unsigned int i = 0; i < parts.size() - 1; i++)
@@ -67,7 +67,7 @@ namespace System
 		return result;
 	}
 
-	void EnvironmentHelper::WriteToClipboard(std::string value)
+	void EnvironmentHelper::writeToClipboard(std::string value)
 	{
 		#ifdef WIN32
 			HWND windowHandle = GetDesktopWindow();

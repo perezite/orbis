@@ -5,7 +5,7 @@
 void SDL_HandleError()
 {
 	std::string error = std::string(SDL_GetError());
-	error = StringHelper::IsEmpty(error) ? "Unknown error" : error;
+	error = StringHelper::isEmpty(error) ? "Unknown error" : error;
 
 	std::string message = "SDL Error: " + error;
 	SDL_ClearError();
@@ -15,7 +15,7 @@ void SDL_HandleError()
 void IMG_HandleError()
 {
 	std::string error = std::string(IMG_GetError());
-	error = StringHelper::IsEmpty(error) ? "Unknown error" : error;
+	error = StringHelper::isEmpty(error) ? "Unknown error" : error;
 
 	std::string message = "SDL Image Error: " + error;
 	SDL_ClearError();

@@ -17,7 +17,7 @@ void GL_Verify(void)
 
 		while ((err = glGetError()) != GL_NO_ERROR)
 		{
-			std::string message = StringHelper::GetFormattedString("OpenGL Error: Error Code %d", 1024, err);
+			std::string message = StringHelper::getFormatted("OpenGL Error: Error Code %d", 1024, err);
 			throw Exception(message);
 		}
 	}
@@ -43,7 +43,7 @@ void GL_Verify(void)
 		{
 			if (returnValue != GLEW_OK)
 			{
-				std::string message = StringHelper::GetFormattedString("GLEW Error: Error Code %s", 1024, glewGetErrorString(returnValue));
+				std::string message = StringHelper::getFormatted("GLEW Error: Error Code %s", 1024, glewGetErrorString(returnValue));
 				throw Exception(message);
 			}
 

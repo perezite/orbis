@@ -10,37 +10,37 @@ namespace Controllers
 	class BallController : public Component
 	{
 	private:
-		enum State
+		enum class State
 		{
-			Aiming_Enter, Aiming_Run,
-			Flying_Enter, Flying_Run,
-			Dying_Enter, Dying_Run,
-			Paralysed_Enter, Paralysed_Run
+			AimingEnter, AimingRun,
+			FlyingEnter, FlyingRun,
+			DyingEnter, DyingRun,
+			ParalysedEnter, ParalysedRun
 		};
 
 	public:
 		// ctor
 		BallController() 
-			: m_state(State::Aiming_Enter), aimingCurrentAngle(0.0f)
+			: m_state(State::AimingEnter), aimingCurrentAngle(0.0f)
 		{}
 
 		// override
 		void update();
 
 		// set the ball effects controller
-		void SetBallEffectsController(BallEffectsController* ballEffectsController) { m_ballEffectsController = ballEffectsController; }
+		void setBallEffectsController(BallEffectsController* ballEffectsController) { m_ballEffectsController = ballEffectsController; }
 
 		// aiming
-		void AimingEnter();	void AimingRun();
+		void aimingEnter();	void aimingRun();
 
 		// flying
-		void FlyingEnter(); void FlyingRun();
+		void flyingEnter(); void flyingRun();
 
 		// dying
-		void DyingEnter();	void DyingRun();
+		void dyingEnter();	void dyingRun();
 
 		// enter the paralysed state
-		void ParalysedEnter();	void ParalysedRun();
+		void paralysedEnter();	void paralysedRun();
 
 	private:
 		// current state

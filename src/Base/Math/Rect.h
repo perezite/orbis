@@ -27,34 +27,34 @@ namespace Math
 		{}
 
 		// get the left top corner
-		Vector2D GetLeftTop() const { return Vector2D(leftBottom.x, rightTop.y); }
+		Vector2D getLeftTop() const { return Vector2D(leftBottom.x, rightTop.y); }
 
 		// get the right bottom corner
-		Vector2D GetRightBottom() const { return Vector2D(rightTop.x, leftBottom.y); }
+		Vector2D getRightBottom() const { return Vector2D(rightTop.x, leftBottom.y); }
 
 		// get the width of the rect
-		float GetWidth() const { return rightTop.x - leftBottom.x; }
+		float getWidth() const { return rightTop.x - leftBottom.x; }
 
 		// get the height of the rect
-		float GetHeight() const { return rightTop.y - leftBottom.y; }
+		float getHeight() const { return rightTop.y - leftBottom.y; }
 
 		// get the area
-		float GetArea() const { return GetWidth() * GetHeight(); }
+		float getArea() const { return getWidth() * getHeight(); }
 
 		// get left
-		float GetLeft() const { return leftBottom.x; }
+		float getLeft() const { return leftBottom.x; }
 
 		// get bottom
-		float GetBottom() const { return leftBottom.y; }
+		float getBottom() const { return leftBottom.y; }
 	
 		// get right
-		float GetRight() const { return rightTop.x; }
+		float getRight() const { return rightTop.x; }
 
 		// get top
-		float GetTop() const { return rightTop.y; }
+		float getTop() const { return rightTop.y; }
 
 		// check if rect contains point
-		bool Contains(Vector2D point) { return point.x >= GetLeft() && point.x <= GetRight() && point.y >= GetBottom() && point.y <= GetTop(); }
+		bool contains(Vector2D point) { return point.x >= getLeft() && point.x <= getRight() && point.y >= getBottom() && point.y <= getTop(); }
 
 	public:
 		// the left bottom corner

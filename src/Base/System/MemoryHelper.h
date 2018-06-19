@@ -8,7 +8,7 @@ namespace System
 	{
 	public:
 		template <class T>
-		static void Remove(std::vector<T*>& vec, unsigned int index)
+		static void remove(std::vector<T*>& vec, unsigned int index)
 		{
 			delete vec[index];
 			vec.erase(vec.begin() + index);

@@ -157,7 +157,7 @@ namespace Components
 	bool TweenInspector::isControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
 	{
 		Vector2D pos = m_tween.getCurve()->get(controlPointIndex).pos;
-		if (Vector2D::Distance(pos, tapPosition) <= SELECT_RADIUS)
+		if (Vector2D::distance(pos, tapPosition) <= SELECT_RADIUS)
 			return true;
 
 		return false;
@@ -193,7 +193,7 @@ namespace Components
 
 			if (isSelected)
 			{
-				Vector2D v = Vector2D(1.0f, m_tween.getCurve()->get(i).tangent).Normalized() * 0.5f * TANGENT_LENGTH;
+				Vector2D v = Vector2D(1.0f, m_tween.getCurve()->get(i).tangent).normalized() * 0.5f * TANGENT_LENGTH;
 				Vector2D tangentStart = pos - v;
 				Vector2D tangentEnd = pos + v;
 				Rect startRect(tangentStart, MARK_EXTENT);
@@ -208,7 +208,7 @@ namespace Components
 	bool TweenInspector::IsClickablePosition(Vector2D position)
 	{
 		Rect clickableRect = Rect(getParent()->getTransform()->position, 0.5f);
-		return clickableRect.Contains(position);
+		return clickableRect.contains(position);
 	}
 
 	bool TweenInspector::IsSelectedControlPointOnBoundary()

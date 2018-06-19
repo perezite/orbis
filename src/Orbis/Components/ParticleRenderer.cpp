@@ -63,7 +63,7 @@ namespace Components
 		for (unsigned int i = 0; i < m_particles.size();)
 		{
 			if (m_particles[i]->getCurrentLifetime() <= 0.0f)
-				MemoryHelper::Remove(m_particles, i);
+				MemoryHelper::remove(m_particles, i);
 			else
 				i++;
 		}
@@ -87,8 +87,8 @@ namespace Components
 		float dt = TimeManager::getInstance()->getDeltaSeconds();
 		Vector2D entityVelocity = (m_lastEntityPos - getParent()->getTransform()->position) * (1.0f/dt);
 
-		Vector2D position = getParent()->getTransform()->position + MathHelper::GetRandomOnUnitCircle() * m_emissionSphereShellRadius;
-		Vector2D particleVelocity = (MathHelper::GetRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
+		Vector2D position = getParent()->getTransform()->position + MathHelper::getRandomOnUnitCircle() * m_emissionSphereShellRadius;
+		Vector2D particleVelocity = (MathHelper::getRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
 		Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
 		m_particles.push_back(new Particle(m_texture, Color::White, transform, particleVelocity));
 

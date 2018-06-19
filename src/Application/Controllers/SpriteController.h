@@ -12,7 +12,7 @@ namespace Controllers
 		SpriteController(float omega) { m_omega = omega; }
 
 		// get rotation velocity
-		float GetOmega() const { return m_omega; }
+		float getOmega() const { return m_omega; }
 
 	public: 
 		float m_omega; 

@@ -25,7 +25,7 @@ namespace
 	{
 		speed = forward ? speed : -speed;
 		Vector2D position = transform->position;
-		Vector2D translation = Matrix3::Rotation2D(transform->rotation) * Vector2D(TimeManager::getInstance()->getDeltaSeconds() * speed, 0.0f);
+		Vector2D translation = Matrix3::rotation2D(transform->rotation) * Vector2D(TimeManager::getInstance()->getDeltaSeconds() * speed, 0.0f);
 		transform->position = position + translation;
 	}
 
@@ -40,12 +40,12 @@ namespace
 
 	void Rotate(SpriteController* sprite, bool clockwise)
 	{
-		Rotate(sprite->getParent()->getTransform(), clockwise, sprite->GetOmega());
+		Rotate(sprite->getParent()->getTransform(), clockwise, sprite->getOmega());
 	}
 
 	void Rotate(CameraController* camera, bool clockwise)
 	{
-		Rotate(camera->getParent()->getTransform(), clockwise, camera->GetOmega());
+		Rotate(camera->getParent()->getTransform(), clockwise, camera->getOmega());
 	}
 
 	void Translate(SpriteController* sprite, bool forward)
@@ -55,7 +55,7 @@ namespace
 
 	void Translate(CameraController* camera, bool forward)
 	{
-		Translate(camera->getParent()->getTransform(), forward, camera->GetOmega());
+		Translate(camera->getParent()->getTransform(), forward, camera->getOmega());
 	}
 
 	void reset(std::map<Entity*, Transform> initialTransforms)
@@ -74,10 +74,10 @@ namespace Controllers
 		InputManager* input = InputManager::getInstance();
 
 		if (input->isTapDown(getParent()->getTransform()->getRect()))
-			Affect();
+			affect();
 	}
 
-	void TransformButtonController::Affect()
+	void TransformButtonController::affect()
 	{
 		std::string texAssetPath = m_inputModeSpriteRenderer->getTexture()->getAssetPath();
 
@@ -113,7 +113,7 @@ namespace Controllers
 			return;
 		}
 
-		if (texAssetPath == "Textures/reset.png")
+		if (texAssetPath == "Textures/Reset.png")
 		{
 			reset(m_initialTransforms);
 			return;
@@ -122,14 +122,14 @@ namespace Controllers
 		throw Exception("The given texture asset path is not supported!");
 	}
 
-	void TransformButtonController::StoreInitialTransforms()
+	void TransformButtonController::storeInitialTransforms()
 	{
-		StoreInitialTransform(m_yellowBlock);
-		StoreInitialTransform(m_blueBlock);
-		StoreInitialTransform(m_camera);
+		storeInitialTransform(m_yellowBlock);
+		storeInitialTransform(m_blueBlock);
+		storeInitialTransform(m_camera);
 	}
 
-	void TransformButtonController::StoreInitialTransform(Component * component)
+	void TransformButtonController::storeInitialTransform(Component * component)
 	{
 		Entity* parent = component->getParent();
 		m_initialTransforms.insert(std::make_pair(parent, *parent->getTransform()));

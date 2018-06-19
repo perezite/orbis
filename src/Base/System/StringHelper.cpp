@@ -11,28 +11,28 @@
 
 namespace System
 {
-	std::string StringHelper::GetFormattedString(std::string format, int maximalFormattedLength, ...)
+	std::string StringHelper::getFormatted(std::string format, int maximalFormattedLength, ...)
 	{
 		va_list args;
 		va_start(args, maximalFormattedLength);
-		std::string result = GetFormattedString(format, maximalFormattedLength, args);
+		std::string result = getFormatted(format, maximalFormattedLength, args);
 		va_end(args);
 
 		return result;
 	}
 
-	std::string StringHelper::GetFormattedString(std::string format, ...)
+	std::string StringHelper::getFormatted(std::string format, ...)
 	{
 		va_list args;
 
 		va_start(args, format);
-		std::string result = GetFormattedString(format, DefaultMaximalFormattedLength, args);
+		std::string result = getFormatted(format, DefaultMaximalFormattedLength, args);
 		va_end(args);
 
 		return result;
 	}
 
-	std::string StringHelper::GetFormattedString(std::string format, int maximalFormattedLength, va_list args)
+	std::string StringHelper::getFormatted(std::string format, int maximalFormattedLength, va_list args)
 	{
 		char *buffer = (char*)malloc(sizeof(char) * (maximalFormattedLength + 1));
 
@@ -44,7 +44,7 @@ namespace System
 		return result;
 	}
 
-	bool StringHelper::IsEmpty(std::string str)
+	bool StringHelper::isEmpty(std::string str)
 	{
 		return str == "";
 	}
@@ -57,7 +57,7 @@ namespace System
 		return result;
 	}
 
-	bool StringHelper::Seek(std::istringstream& is, char c)
+	bool StringHelper::seek(std::istringstream& is, char c)
 	{
 		char r;
 		while (is.get(r) && c != r);
@@ -68,7 +68,7 @@ namespace System
 		return true;
 	}
 
-	std::string StringHelper::Read(std::istringstream& is, char d)
+	std::string StringHelper::read(std::istringstream& is, char d)
 	{
 		std::string buf;
 		char r;

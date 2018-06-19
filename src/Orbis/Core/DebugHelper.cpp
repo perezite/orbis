@@ -24,10 +24,10 @@ namespace Core
 	{
 		ORBIS_ASSERT_DEBUG();
 
-		drawLine(rect.leftBottom, rect.GetRightBottom());
-		drawLine(rect.GetRightBottom(), rect.rightTop);
-		drawLine(rect.rightTop, rect.GetLeftTop());
-		drawLine(rect.GetLeftTop(), rect.leftBottom);
+		drawLine(rect.leftBottom, rect.getRightBottom());
+		drawLine(rect.getRightBottom(), rect.rightTop);
+		drawLine(rect.rightTop, rect.getLeftTop());
+		drawLine(rect.getLeftTop(), rect.leftBottom);
 	}
 
 	void DebugHelper::drawSolidRect(Rect rect, Color color)

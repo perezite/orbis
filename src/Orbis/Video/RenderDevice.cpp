@@ -61,7 +61,7 @@ namespace Video
 		for (unsigned int i = 0; i < batches.size(); i++)
 		{
 			unsigned int batchBegin = batches[i].min;
-			unsigned int batchSize = batches[i].Diff() + 1;
+			unsigned int batchSize = batches[i].diff() + 1;
 			unsigned int vaoStartIndex = computeVaoStartIndex(i, batches);
 			unsigned int iboStartIndex = computeIboStartIndex(i, batches);
 			Renderable* prototype = m_renderables[batchBegin];
@@ -134,8 +134,8 @@ namespace Video
 		Matrix3 camMatrix = Camera::getInstance()->calcCamMatrix();
 		rect = camMatrix * rect;
 		GLfloat vertexArray[12] = {
-			rect.leftBottom.x , rect.leftBottom.y, rect.GetRightBottom().x, rect.GetRightBottom().y, rect.GetLeftTop().x, rect.GetLeftTop().y,
-			rect.GetRightBottom().x, rect.GetRightBottom().y, rect.rightTop.x, rect.rightTop.y, rect.GetLeftTop().x, rect.GetLeftTop().y
+			rect.leftBottom.x , rect.leftBottom.y, rect.getRightBottom().x, rect.getRightBottom().y, rect.getLeftTop().x, rect.getLeftTop().y,
+			rect.getRightBottom().x, rect.getRightBottom().y, rect.rightTop.x, rect.rightTop.y, rect.getLeftTop().x, rect.getLeftTop().y
 		};
 
 		drawDebugPrimitive(vertexArray, 12, color, RenderMode::Triangles);
@@ -238,7 +238,7 @@ namespace Video
 		for (unsigned int i = 0; i < batchIndex; i++)
 		{
 			unsigned int begin = batches[i].min;
-			unsigned int batchSize = batches[i].Diff() + 1;
+			unsigned int batchSize = batches[i].diff() + 1;
 			startIndex += m_renderables[begin]->getMesh()->getVertexData()->size() * batchSize;
 		}
 
@@ -252,7 +252,7 @@ namespace Video
 		for (unsigned int i = 0; i < batchIndex; i++)
 		{
 			unsigned int begin = batches[i].min;
-			unsigned int batchSize = batches[i].Diff() + 1;
+			unsigned int batchSize = batches[i].diff() + 1;
 			startIndex += m_renderables[begin]->getMesh()->getIndices()->size() * batchSize;
 		}
 

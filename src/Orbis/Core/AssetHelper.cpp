@@ -11,7 +11,7 @@ namespace
 	std::string GetAssetFolderPath()
 	{
 		#ifdef WIN32
-			return EnvironmentHelper::CombinePath({ EnvironmentHelper::GetExecutableDirectoryPath(), "..", "Assets" });
+			return EnvironmentHelper::combinePath({ EnvironmentHelper::getExecutableDirectoryPath(), "..", "Assets" });
 		#endif
 		
 		#ifdef __ANDROID__
@@ -24,7 +24,7 @@ namespace Core
 {
 	std::string AssetHelper::assetPathToFilePath(std::string assetPath)
 	{
-		return EnvironmentHelper::CombinePath({ GetAssetFolderPath(), assetPath });
+		return EnvironmentHelper::combinePath({ GetAssetFolderPath(), assetPath });
 	}
 
 	void AssetHelper::saveTextAsset(std::string assetPath, std::string text)
@@ -59,7 +59,7 @@ namespace Core
 		data[totalSize] = '\0';
 
 		// check
-		Exception::Assert(totalSize == fileSize, "Could not load file '" + assetPath + "'");
+		Exception::assert(totalSize == fileSize, "Could not load file '" + assetPath + "'");
 	
 		// cleanup
 		SDL_RWclose(reader);

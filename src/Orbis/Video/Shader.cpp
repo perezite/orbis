@@ -14,7 +14,7 @@ using namespace System;
 namespace
 {
 	// compile the shader code
-	GLuint Compile(std::string shaderCode, GLenum type, GLuint programId)
+	GLuint compile(std::string shaderCode, GLenum type, GLuint programId)
 	{
 		GLuint shader;
 		GLint compiled;
@@ -47,7 +47,7 @@ namespace
 	}
 
 	// link the shader program
-	void Link(GLuint programId)
+	void link(GLuint programId)
 	{
 		glLinkProgram(programId);
 
@@ -83,14 +83,14 @@ namespace Video
 		m_programId = glCreateProgram();
 
 		std::string vertexShaderCode = AssetHelper::loadTextAsset(vertexShaderAssetPath);
-		GLuint vertexShader = Compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
+		GLuint vertexShader = compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
 		glAttachShader(m_programId, vertexShader);
 
 		std::string fragmentShaderCode = AssetHelper::loadTextAsset(fragmentShaderAssetPath);
-		GLuint fragmentShader = Compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
+		GLuint fragmentShader = compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
 		glAttachShader(m_programId, fragmentShader);
 
-		Link(m_programId);
+		link(m_programId);
 	}
 
 	Shader::~Shader()
