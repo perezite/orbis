@@ -175,21 +175,21 @@ namespace Components
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
 			Vector2D current = calcCurve.getValue(x);
-			VideoManager::getInstance()->getRenderDevice()->drawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
+			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
 
 	void TweenInspector::renderControlPoints()
 	{
-		RenderDevice* rd = VideoManager::getInstance()->getRenderDevice();
+		DebugRenderDevice* drd = VideoManager::getInstance()->getDebugRenderDevice();
 
 		for (unsigned int i = 0; i < m_tween.getCurve()->getCount(); i++)
 		{
 			Vector2D pos = m_tween.getCurve()->get(i).pos;
 			Rect rect(pos, MARK_EXTENT);
 			bool isSelected = m_selectedControlPoint == i;
-			rd->drawDebugRect(rect, isSelected ? Color::Red : Color::Green);
+			drd->drawDebugRect(rect, isSelected ? Color::Red : Color::Green);
 
 			if (isSelected)
 			{
@@ -198,9 +198,9 @@ namespace Components
 				Vector2D tangentEnd = pos + v;
 				Rect startRect(tangentStart, MARK_EXTENT);
 				Rect endRect(tangentEnd, MARK_EXTENT);
-				rd->drawDebugLine(tangentStart, tangentEnd, Color::Red);
-				rd->drawDebugRect(startRect, Color::Red);
-				rd->drawDebugRect(endRect, Color::Red);
+				drd->drawDebugLine(tangentStart, tangentEnd, Color::Red);
+				drd->drawDebugRect(startRect, Color::Red);
+				drd->drawDebugRect(endRect, Color::Red);
 			}
 		}
 	}

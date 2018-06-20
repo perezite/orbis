@@ -1,11 +1,7 @@
 TODO:	
 - Refactoring planen
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
-		- Erase–remove korrekt verwenden in RenderDevice (hat aktuell MemoryLeaks...)
-		- MemoryHelper-Funktionen vereinfachen und wenn möglich in den Aufruf ziehen
 		- Renderer gesamthaft refactoren
-		- LevelQueue-Logik in Level/LevelManager anpassen
-		- LevelManager::QueueLevel mit String aufrufen anstatt mit Konstruktor
 		- DebugRenderDevice erstellen
 		- Branch mergen
 		- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)

@@ -2,6 +2,7 @@
 
 #include "Window.h"
 #include "RenderDevice.h"
+#include "DebugRenderDevice.h"
 #include "Texture.h"
 #include "Shader.h"
 #include "TextureAtlas.h"
@@ -43,6 +44,9 @@ namespace Video
 		// get the render device
 		RenderDevice* getRenderDevice() { return &m_renderDevice; }
 
+		// get the debug render device
+		DebugRenderDevice* getDebugRenderDevice() { return &m_debugRenderDevice; }
+
 	protected:
 		// singleton constructor
 		VideoManager() { };
@@ -62,5 +66,8 @@ namespace Video
 
 		// the render device
 		RenderDevice m_renderDevice;
+
+		// the debug render device
+		DebugRenderDevice m_debugRenderDevice;
 	};
 }

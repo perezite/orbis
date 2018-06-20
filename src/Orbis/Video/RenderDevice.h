@@ -46,12 +46,6 @@ namespace Video
 		// render
 		void render();
 
-		// draw a debug line (slow!)
-		void drawDebugLine(Vector2D start, Vector2D end, Color color);
-
-		// draw a debug rect (slow!)
-		void drawDebugRect(Rect rect, Color color);
-
 	protected:
 		// update vertex array
 		void updateVertexArray();
@@ -82,9 +76,6 @@ namespace Video
 	
 		// find index of first renderer in render batch
 		int findFirstIndexInBatch(Renderable* renderable);
-
-		// draw a debug primitve
-		void drawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArrayCount, Color color, RenderMode renderMode);
 
 	private:
 		// the vertex array

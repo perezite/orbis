@@ -17,7 +17,7 @@ namespace Core
 	{
 		ORBIS_ASSERT_DEBUG();
 
-		VideoManager::getInstance()->getRenderDevice()->drawDebugLine(start, end, color);
+		VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(start, end, color);
 	}
 
 	void DebugHelper::drawRect(Rect rect, Color color)
@@ -34,6 +34,6 @@ namespace Core
 	{
 		ORBIS_ASSERT_DEBUG();
 
-		VideoManager::getInstance()->getRenderDevice()->drawDebugRect(rect, color);
+		VideoManager::getInstance()->getDebugRenderDevice()->drawDebugRect(rect, color);
 	}
 }
