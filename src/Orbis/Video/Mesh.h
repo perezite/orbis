@@ -26,18 +26,18 @@ namespace Video
 
 	public:
 		// ctor
-		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexSize, std::vector<GLushort> indices, bool isVertexColored = false)
-			: m_vertexData(vertexData), m_vertexSize(vertexSize), m_indices(indices), m_isVertexColored(isVertexColored)
+		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexCount, std::vector<GLushort> indices, bool isVertexColored = false)
+			: m_vertexData(vertexData), m_vertexCount(vertexCount), m_indices(indices), m_isVertexColored(isVertexColored)
 		{}
 
 		// get vertexData
 		const std::vector<GLfloat>* getVertexData() const { return &m_vertexData; }
 
 		// get num vertices
-		unsigned int getNumVertices() const { return m_vertexData.size() / m_vertexSize; }
+		unsigned int getNumVertices() const { return m_vertexData.size() / m_vertexCount; }
 
-		// get the size of one vertex
-		unsigned int getVertexSize() const { return m_vertexSize; }
+		// get the count of one vertex
+		unsigned int getVertexCount() const { return m_vertexCount; }
 
 		// get indices
 		const std::vector<GLushort>* getIndices() const { return &m_indices; }
@@ -49,8 +49,8 @@ namespace Video
 		// vertex data
 		std::vector<GLfloat> m_vertexData;
 
-		// size (number of elements) per vertex
-		unsigned int m_vertexSize;
+		// count per vertex
+		unsigned int m_vertexCount;
 
 		// indices
 		std::vector<GLushort> m_indices;

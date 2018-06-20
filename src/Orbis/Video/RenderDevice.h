@@ -84,7 +84,7 @@ namespace Video
 		int findFirstIndexInBatch(Renderable* renderable);
 
 		// draw a debug primitve
-		void drawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode);
+		void drawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArrayCount, Color color, RenderMode renderMode);
 
 	private:
 		// the vertex array

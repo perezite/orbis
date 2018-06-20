@@ -61,7 +61,7 @@ namespace Video
 		for (unsigned int i = 0; i < batches.size(); i++)
 		{
 			unsigned int batchBegin = batches[i].min;
-			unsigned int batchSize = batches[i].diff() + 1;
+			unsigned int batchCount = batches[i].diff() + 1;
 			unsigned int vaoStartIndex = computeVaoStartIndex(i, batches);
 			unsigned int iboStartIndex = computeIboStartIndex(i, batches);
 			Renderable* prototype = m_renderables[batchBegin];
@@ -93,7 +93,7 @@ namespace Video
 			}
 
 			// draw batched
-			glDrawElements(GL_TRIANGLES, batchSize * prototype->getMesh()->getIndices()->size(), GL_UNSIGNED_SHORT, &m_indexArray[iboStartIndex]);
+			glDrawElements(GL_TRIANGLES, batchCount * prototype->getMesh()->getIndices()->size(), GL_UNSIGNED_SHORT, &m_indexArray[iboStartIndex]);
 
 			// cleanup
 			prototype->getMaterial()->getShader()->unuse();
@@ -167,7 +167,7 @@ namespace Video
 		std::vector<GLfloat> data = *mesh->getVertexData();
 		for (unsigned int i = 0; i < mesh->getNumVertices(); i++)
 		{
-			unsigned int start = i * mesh->getVertexSize();
+			unsigned int start = i * mesh->getVertexCount();
 			Vector2D pos = mvpMatrix * Vector2D(data[start + 0], data[start + 1]);
 			data[start + 0] = pos.x; data[start + 1] = pos.y;
 			if (tex) {
@@ -181,12 +181,12 @@ namespace Video
 
 	void RenderDevice::reserveVertexArray()
 	{
-		unsigned int vertexArraySize = 0;
+		unsigned int vertexArrayCount = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++) {
-			vertexArraySize += m_renderables[i]->getMesh()->getVertexData()->size();
+			vertexArrayCount += m_renderables[i]->getMesh()->getVertexData()->size();
 		}
 
-		m_vertexArray.reserve(vertexArraySize);
+		m_vertexArray.reserve(vertexArrayCount);
 	}
 
 	void RenderDevice::updateIndexArray()
@@ -224,11 +224,11 @@ namespace Video
 
 	void RenderDevice::reserveIndexArray()
 	{
-		unsigned int size = 0;
+		unsigned int count = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
-			size += m_renderables[i]->getMesh()->getIndices()->size();
+			count += m_renderables[i]->getMesh()->getIndices()->size();
 
-		m_indexArray.reserve(size);
+		m_indexArray.reserve(count);
 	}
 
 	unsigned int RenderDevice::computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
@@ -238,8 +238,8 @@ namespace Video
 		for (unsigned int i = 0; i < batchIndex; i++)
 		{
 			unsigned int begin = batches[i].min;
-			unsigned int batchSize = batches[i].diff() + 1;
-			startIndex += m_renderables[begin]->getMesh()->getVertexData()->size() * batchSize;
+			unsigned int batchCount = batches[i].diff() + 1;
+			startIndex += m_renderables[begin]->getMesh()->getVertexData()->size() * batchCount;
 		}
 
 		return startIndex;
@@ -252,8 +252,8 @@ namespace Video
 		for (unsigned int i = 0; i < batchIndex; i++)
 		{
 			unsigned int begin = batches[i].min;
-			unsigned int batchSize = batches[i].diff() + 1;
-			startIndex += m_renderables[begin]->getMesh()->getIndices()->size() * batchSize;
+			unsigned int batchCount = batches[i].diff() + 1;
+			startIndex += m_renderables[begin]->getMesh()->getIndices()->size() * batchCount;
 		}
 
 		return startIndex;
@@ -292,7 +292,7 @@ namespace Video
 		return m_renderables.size();
 	}
 
-	void RenderDevice::drawDebugPrimitive(GLfloat * vertexArray, unsigned int vertexArraySize, Color color, RenderMode renderMode)
+	void RenderDevice::drawDebugPrimitive(GLfloat * vertexArray, unsigned int vertexArrayCount, Color color, RenderMode renderMode)
 	{
 		// prepare
 		glDisable(GL_BLEND);
@@ -304,7 +304,7 @@ namespace Video
 		glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), vertexArray);
 
 		// draw
-		glDrawArrays((GLenum)renderMode, 0, vertexArraySize / 2);
+		glDrawArrays((GLenum)renderMode, 0, vertexArrayCount / 2);
 
 		// cleanup
 		glDisableVertexAttribArray(positionAttribLocation);
