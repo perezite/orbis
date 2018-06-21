@@ -16,8 +16,9 @@ namespace Core
 		// load a text asset
 		static std::string loadTextAsset(std::string assetPath);
 
-		// try load a text asset
-		static bool tryLoadTextAsset(std::string assetPath, std::string& loadedText);
+		// check if text asset exists
+		static bool textAssetExists(std::string assetPath);
+
 	};
 }
  

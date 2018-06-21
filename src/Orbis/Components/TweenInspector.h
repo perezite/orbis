@@ -74,7 +74,7 @@ namespace Components
 		BezierCurve GetShiftedCurve(BezierCurve* curve, Vector2D shift);
 
 		// save the tween
-		void save();
+		void saveToJsonFile();
 
 		// toggle the editor
 		void toggle();

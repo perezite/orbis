@@ -57,26 +57,21 @@ namespace Core
 			totalSize += lastSize;	
 		} while (totalSize < fileSize && lastSize != 0);
 		data[totalSize] = '\0';
+		SDL_RWclose(reader);
 
 		// check
 		Exception::assert(totalSize == fileSize, "Could not load file '" + assetPath + "'");
-	
-		// cleanup
-		SDL_RWclose(reader);
 
 		return data;
 	}
 
-	bool AssetHelper::tryLoadTextAsset(std::string assetPath, std::string& loadedText)
+	bool AssetHelper::textAssetExists(std::string assetPath)
 	{
 		std::string filePath = assetPathToFilePath(assetPath);
-		SDL_RWops* reader;
-
-		if ((reader = SDL_RWFromFile(filePath.c_str(), "r")) == NULL)
-			return false;
+		SDL_RWops* reader = SDL_RWFromFile(filePath.c_str(), "r");
+		bool exists = reader != NULL;
 		
 		SDL_RWclose(reader);
-		loadedText = loadTextAsset(assetPath);
-		return true;
+		return exists;
 	}
 }

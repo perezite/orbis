@@ -77,7 +77,7 @@ namespace Components
 				m_selectedControlPoint = -1;
 
 			if (input->isKeyGoingDown(KeyCode::s))
-				save();
+				saveToJsonFile();
 		}
 	}
 
@@ -233,10 +233,10 @@ namespace Components
 		return shifted;
 	}
 
-	void TweenInspector::save()
+	void TweenInspector::saveToJsonFile()
 	{
 		ShiftCurve(m_tween.getCurve(), Vector2D(0.5f, 0.5f));
-		m_tween.save();
+		m_tween.saveToJsonFile();
 		ShiftCurve(m_tween.getCurve(), Vector2D(-0.5f, -0.5f));
 		LogHelper::logMessage("Tween data saved");
 	}

@@ -11,18 +11,19 @@ using namespace System;
 
 namespace Effects
 {
-	void Tween::save()
+	Tween::Tween(std::string assetPath) :
+	m_assetPath(assetPath), m_elapsed(0.0f)
 	{
-		AssetHelper::saveTextAsset(m_assetPath, m_curve.toString());
+		if (AssetHelper::textAssetExists(m_assetPath))
+		{
+			std::string json = AssetHelper::loadTextAsset(m_assetPath);
+			m_curve.loadFromJson(json);
+		}
 	}
 
-	void Tween::tryDeserialize()
+	void Tween::saveToJsonFile()
 	{
-		std::string json;
-		if (AssetHelper::tryLoadTextAsset(m_assetPath, json))
-		{
-			m_curve.load(json);
-		}
+		AssetHelper::saveTextAsset(m_assetPath, m_curve.toJson());
 	}
 
 	void Tween::update(Vector2D* current, float duration)

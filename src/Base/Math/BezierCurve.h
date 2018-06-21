@@ -59,10 +59,10 @@ namespace Math
 		void move(unsigned int index, Vector2D newPosition);
 
 		// load from json
-		void load(std::string json);
+		void loadFromJson(std::string json);
 
 		// serialize to json
-		std::string toString();
+		std::string toJson();
 	protected:
 		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
 		Vector2D getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);

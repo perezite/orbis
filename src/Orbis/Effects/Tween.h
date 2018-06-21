@@ -13,11 +13,7 @@ namespace Effects
 	{
 	public:
 		// ctor
-		Tween(std::string assetPath) :
-			m_assetPath(assetPath), m_elapsed(0.0f)
-		{
-			tryDeserialize();
-		}
+		Tween(std::string assetPath); 
 
 		// get the curve
 		BezierCurve* getCurve() { return &m_curve; }
@@ -29,14 +25,10 @@ namespace Effects
 		void setInitial(Vector2D initial) { m_initial = initial; }
 
 		// save as asset
-		void save();
+		void saveToJsonFile();
 
 		// update the value
 		void update(Vector2D* current, float duration);
-
-	protected:
-		// deserialize from asset if existing
-		void tryDeserialize();
 
 	private:
 		// the curve
