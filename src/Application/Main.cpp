@@ -21,7 +21,7 @@ using namespace System;
 
 #include <iostream>
 
-#include "../Base/Serialization/Json.h"
+#include "../Base/Serialization/JsonReader.h"
 using namespace Serialization;
 
 // #define DEBUG_JSON
@@ -30,13 +30,13 @@ using namespace Serialization;
 void Test()
 {
 	std::string jsonStr = "{ {1.0f, {2.0f, 3.0f}}, {4.0f, {5.0f, 6.0f}} }";
-	Json json(jsonStr);
-	while (json.getChild())
+	JsonReader reader(jsonStr);
+	while (reader.getChild())
 	{
-		std::cout << json.getFloat() << std::endl;
-		json.getChild();
-		std::cout << json.getFloat() << std::endl;
-		std::cout << json.getFloat() << std::endl;
+		std::cout << reader.getFloat() << std::endl;
+		reader.getChild();
+		std::cout << reader.getFloat() << std::endl;
+		std::cout << reader.getFloat() << std::endl;
 	}
 	std::cin.get();
 }

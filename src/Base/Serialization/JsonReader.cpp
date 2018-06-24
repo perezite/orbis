@@ -1,13 +1,18 @@
-#include "Json.h"
+#include "JsonReader.h"
 
 #include "../System/Exception.h"
 using namespace System;
 
-#include <algorithm>
-
 namespace Serialization
 {
-	bool Json::getChild()
+	JsonReader::JsonReader(std::string str)
+	{
+		removeWhitespaces(str);
+		m_is << str;
+		getChild();
+	}
+
+	bool JsonReader::getChild()
 	{
 		char r;
 
@@ -19,13 +24,13 @@ namespace Serialization
 		return false;
 	}
 
-	float Json::getFloat()
+	float JsonReader::getFloat()
 	{
 		std::string val = getElement();
 		return (float)atof(val.c_str());
 	}
 
-	std::string Json::getElement()
+	std::string JsonReader::getElement()
 	{
 		char r;
 		std::string buf;
@@ -39,7 +44,7 @@ namespace Serialization
 		throw Exception("Unable to read json");
 	}
 
-	void Json::removeWhitespaces(std::string& str)
+	void JsonReader::removeWhitespaces(std::string& str)
 	{
 		str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
 		str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());

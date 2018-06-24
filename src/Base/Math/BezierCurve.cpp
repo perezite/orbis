@@ -1,7 +1,7 @@
 #include "BezierCurve.h"
 
 #include "../System/StringHelper.h"
-#include "../Serialization/Json.h"
+#include "../Serialization/JsonReader.h"
 using namespace System;
 using namespace Serialization;
 
@@ -57,12 +57,12 @@ namespace Math
 	{
 		m_points.clear();
 
-		Json json(jsonStr);
-		while (json.getChild())
+		JsonReader reader(jsonStr);
+		while (reader.getChild())
 		{
-			float tangent = json.getFloat();
-			json.getChild();
-			float x = json.getFloat(); float y = json.getFloat();
+			float tangent = reader.getFloat();
+			reader.getChild();
+			float x = reader.getFloat(); float y = reader.getFloat();
 			Vector2D pos(x, y);
 			m_points.push_back(BezierPoint(pos, tangent));
 		}

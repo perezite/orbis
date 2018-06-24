@@ -19,7 +19,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\Json.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.cpp" />
   </ItemGroup>
@@ -31,7 +31,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Range.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Rect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\Json.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryHelper.h" />

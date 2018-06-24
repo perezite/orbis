@@ -1,28 +1,23 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include <sstream>
 
 namespace Serialization
 {
 	// a representation of a json string as an object
-	class Json
+	class JsonReader
 	{
 	public:
 		// ctor
-		Json(std::string str)
-		{
-			removeWhitespaces(str);
-			m_is << str;
-			getChild();
-		}
+		JsonReader(std::string str);
 
 		// get child
 		bool getChild();
 
 		// get float element
 		float getFloat();
+
 	protected:
 		// remove whitespaces
 		void removeWhitespaces(std::string& str);
