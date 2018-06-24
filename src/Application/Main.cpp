@@ -21,8 +21,36 @@ using namespace System;
 
 #include <iostream>
 
+#include "../Base/Serialization/Json.h"
+using namespace Serialization;
+
+// #define DEBUG_JSON
+
+#if defined(DEBUG_JSON)
+void Test()
+{
+	std::string jsonStr = "{ {1.0f, {2.0f, 3.0f}}, {4.0f, {5.0f, 6.0f}} }";
+	Json json(jsonStr);
+	while (json.getChild())
+	{
+		std::cout << json.getFloat() << std::endl;
+		json.getChild();
+		std::cout << json.getFloat() << std::endl;
+		std::cout << json.getFloat() << std::endl;
+	}
+	std::cin.get();
+}
+#endif
+
 int main(int argc, char* args[])
 {	
+#if defined DEBUG_JSON
+	Test();
+
+	return 0;
+
+#else
+
 	try
 	{
 		LevelManager::getInstance()->queueLevel(new Level8());
@@ -40,4 +68,7 @@ int main(int argc, char* args[])
 	}
 
 	return 0;
+
+#endif
+
 }

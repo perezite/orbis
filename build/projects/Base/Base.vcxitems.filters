@@ -10,6 +10,9 @@
     <Filter Include="Algorithms">
       <UniqueIdentifier>{88c1a10a-055b-4b18-97d8-3731f8839e9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Serialization">
+      <UniqueIdentifier>{a230f218-d4c5-4601-9a5c-a135fc7081e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\BezierCurve.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\Json.cpp">
+      <Filter>Serialization</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryHelper.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\Json.h">
+      <Filter>Serialization</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

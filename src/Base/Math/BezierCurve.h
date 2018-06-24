@@ -59,7 +59,7 @@ namespace Math
 		void move(unsigned int index, Vector2D newPosition);
 
 		// load from json
-		void loadFromJson(std::string json);
+		void loadFromJson(std::string jsonStr);
 
 		// serialize to json
 		std::string toJson();

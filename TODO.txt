@@ -1,7 +1,8 @@
 TODO:	
 - Refactoring planen
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
-		- Json-Logik extrahieren
+		- Json-Logik extrahieren in BezierCurve.cpp, BezierCurve, Vector2D, StringHelper, TweenInspector, Tween
+		- BezierCurve umbenennen in Spline
 		- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)
 		- Header und Sourcefiles aufsplitten
 		- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen

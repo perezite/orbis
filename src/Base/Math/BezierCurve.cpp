@@ -1,7 +1,9 @@
 #include "BezierCurve.h"
 
 #include "../System/StringHelper.h"
+#include "../Serialization/Json.h"
 using namespace System;
+using namespace Serialization;
 
 #include <algorithm>
 #include <sstream>
@@ -51,28 +53,19 @@ namespace Math
 			m_points = newControlPoints;
 	}
 
-	void BezierCurve::loadFromJson(std::string json)
+	void BezierCurve::loadFromJson(std::string jsonStr)
 	{
 		m_points.clear();
-		std::istringstream is(json);
 
-		StringHelper::seek(is, '{');
-
-		while (true)
+		Json json(jsonStr);
+		while (json.getChild())
 		{
-			StringHelper::seek(is, '{');
-			float tangent = (float)atof(StringHelper::read(is, 'f').c_str());
-			StringHelper::seek(is, ','); StringHelper::seek(is, '{');
-			std::string vectorJson = StringHelper::read(is, '}'); vectorJson = '{' + vectorJson + '}';
-			Vector2D pos = Vector2D::loadFromJson(vectorJson);
-			StringHelper::seek(is, '}');
+			float tangent = json.getFloat();
+			json.getChild();
+			float x = json.getFloat(); float y = json.getFloat();
+			Vector2D pos(x, y);
 			m_points.push_back(BezierPoint(pos, tangent));
-
-			if (!StringHelper::seek(is, ','))
-				break;
 		}
-
-		StringHelper::seek(is, '}');
 	}
 
 	std::string BezierCurve::toJson()
