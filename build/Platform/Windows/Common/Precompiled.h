@@ -1,31 +1,35 @@
 #pragma once
 
-#define _USE_MATH_DEFINES
+#ifndef __INTELLISENSE__
 
-#include <iostream>
-#include <limits>
-#include <math.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <memory.h>
-#include <sstream>
-#include <iomanip>
-#include <string>
-#include <algorithm>
-#include <vector>
-#include <tuple>
-#include <stdio.h>
-#include <time.h>
-#include <map>
-#include <array>
-#include <cstdlib>
-#include <stddef.h>
-#include <set>
+	#define _USE_MATH_DEFINES
 
-#ifdef WIN32
-	#define NOMINMAX		// prevent redefinition of min/max by windows.h
-	#include <windows.h>
-	#include <direct.h>
+	#include <iostream>
+	#include <limits>
+	#include <math.h>
+	#include <stdlib.h>
+	#include <stdarg.h>
+	#include <memory.h>
+	#include <sstream>
+	#include <iomanip>
+	#include <string>
+	#include <algorithm>
+	#include <vector>
+	#include <tuple>
+	#include <stdio.h>
+	#include <time.h>
+	#include <map>
+	#include <array>
+	#include <cstdlib>
+	#include <stddef.h>
+	#include <set>
+
+	#ifdef WIN32
+		#define NOMINMAX		// prevent redefinition of min/max by windows.h
+		#include <windows.h>
+		#include <direct.h>
+	#endif
+
 #endif
 
 #include <stdlib.h>

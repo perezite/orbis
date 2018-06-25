@@ -8,7 +8,8 @@ using namespace Math;
 
 namespace Math
 {
-	struct BezierPoint 
+	// a control point on a bezier spline
+	struct BezierPoint
 	{
 	public:
 		// ctor
@@ -24,20 +25,21 @@ namespace Math
 		float tangent;
 	};
 
-	class BezierCurve
+	// a bezier spline
+	class Spline
 	{
 	public:
 		// ctor
-		BezierCurve();
+		Spline();
 
 		// ctor
-		BezierCurve(std::vector<std::pair<float, std::pair<float, float>>> controlPoints);
+		Spline(std::vector<std::pair<float, std::pair<float, float>>> controlPoints);
 
 		// ctor 
-		BezierCurve(std::vector<BezierPoint> points) : m_points(points)
+		Spline(std::vector<BezierPoint> points) : m_points(points)
 		{ }
 
-		// get the bezier curve value at coordinate x
+		// get the spline value at coordinate x
 		Vector2D getValue(float x);
 
 		// get a control point
@@ -61,10 +63,10 @@ namespace Math
 		// load from json
 		void loadFromJson(std::string jsonStr);
 
-		// serialize to json
+		// convert to json
 		std::string toJson();
 	protected:
-		// get the bezier curve segment value at a parameter t with control points p0, p1, p2, p3
+		// get the spline segment value at a parameter t with control points p0, p1, p2, p3
 		Vector2D getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
 
 		// control points sorting function

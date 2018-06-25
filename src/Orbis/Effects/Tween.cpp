@@ -12,18 +12,13 @@ using namespace System;
 namespace Effects
 {
 	Tween::Tween(std::string assetPath) :
-	m_assetPath(assetPath), m_elapsed(0.0f)
+		m_assetPath(assetPath), m_elapsed(0.0f)
 	{
 		if (AssetHelper::textAssetExists(m_assetPath))
 		{
 			std::string json = AssetHelper::loadTextAsset(m_assetPath);
-			m_curve.loadFromJson(json);
+			m_spline.loadFromJson(json);
 		}
-	}
-
-	void Tween::saveToJsonFile()
-	{
-		AssetHelper::saveTextAsset(m_assetPath, m_curve.toJson());
 	}
 
 	void Tween::update(Vector2D* current, float duration)
@@ -33,9 +28,14 @@ namespace Effects
 
 		if (x <= 1.0f)
 		{
-			float factor = m_curve.getValue(x).y;
+			float factor = m_spline.getValue(x).y;
 
 			*current = m_initial * factor;
 		}
+	}
+
+	void Tween::saveToJsonFile()
+	{
+		AssetHelper::saveTextAsset(m_assetPath, m_spline.toJson());
 	}
 }

@@ -1,4 +1,4 @@
-#include "BezierCurve.h"
+#include "Spline.h"
 
 #include "../System/StringHelper.h"
 #include "../Serialization/JsonReader.h"
@@ -11,14 +11,14 @@ using namespace Serialization;
 
 namespace Math
 {
-	const float BezierCurve::TANGENT_LENGTH = 0.5f;
+	const float Spline::TANGENT_LENGTH = 0.5f;
 
-	BezierCurve::BezierCurve()
+	Spline::Spline()
 	{
 		clear();
 	}
 
-	Vector2D BezierCurve::getValue(float x)
+	Vector2D Spline::getValue(float x)
 	{
 		unsigned int startIdx = 0;
 		for (unsigned int i = 0; i < m_points.size() - 1; i++) {
@@ -38,13 +38,13 @@ namespace Math
 		return Vector2D(x, getValue(t, p0, p1, p2, p3).y);
 	}
 
-	void BezierCurve::add(BezierPoint bp)
+	void Spline::add(BezierPoint bp)
 	{
 		m_points.push_back(BezierPoint(bp.pos, bp.tangent));
 		std::sort(m_points.begin(), m_points.end(), compareControlPoints);
 	}
 
-	void BezierCurve::move(unsigned int index, Vector2D newPosition)
+	void Spline::move(unsigned int index, Vector2D newPosition)
 	{
 		std::vector<BezierPoint> newControlPoints = m_points;
 		newControlPoints[index].pos = newPosition;
@@ -54,7 +54,7 @@ namespace Math
 			m_points = newControlPoints;
 	}
 
-	void BezierCurve::loadFromJson(std::string jsonStr)
+	void Spline::loadFromJson(std::string jsonStr)
 	{
 		m_points.clear();
 
@@ -69,7 +69,7 @@ namespace Math
 		}
 	}
 
-	std::string BezierCurve::toJson()
+	std::string Spline::toJson()
 	{
 		JsonWriter writer;
 		for (unsigned int i = 0; i < getCount(); i++) 
@@ -87,7 +87,7 @@ namespace Math
 	}
 
 	// reference: https://www.youtube.com/watch?v=Qu-QK3uoMdY
-	Vector2D BezierCurve::getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3)
+	Vector2D Spline::getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3)
 	{
 		float tt = t * t;
 		float ttt = tt * t;
@@ -99,7 +99,7 @@ namespace Math
 		return Vector2D(x, y);
 	}
 
-	void BezierCurve::clear()
+	void Spline::clear()
 	{
 		m_points.clear();
 		add(BezierPoint(Vector2D(0.0f, 1.0f), 0.0f));

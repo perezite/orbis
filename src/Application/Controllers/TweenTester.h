@@ -9,7 +9,7 @@ using namespace Effects;
 
 namespace Controllers
 {
-	// test the animation of an entity's scale using bezier curves 
+	// test the animation of an entity's scale using splines
 	class TweenTester : public Component
 	{
 	public:

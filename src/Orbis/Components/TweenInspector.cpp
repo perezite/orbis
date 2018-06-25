@@ -36,7 +36,7 @@ namespace Components
 	TweenInspector::TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey) : 
 		m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
 	{
-		ShiftCurve(m_tween.getCurve(), Vector2D(-0.5f, -0.5f));
+		ShiftSpline(m_tween.getSpline(), Vector2D(-0.5f, -0.5f));
 	}
 
 	void TweenInspector::start()
@@ -85,9 +85,9 @@ namespace Components
 	{
 		if (m_isActive)
 		{
-			renderCurve();
+			renderSpline();
 
-			renderControlPoints();
+			renderBezierPoints();
 		}
 	}
 	
@@ -100,7 +100,7 @@ namespace Components
 
 			// if no control point was selected by the tap, we add a new control point
 			if (m_selectedControlPoint == -1)
-				m_tween.getCurve()->add(BezierPoint(tap, 0.0f));
+				m_tween.getSpline()->add(BezierPoint(tap, 0.0f));
 		}
 	}
 
@@ -112,40 +112,40 @@ namespace Components
 			// clamp boundary point positions
 			if (m_selectedControlPoint == 0)
 				tap.x = -0.5f;
-			if (m_selectedControlPoint == m_tween.getCurve()->getCount() - 1)
+			if (m_selectedControlPoint == m_tween.getSpline()->getCount() - 1)
 				tap.x = 0.5f;
 
 			// move
-			m_tween.getCurve()->move(m_selectedControlPoint, tap);
+			m_tween.getSpline()->move(m_selectedControlPoint, tap);
 		}
 	}
 
 	void TweenInspector::rotateTangent()
 	{
 		Vector2D tap = InputManager::getInstance()->getTapPosition();
-		Vector2D ctrlPoint = m_tween.getCurve()->get(m_selectedControlPoint).pos;
+		Vector2D ctrlPoint = m_tween.getSpline()->get(m_selectedControlPoint).pos;
 		float tangent;
 		if (tap.x > ctrlPoint.x)
 			tangent = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
 		if (tap.x <= ctrlPoint.x)
 			tangent = (ctrlPoint.y - tap.y) / (ctrlPoint.x - tap.x);
 
-		m_tween.getCurve()->set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
+		m_tween.getSpline()->set(m_selectedControlPoint, BezierPoint(ctrlPoint, tangent));
 	}
 
 	void TweenInspector::deleteSelectedControlPoint()
 	{
 		// the boundary points cannot be deleted
-		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.getCurve()->getCount() - 1)
+		if (m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.getSpline()->getCount() - 1)
 			return;
 
-		m_tween.getCurve()->remove(m_selectedControlPoint);
+		m_tween.getSpline()->remove(m_selectedControlPoint);
 		m_selectedControlPoint = -1;
 	}
 
 	unsigned int TweenInspector::computeSelectedControlPoint(Vector2D tapPosition)
 	{
-		for (unsigned int i = 0; i < m_tween.getCurve()->getCount(); i++)
+		for (unsigned int i = 0; i < m_tween.getSpline()->getCount(); i++)
 		{
 			if (isControlPointSelected(i, tapPosition))
 				return i;
@@ -156,44 +156,44 @@ namespace Components
 
 	bool TweenInspector::isControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
 	{
-		Vector2D pos = m_tween.getCurve()->get(controlPointIndex).pos;
+		Vector2D pos = m_tween.getSpline()->get(controlPointIndex).pos;
 		if (Vector2D::distance(pos, tapPosition) <= SELECT_RADIUS)
 			return true;
 
 		return false;
 	}
 
-	void TweenInspector::renderCurve()
+	void TweenInspector::renderSpline()
 	{
-		if (m_tween.getCurve()->getCount() < 2)
+		if (m_tween.getSpline()->getCount() < 2)
 			return;
 
-		BezierCurve calcCurve = GetShiftedCurve(m_tween.getCurve(), Vector2D(0.5f, 0.5f));
+		Spline calcSpline = GetShiftedSpline(m_tween.getSpline(), Vector2D(0.5f, 0.5f));
 
 		float step = 1.0f / (float)NUM_SAMPLES;
-		Vector2D last = calcCurve.get(0).pos;
+		Vector2D last = calcSpline.get(0).pos;
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
-			Vector2D current = calcCurve.getValue(x);
+			Vector2D current = calcSpline.getValue(x);
 			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
 
-	void TweenInspector::renderControlPoints()
+	void TweenInspector::renderBezierPoints()
 	{
 		DebugRenderDevice* drd = VideoManager::getInstance()->getDebugRenderDevice();
 
-		for (unsigned int i = 0; i < m_tween.getCurve()->getCount(); i++)
+		for (unsigned int i = 0; i < m_tween.getSpline()->getCount(); i++)
 		{
-			Vector2D pos = m_tween.getCurve()->get(i).pos;
+			Vector2D pos = m_tween.getSpline()->get(i).pos;
 			Rect rect(pos, MARK_EXTENT);
 			bool isSelected = m_selectedControlPoint == i;
 			drd->drawDebugRect(rect, isSelected ? Color::Red : Color::Green);
 
 			if (isSelected)
 			{
-				Vector2D v = Vector2D(1.0f, m_tween.getCurve()->get(i).tangent).normalized() * 0.5f * TANGENT_LENGTH;
+				Vector2D v = Vector2D(1.0f, m_tween.getSpline()->get(i).tangent).normalized() * 0.5f * TANGENT_LENGTH;
 				Vector2D tangentStart = pos - v;
 				Vector2D tangentEnd = pos + v;
 				Rect startRect(tangentStart, MARK_EXTENT);
@@ -213,31 +213,31 @@ namespace Components
 
 	bool TweenInspector::IsSelectedControlPointOnBoundary()
 	{
-		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.getCurve()->getCount() - 1;
+		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.getSpline()->getCount() - 1;
 	}
 
-	void TweenInspector::ShiftCurve(BezierCurve* curve, Vector2D shift)
+	void TweenInspector::ShiftSpline(Spline* spline, Vector2D shift)
 	{
-		for (unsigned int i = 0; i < curve->getCount(); i++)
+		for (unsigned int i = 0; i < spline->getCount(); i++)
 		{
-			BezierPoint point = curve->get(i);
+			BezierPoint point = spline->get(i);
 			point.pos += shift;
-			curve->set(i, point);
+			spline->set(i, point);
 		}
 	}
 
-	BezierCurve TweenInspector::GetShiftedCurve(BezierCurve* curve, Vector2D shift)
+	Spline TweenInspector::GetShiftedSpline(Spline* spline, Vector2D shift)
 	{
-		BezierCurve shifted = *curve;
-		ShiftCurve(&shifted, shift);
+		Spline shifted = *spline;
+		ShiftSpline(&shifted, shift);
 		return shifted;
 	}
 
 	void TweenInspector::saveToJsonFile()
 	{
-		ShiftCurve(m_tween.getCurve(), Vector2D(0.5f, 0.5f));
+		ShiftSpline(m_tween.getSpline(), Vector2D(0.5f, 0.5f));
 		m_tween.saveToJsonFile();
-		ShiftCurve(m_tween.getCurve(), Vector2D(-0.5f, -0.5f));
+		ShiftSpline(m_tween.getSpline(), Vector2D(-0.5f, -0.5f));
 		LogHelper::logMessage("Tween data saved");
 	}
 

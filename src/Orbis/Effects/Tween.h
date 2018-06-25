@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Base/Math/BezierCurve.h"
+#include "../../Base/Math/Spline.h"
 using namespace Math;
 
 #include <string>
@@ -15,24 +15,24 @@ namespace Effects
 		// ctor
 		Tween(std::string assetPath); 
 
-		// get the curve
-		BezierCurve* getCurve() { return &m_curve; }
+		// get the spline
+		Spline* getSpline() { return &m_spline; }
 
-		// set the curve
-		void setCurve(BezierCurve curve) { m_curve = curve; }
+		// set the spline
+		void setSpline(Spline spline) { m_spline = spline; }
 
 		// se the initial value
 		void setInitial(Vector2D initial) { m_initial = initial; }
 
-		// save as asset
-		void saveToJsonFile();
-
 		// update the value
 		void update(Vector2D* current, float duration);
 
+		// save as asset
+		void saveToJsonFile();
+
 	private:
-		// the curve
-		BezierCurve m_curve;
+		// the spline
+		Spline m_spline;
 
 		// the asset path
 		std::string m_assetPath;

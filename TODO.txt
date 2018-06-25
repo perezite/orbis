@@ -1,7 +1,6 @@
 TODO:	
 - Refactoring planen
 	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
-		- Intellisense-Problem beheben		
 		- BezierCurve umbenennen in Spline
 		- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)
 		- Header und Sourcefiles aufsplitten
@@ -14,6 +13,7 @@ TODO:
 		- Renderer gesamthaft refactoren	
 		- Code-Styling überdenken
 		- Branch mergen		
+- Evaluieren, ob der __INTELLISENSE__ fix in Precompiled.h das Intellisense-Problem behoben hat. Ansonsten nochmal schauen.
 - Den kompletten Source-Code inspizieren und falls nötig weiteres Refactoring planen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:

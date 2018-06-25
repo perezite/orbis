@@ -20,7 +20,7 @@ namespace Components
 	class TweenInspector : Component
 	{
 	public:
-		// utility for quickly creating an inspector entity. Returns 0 in release mode
+		// utility for quickly creating an inspector entity. Returns null in release mode
 		static Entity* tryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationkey = KeyCode::t);
 
 	public:
@@ -55,11 +55,11 @@ namespace Components
 		// check whether a control point is selected by the given tap position
 		bool isControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition);
 
-		// render the bezier curve
-		void renderCurve();
+		// render the bezier spline
+		void renderSpline();
 
 		// render the control points and tangent
-		void renderControlPoints();
+		void renderBezierPoints();
 
 		// check if given points is within the clickable rect
 		bool IsClickablePosition(Vector2D position);
@@ -67,11 +67,11 @@ namespace Components
 		// is the selected control point the first or last point 
 		bool IsSelectedControlPointOnBoundary();
 
-		// shift a curve by the given vector
-		void ShiftCurve(BezierCurve* curve, Vector2D shift);
+		// shift a spline by the given vector
+		void ShiftSpline(Spline* spline, Vector2D shift);
 
-		// get a curve shifted by the given vector
-		BezierCurve GetShiftedCurve(BezierCurve* curve, Vector2D shift);
+		// get a spline shifted by the given vector
+		Spline GetShiftedSpline(Spline* spline, Vector2D shift);
 
 		// save the tween
 		void saveToJsonFile();
@@ -105,10 +105,10 @@ namespace Components
 		// the lenght of the tangent line segment
 		static const float TANGENT_LENGTH;
 
-		// curve sampling density (number of samples per unit line segment)
+		// spline sampling density (number of samples per unit line segment)
 		static const int SAMPLING_DENSITY;
 
-		// number of sampling points per curve segment
+		// number of sampling points per spline segment
 		static const int NUM_SAMPLES;
 	};
 }
