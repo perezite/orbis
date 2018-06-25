@@ -5,7 +5,7 @@
 
 namespace Serialization
 {
-	// a representation of a json string as an object
+	// a class for reading json strings
 	class JsonReader
 	{
 	public:

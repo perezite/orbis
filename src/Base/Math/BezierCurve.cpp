@@ -2,6 +2,7 @@
 
 #include "../System/StringHelper.h"
 #include "../Serialization/JsonReader.h"
+#include "../Serialization/JsonWriter.h"
 using namespace System;
 using namespace Serialization;
 
@@ -70,22 +71,19 @@ namespace Math
 
 	std::string BezierCurve::toJson()
 	{
-		std::stringstream ss;
-		ss << "{";
-
-		for (unsigned int i = 0; i < getCount(); i++)
+		JsonWriter writer;
+		for (unsigned int i = 0; i < getCount(); i++) 
 		{
-			float tangent = get(i).tangent;
-			Vector2D pos = get(i).pos;
-			ss << "{" << StringHelper::toJson(tangent) << "," << pos.toJson() << "}";
-
-			if (i < getCount() - 1)
-				ss << ",";
+			writer.beginChild();
+				writer.addFloat(get(i).tangent);
+				writer.beginChild();
+					writer.addFloat(get(i).pos.x);
+					writer.addFloat(get(i).pos.y);
+				writer.endChild();
+			writer.endChild();
 		}
 
-		ss << "}";
-
-		return ss.str();
+		return writer.toString();
 	}
 
 	// reference: https://www.youtube.com/watch?v=Qu-QK3uoMdY
@@ -100,7 +98,6 @@ namespace Math
 		float y = tititi * p0.y + 3 * titi * t * p1.y + 3 * ti * tt * p2.y + ttt * p3.y;
 		return Vector2D(x, y);
 	}
-
 
 	void BezierCurve::clear()
 	{

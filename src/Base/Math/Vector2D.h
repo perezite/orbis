@@ -19,9 +19,6 @@ namespace Math
 		// get distance between to points
 		static float distance(Vector2D point1, Vector2D point2) { return (point2 - point1).getCount(); }
 
-		// deserialize from string 
-		static Vector2D loadFromJson(std::string json);
-
 	public:
 		// costructor 
 		Vector2D() { x = 0.0f, y = 0.0f; }
@@ -61,9 +58,6 @@ namespace Math
 
 		// get scaled
 		const Vector2D scaled(float length) const;
-
-		// serialize to string
-		const std::string toJson(int precision = 5);
 
 	public:
 		// the x component 

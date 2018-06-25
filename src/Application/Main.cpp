@@ -21,39 +21,11 @@ using namespace System;
 
 #include <iostream>
 
-#include "../Base/Serialization/JsonReader.h"
-using namespace Serialization;
-
-// #define DEBUG_JSON
-
-#if defined(DEBUG_JSON)
-void Test()
-{
-	std::string jsonStr = "{ {1.0f, {2.0f, 3.0f}}, {4.0f, {5.0f, 6.0f}} }";
-	JsonReader reader(jsonStr);
-	while (reader.getChild())
-	{
-		std::cout << reader.getFloat() << std::endl;
-		reader.getChild();
-		std::cout << reader.getFloat() << std::endl;
-		std::cout << reader.getFloat() << std::endl;
-	}
-	std::cin.get();
-}
-#endif
-
 int main(int argc, char* args[])
 {	
-#if defined DEBUG_JSON
-	Test();
-
-	return 0;
-
-#else
-
 	try
 	{
-		LevelManager::getInstance()->queueLevel(new Level8());
+		LevelManager::getInstance()->queueLevel(new Level1());
 		OrbisMain::getInstance()->run();
 	}
 	catch (Exception e)
@@ -68,7 +40,4 @@ int main(int argc, char* args[])
 	}
 
 	return 0;
-
-#endif
-
 }

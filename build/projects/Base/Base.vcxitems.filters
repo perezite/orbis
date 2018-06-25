@@ -39,6 +39,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.cpp">
       <Filter>Serialization</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.h">
@@ -75,6 +78,9 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.h">
       <Filter>Serialization</Filter>
     </ClInclude>
   </ItemGroup>
