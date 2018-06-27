@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{
 EndProject
 Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "Packaging.Android", "Packaging\Android\Packaging.Android.androidproj", "{3B468758-79FA-44EF-841B-9239D6F07FAC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base", "projects\Base\Base.vcxitems", "{7785D580-C005-4C6B-90D4-9A6636212AF7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base", "Projects\Base\Base.vcxitems", "{7785D580-C005-4C6B-90D4-9A6636212AF7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "projects\Application\Application.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "Projects\Application\Application.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{EE53054D-8C75-4E62-B9F9-94A06FC7DD95}"
 EndProject
@@ -32,6 +32,147 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Orbis.Windows", "Platform\Windows\Orbis\Orbis.Windows.vcxproj", "{B20437F4-B2E5-487D-A1C6-2477AF2BB796}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Orbis.Android", "Platform\Android\Orbis\Orbis.Android.vcxproj", "{A93B1C36-CA9D-4291-AEB9-C06F0D2E996A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Sources", "_Sources", "{89998D17-3EF0-455C-94EE-A1B829AF08B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Headers", "_Headers", "{2B510723-16C7-4786-B10F-529462BD3C88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{CFA21FBF-5AC9-47EA-B615-8344FEFEE19D}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Application\Controllers\BallController.h = ..\src\Application\Controllers\BallController.h
+		..\src\Application\Controllers\BallEffectsController.h = ..\src\Application\Controllers\BallEffectsController.h
+		..\src\Application\Controllers\BinPackingVisualizer.h = ..\src\Application\Controllers\BinPackingVisualizer.h
+		..\src\Application\Controllers\CameraController.h = ..\src\Application\Controllers\CameraController.h
+		..\src\Application\Controllers\CloseButtonController.h = ..\src\Application\Controllers\CloseButtonController.h
+		..\src\Application\Controllers\DebugLineTester.h = ..\src\Application\Controllers\DebugLineTester.h
+		..\src\Application\Controllers\InputModeButtonController.h = ..\src\Application\Controllers\InputModeButtonController.h
+		..\src\Application\Controllers\LevelSwitchButtonController.h = ..\src\Application\Controllers\LevelSwitchButtonController.h
+		..\src\Application\Controllers\ParticleSystemTester.h = ..\src\Application\Controllers\ParticleSystemTester.h
+		..\src\Application\Controllers\SpriteController.h = ..\src\Application\Controllers\SpriteController.h
+		..\src\Application\Controllers\TransformButtonController.h = ..\src\Application\Controllers\TransformButtonController.h
+		..\src\Application\Controllers\TweenTester.h = ..\src\Application\Controllers\TweenTester.h
+		..\src\Application\Controllers\WobbleController.h = ..\src\Application\Controllers\WobbleController.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Levels", "Levels", "{57F5AF0D-599C-4BEB-8919-5204D9C73604}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Application\Levels\Level1.h = ..\src\Application\Levels\Level1.h
+		..\src\Application\Levels\Level10.h = ..\src\Application\Levels\Level10.h
+		..\src\Application\Levels\Level2.h = ..\src\Application\Levels\Level2.h
+		..\src\Application\Levels\Level3.h = ..\src\Application\Levels\Level3.h
+		..\src\Application\Levels\Level4.h = ..\src\Application\Levels\Level4.h
+		..\src\Application\Levels\Level5.h = ..\src\Application\Levels\Level5.h
+		..\src\Application\Levels\Level6.h = ..\src\Application\Levels\Level6.h
+		..\src\Application\Levels\Level7.h = ..\src\Application\Levels\Level7.h
+		..\src\Application\Levels\Level8.h = ..\src\Application\Levels\Level8.h
+		..\src\Application\Levels\Level9.h = ..\src\Application\Levels\Level9.h
+		..\src\Application\Levels\LevelHelper.h = ..\src\Application\Levels\LevelHelper.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{673133AE-2EF1-4689-96E4-289188D829D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{8DB928EC-1B3B-4F0D-A3A5-13AB15167A63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorithms", "Algorithms", "{6D4350A3-0A08-4B43-9BA5-CCBBCD6A8085}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Base\Algorithms\BinPacking.h = ..\src\Base\Algorithms\BinPacking.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Math", "Math", "{B259D0BA-2B22-4669-B986-3A64F9D01007}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Base\Math\MathHelper.h = ..\src\Base\Math\MathHelper.h
+		..\src\Base\Math\Matrix3.h = ..\src\Base\Math\Matrix3.h
+		..\src\Base\Math\Range.h = ..\src\Base\Math\Range.h
+		..\src\Base\Math\Rect.h = ..\src\Base\Math\Rect.h
+		..\src\Base\Math\Spline.h = ..\src\Base\Math\Spline.h
+		..\src\Base\Math\Vector2D.h = ..\src\Base\Math\Vector2D.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{8E1383DC-3971-4F39-A6AD-AFEFE66EF6DF}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Base\Serialization\JsonReader.h = ..\src\Base\Serialization\JsonReader.h
+		..\src\Base\Serialization\JsonWriter.h = ..\src\Base\Serialization\JsonWriter.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{B1FC0E67-DB0B-4EC4-9C15-36C5EE7042E0}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Base\System\EnvironmentHelper.h = ..\src\Base\System\EnvironmentHelper.h
+		..\src\Base\System\Exception.h = ..\src\Base\System\Exception.h
+		..\src\Base\System\MemoryHelper.h = ..\src\Base\System\MemoryHelper.h
+		..\src\Base\System\StringHelper.h = ..\src\Base\System\StringHelper.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orbis", "Orbis", "{E168765C-96F7-443D-9BC3-20F338293261}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{CBF6C219-077D-46D9-8881-A0E02A05A41C}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Components\Camera.h = ..\src\Orbis\Components\Camera.h
+		..\src\Orbis\Components\Component.h = ..\src\Orbis\Components\Component.h
+		..\src\Orbis\Components\ParticleRenderer.h = ..\src\Orbis\Components\ParticleRenderer.h
+		..\src\Orbis\Components\RectangleRenderer.h = ..\src\Orbis\Components\RectangleRenderer.h
+		..\src\Orbis\Components\SimpleParticleRenderer.h = ..\src\Orbis\Components\SimpleParticleRenderer.h
+		..\src\Orbis\Components\SpriteRenderer.h = ..\src\Orbis\Components\SpriteRenderer.h
+		..\src\Orbis\Components\TweenInspector.h = ..\src\Orbis\Components\TweenInspector.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0794F630-0ECA-48F1-8A1C-312D636AE655}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Core\AssetHelper.h = ..\src\Orbis\Core\AssetHelper.h
+		..\src\Orbis\Core\DebugHelper.h = ..\src\Orbis\Core\DebugHelper.h
+		..\src\Orbis\Core\LogHelper.h = ..\src\Orbis\Core\LogHelper.h
+		..\src\Orbis\Core\TimeManager.h = ..\src\Orbis\Core\TimeManager.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Effects", "Effects", "{9674DADB-0571-4918-A2F1-E780CFBC7306}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Effects\EffectsManager.h = ..\src\Orbis\Effects\EffectsManager.h
+		..\src\Orbis\Effects\Particle.h = ..\src\Orbis\Effects\Particle.h
+		..\src\Orbis\Effects\Tween.h = ..\src\Orbis\Effects\Tween.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{0577F238-F0CC-4915-A364-4CE02F77CB74}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Game\Entity.h = ..\src\Orbis\Game\Entity.h
+		..\src\Orbis\Game\Level.h = ..\src\Orbis\Game\Level.h
+		..\src\Orbis\Game\LevelManager.h = ..\src\Orbis\Game\LevelManager.h
+		..\src\Orbis\Game\Transform.h = ..\src\Orbis\Game\Transform.h
+		..\src\Orbis\Game\TransformSpace.h = ..\src\Orbis\Game\TransformSpace.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Input", "Input", "{F7CB2549-3B94-434D-A16B-C0F70191C039}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Input\InputManager.h = ..\src\Orbis\Input\InputManager.h
+		..\src\Orbis\Input\KeyCode.h = ..\src\Orbis\Input\KeyCode.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{25A66E13-0215-4E93-892E-40D679FFB2C8}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Libraries\GL.h = ..\src\Orbis\Libraries\GL.h
+		..\src\Orbis\Libraries\SDL.h = ..\src\Orbis\Libraries\SDL.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orbis", "Orbis", "{353B132D-2DF2-4B6E-B0AE-E6ECE00CA49C}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Orbis\OrbisMain.h = ..\src\Orbis\Orbis\OrbisMain.h
+		..\src\Orbis\Orbis\Settings.h = ..\src\Orbis\Orbis\Settings.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Video", "Video", "{EC8B3945-8C90-4988-8E0C-CE4FE6A9A403}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Orbis\Video\Color.h = ..\src\Orbis\Video\Color.h
+		..\src\Orbis\Video\DebugRenderDevice.h = ..\src\Orbis\Video\DebugRenderDevice.h
+		..\src\Orbis\Video\Material.h = ..\src\Orbis\Video\Material.h
+		..\src\Orbis\Video\Mesh.h = ..\src\Orbis\Video\Mesh.h
+		..\src\Orbis\Video\Renderable.h = ..\src\Orbis\Video\Renderable.h
+		..\src\Orbis\Video\RenderDevice.h = ..\src\Orbis\Video\RenderDevice.h
+		..\src\Orbis\Video\RenderMode.h = ..\src\Orbis\Video\RenderMode.h
+		..\src\Orbis\Video\Shader.h = ..\src\Orbis\Video\Shader.h
+		..\src\Orbis\Video\Texture.h = ..\src\Orbis\Video\Texture.h
+		..\src\Orbis\Video\TextureAtlas.h = ..\src\Orbis\Video\TextureAtlas.h
+		..\src\Orbis\Video\TextureChart.h = ..\src\Orbis\Video\TextureChart.h
+		..\src\Orbis\Video\VideoManager.h = ..\src\Orbis\Video\VideoManager.h
+		..\src\Orbis\Video\Window.h = ..\src\Orbis\Video\Window.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -122,12 +263,32 @@ Global
 		{97C2A5E5-4AF0-4B5E-83DA-48505247E667} = {7FD156F4-B637-4947-9D69-D38462B92ADA}
 		{3BBBCD76-8C98-4CF6-8F65-682D0E5205A8} = {AEA2BFC2-2BB1-4544-89CF-885471D2995B}
 		{3B468758-79FA-44EF-841B-9239D6F07FAC} = {7FD156F4-B637-4947-9D69-D38462B92ADA}
+		{7785D580-C005-4C6B-90D4-9A6636212AF7} = {89998D17-3EF0-455C-94EE-A1B829AF08B8}
+		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {89998D17-3EF0-455C-94EE-A1B829AF08B8}
 		{EE53054D-8C75-4E62-B9F9-94A06FC7DD95} = {AEA2BFC2-2BB1-4544-89CF-885471D2995B}
 		{71BA3082-AFAC-433B-B51C-17E3C244FEA7} = {3BBBCD76-8C98-4CF6-8F65-682D0E5205A8}
 		{2C2FA788-3E36-4359-B838-48CB26FC5499} = {3BBBCD76-8C98-4CF6-8F65-682D0E5205A8}
 		{91AF648C-1A05-4275-9C88-EB82C74D1DD0} = {EE53054D-8C75-4E62-B9F9-94A06FC7DD95}
 		{0C624D38-FC5F-49A0-846B-EE5B7B1EBAB9} = {EE53054D-8C75-4E62-B9F9-94A06FC7DD95}
+		{0527DFEE-E806-4CDC-B2EA-6809BA2E081E} = {89998D17-3EF0-455C-94EE-A1B829AF08B8}
 		{B20437F4-B2E5-487D-A1C6-2477AF2BB796} = {EE53054D-8C75-4E62-B9F9-94A06FC7DD95}
 		{A93B1C36-CA9D-4291-AEB9-C06F0D2E996A} = {3BBBCD76-8C98-4CF6-8F65-682D0E5205A8}
+		{CFA21FBF-5AC9-47EA-B615-8344FEFEE19D} = {673133AE-2EF1-4689-96E4-289188D829D2}
+		{57F5AF0D-599C-4BEB-8919-5204D9C73604} = {673133AE-2EF1-4689-96E4-289188D829D2}
+		{673133AE-2EF1-4689-96E4-289188D829D2} = {2B510723-16C7-4786-B10F-529462BD3C88}
+		{8DB928EC-1B3B-4F0D-A3A5-13AB15167A63} = {2B510723-16C7-4786-B10F-529462BD3C88}
+		{6D4350A3-0A08-4B43-9BA5-CCBBCD6A8085} = {8DB928EC-1B3B-4F0D-A3A5-13AB15167A63}
+		{B259D0BA-2B22-4669-B986-3A64F9D01007} = {8DB928EC-1B3B-4F0D-A3A5-13AB15167A63}
+		{8E1383DC-3971-4F39-A6AD-AFEFE66EF6DF} = {8DB928EC-1B3B-4F0D-A3A5-13AB15167A63}
+		{B1FC0E67-DB0B-4EC4-9C15-36C5EE7042E0} = {8DB928EC-1B3B-4F0D-A3A5-13AB15167A63}
+		{E168765C-96F7-443D-9BC3-20F338293261} = {2B510723-16C7-4786-B10F-529462BD3C88}
+		{CBF6C219-077D-46D9-8881-A0E02A05A41C} = {E168765C-96F7-443D-9BC3-20F338293261}
+		{0794F630-0ECA-48F1-8A1C-312D636AE655} = {E168765C-96F7-443D-9BC3-20F338293261}
+		{9674DADB-0571-4918-A2F1-E780CFBC7306} = {E168765C-96F7-443D-9BC3-20F338293261}
+		{0577F238-F0CC-4915-A364-4CE02F77CB74} = {E168765C-96F7-443D-9BC3-20F338293261}
+		{F7CB2549-3B94-434D-A16B-C0F70191C039} = {E168765C-96F7-443D-9BC3-20F338293261}
+		{25A66E13-0215-4E93-892E-40D679FFB2C8} = {E168765C-96F7-443D-9BC3-20F338293261}
+		{353B132D-2DF2-4B6E-B0AE-E6ECE00CA49C} = {E168765C-96F7-443D-9BC3-20F338293261}
+		{EC8B3945-8C90-4988-8E0C-CE4FE6A9A403} = {E168765C-96F7-443D-9BC3-20F338293261}
 	EndGlobalSection
 EndGlobal

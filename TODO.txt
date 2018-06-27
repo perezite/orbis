@@ -1,18 +1,15 @@
 TODO:	
-- Refactoring planen
-	- Liste für Refactoring-Arbeiten als Punkt hier eintragen und obige Punkte löschen
-		- BezierCurve umbenennen in Spline
-		- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)
-		- Header und Sourcefiles aufsplitten
-		- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
-		- StringHelper::Load() in separate Klasse Serialization verschieben
-		- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen. Und soll ausserdem nicht mehr Update() heissen!
-		- Der Inspector soll an der Komponente hängen, nicht am Entity
-		- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
-		- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
-		- Renderer gesamthaft refactoren	
-		- Code-Styling überdenken
-		- Branch mergen		
+- Refactoring
+	- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)
+	- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
+	- StringHelper::Load() in separate Klasse Serialization verschieben
+	- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen. Und soll ausserdem nicht mehr Update() heissen!
+	- Der Inspector soll an der Komponente hängen, nicht am Entity
+	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
+	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
+	- Renderer gesamthaft refactoren	
+	- Code-Styling überdenken (js-style vs a-style)
+	- Branch mergen		
 - Evaluieren, ob der __INTELLISENSE__ fix in Precompiled.h das Intellisense-Problem behoben hat. Ansonsten nochmal schauen.
 - Den kompletten Source-Code inspizieren und falls nötig weiteres Refactoring planen
 - Partikelsystem implementieren

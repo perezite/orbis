@@ -37,30 +37,4 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButtonController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\LevelSwitchButtonController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\ParticleSystemTester.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButtonController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TweenTester.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleController.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level10.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level2.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level3.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level4.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level5.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level6.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level7.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.h" />
-  </ItemGroup>
 </Project>
