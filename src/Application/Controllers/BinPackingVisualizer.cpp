@@ -7,7 +7,7 @@ using namespace base::algorithms;
 
 #include "../../Orbis/Core/DebugHelper.h"
 #include "../../Orbis/Input/InputManager.h"
-using namespace core;
+using namespace orbis::core;
 using namespace input;
 
 #include <iostream>

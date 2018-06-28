@@ -4,7 +4,7 @@
 using namespace base::math;
 
 #include "../../Orbis/Core/TimeManager.h"
-using namespace core;
+using namespace orbis::core;
 
 #include <iostream>
 

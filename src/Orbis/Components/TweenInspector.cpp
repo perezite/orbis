@@ -7,7 +7,7 @@
 #include "../Core/DebugHelper.h"
 using namespace base::system;
 using namespace video;
-using namespace core;
+using namespace orbis::core;
 
 #include <iostream>
 #include <sstream>

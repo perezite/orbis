@@ -3,7 +3,7 @@
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Game/Entity.h"
 using namespace orbis::components;
-using namespace game;
+using namespace orbis::game;
 
 namespace controllers
 {

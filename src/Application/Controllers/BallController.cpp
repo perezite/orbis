@@ -6,8 +6,8 @@ using namespace base::system;
 #include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../orbis/Input/InputManager.h"
-using namespace core;
-using namespace game;
+using namespace orbis::core;
+using namespace orbis::game;
 using namespace input;
 
 #define __STATE_AIMING

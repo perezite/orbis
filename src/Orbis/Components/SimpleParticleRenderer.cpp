@@ -5,8 +5,8 @@
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
 using namespace video;
-using namespace core;
-using namespace game;
+using namespace orbis::core;
+using namespace orbis::game;
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Base/System/MemoryHelper.h"

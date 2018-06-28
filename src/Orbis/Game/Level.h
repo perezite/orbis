@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Game/Entity.h"
-using namespace game;
+using namespace orbis::game;
 
 #include <vector>
 #include <string>
@@ -13,42 +13,45 @@ namespace video
 
 using namespace video;
 
-namespace game
+namespace orbis
 {
-	// Represents a level in the game
-	class Level
+	namespace game
 	{
-	public:
-		// destructor
-		virtual ~Level();
+		// Represents a level in the game
+		class Level
+		{
+		public:
+			// destructor
+			virtual ~Level();
 
-		// initialize the level
-		void initialize();
+			// initialize the level
+			void initialize();
 
-		// add entity
-		void addEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
+			// add entity
+			void addEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
 
-		// update 
-		void update();
+			// update 
+			void update();
 
-		// render
-		void render();
+			// render
+			void render();
 
-		// start
-		virtual void start() { }
+			// start
+			virtual void start() { }
 
-	protected:
-		// start the entities
-		void startEntities();
+		protected:
+			// start the entities
+			void startEntities();
 
-		// update entities
-		void updateEntities();
+			// update entities
+			void updateEntities();
 
-		// render entities
-		void renderEntities();
+			// render entities
+			void renderEntities();
 
-	private:
-		// entites in the level
-		std::vector<Entity*> m_entities;
-	};
+		private:
+			// entites in the level
+			std::vector<Entity*> m_entities;
+		};
+	}
 }

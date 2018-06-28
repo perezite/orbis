@@ -5,9 +5,9 @@
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
 #include "../Effects/EffectsManager.h"
-using namespace core;
-using namespace game;
-using namespace effects;
+using namespace orbis::core;
+using namespace orbis::game;
+using namespace orbis::effects;
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Base/System/MemoryHelper.h"

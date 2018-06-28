@@ -2,7 +2,7 @@
 
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
-using namespace core;
+using namespace orbis::core;
 using namespace video;
 
 namespace orbis

@@ -5,7 +5,7 @@
 #include "../Libraries/GL.h"
 #include "../Libraries/SDL.h"
 #include "../Game/Level.h"
-using namespace game;
+using namespace orbis::game;
 
 #include "../../Base/Math/Rect.h"
 using namespace base::math;

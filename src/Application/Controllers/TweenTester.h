@@ -4,8 +4,8 @@
 #include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Effects/Tween.h"
 using namespace orbis::components;
-using namespace game;
-using namespace effects;
+using namespace orbis::game;
+using namespace orbis::effects;
 
 namespace controllers
 {

@@ -15,18 +15,21 @@ using namespace base::math;
 	#define ORBIS_RELEASE(call) {call}
 #endif
 
-namespace core
+namespace orbis
 {
-	class DebugHelper
+	namespace core
 	{
-	public:
-		// draw a debug line
-		static void drawLine(Vector2D start, Vector2D end, Color color = Color::Green);
+		class DebugHelper
+		{
+		public:
+			// draw a debug line
+			static void drawLine(Vector2D start, Vector2D end, Color color = Color::Green);
 
-		// darw a debug wireframe rectangle
-		static void drawRect(Rect rect, Color color);
+			// darw a debug wireframe rectangle
+			static void drawRect(Rect rect, Color color);
 
-		// draw a debug solid rectangle
-		static void drawSolidRect(Rect rect, Color color);
-	};
+			// draw a debug solid rectangle
+			static void drawSolidRect(Rect rect, Color color);
+		};
+	}
 }

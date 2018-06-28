@@ -6,8 +6,8 @@
 #include "../Input/InputManager.h"
 #include "../Libraries/SDL.h"
 #include "../Orbis/Settings.h"
-using namespace core;
-using namespace game;
+using namespace orbis::core;
+using namespace orbis::game;
 using namespace input;
 
 namespace orbis

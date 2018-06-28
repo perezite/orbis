@@ -5,7 +5,7 @@
 #include "../Core/AssetHelper.h"
 #include "../Libraries/GL.h"
 #include "../Components/Camera.h"
-using namespace core;
+using namespace orbis::core;
 using namespace orbis::components;
 
 #include "../../Base/System/Exception.h"

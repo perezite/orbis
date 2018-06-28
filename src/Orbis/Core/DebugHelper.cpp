@@ -10,30 +10,32 @@ using namespace video;
 	#define ORBIS_ASSERT_DEBUG() 
 #endif
 
-
-namespace core
+namespace orbis
 {
-	void DebugHelper::drawLine(Vector2D start, Vector2D end, Color color)
+	namespace core
 	{
-		ORBIS_ASSERT_DEBUG();
+		void DebugHelper::drawLine(Vector2D start, Vector2D end, Color color)
+		{
+			ORBIS_ASSERT_DEBUG();
 
-		VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(start, end, color);
-	}
+			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(start, end, color);
+		}
 
-	void DebugHelper::drawRect(Rect rect, Color color)
-	{
-		ORBIS_ASSERT_DEBUG();
+		void DebugHelper::drawRect(Rect rect, Color color)
+		{
+			ORBIS_ASSERT_DEBUG();
 
-		drawLine(rect.leftBottom, rect.getRightBottom());
-		drawLine(rect.getRightBottom(), rect.rightTop);
-		drawLine(rect.rightTop, rect.getLeftTop());
-		drawLine(rect.getLeftTop(), rect.leftBottom);
-	}
+			drawLine(rect.leftBottom, rect.getRightBottom());
+			drawLine(rect.getRightBottom(), rect.rightTop);
+			drawLine(rect.rightTop, rect.getLeftTop());
+			drawLine(rect.getLeftTop(), rect.leftBottom);
+		}
 
-	void DebugHelper::drawSolidRect(Rect rect, Color color)
-	{
-		ORBIS_ASSERT_DEBUG();
+		void DebugHelper::drawSolidRect(Rect rect, Color color)
+		{
+			ORBIS_ASSERT_DEBUG();
 
-		VideoManager::getInstance()->getDebugRenderDevice()->drawDebugRect(rect, color);
+			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugRect(rect, color);
+		}
 	}
 }

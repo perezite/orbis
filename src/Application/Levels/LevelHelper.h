@@ -5,7 +5,7 @@
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Game/Level.h"
-using namespace game;
+using namespace orbis::game;
 using namespace controllers;
 using namespace video;
 using namespace orbis::components;

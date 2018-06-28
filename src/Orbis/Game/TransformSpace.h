@@ -1,10 +1,13 @@
 #pragma once
 
-namespace game
+namespace orbis
 {
-	enum class TransformSpace
+	namespace game
 	{
-		World,
-		Camera
-	};
+		enum class TransformSpace
+		{
+			World,
+			Camera
+		};
+	}
 }

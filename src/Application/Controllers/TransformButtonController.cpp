@@ -6,8 +6,8 @@
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
 using namespace input;
-using namespace core;
-using namespace game;
+using namespace orbis::core;
+using namespace orbis::game;
 using namespace base::math;
 
 namespace 

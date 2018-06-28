@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Orbis/Game/Level.h"
-using namespace game;
+using namespace orbis::game;
 
 #include <iostream>
 

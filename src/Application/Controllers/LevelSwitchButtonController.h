@@ -8,7 +8,7 @@
 #include "../../Orbis/Components/Component.h"
 using namespace orbis::components;
 using namespace input;
-using namespace game;
+using namespace orbis::game;
 
 namespace controllers
 {

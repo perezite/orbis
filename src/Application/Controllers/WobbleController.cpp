@@ -2,8 +2,8 @@
 
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Game/Entity.h"
-using namespace core;
-using namespace game;
+using namespace orbis::core;
+using namespace orbis::game;
 
 #include "../../Base/Math/MathHelper.h"
 using namespace base::math;

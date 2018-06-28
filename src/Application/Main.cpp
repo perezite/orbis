@@ -15,8 +15,8 @@ using namespace levels;
 #include "../Orbis/Game/LevelManager.h"
 #include "../Base/System/Exception.h"
 using namespace orbis;
-using namespace core;
-using namespace game;
+using namespace orbis::core;
+using namespace orbis::game;
 using namespace base::system;
 
 #include <iostream>

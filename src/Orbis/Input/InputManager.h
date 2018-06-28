@@ -3,7 +3,7 @@
 #include "KeyCode.h"
 
 #include "../Game/TransformSpace.h"
-using namespace game;
+using namespace orbis::game;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"

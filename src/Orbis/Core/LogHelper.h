@@ -2,15 +2,18 @@
 
 #include <string>
 
-namespace core
+namespace orbis
 {
-	class LogHelper
+	namespace core
 	{
-	public:
-		// log a message
-		static void logMessage(const char* fmt, ...);
+		class LogHelper
+		{
+		public:
+			// log a message
+			static void logMessage(const char* fmt, ...);
 
-		// show a message box
-		static void showMessageBox(std::string message, std::string title);
-	};
+			// show a message box
+			static void showMessageBox(std::string message, std::string title);
+		};
+	}
 }

@@ -5,7 +5,7 @@
 #include "../Libraries/SDL.h"
 #include "../Core/AssetHelper.h"
 #include "../Video/VideoManager.h"
-using namespace core;
+using namespace orbis::core;
 using namespace video;
 
 namespace

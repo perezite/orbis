@@ -2,7 +2,7 @@
 #pragma once
 
 #include "../../Orbis/Game/Level.h"
-using namespace game;
+using namespace orbis::game;
 
 namespace levels
 {

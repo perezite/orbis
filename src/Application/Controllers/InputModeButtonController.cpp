@@ -7,8 +7,8 @@
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/Entity.h"
 using namespace input;
-using namespace core;
-using namespace game;
+using namespace orbis::core;
+using namespace orbis::game;
 using namespace base::math;
 
 #include <algorithm>

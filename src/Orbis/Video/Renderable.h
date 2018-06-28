@@ -6,7 +6,7 @@
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
 using namespace video;
-using namespace game;
+using namespace orbis::game;
 
 #include <iostream>
 #include <vector>

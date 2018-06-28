@@ -4,8 +4,8 @@
 #include "../Effects/EffectsManager.h"
 #include "../Core/TimeManager.h"
 using namespace video;
-using namespace effects;
-using namespace core;
+using namespace orbis::effects;
+using namespace orbis::core;
 
 #include "../../Base/System/MemoryHelper.h"
 #include "../../Base/System/Exception.h"
@@ -13,64 +13,65 @@ using namespace base::system;
 
 #include <iostream>
 
-namespace game
+namespace orbis
 {
-	Level::~Level()
+	namespace game
 	{
-		EffectsManager::getInstance()->clear();
-		VideoManager::getInstance()->clear();
-		MemoryHelper::clear(m_entities);
-	}
-
-	void Level::initialize()
-	{
-		TimeManager::getInstance()->reset();
-		VideoManager::getInstance()->clear();
-		start();
-		startEntities();
-		VideoManager::getInstance()->start();
-	}
-
-	void Level::update()
-	{
-		TimeManager::getInstance()->update();
-		updateEntities();
-	}
-
-	void Level::render()
-	{
-		VideoManager::getInstance()->getWindow()->clear();
-		renderEntities();
-	}
-
-	void Level::startEntities()
-	{
-		for(unsigned int i = 0; i < m_entities.size(); i++)
+		Level::~Level()
 		{
-			m_entities[i]->start();
+			EffectsManager::getInstance()->clear();
+			VideoManager::getInstance()->clear();
+			MemoryHelper::clear(m_entities);
 		}
-	}
 
-	void Level::updateEntities()
-	{
-		for (unsigned int i = 0; i < m_entities.size(); i++)
+		void Level::initialize()
 		{
-			m_entities[i]->update();
+			TimeManager::getInstance()->reset();
+			VideoManager::getInstance()->clear();
+			start();
+			startEntities();
+			VideoManager::getInstance()->start();
 		}
-	}
 
-	void Level::renderEntities()
-	{
-		VideoManager* video = VideoManager::getInstance();
+		void Level::update()
+		{
+			TimeManager::getInstance()->update();
+			updateEntities();
+		}
 
-		video->getWindow()->clear();
-		video->render();
+		void Level::render()
+		{
+			VideoManager::getInstance()->getWindow()->clear();
+			renderEntities();
+		}
 
-		for (unsigned int i = 0; i < m_entities.size(); i++)
-			m_entities[i]->renderDebug();
+		void Level::startEntities()
+		{
+			for (unsigned int i = 0; i < m_entities.size(); i++)
+			{
+				m_entities[i]->start();
+			}
+		}
 
-		video->getWindow()->swapBuffers();
+		void Level::updateEntities()
+		{
+			for (unsigned int i = 0; i < m_entities.size(); i++)
+			{
+				m_entities[i]->update();
+			}
+		}
+
+		void Level::renderEntities()
+		{
+			VideoManager* video = VideoManager::getInstance();
+
+			video->getWindow()->clear();
+			video->render();
+
+			for (unsigned int i = 0; i < m_entities.size(); i++)
+				m_entities[i]->renderDebug();
+
+			video->getWindow()->swapBuffers();
+		}
 	}
 }
-
-

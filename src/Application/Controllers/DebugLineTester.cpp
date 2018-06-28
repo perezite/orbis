@@ -1,7 +1,7 @@
 #include "DebugLineTester.h"
 
 #include "../../Orbis/Core/DebugHelper.h"
-using namespace core;
+using namespace orbis::core;
 
 namespace controllers
 {

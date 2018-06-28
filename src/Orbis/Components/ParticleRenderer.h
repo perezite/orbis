@@ -8,8 +8,8 @@
 #include "../Effects/Particle.h"
 #include "../Game/Level.h"
 using namespace video;
-using namespace game;
-using namespace effects;
+using namespace orbis::game;
+using namespace orbis::effects;
 
 #include <vector>
 

@@ -4,41 +4,44 @@
 
 #include <map>
 
-namespace game
+namespace orbis
 {
-	class LevelManager
+	namespace game
 	{
-	public:
-		// get instance
-		static LevelManager* getInstance();
+		class LevelManager
+		{
+		public:
+			// get instance
+			static LevelManager* getInstance();
 
-		// queue level
-		void queueLevel(Level *level) { m_queuedLevel = level; }
+			// queue level
+			void queueLevel(Level *level) { m_queuedLevel = level; }
 
-		// get the current level
-		Level* getCurrentLevel() { return m_currentLevel; }
-		
-		// clear
-		void clear();
+			// get the current level
+			Level* getCurrentLevel() { return m_currentLevel; }
 
-		// update
-		void update();
+			// clear
+			void clear();
 
-		// render
-		void render();
+			// update
+			void update();
 
-	protected:
-		// constructor
-		LevelManager();
+			// render
+			void render();
 
-		// switch to queued level
-		void switchToQueuedLevel();
+		protected:
+			// constructor
+			LevelManager();
 
-	private:
-		// current level
-		Level* m_currentLevel;
+			// switch to queued level
+			void switchToQueuedLevel();
 
-		// queued level
-		Level* m_queuedLevel;
-	};
+		private:
+			// current level
+			Level* m_currentLevel;
+
+			// queued level
+			Level* m_queuedLevel;
+		};
+	}
 }

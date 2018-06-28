@@ -4,8 +4,8 @@
 #include "../Game/Entity.h"
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
-using namespace game;
-using namespace core;
+using namespace orbis::game;
+using namespace orbis::core;
 using namespace video;
 
 #include "../../Base/System/Exception.h"

@@ -2,13 +2,13 @@
 
 #include <stddef.h>
 
-namespace game
-{
-	class Entity;
-}
-
 namespace orbis
 {
+	namespace game
+	{
+		class Entity;
+	}
+
 	namespace components
 	{
 		class Component

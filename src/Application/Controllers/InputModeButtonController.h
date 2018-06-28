@@ -10,7 +10,7 @@
 #include "../../Orbis/Game/Transform.h"
 using namespace orbis::components;
 using namespace video;
-using namespace game;
+using namespace orbis::game;
 
 #include <string>
 #include <vector>

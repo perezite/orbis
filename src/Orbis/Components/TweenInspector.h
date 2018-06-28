@@ -8,8 +8,8 @@
 #include "../Video/Renderable.h"
 using namespace input;
 using namespace orbis::components;
-using namespace game;
-using namespace effects;
+using namespace orbis::game;
+using namespace orbis::effects;
 using namespace video;
 
 #include <vector>
