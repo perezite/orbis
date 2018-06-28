@@ -1,11 +1,11 @@
 #include "TweenTester.h"
 
 #include "../../Orbis/Core/TimeManager.h"
-using namespace Core;
+using namespace core;
 
 #include <iostream>
 
-namespace Controllers
+namespace controllers
 {
 	void TweenTester::start()
 	{

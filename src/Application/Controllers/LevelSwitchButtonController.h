@@ -6,11 +6,11 @@
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/LevelManager.h"
 #include "../../Orbis/Components/Component.h"
-using namespace Components;
-using namespace Input;
-using namespace Game;
+using namespace components;
+using namespace input;
+using namespace game;
 
-namespace Controllers
+namespace controllers
 {
 	template <class T>
 	class LevelSwitchButtonController : public Component

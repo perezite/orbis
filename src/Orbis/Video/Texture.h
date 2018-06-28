@@ -5,20 +5,20 @@
 #include "../Libraries/GL.h"
 #include "../Libraries/SDL.h"
 #include "../Game/Level.h"
-using namespace Game;
+using namespace game;
 
 #include "../../Base/Math/Rect.h"
-using namespace Math;
+using namespace base::math;
 
 #include <string>
 #include <set>
 
-namespace Game
+namespace game
 {
 	class Level;
 }
 
-namespace Video
+namespace video
 {
 	class TextureChart;
 

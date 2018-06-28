@@ -2,10 +2,10 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Game/Entity.h"
-using namespace Components;
-using namespace Game;
+using namespace components;
+using namespace game;
 
-namespace Controllers
+namespace controllers
 {
 	// test the particle renderer component
 	class ParticleSystemTester : public Component

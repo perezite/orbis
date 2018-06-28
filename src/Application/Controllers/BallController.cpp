@@ -1,21 +1,21 @@
 #include "BallController.h"
 
 #include "../../Base/System/Exception.h"
-using namespace System;
+using namespace base::system;
 
 #include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../orbis/Input/InputManager.h"
-using namespace Core;
-using namespace Game;
-using namespace Input;
+using namespace core;
+using namespace game;
+using namespace input;
 
 #define __STATE_AIMING
 #define __STATE_FLYING
 #define __STATE_DYING
 #define __STATE_PARALYSED
 
-namespace Controllers
+namespace controllers
 {
 	void BallController::update()
 	{

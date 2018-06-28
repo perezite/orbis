@@ -5,13 +5,13 @@
 #include "../Video/Color.h"
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
-using namespace Video;
-using namespace Game;
+using namespace video;
+using namespace game;
 
 #include <iostream>
 #include <vector>
 
-namespace Video
+namespace video
 {
 	// an object being rendered by the render device
 	class Renderable

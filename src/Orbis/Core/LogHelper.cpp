@@ -4,7 +4,7 @@
 
 #include <stdarg.h>
 
-namespace Core
+namespace core
 {
 	void LogHelper::logMessage(const char* fmt, ...)
 	{

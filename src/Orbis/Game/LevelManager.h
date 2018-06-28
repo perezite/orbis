@@ -4,7 +4,7 @@
 
 #include <map>
 
-namespace Game
+namespace game
 {
 	class LevelManager
 	{

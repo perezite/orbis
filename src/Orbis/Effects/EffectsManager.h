@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace Effects
+namespace effects
 {
 	class EffectsManager
 	{

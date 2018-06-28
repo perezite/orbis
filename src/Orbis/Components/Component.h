@@ -2,12 +2,12 @@
 
 #include <stddef.h>
 
-namespace Game
+namespace game
 {
 	class Entity;
 }
 
-namespace Components
+namespace components
 {
 	class Component
 	{
@@ -16,7 +16,7 @@ namespace Components
 		Component() : m_parent(NULL) { }
 
 		// ctor
-		Component(Game::Entity* parent) : m_parent(parent) { };
+		Component(game::Entity* parent) : m_parent(parent) { };
 
 		// dtor
 		virtual ~Component() { };
@@ -31,13 +31,13 @@ namespace Components
 		virtual void renderDebug() { };
 
 		// set entity
-		void setParent(Game::Entity* parent) { m_parent = parent; }
+		void setParent(game::Entity* parent) { m_parent = parent; }
 
 		// get entity
-		Game::Entity *getParent() { return m_parent; }
+		game::Entity *getParent() { return m_parent; }
 
 	private: 
 		// entity which uses the component
-		Game::Entity *m_parent;
+		game::Entity *m_parent;
 	};
 }

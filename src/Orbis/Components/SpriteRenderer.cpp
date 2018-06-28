@@ -2,10 +2,10 @@
 
 #include "../Video/VideoManager.h"
 #include "../Core/TimeManager.h"
-using namespace Video;
-using namespace Core;
+using namespace video;
+using namespace core;
 
-namespace Components
+namespace components
 {
 	SpriteRenderer::SpriteRenderer(Texture* texture)
 		: Component(), m_texture(texture)

@@ -7,13 +7,13 @@
 #include "../Game/Transform.h"
 #include "../Effects/Particle.h"
 #include "../Game/Level.h"
-using namespace Video;
-using namespace Game;
-using namespace Effects;
+using namespace video;
+using namespace game;
+using namespace effects;
 
 #include <vector>
 
-namespace Components
+namespace components
 {
 	// a renderer which renders a particle system
 	class ParticleRenderer : public Component

@@ -1,6 +1,9 @@
 TODO:	
 - Refactoring
-	- Include-Files wenn möglich zusammenziehen (schauen wie das bei SFML gemacht wurdes)
+	- orb und base Namespaces hinzufügen
+	- In jedem Ordner von Base und Orbis jeweils ein Metaheaderfiles hinzufügen
+	- In Application die Metaheaderfiles verwenden
+	- Ermitteln, ob das Precompilen der Metaheaderfiles im Application-Project etwas bringt
 	- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
 	- StringHelper::Load() in separate Klasse Serialization verschieben
 	- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen. Und soll ausserdem nicht mehr Update() heissen!

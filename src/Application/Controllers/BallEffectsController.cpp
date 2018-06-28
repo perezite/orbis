@@ -2,11 +2,11 @@
 
 #include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Core/TimeManager.h"
-using namespace Core;
+using namespace core;
 
 #define __STATE_EXPLODING
 
-namespace Controllers
+namespace controllers
 {
 	#ifdef __STATE_EXPLODING
 

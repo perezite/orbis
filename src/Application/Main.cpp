@@ -8,16 +8,16 @@
 #include "Levels/Level8.h"
 #include "Levels/Level9.h"
 #include "Levels/Level10.h"
-using namespace Levels;
+using namespace levels;
 
 #include "../Orbis/Orbis/OrbisMain.h"
 #include "../Orbis/Core/LogHelper.h"
 #include "../Orbis/Game/LevelManager.h"
 #include "../Base/System/Exception.h"
-using namespace Orbis;
-using namespace Core;
-using namespace Game;
-using namespace System;
+using namespace orbis;
+using namespace core;
+using namespace game;
+using namespace base::system;
 
 #include <iostream>
 

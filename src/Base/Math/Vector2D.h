@@ -3,67 +3,70 @@
 #include <string>
 #include <math.h>
 
-namespace Math
+namespace base
 {
-	// Represents a 2D vector
-	struct Vector2D
+	namespace math
 	{
-	public:
-		// zero vector
-		static const Vector2D Zero;
+		// Represents a 2D vector
+		struct Vector2D
+		{
+		public:
+			// zero vector
+			static const Vector2D Zero;
 
-		// one vector
-		static const Vector2D One;
+			// one vector
+			static const Vector2D One;
 
-	public:
-		// get distance between to points
-		static float distance(Vector2D point1, Vector2D point2) { return (point2 - point1).getCount(); }
+		public:
+			// get distance between to points
+			static float distance(Vector2D point1, Vector2D point2) { return (point2 - point1).getCount(); }
 
-	public:
-		// costructor 
-		Vector2D() { x = 0.0f, y = 0.0f; }
+		public:
+			// costructor 
+			Vector2D() { x = 0.0f, y = 0.0f; }
 
-		// constructor
-		Vector2D (float x_, float y_) : x(x_), y(y_) { }
+			// constructor
+			Vector2D(float x_, float y_) : x(x_), y(y_) { }
 
-		// constructor 
-		Vector2D(const Vector2D &other) : x(other.x), y(other.y) { }
+			// constructor 
+			Vector2D(const Vector2D &other) : x(other.x), y(other.y) { }
 
-		// destructor
-		virtual ~Vector2D() { };
+			// destructor
+			virtual ~Vector2D() { };
 
-		// assignment
-		const Vector2D& operator=(const Vector2D &other);
+			// assignment
+			const Vector2D& operator=(const Vector2D &other);
 
-		// addition
-		const Vector2D operator+(const Vector2D &other) const;
+			// addition
+			const Vector2D operator+(const Vector2D &other) const;
 
-		// subtraction
-		const Vector2D operator-(const Vector2D &other) const;
+			// subtraction
+			const Vector2D operator-(const Vector2D &other) const;
 
-		// scalar multiplication
-		const Vector2D operator*(float scalar) const;
+			// scalar multiplication
+			const Vector2D operator*(float scalar) const;
 
-		// additive inverse
-		const Vector2D operator-() const;
+			// additive inverse
+			const Vector2D operator-() const;
 
-		// inline addition 
-		const Vector2D operator+=(const Vector2D &other);
+			// inline addition 
+			const Vector2D operator+=(const Vector2D &other);
 
-		// get length
-		float getCount() const { return sqrtf(x * x + y * y);  }
+			// get length
+			float getCount() const { return sqrtf(x * x + y * y); }
 
-		// get normalized
-		const Vector2D normalized() const;
+			// get normalized
+			const Vector2D normalized() const;
 
-		// get scaled
-		const Vector2D scaled(float length) const;
+			// get scaled
+			const Vector2D scaled(float length) const;
 
-	public:
-		// the x component 
-		float x;
+		public:
+			// the x component 
+			float x;
 
-		// the y component
-		float y;
-	};
+			// the y component
+			float y;
+		};
+	}
 }

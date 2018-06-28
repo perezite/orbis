@@ -1,9 +1,9 @@
 #include "Particle.h"
 
 #include "../Video/VideoManager.h"
-using namespace Video;
+using namespace video;
 
-namespace Effects
+namespace effects
 {
 	Particle::Particle(Texture * texture, const Color& color, const Transform & transform, const Vector2D & velocity) 
 		: m_renderable(NULL), m_transform(transform),  m_velocity(velocity), m_lifetime(0.5f), m_color(color)

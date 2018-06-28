@@ -2,7 +2,7 @@
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/System/StringHelper.h"
-using namespace System;
+using namespace base::system;
 
 void GL_dummy()
 {

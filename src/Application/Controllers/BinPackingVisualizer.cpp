@@ -2,19 +2,19 @@
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Base/Algorithms/BinPacking.h"
-using namespace Math;
-using namespace Algorithms;
+using namespace base::math;
+using namespace base::algorithms;
 
 #include "../../Orbis/Core/DebugHelper.h"
 #include "../../Orbis/Input/InputManager.h"
-using namespace Core;
-using namespace Input;
+using namespace core;
+using namespace input;
 
 #include <iostream>
 #include <limits>
 #include <algorithm>
 
-namespace Controllers
+namespace controllers
 {
 	const unsigned int BinPackingVisualizer::NUM_RECTS = 15;
 

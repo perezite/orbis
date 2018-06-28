@@ -8,10 +8,10 @@
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/TextureAtlas.h"
-using namespace Components;
-using namespace Video;
+using namespace components;
+using namespace video;
 
-namespace Levels
+namespace levels
 {
 	void Level6::start()
 	{

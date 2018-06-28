@@ -1,6 +1,6 @@
 #include "TextureChart.h"
 
-namespace Video
+namespace video
 {
 	TextureChart::TextureChart(std::vector<Texture*> textures, std::vector<Rect> rects)
 	{

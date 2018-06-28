@@ -9,20 +9,20 @@
 #include "../Controllers/TransformButtonController.h"
 #include "../Controllers/CloseButtonController.h"
 #include "../Controllers/LevelSwitchButtonController.h"
-using namespace Controllers;
+using namespace controllers;
 
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
-using namespace Components;
-using namespace Math;
-using namespace Video;
+using namespace components;
+using namespace base::math;
+using namespace video;
 
 #include <map>
 
-namespace Levels
+namespace levels
 {
 	void Level1::start()
 	{

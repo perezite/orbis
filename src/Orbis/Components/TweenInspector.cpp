@@ -5,15 +5,15 @@
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Core/LogHelper.h"
 #include "../Core/DebugHelper.h"
-using namespace System;
-using namespace Video;
-using namespace Core;
+using namespace base::system;
+using namespace video;
+using namespace core;
 
 #include <iostream>
 #include <sstream>
 #include <algorithm>
 
-namespace Components
+namespace components
 {
 	const float TweenInspector::MARK_EXTENT = 0.01f;
 	const float TweenInspector::SELECT_RADIUS = 0.05f;

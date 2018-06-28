@@ -4,7 +4,7 @@
 #include "Shader.h"
 #include "Color.h"
 
-namespace Video
+namespace video
 {
 	class Material
 	{

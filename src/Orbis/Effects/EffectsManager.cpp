@@ -1,7 +1,7 @@
 #include "EffectsManager.h"
 #include "EffectsManager.h"
 
-namespace Effects
+namespace effects
 {
 	EffectsManager* EffectsManager::getInstance()
 	{

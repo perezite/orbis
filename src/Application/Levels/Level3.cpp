@@ -6,23 +6,23 @@
 
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/WobbleController.h"
-using namespace Controllers;
+using namespace controllers;
 
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Core/DebugHelper.h"
-using namespace Video;
-using namespace Components;
-using namespace Core;
+using namespace video;
+using namespace components;
+using namespace core;
 
 #include "../../Base/Math/MathHelper.h"
-using namespace Math;
+using namespace base::math;
 
 #include <iostream>
 
-namespace Levels
+namespace levels
 {
 	const int Level3::NUM_SPRITES = 1000;
 	const float Level3::MIN_BLOCK_SCALE = 0.01f;

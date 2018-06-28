@@ -3,17 +3,17 @@
 #include "../Video/VideoManager.h"
 #include "../Effects/EffectsManager.h"
 #include "../Core/TimeManager.h"
-using namespace Video;
-using namespace Effects;
-using namespace Core;
+using namespace video;
+using namespace effects;
+using namespace core;
 
 #include "../../Base/System/MemoryHelper.h"
 #include "../../Base/System/Exception.h"
-using namespace System;
+using namespace base::system;
 
 #include <iostream>
 
-namespace Game
+namespace game
 {
 	Level::~Level()
 	{

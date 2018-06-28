@@ -1,14 +1,14 @@
 #include "ParticleSystemTester.h"
 
 #include "../../Base/Math/MathHelper.h"
-using namespace Math;
+using namespace base::math;
 
 #include "../../Orbis/Core/TimeManager.h"
-using namespace Core;
+using namespace core;
 
 #include <iostream>
 
-namespace Controllers
+namespace controllers
 {
 	float ParticleSystemTester::Speed = 1.0f;
 	Vector2D ParticleSystemTester::TopTarget(0.5f, 0.5f);

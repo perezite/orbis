@@ -3,10 +3,10 @@
 #include "../../Base/System/Exception.h"
 #include "../../Base/System/MemoryHelper.h"
 #include "../../Base/Algorithms/BinPacking.h"
-using namespace System;
-using namespace Algorithms;
+using namespace base::system;
+using namespace base::algorithms;
 
-namespace Video
+namespace video
 {
 	void TextureAtlas::add(Texture* texture)
 	{

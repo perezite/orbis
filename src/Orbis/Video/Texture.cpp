@@ -5,8 +5,8 @@
 #include "../Libraries/SDL.h"
 #include "../Core/AssetHelper.h"
 #include "../Video/VideoManager.h"
-using namespace Core;
-using namespace Video;
+using namespace core;
+using namespace video;
 
 namespace
 {
@@ -46,7 +46,7 @@ namespace
 	}
 }
 
-namespace Video
+namespace video
 {
 	Texture::Texture(std::string assetPath, bool flipVertically)
 	{

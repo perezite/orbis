@@ -3,13 +3,13 @@
 #include "Component.h"
 
 #include "../../Orbis/Game/TransformSpace.h"
-using namespace Game;
+using namespace game;
 
 #include "../../Base/Math/Matrix3.h"
 #include "../../Base/Math/Vector2D.h"
-using namespace Math;
+using namespace base::math;
 
-namespace Components
+namespace components
 {
 	// The camera
 	class Camera : public Component

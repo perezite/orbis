@@ -4,10 +4,10 @@
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/System/EnvironmentHelper.h"
-using namespace Math;
-using namespace System;
+using namespace base::math;
+using namespace base::system;
 
-namespace Video
+namespace video
 {
 	const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(400, 711);
 

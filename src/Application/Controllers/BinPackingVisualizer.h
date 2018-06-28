@@ -2,17 +2,17 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Video/Color.h"
-using namespace Components;
-using namespace Video;
+using namespace components;
+using namespace video;
 
 #include "../../Base/Math/Rect.h"
 #include "../../Base/Math/Range.h"
-using namespace Math;
+using namespace base::math;
 
 #include <vector>
 #include <tuple>
 
-namespace Controllers
+namespace controllers
 {
 	// visualizes a bin packing algorithm
 	class BinPackingVisualizer : public Component

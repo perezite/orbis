@@ -4,12 +4,12 @@
 #include "RenderMode.h"
 
 #include "../../Base/Math/Vector2D.h"
-using namespace Math;
+using namespace base::math;
 
 #include <set>
 #include <vector>
 
-namespace Video
+namespace video
 {
 	// a mesh represents the appearance of an entity on the screen
 	class Mesh 

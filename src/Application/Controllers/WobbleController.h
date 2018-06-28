@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../../Orbis/Components/Component.h"
-using namespace Components;
+using namespace components;
 
-namespace Controllers
+namespace controllers
 {
 	class WobbleController : public Component
 	{

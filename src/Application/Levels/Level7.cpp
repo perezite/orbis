@@ -5,15 +5,15 @@
 #include "Level8.h"
 
 #include "../Controllers/BallController.h"
-using namespace Controllers;
+using namespace controllers;
 
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
-using namespace Components;
-using namespace Video;
+using namespace components;
+using namespace video;
 
-namespace Levels
+namespace levels
 {
 	void Level7::start()
 	{

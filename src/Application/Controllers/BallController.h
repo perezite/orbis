@@ -3,9 +3,9 @@
 #include "BallEffectsController.h"
 
 #include "../../Orbis/Components/Component.h"
-using namespace Components;
+using namespace components;
 
-namespace Controllers
+namespace controllers
 {
 	class BallController : public Component
 	{

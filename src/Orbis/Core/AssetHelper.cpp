@@ -4,7 +4,7 @@
 
 #include "../../Base/System/EnvironmentHelper.h"
 #include "../../Base/System/Exception.h"
-using namespace System;
+using namespace base::system;
 
 namespace
 {
@@ -20,7 +20,7 @@ namespace
 	}
 }
 
-namespace Core
+namespace core
 {
 	std::string AssetHelper::assetPathToFilePath(std::string assetPath)
 	{

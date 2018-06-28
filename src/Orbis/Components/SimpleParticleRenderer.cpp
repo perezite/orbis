@@ -4,16 +4,16 @@
 
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
-using namespace Video;
-using namespace Core;
-using namespace Game;
+using namespace video;
+using namespace core;
+using namespace game;
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Base/System/MemoryHelper.h"
-using namespace Math;
-using namespace System;
+using namespace base::math;
+using namespace base::system;
 
-namespace Components
+namespace components
 {
 	SimpleParticleRenderer::SimpleParticleRenderer(Texture * texture) : m_texture(texture)
 	{ }

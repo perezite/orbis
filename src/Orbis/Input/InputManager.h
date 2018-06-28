@@ -3,15 +3,15 @@
 #include "KeyCode.h"
 
 #include "../Game/TransformSpace.h"
-using namespace Game;
+using namespace game;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace Math;
+using namespace base::math;
 
 #include <set>
 
-namespace Input
+namespace input
 {
 	class InputManager
 	{

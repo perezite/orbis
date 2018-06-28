@@ -6,14 +6,14 @@
 #include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/Entity.h"
-using namespace Input;
-using namespace Core;
-using namespace Game;
-using namespace Math;
+using namespace input;
+using namespace core;
+using namespace game;
+using namespace base::math;
 
 #include <algorithm>
 
-namespace Controllers
+namespace controllers
 {
 	void InputModeButtonController::update()
 	{

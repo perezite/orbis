@@ -3,15 +3,15 @@
 #include "Transform.h"
 
 #include "../Components/Component.h"
-using namespace Components;
+using namespace components;
 
 #include "../../Base/Math/Vector2D.h"
-using namespace Math;
+using namespace base::math;
 
 #include <vector>
 #include <string>
 
-namespace Game
+namespace game
 {
 
 	// Represents an Entity in the game

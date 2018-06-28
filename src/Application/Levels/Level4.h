@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../../Orbis/Game/Level.h"
-using namespace Game;
+using namespace game;
 
-namespace Levels
+namespace levels
 {
 	class Level4 : public Level
 	{

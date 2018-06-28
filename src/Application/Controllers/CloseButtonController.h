@@ -8,15 +8,15 @@
 #include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Game/Transform.h"
-using namespace Components;
-using namespace Video;
-using namespace Game;
+using namespace components;
+using namespace video;
+using namespace game;
 
 #include <string>
 #include <vector>
 #include <map>
 
-namespace Controllers
+namespace controllers
 {
 	class CloseButtonController : public Component
 	{

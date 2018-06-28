@@ -5,11 +5,11 @@
 #include "../Core/AssetHelper.h"
 #include "../Libraries/GL.h"
 #include "../Components/Camera.h"
-using namespace Core;
-using namespace Components;
+using namespace core;
+using namespace components;
 
 #include "../../Base/System/Exception.h"
-using namespace System;
+using namespace base::system;
 
 namespace
 {
@@ -74,7 +74,7 @@ namespace
 	}
 }
 
-namespace Video
+namespace video
 {
 	Shader::Shader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
 	{

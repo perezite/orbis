@@ -4,16 +4,16 @@
 #include "../Game/Entity.h"
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
-using namespace Game;
-using namespace Core;
-using namespace Video;
+using namespace game;
+using namespace core;
+using namespace video;
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/Math/MathHelper.h"
-using namespace System;
-using namespace Math;
+using namespace base::system;
+using namespace base::math;
 
-namespace Components
+namespace components
 {
 	Camera* Camera::m_instance = NULL;
 

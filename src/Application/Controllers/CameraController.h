@@ -2,10 +2,10 @@
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Orbis/Components/Component.h"
-using namespace Components;
-using namespace Math;
+using namespace components;
+using namespace base::math;
 
-namespace Controllers
+namespace controllers
 {
 	class CameraController : public Component 
 	{

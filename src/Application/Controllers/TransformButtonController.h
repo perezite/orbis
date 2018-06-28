@@ -6,9 +6,9 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
-using namespace Components;
+using namespace components;
 
-namespace Controllers
+namespace controllers
 {
 	class TransformButtonController : public Component
 	{

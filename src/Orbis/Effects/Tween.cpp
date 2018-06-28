@@ -2,14 +2,14 @@
 
 #include "../Core/AssetHelper.h"
 #include "../Core/TimeManager.h"
-using namespace Core;
+using namespace core;
 
 #include "../../Base/System/StringHelper.h"
-using namespace System;
+using namespace base::system;
 
 #include <sstream>
 
-namespace Effects
+namespace effects
 {
 	Tween::Tween(std::string assetPath) :
 		m_assetPath(assetPath), m_elapsed(0.0f)

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../Video/Color.h"
-using namespace Video;
+using namespace video;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace Math;
+using namespace base::math;
 
 #ifdef _DEBUG
 	#define ORBIS_DEBUG(call) {call}
@@ -15,7 +15,7 @@ using namespace Math;
 	#define ORBIS_RELEASE(call) {call}
 #endif
 
-namespace Core
+namespace core
 {
 	class DebugHelper
 	{

@@ -7,12 +7,12 @@
 #include "../Components/Camera.h"
 #include "../Core/LogHelper.h"
 #include "../Orbis/Settings.h"
-using namespace Components;
-using namespace Core;
+using namespace components;
+using namespace core;
 
 #include <algorithm>
 
-namespace Video
+namespace video
 {
 	void RenderDevice::addRenderable(Renderable* renderable)
 	{

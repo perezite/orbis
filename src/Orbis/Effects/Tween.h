@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../../Base/Math/Spline.h"
-using namespace Math;
+using namespace base::math;
 
 #include <string>
 #include <iostream>
 
-namespace Effects
+namespace effects
 {
 	// apply smooth value changes to a vector
 	class Tween 

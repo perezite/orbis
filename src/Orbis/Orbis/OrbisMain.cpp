@@ -6,11 +6,11 @@
 #include "../Input/InputManager.h"
 #include "../Libraries/SDL.h"
 #include "../Orbis/Settings.h"
-using namespace Core;
-using namespace Game;
-using namespace Input;
+using namespace core;
+using namespace game;
+using namespace input;
 
-namespace Orbis
+namespace orbis
 {
 	OrbisMain* OrbisMain::getInstance()
 	{

@@ -6,15 +6,15 @@
 #include "../Game/Level.h"
 #include "../Effects/Tween.h"
 #include "../Video/Renderable.h"
-using namespace Input;
-using namespace Components;
-using namespace Game;
-using namespace Effects;
-using namespace Video;
+using namespace input;
+using namespace components;
+using namespace game;
+using namespace effects;
+using namespace video;
 
 #include <vector>
 
-namespace Components
+namespace components
 {
 	// used to edit a tween
 	class TweenInspector : Component

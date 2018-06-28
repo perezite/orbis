@@ -2,15 +2,15 @@
 
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Game/Entity.h"
-using namespace Core;
-using namespace Game;
+using namespace core;
+using namespace game;
 
 #include "../../Base/Math/MathHelper.h"
-using namespace Math;
+using namespace base::math;
 
 #include <cstdlib>
 
-namespace Controllers
+namespace controllers
 {
 	const float WobbleController::MIN_SCALE = 0.02f;
 	const float WobbleController::MAX_SCALE = 0.1f;

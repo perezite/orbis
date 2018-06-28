@@ -5,19 +5,19 @@
 #include "LevelHelper.h"
 
 #include "../Controllers/BinPackingVisualizer.h"
-using namespace Controllers;
+using namespace controllers;
 
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/DebugHelper.h"
-using namespace Components;
-using namespace Video;
-using namespace Core;
+using namespace components;
+using namespace video;
+using namespace core;
 
 #include <iostream>
 
-namespace Levels
+namespace levels
 {
 	void Level4::start()
 	{

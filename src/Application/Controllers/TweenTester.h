@@ -3,11 +3,11 @@
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Effects/Tween.h"
-using namespace Components;
-using namespace Game;
-using namespace Effects;
+using namespace components;
+using namespace game;
+using namespace effects;
 
-namespace Controllers
+namespace controllers
 {
 	// test the animation of an entity's scale using splines
 	class TweenTester : public Component

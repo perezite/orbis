@@ -2,20 +2,23 @@
 
 #include <string>
 
-namespace System
+namespace base
 {
-	class Exception
+	namespace system
 	{
-	public:
-		Exception(const std::string &message) : _message(message) {}
+		class Exception
+		{
+		public:
+			Exception(const std::string &message) : _message(message) {}
 
-		virtual ~Exception() throw() {}
+			virtual ~Exception() throw() {}
 
-		virtual const std::string &what() const throw() { return _message; }
+			virtual const std::string &what() const throw() { return _message; }
 
-		static void assert(bool condition, std::string message) { if (!condition) throw Exception(message); }
+			static void assert(bool condition, std::string message) { if (!condition) throw Exception(message); }
 
-	protected:
-		std::string _message;
-	};
+		protected:
+			std::string _message;
+		};
+	}
 }

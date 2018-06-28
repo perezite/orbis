@@ -8,7 +8,7 @@
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/LevelSwitchButtonController.h"
-using namespace Controllers;
+using namespace controllers;
 
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/RectangleRenderer.h"
@@ -17,12 +17,12 @@ using namespace Controllers;
 #include "../../Orbis/Core/DebugHelper.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
-using namespace Components;
-using namespace Core;
-using namespace Math;
-using namespace Video;
+using namespace components;
+using namespace core;
+using namespace base::math;
+using namespace video;
 
-namespace Levels
+namespace levels
 {
 	void Level2::start()
 	{

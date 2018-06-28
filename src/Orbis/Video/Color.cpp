@@ -1,6 +1,6 @@
 #include "Color.h"
 
-namespace Video
+namespace video
 {
 	const Color Color::Black = Color(0.0f, 0.0f, 0.0f, 1.0f);
 	const Color Color::White = Color(1.0f, 1.0f, 1.0f, 1.0f);

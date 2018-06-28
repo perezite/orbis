@@ -5,9 +5,9 @@
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Matrix3.h"
 #include "../../Base/Math/Rect.h"
-using namespace Math;
+using namespace base::math;
 
-namespace Game
+namespace game
 {
 	struct Transform
 	{

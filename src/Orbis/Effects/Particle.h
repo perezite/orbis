@@ -3,13 +3,13 @@
 #include "../Game/Transform.h"
 #include "../Video/Renderable.h"
 #include "../Video/Color.h"
-using namespace Game;
-using namespace Video;
+using namespace game;
+using namespace video;
 
 #include "../../Base/Math/Range.h"
-using namespace Math;
+using namespace base::math;
 
-namespace Effects
+namespace effects
 {
 	// a particle in a particle system. The values are currently hardcoded
 	class Particle 

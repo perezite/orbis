@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace Video
+namespace video
 {
 	VideoManager* VideoManager::getInstance()
 	{

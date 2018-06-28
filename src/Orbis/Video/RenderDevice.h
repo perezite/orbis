@@ -9,17 +9,17 @@
 
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
-using namespace Game;
-using namespace Components;
+using namespace game;
+using namespace components;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
 #include "../../Base/Math/Range.h"
-using namespace Math;
+using namespace base::math;
 
 #include <vector>
 
-namespace Video
+namespace video
 {
 	typedef Range<unsigned int> BatchRange;
 

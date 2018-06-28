@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../Video/VideoManager.h"
-using namespace Video;
+using namespace video;
 
-namespace Orbis
+namespace orbis
 {
 	class OrbisMain
 	{

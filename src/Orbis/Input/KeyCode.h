@@ -2,7 +2,7 @@
 
 #include "../Libraries/SDL.h"
 
-namespace Input
+namespace input
 {
 	// key codes
 	enum KeyCode

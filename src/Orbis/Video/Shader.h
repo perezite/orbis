@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace Video
+namespace video
 {
 	class Shader
 	{

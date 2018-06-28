@@ -1,7 +1,7 @@
 #include "DebugHelper.h"
 
 #include "../Video/VideoManager.h"
-using namespace Video;
+using namespace video;
 
 #ifndef _DEBUG 
 	#define ORBIS_ASSERT_DEBUG() \
@@ -11,7 +11,7 @@ using namespace Video;
 #endif
 
 
-namespace Core
+namespace core
 {
 	void DebugHelper::drawLine(Vector2D start, Vector2D end, Color color)
 	{

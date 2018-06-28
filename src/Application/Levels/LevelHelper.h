@@ -5,13 +5,13 @@
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Game/Level.h"
-using namespace Game;
-using namespace Controllers;
-using namespace Video;
-using namespace Components;
+using namespace game;
+using namespace controllers;
+using namespace video;
+using namespace components;
 
 
-namespace Levels
+namespace levels
 {
 	class LevelHelper
 	{

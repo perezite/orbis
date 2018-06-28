@@ -7,12 +7,12 @@
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace Math;
+using namespace base::math;
 
 #include <vector>
 
 
-namespace Video
+namespace video
 {
 	class DebugRenderDevice
 	{

@@ -12,7 +12,7 @@
 
 typedef std::tuple<std::string, std::string> ShaderPaths;
 
-namespace Video
+namespace video
 {
 	class VideoManager
 	{

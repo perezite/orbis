@@ -1,9 +1,9 @@
 #include "Material.h"
 
 #include "../../Base/Math/MathHelper.h"
-using namespace Math;
+using namespace base::math;
 
-namespace Video
+namespace video
 {
 	bool Material::isBatchEqualTo(Material * const other) const
 	{

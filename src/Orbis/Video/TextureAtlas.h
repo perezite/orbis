@@ -6,12 +6,12 @@
 #include "../Libraries/GL.h"
 
 #include "../../Base/Math/Rect.h"
-using namespace Math;
+using namespace base::math;
 
 #include <vector>
 #include <map>
 
-namespace Video
+namespace video
 {
 	class Texture;
 

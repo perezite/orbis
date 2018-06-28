@@ -2,8 +2,8 @@
 
 #include "../Video/VideoManager.h"
 #include "../Components/Camera.h"
-using namespace Video;
-using namespace Components;
+using namespace video;
+using namespace components;
 
 namespace 
 {
@@ -21,7 +21,7 @@ namespace
 	}
 }
 
-namespace Input
+namespace input
 {
 	InputManager* InputManager::getInstance()
 	{

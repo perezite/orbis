@@ -2,7 +2,7 @@
 
 #include "VideoManager.h"
 
-namespace Video
+namespace video
 {
 	Mesh* Mesh::createVertexColoredTexturedQuad(Color color)
 	{

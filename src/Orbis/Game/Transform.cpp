@@ -1,6 +1,6 @@
 #include "Transform.h"
 
-namespace Game
+namespace game
 {
 	Matrix3 Transform::getModelMatrix() const
 	{

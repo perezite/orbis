@@ -5,14 +5,14 @@
 #include "../../Orbis/Game/Transform.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace Input;
-using namespace Core;
-using namespace Game;
-using namespace Math;
+using namespace input;
+using namespace core;
+using namespace game;
+using namespace base::math;
 
 namespace 
 {
-	using namespace Controllers;
+	using namespace controllers;
 
 	void Rotate(Transform* transform, bool clockwise, float omega)
 	{
@@ -67,7 +67,7 @@ namespace
 	}
 }
 
-namespace Controllers
+namespace controllers
 {
 	void TransformButtonController::update()
 	{

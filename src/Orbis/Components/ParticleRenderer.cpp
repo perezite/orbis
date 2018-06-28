@@ -5,16 +5,16 @@
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
 #include "../Effects/EffectsManager.h"
-using namespace Core;
-using namespace Game;
-using namespace Effects;
+using namespace core;
+using namespace game;
+using namespace effects;
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Base/System/MemoryHelper.h"
-using namespace Math;
-using namespace System;
+using namespace base::math;
+using namespace base::system;
 
-namespace Components
+namespace components
 {
 	ParticleRenderer::ParticleRenderer(Level* parentLevel, Texture * texture) : 
 		m_texture(texture), m_emissionSphereShellRadius(0.075f), m_emissionRate(40), m_timeToNextEmission(0.0f), 

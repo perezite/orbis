@@ -5,7 +5,7 @@
 #include "Level9.h"
 
 #include "../Controllers/TweenTester.h"
-using namespace Controllers;
+using namespace controllers;
 
 #include "../../Orbis/Components/TweenInspector.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -13,16 +13,16 @@ using namespace Controllers;
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Effects/EffectsManager.h"
 #include "../../Orbis/Core/DebugHelper.h"
-using namespace Components;
-using namespace Video;
-using namespace Effects;
-using namespace Core;
+using namespace components;
+using namespace video;
+using namespace effects;
+using namespace core;
 
 #include <iostream>
 #include <algorithm>
 #include <array>
 
-namespace Levels
+namespace levels
 {
 	void Level8::start()
 	{

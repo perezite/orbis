@@ -1,9 +1,9 @@
 #include "../../Base/Math/Vector2D.h"
-using namespace Math;
+using namespace base::math;
 
 #include "../Libraries/SDL.h"
 
-namespace Video
+namespace video
 {
 	class Window
 	{

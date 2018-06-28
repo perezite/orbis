@@ -2,7 +2,7 @@
 
 #include "../Libraries/GL.h"
 
-namespace Video
+namespace video
 {
 	enum class RenderMode : GLenum
 	{

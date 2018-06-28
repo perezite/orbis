@@ -1,14 +1,14 @@
 #include "LevelManager.h"
 
 #include "../Core/TimeManager.h"
-using namespace Core;
+using namespace core;
 
 #include "../../Base/System/Exception.h"
-using namespace System;
+using namespace base::system;
 
 #include <iostream>
 
-namespace Game
+namespace game
 {
 	LevelManager::LevelManager() :
 		m_currentLevel(NULL), m_queuedLevel(NULL)

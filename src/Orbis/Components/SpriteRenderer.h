@@ -4,9 +4,9 @@
 
 #include "../Video/Texture.h"
 #include "../Video/Renderable.h"
-using namespace Video;
+using namespace video;
 
-namespace Components
+namespace components
 {
 	// A renderer which renders a textured quad
 	class SpriteRenderer : public Component

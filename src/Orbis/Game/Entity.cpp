@@ -1,9 +1,9 @@
 #include "Entity.h"
 
 #include "../../Base/System/MemoryHelper.h"
-using namespace System;
+using namespace base::system;
 
-namespace Game
+namespace game
 {
 	Entity::~Entity()
 	{

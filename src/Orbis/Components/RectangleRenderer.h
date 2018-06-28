@@ -4,9 +4,9 @@
 
 #include "../Video/Color.h"
 #include "../Video/Renderable.h"
-using namespace Video;
+using namespace video;
 
-namespace Components
+namespace components
 {
 	// Renders a colored quad
 	class RectangleRenderer : public Component

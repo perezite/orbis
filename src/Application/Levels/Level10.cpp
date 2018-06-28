@@ -7,10 +7,10 @@
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/SimpleParticleRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
-using namespace Components;
-using namespace Video;
+using namespace components;
+using namespace video;
 
-namespace Levels
+namespace levels
 {
 	void Level10::start()
 	{

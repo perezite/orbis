@@ -1,9 +1,9 @@
 #include "DebugLineTester.h"
 
 #include "../../Orbis/Core/DebugHelper.h"
-using namespace Core;
+using namespace core;
 
-namespace Controllers
+namespace controllers
 {
 	void DebugLineTester::renderDebug()
 	{

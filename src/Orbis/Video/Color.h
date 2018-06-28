@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Video
+namespace video
 {
 	struct Color
 	{

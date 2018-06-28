@@ -2,10 +2,10 @@
 
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
-using namespace Core;
-using namespace Video;
+using namespace core;
+using namespace video;
 
-namespace Components
+namespace components
 {
 	void RectangleRenderer::start()
 	{

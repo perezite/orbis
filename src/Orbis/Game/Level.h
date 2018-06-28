@@ -1,19 +1,19 @@
 #pragma once
 
 #include "../Game/Entity.h"
-using namespace Game;
+using namespace game;
 
 #include <vector>
 #include <string>
 
-namespace Video
+namespace video
 {
 	class Texture;
 }
 
-using namespace Video;
+using namespace video;
 
-namespace Game
+namespace game
 {
 	// Represents a level in the game
 	class Level
