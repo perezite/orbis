@@ -6,11 +6,11 @@
 #include "../Input/InputManager.h"
 #include "../Libraries/SDL.h"
 #include "../Engine/Settings.h"
-using namespace orbis::core;
-using namespace orbis::game;
-using namespace orbis::input;
+using namespace orb::core;
+using namespace orb::game;
+using namespace orb::input;
 
-namespace orbis
+namespace orb
 {
 	namespace engine
 	{

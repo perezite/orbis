@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace orbis
+namespace orb
 {
 	namespace effects
 	{

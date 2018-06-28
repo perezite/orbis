@@ -5,9 +5,9 @@
 #include "../../Orbis/Game/Transform.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace orbis::input;
-using namespace orbis::core;
-using namespace orbis::game;
+using namespace orb::input;
+using namespace orb::core;
+using namespace orb::game;
 using namespace base::math;
 
 namespace 

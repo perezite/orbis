@@ -2,10 +2,10 @@
 
 #include "../Video/VideoManager.h"
 #include "../Core/TimeManager.h"
-using namespace video;
-using namespace orbis::core;
+using namespace orb::video;
+using namespace orb::core;
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{

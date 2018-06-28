@@ -2,7 +2,7 @@
 
 #include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Core/TimeManager.h"
-using namespace orbis::core;
+using namespace orb::core;
 
 #define __STATE_EXPLODING
 

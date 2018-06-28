@@ -6,9 +6,9 @@
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/LevelManager.h"
 #include "../../Orbis/Components/Component.h"
-using namespace orbis::components;
-using namespace orbis::input;
-using namespace orbis::game;
+using namespace orb::components;
+using namespace orb::input;
+using namespace orb::game;
 
 namespace controllers
 {

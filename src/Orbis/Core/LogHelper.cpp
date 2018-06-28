@@ -4,7 +4,7 @@
 
 #include <stdarg.h>
 
-namespace orbis
+namespace orb
 {
 	namespace core
 	{

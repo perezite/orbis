@@ -1,7 +1,7 @@
 #include "EffectsManager.h"
 #include "EffectsManager.h"
 
-namespace orbis
+namespace orb
 {
 	namespace effects
 	{

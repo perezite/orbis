@@ -4,7 +4,7 @@
 
 #include <map>
 
-namespace orbis
+namespace orb
 {
 	namespace game
 	{

@@ -3,13 +3,13 @@
 #include "Component.h"
 
 #include "../../Orbis/Game/TransformSpace.h"
-using namespace orbis::game;
+using namespace orb::game;
 
 #include "../../Base/Math/Matrix3.h"
 #include "../../Base/Math/Vector2D.h"
 using namespace base::math;
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{

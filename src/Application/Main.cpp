@@ -14,9 +14,9 @@ using namespace levels;
 #include "../Orbis/Core/LogHelper.h"
 #include "../Orbis/Game/LevelManager.h"
 #include "../Base/System/Exception.h"
-using namespace orbis::engine;
-using namespace orbis::core;
-using namespace orbis::game;
+using namespace orb::engine;
+using namespace orb::core;
+using namespace orb::game;
 using namespace base::system;
 
 #include <iostream>

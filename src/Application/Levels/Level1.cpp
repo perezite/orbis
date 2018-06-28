@@ -16,9 +16,9 @@ using namespace controllers;
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
-using namespace orbis::components;
+using namespace orb::components;
 using namespace base::math;
-using namespace video;
+using namespace orb::video;
 
 #include <map>
 

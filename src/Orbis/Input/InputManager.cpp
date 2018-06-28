@@ -2,8 +2,8 @@
 
 #include "../Video/VideoManager.h"
 #include "../Components/Camera.h"
-using namespace video;
-using namespace orbis::components;
+using namespace orb::video;
+using namespace orb::components;
 
 namespace 
 {
@@ -21,7 +21,7 @@ namespace
 	}
 }
 
-namespace orbis
+namespace orb
 {
 	namespace input
 	{

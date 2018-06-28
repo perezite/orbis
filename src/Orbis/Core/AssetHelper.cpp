@@ -20,7 +20,7 @@ namespace
 	}
 }
 
-namespace orbis
+namespace orb
 {
 	namespace core
 	{

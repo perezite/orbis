@@ -3,7 +3,7 @@
 #include "../../Base/System/MemoryHelper.h"
 using namespace base::system;
 
-namespace orbis
+namespace orb
 {
 	namespace game
 	{

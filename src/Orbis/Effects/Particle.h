@@ -3,13 +3,13 @@
 #include "../Game/Transform.h"
 #include "../Video/Renderable.h"
 #include "../Video/Color.h"
-using namespace orbis::game;
-using namespace video;
+using namespace orb::game;
+using namespace orb::video;
 
 #include "../../Base/Math/Range.h"
 using namespace base::math;
 
-namespace orbis
+namespace orb
 {
 	namespace effects
 	{

@@ -17,10 +17,10 @@ using namespace controllers;
 #include "../../Orbis/Core/DebugHelper.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
-using namespace orbis::components;
-using namespace orbis::core;
+using namespace orb::components;
+using namespace orb::core;
 using namespace base::math;
-using namespace video;
+using namespace orb::video;
 
 namespace levels
 {

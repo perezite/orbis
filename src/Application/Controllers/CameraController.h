@@ -2,7 +2,7 @@
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Orbis/Components/Component.h"
-using namespace orbis::components;
+using namespace orb::components;
 using namespace base::math;
 
 namespace controllers

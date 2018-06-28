@@ -7,13 +7,13 @@
 #include "../Game/Transform.h"
 #include "../Effects/Particle.h"
 #include "../Game/Level.h"
-using namespace video;
-using namespace orbis::game;
-using namespace orbis::effects;
+using namespace orb::video;
+using namespace orb::game;
+using namespace orb::effects;
 
 #include <vector>
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{

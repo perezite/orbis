@@ -4,9 +4,9 @@
 
 #include "../Video/Color.h"
 #include "../Video/Renderable.h"
-using namespace video;
+using namespace orb::video;
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{

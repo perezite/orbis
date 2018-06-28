@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace orbis
+namespace orb
 {
 	namespace core
 	{

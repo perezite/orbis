@@ -6,7 +6,7 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
-using namespace orbis::components;
+using namespace orb::components;
 
 namespace controllers
 {

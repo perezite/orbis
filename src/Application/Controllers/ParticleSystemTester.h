@@ -2,8 +2,8 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Game/Entity.h"
-using namespace orbis::components;
-using namespace orbis::game;
+using namespace orb::components;
+using namespace orb::game;
 
 namespace controllers
 {

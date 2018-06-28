@@ -2,14 +2,14 @@
 
 #include "../Core/AssetHelper.h"
 #include "../Core/TimeManager.h"
-using namespace orbis::core;
+using namespace orb::core;
 
 #include "../../Base/System/StringHelper.h"
 using namespace base::system;
 
 #include <sstream>
 
-namespace orbis
+namespace orb
 {
 	namespace effects
 	{

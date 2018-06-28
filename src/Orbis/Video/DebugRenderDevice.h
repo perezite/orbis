@@ -11,20 +11,22 @@ using namespace base::math;
 
 #include <vector>
 
-
-namespace video
+namespace orb
 {
-	class DebugRenderDevice
+	namespace video
 	{
-	public:
-		// draw a debug line (slow!)
-		void drawDebugLine(Vector2D start, Vector2D end, Color color);
+		class DebugRenderDevice
+		{
+		public:
+			// draw a debug line (slow!)
+			void drawDebugLine(Vector2D start, Vector2D end, Color color);
 
-		// draw a debug rect (slow!)
-		void drawDebugRect(Rect rect, Color color);
+			// draw a debug rect (slow!)
+			void drawDebugRect(Rect rect, Color color);
 
-	protected:
-		// draw a debug primitve
-		void drawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArrayCount, Color color, RenderMode renderMode);
-	};
+		protected:
+			// draw a debug primitve
+			void drawDebugPrimitive(GLfloat* vertexArray, unsigned int vertexArrayCount, Color color, RenderMode renderMode);
+		};
+	}
 }

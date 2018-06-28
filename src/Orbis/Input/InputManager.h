@@ -3,7 +3,7 @@
 #include "KeyCode.h"
 
 #include "../Game/TransformSpace.h"
-using namespace orbis::game;
+using namespace orb::game;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
@@ -11,7 +11,7 @@ using namespace base::math;
 
 #include <set>
 
-namespace orbis
+namespace orb
 {
 	namespace input
 	{

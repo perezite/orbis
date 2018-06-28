@@ -6,14 +6,14 @@
 #include "../../Orbis/Core/LogHelper.h"
 #include "../Core/DebugHelper.h"
 using namespace base::system;
-using namespace video;
-using namespace orbis::core;
+using namespace orb::video;
+using namespace orb::core;
 
 #include <iostream>
 #include <sstream>
 #include <algorithm>
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{

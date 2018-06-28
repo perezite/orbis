@@ -2,11 +2,14 @@
 
 #include "../Libraries/GL.h"
 
-namespace video
+namespace orb
 {
-	enum class RenderMode : GLenum
+	namespace video
 	{
-		Triangles = GL_TRIANGLES,
-		Lines = GL_LINES
-	};
+		enum class RenderMode : GLenum
+		{
+			Triangles = GL_TRIANGLES,
+			Lines = GL_LINES
+		};
+	}
 }

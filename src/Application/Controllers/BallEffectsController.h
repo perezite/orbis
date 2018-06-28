@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Orbis/Components/Component.h"
-using namespace orbis::components;
+using namespace orb::components;
 
 namespace controllers
 {

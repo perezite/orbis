@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 
-namespace orbis
+namespace orb
 {
 	namespace game
 	{

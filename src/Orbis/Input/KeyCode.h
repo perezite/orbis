@@ -2,7 +2,7 @@
 
 #include "../Libraries/SDL.h"
 
-namespace orbis
+namespace orb
 {
 	namespace input
 	{

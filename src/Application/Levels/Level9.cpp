@@ -8,8 +8,8 @@
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Components/ParticleRenderer.h"
 #include "../../ORbis/Video/VideoManager.h"
-using namespace orbis::components;
-using namespace video;
+using namespace orb::components;
+using namespace orb::video;
 
 namespace levels
 {

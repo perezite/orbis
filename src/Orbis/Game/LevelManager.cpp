@@ -1,14 +1,14 @@
 #include "LevelManager.h"
 
 #include "../Core/TimeManager.h"
-using namespace orbis::core;
+using namespace orb::core;
 
 #include "../../Base/System/Exception.h"
 using namespace base::system;
 
 #include <iostream>
 
-namespace orbis
+namespace orb
 {
 	namespace game
 	{

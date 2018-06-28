@@ -1,7 +1,7 @@
 #include "TweenTester.h"
 
 #include "../../Orbis/Core/TimeManager.h"
-using namespace orbis::core;
+using namespace orb::core;
 
 #include <iostream>
 

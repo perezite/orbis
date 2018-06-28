@@ -1,6 +1,6 @@
 #pragma once
 
-namespace orbis
+namespace orb
 {
 	namespace core
 	{

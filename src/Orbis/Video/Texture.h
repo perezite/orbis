@@ -5,7 +5,7 @@
 #include "../Libraries/GL.h"
 #include "../Libraries/SDL.h"
 #include "../Game/Level.h"
-using namespace orbis::game;
+using namespace orb::game;
 
 #include "../../Base/Math/Rect.h"
 using namespace base::math;
@@ -13,62 +13,65 @@ using namespace base::math;
 #include <string>
 #include <set>
 
-namespace game
+namespace orb
 {
-	class Level;
-}
-
-namespace video
-{
-	class TextureChart;
-
-	class Texture
+	namespace game
 	{
-	public:
-		// ctor
-		Texture(std::string assetPath, bool flipVertically = true);
+		class Level;
+	}
 
-		// dtor
-		virtual ~Texture();
+	namespace video
+	{
+		class TextureChart;
 
-		// get the texture handle
-		unsigned int getTextureHandle() const { return m_handle; }
+		class Texture
+		{
+		public:
+			// ctor
+			Texture(std::string assetPath, bool flipVertically = true);
 
-		// get the asset path
-		std::string getAssetPath() const { return m_assetPath; }
+			// dtor
+			virtual ~Texture();
 
-		// get the sdl surface
-		SDL_Surface* getSurface() { return m_surface; }
+			// get the texture handle
+			unsigned int getTextureHandle() const { return m_handle; }
 
-		// get the gl handle
-		GLuint getHandle() { return m_handle; }
+			// get the asset path
+			std::string getAssetPath() const { return m_assetPath; }
 
-		// set the textures atlas page
-		void setTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
+			// get the sdl surface
+			SDL_Surface* getSurface() { return m_surface; }
 
-		// transform texture uv coordinates
-		Vector2D mapUVCoord(Vector2D texUV);
+			// get the gl handle
+			GLuint getHandle() { return m_handle; }
 
-		// bind this texture
-		void bind();
+			// set the textures atlas page
+			void setTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
 
-		// is the texture using atlassing
-		bool isUsingAtlassing() const;
-		
-		// get the atlas texture chart
-		TextureChart* getAtlasChart() const { return m_atlasChart; }
+			// transform texture uv coordinates
+			Vector2D mapUVCoord(Vector2D texUV);
 
-	private:
-		// the texture asset path
-		std::string m_assetPath;
+			// bind this texture
+			void bind();
 
-		// the texture id
-		GLuint m_handle = 0;
-		
-		// the image surface
-		SDL_Surface* m_surface;
+			// is the texture using atlassing
+			bool isUsingAtlassing() const;
 
-		// the texture chart containing the texture
-		TextureChart* m_atlasChart;
-	};
+			// get the atlas texture chart
+			TextureChart* getAtlasChart() const { return m_atlasChart; }
+
+		private:
+			// the texture asset path
+			std::string m_assetPath;
+
+			// the texture id
+			GLuint m_handle = 0;
+
+			// the image surface
+			SDL_Surface* m_surface;
+
+			// the texture chart containing the texture
+			TextureChart* m_atlasChart;
+		};
+	}
 }

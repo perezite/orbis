@@ -1,20 +1,20 @@
 #pragma once
 
 #include "../Game/Entity.h"
-using namespace orbis::game;
+using namespace orb::game;
 
 #include <vector>
 #include <string>
 
-namespace video
+namespace orb
 {
-	class Texture;
-}
+	namespace video
+	{
+		class Texture;
+	}
 
-using namespace video;
+	using namespace video;
 
-namespace orbis
-{
 	namespace game
 	{
 		// Represents a level in the game

@@ -9,8 +9,8 @@
 
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
-using namespace orbis::game;
-using namespace orbis::components;
+using namespace orb::game;
+using namespace orb::components;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
@@ -19,75 +19,78 @@ using namespace base::math;
 
 #include <vector>
 
-namespace video
+namespace orb
 {
-	typedef Range<unsigned int> BatchRange;
-
-	class RenderDevice
+	namespace video
 	{
-	public:
-		// ctor
-		RenderDevice()
-			: m_isIndexArrayDirty(false)
-		{}
+		typedef Range<unsigned int> BatchRange;
 
-		// add a renderable
-		void addRenderable(Renderable* renderable);
+		class RenderDevice
+		{
+		public:
+			// ctor
+			RenderDevice()
+				: m_isIndexArrayDirty(false)
+			{}
 
-		// update a renderable
-		void updateRenderable(Renderable* renderable);
+			// add a renderable
+			void addRenderable(Renderable* renderable);
 
-		// delete a renderable
-		void deleteRenderable(Renderable* renderable);
+			// update a renderable
+			void updateRenderable(Renderable* renderable);
 
-		// clear all renderables
-		void clear();
+			// delete a renderable
+			void deleteRenderable(Renderable* renderable);
 
-		// render
-		void render();
+			// clear all renderables
+			void clear();
 
-	protected:
-		// update vertex array
-		void updateVertexArray();
+			// render
+			void render();
 
-		// update the vertex array for the renderer with the given index using the given mvp matrix
-		void insertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix);
+		protected:
+			// update vertex array
+			void updateVertexArray();
 
-		// reserver the vertex buffer to hold the renderer data
-		void reserveVertexArray();
+			// update the vertex array for the renderer with the given index using the given mvp matrix
+			void insertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix);
 
-		// insert renderers indices at position in index array
-		void updateIndexArray();
+			// reserver the vertex buffer to hold the renderer data
+			void reserveVertexArray();
 
-		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
-		void insertIntoIndexArray(unsigned int rendererIndex, unsigned short& offset);
+			// insert renderers indices at position in index array
+			void updateIndexArray();
 
-		// reserve index array space
-		void reserveIndexArray();
+			// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
+			void insertIntoIndexArray(unsigned int rendererIndex, unsigned short& offset);
 
-		// compute the vao start index for a given batch
-		unsigned int computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
+			// reserve index array space
+			void reserveIndexArray();
 
-		// compute the ibo (index buffer) start index for a given batch
-		unsigned int computeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
+			// compute the vao start index for a given batch
+			unsigned int computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
-		// compute the batches
-		std::vector<BatchRange> computeBatches();
-	
-		// find index of first renderer in render batch
-		int findFirstIndexInBatch(Renderable* renderable);
+			// compute the ibo (index buffer) start index for a given batch
+			unsigned int computeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
-	private:
-		// the vertex array
-		std::vector<GLfloat> m_vertexArray;
+			// compute the batches
+			std::vector<BatchRange> computeBatches();
 
-		// the index array
-		std::vector<GLushort> m_indexArray;
+			// find index of first renderer in render batch
+			int findFirstIndexInBatch(Renderable* renderable);
 
-		// is the index array in dirty state
-		bool m_isIndexArrayDirty;
+		private:
+			// the vertex array
+			std::vector<GLfloat> m_vertexArray;
 
-		// the renderables
-		std::vector<Renderable*> m_renderables;
-	};
+			// the index array
+			std::vector<GLushort> m_indexArray;
+
+			// is the index array in dirty state
+			bool m_isIndexArrayDirty;
+
+			// the renderables
+			std::vector<Renderable*> m_renderables;
+		};
+	}
 }

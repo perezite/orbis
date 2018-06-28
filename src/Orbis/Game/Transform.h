@@ -7,7 +7,7 @@
 #include "../../Base/Math/Rect.h"
 using namespace base::math;
 
-namespace orbis
+namespace orb
 {
 	namespace game
 	{

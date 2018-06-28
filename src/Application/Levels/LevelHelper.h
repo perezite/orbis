@@ -5,10 +5,10 @@
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Game/Level.h"
-using namespace orbis::game;
+using namespace orb::game;
 using namespace controllers;
-using namespace video;
-using namespace orbis::components;
+using namespace orb::video;
+using namespace orb::components;
 
 
 namespace levels

@@ -4,16 +4,16 @@
 #include "../Game/Entity.h"
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
-using namespace orbis::game;
-using namespace orbis::core;
-using namespace video;
+using namespace orb::game;
+using namespace orb::core;
+using namespace orb::video;
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/Math/MathHelper.h"
 using namespace base::system;
 using namespace base::math;
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{

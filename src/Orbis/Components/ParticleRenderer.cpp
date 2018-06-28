@@ -5,16 +5,16 @@
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
 #include "../Effects/EffectsManager.h"
-using namespace orbis::core;
-using namespace orbis::game;
-using namespace orbis::effects;
+using namespace orb::core;
+using namespace orb::game;
+using namespace orb::effects;
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Base/System/MemoryHelper.h"
 using namespace base::math;
 using namespace base::system;
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{

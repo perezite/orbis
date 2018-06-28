@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Video/Color.h"
-using namespace video;
+using namespace orb::video;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
@@ -15,7 +15,7 @@ using namespace base::math;
 	#define ORBIS_RELEASE(call) {call}
 #endif
 
-namespace orbis
+namespace orb
 {
 	namespace core
 	{

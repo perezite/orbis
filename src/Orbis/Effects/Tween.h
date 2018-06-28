@@ -6,7 +6,7 @@ using namespace base::math;
 #include <string>
 #include <iostream>
 
-namespace orbis
+namespace orb
 {
 	namespace effects
 	{

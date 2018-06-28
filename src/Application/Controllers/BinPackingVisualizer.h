@@ -2,8 +2,8 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Video/Color.h"
-using namespace orbis::components;
-using namespace video;
+using namespace orb::components;
+using namespace orb::video;
 
 #include "../../Base/Math/Rect.h"
 #include "../../Base/Math/Range.h"

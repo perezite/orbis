@@ -1,7 +1,7 @@
 #include "DebugHelper.h"
 
 #include "../Video/VideoManager.h"
-using namespace video;
+using namespace orb::video;
 
 #ifndef _DEBUG 
 	#define ORBIS_ASSERT_DEBUG() \
@@ -10,7 +10,7 @@ using namespace video;
 	#define ORBIS_ASSERT_DEBUG() 
 #endif
 
-namespace orbis
+namespace orb
 {
 	namespace core
 	{

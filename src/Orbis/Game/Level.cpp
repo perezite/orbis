@@ -3,9 +3,9 @@
 #include "../Video/VideoManager.h"
 #include "../Effects/EffectsManager.h"
 #include "../Core/TimeManager.h"
-using namespace video;
-using namespace orbis::effects;
-using namespace orbis::core;
+using namespace orb::video;
+using namespace orb::effects;
+using namespace orb::core;
 
 #include "../../Base/System/MemoryHelper.h"
 #include "../../Base/System/Exception.h"
@@ -13,7 +13,7 @@ using namespace base::system;
 
 #include <iostream>
 
-namespace orbis
+namespace orb
 {
 	namespace game
 	{

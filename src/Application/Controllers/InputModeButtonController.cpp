@@ -6,9 +6,9 @@
 #include "../../Orbis/Core/LogHelper.h"
 #include "../../Orbis/Game/Transform.h"
 #include "../../Orbis/Game/Entity.h"
-using namespace orbis::input;
-using namespace orbis::core;
-using namespace orbis::game;
+using namespace orb::input;
+using namespace orb::core;
+using namespace orb::game;
 using namespace base::math;
 
 #include <algorithm>

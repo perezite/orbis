@@ -4,16 +4,16 @@
 
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
-using namespace video;
-using namespace orbis::core;
-using namespace orbis::game;
+using namespace orb::video;
+using namespace orb::core;
+using namespace orb::game;
 
 #include "../../Base/Math/MathHelper.h"
 #include "../../Base/System/MemoryHelper.h"
 using namespace base::math;
 using namespace base::system;
 
-namespace orbis
+namespace orb
 {
 	namespace components
 	{
