@@ -7,7 +7,7 @@
 #include "../Components/Camera.h"
 #include "../Core/LogHelper.h"
 #include "../Orbis/Settings.h"
-using namespace components;
+using namespace orbis::components;
 using namespace core;
 
 #include <algorithm>

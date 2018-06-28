@@ -13,7 +13,7 @@ using namespace controllers;
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Effects/EffectsManager.h"
 #include "../../Orbis/Core/DebugHelper.h"
-using namespace components;
+using namespace orbis::components;
 using namespace video;
 using namespace effects;
 using namespace core;

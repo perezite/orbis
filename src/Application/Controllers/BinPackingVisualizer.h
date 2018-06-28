@@ -2,7 +2,7 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Video/Color.h"
-using namespace components;
+using namespace orbis::components;
 using namespace video;
 
 #include "../../Base/Math/Rect.h"

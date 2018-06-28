@@ -3,7 +3,7 @@
 #include "../Video/VideoManager.h"
 #include "../Components/Camera.h"
 using namespace video;
-using namespace components;
+using namespace orbis::components;
 
 namespace 
 {

@@ -10,7 +10,7 @@
 #include "../Game/Transform.h"
 #include "../Game/Entity.h"
 using namespace game;
-using namespace components;
+using namespace orbis::components;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"

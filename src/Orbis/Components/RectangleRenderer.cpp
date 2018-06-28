@@ -5,15 +5,18 @@
 using namespace core;
 using namespace video;
 
-namespace components
+namespace orbis
 {
-	void RectangleRenderer::start()
+	namespace components
 	{
-		m_renderable.getMaterial()->setTexture(NULL);
-		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag"));
-		m_renderable.getMaterial()->setColor(m_color);
-		m_renderable.setMesh(Mesh::createFlatQuad());
-		m_renderable.setTransform(getParent()->getTransform());
-		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
+		void RectangleRenderer::start()
+		{
+			m_renderable.getMaterial()->setTexture(NULL);
+			m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag"));
+			m_renderable.getMaterial()->setColor(m_color);
+			m_renderable.setMesh(Mesh::createFlatQuad());
+			m_renderable.setTransform(getParent()->getTransform());
+			VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
+		}
 	}
 }

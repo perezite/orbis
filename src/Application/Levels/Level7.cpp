@@ -10,7 +10,7 @@ using namespace controllers;
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
-using namespace components;
+using namespace orbis::components;
 using namespace video;
 
 namespace levels

@@ -3,7 +3,7 @@
 #include "Transform.h"
 
 #include "../Components/Component.h"
-using namespace components;
+using namespace orbis::components;
 
 #include "../../Base/Math/Vector2D.h"
 using namespace base::math;

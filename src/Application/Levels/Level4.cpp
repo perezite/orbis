@@ -11,7 +11,7 @@ using namespace controllers;
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/DebugHelper.h"
-using namespace components;
+using namespace orbis::components;
 using namespace video;
 using namespace core;
 

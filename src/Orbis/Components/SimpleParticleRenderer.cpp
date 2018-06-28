@@ -13,25 +13,28 @@ using namespace game;
 using namespace base::math;
 using namespace base::system;
 
-namespace components
+namespace orbis
 {
-	SimpleParticleRenderer::SimpleParticleRenderer(Texture * texture) : m_texture(texture)
-	{ }
-
-	SimpleParticleRenderer::~SimpleParticleRenderer()
+	namespace components
 	{
-		MemoryHelper::clear(m_particles);
-	}
+		SimpleParticleRenderer::SimpleParticleRenderer(Texture * texture) : m_texture(texture)
+		{ }
 
-	void SimpleParticleRenderer::start()
-	{
-		spawnParticle(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 0.5f));
-		spawnParticle(Transform(Vector2D(+0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 1.0f));
-	}
+		SimpleParticleRenderer::~SimpleParticleRenderer()
+		{
+			MemoryHelper::clear(m_particles);
+		}
 
-	void SimpleParticleRenderer::spawnParticle(const Transform& transform, const Color& color)
-	{
-		Particle* particle = new Particle(m_texture, color, transform, Vector2D::Zero);
-		m_particles.push_back(particle);
+		void SimpleParticleRenderer::start()
+		{
+			spawnParticle(Transform(Vector2D(-0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 0.5f));
+			spawnParticle(Transform(Vector2D(+0.1f, -0.1f), 0.0f, Vector2D(0.1f, 0.1f)), Color(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+
+		void SimpleParticleRenderer::spawnParticle(const Transform& transform, const Color& color)
+		{
+			Particle* particle = new Particle(m_texture, color, transform, Vector2D::Zero);
+			m_particles.push_back(particle);
+		}
 	}
 }

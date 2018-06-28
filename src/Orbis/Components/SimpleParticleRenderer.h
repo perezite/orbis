@@ -13,30 +13,33 @@ using namespace effects;
 
 #include <vector>
 
-namespace components
+namespace orbis
 {
-	// a renderer which renders a simplified particle system
-	class SimpleParticleRenderer : public Component
+	namespace components
 	{
-	public:
-		// ctor
-		SimpleParticleRenderer(Texture* texture);
+		// a renderer which renders a simplified particle system
+		class SimpleParticleRenderer : public Component
+		{
+		public:
+			// ctor
+			SimpleParticleRenderer(Texture* texture);
 
-		// dtor
-		virtual ~SimpleParticleRenderer();
+			// dtor
+			virtual ~SimpleParticleRenderer();
 
-		// override
-		void start();
+			// override
+			void start();
 
-	protected:
-		// add a particle
-		void spawnParticle(const Transform& transform, const Color& color);
+		protected:
+			// add a particle
+			void spawnParticle(const Transform& transform, const Color& color);
 
-	private: 
-		// the texture
-		Texture* m_texture;
+		private:
+			// the texture
+			Texture* m_texture;
 
-		// the particles current lifetimes in seconds
-		std::vector<Particle*> m_particles;
-	};
+			// the particles current lifetimes in seconds
+			std::vector<Particle*> m_particles;
+		};
+	}
 }

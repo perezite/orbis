@@ -17,7 +17,7 @@ using namespace controllers;
 #include "../../Orbis/Core/DebugHelper.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/MathHelper.h"
-using namespace components;
+using namespace orbis::components;
 using namespace core;
 using namespace base::math;
 using namespace video;

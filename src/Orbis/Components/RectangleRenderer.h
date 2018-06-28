@@ -6,23 +6,26 @@
 #include "../Video/Renderable.h"
 using namespace video;
 
-namespace components
+namespace orbis
 {
-	// Renders a colored quad
-	class RectangleRenderer : public Component
+	namespace components
 	{
-	public:
-		// ctor
-		RectangleRenderer(const Color& color) : Component() { m_color = color; }
+		// Renders a colored quad
+		class RectangleRenderer : public Component
+		{
+		public:
+			// ctor
+			RectangleRenderer(const Color& color) : Component() { m_color = color; }
 
-		// start
-		void start();
+			// start
+			void start();
 
-	private:
-		// the color 
-		Color m_color;
+		private:
+			// the color 
+			Color m_color;
 
-		// the renderable
-		Renderable m_renderable;
-	};
+			// the renderable
+			Renderable m_renderable;
+		};
+	}
 }

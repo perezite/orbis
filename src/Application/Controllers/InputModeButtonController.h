@@ -8,7 +8,7 @@
 #include "../../Orbis/Video/Texture.h"
 #include "../../Orbis/Game/Entity.h"
 #include "../../Orbis/Game/Transform.h"
-using namespace components;
+using namespace orbis::components;
 using namespace video;
 using namespace game;
 

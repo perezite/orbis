@@ -8,7 +8,7 @@
 using namespace game;
 using namespace controllers;
 using namespace video;
-using namespace components;
+using namespace orbis::components;
 
 
 namespace levels

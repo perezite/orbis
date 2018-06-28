@@ -8,7 +8,7 @@
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Video/TextureAtlas.h"
-using namespace components;
+using namespace orbis::components;
 using namespace video;
 
 namespace levels

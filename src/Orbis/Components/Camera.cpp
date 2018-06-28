@@ -13,74 +13,77 @@ using namespace video;
 using namespace base::system;
 using namespace base::math;
 
-namespace components
+namespace orbis
 {
-	Camera* Camera::m_instance = NULL;
-
-	Camera* Camera::getInstance()
+	namespace components
 	{
-		Exception::assert(m_instance != NULL, "No camera was attached in the level");
+		Camera* Camera::m_instance = NULL;
 
-		return m_instance;
-	}
+		Camera* Camera::getInstance()
+		{
+			Exception::assert(m_instance != NULL, "No camera was attached in the level");
 
-	Camera::Camera() : Component()
-	{
-		Exception::assert(m_instance == NULL, "Only one camera at a time is allowed");
-		m_instance = this;
-	}
+			return m_instance;
+		}
 
-	Camera::~Camera()
-	{
-		m_instance = NULL;
-	}
+		Camera::Camera() : Component()
+		{
+			Exception::assert(m_instance == NULL, "Only one camera at a time is allowed");
+			m_instance = this;
+		}
 
-	Vector2D Camera::screenSpaceToCameraSpace(Vector2D v)
-	{
-		return Vector2D(v.x, getAspect() * v.y);
-	}
+		Camera::~Camera()
+		{
+			m_instance = NULL;
+		}
 
-	Matrix3 Camera::calcViewMatrix(TransformSpace space)
-	{
-		if (space == TransformSpace::Camera)
-			return Matrix3::getEye();
+		Vector2D Camera::screenSpaceToCameraSpace(Vector2D v)
+		{
+			return Vector2D(v.x, getAspect() * v.y);
+		}
 
-		Transform* transform = getInstance()->getParent()->getTransform();
-		Matrix3 invTransform;
-		invTransform.rotate2D(-transform->rotation);
-		invTransform.translate2D(-transform->position);
-		return invTransform;
-	}
+		Matrix3 Camera::calcViewMatrix(TransformSpace space)
+		{
+			if (space == TransformSpace::Camera)
+				return Matrix3::getEye();
 
-	// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
-	Matrix3 Camera::calcProjectionMatrix(TransformSpace space)
-	{
-		Vector2D scale = 
-			space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2D::One;
-		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
-		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
-		float inverseAspect = resolution.x / resolution.y;
+			Transform* transform = getInstance()->getParent()->getTransform();
+			Matrix3 invTransform;
+			invTransform.rotate2D(-transform->rotation);
+			invTransform.translate2D(-transform->position);
+			return invTransform;
+		}
 
-		Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f, 
-					0.0f, 2.0f * inverseAspect * inverseScale.y, 0.0f, 
-					0.0f, 0.0f, 1.0f);
-		return mat;
-	}
+		// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
+		Matrix3 Camera::calcProjectionMatrix(TransformSpace space)
+		{
+			Vector2D scale =
+				space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2D::One;
+			Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
+			Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
+			float inverseAspect = resolution.x / resolution.y;
 
-	Matrix3 Camera::calcCamMatrix(TransformSpace space)
-	{
-		return calcProjectionMatrix(space) * calcViewMatrix(space);
-	}
+			Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f,
+				0.0f, 2.0f * inverseAspect * inverseScale.y, 0.0f,
+				0.0f, 0.0f, 1.0f);
+			return mat;
+		}
 
-	Vector2D Camera::getSize()
-	{
-		Vector2D scale = getInstance()->getParent()->getTransform()->scale;
-		return Vector2D(scale.x, scale.y * getAspect());
-	}
+		Matrix3 Camera::calcCamMatrix(TransformSpace space)
+		{
+			return calcProjectionMatrix(space) * calcViewMatrix(space);
+		}
 
-	float Camera::getAspect()
-	{
-		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
-		return resolution.y / resolution.x;
+		Vector2D Camera::getSize()
+		{
+			Vector2D scale = getInstance()->getParent()->getTransform()->scale;
+			return Vector2D(scale.x, scale.y * getAspect());
+		}
+
+		float Camera::getAspect()
+		{
+			Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
+			return resolution.y / resolution.x;
+		}
 	}
 }

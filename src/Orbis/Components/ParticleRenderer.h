@@ -13,66 +13,69 @@ using namespace effects;
 
 #include <vector>
 
-namespace components
+namespace orbis
 {
-	// a renderer which renders a particle system
-	class ParticleRenderer : public Component
+	namespace components
 	{
-	public:
-		// ctor
-		ParticleRenderer(Level* parentLevel, Texture* texture);
+		// a renderer which renders a particle system
+		class ParticleRenderer : public Component
+		{
+		public:
+			// ctor
+			ParticleRenderer(Level* parentLevel, Texture* texture);
 
-		// dtor
-		virtual ~ParticleRenderer();
+			// dtor
+			virtual ~ParticleRenderer();
 
-		// override
-		void start();
+			// override
+			void start();
 
-		// override
-		void update();
+			// override
+			void update();
 
-	protected:
-		// update the particles
-		void updateParticles();
+		protected:
+			// update the particles
+			void updateParticles();
 
-		// delete outdated particles
-		void cleanupParticles();
+			// delete outdated particles
+			void cleanupParticles();
 
-		// emit new particles
-		void emitParticles();
+			// emit new particles
+			void emitParticles();
 
-		// add a particle
-		void spawnParticle();
+			// add a particle
+			void spawnParticle();
 
-	private: 
-		// the texture
-		Texture* m_texture;
+		private:
+			// the texture
+			Texture* m_texture;
 
-		// the particles current lifetimes in seconds
-		std::vector<Particle*> m_particles;
+			// the particles current lifetimes in seconds
+			std::vector<Particle*> m_particles;
 
-		// emission sphere shell radius
-		float m_emissionSphereShellRadius;
+			// emission sphere shell radius
+			float m_emissionSphereShellRadius;
 
-		// emission rate in particles per second
-		unsigned int m_emissionRate;
+			// emission rate in particles per second
+			unsigned int m_emissionRate;
 
-		// time to next particle emission in second
-		float m_timeToNextEmission;
+			// time to next particle emission in second
+			float m_timeToNextEmission;
 
-		// the initial speed of the particles
-		float m_initialSpeed;
+			// the initial speed of the particles
+			float m_initialSpeed;
 
-		// the initial size of the partices
-		float m_initialSize;
+			// the initial size of the partices
+			float m_initialSize;
 
-		// amount of velocity inheritance
-		float m_velocityInheritance;
+			// amount of velocity inheritance
+			float m_velocityInheritance;
 
-		// the last position of the entity transforms
-		Vector2D m_lastEntityPos;
+			// the last position of the entity transforms
+			Vector2D m_lastEntityPos;
 
-		// the parent level
-		Level* m_parentLevel;
-	};
+			// the parent level
+			Level* m_parentLevel;
+		};
+	}
 }

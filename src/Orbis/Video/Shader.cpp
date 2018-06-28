@@ -6,7 +6,7 @@
 #include "../Libraries/GL.h"
 #include "../Components/Camera.h"
 using namespace core;
-using namespace components;
+using namespace orbis::components;
 
 #include "../../Base/System/Exception.h"
 using namespace base::system;
