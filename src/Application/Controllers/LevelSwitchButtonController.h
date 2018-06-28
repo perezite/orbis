@@ -7,7 +7,7 @@
 #include "../../Orbis/Game/LevelManager.h"
 #include "../../Orbis/Components/Component.h"
 using namespace orbis::components;
-using namespace input;
+using namespace orbis::input;
 using namespace orbis::game;
 
 namespace controllers

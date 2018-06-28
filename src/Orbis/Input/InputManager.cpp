@@ -21,26 +21,28 @@ namespace
 	}
 }
 
-namespace input
+namespace orbis
 {
-	InputManager* InputManager::getInstance()
+	namespace input
 	{
-		static InputManager instance;
-
-		return &instance;
-	}
-
-	void InputManager::update()
-	{
-		SDL_Event event;
-
-		m_tapsGoingDown.clear();
-		m_keysGoingDown.clear();
-
-		while (SDL_PollEvent(&event))
+		InputManager* InputManager::getInstance()
 		{
-			switch (event.type)
+			static InputManager instance;
+
+			return &instance;
+		}
+
+		void InputManager::update()
+		{
+			SDL_Event event;
+
+			m_tapsGoingDown.clear();
+			m_keysGoingDown.clear();
+
+			while (SDL_PollEvent(&event))
 			{
+				switch (event.type)
+				{
 				case SDL_QUIT:
 					m_hasQuitEvent = true;
 					break;
@@ -74,83 +76,84 @@ namespace input
 				case SDL_WINDOWEVENT:
 					switch (event.window.event)
 					{
-						case SDL_WINDOWEVENT_ENTER:
-							m_isCursorInsideWindow = true;
-							break;
-						case SDL_WINDOWEVENT_LEAVE:
-							m_isCursorInsideWindow = false;
-							m_tapsDown.clear();
-							m_tapsGoingDown.clear();
-							break;
+					case SDL_WINDOWEVENT_ENTER:
+						m_isCursorInsideWindow = true;
+						break;
+					case SDL_WINDOWEVENT_LEAVE:
+						m_isCursorInsideWindow = false;
+						m_tapsDown.clear();
+						m_tapsGoingDown.clear();
+						break;
 					}
 					break;
+				}
 			}
 		}
-	}
 
-	void InputManager::setQuitEvent()
-	{
-		m_hasQuitEvent = true;
-	}
-
-	bool InputManager::isKeyDown(KeyCode keyCode)
-	{
-		return m_keysDown.count(keyCode) == 1;
-	}
-
-	bool InputManager::isKeyGoingDown(KeyCode keyCode)
-	{
-		return m_keysGoingDown.count(keyCode) == 1;
-	}
-
-	bool InputManager::isTapDown()
-	{
-		return m_isCursorInsideWindow && m_tapsDown.size() > 0;
-	}
-
-	bool InputManager::isTapDown(Rect rect)
-	{
-		if (isTapDown())
+		void InputManager::setQuitEvent()
 		{
-			if (rect.contains(getTapPosition()))
-				return true;
+			m_hasQuitEvent = true;
 		}
 
-		return false;
-	}
-
-	bool InputManager::isTapIndexDown(signed long index)
-	{
-		return m_tapsDown.find(index) != m_tapsDown.end();
-	}
-
-	bool InputManager::isTapGoingDown()
-	{
-		return m_isCursorInsideWindow && m_tapsGoingDown.size() > 0;
-	}
-
-	bool InputManager::isTapGoingDown(Rect rect)
-	{
-		if (isTapGoingDown())
+		bool InputManager::isKeyDown(KeyCode keyCode)
 		{
-			if (rect.contains(getTapPosition()))
-				return true;
+			return m_keysDown.count(keyCode) == 1;
 		}
 
-		return false;
-	}
+		bool InputManager::isKeyGoingDown(KeyCode keyCode)
+		{
+			return m_keysGoingDown.count(keyCode) == 1;
+		}
 
-	bool InputManager::isTapIndexGoingDown(signed long index)
-	{
-		return m_tapsGoingDown.find(index) != m_tapsGoingDown.end();
-	}
+		bool InputManager::isTapDown()
+		{
+			return m_isCursorInsideWindow && m_tapsDown.size() > 0;
+		}
 
-	Vector2D InputManager::getTapPosition()
-	{
-		Exception::assert(isTapDown() || isTapGoingDown(), "getTapPosition() can only be called when a tap is pressed or going down");
+		bool InputManager::isTapDown(Rect rect)
+		{
+			if (isTapDown())
+			{
+				if (rect.contains(getTapPosition()))
+					return true;
+			}
 
-		Camera* cam = Camera::getInstance();
-		float aspect = cam->getAspect();
-		return Vector2D(m_tapPosition.x, aspect * m_tapPosition.y);
+			return false;
+		}
+
+		bool InputManager::isTapIndexDown(signed long index)
+		{
+			return m_tapsDown.find(index) != m_tapsDown.end();
+		}
+
+		bool InputManager::isTapGoingDown()
+		{
+			return m_isCursorInsideWindow && m_tapsGoingDown.size() > 0;
+		}
+
+		bool InputManager::isTapGoingDown(Rect rect)
+		{
+			if (isTapGoingDown())
+			{
+				if (rect.contains(getTapPosition()))
+					return true;
+			}
+
+			return false;
+		}
+
+		bool InputManager::isTapIndexGoingDown(signed long index)
+		{
+			return m_tapsGoingDown.find(index) != m_tapsGoingDown.end();
+		}
+
+		Vector2D InputManager::getTapPosition()
+		{
+			Exception::assert(isTapDown() || isTapGoingDown(), "getTapPosition() can only be called when a tap is pressed or going down");
+
+			Camera* cam = Camera::getInstance();
+			float aspect = cam->getAspect();
+			return Vector2D(m_tapPosition.x, aspect * m_tapPosition.y);
+		}
 	}
 }

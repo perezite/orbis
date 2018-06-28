@@ -6,7 +6,7 @@
 #include "../Game/Level.h"
 #include "../Effects/Tween.h"
 #include "../Video/Renderable.h"
-using namespace input;
+using namespace orbis::input;
 using namespace orbis::components;
 using namespace orbis::game;
 using namespace orbis::effects;

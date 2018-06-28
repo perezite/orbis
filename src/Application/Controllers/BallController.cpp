@@ -8,7 +8,7 @@ using namespace base::system;
 #include "../../orbis/Input/InputManager.h"
 using namespace orbis::core;
 using namespace orbis::game;
-using namespace input;
+using namespace orbis::input;
 
 #define __STATE_AIMING
 #define __STATE_FLYING

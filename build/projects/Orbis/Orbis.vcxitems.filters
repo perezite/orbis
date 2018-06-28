@@ -4,9 +4,6 @@
     <Filter Include="Video">
       <UniqueIdentifier>{7edbb78a-0e92-4b45-8a46-211ce23701f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Orbis">
-      <UniqueIdentifier>{7707beba-0cf5-4b14-86ef-48c805563d6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{1d231c7b-aa4e-4647-bbaf-d6305a0947fb}</UniqueIdentifier>
     </Filter>
@@ -25,13 +22,13 @@
     <Filter Include="Effects">
       <UniqueIdentifier>{c0fd0357-29d4-49a0-9300-07fba861a548}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{a4e2121d-c599-44a4-a875-c9d7b9297012}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.cpp">
       <Filter>Video</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis\OrbisMain.cpp">
-      <Filter>Orbis</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogHelper.cpp">
       <Filter>Core</Filter>
@@ -122,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\DebugRenderDevice.cpp">
       <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Engine\OrbisMain.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

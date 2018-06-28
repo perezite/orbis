@@ -151,10 +151,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 		..\src\Orbis\Libraries\SDL.h = ..\src\Orbis\Libraries\SDL.h
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orbis", "Orbis", "{353B132D-2DF2-4B6E-B0AE-E6ECE00CA49C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{353B132D-2DF2-4B6E-B0AE-E6ECE00CA49C}"
 	ProjectSection(SolutionItems) = preProject
-		..\src\Orbis\Orbis\OrbisMain.h = ..\src\Orbis\Orbis\OrbisMain.h
-		..\src\Orbis\Orbis\Settings.h = ..\src\Orbis\Orbis\Settings.h
+		..\src\Orbis\Engine\OrbisMain.h = ..\src\Orbis\Engine\OrbisMain.h
+		..\src\Orbis\Engine\Settings.h = ..\src\Orbis\Engine\Settings.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Video", "Video", "{EC8B3945-8C90-4988-8E0C-CE4FE6A9A403}"

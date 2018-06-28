@@ -10,11 +10,11 @@
 #include "Levels/Level10.h"
 using namespace levels;
 
-#include "../Orbis/Orbis/OrbisMain.h"
+#include "../Orbis/Engine/OrbisMain.h"
 #include "../Orbis/Core/LogHelper.h"
 #include "../Orbis/Game/LevelManager.h"
 #include "../Base/System/Exception.h"
-using namespace orbis;
+using namespace orbis::engine;
 using namespace orbis::core;
 using namespace orbis::game;
 using namespace base::system;
