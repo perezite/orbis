@@ -1,6 +1,6 @@
 TODO:	
 - Refactoring
-	- In jedem Ordner von Base und Orbis jeweils ein Metaheaderfiles hinzufügen
+	- In jedem Ordner von Base und Orbis jeweils ein Metaheaderfile hinzufügen
 	- In Application die Metaheaderfiles verwenden
 	- Ermitteln, ob das Precompilen der Metaheaderfiles im Application-Project etwas bringt
 	- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
