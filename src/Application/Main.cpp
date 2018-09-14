@@ -19,7 +19,6 @@ using namespace orb::core;
 using namespace orb::game;
 using namespace base::system;
 
-#include <iostream>
 
 int main(int argc, char* args[])
 {	
