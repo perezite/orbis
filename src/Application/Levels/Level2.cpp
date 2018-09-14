@@ -10,13 +10,7 @@
 #include "../Controllers/LevelSwitchButtonController.h"
 using namespace controllers;
 
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Components/RectangleRenderer.h"
-#include "../../Orbis/Components/Camera.h"
-#include "../../Orbis/Video/VideoManager.h"
-#include "../../Orbis/Core/DebugHelper.h"
-#include "../../Base/Math/Vector2D.h"
-#include "../../Base/Math/MathHelper.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::components;
 using namespace orb::core;
 using namespace base::math;

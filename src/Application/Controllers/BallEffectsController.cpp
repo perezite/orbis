@@ -1,7 +1,6 @@
 #include "BallEffectsController.h"
 
-#include "../../Orbis/Core/LogHelper.h"
-#include "../../Orbis/Core/TimeManager.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::core;
 
 #define __STATE_EXPLODING

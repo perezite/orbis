@@ -4,10 +4,7 @@
 #include "Level8.h"
 #include "Level10.h"
 
-#include "../../Orbis/Components/Camera.h"
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Components/ParticleRenderer.h"
-#include "../../ORbis/Video/VideoManager.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::components;
 using namespace orb::video;
 

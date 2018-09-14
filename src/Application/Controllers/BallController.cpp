@@ -3,9 +3,7 @@
 #include "../../Base/System/Exception.h"
 using namespace base::system;
 
-#include "../../Orbis/Core/LogHelper.h"
-#include "../../Orbis/Game/Entity.h"
-#include "../../orbis/Input/InputManager.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::core;
 using namespace orb::game;
 using namespace orb::input;

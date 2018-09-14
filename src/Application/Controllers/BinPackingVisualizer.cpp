@@ -5,8 +5,7 @@
 using namespace base::math;
 using namespace base::algorithms;
 
-#include "../../Orbis/Core/DebugHelper.h"
-#include "../../Orbis/Input/InputManager.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::core;
 using namespace orb::input;
 

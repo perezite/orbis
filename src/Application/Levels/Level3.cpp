@@ -8,11 +8,7 @@
 #include "../Controllers/WobbleController.h"
 using namespace controllers;
 
-#include "../../Orbis/Video/VideoManager.h"
-#include "../../Orbis/Components/Camera.h"
-#include "../../Orbis/Components/RectangleRenderer.h"
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Core/DebugHelper.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::video;
 using namespace orb::components;
 using namespace orb::core;

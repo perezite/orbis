@@ -1,8 +1,5 @@
 TODO:	
 - Refactoring
-	- Orbis.h erstellen, welches alle Files einbindet
-	- Precompilation für Android nachziehen
-	- Application so umschreiben, dass es nur noch Orbis.h verwendet
 	- Orbis umschreiben, so dass es nur noch Orbis.h verwendet
 	- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
 	- StringHelper::Load() in separate Klasse Serialization verschieben

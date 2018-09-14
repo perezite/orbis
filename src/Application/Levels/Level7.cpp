@@ -7,9 +7,7 @@
 #include "../Controllers/BallController.h"
 using namespace controllers;
 
-#include "../../Orbis/Components/Camera.h"
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Video/VideoManager.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::components;
 using namespace orb::video;
 

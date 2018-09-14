@@ -1,7 +1,6 @@
 #include "WobbleController.h"
 
-#include "../../Orbis/Core/TimeManager.h"
-#include "../../Orbis/Game/Entity.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::core;
 using namespace orb::game;
 

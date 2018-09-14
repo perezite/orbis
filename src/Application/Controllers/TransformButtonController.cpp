@@ -1,8 +1,6 @@
 #include "TransformButtonController.h"
 
-#include "../../Orbis/Input/InputManager.h"
-#include "../../Orbis/Core/TimeManager.h"
-#include "../../Orbis/Game/Transform.h"
+#include "../../Orbis/Orbis.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
 using namespace orb::input;

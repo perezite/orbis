@@ -7,10 +7,7 @@
 #include "../Controllers/BinPackingVisualizer.h"
 using namespace controllers;
 
-#include "../../Orbis/Components/Camera.h"
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Video/VideoManager.h"
-#include "../../Orbis/Core/DebugHelper.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::components;
 using namespace orb::video;
 using namespace orb::core;

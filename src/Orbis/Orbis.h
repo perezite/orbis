@@ -11,6 +11,7 @@
 
 #include "Core\AssetHelper.h"
 #include "Core\DebugHelper.h"
+#include "Core\LogHelper.h"
 #include "Core\TimeManager.h"
 
 #include "Effects\EffectsManager.h"

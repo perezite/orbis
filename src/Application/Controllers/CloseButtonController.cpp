@@ -2,10 +2,7 @@
 
 #include "SpriteController.h"
 
-#include "../../Orbis/Input/InputManager.h"
-#include "../../Orbis/Core/LogHelper.h"
-#include "../../Orbis/Game/Transform.h"
-#include "../../Orbis/Game/Entity.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::input;
 using namespace orb::core;
 using namespace orb::game;

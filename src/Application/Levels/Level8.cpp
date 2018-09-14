@@ -7,12 +7,7 @@
 #include "../Controllers/TweenTester.h"
 using namespace controllers;
 
-#include "../../Orbis/Components/TweenInspector.h"
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Components/Camera.h"
-#include "../../Orbis/Video/VideoManager.h"
-#include "../../Orbis/Effects/EffectsManager.h"
-#include "../../Orbis/Core/DebugHelper.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb::components;
 using namespace orb::video;
 using namespace orb::effects;
