@@ -1,6 +1,6 @@
 #include "AssetHelper.h"
 
-#include "../Libraries/SDL.h"
+#include "../Orbis.h"
 
 #include "../../Base/System/EnvironmentHelper.h"
 #include "../../Base/System/Exception.h"

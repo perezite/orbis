@@ -1,7 +1,6 @@
 #include "SpriteRenderer.h"
 
-#include "../Video/VideoManager.h"
-#include "../Core/TimeManager.h"
+#include "../Orbis.h"
 using namespace orb::video;
 using namespace orb::core;
 

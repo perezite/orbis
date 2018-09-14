@@ -1,7 +1,6 @@
 #include "Tween.h"
 
-#include "../Core/AssetHelper.h"
-#include "../Core/TimeManager.h"
+#include "../Orbis.h"
 using namespace orb::core;
 
 #include "../../Base/System/StringHelper.h"

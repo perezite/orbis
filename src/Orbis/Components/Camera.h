@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Component.h"
-
-#include "../../Orbis/Game/TransformSpace.h"
+#include "../Orbis.h"
 using namespace orb::game;
 
 #include "../../Base/Math/Matrix3.h"

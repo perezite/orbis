@@ -1,9 +1,6 @@
 #pragma once
 
-#include "Component.h"
-
-#include "../Video/Texture.h"
-#include "../Video/Renderable.h"
+#include "../Orbis.h"
 using namespace orb::video;
 
 namespace orb

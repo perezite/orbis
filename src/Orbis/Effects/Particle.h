@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../Game/Transform.h"
-#include "../Video/Renderable.h"
-#include "../Video/Color.h"
+#include "../Orbis.h"
 using namespace orb::game;
 using namespace orb::video;
 

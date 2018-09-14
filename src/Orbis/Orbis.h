@@ -3,6 +3,7 @@
 #include "Libraries\SDL.h"
 
 #include "Components\Component.h"
+#include "Components\Camera.h"
 #include "Components\ParticleRenderer.h"
 #include "Components\RectangleRenderer.h"
 #include "Components\SimpleParticleRenderer.h"
@@ -19,6 +20,7 @@
 #include "Effects\Tween.h"
 
 #include "Engine\OrbisMain.h"
+#include "Engine\Settings.h"
 
 #include "Game\Entity.h"
 #include "Game\Level.h"

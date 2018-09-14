@@ -1,8 +1,6 @@
 #include "Level.h"
 
-#include "../Video/VideoManager.h"
-#include "../Effects/EffectsManager.h"
-#include "../Core/TimeManager.h"
+#include "../Orbis.h"
 using namespace orb::video;
 using namespace orb::effects;
 using namespace orb::core;

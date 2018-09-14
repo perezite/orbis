@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-#include "../Video/VideoManager.h"
+#include "../Orbis.h"
 using namespace orb::video;
 
 namespace orb

@@ -1,12 +1,6 @@
 #pragma once
 
-#include "Component.h"
-
-#include "../Video/Texture.h"
-#include "../Video/Renderable.h"
-#include "../Game/Transform.h"
-#include "../Effects/Particle.h"
-#include "../Effects/Tween.h"
+#include "../Orbis.h"
 using namespace orb::video;
 using namespace orb::game;
 using namespace orb::effects;

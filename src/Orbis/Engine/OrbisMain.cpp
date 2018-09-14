@@ -1,11 +1,6 @@
 #include "OrbisMain.h"
 
-#include "../Core/TimeManager.h"
-#include "../Core/LogHelper.h"
-#include "../Game/LevelManager.h"
-#include "../Input/InputManager.h"
-#include "../Libraries/SDL.h"
-#include "../Engine/Settings.h"
+#include "../Orbis.h"
 using namespace orb::core;
 using namespace orb::game;
 using namespace orb::input;

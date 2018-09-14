@@ -1,9 +1,6 @@
 #include "SimpleParticleRenderer.h"
 
-#include "TweenInspector.h"
-
-#include "../Core/TimeManager.h"
-#include "../Game/LevelManager.h"
+#include "../Orbis.h"
 using namespace orb::video;
 using namespace orb::core;
 using namespace orb::game;
