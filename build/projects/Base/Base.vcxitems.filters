@@ -13,6 +13,15 @@
     <Filter Include="Serialization">
       <UniqueIdentifier>{a230f218-d4c5-4601-9a5c-a135fc7081e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\Headers">
+      <UniqueIdentifier>{1d6ff6b6-87d0-43ae-8546-c2d303c0a4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Serialization\Headers">
+      <UniqueIdentifier>{41f26c3f-46b2-4fb1-bbfd-3092650b3b12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Headers">
+      <UniqueIdentifier>{e4cab05a-6183-45f2-a448-e42de9199ee7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.cpp">
@@ -42,5 +51,46 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.h">
+      <Filter>Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h">
+      <Filter>Math\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.h">
+      <Filter>Math\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Rect.h">
+      <Filter>Math\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Range.h">
+      <Filter>Math\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.h">
+      <Filter>Math\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.h">
+      <Filter>Math\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.h">
+      <Filter>Serialization\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.h">
+      <Filter>Serialization\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h">
+      <Filter>System\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryHelper.h">
+      <Filter>System\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h">
+      <Filter>System\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.h">
+      <Filter>System\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

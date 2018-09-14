@@ -25,6 +25,30 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{a4e2121d-c599-44a4-a875-c9d7b9297012}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Headers">
+      <UniqueIdentifier>{24ad8df6-283d-4305-b8d0-83b22e4026ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Headers">
+      <UniqueIdentifier>{0d7c9ea0-d0b7-45e3-b828-ea13e480aeb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effects\Headers">
+      <UniqueIdentifier>{d1f8df55-563f-4230-a7e9-29d671e1c0c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Headers">
+      <UniqueIdentifier>{12c57157-c9c4-44b9-9a6c-0fa94ee88d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Headers">
+      <UniqueIdentifier>{2e35dcf9-2703-4937-ba3f-67bcff7bc6c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Headers">
+      <UniqueIdentifier>{eb9438b1-6060-46c2-9a00-74dd52f19f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Headers">
+      <UniqueIdentifier>{645f116f-950c-4b1d-bd7e-1ff9590e0ff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Video\Headers">
+      <UniqueIdentifier>{691b24fa-58b7-42bc-ba23-957479d0bfbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.cpp">
@@ -126,5 +150,119 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\TweenInspector.h">
+      <Filter>Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SpriteRenderer.h">
+      <Filter>Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SimpleParticleRenderer.h">
+      <Filter>Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\RectangleRenderer.h">
+      <Filter>Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleRenderer.h">
+      <Filter>Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Component.h">
+      <Filter>Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Camera.h">
+      <Filter>Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\TimeManager.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogHelper.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugHelper.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Tween.h">
+      <Filter>Effects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Particle.h">
+      <Filter>Effects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\EffectsManager.h">
+      <Filter>Effects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Engine\Settings.h">
+      <Filter>Engine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Engine\OrbisMain.h">
+      <Filter>Engine\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\TransformSpace.h">
+      <Filter>Game\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Transform.h">
+      <Filter>Game\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelManager.h">
+      <Filter>Game\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Level.h">
+      <Filter>Game\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Entity.h">
+      <Filter>Game\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Input\InputManager.h">
+      <Filter>Input\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Input\KeyCode.h">
+      <Filter>Input\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\GL.h">
+      <Filter>Libraries\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\SDL.h">
+      <Filter>Libraries\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Window.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\TextureChart.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\TextureAtlas.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Texture.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Shader.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Renderable.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderMode.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\RenderDevice.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Mesh.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Material.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\DebugRenderDevice.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Color.h">
+      <Filter>Video\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
