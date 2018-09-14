@@ -15,6 +15,7 @@ namespace orb
 
 		Particle::~Particle()
 		{
+			VideoManager::getInstance()->getRenderDevice();
 			VideoManager::getInstance()->getRenderDevice()->deleteRenderable(m_renderable);
 			delete m_renderable;
 		}

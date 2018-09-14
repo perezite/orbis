@@ -1,8 +1,9 @@
 TODO:	
 - Refactoring
-	- In jedem Ordner von Base und Orbis jeweils ein Metaheaderfile hinzufügen
-	- In Application die Metaheaderfiles verwenden
-	- Ermitteln, ob das Precompilen der Metaheaderfiles im Application-Project etwas bringt
+	- Orbis.h erstellen, welches alle Files einbindet
+	- Precompilation für Android nachziehen
+	- Application so umschreiben, dass es nur noch Orbis.h verwendet
+	- Orbis umschreiben, so dass es nur noch Orbis.h verwendet
 	- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
 	- StringHelper::Load() in separate Klasse Serialization verschieben
 	- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen. Und soll ausserdem nicht mehr Update() heissen!

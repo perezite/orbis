@@ -1,5 +1,4 @@
 #include "EffectsManager.h"
-#include "EffectsManager.h"
 
 namespace orb
 {

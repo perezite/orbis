@@ -31,5 +31,3 @@
 	#endif
 
 #endif
-
-#include <stdlib.h>

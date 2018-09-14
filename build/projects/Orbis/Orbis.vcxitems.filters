@@ -124,4 +124,7 @@
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis.h" />
+  </ItemGroup>
 </Project>

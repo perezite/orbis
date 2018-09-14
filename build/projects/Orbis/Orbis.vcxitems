@@ -47,4 +47,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Window.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis.h" />
+  </ItemGroup>
 </Project>
