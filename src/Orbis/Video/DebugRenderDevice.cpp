@@ -1,11 +1,7 @@
 #include "RenderDevice.h"
 
-#include "Shader.h"
-#include "VideoManager.h"
-
-#include "../Components/Camera.h"
-#include "../Core/LogHelper.h"
 #include "../Engine/Settings.h"
+#include "../Orbis.h"
 using namespace orb::components;
 using namespace orb::core;
 
