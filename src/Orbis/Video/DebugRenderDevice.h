@@ -5,8 +5,6 @@
 
 #include "../Libraries/GL.h"
 
-#include "../Orbis.h"
-
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
 using namespace base::math;

@@ -1,6 +1,6 @@
 #include "DebugHelper.h"
 
-#include "../Orbis.h"
+#include "../Video/VideoManager.h"
 using namespace orb::video;
 
 #ifndef _DEBUG 

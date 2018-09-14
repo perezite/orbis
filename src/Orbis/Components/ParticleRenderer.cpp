@@ -1,6 +1,10 @@
 #include "ParticleRenderer.h"
 
-#include "../Orbis.h" 
+#include "TweenInspector.h"
+
+#include "../Core/TimeManager.h"
+#include "../Game/LevelManager.h"
+#include "../Effects/EffectsManager.h"
 using namespace orb::core;
 using namespace orb::game;
 using namespace orb::effects;

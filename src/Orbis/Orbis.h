@@ -1,7 +1,8 @@
 #include <iostream>
 
+#include "Libraries\SDL.h"
+
 #include "Components\Component.h"
-#include "Components\Camera.h"
 #include "Components\ParticleRenderer.h"
 #include "Components\RectangleRenderer.h"
 #include "Components\SimpleParticleRenderer.h"
@@ -18,7 +19,6 @@
 #include "Effects\Tween.h"
 
 #include "Engine\OrbisMain.h"
-#include "Engine\Settings.h"
 
 #include "Game\Entity.h"
 #include "Game\Level.h"
@@ -33,14 +33,13 @@
 #include "Libraries\SDL.h"
 
 #include "Video\Color.h"
-#include "Video\VideoManager.h"
 #include "Video\DebugRenderDevice.h"
 #include "Video\Material.h"
 #include "Video\Mesh.h"
 #include "Video\RenderDevice.h"
-#include "Video\RenderMode.h"
 #include "Video\Shader.h"
 #include "Video\Texture.h"
 #include "Video\TextureAtlas.h"
 #include "Video\TextureChart.h"
+#include "Video\VideoManager.h"
 #include "Video\Window.h"

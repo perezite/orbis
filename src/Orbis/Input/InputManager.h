@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../Orbis.h"
+#include "KeyCode.h"
+
+#include "../Game/TransformSpace.h"
 using namespace orb::game;
 
 #include "../../Base/Math/Vector2D.h"

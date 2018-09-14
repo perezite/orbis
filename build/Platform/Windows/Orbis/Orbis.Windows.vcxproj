@@ -16,13 +16,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Precompiled.cpp">
+    <ClCompile Include="..\Common\Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Precompiled.h" />
+    <ClInclude Include="..\Common\Precompiled.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B20437F4-B2E5-487D-A1C6-2477AF2BB796}</ProjectGuid>

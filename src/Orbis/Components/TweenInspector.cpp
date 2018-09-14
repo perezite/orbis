@@ -1,6 +1,10 @@
 #include "TweenInspector.h"
 
-#include "../Orbis.h"
+#include "../../Base/System/EnvironmentHelper.h"
+#include "../../Orbis/Video/VideoManager.h"
+#include "../../Orbis/Core/TimeManager.h"
+#include "../../Orbis/Core/LogHelper.h"
+#include "../Core/DebugHelper.h"
 using namespace base::system;
 using namespace orb::video;
 using namespace orb::core;

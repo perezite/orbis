@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../Orbis.h"
+#include "Transform.h"
+
+#include "../Components/Component.h"
 using namespace orb::components;
 
 #include "../../Base/Math/Vector2D.h"

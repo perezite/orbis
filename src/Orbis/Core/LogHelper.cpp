@@ -1,6 +1,6 @@
 #include "LogHelper.h"
 
-#include "../Orbis.h"
+#include "../Libraries/SDL.h"
 
 #include <stdarg.h>
 

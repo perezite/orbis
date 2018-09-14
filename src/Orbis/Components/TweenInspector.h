@@ -1,6 +1,11 @@
 #pragma once
 
-#include "../Orbis.h"
+#include "../Input/InputManager.h"
+#include "../Components/Component.h"
+#include "../Game/Entity.h"
+#include "../Game/Level.h"
+#include "../Effects/Tween.h"
+#include "../Video/Renderable.h"
 using namespace orb::input;
 using namespace orb::components;
 using namespace orb::game;

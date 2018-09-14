@@ -1,6 +1,7 @@
 #include "InputManager.h"
 
-#include "../Orbis.h"
+#include "../Video/VideoManager.h"
+#include "../Components/Camera.h"
 using namespace orb::video;
 using namespace orb::components;
 

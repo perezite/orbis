@@ -1,13 +1,11 @@
 #pragma once
 
-//#include "Window.h"
-//#include "RenderDevice.h"
-//#include "DebugRenderDevice.h"
-//#include "Texture.h"
-//#include "Shader.h"
-//#include "TextureAtlas.h"
-
-#include "../Orbis.h"
+#include "Window.h"
+#include "RenderDevice.h"
+#include "DebugRenderDevice.h"
+#include "Texture.h"
+#include "Shader.h"
+#include "TextureAtlas.h"
 
 #include <string>
 #include <map>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Orbis.h"
+#include "../Game/Entity.h"
 using namespace orb::game;
 
 #include <vector>

@@ -1,6 +1,7 @@
 #include "RectangleRenderer.h"
 
-#include "../Orbis.h"
+#include "../Core/TimeManager.h"
+#include "../Video/VideoManager.h"
 using namespace orb::core;
 using namespace orb::video;
 
