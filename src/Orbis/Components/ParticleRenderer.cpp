@@ -32,7 +32,7 @@ namespace orb
 		void ParticleRenderer::start()
 		{
 			Tween* alphaTween = EffectsManager::getInstance()->getTween("Tweens/GreenParticlesAlpha.tween");
-			LevelManager::getInstance()->getCurrentLevel()->addEntity(TweenInspector::tryConstructEntity(m_parentLevel, alphaTween, KeyCode::b));
+			// LevelManager::getInstance()->getCurrentLevel()->addEntity(TweenInspector::tryConstructEntity(m_parentLevel, alphaTween, KeyCode::b));
 		}
 
 		void ParticleRenderer::update()

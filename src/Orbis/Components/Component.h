@@ -1,5 +1,8 @@
 #pragma once
 
+//#include "../Inspectors/Inspector.h"
+//using namespace orb::inspectors;
+
 #include <stddef.h>
 
 namespace orb
@@ -38,9 +41,15 @@ namespace orb
 			// get entity
 			game::Entity *getParent() { return m_parent; }
 
+			// add an inspector
+			// void SetInspector(orb::inspectors::Inspector* inspector) { m_inspector = inspector; };
+
 		private:
 			// entity which uses the component
 			game::Entity *m_parent;
+
+			// an inspector for this entity
+			// orb::inspectors::Inspector *m_inspector;
 		};
 	}
 }

@@ -49,6 +49,9 @@
     <Filter Include="Video\Headers">
       <UniqueIdentifier>{691b24fa-58b7-42bc-ba23-957479d0bfbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inspectors">
+      <UniqueIdentifier>{af7789e1-4b0d-4c5d-82c6-73c67a3ab095}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.cpp">
@@ -146,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\BrickInspector.cpp">
+      <Filter>Inspectors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +269,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.h">
       <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\BrickInspector.h">
+      <Filter>Inspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\Inspector.h">
+      <Filter>Inspectors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
