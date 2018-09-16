@@ -1,7 +1,7 @@
 #include "OrbisMain.h"
 
 #include "../Core/TimeManager.h"
-#include "../Core/LogHelper.h"
+#include "../Core/LogUtil.h"
 #include "../Game/LevelManager.h"
 #include "../Input/InputManager.h"
 #include "../Libraries/SDL.h"
@@ -52,7 +52,7 @@ namespace orb
 			{
 				// track current performance
 				float currentPerformance = 1000.0f / float(m_numFrames);
-				LogHelper::logMessage("%f ms/frame", currentPerformance);
+				LogUtil::logMessage("%f ms/frame", currentPerformance);
 				m_startTicks += 1000;
 				m_numFrames = 0;
 
@@ -60,7 +60,7 @@ namespace orb
 				m_numSamples++;
 				m_cumulativePerformance += currentPerformance;
 				float average = m_cumulativePerformance / float(m_numSamples);
-				LogHelper::logMessage("Average: %f ms/frame, samples: %d", average, m_numSamples);
+				LogUtil::logMessage("Average: %f ms/frame, samples: %d", average, m_numSamples);
 			}
 		}
 	}

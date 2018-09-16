@@ -5,7 +5,7 @@
 #include "VideoManager.h"
 
 #include "../Components/Camera.h"
-#include "../Core/LogHelper.h"
+#include "../Core/LogUtil.h"
 #include "../Engine/Settings.h"
 using namespace orb::components;
 using namespace orb::core;
@@ -111,7 +111,7 @@ namespace orb
 			}
 
 #ifdef ORBIS_DEBUG_RENDERDEVICE
-			LogHelper::logMessage("Number of draw calls: %d", count);
+			LogUtil::logMessage("Number of draw calls: %d", count);
 #endif 
 
 			// cleanup

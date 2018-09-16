@@ -7,7 +7,7 @@ using namespace orb::video;
 using namespace orb::effects;
 using namespace orb::core;
 
-#include "../../Base/System/MemoryHelper.h"
+#include "../../Base/System/MemoryUtil.h"
 #include "../../Base/System/Exception.h"
 using namespace base::system;
 
@@ -21,7 +21,7 @@ namespace orb
 		{
 			EffectsManager::getInstance()->clear();
 			VideoManager::getInstance()->clear();
-			MemoryHelper::clear(m_entities);
+			MemoryUtil::clear(m_entities);
 		}
 
 		void Level::initialize()

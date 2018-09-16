@@ -1,10 +1,10 @@
 #include "TweenInspector.h"
 
-#include "../../Base/System/EnvironmentHelper.h"
+#include "../../Base/System/EnvironmentUtil.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/TimeManager.h"
-#include "../../Orbis/Core/LogHelper.h"
-#include "../Core/DebugHelper.h"
+#include "../../Orbis/Core/LogUtil.h"
+#include "../Core/DebugUtil.h"
 using namespace base::system;
 using namespace orb::video;
 using namespace orb::core;
@@ -240,7 +240,7 @@ namespace orb
 			ShiftSpline(m_tween.getSpline(), Vector2D(0.5f, 0.5f));
 			m_tween.saveToJsonFile();
 			ShiftSpline(m_tween.getSpline(), Vector2D(-0.5f, -0.5f));
-			LogHelper::logMessage("Tween data saved");
+			LogUtil::logMessage("Tween data saved");
 		}
 
 		void TweenInspector::toggle()

@@ -8,8 +8,8 @@ using namespace orb::video;
 using namespace orb::core;
 using namespace orb::game;
 
-#include "../../Base/Math/Math.h"
-#include "../../Base/System/MemoryHelper.h"
+#include "../../Base/Math/MathUtil.h"
+#include "../../Base/System/MemoryUtil.h"
 using namespace base::math;
 using namespace base::system;
 
@@ -22,7 +22,7 @@ namespace orb
 
 		SimpleParticleRenderer::~SimpleParticleRenderer()
 		{
-			MemoryHelper::clear(m_particles);
+			MemoryUtil::clear(m_particles);
 		}
 
 		void SimpleParticleRenderer::start()

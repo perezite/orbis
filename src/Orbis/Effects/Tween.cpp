@@ -1,10 +1,10 @@
 #include "Tween.h"
 
-#include "../Core/AssetHelper.h"
+#include "../Core/AssetUtil.h"
 #include "../Core/TimeManager.h"
 using namespace orb::core;
 
-#include "../../Base/System/StringHelper.h"
+#include "../../Base/System/StringUtil.h"
 using namespace base::system;
 
 #include <sstream>
@@ -16,9 +16,9 @@ namespace orb
 		Tween::Tween(std::string assetPath) :
 			m_assetPath(assetPath), m_elapsed(0.0f)
 		{
-			if (AssetHelper::textAssetExists(m_assetPath))
+			if (AssetUtil::textAssetExists(m_assetPath))
 			{
-				std::string json = AssetHelper::loadTextAsset(m_assetPath);
+				std::string json = AssetUtil::loadTextAsset(m_assetPath);
 				m_spline.loadFromJson(json);
 			}
 		}
@@ -38,7 +38,7 @@ namespace orb
 
 		void Tween::saveToJsonFile()
 		{
-			AssetHelper::saveTextAsset(m_assetPath, m_spline.toJson());
+			AssetUtil::saveTextAsset(m_assetPath, m_spline.toJson());
 		}
 	}
 }

@@ -1,6 +1,6 @@
 #include "Spline.h"
 
-#include "../System/StringHelper.h"
+#include "../System/StringUtil.h"
 #include "../Serialization/JsonReader.h"
 #include "../Serialization/JsonWriter.h"
 using namespace base::system;

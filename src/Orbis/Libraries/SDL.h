@@ -2,7 +2,7 @@
 #define _ORBIS_SDL_H
 
 #include "../../Base/System/Exception.h"
-#include "../../Base/System/StringHelper.h"
+#include "../../Base/System/StringUtil.h"
 using namespace base::system;
 
 #include <SDL2/SDL.h>

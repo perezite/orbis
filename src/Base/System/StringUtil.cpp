@@ -1,4 +1,4 @@
-#include "StringHelper.h"
+#include "StringUtil.h"
 
 #include <stdarg.h>
 #include <stdlib.h>
@@ -13,7 +13,7 @@ namespace base
 {
 	namespace system
 	{
-		std::string StringHelper::getFormatted(std::string format, int maximalFormattedLength, ...)
+		std::string StringUtil::getFormatted(std::string format, int maximalFormattedLength, ...)
 		{
 			va_list args;
 			va_start(args, maximalFormattedLength);
@@ -23,7 +23,7 @@ namespace base
 			return result;
 		}
 
-		std::string StringHelper::getFormatted(std::string format, ...)
+		std::string StringUtil::getFormatted(std::string format, ...)
 		{
 			va_list args;
 
@@ -34,7 +34,7 @@ namespace base
 			return result;
 		}
 
-		std::string StringHelper::getFormatted(std::string format, int maximalFormattedLength, va_list args)
+		std::string StringUtil::getFormatted(std::string format, int maximalFormattedLength, va_list args)
 		{
 			char *buffer = (char*)malloc(sizeof(char) * (maximalFormattedLength + 1));
 

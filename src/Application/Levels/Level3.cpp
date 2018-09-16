@@ -5,7 +5,7 @@
 #include "LevelUtil.h"
 
 #include "../Controllers/DebugLineTester.h"
-#include "../Controllers/WobbleController.h"
+#include "../Controllers/WobbleEffect.h"
 using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
@@ -13,7 +13,7 @@ using namespace orb::video;
 using namespace orb::components;
 using namespace orb::core;
 
-#include "../../Base/Math/Math.h"
+#include "../../Base/Math/MathUtil.h"
 using namespace base::math;
 
 #include <iostream>
@@ -51,12 +51,12 @@ namespace levels
 			bool hasTexture = ++counter % 2 == 0;
 
 			Entity* entity = new Entity(hasTexture ? "Textured sprite" : "Solid sprite");
-			Transform trans = Transform(Vector2D(Math::getRandom() - 0.5f, Math::getRandom() - 0.5f), 0.0f, Vector2D::One);
+			Transform trans = Transform(Vector2D(MathUtil::getRandom() - 0.5f, MathUtil::getRandom() - 0.5f), 0.0f, Vector2D::One);
 			entity->setTransform(trans);
 
 			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
 			entity->addComponent(hasTexture ? (Component*)new SpriteRenderer(texture) : (Component*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
-			entity->addComponent(new WobbleController());
+			entity->addComponent(new WobbleEffect());
 
 			this->addEntity(entity);
 		}

@@ -11,7 +11,7 @@
 using namespace levels;
 
 #include "../Orbis/Engine/OrbisMain.h"
-#include "../Orbis/Core/LogHelper.h"
+#include "../Orbis/Core/LogUtil.h"
 #include "../Orbis/Game/LevelManager.h"
 #include "../Base/System/Exception.h"
 using namespace orb::engine;
@@ -29,13 +29,13 @@ int main(int argc, char* args[])
 	}
 	catch (Exception e)
 	{
-		LogHelper::logMessage("%.1023s", e.what().c_str());
+		LogUtil::logMessage("%.1023s", e.what().c_str());
 
 		#if defined(_DEBUG)
 			throw e;
 		#endif
 
- 		LogHelper::showMessageBox(e.what(), "Exception");
+ 		LogUtil::showMessageBox(e.what(), "Exception");
 	}
 
 	return 0;

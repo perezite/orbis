@@ -7,7 +7,7 @@ namespace base
 {
 	namespace system
 	{
-		class EnvironmentHelper
+		class EnvironmentUtil
 		{
 		public:
 			// get the path of the directory the exectuable resides in

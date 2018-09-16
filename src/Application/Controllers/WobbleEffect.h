@@ -5,7 +5,7 @@ using namespace orb::components;
 
 namespace controllers
 {
-	class WobbleController : public Component
+	class WobbleEffect : public Component
 	{
 	public:
 		// start

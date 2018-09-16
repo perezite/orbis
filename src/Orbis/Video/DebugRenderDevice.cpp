@@ -4,7 +4,7 @@
 #include "VideoManager.h"
 
 #include "../Components/Camera.h"
-#include "../Core/LogHelper.h"
+#include "../Core/LogUtil.h"
 #include "../Engine/Settings.h"
 using namespace orb::components;
 using namespace orb::core;

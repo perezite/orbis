@@ -1,6 +1,5 @@
 TODO:	
 - Refactoring
-	- Helpers entweder umbenennen in Util oder das Util gleich komplett weglassen
 	- StringHelper::Load() in separate Klasse Serialization verschieben
 	- Tween::Update Funktion soll den neuen Wert zurückgeben anstatt einen Zeiger zu nehmen. Und soll ausserdem nicht mehr Update() heissen!
 	- Der Inspector soll an der Komponente hängen, nicht am Entity

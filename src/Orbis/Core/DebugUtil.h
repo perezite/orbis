@@ -19,7 +19,7 @@ namespace orb
 {
 	namespace core
 	{
-		class DebugHelper
+		class DebugUtil
 		{
 		public:
 			// draw a debug line

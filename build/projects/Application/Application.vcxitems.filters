@@ -14,9 +14,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level4.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
@@ -47,9 +44,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\ParticleSystemTester.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButtonController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\Ball.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
@@ -60,6 +54,12 @@
       <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButton.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButton.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleEffect.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,13 +78,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleController.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TweenTester.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButtonController.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.h">
@@ -148,6 +142,12 @@
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButton.h">
+      <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButton.h">
+      <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleEffect.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
   </ItemGroup>

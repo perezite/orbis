@@ -3,7 +3,7 @@
 #include "../Libraries/GL.h"
 
 #include "../../Base/Math/Vector2D.h"
-#include "../../Base/System/EnvironmentHelper.h"
+#include "../../Base/System/EnvironmentUtil.h"
 using namespace base::math;
 using namespace base::system;
 
@@ -51,7 +51,7 @@ namespace orb
 
 		void Window::setResolution(Vector2D resolution)
 		{
-			if (EnvironmentHelper::isMobile())
+			if (EnvironmentUtil::isMobile())
 				return;
 
 			SDL_DestroyWindow(m_sdlWindow);
@@ -75,7 +75,7 @@ namespace orb
 
 		Vector2D Window::getDefaultResolution()
 		{
-			if (EnvironmentHelper::isMobile())
+			if (EnvironmentUtil::isMobile())
 			{
 				SDL_DisplayMode mode;
 				SDL_GetDisplayMode(0, 0, &mode);

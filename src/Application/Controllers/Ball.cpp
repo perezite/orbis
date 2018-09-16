@@ -35,14 +35,14 @@ namespace controllers
 
 		void Ball::aimingEnter()
 		{
-			LogHelper::logMessage("Ball::aimingEnter");
+			LogUtil::logMessage("Ball::aimingEnter");
 			getParent()->getTransform()->position = Vector2D::Zero;
 			m_state = State::AimingRun;
 		}
 
 		void Ball::aimingRun()
 		{
-			LogHelper::logMessage("Ball::aimingRun");
+			LogUtil::logMessage("Ball::aimingRun");
 			aimingCurrentAngle = 0.0f;
 			getParent()->getTransform()->rotation = aimingCurrentAngle;
 
@@ -56,13 +56,13 @@ namespace controllers
 		
 		void Ball::flyingEnter()
 		{
-			LogHelper::logMessage("Ball::flyingEnter");
+			LogUtil::logMessage("Ball::flyingEnter");
 			m_state = State::FlyingRun;
 		}
 
 		void Ball::flyingRun()
 		{
-			LogHelper::logMessage("Ball::flyingRun");
+			LogUtil::logMessage("Ball::flyingRun");
 			if (InputManager::getInstance()->isTapGoingDown())
 			{
 				m_state = State::DyingEnter;
@@ -75,7 +75,7 @@ namespace controllers
 
 		void Ball::dyingEnter()
 		{
-			LogHelper::logMessage("Ball::dyingEnter()");
+			LogUtil::logMessage("Ball::dyingEnter()");
 			if (m_ballEffectsController->explode())
 				return;
 
@@ -85,7 +85,7 @@ namespace controllers
 
 		void Ball::dyingRun()
 		{
-			LogHelper::logMessage("Ball::dyingRun()");
+			LogUtil::logMessage("Ball::dyingRun()");
 
 			if (InputManager::getInstance()->isTapGoingDown())
 				m_state = State::ParalysedEnter;
@@ -97,14 +97,14 @@ namespace controllers
 
 		void Ball::paralysedEnter()
 		{
-			LogHelper::logMessage("Ball::paralysedEnter");
+			LogUtil::logMessage("Ball::paralysedEnter");
 			m_state = State::ParalysedRun;
 
 		}
 
 		void Ball::paralysedRun()
 		{
-			LogHelper::logMessage("Ball::paralysedRun");
+			LogUtil::logMessage("Ball::paralysedRun");
 			if (InputManager::getInstance()->isTapGoingDown())
 				m_state = State::AimingEnter;
 		}

@@ -1,4 +1,4 @@
-#include "DebugHelper.h"
+#include "DebugUtil.h"
 
 #include "../Video/VideoManager.h"
 using namespace orb::video;
@@ -14,14 +14,14 @@ namespace orb
 {
 	namespace core
 	{
-		void DebugHelper::drawLine(Vector2D start, Vector2D end, Color color)
+		void DebugUtil::drawLine(Vector2D start, Vector2D end, Color color)
 		{
 			ORBIS_ASSERT_DEBUG();
 
 			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(start, end, color);
 		}
 
-		void DebugHelper::drawRect(Rect rect, Color color)
+		void DebugUtil::drawRect(Rect rect, Color color)
 		{
 			ORBIS_ASSERT_DEBUG();
 
@@ -31,7 +31,7 @@ namespace orb
 			drawLine(rect.getLeftTop(), rect.leftBottom);
 		}
 
-		void DebugHelper::drawSolidRect(Rect rect, Color color)
+		void DebugUtil::drawSolidRect(Rect rect, Color color)
 		{
 			ORBIS_ASSERT_DEBUG();
 

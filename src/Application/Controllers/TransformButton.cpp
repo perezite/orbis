@@ -1,4 +1,4 @@
-#include "TransformButtonController.h"
+#include "TransformButton.h"
 
 #include "../../Orbis/Orbis.h"
 #include "../../Base/Math/Vector2D.h"
@@ -67,7 +67,7 @@ namespace
 
 namespace controllers
 {
-	void TransformButtonController::update()
+	void TransformButton::update()
 	{
 		InputManager* input = InputManager::getInstance();
 
@@ -75,7 +75,7 @@ namespace controllers
 			affect();
 	}
 
-	void TransformButtonController::affect()
+	void TransformButton::affect()
 	{
 		std::string texAssetPath = m_inputModeSpriteRenderer->getTexture()->getAssetPath();
 
@@ -120,14 +120,14 @@ namespace controllers
 		throw Exception("The given texture asset path is not supported!");
 	}
 
-	void TransformButtonController::storeInitialTransforms()
+	void TransformButton::storeInitialTransforms()
 	{
 		storeInitialTransform(m_yellowBlock);
 		storeInitialTransform(m_blueBlock);
 		storeInitialTransform(m_camera);
 	}
 
-	void TransformButtonController::storeInitialTransform(Component * component)
+	void TransformButton::storeInitialTransform(Component * component)
 	{
 		Entity* parent = component->getParent();
 		m_initialTransforms.insert(std::make_pair(parent, *parent->getTransform()));

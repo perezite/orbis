@@ -1,8 +1,8 @@
 #include "Vector2D.h"
 
-#include "Math.h"
+#include "MathUtil.h"
 
-#include "../System/StringHelper.h"
+#include "../System/StringUtil.h"
 using namespace base::system;
 
 #include <sstream>

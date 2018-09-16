@@ -7,7 +7,7 @@ namespace base
 {
 	namespace system
 	{
-		class StringHelper
+		class StringUtil
 		{
 		public:
 			// get formatted string 

@@ -3,7 +3,7 @@
 #include "TextureAtlas.h"
 
 #include "../Libraries/SDL.h"
-#include "../Core/AssetHelper.h"
+#include "../Core/AssetUtil.h"
 #include "../Video/VideoManager.h"
 using namespace orb::core;
 using namespace orb::video;
@@ -54,7 +54,7 @@ namespace orb
 		{
 			m_assetPath = assetPath;
 
-			std::string filePath = AssetHelper::assetPathToFilePath(assetPath);
+			std::string filePath = AssetUtil::assetPathToFilePath(assetPath);
 			m_surface = IMG_Load(filePath.c_str());
 			SDL_Surface* converted = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
 			SDL_FreeSurface(m_surface);

@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-#include "../../Base/System/MemoryHelper.h"
+#include "../../Base/System/MemoryUtil.h"
 using namespace base::system;
 
 namespace orb
@@ -9,7 +9,7 @@ namespace orb
 	{
 		Entity::~Entity()
 		{
-			MemoryHelper::clear(m_components);
+			MemoryUtil::clear(m_components);
 		}
 
 		void Entity::addComponent(Component *component)

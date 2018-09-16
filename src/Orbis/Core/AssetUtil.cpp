@@ -1,8 +1,8 @@
-#include "AssetHelper.h"
+#include "AssetUtil.h"
 
 #include "../Libraries/SDL.h"
 
-#include "../../Base/System/EnvironmentHelper.h"
+#include "../../Base/System/EnvironmentUtil.h"
 #include "../../Base/System/Exception.h"
 using namespace base::system;
 
@@ -11,7 +11,7 @@ namespace
 	std::string GetAssetFolderPath()
 	{
 		#ifdef WIN32
-			return EnvironmentHelper::combinePath({ EnvironmentHelper::getExecutableDirectoryPath(), "..", "Assets" });
+			return EnvironmentUtil::combinePath({ EnvironmentUtil::getExecutableDirectoryPath(), "..", "Assets" });
 		#endif
 		
 		#ifdef __ANDROID__
@@ -24,12 +24,12 @@ namespace orb
 {
 	namespace core
 	{
-		std::string AssetHelper::assetPathToFilePath(std::string assetPath)
+		std::string AssetUtil::assetPathToFilePath(std::string assetPath)
 		{
-			return EnvironmentHelper::combinePath({ GetAssetFolderPath(), assetPath });
+			return EnvironmentUtil::combinePath({ GetAssetFolderPath(), assetPath });
 		}
 
-		void AssetHelper::saveTextAsset(std::string assetPath, std::string text)
+		void AssetUtil::saveTextAsset(std::string assetPath, std::string text)
 		{
 			std::string filePath = assetPathToFilePath(assetPath);
 
@@ -40,7 +40,7 @@ namespace orb
 			SDL_RWclose(writer);
 		}
 
-		std::string AssetHelper::loadTextAsset(std::string assetPath)
+		std::string AssetUtil::loadTextAsset(std::string assetPath)
 		{
 			std::string filePath = assetPathToFilePath(assetPath);
 
@@ -67,7 +67,7 @@ namespace orb
 			return data;
 		}
 
-		bool AssetHelper::textAssetExists(std::string assetPath)
+		bool AssetUtil::textAssetExists(std::string assetPath)
 		{
 			std::string filePath = assetPathToFilePath(assetPath);
 			SDL_RWops* reader = SDL_RWFromFile(filePath.c_str(), "r");

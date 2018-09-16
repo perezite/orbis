@@ -9,8 +9,8 @@ using namespace orb::core;
 using namespace orb::game;
 using namespace orb::effects;
 
-#include "../../Base/Math/Math.h"
-#include "../../Base/System/MemoryHelper.h"
+#include "../../Base/Math/MathUtil.h"
+#include "../../Base/System/MemoryUtil.h"
 using namespace base::math;
 using namespace base::system;
 
@@ -26,7 +26,7 @@ namespace orb
 
 		ParticleRenderer::~ParticleRenderer()
 		{
-			MemoryHelper::clear(m_particles);
+			MemoryUtil::clear(m_particles);
 		}
 
 		void ParticleRenderer::start()
@@ -65,7 +65,7 @@ namespace orb
 			for (unsigned int i = 0; i < m_particles.size();)
 			{
 				if (m_particles[i]->getCurrentLifetime() <= 0.0f)
-					MemoryHelper::remove(m_particles, i);
+					MemoryUtil::remove(m_particles, i);
 				else
 					i++;
 			}
@@ -89,8 +89,8 @@ namespace orb
 			float dt = TimeManager::getInstance()->getDeltaSeconds();
 			Vector2D entityVelocity = (m_lastEntityPos - getParent()->getTransform()->position) * (1.0f / dt);
 
-			Vector2D position = getParent()->getTransform()->position + Math::getRandomOnUnitCircle() * m_emissionSphereShellRadius;
-			Vector2D particleVelocity = (Math::getRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
+			Vector2D position = getParent()->getTransform()->position + MathUtil::getRandomOnUnitCircle() * m_emissionSphereShellRadius;
+			Vector2D particleVelocity = (MathUtil::getRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
 			Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
 			m_particles.push_back(new Particle(m_texture, Color::White, transform, particleVelocity));
 

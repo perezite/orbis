@@ -27,12 +27,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp">
       <Filter>Math</Filter>
     </ClCompile>
@@ -48,8 +42,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Math.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathUtil.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentUtil.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringUtil.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,20 +77,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.h">
       <Filter>Serialization\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h">
-      <Filter>System\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryHelper.h">
-      <Filter>System\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h">
       <Filter>System\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathUtil.h">
+      <Filter>Math\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentUtil.h">
       <Filter>System\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Math.h">
-      <Filter>Math\Headers</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryUtil.h">
+      <Filter>System\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringUtil.h">
+      <Filter>System\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

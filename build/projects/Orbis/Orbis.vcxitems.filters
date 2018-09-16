@@ -54,9 +54,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\VideoManager.cpp">
       <Filter>Video</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogHelper.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Entity.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -71,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Shader.cpp">
       <Filter>Video</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SpriteRenderer.cpp">
       <Filter>Components</Filter>
@@ -111,9 +105,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Material.cpp">
       <Filter>Video</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugHelper.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\TextureAtlas.cpp">
       <Filter>Video</Filter>
     </ClCompile>
@@ -147,6 +138,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Engine\OrbisMain.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetUtil.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugUtil.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis.h" />
@@ -172,15 +172,6 @@
       <Filter>Components\Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\TimeManager.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogHelper.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugHelper.h">
-      <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetHelper.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Tween.h">
@@ -263,6 +254,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Color.h">
       <Filter>Video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetUtil.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugUtil.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.h">
+      <Filter>Core\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

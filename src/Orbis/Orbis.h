@@ -9,9 +9,9 @@
 #include "Components\SpriteRenderer.h"
 #include "Components\TweenInspector.h"
 
-#include "Core\AssetHelper.h"
-#include "Core\DebugHelper.h"
-#include "Core\LogHelper.h"
+#include "Core\AssetUtil.h"
+#include "Core\DebugUtil.h"
+#include "Core\LogUtil.h"
 #include "Core\TimeManager.h"
 
 #include "Effects\EffectsManager.h"

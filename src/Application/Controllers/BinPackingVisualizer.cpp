@@ -1,6 +1,6 @@
 #include "BinPackingVisualizer.h"
 
-#include "../../Base/Math/Math.h"
+#include "../../Base/Math/MathUtil.h"
 #include "../../Base/Algorithms/BinPacking.h"
 using namespace base::math;
 using namespace base::algorithms;
@@ -27,12 +27,12 @@ namespace controllers
 		// insert rects and colors
 		for (unsigned int i = 0; i < NUM_RECTS; i++)
 		{
-			float width = Math::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
-			float height = Math::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
+			float width = MathUtil::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
+			float height = MathUtil::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
 			Vector2D leftBottom(-width / 2.0f, -height / 2.0f);
 			Vector2D rightTop(width / 2.0f, height / 2.0f);
 			m_origRects.push_back(Rect(leftBottom, rightTop));
-			m_rectColors.push_back(Color(Math::getRandom(), Math::getRandom(), Math::getRandom()));
+			m_rectColors.push_back(Color(MathUtil::getRandom(), MathUtil::getRandom(), MathUtil::getRandom()));
 		}
 	}
 
@@ -40,11 +40,11 @@ namespace controllers
 	{
 		std::vector<Rect> lastBinRects = m_packedRects.empty() ? std::vector<Rect>() : m_packedRects.back();
 		for (unsigned int i = 0; i < lastBinRects.size(); i++)
-			DebugHelper::drawSolidRect(lastBinRects[i], m_rectColors[i]);
+			DebugUtil::drawSolidRect(lastBinRects[i], m_rectColors[i]);
 
 		std::vector<Rect> partitionBuffer = BinPacking::getPartitionBuffer();
 		for (unsigned int i = 0; i < partitionBuffer.size(); i++)
-			DebugHelper::drawRect(partitionBuffer[i], Color::Green);
+			DebugUtil::drawRect(partitionBuffer[i], Color::Green);
 	}
 
 	void BinPackingVisualizer::update()

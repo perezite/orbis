@@ -2,7 +2,7 @@
 
 #include "VideoManager.h"
 
-#include "../Core/AssetHelper.h"
+#include "../Core/AssetUtil.h"
 #include "../Libraries/GL.h"
 #include "../Components/Camera.h"
 using namespace orb::core;
@@ -84,11 +84,11 @@ namespace orb
 
 			m_programId = glCreateProgram();
 
-			std::string vertexShaderCode = AssetHelper::loadTextAsset(vertexShaderAssetPath);
+			std::string vertexShaderCode = AssetUtil::loadTextAsset(vertexShaderAssetPath);
 			GLuint vertexShader = compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
 			glAttachShader(m_programId, vertexShader);
 
-			std::string fragmentShaderCode = AssetHelper::loadTextAsset(fragmentShaderAssetPath);
+			std::string fragmentShaderCode = AssetUtil::loadTextAsset(fragmentShaderAssetPath);
 			GLuint fragmentShader = compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
 			glAttachShader(m_programId, fragmentShader);
 

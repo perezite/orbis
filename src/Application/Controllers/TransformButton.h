@@ -10,11 +10,11 @@ using namespace orb::components;
 
 namespace controllers
 {
-	class TransformButtonController : public Component
+	class TransformButton : public Component
 	{
 	public:
 		// ctor
-		TransformButtonController(SpriteController* yellowBlock, 
+		TransformButton(SpriteController* yellowBlock, 
 			SpriteController* blueBlock, CameraBehavior* camera, SpriteRenderer* inputModeRenderer, bool leftDirection)
 			: m_yellowBlock(yellowBlock), m_blueBlock(blueBlock),
 			m_camera(camera), m_inputModeSpriteRenderer(inputModeRenderer), m_positiveTransform(leftDirection)

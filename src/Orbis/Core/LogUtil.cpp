@@ -1,4 +1,4 @@
-#include "LogHelper.h"
+#include "LogUtil.h"
 
 #include "../Libraries/SDL.h"
 
@@ -8,7 +8,7 @@ namespace orb
 {
 	namespace core
 	{
-		void LogHelper::logMessage(const char* fmt, ...)
+		void LogUtil::logMessage(const char* fmt, ...)
 		{
 			static char buf[1024];
 			va_list args;
@@ -20,7 +20,7 @@ namespace orb
 
 		}
 
-		void LogHelper::showMessageBox(std::string message, std::string title)
+		void LogUtil::showMessageBox(std::string message, std::string title)
 		{
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title.c_str(), message.c_str(), NULL);
 		}

@@ -6,7 +6,7 @@ namespace orb
 {
 	namespace core
 	{
-		class AssetHelper
+		class AssetUtil
 		{
 		public:
 			// convert an asset path to a file path

@@ -6,7 +6,7 @@ namespace base
 {
 	namespace system
 	{
-		class MemoryHelper
+		class MemoryUtil
 		{
 		public:
 			template <class T>

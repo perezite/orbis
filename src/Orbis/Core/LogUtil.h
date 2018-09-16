@@ -6,7 +6,7 @@ namespace orb
 {
 	namespace core
 	{
-		class LogHelper
+		class LogUtil
 		{
 		public:
 			// log a message

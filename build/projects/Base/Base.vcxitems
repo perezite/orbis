@@ -15,18 +15,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Math.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentUtil.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Math.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Range.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Rect.h" />
@@ -34,9 +34,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryHelper.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryUtil.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringUtil.h" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #include "TextureAtlas.h"
 
 #include "../../Base/System/Exception.h"
-#include "../../Base/System/MemoryHelper.h"
+#include "../../Base/System/MemoryUtil.h"
 #include "../../Base/Algorithms/BinPacking.h"
 using namespace base::system;
 using namespace base::algorithms;
@@ -17,7 +17,7 @@ namespace orb
 
 		void TextureAtlas::clear()
 		{
-			MemoryHelper::clear(m_charts);
+			MemoryUtil::clear(m_charts);
 			m_textures.clear();
 		}
 

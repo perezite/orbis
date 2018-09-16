@@ -6,7 +6,7 @@
 #include "../Controllers/CameraBehavior.h"
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/InputModeButton.h"
-#include "../Controllers/TransformButtonController.h"
+#include "../Controllers/TransformButton.h"
 #include "../Controllers/CloseButton.h"
 #include "../Controllers/LevelSwitchButtonController.h"
 using namespace controllers;
@@ -56,7 +56,7 @@ namespace levels
 
 		// yellow block entity
 		Entity* yellowBlock = new Entity("Yellow Brick");
-		SpriteController* yellowBlockController = new SpriteController(Math::getPi());
+		SpriteController* yellowBlockController = new SpriteController(MathUtil::getPi());
 		yellowBlock->addComponent(yellowBlockController);
 		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTexture));
 		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
@@ -64,7 +64,7 @@ namespace levels
 
 		// blue block entity
 		Entity* blueBlock = new Entity("Blue Brick");
-		SpriteController* blueBlockController = new SpriteController(-Math::getPi() / 2.0f);
+		SpriteController* blueBlockController = new SpriteController(-MathUtil::getPi() / 2.0f);
 		blueBlock->addComponent(blueBlockController);
 		blueBlock->addComponent(new SpriteRenderer(blueBlockTexture));
 		blueBlock->setTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
@@ -82,14 +82,14 @@ namespace levels
 		// left button
 		Entity* leftButton = new Entity("left button");
 		leftButton->addComponent(new SpriteRenderer(leftArrowTex));
-		leftButton->addComponent(new TransformButtonController(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, false));
+		leftButton->addComponent(new TransformButton(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, false));
 		leftButton->setTransform(Transform(Vector2D(-0.25f, -0.25f * cam->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
 		this->addEntity(leftButton);
 
 		// right button
 		Entity* rightButton = new Entity("right button");
 		rightButton->addComponent(new SpriteRenderer(rightArrowTex));
-		rightButton->addComponent(new TransformButtonController(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, true));
+		rightButton->addComponent(new TransformButton(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, true));
 		rightButton->setTransform(Transform(Vector2D(0.25f * cam->getSize().x, -0.25f * cam->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
 		this->addEntity(rightButton);
 

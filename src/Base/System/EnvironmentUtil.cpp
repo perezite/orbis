@@ -1,7 +1,7 @@
-#include "EnvironmentHelper.h"
+#include "EnvironmentUtil.h"
 
 #include "Exception.h"
-#include "StringHelper.h"
+#include "StringUtil.h"
 
 #ifdef WIN32
 	#include <windows.h>
@@ -13,9 +13,9 @@ namespace base
 { 
 	namespace system
 	{
-		const std::string EnvironmentHelper::PathSeparator = "\\";
+		const std::string EnvironmentUtil::PathSeparator = "\\";
 
-		std::string system::EnvironmentHelper::getExecutableDirectoryPath()
+		std::string system::EnvironmentUtil::getExecutableDirectoryPath()
 		{
 			#ifdef WIN32
 				wchar_t filePath[MAX_PATH];
@@ -41,7 +41,7 @@ namespace base
 			#endif
 		}
 
-		bool EnvironmentHelper::isMobile()
+		bool EnvironmentUtil::isMobile()
 		{
 			#if defined WIN32
 				return false;
@@ -52,7 +52,7 @@ namespace base
 			#endif
 		}
 
-		std::string EnvironmentHelper::combinePath(std::vector<std::string> parts)
+		std::string EnvironmentUtil::combinePath(std::vector<std::string> parts)
 		{
 			std::string result;
 			for (unsigned int i = 0; i < parts.size() - 1; i++)
@@ -69,7 +69,7 @@ namespace base
 			return result;
 		}
 
-		void EnvironmentHelper::writeToClipboard(std::string value)
+		void EnvironmentUtil::writeToClipboard(std::string value)
 		{
 			#ifdef WIN32
 				HWND windowHandle = GetDesktopWindow();

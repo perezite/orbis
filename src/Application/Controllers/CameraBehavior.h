@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Base/Math/Math.h"
+#include "../../Base/Math/MathUtil.h"
 #include "../../Orbis/Components/Component.h"
 using namespace orb::components;
 using namespace base::math;
@@ -11,6 +11,6 @@ namespace controllers
 	{
 	public:
 		// get omega
-		float getOmega() { return Math::getPi() / 4.0f; };
+		float getOmega() { return MathUtil::getPi() / 4.0f; };
 	};
 }
