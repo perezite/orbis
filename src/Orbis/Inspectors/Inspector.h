@@ -1,5 +1,4 @@
-#include "../Components/Component.h"
-using namespace orb::components;
+#pragma once
 
 namespace orb
 {
@@ -8,12 +7,6 @@ namespace orb
 		class Inspector
 		{
 		public:
-			// default ctor
-			Inspector() : m_parent(NULL) { }
-
-			// ctor
-			Inspector(Component* parent) : m_parent(parent) { };
-
 			// start
 			virtual void start() { };
 
@@ -23,12 +16,8 @@ namespace orb
 			// render
 			virtual void renderDebug() { };
 
-			// set entity
-			void setParent(Component* parent) { m_parent = parent; }
 
 		private:
-			// the parent component
-			Component *m_parent;
 		};		
 	}
 }

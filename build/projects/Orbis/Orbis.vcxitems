@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Camera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Component.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\ParticleRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\RectangleRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\SimpleParticleRenderer.cpp" />
@@ -33,7 +34,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Transform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Input\InputManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\BrickInspector.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\GL.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\SDL.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Video\Color.cpp" />
@@ -72,7 +72,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\TransformSpace.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Input\InputManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Input\KeyCode.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\BrickInspector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\Inspector.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\GL.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Libraries\SDL.h" />

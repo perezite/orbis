@@ -150,8 +150,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\BrickInspector.cpp">
-      <Filter>Inspectors</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Components\Component.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +269,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.h">
       <Filter>Core\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\BrickInspector.h">
-      <Filter>Inspectors</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Inspectors\Inspector.h">
       <Filter>Inspectors</Filter>

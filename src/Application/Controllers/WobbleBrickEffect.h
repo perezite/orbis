@@ -10,11 +10,11 @@ using namespace orb::effects;
 namespace controllers
 {
 	// test the animation of an entity's scale using splines
-	class TweenTester : public Component
+	class WobbleBrickEffect : public Component
 	{
 	public:
 		// ctor
-		TweenTester(Tween* tween, float tweenDuration)
+		WobbleBrickEffect(Tween* tween, float tweenDuration)
 			: Component::Component(), m_tween(tween), m_duration(tweenDuration)
 		{ }
 

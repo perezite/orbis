@@ -1,7 +1,7 @@
 #pragma once
 
-//#include "../Inspectors/Inspector.h"
-//using namespace orb::inspectors;
+#include "../Inspectors/Inspector.h"
+using namespace orb::inspectors;
 
 #include <stddef.h>
 
@@ -18,13 +18,16 @@ namespace orb
 		{
 		public:
 			// default ctor
-			Component() : m_parent(NULL) { }
+			Component() : m_parent(NULL), m_inspector(NULL) { }
 
 			// ctor
 			Component(game::Entity* parent) : m_parent(parent) { };
 
 			// dtor
-			virtual ~Component() { };
+			virtual ~Component();
+
+			// start component
+			void startComponent();
 
 			// start
 			virtual void start() { };
@@ -42,14 +45,14 @@ namespace orb
 			game::Entity *getParent() { return m_parent; }
 
 			// add an inspector
-			// void SetInspector(orb::inspectors::Inspector* inspector) { m_inspector = inspector; };
+			void SetInspector(Inspector* inspector) { m_inspector = inspector; };
 
 		private:
 			// entity which uses the component
 			game::Entity *m_parent;
 
 			// an inspector for this entity
-			// orb::inspectors::Inspector *m_inspector;
+			Inspector *m_inspector;
 		};
 	}
 }

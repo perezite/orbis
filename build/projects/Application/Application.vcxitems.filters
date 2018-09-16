@@ -32,9 +32,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TweenTester.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
@@ -62,6 +59,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleEffect.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleBrickEffect.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Inspectors\WobbleBrickEffectInspector.cpp">
+      <Filter>Inspectors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -76,11 +79,11 @@
     <Filter Include="Levels\Headers">
       <UniqueIdentifier>{93407f73-2e54-41fe-b690-20438e0b9495}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inspectors">
+      <UniqueIdentifier>{786c513a-dd3a-40ee-955b-f03e0eeb2fa0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TweenTester.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\SpriteController.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
@@ -149,6 +152,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleEffect.h">
       <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleBrickEffect.h">
+      <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Inspectors\WobbleBrickEffectInspector.h">
+      <Filter>Inspectors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

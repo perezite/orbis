@@ -4,8 +4,10 @@
 #include "Level7.h"
 #include "Level9.h"
 
-#include "../Controllers/TweenTester.h"
+#include "../Controllers/WobbleBrickEffect.h"
+#include "../Inspectors/WobbleBrickEffectInspector.h"
 using namespace controllers;
+using namespace inspectors;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
@@ -38,7 +40,9 @@ namespace levels
 		Entity* brick = new Entity();
 		addEntity(TweenInspector::tryConstructEntity(this, tween));
 		brick->addComponent(new SpriteRenderer(brickTex));
-		brick->addComponent(new TweenTester(tween, 6.0f));
+		WobbleBrickEffect* wobbleBrickEffect = new WobbleBrickEffect(tween, 6.0f);
+		wobbleBrickEffect->SetInspector(new WobbleBrickEffectInspector());
+		brick->addComponent(wobbleBrickEffect);
 		addEntity(brick);
 	}
 }

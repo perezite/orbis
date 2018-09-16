@@ -1,26 +1,22 @@
 TODO:	
 - Refactoring
-	- Der Inspector soll an der Komponente hängen, nicht am Entity
-		-- Von Level 8 ausgehen
-		- Strategie modifizieren: Tween ist keine Komponente. Macht es da Sinn, einen 'Inspector' dafür zu erstellen
-		- TweenInspector direkt in TweenTester managens
-		- TweenInspector in gleichen Ordner wie Tween verschieben
-		- In ParticleRenderer wieder einbinden
-		-- Ordner Inspectors erstellen
-		-- Evtl. TestInspector erstellen und an Yellow-Brick in Komponente 1 hängen
-		-- Im Inspektor testweise die Koordinate nach 5 Sekunden auf (0, 0) setzen
-		-- TweenInspector entsprechend anpassen
-		- BrickInspector wieder löschen
-		- Ggf. den Inspectors Ordner wieder löschen
-	- Tween->update soll einen neuen Wert zurückgeben, anstatt den Zeiger manipulieren, ausserdem umbenennen in getUpdated
+	- Inspector refactoren
+		- TweenPropertyInspector erstellen in Orbis
+			- Leitet von nichts ab
+			- Enthält den Code von TweenInspector
+			- Methode für Debug SpriteRendering hinzufügen
+			- Erstellt keinen SpriteRenderer, sondern ruft DebugRenderDevice->RenderSprite(...) auf
+		- TweenPropertyInspector in WobbleBrickEffectInspector einbinden
+		- TweenInspector entfernen
+	- Tween->update() refactoren. Soll einen Skalarwert zurückgeben
 	- Ordner analog den namespaces umbenennen
 	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 	- Renderer gesamthaft refactoren	
 	- Code-Styling überdenken (js-style vs a-style)
-	- Branch mergen		
+- Evaluieren, ob weitere Refactorings nötig sind
+- Branch mergen		
 - Evaluieren, ob der __INTELLISENSE__ fix in Precompiled.h das Intellisense-Problem behoben hat. Ansonsten nochmal schauen.
-- Den kompletten Source-Code inspizieren und falls nötig weiteres Refactoring planen
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
@@ -38,4 +34,10 @@ TODO:
 	- Bricks
 	- Hintergrund
 	- Levellogik mit Anzeigen über Console
-	- Resetfunktion mit R
+	- Reset mit R-Taste
+	
+
+	
+- Brick
+	- WobbleEffect
+		- 

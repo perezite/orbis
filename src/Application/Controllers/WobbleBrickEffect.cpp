@@ -1,4 +1,4 @@
-#include "TweenTester.h"
+#include "WobbleBrickEffect.h"
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::core;
@@ -7,12 +7,12 @@ using namespace orb::core;
 
 namespace controllers
 {
-	void TweenTester::start()
+	void WobbleBrickEffect::start()
 	{
 		m_tween->setInitial(getParent()->getTransform()->scale);
 	}
 
-	void TweenTester::update()
+	void WobbleBrickEffect::update()
 	{
 		m_tween->update(&getParent()->getTransform()->scale, m_duration);
 	}
