@@ -1,10 +1,10 @@
 #include "Level7.h"
 
-#include "LevelHelper.h"
+#include "LevelUtil.h"
 #include "Level6.h"
 #include "Level8.h"
 
-#include "../Controllers/BallController.h"
+#include "../Controllers/Ball.h"
 using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
@@ -21,13 +21,13 @@ namespace levels
 		addEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher<Level6>(this, false);
-		LevelHelper::AddLevelSwitcher<Level8>(this, true);
+		LevelUtil::AddLevelSwitcher<Level6>(this, false);
+		LevelUtil::AddLevelSwitcher<Level8>(this, true);
 
 		// init ball 
 		Entity* ballEntity = new Entity();
-		BallController* ballController = new BallController();
-		BallEffectsController* ballEffectsController = new BallEffectsController();
+		Ball* ballController = new Ball();
+		BallEffects* ballEffectsController = new BallEffects();
 		ballController->setBallEffectsController(ballEffectsController);
 		ballEntity->addComponent(ballController);
 		addEntity(ballEntity);

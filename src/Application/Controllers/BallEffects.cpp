@@ -1,4 +1,4 @@
-#include "BallEffectsController.h"
+#include "BallEffects.h"
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::core;
@@ -9,10 +9,10 @@ namespace controllers
 {
 	#ifdef __STATE_EXPLODING
 
-		bool BallEffectsController::explode()
+		bool BallEffects::explode()
 		{
 			float waitSeconds = 2.0f - m_explosionTimeElapsed;
-			LogHelper::logMessage("BallEffectsController::ExplodingRun(), wait another %f", waitSeconds);
+			LogHelper::logMessage("BallEffects::ExplodingRun(), wait another %f", waitSeconds);
 			m_explosionTimeElapsed += TimeManager::getInstance()->getDeltaSeconds();
 
 			if (m_explosionTimeElapsed >= 2.0f)

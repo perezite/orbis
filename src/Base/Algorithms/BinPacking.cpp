@@ -1,7 +1,7 @@
 #include "BinPacking.h"
 
 #include "../System/Exception.h"
-#include "../Math/MathHelper.h"
+#include "../Math/Math.h"
 using namespace base::system;
 using namespace base::math;
 

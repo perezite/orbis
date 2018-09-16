@@ -4,7 +4,7 @@
 using namespace orb::core;
 using namespace orb::game;
 
-#include "../../Base/Math/MathHelper.h"
+#include "../../Base/Math/Math.h"
 using namespace base::math;
 
 #include <cstdlib>
@@ -16,7 +16,7 @@ namespace controllers
 
 	void WobbleController::start()
 	{
-		float scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * MathHelper::getRandom();
+		float scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * Math::getRandom();
 		getParent()->getTransform()->scale = Vector2D(scale, scale);
 		m_isGrowing = rand() % 2 == 0 ? true : false;
 	}

@@ -1,13 +1,13 @@
 #include "Level1.h"
 
 #include "Level2.h"
-#include "LevelHelper.h"
+#include "LevelUtil.h"
 
-#include "../Controllers/CameraController.h"
+#include "../Controllers/CameraBehavior.h"
 #include "../Controllers/SpriteController.h"
-#include "../Controllers/InputModeButtonController.h"
+#include "../Controllers/InputModeButton.h"
 #include "../Controllers/TransformButtonController.h"
-#include "../Controllers/CloseButtonController.h"
+#include "../Controllers/CloseButton.h"
 #include "../Controllers/LevelSwitchButtonController.h"
 using namespace controllers;
 
@@ -40,14 +40,14 @@ namespace levels
 		// camera entity
 		Entity* camEntity = new Entity();
 		Camera* cam = new Camera();
-		CameraController* camController = new CameraController();
+		CameraBehavior* camController = new CameraBehavior();
 		camEntity->addComponent(cam);
 		camEntity->addComponent(camController);
 		camEntity->setTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
 		this->addEntity(camEntity);
 
 		// create level switcher
-		LevelHelper::AddLevelSwitcher<Level2>(this, true);
+		LevelUtil::AddLevelSwitcher<Level2>(this, true);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");
@@ -56,7 +56,7 @@ namespace levels
 
 		// yellow block entity
 		Entity* yellowBlock = new Entity("Yellow Brick");
-		SpriteController* yellowBlockController = new SpriteController(MathHelper::getPi());
+		SpriteController* yellowBlockController = new SpriteController(Math::getPi());
 		yellowBlock->addComponent(yellowBlockController);
 		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTexture));
 		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
@@ -64,7 +64,7 @@ namespace levels
 
 		// blue block entity
 		Entity* blueBlock = new Entity("Blue Brick");
-		SpriteController* blueBlockController = new SpriteController(-MathHelper::getPi() / 2.0f);
+		SpriteController* blueBlockController = new SpriteController(-Math::getPi() / 2.0f);
 		blueBlock->addComponent(blueBlockController);
 		blueBlock->addComponent(new SpriteRenderer(blueBlockTexture));
 		blueBlock->setTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
@@ -75,7 +75,7 @@ namespace levels
 		SpriteRenderer* inputModeButtonRenderer = new SpriteRenderer(rotateYellowSpriteTex);
 		inputModeButton->addComponent(inputModeButtonRenderer);
 		std::vector<Texture*> inputModeTextures = { rotateYellowSpriteTex, translateYellowSpriteTex, translateBlueSpriteTex, rotateCameraTex, translateCameraTex, scaleCameraTex, resetTex };
-		inputModeButton->addComponent(new InputModeButtonController(inputModeButtonRenderer, inputModeTextures));
+		inputModeButton->addComponent(new InputModeButton(inputModeButtonRenderer, inputModeTextures));
 		inputModeButton->setTransform(Transform(Vector2D(-0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
 		this->addEntity(inputModeButton);
 
@@ -96,7 +96,7 @@ namespace levels
 		// close button
 		Entity* closeButton = new Entity("close button");
 		closeButton->addComponent(new SpriteRenderer(closeTex));
-		closeButton->addComponent(new CloseButtonController());
+		closeButton->addComponent(new CloseButton());
 		closeButton->setTransform(Transform(Vector2D(0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
 		this->addEntity(closeButton);
 	}

@@ -2,9 +2,9 @@
 
 #include "Level1.h"
 #include "Level3.h"
-#include "LevelHelper.h"
+#include "LevelUtil.h"
 
-#include "../Controllers/CameraController.h"
+#include "../Controllers/CameraBehavior.h"
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/LevelSwitchButtonController.h"
@@ -28,13 +28,13 @@ namespace levels
 		Entity* camera = new Entity();
 		Camera* cam = new Camera();
 		camera->addComponent(cam);
-		CameraController* cameraController = new CameraController();
+		CameraBehavior* cameraController = new CameraBehavior();
 		camera->addComponent(cameraController);
 		this->addEntity(camera);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher<Level1>(this, false);
-		LevelHelper::AddLevelSwitcher<Level3>(this, true);
+		LevelUtil::AddLevelSwitcher<Level1>(this, false);
+		LevelUtil::AddLevelSwitcher<Level3>(this, true);
 
 		// coordinate system entity
 		Entity* coordSystem = new Entity("Coordinate System");
@@ -50,7 +50,7 @@ namespace levels
 		// red flat rect entity
 		Entity* redFlatRect = new Entity("Red Flat Rect");
 		redFlatRect->addComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
-		redFlatRect->setTransform(Transform(Vector2D(-0.2f, 0.3f), MathHelper::getPi() / 7.0f, Vector2D(0.2f, 0.2f)));
+		redFlatRect->setTransform(Transform(Vector2D(-0.2f, 0.3f), Math::getPi() / 7.0f, Vector2D(0.2f, 0.2f)));
 		this->addEntity(redFlatRect);
 
 		// green flat rect entity

@@ -26,14 +26,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level6.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level7.cpp">
       <Filter>Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.cpp">
-      <Filter>Controllers</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.cpp">
       <Filter>Levels</Filter>
@@ -56,10 +50,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\TransformButtonController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\Ball.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButtonController.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffects.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButton.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButton.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -96,25 +96,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\LevelSwitchButtonController.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButtonController.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\DebugLineTester.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButtonController.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraController.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BinPackingVisualizer.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffectsController.h">
-      <Filter>Controllers\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallController.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level1.h">
@@ -147,8 +132,23 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level10.h">
       <Filter>Levels\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelHelper.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelUtil.h">
       <Filter>Levels\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\Ball.h">
+      <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\BallEffects.h">
+      <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CameraBehavior.h">
+      <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\CloseButton.h">
+      <Filter>Controllers\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\InputModeButton.h">
+      <Filter>Controllers\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

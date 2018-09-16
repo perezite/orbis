@@ -1,4 +1,4 @@
-#include "MathHelper.h"
+#include "Math.h"
 
 
 
@@ -10,38 +10,38 @@ namespace base
 {
 	namespace math
 	{
-		float MathHelper::getPi()
+		float Math::getPi()
 		{
 			return (float)M_PI;
 		}
 
-		float MathHelper::radianToDegrees(float radian)
+		float Math::radianToDegrees(float radian)
 		{
 			return (radian / (2.0f * getPi())) * 360.0f;
 		}
 
-		float MathHelper::degreesToRadian(float degrees)
+		float Math::degreesToRadian(float degrees)
 		{
 			return (degrees / 360.0f) * 2.0f * getPi();
 		}
 
-		float MathHelper::getRandom()
+		float Math::getRandom()
 		{
 			return (float)rand() / (RAND_MAX);
 		}
 
-		float MathHelper::getRandom(float low, float high)
+		float Math::getRandom(float low, float high)
 		{
-			return MathHelper::getRandom() * (high - low) + low;
+			return Math::getRandom() * (high - low) + low;
 		}
 
-		Vector2D MathHelper::getRandomOnUnitCircle()
+		Vector2D Math::getRandomOnUnitCircle()
 		{
 			float alpha = getRandom(0, 2.0f * getPi());
 			return Vector2D(cosf(alpha), sinf(alpha));
 		}
 
-		bool MathHelper::approx(float val1, float val2, float eps)
+		bool Math::approx(float val1, float val2, float eps)
 		{
 			return fabs(val1 - val2) < eps;
 		}

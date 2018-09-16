@@ -1,4 +1,4 @@
-#include "CloseButtonController.h"
+#include "CloseButton.h"
 
 #include "SpriteController.h"
 
@@ -12,7 +12,7 @@ using namespace base::math;
 
 namespace controllers
 {
-	void CloseButtonController::update()
+	void CloseButton::update()
 	{
 		InputManager* input = InputManager::getInstance();
 

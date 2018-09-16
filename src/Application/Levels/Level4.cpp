@@ -2,7 +2,7 @@
 
 #include "Level3.h"
 #include "Level5.h"
-#include "LevelHelper.h"
+#include "LevelUtil.h"
 
 #include "../Controllers/BinPackingVisualizer.h"
 using namespace controllers;
@@ -27,8 +27,8 @@ namespace levels
 		addEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher<Level3>(this, false);
-		LevelHelper::AddLevelSwitcher<Level5>(this, true);
+		LevelUtil::AddLevelSwitcher<Level3>(this, false);
+		LevelUtil::AddLevelSwitcher<Level5>(this, true);
 
 		// add debug visualizer
 		ORBIS_DEBUG (

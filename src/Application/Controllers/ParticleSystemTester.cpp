@@ -1,6 +1,6 @@
 #include "ParticleSystemTester.h"
 
-#include "../../Base/Math/MathHelper.h"
+#include "../../Base/Math/Math.h"
 using namespace base::math;
 
 #include "../../Orbis/Orbis.h"

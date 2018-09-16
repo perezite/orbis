@@ -1,6 +1,6 @@
 #include "Level10.h"
 
-#include "LevelHelper.h"
+#include "LevelUtil.h"
 #include "Level9.h"
 
 #include "../../Orbis/Orbis.h"
@@ -20,7 +20,7 @@ namespace levels
 		addEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher<Level9>(this, false);
+		LevelUtil::AddLevelSwitcher<Level9>(this, false);
 
 		// init entities
 		Entity* particles = new Entity("Particles");

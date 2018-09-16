@@ -16,7 +16,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Math.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.cpp" />
@@ -26,7 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Math.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Range.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Rect.h" />

@@ -1,6 +1,6 @@
 #include "Level9.h"
 
-#include "LevelHelper.h"
+#include "LevelUtil.h"
 #include "Level8.h"
 #include "Level10.h"
 
@@ -23,8 +23,8 @@ namespace levels
 		addEntity(cam);
 
 		// add level switchers
-		LevelHelper::AddLevelSwitcher<Level8>(this, false);
-		LevelHelper::AddLevelSwitcher<Level10>(this, true);
+		LevelUtil::AddLevelSwitcher<Level8>(this, false);
+		LevelUtil::AddLevelSwitcher<Level10>(this, true);
 
 		// init entities
 		Entity* yellowBlock = new Entity("Yellow Brick");

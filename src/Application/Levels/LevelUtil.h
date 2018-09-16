@@ -13,7 +13,7 @@ using namespace orb::components;
 
 namespace levels
 {
-	class LevelHelper
+	class LevelUtil
 	{
 	public:
 		template <class T>

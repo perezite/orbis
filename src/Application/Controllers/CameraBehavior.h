@@ -1,16 +1,16 @@
 #pragma once
 
-#include "../../Base/Math/MathHelper.h"
+#include "../../Base/Math/Math.h"
 #include "../../Orbis/Components/Component.h"
 using namespace orb::components;
 using namespace base::math;
 
 namespace controllers
 {
-	class CameraController : public Component 
+	class CameraBehavior : public Component 
 	{
 	public:
 		// get omega
-		float getOmega() { return MathHelper::getPi() / 4.0f; };
+		float getOmega() { return Math::getPi() / 4.0f; };
 	};
 }

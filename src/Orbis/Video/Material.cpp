@@ -1,6 +1,6 @@
 #include "Material.h"
 
-#include "../../Base/Math/MathHelper.h"
+#include "../../Base/Math/Math.h"
 using namespace base::math;
 
 namespace orb
@@ -15,10 +15,10 @@ namespace orb
 
 			float eps = 0.001f;
 			bool colorsBatchEqual =
-				MathHelper::approx(m_color.r, other->m_color.r, eps)
-				&& MathHelper::approx(m_color.g, other->m_color.g, eps)
-				&& MathHelper::approx(m_color.b, other->m_color.b, eps)
-				&& MathHelper::approx(m_color.a, other->m_color.a, eps);
+				Math::approx(m_color.r, other->m_color.r, eps)
+				&& Math::approx(m_color.g, other->m_color.g, eps)
+				&& Math::approx(m_color.b, other->m_color.b, eps)
+				&& Math::approx(m_color.a, other->m_color.a, eps);
 
 			return texturesBatchEqual && shadersBatchEqual && colorsBatchEqual;
 		}

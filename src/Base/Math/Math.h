@@ -7,7 +7,7 @@ namespace base
 	namespace math
 	{
 		// Helpers for math
-		class MathHelper
+		class Math
 		{
 		public:
 			// get the number Pi

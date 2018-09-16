@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SpriteController.h"
-#include "CameraController.h"
+#include "CameraBehavior.h"
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -18,7 +18,7 @@ using namespace orb::game;
 
 namespace controllers
 {
-	class CloseButtonController : public Component
+	class CloseButton : public Component
 	{
 	public:
 		// update

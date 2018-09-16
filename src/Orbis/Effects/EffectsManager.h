@@ -3,6 +3,7 @@
 #include "Tween.h"
 
 #include <string>
+#include <map>
 
 namespace orb
 {

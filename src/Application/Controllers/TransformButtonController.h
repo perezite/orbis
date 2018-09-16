@@ -1,8 +1,8 @@
 #pragma once
 
-#include "CameraController.h"
+#include "CameraBehavior.h"
 #include "SpriteController.h"
-#include "InputModeButtonController.h"
+#include "InputModeButton.h"
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -15,7 +15,7 @@ namespace controllers
 	public:
 		// ctor
 		TransformButtonController(SpriteController* yellowBlock, 
-			SpriteController* blueBlock, CameraController* camera, SpriteRenderer* inputModeRenderer, bool leftDirection)
+			SpriteController* blueBlock, CameraBehavior* camera, SpriteRenderer* inputModeRenderer, bool leftDirection)
 			: m_yellowBlock(yellowBlock), m_blueBlock(blueBlock),
 			m_camera(camera), m_inputModeSpriteRenderer(inputModeRenderer), m_positiveTransform(leftDirection)
 		{
@@ -43,7 +43,7 @@ namespace controllers
 		SpriteController* m_blueBlock;
 
 		// the camera controller
-		CameraController* m_camera;
+		CameraBehavior* m_camera;
 
 		// the input mode button sprite renderer
 		SpriteRenderer* m_inputModeSpriteRenderer;

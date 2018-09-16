@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SpriteController.h"
-#include "CameraController.h"
+#include "CameraBehavior.h"
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
@@ -18,11 +18,11 @@ using namespace orb::game;
 
 namespace controllers
 {
-	class InputModeButtonController : public Component 
+	class InputModeButton : public Component 
 	{
 	public:
 		// ctor
-		InputModeButtonController(SpriteRenderer* spriteRenderer, std::vector<Texture*> inputModeTextures)
+		InputModeButton(SpriteRenderer* spriteRenderer, std::vector<Texture*> inputModeTextures)
 			: m_renderer(spriteRenderer), m_textures(inputModeTextures)
 		{}
 

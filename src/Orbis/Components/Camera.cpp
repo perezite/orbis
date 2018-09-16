@@ -9,7 +9,7 @@ using namespace orb::core;
 using namespace orb::video;
 
 #include "../../Base/System/Exception.h"
-#include "../../Base/Math/MathHelper.h"
+#include "../../Base/Math/Math.h"
 using namespace base::system;
 using namespace base::math;
 

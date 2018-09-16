@@ -1,13 +1,13 @@
 #pragma once
 
-#include "BallEffectsController.h"
+#include "BallEffects.h"
 
 #include "../../Orbis/Components/Component.h"
 using namespace orb::components;
 
 namespace controllers
 {
-	class BallController : public Component
+	class Ball : public Component
 	{
 	private:
 		enum class State
@@ -20,7 +20,7 @@ namespace controllers
 
 	public:
 		// ctor
-		BallController() 
+		Ball() 
 			: m_state(State::AimingEnter), aimingCurrentAngle(0.0f)
 		{}
 
@@ -28,7 +28,7 @@ namespace controllers
 		void update();
 
 		// set the ball effects controller
-		void setBallEffectsController(BallEffectsController* ballEffectsController) { m_ballEffectsController = ballEffectsController; }
+		void setBallEffectsController(BallEffects* ballEffectsController) { m_ballEffectsController = ballEffectsController; }
 
 		// aiming
 		void aimingEnter();	void aimingRun();
@@ -50,6 +50,6 @@ namespace controllers
 		float aimingCurrentAngle;
 
 		// the ball effects controller
-		BallEffectsController* m_ballEffectsController;
+		BallEffects* m_ballEffectsController;
 	};
 }

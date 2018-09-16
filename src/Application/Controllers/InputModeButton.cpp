@@ -1,4 +1,4 @@
-#include "InputModeButtonController.h"
+#include "InputModeButton.h"
 
 #include "SpriteController.h"
 
@@ -12,7 +12,7 @@ using namespace base::math;
 
 namespace controllers
 {
-	void InputModeButtonController::update()
+	void InputModeButton::update()
 	{
 		InputManager* inputManager = InputManager::getInstance();
 
@@ -20,7 +20,7 @@ namespace controllers
 				cycle();
 	}
 
-	void InputModeButtonController::cycle()
+	void InputModeButton::cycle()
 	{
 		// get current texture
 		std::vector<Texture*>::iterator previousTextureIt = std::find(m_textures.begin(), m_textures.end(), m_renderer->getTexture());

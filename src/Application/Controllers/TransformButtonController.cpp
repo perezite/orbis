@@ -27,7 +27,7 @@ namespace
 		transform->position = position + translation;
 	}
 
-	void Scale(CameraController *camera, bool positive)
+	void Scale(CameraBehavior *camera, bool positive)
 	{
 		float dt = TimeManager::getInstance()->getDeltaSeconds();
 		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
@@ -41,7 +41,7 @@ namespace
 		Rotate(sprite->getParent()->getTransform(), clockwise, sprite->getOmega());
 	}
 
-	void Rotate(CameraController* camera, bool clockwise)
+	void Rotate(CameraBehavior* camera, bool clockwise)
 	{
 		Rotate(camera->getParent()->getTransform(), clockwise, camera->getOmega());
 	}
@@ -51,7 +51,7 @@ namespace
 		Translate(sprite->getParent()->getTransform(), forward, 0.5f);
 	}
 
-	void Translate(CameraController* camera, bool forward)
+	void Translate(CameraBehavior* camera, bool forward)
 	{
 		Translate(camera->getParent()->getTransform(), forward, camera->getOmega());
 	}

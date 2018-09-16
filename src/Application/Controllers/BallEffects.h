@@ -5,11 +5,11 @@ using namespace orb::components;
 
 namespace controllers
 {
-	class BallEffectsController : Component
+	class BallEffects : Component
 	{
 	public:
 		// ctor
-		BallEffectsController()
+		BallEffects()
 			: m_explosionTimeElapsed(0.0f)
 		{}
 

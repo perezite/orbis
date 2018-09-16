@@ -1,6 +1,6 @@
 #include "Vector2D.h"
 
-#include "MathHelper.h"
+#include "Math.h"
 
 #include "../System/StringHelper.h"
 using namespace base::system;

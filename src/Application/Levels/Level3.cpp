@@ -2,7 +2,7 @@
 
 #include "Level2.h"
 #include "Level4.h"
-#include "LevelHelper.h"
+#include "LevelUtil.h"
 
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/WobbleController.h"
@@ -13,7 +13,7 @@ using namespace orb::video;
 using namespace orb::components;
 using namespace orb::core;
 
-#include "../../Base/Math/MathHelper.h"
+#include "../../Base/Math/Math.h"
 using namespace base::math;
 
 #include <iostream>
@@ -51,7 +51,7 @@ namespace levels
 			bool hasTexture = ++counter % 2 == 0;
 
 			Entity* entity = new Entity(hasTexture ? "Textured sprite" : "Solid sprite");
-			Transform trans = Transform(Vector2D(MathHelper::getRandom() - 0.5f, MathHelper::getRandom() - 0.5f), 0.0f, Vector2D::One);
+			Transform trans = Transform(Vector2D(Math::getRandom() - 0.5f, Math::getRandom() - 0.5f), 0.0f, Vector2D::One);
 			entity->setTransform(trans);
 
 			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
@@ -62,8 +62,8 @@ namespace levels
 		}
 
 		// add level switchers. Note: because we have no layering yet, the sprites above must be generated first in order to be batched in the right order
-		LevelHelper::AddLevelSwitcher<Level2>(this, false);
-		LevelHelper::AddLevelSwitcher<Level4>(this, true);
+		LevelUtil::AddLevelSwitcher<Level2>(this, false);
+		LevelUtil::AddLevelSwitcher<Level4>(this, true);
 
 		// init debug line tester
 		ORBIS_DEBUG (

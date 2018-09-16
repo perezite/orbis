@@ -8,7 +8,7 @@ using namespace orb::video;
 using namespace orb::core;
 using namespace orb::game;
 
-#include "../../Base/Math/MathHelper.h"
+#include "../../Base/Math/Math.h"
 #include "../../Base/System/MemoryHelper.h"
 using namespace base::math;
 using namespace base::system;
