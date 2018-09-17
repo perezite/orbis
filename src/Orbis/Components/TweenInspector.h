@@ -69,7 +69,7 @@ namespace orb
 			// is the selected control point the first or last point 
 			bool IsSelectedControlPointOnBoundary();
 
-			// shift a spline by the given vector
+			// shift a spline bys the given vector
 			void ShiftSpline(Spline* spline, Vector2D shift);
 
 			// get a spline shifted by the given vector

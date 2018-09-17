@@ -2,7 +2,6 @@ TODO:
 - Refactoring
 	- Inspector refactoren
 		- TweenPropertyInspector erstellen in Orbis
-			- Leitet von nichts ab
 			- Enthält den Code von TweenInspector
 			- Methode für Debug SpriteRendering hinzufügen
 			- Erstellt keinen SpriteRenderer, sondern ruft DebugRenderDevice->RenderSprite(...) auf
@@ -35,9 +34,3 @@ TODO:
 	- Hintergrund
 	- Levellogik mit Anzeigen über Console
 	- Reset mit R-Taste
-	
-
-	
-- Brick
-	- WobbleEffect
-		- 
