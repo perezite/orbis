@@ -22,13 +22,13 @@ namespace orb
 		{
 		public:
 			// ctor
-			ParticleRenderer(Level* parentLevel, Texture* texture);
+			ParticleRenderer(Texture* texture);
 
 			// dtor
 			virtual ~ParticleRenderer();
 
 			// override
-			void start();
+			void start() { };
 
 			// override
 			void update();
@@ -73,9 +73,6 @@ namespace orb
 
 			// the last position of the entity transforms
 			Vector2D m_lastEntityPos;
-
-			// the parent level
-			Level* m_parentLevel;
 		};
 	}
 }

@@ -5,9 +5,7 @@
 #include "Level9.h"
 
 #include "../Controllers/WobbleBrickEffect.h"
-#include "../Inspectors/WobbleBrickEffectInspector.h"
 using namespace controllers;
-using namespace inspectors;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
@@ -38,10 +36,8 @@ namespace levels
 
 		// add tweened brick
 		Entity* brick = new Entity();
-		addEntity(TweenInspector::tryConstructEntity(this, tween));
 		brick->addComponent(new SpriteRenderer(brickTex));
 		WobbleBrickEffect* wobbleBrickEffect = new WobbleBrickEffect(tween, 6.0f);
-		wobbleBrickEffect->SetInspector(new WobbleBrickEffectInspector());
 		brick->addComponent(wobbleBrickEffect);
 		addEntity(brick);
 	}

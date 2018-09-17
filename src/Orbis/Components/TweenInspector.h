@@ -19,15 +19,11 @@ namespace orb
 	namespace components
 	{
 		// used to edit a tween
-		class TweenInspector : Component
+		class TweenInspector : public Component
 		{
 		public:
-			// utility for quickly creating an inspector entity. Returns null in release mode
-			static Entity* tryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationkey = KeyCode::t);
-
-		public:
 			// ctor
-			TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey = KeyCode::t);
+			TweenInspector(Tween* tween, KeyCode activationKey = KeyCode::t);
 
 			// start
 			void start();

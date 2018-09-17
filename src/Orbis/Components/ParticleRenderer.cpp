@@ -18,21 +18,15 @@ namespace orb
 {
 	namespace components
 	{
-		ParticleRenderer::ParticleRenderer(Level* parentLevel, Texture * texture) :
+		ParticleRenderer::ParticleRenderer(Texture * texture) :
 			m_texture(texture), m_emissionSphereShellRadius(0.075f), m_emissionRate(40), m_timeToNextEmission(0.0f),
-			m_initialSpeed(0.2f), m_initialSize(0.1f), m_velocityInheritance(0.25f), m_parentLevel(parentLevel)
+			m_initialSpeed(0.2f), m_initialSize(0.1f), m_velocityInheritance(0.25f)
 		{
 		}
 
 		ParticleRenderer::~ParticleRenderer()
 		{
 			MemoryUtil::clear(m_particles);
-		}
-
-		void ParticleRenderer::start()
-		{
-			Tween* alphaTween = EffectsManager::getInstance()->getTween("Tweens/GreenParticlesAlpha.tween");
-			// LevelManager::getInstance()->getCurrentLevel()->addEntity(TweenInspector::tryConstructEntity(m_parentLevel, alphaTween, KeyCode::b));
 		}
 
 		void ParticleRenderer::update()

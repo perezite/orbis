@@ -23,19 +23,7 @@ namespace orb
 		const int TweenInspector::SAMPLING_DENSITY = 100;
 		const int TweenInspector::NUM_SAMPLES = 100;
 
-		Entity* TweenInspector::tryConstructEntity(Level* parentLevel, Tween* tween, KeyCode activationKey)
-		{
-			Entity* entity = NULL;
-
-			ORBIS_DEBUG(
-				entity = new Entity();
-			entity->addComponent(new TweenInspector(parentLevel, tween, activationKey));
-			)
-
-				return entity;
-		}
-
-		TweenInspector::TweenInspector(Level* parentLevel, Tween* tween, KeyCode activationKey) :
+		TweenInspector::TweenInspector(Tween* tween, KeyCode activationKey) :
 			m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
 		{
 			ShiftSpline(m_tween.getSpline(), Vector2D(-0.5f, -0.5f));

@@ -22,7 +22,7 @@ namespace orb
 		{
 			for (unsigned int i = 0; i < m_components.size(); i++)
 			{
-				m_components[i]->startComponent();
+				m_components[i]->start();
 			}
 		}
 

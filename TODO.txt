@@ -1,12 +1,5 @@
 TODO:	
 - Refactoring
-	- Inspector refactoren
-		- TweenPropertyInspector erstellen in Orbis
-			- Enthält den Code von TweenInspector
-			- Methode für Debug SpriteRendering hinzufügen
-			- Erstellt keinen SpriteRenderer, sondern ruft DebugRenderDevice->RenderSprite(...) auf
-		- TweenPropertyInspector in WobbleBrickEffectInspector einbinden
-		- TweenInspector entfernen
 	- Tween->update() refactoren. Soll einen Skalarwert zurückgeben
 	- Ordner analog den namespaces umbenennen
 	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt

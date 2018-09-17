@@ -32,6 +32,10 @@ namespace orb
 			// save as asset
 			void saveToJsonFile();
 
+		protected:
+			// create an inspector entity for this tween
+			void createInspectorEntity();
+
 		private:
 			// the spline
 			Spline m_spline;

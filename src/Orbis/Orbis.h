@@ -29,8 +29,6 @@
 #include "Input\InputManager.h"
 #include "Input\KeyCode.h"
 
-#include "Inspectors\Inspector.h"
-
 #include "Libraries\GL.h"
 #include "Libraries\SDL.h"
 
