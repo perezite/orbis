@@ -9,12 +9,11 @@ namespace controllers
 {
 	void WobbleBrickEffect::start()
 	{
-		m_tween->setInitial(getParent()->getTransform()->scale);
 	}
 
 	void WobbleBrickEffect::update()
 	{
-		m_tween->update(&getParent()->getTransform()->scale, m_duration);
+		getParent()->getTransform()->scale = Vector2D::One * m_tween->getValue(m_duration);
 	}
 }
 

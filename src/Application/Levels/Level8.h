@@ -10,5 +10,7 @@ namespace levels
 	public:
 		// override
 		void start();
+
+		void update();
 	};
 }

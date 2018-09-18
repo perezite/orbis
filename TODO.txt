@@ -1,6 +1,5 @@
 TODO:	
 - Refactoring
-	- Tween->update() refactoren. Soll einen Skalarwert zurückgeben
 	- Ordner analog den namespaces umbenennen
 	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren

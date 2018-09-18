@@ -23,11 +23,8 @@ namespace orb
 			// set the spline
 			void setSpline(Spline spline) { m_spline = spline; }
 
-			// se the initial value
-			void setInitial(Vector2D initial) { m_initial = initial; }
-
 			// update the value
-			void update(Vector2D* current, float duration);
+			float getValue(float duration);
 
 			// save as asset
 			void saveToJsonFile();
@@ -45,9 +42,6 @@ namespace orb
 
 			// elapsed tween time
 			float m_elapsed;
-
-			// the initial value of the tweened vector
-			Vector2D m_initial;
 		};
 	}
 }

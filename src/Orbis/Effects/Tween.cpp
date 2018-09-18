@@ -13,6 +13,7 @@ using namespace orb::components;
 using namespace base::system;
 
 #include <sstream>
+#include <algorithm>
 
 namespace orb
 {
@@ -32,17 +33,13 @@ namespace orb
 			);
 		}
 
-		void Tween::update(Vector2D* current, float duration)
+		float Tween::getValue(float duration)
 		{
 			m_elapsed += TimeManager::getInstance()->getDeltaSeconds();
-			float x = m_elapsed / duration;
+			float t = std::min(m_elapsed / duration, 1.0f);
+			float value = m_spline.getValue(t).y;
 
-			if (x <= 1.0f)
-			{
-				float factor = m_spline.getValue(x).y;
-
-				*current = m_initial * factor;
-			}
+			return value;
 		}
 
 		void Tween::saveToJsonFile()

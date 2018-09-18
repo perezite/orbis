@@ -37,7 +37,7 @@ namespace levels
 		// add tweened brick
 		Entity* brick = new Entity();
 		brick->addComponent(new SpriteRenderer(brickTex));
-		WobbleBrickEffect* wobbleBrickEffect = new WobbleBrickEffect(tween, 6.0f);
+		WobbleBrickEffect* wobbleBrickEffect = new WobbleBrickEffect(tween, 10.0f);
 		brick->addComponent(wobbleBrickEffect);
 		addEntity(brick);
 	}
