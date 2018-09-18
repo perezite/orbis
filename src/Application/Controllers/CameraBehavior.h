@@ -5,7 +5,7 @@
 using namespace orb::components;
 using namespace base::math;
 
-namespace controllers
+namespace app
 {
 	class CameraBehavior : public Component 
 	{

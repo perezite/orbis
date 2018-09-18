@@ -13,7 +13,7 @@ using namespace orb::input;
 #define __STATE_DYING
 #define __STATE_PARALYSED
 
-namespace controllers
+namespace app
 {
 	void Ball::update()
 	{

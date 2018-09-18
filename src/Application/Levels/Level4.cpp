@@ -5,7 +5,6 @@
 #include "LevelUtil.h"
 
 #include "../Controllers/BinPackingVisualizer.h"
-using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
@@ -14,7 +13,7 @@ using namespace orb::core;
 
 #include <iostream>
 
-namespace levels
+namespace app
 {
 	void Level4::start()
 	{

@@ -16,7 +16,7 @@ using namespace orb::game;
 #include <vector>
 #include <map>
 
-namespace controllers
+namespace app
 {
 	class InputModeButton : public Component 
 	{

@@ -5,7 +5,7 @@
 using namespace orb::components;
 using namespace orb::game;
 
-namespace controllers
+namespace app
 {
 	// test the particle renderer component
 	class ParticleSystemTester : public Component

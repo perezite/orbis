@@ -10,7 +10,7 @@ using namespace orb::components;
 using namespace orb::input;
 using namespace orb::game;
 
-namespace controllers
+namespace app
 {
 	template <class T>
 	class LevelSwitchButtonController : public Component

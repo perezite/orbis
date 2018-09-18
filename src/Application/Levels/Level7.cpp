@@ -5,13 +5,12 @@
 #include "Level8.h"
 
 #include "../Controllers/Ball.h"
-using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
 using namespace orb::video;
 
-namespace levels
+namespace app
 {
 	void Level7::start()
 	{

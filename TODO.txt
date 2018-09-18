@@ -1,6 +1,6 @@
 TODO:	
 - Refactoring
-	- Ordner analog den namespaces umbenennen
+	- Verschachtelte Namespaces entfernen
 	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 	- Renderer gesamthaft refactoren	

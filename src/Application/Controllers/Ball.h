@@ -5,7 +5,7 @@
 #include "../../Orbis/Components/Component.h"
 using namespace orb::components;
 
-namespace controllers
+namespace app
 {
 	class Ball : public Component
 	{

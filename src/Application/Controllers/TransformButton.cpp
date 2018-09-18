@@ -10,7 +10,7 @@ using namespace base::math;
 
 namespace 
 {
-	using namespace controllers;
+	using namespace app;
 
 	void Rotate(Transform* transform, bool clockwise, float omega)
 	{
@@ -65,7 +65,7 @@ namespace
 	}
 }
 
-namespace controllers
+namespace app
 {
 	void TransformButton::update()
 	{

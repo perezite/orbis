@@ -4,7 +4,7 @@
 #include "../../Orbis/Game/Level.h"
 using namespace orb::game;
 
-namespace levels
+namespace app
 {
 	class Level6 : public Level
 	{

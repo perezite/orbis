@@ -7,7 +7,7 @@ using namespace orb::components;
 using namespace orb::game;
 using namespace orb::effects;
 
-namespace controllers
+namespace app
 {
 	// test the animation of an entity's scale using splines
 	class WobbleBrickEffect : public Component

@@ -5,7 +5,7 @@ using namespace orb::core;
 
 #define __STATE_EXPLODING
 
-namespace controllers
+namespace app
 {
 	#ifdef __STATE_EXPLODING
 

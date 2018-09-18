@@ -8,7 +8,7 @@
 #include "Levels/Level8.h"
 #include "Levels/Level9.h"
 #include "Levels/Level10.h"
-using namespace levels;
+using namespace app;
 
 #include "../Orbis/Engine/OrbisMain.h"
 #include "../Orbis/Core/LogUtil.h"
@@ -18,7 +18,6 @@ using namespace orb::engine;
 using namespace orb::core;
 using namespace orb::game;
 using namespace base::system;
-
 
 int main(int argc, char* args[])
 {	

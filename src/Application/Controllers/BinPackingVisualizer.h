@@ -12,7 +12,7 @@ using namespace base::math;
 #include <vector>
 #include <tuple>
 
-namespace controllers
+namespace app
 {
 	// visualizes a bin packing algorithm
 	class BinPackingVisualizer : public Component

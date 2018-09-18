@@ -6,7 +6,6 @@
 
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/WobbleEffect.h"
-using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::video;
@@ -18,7 +17,7 @@ using namespace base::math;
 
 #include <iostream>
 
-namespace levels
+namespace app
 {
 	const int Level3::NUM_SPRITES = 1000;
 	const float Level3::MIN_BLOCK_SCALE = 0.01f;

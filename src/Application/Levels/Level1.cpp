@@ -9,7 +9,6 @@
 #include "../Controllers/TransformButton.h"
 #include "../Controllers/CloseButton.h"
 #include "../Controllers/LevelSwitchButtonController.h"
-using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
@@ -18,7 +17,7 @@ using namespace orb::video;
 
 #include <map>
 
-namespace levels
+namespace app
 {
 	void Level1::start()
 	{

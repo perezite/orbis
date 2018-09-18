@@ -10,7 +10,7 @@ using namespace base::math;
 
 #include <algorithm>
 
-namespace controllers
+namespace app
 {
 	void InputModeButton::update()
 	{

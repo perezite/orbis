@@ -6,12 +6,10 @@
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Game/Level.h"
 using namespace orb::game;
-using namespace controllers;
 using namespace orb::video;
 using namespace orb::components;
 
-
-namespace levels
+namespace app
 {
 	class LevelUtil
 	{

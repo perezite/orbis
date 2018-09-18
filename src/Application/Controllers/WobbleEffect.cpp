@@ -9,7 +9,7 @@ using namespace base::math;
 
 #include <cstdlib>
 
-namespace controllers
+namespace app
 {
 	const float WobbleEffect::MIN_SCALE = 0.02f;
 	const float WobbleEffect::MAX_SCALE = 0.1f;

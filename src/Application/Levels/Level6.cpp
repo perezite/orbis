@@ -8,7 +8,7 @@
 using namespace orb::components;
 using namespace orb::video;
 
-namespace levels
+namespace app
 {
 	void Level6::start()
 	{

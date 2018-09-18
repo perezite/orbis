@@ -5,7 +5,7 @@ using namespace orb::core;
 
 #include <iostream>
 
-namespace controllers
+namespace app
 {
 	void WobbleBrickEffect::start()
 	{

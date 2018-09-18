@@ -8,7 +8,6 @@
 #include "../Controllers/SpriteController.h"
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/LevelSwitchButtonController.h"
-using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
@@ -16,7 +15,7 @@ using namespace orb::core;
 using namespace base::math;
 using namespace orb::video;
 
-namespace levels
+namespace app
 {
 	void Level2::start()
 	{

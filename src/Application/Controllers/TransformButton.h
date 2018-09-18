@@ -8,7 +8,7 @@
 #include "../../Orbis/Components/SpriteRenderer.h"
 using namespace orb::components;
 
-namespace controllers
+namespace app
 {
 	class TransformButton : public Component
 	{

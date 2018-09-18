@@ -5,7 +5,6 @@
 #include "Level9.h"
 
 #include "../Controllers/WobbleBrickEffect.h"
-using namespace controllers;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
@@ -13,11 +12,7 @@ using namespace orb::video;
 using namespace orb::effects;
 using namespace orb::core;
 
-#include <iostream>
-#include <algorithm>
-#include <array>
-
-namespace levels
+namespace app
 {
 	void Level8::start()
 	{

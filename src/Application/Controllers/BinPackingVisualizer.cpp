@@ -13,7 +13,7 @@ using namespace orb::input;
 #include <limits>
 #include <algorithm>
 
-namespace controllers
+namespace app
 {
 	const unsigned int BinPackingVisualizer::NUM_RECTS = 15;
 

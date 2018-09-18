@@ -3,7 +3,7 @@
 #include "../../Orbis/Orbis.h"
 using namespace orb::core;
 
-namespace controllers
+namespace app
 {
 	void DebugLineTester::renderDebug()
 	{

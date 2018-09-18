@@ -8,7 +8,7 @@ using namespace orb::core;
 
 #include <iostream>
 
-namespace controllers
+namespace app
 {
 	float ParticleSystemTester::Speed = 1.0f;
 	Vector2D ParticleSystemTester::TopTarget(0.5f, 0.5f);

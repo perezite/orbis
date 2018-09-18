@@ -5,7 +5,7 @@ using namespace orb::game;
 
 #include <iostream>
 
-namespace levels
+namespace app
 {
 	class Level3 : public Level
 	{
