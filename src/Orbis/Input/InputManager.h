@@ -7,7 +7,7 @@ using namespace orb::game;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace base::math;
+using namespace base;
 
 #include <set>
 

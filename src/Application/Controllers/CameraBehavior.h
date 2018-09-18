@@ -3,7 +3,7 @@
 #include "../../Base/Math/MathUtil.h"
 #include "../../Orbis/Components/Component.h"
 using namespace orb::components;
-using namespace base::math;
+using namespace base;
 
 namespace app
 {

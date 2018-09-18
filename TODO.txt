@@ -6,6 +6,8 @@ TODO:
 	- Renderer gesamthaft refactoren	
 	- Code-Styling überdenken (js-style vs a-style)
 - Evaluieren, ob weitere Refactorings nötig sind
+- Xperia Debugging zum Laufen bringen
+- Testen auf Mobile
 - Branch mergen		
 - Evaluieren, ob der __INTELLISENSE__ fix in Precompiled.h das Intellisense-Problem behoben hat. Ansonsten nochmal schauen.
 - Partikelsystem implementieren

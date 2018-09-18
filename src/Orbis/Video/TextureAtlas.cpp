@@ -3,8 +3,7 @@
 #include "../../Base/System/Exception.h"
 #include "../../Base/System/MemoryUtil.h"
 #include "../../Base/Algorithms/BinPacking.h"
-using namespace base::system;
-using namespace base::algorithms;
+using namespace base;
 
 namespace orb
 {

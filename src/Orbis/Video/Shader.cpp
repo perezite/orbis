@@ -9,7 +9,7 @@ using namespace orb::core;
 using namespace orb::components;
 
 #include "../../Base/System/Exception.h"
-using namespace base::system;
+using namespace base;
 
 namespace orb
 {

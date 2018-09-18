@@ -4,7 +4,7 @@
 #include "RenderMode.h"
 
 #include "../../Base/Math/Vector2D.h"
-using namespace base::math;
+using namespace base;
 
 #include <set>
 #include <vector>

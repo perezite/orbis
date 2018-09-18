@@ -1,7 +1,7 @@
 #include "Entity.h"
 
 #include "../../Base/System/MemoryUtil.h"
-using namespace base::system;
+using namespace base;
 
 namespace orb
 {

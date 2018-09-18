@@ -4,7 +4,7 @@
 
 #include "../../Base/System/EnvironmentUtil.h"
 #include "../../Base/System/Exception.h"
-using namespace base::system;
+using namespace base;
 
 namespace
 {

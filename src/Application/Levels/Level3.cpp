@@ -13,7 +13,7 @@ using namespace orb::components;
 using namespace orb::core;
 
 #include "../../Base/Math/MathUtil.h"
-using namespace base::math;
+using namespace base;
 
 #include <iostream>
 

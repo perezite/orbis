@@ -10,8 +10,7 @@ using namespace orb::game;
 
 #include "../../Base/Math/MathUtil.h"
 #include "../../Base/System/MemoryUtil.h"
-using namespace base::math;
-using namespace base::system;
+using namespace base;
 
 namespace orb
 {

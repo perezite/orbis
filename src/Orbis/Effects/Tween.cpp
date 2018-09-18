@@ -10,7 +10,7 @@ using namespace orb::game;
 using namespace orb::components;
 
 #include "../../Base/System/StringUtil.h"
-using namespace base::system;
+using namespace base;
 
 #include <sstream>
 #include <algorithm>

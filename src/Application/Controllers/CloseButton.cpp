@@ -6,7 +6,7 @@
 using namespace orb::input;
 using namespace orb::core;
 using namespace orb::game;
-using namespace base::math;
+using namespace base;
 
 #include <algorithm>
 

@@ -8,7 +8,7 @@
 using namespace orb::game;
 
 #include "../../Base/Math/Rect.h"
-using namespace base::math;
+using namespace base;
 
 #include <string>
 #include <set>

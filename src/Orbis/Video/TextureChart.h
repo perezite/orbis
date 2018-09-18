@@ -6,7 +6,7 @@
 #include "../Libraries/GL.h"
 
 #include "../../Base/Math/Rect.h"
-using namespace base::math;
+using namespace base;
 
 #include <vector>
 #include <map>

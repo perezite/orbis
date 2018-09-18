@@ -12,7 +12,6 @@
 #include "../../Orbis/Orbis.h"
 using namespace orb::components;
 using namespace orb::core;
-using namespace base::math;
 using namespace orb::video;
 
 namespace app

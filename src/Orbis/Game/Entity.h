@@ -6,7 +6,7 @@
 using namespace orb::components;
 
 #include "../../Base/Math/Vector2D.h"
-using namespace base::math;
+using namespace base;
 
 #include <vector>
 #include <string>

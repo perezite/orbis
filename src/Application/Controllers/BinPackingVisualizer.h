@@ -7,7 +7,7 @@ using namespace orb::video;
 
 #include "../../Base/Math/Rect.h"
 #include "../../Base/Math/Range.h"
-using namespace base::math;
+using namespace base;
 
 #include <vector>
 #include <tuple>

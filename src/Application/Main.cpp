@@ -17,7 +17,7 @@ using namespace app;
 using namespace orb::engine;
 using namespace orb::core;
 using namespace orb::game;
-using namespace base::system;
+using namespace base;
 
 int main(int argc, char* args[])
 {	

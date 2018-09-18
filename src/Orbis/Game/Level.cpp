@@ -9,7 +9,7 @@ using namespace orb::core;
 
 #include "../../Base/System/MemoryUtil.h"
 #include "../../Base/System/Exception.h"
-using namespace base::system;
+using namespace base;
 
 #include <iostream>
 

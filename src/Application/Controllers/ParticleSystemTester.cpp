@@ -1,7 +1,7 @@
 #include "ParticleSystemTester.h"
 
 #include "../../Base/Math/MathUtil.h"
-using namespace base::math;
+using namespace base;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::core;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Base/Math/Spline.h"
-using namespace base::math;
+using namespace base;
 
 #include <string>
 #include <iostream>

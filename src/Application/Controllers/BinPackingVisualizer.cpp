@@ -2,8 +2,7 @@
 
 #include "../../Base/Math/MathUtil.h"
 #include "../../Base/Algorithms/BinPacking.h"
-using namespace base::math;
-using namespace base::algorithms;
+using namespace base;
 
 #include "../../Orbis/Orbis.h"
 using namespace orb::core;

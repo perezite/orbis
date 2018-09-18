@@ -1,7 +1,7 @@
 #include "Material.h"
 
 #include "../../Base/Math/MathUtil.h"
-using namespace base::math;
+using namespace base;
 
 namespace orb
 {

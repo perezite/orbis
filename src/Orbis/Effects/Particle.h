@@ -7,7 +7,7 @@ using namespace orb::game;
 using namespace orb::video;
 
 #include "../../Base/Math/Range.h"
-using namespace base::math;
+using namespace base;
 
 namespace orb
 {

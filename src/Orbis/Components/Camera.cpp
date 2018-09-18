@@ -10,8 +10,7 @@ using namespace orb::video;
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/Math/MathUtil.h"
-using namespace base::system;
-using namespace base::math;
+using namespace base;
 
 namespace orb
 {

@@ -5,31 +5,28 @@
 
 namespace base
 {
-	namespace serialization
+	// a class for reading json strings
+	class JsonReader
 	{
-		// a class for reading json strings
-		class JsonReader
-		{
-		public:
-			// ctor
-			JsonReader(std::string str);
+	public:
+		// ctor
+		JsonReader(std::string str);
 
-			// get child
-			bool getChild();
+		// get child
+		bool getChild();
 
-			// get float element
-			float getFloat();
+		// get float element
+		float getFloat();
 
-		protected:
-			// remove whitespaces
-			void removeWhitespaces(std::string& str);
+	protected:
+		// remove whitespaces
+		void removeWhitespaces(std::string& str);
 
-			// get string element
-			std::string getElement();
+		// get string element
+		std::string getElement();
 
-		private:
-			// the stringstream
-			std::stringstream m_is;
-		};
-	}
+	private:
+		// the stringstream
+		std::stringstream m_is;
+	};
 }

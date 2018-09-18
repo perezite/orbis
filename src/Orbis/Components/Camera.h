@@ -7,7 +7,7 @@ using namespace orb::game;
 
 #include "../../Base/Math/Matrix3.h"
 #include "../../Base/Math/Vector2D.h"
-using namespace base::math;
+using namespace base;
 
 namespace orb
 {

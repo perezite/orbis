@@ -15,7 +15,7 @@ using namespace orb::components;
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
 #include "../../Base/Math/Range.h"
-using namespace base::math;
+using namespace base;
 
 #include <vector>
 

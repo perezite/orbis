@@ -4,21 +4,18 @@
 
 namespace base
 {
-	namespace system
+	class Exception
 	{
-		class Exception
-		{
-		public:
-			Exception(const std::string &message) : _message(message) {}
+	public:
+		Exception(const std::string &message) : _message(message) {}
 
-			virtual ~Exception() throw() {}
+		virtual ~Exception() throw() {}
 
-			virtual const std::string &what() const throw() { return _message; }
+		virtual const std::string &what() const throw() { return _message; }
 
-			static void assert(bool condition, std::string message) { if (!condition) throw Exception(message); }
+		static void assert(bool condition, std::string message) { if (!condition) throw Exception(message); }
 
-		protected:
-			std::string _message;
-		};
-	}
+	protected:
+		std::string _message;
+	};
 }

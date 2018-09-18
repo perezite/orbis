@@ -5,7 +5,7 @@ using namespace orb::video;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace base::math;
+using namespace base;
 
 #ifdef _DEBUG
 	#define ORBIS_DEBUG(call) {call}

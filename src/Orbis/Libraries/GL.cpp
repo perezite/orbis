@@ -2,7 +2,7 @@
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/System/StringUtil.h"
-using namespace base::system;
+using namespace base;
 
 void GL_dummy()
 {

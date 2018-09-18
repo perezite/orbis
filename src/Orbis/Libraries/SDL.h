@@ -3,7 +3,7 @@
 
 #include "../../Base/System/Exception.h"
 #include "../../Base/System/StringUtil.h"
-using namespace base::system;
+using namespace base;
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

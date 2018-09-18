@@ -5,7 +5,7 @@
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Core/LogUtil.h"
 #include "../Core/DebugUtil.h"
-using namespace base::system;
+using namespace base;
 using namespace orb::video;
 using namespace orb::core;
 

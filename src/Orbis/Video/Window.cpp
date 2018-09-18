@@ -4,8 +4,7 @@
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/System/EnvironmentUtil.h"
-using namespace base::math;
-using namespace base::system;
+using namespace base;
 
 namespace orb
 {
