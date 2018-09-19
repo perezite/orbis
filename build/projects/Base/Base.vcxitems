@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Base.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Range.h" />

@@ -5,8 +5,7 @@
 #include "../Core/TimeManager.h"
 #include "../Video/VideoManager.h"
 
-#include "../../Base/System/Exception.h"
-#include "../../Base/Math/MathUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

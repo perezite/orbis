@@ -1,7 +1,3 @@
-#include <iostream>
-
-#include "Libraries\SDL.h"
-
 #include "Components\Component.h"
 #include "Components\ParticleRenderer.h"
 #include "Components\RectangleRenderer.h"

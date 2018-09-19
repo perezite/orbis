@@ -4,8 +4,7 @@
 
 #include "../../Orbis/Game/TransformSpace.h"
 
-#include "../../Base/Math/Matrix3.h"
-#include "../../Base/Math/Vector2D.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

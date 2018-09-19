@@ -6,8 +6,7 @@
 #include "../Game/LevelManager.h"
 #include "../Effects/EffectsManager.h"
 
-#include "../../Base/Math/MathUtil.h"
-#include "../../Base/System/MemoryUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

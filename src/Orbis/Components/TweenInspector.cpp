@@ -1,12 +1,12 @@
 #include "TweenInspector.h"
 
-#include "../../Base/System/EnvironmentUtil.h"
 #include "../../Orbis/Video/VideoManager.h"
 #include "../../Orbis/Core/TimeManager.h"
 #include "../../Orbis/Core/LogUtil.h"
 #include "../Core/DebugUtil.h"
+
+#include "../../Base/Base.h"
 using namespace base;
-using namespace orb;
 
 #include <iostream>
 #include <sstream>
@@ -14,6 +14,8 @@ using namespace orb;
 
 namespace orb
 {
+	using namespace orb;
+
 	const float TweenInspector::MARK_EXTENT = 0.01f;
 	const float TweenInspector::SELECT_RADIUS = 0.05f;
 	const float TweenInspector::TANGENT_LENGTH = 0.18f;
