@@ -1,12 +1,11 @@
 #include "TransformButton.h"
 
-#include "../../Orbis/Orbis.h"
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
-using namespace orb::input;
-using namespace orb::core;
-using namespace orb::game;
 using namespace base;
+
+#include "../../Orbis/Orbis.h"
+using namespace orb;
 
 namespace 
 {

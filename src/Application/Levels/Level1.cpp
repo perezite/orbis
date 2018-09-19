@@ -11,8 +11,7 @@
 #include "../Controllers/LevelSwitchButtonController.h"
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::components;
-using namespace orb::video;
+using namespace orb;
 
 #include <map>
 

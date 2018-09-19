@@ -1,7 +1,6 @@
 #include "LevelManager.h"
 
 #include "../Core/TimeManager.h"
-using namespace orb::core;
 
 #include "../../Base/System/Exception.h"
 using namespace base;
@@ -10,46 +9,43 @@ using namespace base;
 
 namespace orb
 {
-	namespace game
+	LevelManager::LevelManager() :
+		m_currentLevel(NULL), m_queuedLevel(NULL)
+	{ }
+
+	LevelManager * LevelManager::getInstance()
 	{
-		LevelManager::LevelManager() :
-			m_currentLevel(NULL), m_queuedLevel(NULL)
-		{ }
+		static LevelManager instance;
+		return &instance;
+	}
 
-		LevelManager * LevelManager::getInstance()
-		{
-			static LevelManager instance;
-			return &instance;
-		}
+	void LevelManager::clear()
+	{
+		if (m_currentLevel)
+			delete m_currentLevel;
+		if (m_queuedLevel)
+			delete m_queuedLevel;
+	}
 
-		void LevelManager::clear()
-		{
-			if (m_currentLevel)
-				delete m_currentLevel;
-			if (m_queuedLevel)
-				delete m_queuedLevel;
-		}
+	void LevelManager::update()
+	{
+		if (m_queuedLevel != NULL)
+			switchToQueuedLevel();
 
-		void LevelManager::update()
-		{
-			if (m_queuedLevel != NULL)
-				switchToQueuedLevel();
+		m_currentLevel->update();
+	}
 
-			m_currentLevel->update();
-		}
+	void LevelManager::render()
+	{
+		m_currentLevel->render();
+	}
 
-		void LevelManager::render()
-		{
-			m_currentLevel->render();
-		}
-
-		void LevelManager::switchToQueuedLevel()
-		{
-			if (m_currentLevel)
-				delete m_currentLevel;
-			m_currentLevel = m_queuedLevel;
-			m_queuedLevel = NULL;
-			m_currentLevel->initialize();
-		}
+	void LevelManager::switchToQueuedLevel()
+	{
+		if (m_currentLevel)
+			delete m_currentLevel;
+		m_currentLevel = m_queuedLevel;
+		m_queuedLevel = NULL;
+		m_currentLevel->initialize();
 	}
 }

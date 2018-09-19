@@ -5,8 +5,6 @@
 #include "../Libraries/SDL.h"
 #include "../Core/AssetUtil.h"
 #include "../Video/VideoManager.h"
-using namespace orb::core;
-using namespace orb::video;
 
 namespace orb
 {
@@ -48,79 +46,76 @@ namespace orb
 		}
 	}
 
-	namespace video
+	Texture::Texture(std::string assetPath, bool flipVertically)
 	{
-		Texture::Texture(std::string assetPath, bool flipVertically)
-		{
-			m_assetPath = assetPath;
+		m_assetPath = assetPath;
 
-			std::string filePath = AssetUtil::assetPathToFilePath(assetPath);
-			m_surface = IMG_Load(filePath.c_str());
-			SDL_Surface* converted = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
+		std::string filePath = AssetUtil::assetPathToFilePath(assetPath);
+		m_surface = IMG_Load(filePath.c_str());
+		SDL_Surface* converted = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
+		SDL_FreeSurface(m_surface);
+		m_surface = converted;
+
+		if (flipVertically)
+		{
+			SDL_Surface* flipped = getFlipped(m_surface);
 			SDL_FreeSurface(m_surface);
-			m_surface = converted;
+			m_surface = flipped;
+		}
 
-			if (flipVertically)
-			{
-				SDL_Surface* flipped = getFlipped(m_surface);
-				SDL_FreeSurface(m_surface);
-				m_surface = flipped;
-			}
+		glGenTextures(1, &m_handle);
+		glBindTexture(GL_TEXTURE_2D, m_handle);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-			glGenTextures(1, &m_handle);
+		if (isUsingAtlassing())
+		{
+			VideoManager::getInstance()->getTextureAtlas()->add(this);
+		}
+	}
+
+	Texture::~Texture()
+	{
+		if (!isUsingAtlassing())
+		{
+			glDeleteTextures(1, &m_handle);
+			SDL_FreeSurface(m_surface);
+		}
+	}
+
+	Vector2D Texture::mapUVCoord(Vector2D texUV)
+	{
+		if (isUsingAtlassing())
+		{
+			Rect uvRect = m_atlasChart->getUVRect(this);
+			Vector2D atlasUV(uvRect.getLeft() + texUV.x * uvRect.getWidth(), uvRect.getBottom() + texUV.y * uvRect.getHeight());
+			return atlasUV;
+		}
+		else
+		{
+			return texUV;
+		}
+	}
+
+	void Texture::bind()
+	{
+		if (isUsingAtlassing())
+		{
+			m_atlasChart->bind();
+		}
+		else
+		{
 			glBindTexture(GL_TEXTURE_2D, m_handle);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-			if (isUsingAtlassing())
-			{
-				VideoManager::getInstance()->getTextureAtlas()->add(this);
-			}
 		}
+	}
 
-		Texture::~Texture()
-		{
-			if (!isUsingAtlassing())
-			{
-				glDeleteTextures(1, &m_handle);
-				SDL_FreeSurface(m_surface);
-			}
-		}
-
-		Vector2D Texture::mapUVCoord(Vector2D texUV)
-		{
-			if (isUsingAtlassing())
-			{
-				Rect uvRect = m_atlasChart->getUVRect(this);
-				Vector2D atlasUV(uvRect.getLeft() + texUV.x * uvRect.getWidth(), uvRect.getBottom() + texUV.y * uvRect.getHeight());
-				return atlasUV;
-			}
-			else
-			{
-				return texUV;
-			}
-		}
-
-		void Texture::bind()
-		{
-			if (isUsingAtlassing())
-			{
-				m_atlasChart->bind();
-			}
-			else
-			{
-				glBindTexture(GL_TEXTURE_2D, m_handle);
-			}
-		}
-
-		bool Texture::isUsingAtlassing() const
-		{
-			#ifdef ORBIS_USE_TEXTURE_ATLASSING
-				return true;
-			#else
-				return false;
-			#endif
-		}
+	bool Texture::isUsingAtlassing() const
+	{
+		#ifdef ORBIS_USE_TEXTURE_ATLASSING
+			return true;
+		#else
+			return false;
+		#endif
 	}
 }

@@ -4,9 +4,7 @@
 using namespace base;
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::core;
-using namespace orb::game;
-using namespace orb::input;
+using namespace orb;
 
 #define __STATE_AIMING
 #define __STATE_FLYING

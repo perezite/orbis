@@ -5,8 +5,7 @@
 using namespace base;
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::core;
-using namespace orb::input;
+using namespace orb;
 
 #include <iostream>
 #include <limits>

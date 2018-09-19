@@ -2,12 +2,9 @@
 
 namespace orb
 {
-	namespace game
+	enum class TransformSpace
 	{
-		enum class TransformSpace
-		{
-			World,
-			Camera
-		};
-	}
+		World,
+		Camera
+	};
 }

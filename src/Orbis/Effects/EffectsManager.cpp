@@ -1,32 +1,27 @@
 #include "EffectsManager.h"
 
-
-
 namespace orb
 {
-	namespace effects
+	EffectsManager* EffectsManager::getInstance()
 	{
-		EffectsManager* EffectsManager::getInstance()
-		{
-			static EffectsManager instance;
-			return &instance;
-		}
+		static EffectsManager instance;
+		return &instance;
+	}
 
-		void EffectsManager::clear()
-		{
-			for (std::map<std::string, Tween*>::iterator it = m_tweens.begin(); it != m_tweens.end(); it++)
-				delete (*it).second;
-			m_tweens.clear();
-		}
+	void EffectsManager::clear()
+	{
+		for (std::map<std::string, Tween*>::iterator it = m_tweens.begin(); it != m_tweens.end(); it++)
+			delete (*it).second;
+		m_tweens.clear();
+	}
 
-		Tween* EffectsManager::getTween(std::string assetPath)
-		{
-			if (m_tweens[assetPath])
-				return m_tweens[assetPath];
+	Tween* EffectsManager::getTween(std::string assetPath)
+	{
+		if (m_tweens[assetPath])
+			return m_tweens[assetPath];
 
-			Tween* tween = new Tween(assetPath);
-			m_tweens[assetPath] = tween;
-			return tween;
-		}
+		Tween* tween = new Tween(assetPath);
+		m_tweens[assetPath] = tween;
+		return tween;
 	}
 }

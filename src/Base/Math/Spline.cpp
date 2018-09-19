@@ -3,7 +3,6 @@
 #include "../System/StringUtil.h"
 #include "../Serialization/JsonReader.h"
 #include "../Serialization/JsonWriter.h"
-using namespace base;
 
 #include <algorithm>
 #include <sstream>

@@ -4,16 +4,13 @@
 
 namespace orb
 {
-	namespace core
+	class LogUtil
 	{
-		class LogUtil
-		{
-		public:
-			// log a message
-			static void logMessage(const char* fmt, ...);
+	public:
+		// log a message
+		static void logMessage(const char* fmt, ...);
 
-			// show a message box
-			static void showMessageBox(std::string message, std::string title);
-		};
-	}
+		// show a message box
+		static void showMessageBox(std::string message, std::string title);
+	};
 }

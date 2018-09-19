@@ -8,40 +8,37 @@ using namespace base;
 
 namespace orb
 {
-	namespace effects
+	// apply smooth value changes to a vector
+	class Tween
 	{
-		// apply smooth value changes to a vector
-		class Tween
-		{
-		public:
-			// ctor
-			Tween(std::string assetPath);
+	public:
+		// ctor
+		Tween(std::string assetPath);
 
-			// get the spline
-			Spline* getSpline() { return &m_spline; }
+		// get the spline
+		Spline* getSpline() { return &m_spline; }
 
-			// set the spline
-			void setSpline(Spline spline) { m_spline = spline; }
+		// set the spline
+		void setSpline(Spline spline) { m_spline = spline; }
 
-			// update the value
-			float getValue(float duration);
+		// update the value
+		float getValue(float duration);
 
-			// save as asset
-			void saveToJsonFile();
+		// save as asset
+		void saveToJsonFile();
 
-		protected:
-			// create an inspector entity for this tween
-			void createInspectorEntity();
+	protected:
+		// create an inspector entity for this tween
+		void createInspectorEntity();
 
-		private:
-			// the spline
-			Spline m_spline;
+	private:
+		// the spline
+		Spline m_spline;
 
-			// the asset path
-			std::string m_assetPath;
+		// the asset path
+		std::string m_assetPath;
 
-			// elapsed tween time
-			float m_elapsed;
-		};
-	}
+		// elapsed tween time
+		float m_elapsed;
+	};
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Video/Color.h"
-using namespace orb::video;
+using namespace orb;
 
 #include "../../Base/Math/Vector2D.h"
 #include "../../Base/Math/Rect.h"
@@ -17,19 +17,16 @@ using namespace base;
 
 namespace orb
 {
-	namespace core
+	class DebugUtil
 	{
-		class DebugUtil
-		{
-		public:
-			// draw a debug line
-			static void drawLine(Vector2D start, Vector2D end, Color color = Color::Green);
+	public:
+		// draw a debug line
+		static void drawLine(Vector2D start, Vector2D end, Color color = Color::Green);
 
-			// darw a debug wireframe rectangle
-			static void drawRect(Rect rect, Color color);
+		// darw a debug wireframe rectangle
+		static void drawRect(Rect rect, Color color);
 
-			// draw a debug solid rectangle
-			static void drawSolidRect(Rect rect, Color color);
-		};
-	}
+		// draw a debug solid rectangle
+		static void drawSolidRect(Rect rect, Color color);
+	};
 }

@@ -1,11 +1,10 @@
 #include "WobbleEffect.h"
 
-#include "../../Orbis/Orbis.h"
-using namespace orb::core;
-using namespace orb::game;
-
 #include "../../Base/Math/MathUtil.h"
 using namespace base;
+
+#include "../../Orbis/Orbis.h"
+using namespace orb;
 
 #include <cstdlib>
 

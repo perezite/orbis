@@ -1,7 +1,7 @@
 #include "WobbleBrickEffect.h"
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::core;
+using namespace orb;
 
 #include <iostream>
 

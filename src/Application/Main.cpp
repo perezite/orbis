@@ -10,14 +10,13 @@
 #include "Levels/Level10.h"
 using namespace app;
 
+#include "../Base/System/Exception.h"
+using namespace base;
+
 #include "../Orbis/Engine/OrbisMain.h"
 #include "../Orbis/Core/LogUtil.h"
 #include "../Orbis/Game/LevelManager.h"
-#include "../Base/System/Exception.h"
-using namespace orb::engine;
-using namespace orb::core;
-using namespace orb::game;
-using namespace base;
+using namespace orb;
 
 int main(int argc, char* args[])
 {	

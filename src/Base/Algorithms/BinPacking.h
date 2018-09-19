@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Math/Rect.h"
-using namespace base;
 
 #include <vector>
 #include <tuple>

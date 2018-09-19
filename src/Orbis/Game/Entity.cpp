@@ -5,41 +5,38 @@ using namespace base;
 
 namespace orb
 {
-	namespace game
+	Entity::~Entity()
 	{
-		Entity::~Entity()
-		{
-			MemoryUtil::clear(m_components);
-		}
+		MemoryUtil::clear(m_components);
+	}
 
-		void Entity::addComponent(Component *component)
-		{
-			component->setParent(this);
-			m_components.push_back(component);
-		}
+	void Entity::addComponent(Component *component)
+	{
+		component->setParent(this);
+		m_components.push_back(component);
+	}
 
-		void Entity::start()
+	void Entity::start()
+	{
+		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			for (unsigned int i = 0; i < m_components.size(); i++)
-			{
-				m_components[i]->start();
-			}
+			m_components[i]->start();
 		}
+	}
 
-		void Entity::update()
+	void Entity::update()
+	{
+		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			for (unsigned int i = 0; i < m_components.size(); i++)
-			{
-				m_components[i]->update();
-			}
+			m_components[i]->update();
 		}
+	}
 
-		void Entity::renderDebug()
+	void Entity::renderDebug()
+	{
+		for (unsigned int i = 0; i < m_components.size(); i++)
 		{
-			for (unsigned int i = 0; i < m_components.size(); i++)
-			{
-				m_components[i]->renderDebug();
-			}
+			m_components[i]->renderDebug();
 		}
 	}
 }

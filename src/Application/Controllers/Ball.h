@@ -3,7 +3,7 @@
 #include "BallEffects.h"
 
 #include "../../Orbis/Components/Component.h"
-using namespace orb::components;
+using namespace orb;
 
 namespace app
 {

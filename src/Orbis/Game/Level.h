@@ -1,57 +1,48 @@
 #pragma once
 
 #include "../Game/Entity.h"
-using namespace orb::game;
 
 #include <vector>
 #include <string>
 
 namespace orb
 {
-	namespace video
+	class Texture;
+
+	// Represents a level in the game
+	class Level
 	{
-		class Texture;
-	}
+	public:
+		// destructor
+		virtual ~Level();
 
-	using namespace video;
+		// initialize the level
+		void initialize();
 
-	namespace game
-	{
-		// Represents a level in the game
-		class Level
-		{
-		public:
-			// destructor
-			virtual ~Level();
+		// add entity
+		void addEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
 
-			// initialize the level
-			void initialize();
+		// update 
+		void update();
 
-			// add entity
-			void addEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
+		// render
+		void render();
 
-			// update 
-			void update();
+		// start
+		virtual void start() { }
 
-			// render
-			void render();
+	protected:
+		// start the entities
+		void startEntities();
 
-			// start
-			virtual void start() { }
+		// update entities
+		void updateEntities();
 
-		protected:
-			// start the entities
-			void startEntities();
+		// render entities
+		void renderEntities();
 
-			// update entities
-			void updateEntities();
-
-			// render entities
-			void renderEntities();
-
-		private:
-			// entites in the level
-			std::vector<Entity*> m_entities;
-		};
-	}
+	private:
+		// entites in the level
+		std::vector<Entity*> m_entities;
+	};
 }

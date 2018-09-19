@@ -2,8 +2,7 @@
 
 #include "../../Orbis/Components/Component.h"
 #include "../../Orbis/Game/Entity.h"
-using namespace orb::components;
-using namespace orb::game;
+using namespace orb;
 
 namespace app
 {

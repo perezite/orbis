@@ -3,7 +3,6 @@
 #include "MathUtil.h"
 
 #include "../System/StringUtil.h"
-using namespace base;
 
 #include <sstream>
 #include <iostream>

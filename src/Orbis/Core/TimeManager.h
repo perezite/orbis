@@ -2,36 +2,33 @@
 
 namespace orb
 {
-	namespace core
+	class TimeManager
 	{
-		class TimeManager
-		{
-		public:
-			// get the instance
-			static TimeManager* getInstance();
+	public:
+		// get the instance
+		static TimeManager* getInstance();
 
-			// update
-			void update();
+		// update
+		void update();
 
-			// reset
-			void reset();
+		// reset
+		void reset();
 
-			// get the seconds elapsed since the last frame
-			float getDeltaSeconds();
+		// get the seconds elapsed since the last frame
+		float getDeltaSeconds();
 
-			// get the current time in seconds
-			long getTicks();
+		// get the current time in seconds
+		long getTicks();
 
-		protected:
-			// singleton ctor
-			TimeManager();
+	protected:
+		// singleton ctor
+		TimeManager();
 
-		private:
-			// number of ticks at the beginning of the previous frame
-			long m_lastTicks;
+	private:
+		// number of ticks at the beginning of the previous frame
+		long m_lastTicks;
 
-			// number of ticks at beginning of the current frame
-			long m_currentTicks;
-		};
-	}
+		// number of ticks at beginning of the current frame
+		long m_currentTicks;
+	};
 }

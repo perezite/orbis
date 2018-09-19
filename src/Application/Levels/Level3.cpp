@@ -7,13 +7,11 @@
 #include "../Controllers/DebugLineTester.h"
 #include "../Controllers/WobbleEffect.h"
 
-#include "../../Orbis/Orbis.h"
-using namespace orb::video;
-using namespace orb::components;
-using namespace orb::core;
-
 #include "../../Base/Math/MathUtil.h"
 using namespace base;
+
+#include "../../Orbis/Orbis.h"
+using namespace orb;
 
 #include <iostream>
 

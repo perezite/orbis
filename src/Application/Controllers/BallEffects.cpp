@@ -1,7 +1,7 @@
 #include "BallEffects.h"
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::core;
+using namespace orb;
 
 #define __STATE_EXPLODING
 

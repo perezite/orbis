@@ -1,9 +1,11 @@
 #pragma once
 
 #include "../../Base/Math/MathUtil.h"
-#include "../../Orbis/Components/Component.h"
-using namespace orb::components;
 using namespace base;
+
+#include "../../Orbis/Components/Component.h"
+using namespace orb;
+
 
 namespace app
 {

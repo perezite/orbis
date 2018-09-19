@@ -5,8 +5,6 @@
 #include "../Core/AssetUtil.h"
 #include "../Libraries/GL.h"
 #include "../Components/Camera.h"
-using namespace orb::core;
-using namespace orb::components;
 
 #include "../../Base/System/Exception.h"
 using namespace base;
@@ -76,57 +74,54 @@ namespace orb
 		}
 	}
 
-	namespace video
+	Shader::Shader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
 	{
-		Shader::Shader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
-		{
-			VideoManager::getInstance();
+		VideoManager::getInstance();
 
-			m_programId = glCreateProgram();
+		m_programId = glCreateProgram();
 
-			std::string vertexShaderCode = AssetUtil::loadTextAsset(vertexShaderAssetPath);
-			GLuint vertexShader = compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
-			glAttachShader(m_programId, vertexShader);
+		std::string vertexShaderCode = AssetUtil::loadTextAsset(vertexShaderAssetPath);
+		GLuint vertexShader = compile(vertexShaderCode, GL_VERTEX_SHADER, m_programId);
+		glAttachShader(m_programId, vertexShader);
 
-			std::string fragmentShaderCode = AssetUtil::loadTextAsset(fragmentShaderAssetPath);
-			GLuint fragmentShader = compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
-			glAttachShader(m_programId, fragmentShader);
+		std::string fragmentShaderCode = AssetUtil::loadTextAsset(fragmentShaderAssetPath);
+		GLuint fragmentShader = compile(fragmentShaderCode, GL_FRAGMENT_SHADER, m_programId);
+		glAttachShader(m_programId, fragmentShader);
 
-			link(m_programId);
-		}
+		link(m_programId);
+	}
 
-		Shader::~Shader()
-		{
-			glDeleteProgram(m_programId);
-		}
+	Shader::~Shader()
+	{
+		glDeleteProgram(m_programId);
+	}
 
-		int Shader::getAttributeLocation(std::string id)
-		{
-			GLint location = glGetAttribLocation(m_programId, id.c_str());
-			return location;
-		}
+	int Shader::getAttributeLocation(std::string id)
+	{
+		GLint location = glGetAttribLocation(m_programId, id.c_str());
+		return location;
+	}
 
-		void Shader::setUniform(std::string id, int value)
-		{
-			GLint handle = glGetUniformLocation(m_programId, id.c_str());
-			glUniform1i(handle, value);
-		}
+	void Shader::setUniform(std::string id, int value)
+	{
+		GLint handle = glGetUniformLocation(m_programId, id.c_str());
+		glUniform1i(handle, value);
+	}
 
-		void Shader::setUniform(std::string id, const Color & color)
-		{
-			GLint handle = glGetUniformLocation(m_programId, id.c_str());
+	void Shader::setUniform(std::string id, const Color & color)
+	{
+		GLint handle = glGetUniformLocation(m_programId, id.c_str());
 
-			glUniform4f(handle, color.r, color.g, color.b, color.a);
-		}
+		glUniform4f(handle, color.r, color.g, color.b, color.a);
+	}
 
-		void Shader::use()
-		{
-			glUseProgram(m_programId);
-		}
+	void Shader::use()
+	{
+		glUseProgram(m_programId);
+	}
 
-		void Shader::unuse()
-		{
-			glUseProgram(0);
-		}
+	void Shader::unuse()
+	{
+		glUseProgram(0);
 	}
 }

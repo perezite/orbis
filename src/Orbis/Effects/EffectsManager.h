@@ -7,27 +7,24 @@
 
 namespace orb
 {
-	namespace effects
+	class EffectsManager
 	{
-		class EffectsManager
-		{
-		public:
-			// get instance
-			static EffectsManager* getInstance();
+	public:
+		// get instance
+		static EffectsManager* getInstance();
 
-			// clear the manager
-			void clear();
+		// clear the manager
+		void clear();
 
-			// get a tween
-			Tween* getTween(std::string assetPath);
+		// get a tween
+		Tween* getTween(std::string assetPath);
 
-		protected:
-			// singleton constructor
-			EffectsManager() {}
+	protected:
+		// singleton constructor
+		EffectsManager() {}
 
-		private:
-			// a list of tweens
-			std::map<std::string, Tween*> m_tweens;
-		};
-	}
+	private:
+		// a list of tweens
+		std::map<std::string, Tween*> m_tweens;
+	};
 }

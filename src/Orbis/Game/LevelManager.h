@@ -6,42 +6,39 @@
 
 namespace orb
 {
-	namespace game
+	class LevelManager
 	{
-		class LevelManager
-		{
-		public:
-			// get instance
-			static LevelManager* getInstance();
+	public:
+		// get instance
+		static LevelManager* getInstance();
 
-			// queue level
-			void queueLevel(Level *level) { m_queuedLevel = level; }
+		// queue level
+		void queueLevel(Level *level) { m_queuedLevel = level; }
 
-			// get the current level
-			Level* getCurrentLevel() { return m_currentLevel; }
+		// get the current level
+		Level* getCurrentLevel() { return m_currentLevel; }
 
-			// clear
-			void clear();
+		// clear
+		void clear();
 
-			// update
-			void update();
+		// update
+		void update();
 
-			// render
-			void render();
+		// render
+		void render();
 
-		protected:
-			// constructor
-			LevelManager();
+	protected:
+		// constructor
+		LevelManager();
 
-			// switch to queued level
-			void switchToQueuedLevel();
+		// switch to queued level
+		void switchToQueuedLevel();
 
-		private:
-			// current level
-			Level* m_currentLevel;
+	private:
+		// current level
+		Level* m_currentLevel;
 
-			// queued level
-			Level* m_queuedLevel;
-		};
-	}
+		// queued level
+		Level* m_queuedLevel;
+	};
 }

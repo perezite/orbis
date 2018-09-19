@@ -1,12 +1,9 @@
 #pragma once
 
 #include "../Video/VideoManager.h"
-using namespace orb::video;
 
 namespace orb
 {
-	namespace engine
-	{
 		class OrbisMain
 		{
 		public:
@@ -36,5 +33,4 @@ namespace orb
 			// cumulated performance values
 			float m_cumulativePerformance;
 		};
-	}
 }

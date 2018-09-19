@@ -7,8 +7,7 @@
 #include "../Controllers/Ball.h"
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::components;
-using namespace orb::video;
+using namespace orb;
 
 namespace app
 {

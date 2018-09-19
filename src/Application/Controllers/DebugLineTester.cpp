@@ -1,7 +1,7 @@
 #include "DebugLineTester.h"
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::core;
+using namespace orb;
 
 namespace app
 {

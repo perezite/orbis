@@ -13,46 +13,43 @@ using namespace base;
 
 namespace orb
 {
-	namespace video
+	class Texture;
+
+	class TextureChart;
+
+	class TextureAtlas
 	{
-		class Texture;
+	public:
+		// dtor
+		virtual ~TextureAtlas() { };
 
-		class TextureChart;
+		// add a texture 
+		void add(Texture* texture);
 
-		class TextureAtlas
-		{
-		public:
-			// dtor
-			virtual ~TextureAtlas() { };
+		// clear the atlas
+		void clear();
 
-			// add a texture 
-			void add(Texture* texture);
+		// generate the atlas
+		void generate();
 
-			// clear the atlas
-			void clear();
+	protected:
+		// get texture rects
+		std::vector<Rect> getTextureRects();
 
-			// generate the atlas
-			void generate();
+		// select textures by indexed rects
+		std::vector<Texture*> selectTextures(std::vector<Rect> indexedRects);
 
-		protected:
-			// get texture rects
-			std::vector<Rect> getTextureRects();
+		// get the rect of an sdl surface
+		SDL_Rect getSurfaceRect(SDL_Surface* surface);
 
-			// select textures by indexed rects
-			std::vector<Texture*> selectTextures(std::vector<Rect> indexedRects);
+		// convert sdl rect to orbis rect
+		Rect toOrbisRect(SDL_Rect rect);
 
-			// get the rect of an sdl surface
-			SDL_Rect getSurfaceRect(SDL_Surface* surface);
+	private:
+		// the textures
+		std::vector<Texture*> m_textures;
 
-			// convert sdl rect to orbis rect
-			Rect toOrbisRect(SDL_Rect rect);
-
-		private:
-			// the textures
-			std::vector<Texture*> m_textures;
-
-			// the pages
-			std::vector<TextureChart*> m_charts;
-		};
-	}
+		// the pages
+		std::vector<TextureChart*> m_charts;
+	};
 }

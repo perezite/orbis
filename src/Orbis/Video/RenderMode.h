@@ -4,12 +4,9 @@
 
 namespace orb
 {
-	namespace video
+	enum class RenderMode : GLenum
 	{
-		enum class RenderMode : GLenum
-		{
-			Triangles = GL_TRIANGLES,
-			Lines = GL_LINES
-		};
-	}
+		Triangles = GL_TRIANGLES,
+		Lines = GL_LINES
+	};
 }

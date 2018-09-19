@@ -3,7 +3,6 @@
 #include "Transform.h"
 
 #include "../Components/Component.h"
-using namespace orb::components;
 
 #include "../../Base/Math/Vector2D.h"
 using namespace base;
@@ -13,51 +12,48 @@ using namespace base;
 
 namespace orb
 {
-	namespace game
+	// Represents an Entity in the game
+	class Entity
 	{
-		// Represents an Entity in the game
-		class Entity
-		{
-		public:
-			// constructor
-			Entity(std::string name = "") { m_name = name; }
+	public:
+		// constructor
+		Entity(std::string name = "") { m_name = name; }
 
-			// destructor
-			virtual ~Entity();
+		// destructor
+		virtual ~Entity();
 
-			// set transform
-			void setTransform(Transform transform) { m_transform = transform; }
+		// set transform
+		void setTransform(Transform transform) { m_transform = transform; }
 
-			// get transform
-			Transform* getTransform() { return &m_transform; }
+		// get transform
+		Transform* getTransform() { return &m_transform; }
 
-			// get the name
-			std::string getName() const { return m_name; }
+		// get the name
+		std::string getName() const { return m_name; }
 
-			// get components
-			const std::vector<Component*>& getComponents() const { return m_components; }
+		// get components
+		const std::vector<Component*>& getComponents() const { return m_components; }
 
-			// add component
-			void addComponent(Component *component);
+		// add component
+		void addComponent(Component *component);
 
-			// start the entity
-			void start();
+		// start the entity
+		void start();
 
-			// update the entity
-			void update();
+		// update the entity
+		void update();
 
-			// debug-render the entity
-			void renderDebug();
+		// debug-render the entity
+		void renderDebug();
 
-		private:
-			// transform of the entity
-			Transform m_transform;
+	private:
+		// transform of the entity
+		Transform m_transform;
 
-			// components of the entity
-			std::vector<Component*> m_components;
+		// components of the entity
+		std::vector<Component*> m_components;
 
-			// name of the entity
-			std::string m_name;
-		};
-	}
+		// name of the entity
+		std::string m_name;
+	};
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../../Base/Math/Vector2D.h"
-using namespace base;
 
 #include <vector>
 #include <sstream>

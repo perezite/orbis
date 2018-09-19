@@ -14,63 +14,60 @@ typedef std::tuple<std::string, std::string> ShaderPaths;
 
 namespace orb
 {
-	namespace video
+	class VideoManager
 	{
-		class VideoManager
-		{
-		public:
-			// get instance
-			static VideoManager* getInstance();
+	public:
+		// get instance
+		static VideoManager* getInstance();
 
-			// clear the manager
-			void clear();
+		// clear the manager
+		void clear();
 
-			// start the manager
-			void start();
+		// start the manager
+		void start();
 
-			// render
-			void render();
+		// render
+		void render();
 
-			// get the texture atlas
-			TextureAtlas* getTextureAtlas() { return &m_textureAtlas; }
+		// get the texture atlas
+		TextureAtlas* getTextureAtlas() { return &m_textureAtlas; }
 
-			// get or load a texture
-			Texture* getTexture(std::string assetPath, bool flipVertically = true);
+		// get or load a texture
+		Texture* getTexture(std::string assetPath, bool flipVertically = true);
 
-			// get or load a shader
-			Shader* getShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath);
+		// get or load a shader
+		Shader* getShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath);
 
-			// get the winow
-			Window* getWindow() { return &m_window; }
+		// get the winow
+		Window* getWindow() { return &m_window; }
 
-			// get the render device
-			RenderDevice* getRenderDevice() { return &m_renderDevice; }
+		// get the render device
+		RenderDevice* getRenderDevice() { return &m_renderDevice; }
 
-			// get the debug render device
-			DebugRenderDevice* getDebugRenderDevice() { return &m_debugRenderDevice; }
+		// get the debug render device
+		DebugRenderDevice* getDebugRenderDevice() { return &m_debugRenderDevice; }
 
-		protected:
-			// singleton constructor
-			VideoManager() { };
+	protected:
+		// singleton constructor
+		VideoManager() { };
 
-		private:
-			// the textures
-			std::map<std::string, Texture*> m_textures;
+	private:
+		// the textures
+		std::map<std::string, Texture*> m_textures;
 
-			// the shaders
-			std::map<ShaderPaths, Shader*> m_shaders;
+		// the shaders
+		std::map<ShaderPaths, Shader*> m_shaders;
 
-			// the texture atlas
-			TextureAtlas m_textureAtlas;
+		// the texture atlas
+		TextureAtlas m_textureAtlas;
 
-			// the window
-			Window m_window;
+		// the window
+		Window m_window;
 
-			// the render device
-			RenderDevice m_renderDevice;
+		// the render device
+		RenderDevice m_renderDevice;
 
-			// the debug render device
-			DebugRenderDevice m_debugRenderDevice;
-		};
-	}
+		// the debug render device
+		DebugRenderDevice m_debugRenderDevice;
+	};
 }

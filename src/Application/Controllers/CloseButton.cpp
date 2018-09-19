@@ -3,10 +3,7 @@
 #include "SpriteController.h"
 
 #include "../../Orbis/Orbis.h"
-using namespace orb::input;
-using namespace orb::core;
-using namespace orb::game;
-using namespace base;
+using namespace orb;
 
 #include <algorithm>
 

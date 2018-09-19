@@ -5,9 +5,7 @@
 #include "../../Orbis/Components/Camera.h"
 #include "../../Orbis/Components/SpriteRenderer.h"
 #include "../../Orbis/Game/Level.h"
-using namespace orb::game;
-using namespace orb::video;
-using namespace orb::components;
+using namespace orb;
 
 namespace app
 {
