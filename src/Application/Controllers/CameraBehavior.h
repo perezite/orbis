@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../Base/Math/MathUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
-#include "../../Orbis/Components/Component.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb;
 
 

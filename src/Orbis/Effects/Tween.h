@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Base/Math/Spline.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include <string>

@@ -2,7 +2,7 @@
 
 #include "../Core/TimeManager.h"
 
-#include "../../Base/System/Exception.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include <iostream>

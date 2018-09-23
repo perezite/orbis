@@ -1,8 +1,6 @@
 #include "TextureAtlas.h"
 
-#include "../../Base/System/Exception.h"
-#include "../../Base/System/MemoryUtil.h"
-#include "../../Base/Algorithms/BinPacking.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

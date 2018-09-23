@@ -1,7 +1,6 @@
 #include "BinPackingVisualizer.h"
 
-#include "../../Base/Math/MathUtil.h"
-#include "../../Base/Algorithms/BinPacking.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include "../../Orbis/Orbis.h"

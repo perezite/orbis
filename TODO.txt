@@ -1,11 +1,13 @@
 TODO:	
 - Refactoring
-	- Base-Headers in Meta Headerfile zusammenfassen
+	- Precompilation für Base.h einfügen
 	- Timing durchführen, ob Precompilation der Metaheader-Files etwas bringt. Falls nicht: Precompilation von Orbis.h wieder entfernen
 	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 	- Renderer gesamthaft refactoren	
 	- Code-Styling überdenken (js-style vs a-style)
+- Infastruktur: Ermitteln, welche Prozesse VS blocken (Kandidat: vcpkgsrv.exe) und Lösung dafür finden
+- Ermitteln, ob das Überhitzungsproblem gelöst werden kann durch killen von vcpkgsrv.exe
 - Evaluieren, ob weitere Refactorings nötig sind
 - Xperia Debugging zum Laufen bringen
 - Testen auf Mobile

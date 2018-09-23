@@ -5,7 +5,7 @@
 #include "../Libraries/SDL.h"
 #include "../Libraries/GL.h"
 
-#include "../../Base/Math/Rect.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include <vector>

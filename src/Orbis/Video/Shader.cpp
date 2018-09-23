@@ -6,7 +6,7 @@
 #include "../Libraries/GL.h"
 #include "../Components/Camera.h"
 
-#include "../../Base/System/Exception.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

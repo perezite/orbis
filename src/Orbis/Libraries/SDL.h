@@ -1,8 +1,7 @@
 #ifndef _ORBIS_SDL_H
 #define _ORBIS_SDL_H
 
-#include "../../Base/System/Exception.h"
-#include "../../Base/System/StringUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include <SDL2/SDL.h>

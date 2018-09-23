@@ -4,7 +4,7 @@
 #include "../Video/Renderable.h"
 #include "../Video/Color.h"
 
-#include "../../Base/Math/Range.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-#include "../../Base/System/MemoryUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

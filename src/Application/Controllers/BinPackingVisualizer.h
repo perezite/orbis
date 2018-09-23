@@ -1,11 +1,9 @@
 #pragma once
 
-#include "../../Orbis/Components/Component.h"
-#include "../../Orbis/Video/Color.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb;
 
-#include "../../Base/Math/Rect.h"
-#include "../../Base/Math/Range.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include <vector>

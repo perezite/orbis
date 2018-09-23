@@ -2,9 +2,7 @@
 
 #include "TransformSpace.h"
 
-#include "../../Base/Math/Vector2D.h"
-#include "../../Base/Math/Matrix3.h"
-#include "../../Base/Math/Rect.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace orb

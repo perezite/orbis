@@ -1,6 +1,6 @@
 #include "WobbleEffect.h"
 
-#include "../../Base/Math/MathUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include "../../Orbis/Orbis.h"

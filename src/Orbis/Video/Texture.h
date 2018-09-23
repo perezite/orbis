@@ -6,7 +6,7 @@
 #include "../Libraries/SDL.h"
 #include "../Game/Level.h"
 
-#include "../../Base/Math/Rect.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include <string>

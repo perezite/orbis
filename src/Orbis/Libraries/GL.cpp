@@ -1,7 +1,6 @@
 #include "GL.h"
 
-#include "../../Base/System/Exception.h"
-#include "../../Base/System/StringUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 void GL_dummy()

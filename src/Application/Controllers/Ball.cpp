@@ -1,6 +1,6 @@
 #include "Ball.h"
 
-#include "../../Base/System/Exception.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include "../../Orbis/Orbis.h"

@@ -6,7 +6,7 @@
 #include "../Game/LevelManager.h"
 #include "../Components/TweenInspector.h"
 
-#include "../../Base/System/StringUtil.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 #include <sstream>

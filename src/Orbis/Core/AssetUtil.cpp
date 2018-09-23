@@ -2,8 +2,7 @@
 
 #include "../Libraries/SDL.h"
 
-#include "../../Base/System/EnvironmentUtil.h"
-#include "../../Base/System/Exception.h"
+#include "../../Base/Base.h"
 using namespace base;
 
 namespace
