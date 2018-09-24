@@ -1,7 +1,5 @@
 TODO:	
 - Refactoring
-	- Precompilation für Base.h einfügen
-	- Timing durchführen, ob Precompilation der Metaheader-Files etwas bringt. Falls nicht: Precompilation von Orbis.h wieder entfernen
 	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 	- Renderer gesamthaft refactoren	

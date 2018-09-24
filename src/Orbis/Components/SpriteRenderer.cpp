@@ -7,7 +7,14 @@ namespace orb
 {
 	SpriteRenderer::SpriteRenderer(Texture* texture)
 		: Component(), m_texture(texture)
-	{}
+	{
+		throw Exception("deprecated!");
+	}
+
+	SpriteRenderer::SpriteRenderer(std::string assetPath)
+	{
+		m_texture = VideoManager::getInstance()->getTexture(assetPath);
+	}
 
 	void SpriteRenderer::start()
 	{

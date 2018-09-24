@@ -14,6 +14,9 @@ namespace orb
 		// ctor
 		SpriteRenderer(Texture* texture);
 
+		// ctor
+		SpriteRenderer(std::string assetPath);
+
 		// start
 		void start();
 
