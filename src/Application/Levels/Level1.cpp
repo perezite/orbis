@@ -119,9 +119,37 @@ namespace app
 		build(this)->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())
 			->withTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One))->go();
 
+		build(this)->levelSwitcher<Level2>(true)->go();
+
 		build(this)->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
 
-		build(this)->levelSwitcher<Level2>(true)->go();
+		build(this)->entity("yellow block")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
+			->withComponent(new SpriteController(MathUtil::getPi()))
+			->withTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)))->go();
+
+		build(this)->entity("blue block")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
+			->withComponent(new SpriteController(-MathUtil::getPi() / 2.0f))
+			->withTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)))->go();
+
+		std::vector<std::string> inputModeTextures =
+			{ "Textures/RotateYellowSprite.png", "Textures/TranslateYellowSprite.png" };
+		// { rotateYellowSpriteTex, translateYellowSpriteTex, translateBlueSpriteTex, rotateCameraTex, translateCameraTex, scaleCameraTex, resetTex };
+
+		build(this)->entity("input mode button")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
+			->withComponent(new InputModeButton(inputModeTextures))
+			->withTransform(Transform(Vector2D(-0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera))
+			->go();
+			
+
+		// build(this)->entity("input mode button")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
+
+		/*Entity* inputModeButton = new Entity("input mode button");
+		SpriteRenderer* inputModeButtonRenderer = new SpriteRenderer(rotateYellowSpriteTex);
+		inputModeButton->addComponent(inputModeButtonRenderer);
+		std::vector<Texture*> inputModeTextures = { rotateYellowSpriteTex, translateYellowSpriteTex, translateBlueSpriteTex, rotateCameraTex, translateCameraTex, scaleCameraTex, resetTex };
+		inputModeButton->addComponent(new InputModeButton(inputModeButtonRenderer, inputModeTextures));
+		inputModeButton->setTransform(Transform(Vector2D(-0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
+		this->addEntity(inputModeButton);*/
 	}
 
 	/*void Level1::start()
@@ -141,38 +169,6 @@ namespace app
 		Texture* leftArrowTex = VideoManager::getInstance()->getTexture("Textures/OverlayLeft.png");
 		Texture* rightArrowTex = VideoManager::getInstance()->getTexture("Textures/OverlayRight.png");
 
-		// camera entity
-		Entity* camEntity = new Entity();
-		Camera* cam = new Camera();
-		CameraBehavior* camController = new CameraBehavior();
-		camEntity->addComponent(cam);
-		camEntity->addComponent(camController);
-		camEntity->setTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One));
-		this->addEntity(camEntity);
-
-		// create level switcher
-		LevelUtil::AddLevelSwitcher<Level2>(this, true);
-
-		// coordinate system entity
-		Entity* coordSystem = new Entity("Coordinate System");
-		coordSystem->addComponent(new SpriteRenderer(coordSystemTexture));
-		this->addEntity(coordSystem);
-
-		// yellow block entity
-		Entity* yellowBlock = new Entity("Yellow Brick");
-		SpriteController* yellowBlockController = new SpriteController(MathUtil::getPi());
-		yellowBlock->addComponent(yellowBlockController);
-		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTexture));
-		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(yellowBlock);
-
-		// blue block entity
-		Entity* blueBlock = new Entity("Blue Brick");
-		SpriteController* blueBlockController = new SpriteController(-MathUtil::getPi() / 2.0f);
-		blueBlock->addComponent(blueBlockController);
-		blueBlock->addComponent(new SpriteRenderer(blueBlockTexture));
-		blueBlock->setTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)));
-		this->addEntity(blueBlock);
 
 		// input mode button
 		Entity* inputModeButton = new Entity("input mode button");

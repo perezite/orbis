@@ -1,6 +1,13 @@
 TODO:	
 - Refactoring
-	- Builder-Pattern für Level implementieren. Pre-Test mit Konsolenprojekt
+	- Builder-Pattern für Level implementieren
+		- Level1 umbauen
+			- Konzept für Atlassing überlegen
+			-- Hint: Funktion erstellen mit der man einen kompletten Pfad atlassen kann
+		- Builder extrahieren
+		- Testing auf Mobile
+		- Restliche Level umbauen
+		- TODO-Kommentare umsetzen
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 	- Renderer gesamthaft refactoren	
 	- Code-Styling überdenken (js-style vs a-style)

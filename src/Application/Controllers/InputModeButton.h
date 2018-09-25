@@ -3,11 +3,7 @@
 #include "SpriteController.h"
 #include "CameraBehavior.h"
 
-#include "../../Orbis/Components/Component.h"
-#include "../../Orbis/Components/SpriteRenderer.h"
-#include "../../Orbis/Video/Texture.h"
-#include "../../Orbis/Game/Entity.h"
-#include "../../Orbis/Game/Transform.h"
+#include "../../Orbis/Orbis.h"
 using namespace orb;
 
 #include <string>
@@ -20,9 +16,19 @@ namespace app
 	{
 	public:
 		// ctor
-		InputModeButton(SpriteRenderer* spriteRenderer, std::vector<Texture*> inputModeTextures)
-			: m_renderer(spriteRenderer), m_textures(inputModeTextures)
-		{}
+		InputModeButton(std::vector<std::string> textures)
+			: m_textures(textures), m_spriteRenderer(NULL)
+		{
+			// TODO: Remove this when atlassing is fixed
+			for (unsigned int i = 0; i < m_textures.size(); i++)
+				VideoManager::getInstance()->getTexture(m_textures[i]);
+		}
+
+		// start
+		void start()
+		{
+			m_spriteRenderer = getParent()->getComponent<SpriteRenderer>();
+		}
 
 		// update
 		void update();
@@ -32,13 +38,13 @@ namespace app
 		void cycle();
 
 	private:
-		// input mode overlay sprite renderer
-		SpriteRenderer* m_renderer;
-
-		// available input mode overlay textures
-		std::vector<Texture*> m_textures;
+		// the textures
+		std::vector<std::string> m_textures;
 
 		// initial transforms of the entites
 		std::map<Entity*, Transform> m_initialTransforms;
+
+		// the sprite renderer
+		SpriteRenderer* m_spriteRenderer;
 	};
 }

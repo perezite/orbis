@@ -34,6 +34,19 @@ namespace orb
 		// get components
 		const std::vector<Component*>& getComponents() const { return m_components; }
 
+		// get a component of a specific type
+		template <class T> T* getComponent() 
+		{
+			for (unsigned int i = 0; i < m_components.size(); i++)
+			{
+				T* result = dynamic_cast<T*>(m_components[i]);
+				if (result != NULL)
+					return result;
+			}
+
+			return NULL;
+		}
+
 		// add component
 		void addComponent(Component *component);
 

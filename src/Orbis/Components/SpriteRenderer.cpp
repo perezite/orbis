@@ -26,6 +26,13 @@ namespace orb
 		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 
+	void SpriteRenderer::setTexture(std::string path)
+	{
+		m_texture = VideoManager::getInstance()->getTexture(path);
+		m_renderable.getMaterial()->setTexture(m_texture);
+		VideoManager::getInstance()->getRenderDevice()->updateRenderable(&m_renderable);
+	}
+
 	void SpriteRenderer::setTexture(Texture * texture)
 	{
 		m_renderable.getMaterial()->setTexture(texture);
