@@ -21,7 +21,7 @@ namespace orb
 		// set the spline
 		void setSpline(Spline spline) { m_spline = spline; }
 
-		// update the value
+		// updateLevel the value
 		float getValue(float duration);
 
 		// save as asset

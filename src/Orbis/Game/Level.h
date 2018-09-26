@@ -16,14 +16,17 @@ namespace orb
 		// destructor
 		virtual ~Level();
 
-		// initialize the level
-		void initialize();
+		// start the level
+		void startLevel();
+
+		// get entity 
+		Entity* findEntity(std::string name);
 
 		// add entity
 		void addEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
 
-		// update 
-		void update();
+		// update the level 
+		void updateLevel();
 
 		// render
 		void render();
@@ -31,11 +34,14 @@ namespace orb
 		// start
 		virtual void start() { }
 
+		// update
+		virtual void update() { } 
+
 	protected:
 		// start the entities
 		void startEntities();
 
-		// update entities
+		// updateLevel entities
 		void updateEntities();
 
 		// render entities

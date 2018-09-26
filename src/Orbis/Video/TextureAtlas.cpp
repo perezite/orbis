@@ -1,5 +1,7 @@
 #include "TextureAtlas.h"
 
+#include "VideoManager.h"
+
 #include "../../Base/Base.h"
 using namespace base;
 
@@ -10,10 +12,19 @@ namespace orb
 		m_textures.push_back(texture);
 	}
 
+	void TextureAtlas::add(std::vector<std::string> textures)
+	{
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			VideoManager::getInstance()->getTexture(textures[i]);
+		}
+	}
+
 	void TextureAtlas::clear()
 	{
 		MemoryUtil::clear(m_charts);
 		m_textures.clear();
+		m_isGenerated = false;
 	}
 
 	void TextureAtlas::generate()
@@ -34,6 +45,8 @@ namespace orb
 			TextureChart* page = new TextureChart(pageTextures, pageRects);
 			m_charts.push_back(page);
 		}
+
+		m_isGenerated = true;
 	}
 
 	std::vector<Rect> TextureAtlas::getTextureRects()

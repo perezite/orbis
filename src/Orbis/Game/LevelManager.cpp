@@ -32,7 +32,7 @@ namespace orb
 		if (m_queuedLevel != NULL)
 			switchToQueuedLevel();
 
-		m_currentLevel->update();
+		m_currentLevel->updateLevel();
 	}
 
 	void LevelManager::render()
@@ -46,6 +46,6 @@ namespace orb
 			delete m_currentLevel;
 		m_currentLevel = m_queuedLevel;
 		m_queuedLevel = NULL;
-		m_currentLevel->initialize();
+		m_currentLevel->startLevel();
 	}
 }

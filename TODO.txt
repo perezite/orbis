@@ -1,10 +1,10 @@
 TODO:	
 - Refactoring
 	- Builder-Pattern für Level implementieren
-		- Level1 umbauen
-			- Konzept für Atlassing überlegen
-			-- Hint: Funktion erstellen mit der man einen kompletten Pfad atlassen kann
+		- Mobile zum Laufen kriegen
 		- Builder extrahieren
+			- Id-Konzept überlegen für Entities (anstatt Namen)
+			- Alternative zu dynamic_cast ausdenken
 		- Testing auf Mobile
 		- Restliche Level umbauen
 		- TODO-Kommentare umsetzen
@@ -12,6 +12,7 @@ TODO:
 	- Renderer gesamthaft refactoren	
 	- Code-Styling überdenken (js-style vs a-style)
 - Infastruktur: Ermitteln, welche Prozesse VS blocken (Kandidat: vcpkgsrv.exe) und Lösung dafür finden
+	-- Hint: https://forums.unrealengine.com/development-discussion/c-gameplay-programming/25831-visual-studio-2013-express-vcpkgsrv-exe-going-crazy
 - Ermitteln, ob das Überhitzungsproblem gelöst werden kann durch killen von vcpkgsrv.exe
 - Evaluieren, ob weitere Refactorings nötig sind
 - Xperia Debugging zum Laufen bringen

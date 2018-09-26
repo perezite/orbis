@@ -17,7 +17,7 @@ namespace orb
 		// get instance
 		static InputManager* getInstance();
 
-		// update
+		// updateLevel
 		void update();
 
 		// has the input a quit event

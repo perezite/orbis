@@ -10,7 +10,5 @@ namespace app
 	public:
 		// override
 		void start();
-
-		void update();
 	};
 }

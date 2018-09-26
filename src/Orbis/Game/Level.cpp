@@ -18,7 +18,18 @@ namespace orb
 		MemoryUtil::clear(m_entities);
 	}
 
-	void Level::initialize()
+	Entity* Level::findEntity(std::string name)
+	{
+		for (unsigned int i = 0; i < m_entities.size(); i++)
+		{
+			if (m_entities[i]->getName() == name)
+				return m_entities[i];
+		}
+
+		return NULL;
+	}
+
+	void Level::startLevel()
 	{
 		TimeManager::getInstance()->reset();
 		VideoManager::getInstance()->clear();
@@ -27,9 +38,10 @@ namespace orb
 		VideoManager::getInstance()->start();
 	}
 
-	void Level::update()
+	void Level::updateLevel()
 	{
 		TimeManager::getInstance()->update();
+		update();
 		updateEntities();
 	}
 

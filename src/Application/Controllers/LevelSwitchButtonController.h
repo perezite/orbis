@@ -19,7 +19,7 @@ namespace app
 			Component(), m_switchForward(switchForward)
 		{}
 
-		// update
+		// updateLevel
 		void update()
 		{
 			InputManager* input = InputManager::getInstance();

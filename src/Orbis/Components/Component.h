@@ -22,7 +22,7 @@ namespace orb
 		// start
 		virtual void start() { };
 
-		// update
+		// updateLevel
 		virtual void update() { };
 
 		// render

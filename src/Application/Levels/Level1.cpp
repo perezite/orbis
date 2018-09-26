@@ -33,7 +33,7 @@ namespace
 
 		LevelBuilder* entity(std::string name = "")
 		{
-			m_entity = new Entity();
+			m_entity = new Entity(name);
 			return this;
 		}
 
@@ -53,8 +53,6 @@ namespace
 		template <class T>
 		LevelBuilder* levelSwitcher(bool isForward)
 		{
-			VideoManager* video = VideoManager::getInstance();
-
 			Camera* cam = Camera::getInstance();
 			float horzPos = isForward ? 0.45f * cam->getSize().x : -0.45f * cam->getSize().x;
 			std::string texPath = isForward ? "Textures/OverlayRight.png" : "Textures/OverlayLeft.png";
@@ -116,6 +114,12 @@ namespace app
 {
 	void Level1::start()
 	{
+		std::vector<std::string> inputModeTextures = { 
+			"Textures/RotateYellowSprite.png", "Textures/TranslateYellowSprite.png", "Textures/TranslateBlueSprite.png", 
+			"Textures/RotateCamera.png", "Textures/TranslateCamera.png", "Textures/ScaleCamera.png", "Textures/Reset.png" };
+
+		VideoManager::getInstance()->getTextureAtlas()->add(inputModeTextures);
+
 		build(this)->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())
 			->withTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One))->go();
 
@@ -126,79 +130,29 @@ namespace app
 		build(this)->entity("yellow block")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
 			->withComponent(new SpriteController(MathUtil::getPi()))
 			->withTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)))->go();
-
+		
 		build(this)->entity("blue block")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
 			->withComponent(new SpriteController(-MathUtil::getPi() / 2.0f))
 			->withTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)))->go();
-
-		std::vector<std::string> inputModeTextures =
-			{ "Textures/RotateYellowSprite.png", "Textures/TranslateYellowSprite.png" };
-		// { rotateYellowSpriteTex, translateYellowSpriteTex, translateBlueSpriteTex, rotateCameraTex, translateCameraTex, scaleCameraTex, resetTex };
 
 		build(this)->entity("input mode button")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
 			->withComponent(new InputModeButton(inputModeTextures))
 			->withTransform(Transform(Vector2D(-0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera))
 			->go();
-			
 
-		// build(this)->entity("input mode button")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
+		build(this)->entity("left button")->withComponent(new SpriteRenderer("Textures/OverlayLeft.png"))
+			->withComponent(new TransformButton(false))
+			->withTransform(Transform(Vector2D(-0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera))
+			->go();
 
-		/*Entity* inputModeButton = new Entity("input mode button");
-		SpriteRenderer* inputModeButtonRenderer = new SpriteRenderer(rotateYellowSpriteTex);
-		inputModeButton->addComponent(inputModeButtonRenderer);
-		std::vector<Texture*> inputModeTextures = { rotateYellowSpriteTex, translateYellowSpriteTex, translateBlueSpriteTex, rotateCameraTex, translateCameraTex, scaleCameraTex, resetTex };
-		inputModeButton->addComponent(new InputModeButton(inputModeButtonRenderer, inputModeTextures));
-		inputModeButton->setTransform(Transform(Vector2D(-0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
-		this->addEntity(inputModeButton);*/
+		build(this)->entity("right button")->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))
+			->withComponent(new TransformButton(true))
+			->withTransform(Transform(Vector2D(0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera))
+			->go();
+
+		build(this)->entity("close button")->withComponent(new SpriteRenderer("Textures/OverlayClose.png"))
+			->withComponent(new CloseButton())
+			->withTransform(Transform(Vector2D(0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera))
+			->go();
 	}
-
-	/*void Level1::start()
-	{
-		// textures
-		Texture* coordSystemTexture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem.png");
-		Texture* yellowBlockTexture = VideoManager::getInstance()->getTexture("Textures/YellowBlock.png");
-		Texture* blueBlockTexture = VideoManager::getInstance()->getTexture("Textures/BlueBlock.png");
-		Texture* rotateYellowSpriteTex = VideoManager::getInstance()->getTexture("Textures/RotateYellowSprite.png");
-		Texture* translateYellowSpriteTex = VideoManager::getInstance()->getTexture("Textures/TranslateYellowSprite.png");
-		Texture* translateBlueSpriteTex = VideoManager::getInstance()->getTexture("Textures/TranslateBlueSprite.png");
-		Texture* rotateCameraTex = VideoManager::getInstance()->getTexture("Textures/RotateCamera.png");
-		Texture* translateCameraTex = VideoManager::getInstance()->getTexture("Textures/TranslateCamera.png");
-		Texture* resetTex = VideoManager::getInstance()->getTexture("Textures/Reset.png");
-		Texture* scaleCameraTex = VideoManager::getInstance()->getTexture("Textures/ScaleCamera.png");
-		Texture* closeTex = VideoManager::getInstance()->getTexture("Textures/OverlayClose.png");
-		Texture* leftArrowTex = VideoManager::getInstance()->getTexture("Textures/OverlayLeft.png");
-		Texture* rightArrowTex = VideoManager::getInstance()->getTexture("Textures/OverlayRight.png");
-
-
-		// input mode button
-		Entity* inputModeButton = new Entity("input mode button");
-		SpriteRenderer* inputModeButtonRenderer = new SpriteRenderer(rotateYellowSpriteTex);
-		inputModeButton->addComponent(inputModeButtonRenderer);
-		std::vector<Texture*> inputModeTextures = { rotateYellowSpriteTex, translateYellowSpriteTex, translateBlueSpriteTex, rotateCameraTex, translateCameraTex, scaleCameraTex, resetTex };
-		inputModeButton->addComponent(new InputModeButton(inputModeButtonRenderer, inputModeTextures));
-		inputModeButton->setTransform(Transform(Vector2D(-0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
-		this->addEntity(inputModeButton);
-
-		// left button
-		Entity* leftButton = new Entity("left button");
-		leftButton->addComponent(new SpriteRenderer(leftArrowTex));
-		leftButton->addComponent(new TransformButton(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, false));
-		leftButton->setTransform(Transform(Vector2D(-0.25f, -0.25f * cam->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
-		this->addEntity(leftButton);
-
-		// right button
-		Entity* rightButton = new Entity("right button");
-		rightButton->addComponent(new SpriteRenderer(rightArrowTex));
-		rightButton->addComponent(new TransformButton(yellowBlockController, blueBlockController, camController, inputModeButtonRenderer, true));
-		rightButton->setTransform(Transform(Vector2D(0.25f * cam->getSize().x, -0.25f * cam->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera));
-		this->addEntity(rightButton);
-
-		// close button
-		Entity* closeButton = new Entity("close button");
-		closeButton->addComponent(new SpriteRenderer(closeTex));
-		closeButton->addComponent(new CloseButton());
-		closeButton->setTransform(Transform(Vector2D(0.25f * cam->getSize().x, 0.25f * cam->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera));
-		this->addEntity(closeButton);
-	}*/
-
 }

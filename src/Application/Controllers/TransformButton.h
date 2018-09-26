@@ -14,13 +14,7 @@ namespace app
 	{
 	public:
 		// ctor
-		TransformButton(SpriteController* yellowBlock, 
-			SpriteController* blueBlock, CameraBehavior* camera, SpriteRenderer* inputModeRenderer, bool leftDirection)
-			: m_yellowBlock(yellowBlock), m_blueBlock(blueBlock),
-			m_camera(camera), m_inputModeSpriteRenderer(inputModeRenderer), m_positiveTransform(leftDirection)
-		{
-			storeInitialTransforms();
-		}
+		TransformButton(bool leftDirection);
 
 		// override
 		void update();

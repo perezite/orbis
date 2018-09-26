@@ -18,11 +18,7 @@ namespace app
 		// ctor
 		InputModeButton(std::vector<std::string> textures)
 			: m_textures(textures), m_spriteRenderer(NULL)
-		{
-			// TODO: Remove this when atlassing is fixed
-			for (unsigned int i = 0; i < m_textures.size(); i++)
-				VideoManager::getInstance()->getTexture(m_textures[i]);
-		}
+		{ }
 
 		// start
 		void start()
@@ -30,7 +26,7 @@ namespace app
 			m_spriteRenderer = getParent()->getComponent<SpriteRenderer>();
 		}
 
-		// update
+		// updateLevel
 		void update();
 
 	protected:

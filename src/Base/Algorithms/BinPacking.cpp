@@ -36,7 +36,7 @@ namespace base
 		// 1) sort rects by their area
 		sortRectsByArea(rects);
 
-		// 2) initialize the list of (empty) partitions with the unpartitioned bin
+		// 2) startLevel the list of (empty) partitions with the unpartitioned bin
 		std::vector<Rect> partitions{ bin };
 		m_partitionBuffer.push_back(bin);
 

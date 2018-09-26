@@ -21,7 +21,7 @@ namespace orb
 		// clear
 		void clear();
 
-		// update
+		// updateLevel
 		void update();
 
 		// render

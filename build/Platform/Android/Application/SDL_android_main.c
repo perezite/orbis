@@ -14,7 +14,7 @@ Functions called by JNI
 *******************************************************************************/
 #include <jni.h>
 
-/* Called before SDL_main() to initialize JNI bindings in SDL library */
+/* Called before SDL_main() to startLevel JNI bindings in SDL library */
 extern void SDL_Android_Init(JNIEnv* env, jclass cls);
 
 /* Start up the SDL app */

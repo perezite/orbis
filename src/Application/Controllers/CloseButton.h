@@ -19,7 +19,7 @@ namespace app
 	class CloseButton : public Component
 	{
 	public:
-		// update
+		// updateLevel
 		void update();
 	};
 }

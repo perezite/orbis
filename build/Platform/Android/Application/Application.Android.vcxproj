@@ -132,6 +132,7 @@
       <ExceptionHandling>Enabled</ExceptionHandling>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>
@@ -156,6 +157,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DataLevelLinking>true</DataLevelLinking>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>
@@ -175,6 +177,7 @@
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>
@@ -199,6 +202,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DataLevelLinking>true</DataLevelLinking>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>m;log;GLESv2;SDL2;SDL2_image;%(LibraryDependencies)</LibraryDependencies>

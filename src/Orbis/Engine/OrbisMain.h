@@ -24,7 +24,7 @@ namespace orb
 			// start time of current performance log measurement
 			long m_startTicks;
 
-			// number of frames elapsed since last performance log update
+			// number of frames elapsed since last performance log updateLevel
 			long m_numFrames;
 
 			// current number of performance samples

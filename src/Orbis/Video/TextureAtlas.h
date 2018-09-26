@@ -20,11 +20,21 @@ namespace orb
 	class TextureAtlas
 	{
 	public:
+		// ctor
+		TextureAtlas() : m_isGenerated(false)
+		{ }
+
 		// dtor
 		virtual ~TextureAtlas() { };
 
+		// is the atlas generatedk
+		bool isGenerated() { return m_isGenerated; }
+
 		// add a texture 
 		void add(Texture* texture);
+
+		// add multiple textures
+		void add(std::vector<std::string> textures);
 
 		// clear the atlas
 		void clear();
@@ -51,5 +61,8 @@ namespace orb
 
 		// the pages
 		std::vector<TextureChart*> m_charts;
+
+		// is the atlas generated
+		bool m_isGenerated;
 	};
 }

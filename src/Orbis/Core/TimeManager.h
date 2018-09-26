@@ -8,7 +8,7 @@ namespace orb
 		// get the instance
 		static TimeManager* getInstance();
 
-		// update
+		// updateLevel
 		void update();
 
 		// reset

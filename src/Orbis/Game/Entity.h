@@ -53,7 +53,7 @@ namespace orb
 		// start the entity
 		void start();
 
-		// update the entity
+		// updateLevel the entity
 		void update();
 
 		// debug-render the entity

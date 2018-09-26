@@ -36,11 +36,11 @@ namespace orb
 	{
 		float dt = TimeManager::getInstance()->getDeltaSeconds();
 
-		// update lifetime
+		// updateLevel lifetime
 		for (unsigned int i = 0; i < m_particles.size(); i++)
 			m_particles[i]->setCurrentLifetime(m_particles[i]->getCurrentLifetime() - dt);
 
-		// update position
+		// updateLevel position
 		for (unsigned int i = 0; i < m_particles.size(); i++)
 			m_particles[i]->getTransform()->position += m_particles[i]->getVelocity() * dt;
 	}

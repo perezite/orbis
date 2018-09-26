@@ -29,7 +29,7 @@ namespace orb
 		void update();
 
 	protected:
-		// update the particles
+		// updateLevel the particles
 		void updateParticles();
 
 		// delete outdated particles

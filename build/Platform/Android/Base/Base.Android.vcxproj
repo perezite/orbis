@@ -112,6 +112,7 @@
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeaderOutputFileDirectory>$(IntDir)</PrecompiledHeaderOutputFileDirectory>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
@@ -137,6 +138,7 @@
       <DataLevelLinking>true</DataLevelLinking>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeaderOutputFileDirectory>$(IntDir)</PrecompiledHeaderOutputFileDirectory>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
@@ -157,6 +159,7 @@
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeaderOutputFileDirectory>$(IntDir)</PrecompiledHeaderOutputFileDirectory>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
@@ -182,6 +185,7 @@
       <DataLevelLinking>true</DataLevelLinking>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeaderOutputFileDirectory>$(IntDir)</PrecompiledHeaderOutputFileDirectory>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>

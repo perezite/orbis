@@ -30,7 +30,7 @@ namespace orb
 		// add a renderable
 		void addRenderable(Renderable* renderable);
 
-		// update a renderable
+		// updateLevel a renderable
 		void updateRenderable(Renderable* renderable);
 
 		// delete a renderable
@@ -43,10 +43,10 @@ namespace orb
 		void render();
 
 	protected:
-		// update vertex array
+		// updateLevel vertex array
 		void updateVertexArray();
 
-		// update the vertex array for the renderer with the given index using the given mvp matrix
+		// updateLevel the vertex array for the renderer with the given index using the given mvp matrix
 		void insertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix);
 
 		// reserver the vertex buffer to hold the renderer data
@@ -55,7 +55,7 @@ namespace orb
 		// insert renderers indices at position in index array
 		void updateIndexArray();
 
-		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
+		// updateLevel the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
 		void insertIntoIndexArray(unsigned int rendererIndex, unsigned short& offset);
 
 		// reserve index array space

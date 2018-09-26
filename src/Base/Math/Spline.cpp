@@ -48,7 +48,7 @@ namespace base
 		std::vector<BezierPoint> newControlPoints = m_points;
 		newControlPoints[index].pos = newPosition;
 
-		// only update if the translation did not change the order of the control points
+		// only updateLevel if the translation did not change the order of the control points
 		if (std::is_sorted(std::begin(newControlPoints), std::end(newControlPoints), compareControlPoints))
 			m_points = newControlPoints;
 	}

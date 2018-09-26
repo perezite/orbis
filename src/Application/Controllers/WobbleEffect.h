@@ -11,7 +11,7 @@ namespace app
 		// start
 		void start();
 
-		// update
+		// updateLevel
 		void update();
 
 	private:

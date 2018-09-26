@@ -32,17 +32,17 @@ namespace orb
 			return true;
 
 		// compare atlassing
-		if (thisTex->isUsingAtlassing() && !otherTex->isUsingAtlassing())
+		if (thisTex->isAtlassed() && !otherTex->isAtlassed())
 			return false;
-		if (!thisTex->isUsingAtlassing() && otherTex->isUsingAtlassing())
+		if (!thisTex->isAtlassed() && otherTex->isAtlassed())
 			return false;
 
 		// compare direct textures
-		if (!thisTex->isUsingAtlassing() && !otherTex->isUsingAtlassing())
+		if (!thisTex->isAtlassed() && !otherTex->isAtlassed())
 			return thisTex == otherTex;
 
 		// compare atlas charts
-		if (thisTex->isUsingAtlassing() && otherTex->isUsingAtlassing())
+		if (thisTex->isAtlassed() && otherTex->isAtlassed())
 			return thisTex->getAtlasChart() == otherTex->getAtlasChart();
 
 		throw Exception("Something went really wrong!");

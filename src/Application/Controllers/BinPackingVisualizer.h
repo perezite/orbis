@@ -20,7 +20,7 @@ namespace app
 		// render
 		void renderDebug();
 
-		// update
+		// updateLevel
 		void update();
 
 

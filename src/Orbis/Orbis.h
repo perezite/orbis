@@ -1,4 +1,5 @@
 #include "Components\Component.h"
+#include "Components\Camera.h"
 #include "Components\ParticleRenderer.h"
 #include "Components\RectangleRenderer.h"
 #include "Components\SimpleParticleRenderer.h"

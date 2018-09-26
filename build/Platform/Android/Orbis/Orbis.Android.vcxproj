@@ -94,6 +94,7 @@
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -106,6 +107,7 @@
       <ExceptionHandling>Enabled</ExceptionHandling>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -118,6 +120,7 @@
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -130,6 +133,7 @@
       <ExceptionHandling>Enabled</ExceptionHandling>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

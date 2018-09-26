@@ -49,7 +49,7 @@ namespace orb
 		void bind();
 
 		// is the texture using atlassing
-		bool isUsingAtlassing() const;
+		bool isAtlassed() { return m_isAtlassed; }
 
 		// get the atlas texture chart
 		TextureChart* getAtlasChart() const { return m_atlasChart; }
@@ -63,6 +63,9 @@ namespace orb
 
 		// the image surface
 		SDL_Surface* m_surface;
+
+		// if the texture is on an atlas
+		bool m_isAtlassed;
 
 		// the texture chart containing the texture
 		TextureChart* m_atlasChart;
