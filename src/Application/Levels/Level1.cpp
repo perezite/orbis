@@ -125,7 +125,7 @@ namespace app
 
 		build(this)->levelSwitcher<Level2>(true)->go();
 
-		build(this)->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
+		build(this)->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystemm.png"))->go();
 
 		build(this)->entity("yellow block")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
 			->withComponent(new SpriteController(MathUtil::getPi()))

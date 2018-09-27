@@ -15,10 +15,14 @@ namespace orb
 	class Renderable
 	{
 	public:
+		// ctor
+		Renderable() : m_mesh(NULL) {}
+
 		// dtor
 		virtual ~Renderable()
 		{
-			delete m_mesh;
+			if (m_mesh)
+				delete m_mesh;
 		}
 
 		// set the transform

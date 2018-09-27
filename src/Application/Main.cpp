@@ -29,11 +29,11 @@ int main(int argc, char* args[])
 	{
 		LogUtil::logMessage("%.1023s", e.what().c_str());
 
-		#if defined(_DEBUG)
-			throw e;
-		#endif
+		LogUtil::showMessageBox(e.what(), "Exception");
 
- 		LogUtil::showMessageBox(e.what(), "Exception");
+		#if defined(_DEBUG)
+			 throw e;
+		#endif
 	}
 
 	return 0;

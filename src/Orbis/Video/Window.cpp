@@ -12,6 +12,9 @@ namespace orb
 	Window::Window()
 	{
 		SDL_Init(SDL_INIT_VIDEO);
+		int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG | IMG_INIT_TIF;
+		if (!IMG_Init(imgFlags) & imgFlags)
+			throw Exception("epic fail");
 		m_resolution = getDefaultResolution();
 
 		#ifdef WIN32	
