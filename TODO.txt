@@ -1,7 +1,7 @@
 TODO:	
 - Refactoring
 	- Builder-Pattern für Level implementieren
-		- Mobile zum Laufen kriegen
+		- Korrektes Exception-Handling auf Mobile zum Laufen kriegen bei FileNotFound Exception
 		- Builder extrahieren
 			- Id-Konzept überlegen für Entities (anstatt Namen)
 			- Alternative zu dynamic_cast ausdenken
