@@ -1,7 +1,6 @@
 TODO:	
 - Refactoring
 	- Builder-Pattern für Level implementieren
-		- Selbstgebastelten dynamic_cast implementieren
 		- Builder extrahieren
 		- Restliche Level umbauen
 		- TODO-Kommentare umsetzen

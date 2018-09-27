@@ -43,10 +43,38 @@ namespace
 			return this;
 		}
 
+		LevelBuilder* withPosition(float x, float y)
+		{
+			m_transform.position = Vector2D(x, y);
+			return this;
+		}
+
+		LevelBuilder* withRotation(float alpha)
+		{
+			m_transform.rotation = alpha;
+			return this;
+		}
+
+		LevelBuilder* withScale(float w, float h)
+		{
+			m_transform.scale = Vector2D(w, h);
+			return this;
+		}
+
+		LevelBuilder* withTransformSpace(TransformSpace space)
+		{
+			m_transform.transformSpace = space;
+			return this;
+		}
+
+		LevelBuilder* withTransform(float x, float y, float alpha, float w, float h)
+		{
+			this->withPosition(x, y)->withRotation(alpha)->withScale(w, h);
+		}
+
 		LevelBuilder* withTransform(Transform transform)
 		{
 			m_transform = transform;
-			m_hasTransform = true;
 			return this;
 		}
 
@@ -56,14 +84,8 @@ namespace
 			Camera* cam = Camera::getInstance();
 			float horzPos = isForward ? 0.45f * cam->getSize().x : -0.45f * cam->getSize().x;
 			std::string texPath = isForward ? "Textures/OverlayRight.png" : "Textures/OverlayLeft.png";
-
-			Entity* switcher = new Entity(isForward ? "next level Button" : "previous level Button");
-			switcher->addComponent(new SpriteRenderer(texPath));
-			switcher->addComponent(new LevelSwitchButtonController<T>(isForward));
-			switcher->setTransform(Transform(Vector2D(horzPos, 0.45f * cam->getSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::Camera));
-			m_entity = switcher;
-
-			return this;
+			return this->entity()->withComponent(new SpriteRenderer(texPath))->withComponent(new LevelSwitchButtonController<T>(isForward))
+				->withTransform((Transform(Vector2D(horzPos, 0.45f * cam->getSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::Camera)));
 		}
 
 		void go()
@@ -71,8 +93,7 @@ namespace
 			for (unsigned int i = 0; i < m_components.size(); i++)
 				m_entity->addComponent(m_components[i]);
 
-			if (m_hasTransform)
-				m_entity->setTransform(m_transform);
+			m_entity->setTransform(m_transform);
 
 			m_level->addEntity(m_entity);
 
@@ -84,8 +105,7 @@ namespace
 		{
 			m_level = NULL;
 			m_entity = NULL;
-			m_transform = Transform(Vector2D::Zero, 0.0f, Vector2D::One);
-			m_hasTransform = false;
+			m_transform = Transform(Vector2D(0.0f, 0.0f), 0.0f, Vector2D(1.0f, 1.0f), TransformSpace::World);
 			m_components.clear();
 		}
 
@@ -95,8 +115,6 @@ namespace
 		Entity* m_entity;
 
 		Transform m_transform;
-
-		bool m_hasTransform;
 
 		std::vector<Component*> m_components;
 	};
@@ -128,30 +146,30 @@ namespace app
 
 		build(this)->entity("yellowBlock")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
 			->withComponent(new SpriteController(MathUtil::getPi()))
-			->withTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)))->go();
-		
+			->withPosition(0.25f, 0.1f)->withScale(0.33f, 0.33f)->go();
+
 		build(this)->entity("blueBlock")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
 			->withComponent(new SpriteController(-MathUtil::getPi() / 2.0f))
-			->withTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)))->go();
+			->withPosition(-0.25f, -0.1f)->withScale(0.15f, 0.15f)->go();
 
 		build(this)->entity("inputModeButton")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
 			->withComponent(new InputModeButton(inputModeTextures))
-			->withTransform(Transform(Vector2D(-0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera))
-			->go();
+			->withPosition(-0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y)->withScale(0.25f, 0.25f)
+			->withTransformSpace(TransformSpace::Camera)->go();
 
 		build(this)->entity("leftButton")->withComponent(new SpriteRenderer("Textures/OverlayLeft.png"))
 			->withComponent(new TransformButton(false))
-			->withTransform(Transform(Vector2D(-0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera))
-			->go();
+			->withPosition(-0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y)->withScale(0.5f, 0.5f)
+			->withTransformSpace(TransformSpace::Camera)->go();
 
 		build(this)->entity("rightButton")->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))
 			->withComponent(new TransformButton(true))
-			->withTransform(Transform(Vector2D(0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera))
-			->go();
+			->withPosition(0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y)->withScale(0.5f, 0.5f)
+			->withTransformSpace(TransformSpace::Camera)->go();
 
 		build(this)->entity("closeButton")->withComponent(new SpriteRenderer("Textures/OverlayClose.png"))
 			->withComponent(new CloseButton())
-			->withTransform(Transform(Vector2D(0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera))
-			->go();
+			->withPosition(0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y)->withScale(0.25f, 0.25f)
+			->withTransformSpace(TransformSpace::Camera)->go();
 	}
 }

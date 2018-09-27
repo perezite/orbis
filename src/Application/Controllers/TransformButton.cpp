@@ -65,8 +65,7 @@ namespace
 
 namespace app
 {
-	TransformButton::TransformButton(bool leftDirection)
-		: m_positiveTransform(leftDirection)
+	TransformButton::TransformButton(bool leftDirection) : m_positiveTransform(leftDirection)
 	{
 		Level* level = LevelManager::getInstance()->getCurrentLevel();
 		m_yellowBlock = level->findEntity("yellowBlock")->getComponent<SpriteController>();
