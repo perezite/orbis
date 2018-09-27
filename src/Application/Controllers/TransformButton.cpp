@@ -69,9 +69,9 @@ namespace app
 		: m_positiveTransform(leftDirection)
 	{
 		Level* level = LevelManager::getInstance()->getCurrentLevel();
-		m_yellowBlock = level->findEntity("yellow block")->getComponent<SpriteController>();
-		m_blueBlock = level->findEntity("blue block")->getComponent<SpriteController>();
-		m_inputModeSpriteRenderer = level->findEntity("input mode button")->getComponent<SpriteRenderer>();
+		m_yellowBlock = level->findEntity("yellowBlock")->getComponent<SpriteController>();
+		m_blueBlock = level->findEntity("blueBlock")->getComponent<SpriteController>();
+		m_inputModeSpriteRenderer = level->findEntity("inputModeButton")->getComponent<SpriteRenderer>();
 		m_camera = Camera::getInstance()->getParent()->getComponent<CameraBehavior>();
 		storeInitialTransforms();
 	}

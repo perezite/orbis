@@ -17,7 +17,7 @@ namespace orb
 	{
 	public:
 		// constructor
-		Entity(std::string name = "") { m_name = name; }
+		Entity(std::string id = "") { m_id = id; }
 
 		// destructor
 		virtual ~Entity();
@@ -28,8 +28,8 @@ namespace orb
 		// get transform
 		Transform* getTransform() { return &m_transform; }
 
-		// get the name
-		std::string getName() const { return m_name; }
+		// get the id
+		std::string getId() const { return m_id; }
 
 		// get components
 		const std::vector<Component*>& getComponents() const { return m_components; }
@@ -66,7 +66,7 @@ namespace orb
 		// components of the entity
 		std::vector<Component*> m_components;
 
-		// name of the entity
-		std::string m_name;
+		// id of the entity
+		std::string m_id;
 	};
 }

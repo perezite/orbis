@@ -28,18 +28,16 @@ namespace orb
 		void setTexture(std::string path);
 
 		// get the texture path
-		// std::string getTexturePath(void) { return m_renderable.getMaterial()->getTexture()->getAssetPath(); }
-		std::string getTexturePath(void) { return NULL; }
+		 std::string getTexturePath(void) { return m_renderable.getMaterial()->getTexture()->getAssetPath(); }
 
 		// get the texture
 		// TODO: Remove this function
-		// Texture* getTexture(void) { return m_renderable.getMaterial()->getTexture(); }
-		Texture* getTexture(void) { return NULL; }
+		 Texture* getTexture(void) { return m_renderable.getMaterial()->getTexture(); }
 
 
 	private:
 		// the texture
-		// Texture* m_texture;
+		Texture* m_texture;
 
 		// the renderable
 		Renderable m_renderable;

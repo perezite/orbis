@@ -23,7 +23,7 @@ namespace orb
 		Entity* findEntity(std::string name);
 
 		// add entity
-		void addEntity(Entity *entity) { if (entity) m_entities.push_back(entity); }
+		void addEntity(Entity *entity);
 
 		// update the level 
 		void updateLevel();

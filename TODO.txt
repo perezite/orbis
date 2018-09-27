@@ -1,10 +1,8 @@
 TODO:	
 - Refactoring
 	- Builder-Pattern für Level implementieren
+		- Selbstgebastelten dynamic_cast implementieren
 		- Builder extrahieren
-			- Id-Konzept überlegen für Entities (anstatt Namen)
-			- Alternative zu dynamic_cast ausdenken
-		- Testing auf Mobile
 		- Restliche Level umbauen
 		- TODO-Kommentare umsetzen
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren

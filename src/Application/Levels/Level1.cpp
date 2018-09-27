@@ -120,37 +120,36 @@ namespace app
 
 		VideoManager::getInstance()->getTextureAtlas()->add(inputModeTextures);
 
-		build(this)->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())
-			->withTransform(Transform(Vector2D::Zero, 0.0f, Vector2D::One))->go();
+		build(this)->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
 
 		build(this)->levelSwitcher<Level2>(true)->go();
 
-		build(this)->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystemm.png"))->go();
+		build(this)->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
 
-		build(this)->entity("yellow block")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
+		build(this)->entity("yellowBlock")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
 			->withComponent(new SpriteController(MathUtil::getPi()))
 			->withTransform(Transform(Vector2D(0.25f, 0.1f), 0.0f, Vector2D(0.33f, 0.33f)))->go();
 		
-		build(this)->entity("blue block")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
+		build(this)->entity("blueBlock")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
 			->withComponent(new SpriteController(-MathUtil::getPi() / 2.0f))
 			->withTransform(Transform(Vector2D(-0.25f, -0.1f), 0.0f, Vector2D(0.15f, 0.15f)))->go();
 
-		build(this)->entity("input mode button")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
+		build(this)->entity("inputModeButton")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
 			->withComponent(new InputModeButton(inputModeTextures))
 			->withTransform(Transform(Vector2D(-0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera))
 			->go();
 
-		build(this)->entity("left button")->withComponent(new SpriteRenderer("Textures/OverlayLeft.png"))
+		build(this)->entity("leftButton")->withComponent(new SpriteRenderer("Textures/OverlayLeft.png"))
 			->withComponent(new TransformButton(false))
 			->withTransform(Transform(Vector2D(-0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera))
 			->go();
 
-		build(this)->entity("right button")->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))
+		build(this)->entity("rightButton")->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))
 			->withComponent(new TransformButton(true))
 			->withTransform(Transform(Vector2D(0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.5f, 0.5f), TransformSpace::Camera))
 			->go();
 
-		build(this)->entity("close button")->withComponent(new SpriteRenderer("Textures/OverlayClose.png"))
+		build(this)->entity("closeButton")->withComponent(new SpriteRenderer("Textures/OverlayClose.png"))
 			->withComponent(new CloseButton())
 			->withTransform(Transform(Vector2D(0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y), 0.0f, Vector2D(0.25f, 0.25f), TransformSpace::Camera))
 			->go();

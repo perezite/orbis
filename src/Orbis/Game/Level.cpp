@@ -20,13 +20,33 @@ namespace orb
 
 	Entity* Level::findEntity(std::string name)
 	{
+		if (name == "")
+			return NULL;
+
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 		{
-			if (m_entities[i]->getName() == name)
+			if (m_entities[i]->getId() == name)
 				return m_entities[i];
 		}
 
 		return NULL;
+	}
+
+	void Level::addEntity(Entity *entity)
+	{
+		// assert distinct id's
+		if (entity->getId() != "")
+		{
+			for (unsigned int i = 0; i < m_entities.size(); i++)
+			{
+				if (m_entities[i]->getId() == entity->getId())
+					throw Exception("Entity Id's must be unique");
+			}
+		}
+
+		// add the entity
+		if (entity) m_entities.push_back(entity);
+
 	}
 
 	void Level::startLevel()
