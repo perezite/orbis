@@ -30,6 +30,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Engine\OrbisMain.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Entity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Level.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelBuilder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Transform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Input\InputManager.cpp" />
@@ -66,6 +67,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Engine\Settings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Entity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Level.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelBuilder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\Transform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\TransformSpace.h" />

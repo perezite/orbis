@@ -11,11 +11,18 @@ using namespace base;
 
 namespace orb
 {
+	Level::Level() : m_levelBuilder(new LevelBuilder())
+	{ 
+		m_levelBuilder->setLevel(this);
+	}
+
 	Level::~Level()
 	{
 		EffectsManager::getInstance()->clear();
 		VideoManager::getInstance()->clear();
 		MemoryUtil::clear(m_entities);
+		if (m_levelBuilder)
+			delete m_levelBuilder;
 	}
 
 	Entity* Level::findEntity(std::string name)

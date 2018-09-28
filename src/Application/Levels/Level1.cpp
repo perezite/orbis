@@ -16,118 +16,6 @@ using namespace orb;
 #include <map>
 #include <vector>
 
-namespace 
-{
-	using namespace app;
-
-	class LevelBuilder
-	{
-	public:
-		LevelBuilder()
-		{
-			reset();
-		}
-
-		void setLevel(Level* level) { m_level = level; }
-
-
-		LevelBuilder* entity(std::string name = "")
-		{
-			m_entity = new Entity(name);
-			return this;
-		}
-
-		LevelBuilder* withComponent(Component* component)
-		{
-			m_components.push_back(component);
-			return this;
-		}
-
-		LevelBuilder* withPosition(float x, float y)
-		{
-			m_transform.position = Vector2D(x, y);
-			return this;
-		}
-
-		LevelBuilder* withRotation(float alpha)
-		{
-			m_transform.rotation = alpha;
-			return this;
-		}
-
-		LevelBuilder* withScale(float w, float h)
-		{
-			m_transform.scale = Vector2D(w, h);
-			return this;
-		}
-
-		LevelBuilder* withTransformSpace(TransformSpace space)
-		{
-			m_transform.transformSpace = space;
-			return this;
-		}
-
-		LevelBuilder* withTransform(float x, float y, float alpha, float w, float h)
-		{
-			this->withPosition(x, y)->withRotation(alpha)->withScale(w, h);
-		}
-
-		LevelBuilder* withTransform(Transform transform)
-		{
-			m_transform = transform;
-			return this;
-		}
-
-		template <class T>
-		LevelBuilder* levelSwitcher(bool isForward)
-		{
-			Camera* cam = Camera::getInstance();
-			float horzPos = isForward ? 0.45f * cam->getSize().x : -0.45f * cam->getSize().x;
-			std::string texPath = isForward ? "Textures/OverlayRight.png" : "Textures/OverlayLeft.png";
-			return this->entity()->withComponent(new SpriteRenderer(texPath))->withComponent(new LevelSwitchButtonController<T>(isForward))
-				->withTransform((Transform(Vector2D(horzPos, 0.45f * cam->getSize().y), 0.0f, Vector2D(0.1f, 0.1f), TransformSpace::Camera)));
-		}
-
-		void go()
-		{
-			for (unsigned int i = 0; i < m_components.size(); i++)
-				m_entity->addComponent(m_components[i]);
-
-			m_entity->setTransform(m_transform);
-
-			m_level->addEntity(m_entity);
-
-			reset();
-		}
-
-	protected:
-		void reset()
-		{
-			m_level = NULL;
-			m_entity = NULL;
-			m_transform = Transform(Vector2D(0.0f, 0.0f), 0.0f, Vector2D(1.0f, 1.0f), TransformSpace::World);
-			m_components.clear();
-		}
-
-	private:
-		Level* m_level;
-
-		Entity* m_entity;
-
-		Transform m_transform;
-
-		std::vector<Component*> m_components;
-	};
-
-	LevelBuilder builder;
-
-	LevelBuilder* build(Level* level)
-	{
-		builder.setLevel(level);
-		return &builder;
-	}
-}
-
 namespace app
 {
 	void Level1::start()
@@ -138,38 +26,40 @@ namespace app
 
 		VideoManager::getInstance()->getTextureAtlas()->add(inputModeTextures);
 
-		build(this)->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
+		build()->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
 
-		build(this)->levelSwitcher<Level2>(true)->go();
+		Camera* cam = Camera::getInstance();
+		build()->entity()->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))->withComponent(new LevelSwitchButtonController<Level2>(true))
+			->withPosition(0.45f * cam->getSize().x, 0.45f * cam->getSize().y)->withScale(0.1f, 0.1f)->withTransformSpace(TransformSpace::Camera)->go();
 
-		build(this)->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
+		build()->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
 
-		build(this)->entity("yellowBlock")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
+		build()->entity("yellowBlock")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
 			->withComponent(new SpriteController(MathUtil::getPi()))
 			->withPosition(0.25f, 0.1f)->withScale(0.33f, 0.33f)->go();
 
-		build(this)->entity("blueBlock")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
+		build()->entity("blueBlock")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
 			->withComponent(new SpriteController(-MathUtil::getPi() / 2.0f))
 			->withPosition(-0.25f, -0.1f)->withScale(0.15f, 0.15f)->go();
 
-		build(this)->entity("inputModeButton")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
+		build()->entity("inputModeButton")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
 			->withComponent(new InputModeButton(inputModeTextures))
-			->withPosition(-0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y)->withScale(0.25f, 0.25f)
+			->withPosition(-0.25f * cam->getSize().x, 0.25f * cam->getSize().y)->withScale(0.25f, 0.25f)
 			->withTransformSpace(TransformSpace::Camera)->go();
 
-		build(this)->entity("leftButton")->withComponent(new SpriteRenderer("Textures/OverlayLeft.png"))
+		build()->entity("leftButton")->withComponent(new SpriteRenderer("Textures/OverlayLeft.png"))
 			->withComponent(new TransformButton(false))
-			->withPosition(-0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y)->withScale(0.5f, 0.5f)
+			->withPosition(-0.25f * cam->getSize().x, -0.25f * cam->getSize().y)->withScale(0.5f, 0.5f)
 			->withTransformSpace(TransformSpace::Camera)->go();
 
-		build(this)->entity("rightButton")->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))
+		build()->entity("rightButton")->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))
 			->withComponent(new TransformButton(true))
-			->withPosition(0.25f * Camera::getInstance()->getSize().x, -0.25f * Camera::getInstance()->getSize().y)->withScale(0.5f, 0.5f)
+			->withPosition(0.25f * cam->getSize().x, -0.25f * cam->getSize().y)->withScale(0.5f, 0.5f)
 			->withTransformSpace(TransformSpace::Camera)->go();
 
-		build(this)->entity("closeButton")->withComponent(new SpriteRenderer("Textures/OverlayClose.png"))
+		build()->entity("closeButton")->withComponent(new SpriteRenderer("Textures/OverlayClose.png"))
 			->withComponent(new CloseButton())
-			->withPosition(0.25f * Camera::getInstance()->getSize().x, 0.25f * Camera::getInstance()->getSize().y)->withScale(0.25f, 0.25f)
+			->withPosition(0.25f * cam->getSize().x, 0.25f * cam->getSize().y)->withScale(0.25f, 0.25f)
 			->withTransformSpace(TransformSpace::Camera)->go();
 	}
 }

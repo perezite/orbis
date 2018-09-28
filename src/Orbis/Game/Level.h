@@ -1,5 +1,7 @@
 #pragma once
 
+#include "LevelBuilder.h"
+
 #include "../Game/Entity.h"
 
 #include <vector>
@@ -7,12 +9,15 @@
 
 namespace orb
 {
-	class Texture;
+	class LevelBuilder;
 
 	// Represents a level in the game
 	class Level
 	{
 	public:
+		// ctor
+		Level();
+
 		// destructor
 		virtual ~Level();
 
@@ -30,6 +35,9 @@ namespace orb
 
 		// render
 		void render();
+
+		// get the level builder
+		LevelBuilder* build() { return m_levelBuilder; }
 
 		// start
 		virtual void start() { }
@@ -50,5 +58,8 @@ namespace orb
 	private:
 		// entites in the level
 		std::vector<Entity*> m_entities;
+
+		// the level builder 
+		LevelBuilder* m_levelBuilder;
 	};
 }

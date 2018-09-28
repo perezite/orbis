@@ -19,6 +19,7 @@
 
 #include "Game\Entity.h"
 #include "Game\Level.h"
+#include "Game\LevelBuilder.h"
 #include "Game\LevelManager.h"
 #include "Game\Transform.h"
 #include "Game\TransformSpace.h"
