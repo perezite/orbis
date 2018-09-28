@@ -65,7 +65,7 @@ void GL_dummy();
 	#undef glVertexAttribPointer
 	#define glVertexAttribPointer(index, size, type, normalized, stride, pointer) GL_VERIFY(GLEW_ORIGINAL(VertexAttribPointer)(index, size, type, normalized, stride, pointer))
 
-	#define glDrawElements(mode, count, type, indices) GL_VERIFY(glDrawElements(mode, count, type, indices))
+	#define glDrawElements(mode, count, type, indexes) GL_VERIFY(glDrawElements(mode, count, type, indexes))
 
 	#undef glDisableVertexAttribArray
 	#define glDisableVertexAttribArray(index) GL_VERIFY(GLEW_ORIGINAL(DisableVertexAttribArray)(index))

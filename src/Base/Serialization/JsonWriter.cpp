@@ -3,6 +3,8 @@
 #include "../System/Exception.h"
 using namespace base;
 
+#include <iomanip>
+
 namespace base
 {
 	JsonWriter::JsonWriter()

@@ -16,7 +16,7 @@ namespace orb
 	{
 		int position = findFirstIndexInBatch(renderable);
 		m_renderables.insert(m_renderables.begin() + position, renderable);
-		m_isIndexArrayDirty = true;
+		m_areIndexesDirty = true;
 	}
 
 	void RenderDevice::updateRenderable(Renderable* renderable)
@@ -49,19 +49,18 @@ namespace orb
 		// updateLevel arrays
 		updateIndexArray();
 		updateVertexArray();
+		updateBatches();
 
 		// skip if nothing to render
-		if (m_vertexArray.size() == 0)
+		if (m_vertexes.size() == 0)
 			return;
 
-		// render batched
-		std::vector<BatchRange> batches = computeBatches();
-		for (unsigned int i = 0; i < batches.size(); i++)
+		for (unsigned int i = 0; i < m_batches.size(); i++)
 		{
-			unsigned int batchBegin = batches[i].min;
-			unsigned int batchCount = batches[i].diff() + 1;
-			unsigned int vaoStartIndex = computeVaoStartIndex(i, batches);
-			unsigned int iboStartIndex = computeIboStartIndex(i, batches);
+			unsigned int batchBegin = m_batches[i].min;
+			unsigned int batchCount = m_batches[i].diff() + 1;
+			unsigned int vaoStartIndex = computeVaoStartIndex(i, m_batches);
+			unsigned int iboStartIndex = computeIboStartIndex(i, m_batches);
 			Renderable* prototype = m_renderables[batchBegin];
 
 			// init batch prototype
@@ -71,27 +70,27 @@ namespace orb
 			prototype->getMaterial()->prepareShaderVariables();
 
 			// set position shader variable
-			unsigned int stride = prototype->getMesh()->getVertexData()->size();
+			unsigned int stride = prototype->getMesh()->getVertexes()->size();
 			int positionAttribLocation = prototype->getMaterial()->getShader()->getAttributeLocation("a_vPosition");
 			glEnableVertexAttribArray(positionAttribLocation);
-			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex]));
+			glVertexAttribPointer(positionAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexes[vaoStartIndex]));
 
 			// set texture coordinate shader variable
 			if (prototype->getMaterial()->getTexture() != NULL) {
 				int texCoordAttribLocation = prototype->getMaterial()->getShader()->getAttributeLocation("a_vTexCoord");
 				glEnableVertexAttribArray(texCoordAttribLocation);
-				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex + 2]));
+				glVertexAttribPointer(texCoordAttribLocation, 2, GL_FLOAT, GL_FALSE, stride, &(m_vertexes[vaoStartIndex + 2]));
 			}
 
 			// set vertex color shader variable
 			if (prototype->getMesh()->isVertexColored()) {
 				int vertexColorAttribLocation = prototype->getMaterial()->getShader()->getAttributeLocation("a_vVertexColor");
 				glEnableVertexAttribArray(vertexColorAttribLocation);
-				glVertexAttribPointer(vertexColorAttribLocation, 4, GL_FLOAT, GL_FALSE, stride, &(m_vertexArray[vaoStartIndex + 4]));
+				glVertexAttribPointer(vertexColorAttribLocation, 4, GL_FLOAT, GL_FALSE, stride, &(m_vertexes[vaoStartIndex + 4]));
 			}
 
 			// draw batched
-			glDrawElements(GL_TRIANGLES, batchCount * prototype->getMesh()->getIndices()->size(), GL_UNSIGNED_SHORT, &m_indexArray[iboStartIndex]);
+			glDrawElements(GL_TRIANGLES, batchCount * prototype->getMesh()->getIndexes()->size(), GL_UNSIGNED_SHORT, &m_indexes[iboStartIndex]);
 
 			// cleanup
 			prototype->getMaterial()->getShader()->unuse();
@@ -119,7 +118,7 @@ namespace orb
 		Matrix3 worldCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::World);
 		Matrix3 localCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::Camera);
 
-		m_vertexArray.clear();
+		m_vertexes.clear();
 		reserveVertexArray();
 
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
@@ -137,8 +136,8 @@ namespace orb
 		Texture* tex = renderable->getMaterial()->getTexture();
 
 		// apply transformation on mesh data
-		std::vector<GLfloat> data = *mesh->getVertexData();
-		for (unsigned int i = 0; i < mesh->getNumVertices(); i++)
+		std::vector<GLfloat> data = *mesh->getVertexes();
+		for (unsigned int i = 0; i < mesh->getNumVertexes(); i++)
 		{
 			unsigned int start = i * mesh->getVertexCount();
 			Vector2D pos = mvpMatrix * Vector2D(data[start + 0], data[start + 1]);
@@ -149,24 +148,24 @@ namespace orb
 			}
 		}
 
-		m_vertexArray.insert(m_vertexArray.end(), data.begin(), data.end());
+		m_vertexes.insert(m_vertexes.end(), data.begin(), data.end());
 	}
 
 	void RenderDevice::reserveVertexArray()
 	{
 		unsigned int vertexArrayCount = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++) {
-			vertexArrayCount += m_renderables[i]->getMesh()->getVertexData()->size();
+			vertexArrayCount += m_renderables[i]->getMesh()->getVertexes()->size();
 		}
 
-		m_vertexArray.reserve(vertexArrayCount);
+		m_vertexes.reserve(vertexArrayCount);
 	}
 
 	void RenderDevice::updateIndexArray()
 	{
-		if (m_isIndexArrayDirty)
+		if (m_areIndexesDirty)
 		{
-			m_indexArray.clear();
+			m_indexes.clear();
 			reserveIndexArray();
 
 			GLushort offset = 0;
@@ -175,33 +174,33 @@ namespace orb
 				insertIntoIndexArray(i, offset);
 			}
 
-			m_isIndexArrayDirty = false;
+			m_areIndexesDirty = false;
 		}
 	}
 
 	void RenderDevice::insertIntoIndexArray(unsigned int index, unsigned short& offset)
 	{
 		// reset value offet when switching batch
-		if (index == 0 || !m_renderables[index]->isBatchEqualTo(m_renderables[index - 1]))
+		if (index == 0 || !m_renderables[index]->isBatchableWith(m_renderables[index - 1]))
 			offset = 0;
 
 		Mesh* mesh = m_renderables[index]->getMesh();
-		for (unsigned int j = 0; j < mesh->getIndices()->size(); j++)
+		for (unsigned int j = 0; j < mesh->getIndexes()->size(); j++)
 		{
-			GLushort value = offset + mesh->getIndices()->at(j);
-			m_indexArray.insert(m_indexArray.end(), value);
+			GLushort value = offset + mesh->getIndexes()->at(j);
+			m_indexes.insert(m_indexes.end(), value);
 		}
 
-		offset += mesh->getNumVertices();
+		offset += mesh->getNumVertexes();
 	}
 
 	void RenderDevice::reserveIndexArray()
 	{
 		unsigned int count = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
-			count += m_renderables[i]->getMesh()->getIndices()->size();
+			count += m_renderables[i]->getMesh()->getIndexes()->size();
 
-		m_indexArray.reserve(count);
+		m_indexes.reserve(count);
 	}
 
 	unsigned int RenderDevice::computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches)
@@ -212,7 +211,7 @@ namespace orb
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchCount = batches[i].diff() + 1;
-			startIndex += m_renderables[begin]->getMesh()->getVertexData()->size() * batchCount;
+			startIndex += m_renderables[begin]->getMesh()->getVertexes()->size() * batchCount;
 		}
 
 		return startIndex;
@@ -226,39 +225,37 @@ namespace orb
 		{
 			unsigned int begin = batches[i].min;
 			unsigned int batchCount = batches[i].diff() + 1;
-			startIndex += m_renderables[begin]->getMesh()->getIndices()->size() * batchCount;
+			startIndex += m_renderables[begin]->getMesh()->getIndexes()->size() * batchCount;
 		}
 
 		return startIndex;
 	}
 
-	std::vector<BatchRange> RenderDevice::computeBatches()
+	void RenderDevice::updateBatches()
 	{
-		std::vector<BatchRange> batches;
+		m_batches.clear();
 		int begin = 0;
 		int current = 0;
 		int last = m_renderables.size();
 
 		while (current < last)
 		{
-			while (current < last && m_renderables[begin]->isBatchEqualTo(m_renderables[current]))
+			while (current < last && m_renderables[begin]->isBatchableWith(m_renderables[current]))
 				current++;
 
-			batches.push_back(BatchRange(begin, current - 1));
+			m_batches.push_back(BatchRange(begin, current - 1));
 			begin = current;
 
 			if (current == last)
 				break;
 		}
-
-		return batches;
 	}
 
 	int RenderDevice::findFirstIndexInBatch(Renderable* renderable)
 	{
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
-			if (renderable->isBatchEqualTo(m_renderables[i]))
+			if (renderable->isBatchableWith(m_renderables[i]))
 				return i;
 		}
 

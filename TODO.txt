@@ -1,9 +1,5 @@
 TODO:	
 - Refactoring
-	- Builder-Pattern für Level implementieren
-		- Restliche Level umbauen
-		- TODO-Kommentare umsetzen
-	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 	- Renderer gesamthaft refactoren	
 	- Code-Styling überdenken (js-style vs a-style)
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
