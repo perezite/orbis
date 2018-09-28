@@ -12,9 +12,7 @@ namespace app
 	{
 	public:
 		// ctor
-		WobbleBrickEffect(Tween* tween, float tweenDuration)
-			: Component::Component(), m_tween(tween), m_duration(tweenDuration)
-		{ }
+		WobbleBrickEffect(std::string tween, float tweenDuration);
 
 		// override
 		void start();

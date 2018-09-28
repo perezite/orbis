@@ -17,7 +17,7 @@ namespace orb
 	{
 	public:
 		// ctor
-		SimpleParticleRenderer(Texture* texture);
+		SimpleParticleRenderer(std::string texture);
 
 		// dtor
 		virtual ~SimpleParticleRenderer();

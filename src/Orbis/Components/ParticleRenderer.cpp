@@ -5,16 +5,19 @@
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
 #include "../Effects/EffectsManager.h"
+#include "../Video/VideoManager.h"
 
 #include "../../Base/Base.h"
 using namespace base;
 
 namespace orb
 {
-	ParticleRenderer::ParticleRenderer(Texture * texture) :
-		m_texture(texture), m_emissionSphereShellRadius(0.075f), m_emissionRate(40), m_timeToNextEmission(0.0f),
+	ParticleRenderer::ParticleRenderer(std::string texture) :
+		m_emissionSphereShellRadius(0.075f), m_emissionRate(40), m_timeToNextEmission(0.0f),
 		m_initialSpeed(0.2f), m_initialSize(0.1f), m_velocityInheritance(0.25f)
-	{ }
+	{
+		m_texture = VideoManager::getInstance()->getTexture(texture, true);
+	}
 
 	ParticleRenderer::~ParticleRenderer()
 	{

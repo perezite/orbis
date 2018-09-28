@@ -5,7 +5,7 @@ using namespace orb;
 
 namespace app
 {
-	class BallEffects : Component
+	class BallEffects : public Component
 	{
 	public:
 		// ctor

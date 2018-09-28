@@ -11,40 +11,21 @@ namespace app
 {
 	void Level6::start()
 	{
-		// init textures
-		Texture* bleedingTestBlue = VideoManager::getInstance()->getTexture("Textures/BleedingTestBlue.png");
-		Texture* bleedingTestGreen = VideoManager::getInstance()->getTexture("Textures/BleedingTestGreen.png");
-		Texture* bleedingTestRed = VideoManager::getInstance()->getTexture("Textures/BleedingTestRed.png");
-		Texture* bleedingTestYellow = VideoManager::getInstance()->getTexture("Textures/BleedingTestYellow.png");
+		build()->entity()->withComponent(new Camera())->go();
 
-		// init camera
-		Entity* cam = new Entity();
-		cam->addComponent(new Camera());
-		addEntity(cam);
-
-		// add level switchers
 		LevelUtil::addLevelSwitcher<Level5>(false);
 		LevelUtil::addLevelSwitcher<Level7>(true);
 
-		// init entities
-		Entity* blueEntity = new Entity("Bleeding Test Blue");
-		blueEntity->addComponent(new SpriteRenderer(bleedingTestBlue));
-		blueEntity->setTransform(Transform(Vector2D(-0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(blueEntity);
+		build()->entity()->withComponent(new SpriteRenderer("Textures/BleedingTestBlue.png"))
+			->withPosition(-0.25f, -0.25f)->withScale(0.33f, 0.33f)->go();
 
-		Entity* greenEntity = new Entity("Bleeding Test Green");
-		greenEntity->addComponent(new SpriteRenderer(bleedingTestGreen));
-		greenEntity->setTransform(Transform(Vector2D(0.25f, -0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(greenEntity);
+		build()->entity()->withComponent(new SpriteRenderer("Textures/BleedingTestGreen.png"))
+			->withPosition( 0.25f, -0.25f)->withScale(0.33f, 0.33f)->go();
 
-		Entity* redEntity = new Entity("Bleeding Test Red");
-		redEntity->addComponent(new SpriteRenderer(bleedingTestRed));
-		redEntity->setTransform(Transform(Vector2D(0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(redEntity);
+		build()->entity()->withComponent(new SpriteRenderer("Textures/BleedingTestRed.png"))
+			->withPosition( 0.25f, 0.25f)->withScale(0.33f, 0.33f)->go();
 
-		Entity* yellowEntity = new Entity("Bleeding Test Yellow");
-		yellowEntity->addComponent(new SpriteRenderer(bleedingTestYellow));
-		yellowEntity->setTransform(Transform(Vector2D(-0.25f, 0.25f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(yellowEntity);
+		build()->entity()->withComponent(new SpriteRenderer("Textures/BleedingTestYellow.png"))
+			->withPosition(-0.25f, 0.25f)->withScale(0.33f, 0.33f)->go();
 	}
 }

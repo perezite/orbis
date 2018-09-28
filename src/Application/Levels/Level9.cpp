@@ -11,39 +11,22 @@ namespace app
 {
 	void Level9::start()
 	{
-		// init textures
-		Texture* yellowBlockTex = VideoManager::getInstance()->getTexture("Textures/YellowBlock.png");
-		Texture* redBlockTex = VideoManager::getInstance()->getTexture("Textures/RedBlock.png");
-		Texture* greenParticleTex = VideoManager::getInstance()->getTexture("Textures/GreenParticle.png");
-
-		// init camera
-		Entity* cam = new Entity();
-		cam->addComponent(new Camera());
-		addEntity(cam);
+		build()->entity()->withComponent(new Camera())->go();
 
 		// add level switchers
 		LevelUtil::addLevelSwitcher<Level8>(false);
 		LevelUtil::addLevelSwitcher<Level10>(true);
 
-		// init entities
-		Entity* yellowBlock = new Entity("Yellow Brick");
-		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTex));
-		yellowBlock->setTransform(Transform(Vector2D(-0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(yellowBlock);
+		build()->entity()->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
+			->withPosition(-0.25f, 0.3f)->withScale(0.33f, 0.33f)->go();
 
-		Entity* yellowBlock2 = new Entity("Yellow Brick 2");
-		yellowBlock2->addComponent(new SpriteRenderer(yellowBlockTex));
-		yellowBlock2->setTransform(Transform(Vector2D(0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(yellowBlock2);
+		build()->entity()->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
+			->withPosition(0.25f, 0.3f)->withScale(0.33f, 0.33f)->go();
 
-		Entity* redBlock = new Entity("Red Brick");
-		redBlock->addComponent(new SpriteRenderer(redBlockTex));
-		redBlock->setTransform(Transform(Vector2D(0.0f, 0.0f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(redBlock);
+		build()->entity()->withComponent(new SpriteRenderer("Textures/RedBlock.png"))
+			->withScale(0.33f, 0.33f)->go();
 
-		Entity* particles = new Entity("Particles");
-		particles->addComponent(new ParticleRenderer(greenParticleTex));
-		particles->setTransform(Transform(Vector2D(0.0f, -0.3f), 0.0f, Vector2D(0.1f, 0.1f)));
-		this->addEntity(particles);
+		build()->entity()->withComponent(new ParticleRenderer("Textures/GreenParticle.png"))
+			->withPosition(0.0f, -0.3f)->withScale(0.1f, 0.1f)->go();
 	}
 }

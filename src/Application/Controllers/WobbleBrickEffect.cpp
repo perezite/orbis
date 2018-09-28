@@ -7,6 +7,12 @@ using namespace orb;
 
 namespace app
 {
+	WobbleBrickEffect::WobbleBrickEffect(std::string tween, float tweenDuration) : 
+		Component::Component(), m_duration(tweenDuration)
+	{
+		m_tween = EffectsManager::getInstance()->getTween(tween);
+	}
+
 	void WobbleBrickEffect::start()
 	{
 	}

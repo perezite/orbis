@@ -6,6 +6,8 @@ TODO:
 	- Bootbox und Sandbox in separates Projekt extrahieren, wo sie nicht mit dem restlichen Code kollidieren
 	- Renderer gesamthaft refactoren	
 	- Code-Styling überdenken (js-style vs a-style)
+	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
+	- Interface überlegen: Sowas ähnliches wie SFML
 - Infastruktur: Ermitteln, welche Prozesse VS blocken (Kandidat: vcpkgsrv.exe) und Lösung dafür finden
 	-- Hint: https://forums.unrealengine.com/development-discussion/c-gameplay-programming/25831-visual-studio-2013-express-vcpkgsrv-exe-going-crazy
 - Evaluieren, ob weitere Refactorings nötig sind

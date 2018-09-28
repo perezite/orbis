@@ -13,6 +13,11 @@ using namespace orb;
 
 namespace app
 {
+	void Ball::start()
+	{
+		m_ballEffects = getParent()->getComponent<BallEffects>();
+	}
+
 	void Ball::update()
 	{
 		switch (m_state)
@@ -74,7 +79,7 @@ namespace app
 		void Ball::dyingEnter()
 		{
 			LogUtil::logMessage("Ball::dyingEnter()");
-			if (m_ballEffectsController->explode())
+			if (m_ballEffects->explode())
 				return;
 
 			m_state = State::DyingRun;

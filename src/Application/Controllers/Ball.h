@@ -25,10 +25,10 @@ namespace app
 		{}
 
 		// override
-		void update();
+		void start();
 
-		// set the ball effects controller
-		void setBallEffectsController(BallEffects* ballEffectsController) { m_ballEffectsController = ballEffectsController; }
+		// override
+		void update();
 
 		// aiming
 		void aimingEnter();	void aimingRun();
@@ -50,6 +50,6 @@ namespace app
 		float aimingCurrentAngle;
 
 		// the ball effects controller
-		BallEffects* m_ballEffectsController;
+		BallEffects* m_ballEffects;
 	};
 }

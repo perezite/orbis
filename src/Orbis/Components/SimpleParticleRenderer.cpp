@@ -4,14 +4,17 @@
 
 #include "../Core/TimeManager.h"
 #include "../Game/LevelManager.h"
+#include "../Video/VideoManager.h"
 
 #include "../../Base/Base.h"
 using namespace base;
 
 namespace orb
 {
-	SimpleParticleRenderer::SimpleParticleRenderer(Texture * texture) : m_texture(texture)
-	{ }
+	SimpleParticleRenderer::SimpleParticleRenderer(std::string texture) 
+	{
+		m_texture = VideoManager::getInstance()->getTexture(texture);
+	}
 
 	SimpleParticleRenderer::~SimpleParticleRenderer()
 	{

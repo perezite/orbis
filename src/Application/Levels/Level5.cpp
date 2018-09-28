@@ -11,34 +11,18 @@ namespace app
 {
 	void Level5::start()
 	{
-		// init textures
-		Texture* yellowBlockTex = VideoManager::getInstance()->getTexture("Textures/YellowBlock.png");
-		Texture* redBlockTex = VideoManager::getInstance()->getTexture("Textures/RedBlock.png");
-		Texture* greenBlockTex = VideoManager::getInstance()->getTexture("Textures/GreenBlock.png");
+		build()->entity()->withComponent(new Camera())->go();
 
-		// init camera
-		Entity* cam = new Entity();
-		cam->addComponent(new Camera());
-		addEntity(cam);
-
-		// add level switchers
 		LevelUtil::addLevelSwitcher<Level4>(false);
 		LevelUtil::addLevelSwitcher<Level6>(true);
 
-		// init entities
-		Entity* yellowBlock = new Entity("Yellow Brick");
-		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTex));
-		yellowBlock->setTransform(Transform(Vector2D(-0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(yellowBlock);
+		build()->entity("yellowBrick")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
+			->withPosition(-0.25f, 0.3f)->withScale(0.33f, 0.33f)->go();
 
-		Entity* redBlock = new Entity("Red Brick");
-		redBlock->addComponent(new SpriteRenderer(redBlockTex));
-		redBlock->setTransform(Transform(Vector2D(0.0f, 0.0f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(redBlock);
+		build()->entity("redBrick")->withComponent(new SpriteRenderer("Textures/RedBlock.png"))
+			->withScale(0.33f, 0.33f)->go();
 
-		Entity* greenBlock = new Entity("Green Brick");
-		greenBlock->addComponent(new SpriteRenderer(greenBlockTex));
-		greenBlock->setTransform(Transform(Vector2D(0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(greenBlock);
+		build()->entity("greenBrick")->withComponent(new SpriteRenderer("Textures/GreenBlock.png"))
+			->withPosition(0.25f, 0.3f)->withScale(0.33f, 0.33f)->go();
 	}
 }

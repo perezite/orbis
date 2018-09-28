@@ -18,21 +18,15 @@ namespace app
 		m_originalResolution = VideoManager::getInstance()->getWindow()->getResolution();
 		VideoManager::getInstance()->getWindow()->setResolution(Vector2D(800, 800));
 
-		// add camera
-		Entity* cam = new Entity();
-		cam->addComponent(new Camera());
-		addEntity(cam);
+		build()->entity()->withComponent(new Camera())->go();
 
-		// add level switchers
 		LevelUtil::addLevelSwitcher<Level3>(false);
 		LevelUtil::addLevelSwitcher<Level5>(true);
 
 		// add debug visualizer
-		ORBIS_DEBUG (
-			Entity* visualizer = new Entity();
-			visualizer->addComponent(new BinPackingVisualizer());
-			addEntity(visualizer);
-		);
+		ORBIS_DEBUG(
+			build()->entity()->withComponent(new BinPackingVisualizer())->go();
+		)
 	}
 
 	Level4::~Level4()
