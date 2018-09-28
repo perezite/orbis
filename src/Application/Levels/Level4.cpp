@@ -24,8 +24,8 @@ namespace app
 		addEntity(cam);
 
 		// add level switchers
-		LevelUtil::AddLevelSwitcher<Level3>(this, false);
-		LevelUtil::AddLevelSwitcher<Level5>(this, true);
+		LevelUtil::addLevelSwitcher<Level3>(false);
+		LevelUtil::addLevelSwitcher<Level5>(true);
 
 		// add debug visualizer
 		ORBIS_DEBUG (

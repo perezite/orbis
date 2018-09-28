@@ -19,7 +19,7 @@ namespace app
 		addEntity(cam);
 
 		// add level switchers
-		LevelUtil::AddLevelSwitcher<Level9>(this, false);
+		LevelUtil::addLevelSwitcher<Level9>(false);
 
 		// init entities
 		Entity* particles = new Entity("Particles");

@@ -16,50 +16,24 @@ namespace app
 {
 	void Level2::start()
 	{
-		// textures
-		Texture* coordSystemTexture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem.png");
-		Texture* yellowBlockTexture = VideoManager::getInstance()->getTexture("Textures/YellowBlock.png");
+		build()->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
 
-		// camera entity
-		Entity* camera = new Entity();
-		Camera* cam = new Camera();
-		camera->addComponent(cam);
-		CameraBehavior* cameraController = new CameraBehavior();
-		camera->addComponent(cameraController);
-		this->addEntity(camera);
+		LevelUtil::addLevelSwitcher<Level1>(false);
+		LevelUtil::addLevelSwitcher<Level3>(true);
 
-		// add level switchers
-		LevelUtil::AddLevelSwitcher<Level1>(this, false);
-		LevelUtil::AddLevelSwitcher<Level3>(this, true);
+		build()->entity("coordinateSystem")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
+		
+		build()->entity("yellowBrick")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
+			->withPosition(0.25f, 0.3f)->withScale(0.33f, 0.33f)->go();
 
-		// coordinate system entity
-		Entity* coordSystem = new Entity("Coordinate System");
-		coordSystem->addComponent(new SpriteRenderer(coordSystemTexture));
-		this->addEntity(coordSystem);
+		build()->entity("redFlatRect")->withComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)))
+			->withPosition(-0.2f, 0.3f)->withRotation(MathUtil::getPi() / 7.0f)->withScale(0.2f, 0.2f)->go();
 
-		// yellow block entity
-		Entity* yellowBlock = new Entity("Yellow Brick");
-		yellowBlock->addComponent(new SpriteRenderer(yellowBlockTexture));
-		yellowBlock->setTransform(Transform(Vector2D(0.25f, 0.3f), 0.0f, Vector2D(0.33f, 0.33f)));
-		this->addEntity(yellowBlock);
+		build()->entity("greenFlatRect")->withComponent(new RectangleRenderer(Color(0.0f, 1.0f, 0.0f)))
+			->withPosition(0.2f, -0.3f)->withScale(0.1f, 0.1f)->go();
 
-		// red flat rect entity
-		Entity* redFlatRect = new Entity("Red Flat Rect");
-		redFlatRect->addComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
-		redFlatRect->setTransform(Transform(Vector2D(-0.2f, 0.3f), MathUtil::getPi() / 7.0f, Vector2D(0.2f, 0.2f)));
-		this->addEntity(redFlatRect);
-
-		// green flat rect entity
-		Entity* greenRect = new Entity("Green Flat Rect");
-		greenRect->addComponent(new RectangleRenderer(Color(0.0f, 1.0f, 0.0f)));
-		greenRect->setTransform(Transform(Vector2D(0.2f, -0.3f), 0.f, Vector2D(0.1f, 0.1f)));
-		this->addEntity(greenRect);
-
-		// line renderer
-		ORBIS_DEBUG (
-			Entity* debugLineEntity = new Entity("Debug Lines");
-			debugLineEntity->addComponent(new DebugLineTester());
-			this->addEntity(debugLineEntity);
+		ORBIS_DEBUG(
+			build()->entity("debugLines")->withComponent(new DebugLineTester())->go();
 		)
 	}
 }

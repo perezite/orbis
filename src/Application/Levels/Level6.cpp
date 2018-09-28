@@ -23,8 +23,8 @@ namespace app
 		addEntity(cam);
 
 		// add level switchers
-		LevelUtil::AddLevelSwitcher<Level5>(this, false);
-		LevelUtil::AddLevelSwitcher<Level7>(this, true);
+		LevelUtil::addLevelSwitcher<Level5>(false);
+		LevelUtil::addLevelSwitcher<Level7>(true);
 
 		// init entities
 		Entity* blueEntity = new Entity("Bleeding Test Blue");

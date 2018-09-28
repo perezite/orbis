@@ -19,8 +19,8 @@ namespace app
 		addEntity(cam);
 
 		// add level switchers
-		LevelUtil::AddLevelSwitcher<Level6>(this, false);
-		LevelUtil::AddLevelSwitcher<Level8>(this, true);
+		LevelUtil::addLevelSwitcher<Level6>(false);
+		LevelUtil::addLevelSwitcher<Level8>(true);
 
 		// init ball 
 		Entity* ballEntity = new Entity();

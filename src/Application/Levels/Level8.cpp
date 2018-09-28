@@ -23,8 +23,8 @@ namespace app
 		addEntity(cam);
 
 		// add level switchers
-		LevelUtil::AddLevelSwitcher<Level7>(this, false);
-		LevelUtil::AddLevelSwitcher<Level9>(this, true);
+		LevelUtil::addLevelSwitcher<Level7>(false);
+		LevelUtil::addLevelSwitcher<Level9>(true);
 
 		// add tweened brick
 		Entity* brick = new Entity();

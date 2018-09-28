@@ -28,9 +28,7 @@ namespace app
 
 		build()->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
 
-		Camera* cam = Camera::getInstance();
-		build()->entity()->withComponent(new SpriteRenderer("Textures/OverlayRight.png"))->withComponent(new LevelSwitchButtonController<Level2>(true))
-			->withPosition(0.45f * cam->getSize().x, 0.45f * cam->getSize().y)->withScale(0.1f, 0.1f)->withTransformSpace(TransformSpace::Camera)->go();
+		LevelUtil::addLevelSwitcher<Level2>(true);
 
 		build()->entity("coordinate system")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
 
@@ -41,6 +39,8 @@ namespace app
 		build()->entity("blueBlock")->withComponent(new SpriteRenderer("Textures/BlueBlock.png"))
 			->withComponent(new SpriteController(-MathUtil::getPi() / 2.0f))
 			->withPosition(-0.25f, -0.1f)->withScale(0.15f, 0.15f)->go();
+
+		Camera* cam = Camera::getInstance();
 
 		build()->entity("inputModeButton")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
 			->withComponent(new InputModeButton(inputModeTextures))

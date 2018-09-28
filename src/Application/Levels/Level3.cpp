@@ -24,49 +24,33 @@ namespace app
 	void Level3::start()
 	{
 		// init textures
-		std::vector<Texture*> textures;
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/BlackBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/BlueBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/CyanBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/GreenBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/GreyBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/OrangeBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/PurpleBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/RedBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/VioletBlock.png"));
-		textures.push_back(VideoManager::getInstance()->getTexture("Textures/YellowBlock.png"));
+		std::vector<std::string> textures = { "Textures/BlackBlock.png", "Textures/BlueBlock.png", "Textures/CyanBlock.png",
+			"Textures/GreenBlock.png", "Textures/GreyBlock.png", "Textures/OrangeBlock.png", "Textures/PurpleBlock.png", 
+			"Textures/RedBlock.png", "Textures/VioletBlock.png", "Textures/YellowBlock.png" };
 
-		// init camera
-		Entity* camEntity = new Entity("Camera");
-		camEntity->addComponent(new Camera());
-		addEntity(camEntity);
+		VideoManager::getInstance()->getTextureAtlas()->add(textures);
+
+		build()->entity("camera")->withComponent(new Camera())->go();
 
 		// init blocks
 		for (unsigned int i = 0; i < NUM_SPRITES; i++)
 		{
 			static int counter = 0;
 			bool hasTexture = ++counter % 2 == 0;
+			Component* renderer = hasTexture ? new SpriteRenderer(textures[rand() % textures.size()]) 
+				: (Component*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f));
 
-			Entity* entity = new Entity(hasTexture ? "Textured sprite" : "Solid sprite");
-			Transform trans = Transform(Vector2D(MathUtil::getRandom() - 0.5f, MathUtil::getRandom() - 0.5f), 0.0f, Vector2D::One);
-			entity->setTransform(trans);
-
-			Texture* texture = hasTexture ? textures[rand() % textures.size()] : NULL;
-			entity->addComponent(hasTexture ? (Component*)new SpriteRenderer(texture) : (Component*)new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)));
-			entity->addComponent(new WobbleEffect());
-
-			this->addEntity(entity);
+			build()->entity()->withComponent(renderer)
+				->withComponent(new WobbleEffect())->withPosition(MathUtil::getRandom() - 0.5f, MathUtil::getRandom() - 0.5f)->go();
 		}
 
 		// add level switchers. Note: because we have no layering yet, the sprites above must be generated first in order to be batched in the right order
-		LevelUtil::AddLevelSwitcher<Level2>(this, false);
-		LevelUtil::AddLevelSwitcher<Level4>(this, true);
+		LevelUtil::addLevelSwitcher<Level2>(false);
+		LevelUtil::addLevelSwitcher<Level4>(true);
 
 		// init debug line tester
-		ORBIS_DEBUG (
-			Entity* entity = new Entity("Debug line tester");
-			entity->addComponent(new DebugLineTester());
-			addEntity(entity);
+		ORBIS_DEBUG(
+			build()->entity("debugLineTester")->withComponent(new DebugLineTester())->go();
 		);
 	}
 }
