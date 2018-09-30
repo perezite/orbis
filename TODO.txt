@@ -1,6 +1,8 @@
 TODO:	
 - Refactoring
 	- Renderer gesamthaft refactoren	
+		- Batch-Logik refactoren
+	- Test auf Mobile
 	- Code-Styling überdenken (js-style vs a-style)
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
 	- Interface überlegen: Sowas ähnliches wie SFML

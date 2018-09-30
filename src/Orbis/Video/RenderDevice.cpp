@@ -14,7 +14,7 @@ namespace orb
 {
 	void RenderDevice::addRenderable(Renderable* renderable)
 	{
-		int position = findFirstIndexInBatch(renderable);
+		int position = findInsertPositionForBatching(renderable);
 		m_renderables.insert(m_renderables.begin() + position, renderable);
 		m_areIndexesDirty = true;
 	}
@@ -47,7 +47,7 @@ namespace orb
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// updateLevel arrays
-		updateIndexArray();
+		updateIndexes();
 		updateVertexArray();
 		updateBatches();
 
@@ -119,18 +119,19 @@ namespace orb
 		Matrix3 localCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::Camera);
 
 		m_vertexes.clear();
-		reserveVertexArray();
+		reserveVertexes();
 
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
 			Transform* transform = m_renderables[i]->getTransform();
 			bool isWorldSpace = transform->transformSpace == TransformSpace::World ? true : false;
 			Matrix3 mvpMatrix = (isWorldSpace ? worldCamMatrix : localCamMatrix) * transform->getModelMatrix();
-			insertIntoVertexArray(m_renderables[i], mvpMatrix);
+			std::vector<GLfloat> vertexes = computeVertexes(m_renderables[i], mvpMatrix);
+			addVertexes(vertexes);
 		}
 	}
 
-	void RenderDevice::insertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix)
+	std::vector<float> RenderDevice::computeVertexes(Renderable * const renderable, Matrix3 & mvpMatrix)
 	{
 		Mesh* mesh = renderable->getMesh();
 		Texture* tex = renderable->getMaterial()->getTexture();
@@ -148,10 +149,15 @@ namespace orb
 			}
 		}
 
-		m_vertexes.insert(m_vertexes.end(), data.begin(), data.end());
+		return data;
 	}
 
-	void RenderDevice::reserveVertexArray()
+	void RenderDevice::addVertexes(std::vector<GLfloat> vertexes)
+	{
+		m_vertexes.insert(m_vertexes.end(), vertexes.begin(), vertexes.end());
+	}
+
+	void RenderDevice::reserveVertexes()
 	{
 		unsigned int vertexArrayCount = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++) {
@@ -161,24 +167,24 @@ namespace orb
 		m_vertexes.reserve(vertexArrayCount);
 	}
 
-	void RenderDevice::updateIndexArray()
+	void RenderDevice::updateIndexes()
 	{
 		if (m_areIndexesDirty)
 		{
 			m_indexes.clear();
-			reserveIndexArray();
+			reserveIndexes();
 
 			GLushort offset = 0;
 			for (unsigned int i = 0; i < m_renderables.size(); i++)
 			{
-				insertIntoIndexArray(i, offset);
+				addIndex(i, offset);
 			}
 
 			m_areIndexesDirty = false;
 		}
 	}
 
-	void RenderDevice::insertIntoIndexArray(unsigned int index, unsigned short& offset)
+	void RenderDevice::addIndex(unsigned int index, unsigned short& offset)
 	{
 		// reset value offet when switching batch
 		if (index == 0 || !m_renderables[index]->isBatchableWith(m_renderables[index - 1]))
@@ -194,7 +200,7 @@ namespace orb
 		offset += mesh->getNumVertexes();
 	}
 
-	void RenderDevice::reserveIndexArray()
+	void RenderDevice::reserveIndexes()
 	{
 		unsigned int count = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
@@ -251,7 +257,7 @@ namespace orb
 		}
 	}
 
-	int RenderDevice::findFirstIndexInBatch(Renderable* renderable)
+	int RenderDevice::findInsertPositionForBatching(Renderable* renderable)
 	{
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{

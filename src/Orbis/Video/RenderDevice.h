@@ -44,23 +44,25 @@ namespace orb
 
 	protected:
 		// update vertex array
-
 		void updateVertexArray();
 
+		// compute vertexes from a renderable
+		std::vector<GLfloat> computeVertexes(Renderable* const renderable, Matrix3& mvpMatrix);
+
 		// update the vertex array for the renderer with the given index using the given mvp matrix
-		void insertIntoVertexArray(Renderable* const renderable, Matrix3& mvpMatrix);
+		void addVertexes(std::vector<GLfloat> vertexes);
 
 		// reserve the vertex buffer to hold the renderer data
-		void reserveVertexArray();
+		void reserveVertexes();
 
 		// insert renderers indexes at position in index data
-		void updateIndexArray();
+		void updateIndexes();
 
 		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
-		void insertIntoIndexArray(unsigned int rendererIndex, unsigned short& offset);
+		void addIndex(unsigned int rendererIndex, unsigned short& offset);
 
 		// reserve index array space
-		void reserveIndexArray();
+		void reserveIndexes();
 
 		// update the batches
 		void updateBatches();
@@ -71,8 +73,8 @@ namespace orb
 		// compute the ibo (index buffer) start index for a given batch
 		unsigned int computeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
 
-		// find index of first renderer in render batch
-		int findFirstIndexInBatch(Renderable* renderable);
+		// find insert index for renderable appropriate for batching
+		int findInsertPositionForBatching(Renderable* renderable);
 
 	private:
 		// the vertexes 
@@ -84,10 +86,10 @@ namespace orb
 		// the batches
 		std::vector<BatchRange> m_batches;
 
-		// are the indexes in dirty state
-		bool m_areIndexesDirty;
-
 		// the renderables
 		std::vector<Renderable*> m_renderables;
+
+		// are the indexes in dirty state
+		bool m_areIndexesDirty;
 	};
 }
