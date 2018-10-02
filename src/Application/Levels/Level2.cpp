@@ -18,11 +18,11 @@ namespace app
 	{
 		build()->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
 
-		LevelUtil::addLevelSwitcher<Level1>(false);
-		LevelUtil::addLevelSwitcher<Level3>(true);
+		 LevelUtil::addLevelSwitcher<Level1>(false);
+		 LevelUtil::addLevelSwitcher<Level3>(true);
 
 		build()->entity("coordinateSystem")->withComponent(new SpriteRenderer("Textures/CoordinateSystem.png"))->go();
-		
+
 		build()->entity("yellowBrick")->withComponent(new SpriteRenderer("Textures/YellowBlock.png"))
 			->withPosition(0.25f, 0.3f)->withScale(0.33f, 0.33f)->go();
 

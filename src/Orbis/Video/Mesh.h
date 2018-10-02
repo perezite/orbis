@@ -30,8 +30,10 @@ namespace orb
 			: m_vertexes(vertexData), m_vertexCount(vertexCount), m_indexes(indexes), m_isVertexColored(isVertexColored)
 		{}
 
-		// get vertexData
-		const std::vector<GLfloat>* getVertexes() const { return &m_vertexes; }
+		// get vertexData (deprecated)
+		const std::vector<GLfloat>* getVertexes2() const { return &m_vertexes; }
+
+		std::vector<GLfloat> getVertexes() { return m_vertexes; }
 
 		// get num vertexes
 		unsigned int getNumVertexes() const { return m_vertexes.size() / m_vertexCount; }
@@ -39,8 +41,11 @@ namespace orb
 		// get the count of one vertex
 		unsigned int getVertexCount() const { return m_vertexCount; }
 
+		// get indexes (deprecated)
+		const std::vector<GLushort>* getIndexes2() const { return &m_indexes; }
+
 		// get indexes
-		const std::vector<GLushort>* getIndexes() const { return &m_indexes; }
+		std::vector<GLushort> getIndexes() { return m_indexes; }
 
 		// is vertex colored
 		bool isVertexColored() const { return m_isVertexColored; }

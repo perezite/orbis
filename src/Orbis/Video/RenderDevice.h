@@ -18,15 +18,37 @@ using namespace base;
 namespace orb
 {
 	typedef Range<unsigned int> BatchRange;
+	typedef std::vector<Renderable*> Batch;
+
+	class RenderBatch
+	{
+	public:
+		void setRenderables(std::vector<Renderable*> renderables);
+
+		std::vector<Renderable*> getRenderables() { return m_renderables; }
+
+		void render();
+
+	protected:
+		void calculateIndexes();
+
+		void calculateVertexes();
+
+		std::vector<float> computeTransformedVertexes(Renderable* renderable);
+	
+	private:
+		std::vector<Renderable*> m_renderables;
+
+		std::vector<GLushort> m_indexes;
+
+		std::vector<GLfloat> m_vertexes;
+
+		int m_test;
+	};
 
 	class RenderDevice
 	{
 	public:
-		// ctor
-		RenderDevice()
-			: m_areIndexesDirty(false)
-		{}
-
 		// add a renderable
 		void addRenderable(Renderable* renderable);
 
@@ -44,10 +66,10 @@ namespace orb
 
 	protected:
 		// update vertex array
-		void updateVertexArray();
+		void updateVertexes();
 
 		// compute vertexes from a renderable
-		std::vector<GLfloat> computeVertexes(Renderable* const renderable, Matrix3& mvpMatrix);
+		std::vector<GLfloat> computeVertexData(Renderable* const renderable, Matrix3& mvpMatrix);
 
 		// update the vertex array for the renderer with the given index using the given mvp matrix
 		void addVertexes(std::vector<GLfloat> vertexes);
@@ -65,7 +87,7 @@ namespace orb
 		void reserveIndexes();
 
 		// update the batches
-		void updateBatches();
+		void computeBatches();
 
 		// compute the vao start index for a given batch
 		unsigned int computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
@@ -77,19 +99,19 @@ namespace orb
 		int findInsertPositionForBatching(Renderable* renderable);
 
 	private:
-		// the vertexes 
+		// the vertexes
 		std::vector<GLfloat> m_vertexes;
 
 		// the indexes
 		std::vector<GLushort> m_indexes;
 
+		// the batches (deprecated)
+		std::vector<BatchRange> m_batches2;
+
 		// the batches
-		std::vector<BatchRange> m_batches;
+		std::vector<RenderBatch> m_batches;
 
 		// the renderables
 		std::vector<Renderable*> m_renderables;
-
-		// are the indexes in dirty state
-		bool m_areIndexesDirty;
 	};
 }
