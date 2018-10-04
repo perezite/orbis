@@ -22,7 +22,7 @@ int main(int argc, char* args[])
 {	
 	try
 	{
-		LevelManager::getInstance()->queueLevel(new Level9());
+		LevelManager::getInstance()->queueLevel(new Level3());
 		OrbisMain::getInstance()->run();
 	}
 	catch (Exception e)

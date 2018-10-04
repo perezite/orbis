@@ -65,38 +65,8 @@ namespace orb
 		void render();
 
 	protected:
-		// update vertex array
-		void updateVertexes();
-
-		// compute vertexes from a renderable
-		std::vector<GLfloat> computeVertexData(Renderable* const renderable, Matrix3& mvpMatrix);
-
-		// update the vertex array for the renderer with the given index using the given mvp matrix
-		void addVertexes(std::vector<GLfloat> vertexes);
-
-		// reserve the vertex buffer to hold the renderer data
-		void reserveVertexes();
-
-		// insert renderers indexes at position in index data
-		void updateIndexes();
-
-		// update the index array for the renderer at the given renderer index. The given offset is applied to the indices and an updated offset is returned
-		void addIndex(unsigned int rendererIndex, unsigned short& offset);
-
-		// reserve index array space
-		void reserveIndexes();
-
 		// update the batches
 		void computeBatches();
-
-		// compute the vao start index for a given batch
-		unsigned int computeVaoStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
-
-		// compute the ibo (index buffer) start index for a given batch
-		unsigned int computeIboStartIndex(unsigned int batchIndex, std::vector<BatchRange> batches);
-
-		// find insert index for renderable appropriate for batching
-		int findInsertPositionForBatching(Renderable* renderable);
 
 	private:
 		// the vertexes
