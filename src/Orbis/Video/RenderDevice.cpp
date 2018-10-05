@@ -274,8 +274,6 @@ namespace orb
 
 #ifdef NEW_STUFF
 
-bool first = true;
-
 #include "Mesh.h"
 #include "Shader.h"
 #include "VideoManager.h"
@@ -322,17 +320,20 @@ namespace orb
 	void RenderDevice::addRenderable(Renderable* renderable)
 	{
 		m_renderables.push_back(renderable);
+		m_isDirty = true;
 	}
 
 	void RenderDevice::updateRenderable(Renderable* renderable)
 	{
 		deleteRenderable(renderable);
 		addRenderable(renderable);
+		m_isDirty = true;
 	}
 
 	void RenderDevice::deleteRenderable(Renderable* renderable)
 	{
 		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), renderable), m_renderables.end());
+		m_isDirty = true;
 	}
 
 	void RenderDevice::clear()
@@ -344,25 +345,21 @@ namespace orb
 	{
 		computeBatches();
 
-		glActiveTexture(GL_TEXTURE0);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		prepareRendering();
 
 		for (unsigned i = 0; i < m_batches.size(); i++)
 			m_batches[i].render();
 
-#ifdef ORBIS_DEBUG_RENDERDEVICE
-		LogUtil::logMessage("Number of draw calls: %d", m_batches.size());
-#endif
+		finishRendering();
 
-		glDisable(GL_BLEND);
-
-		first = false;
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
+			LogUtil::logMessage("Number of draw calls: %d", m_batches.size());
+		#endif
 	}
 
 	void RenderDevice::computeBatches()
 	{
-		if (first)
+		if (m_isDirty)
 		{
 			std::vector<std::vector<Renderable*>> grouping
 				= groupByBatches(m_renderables);
@@ -373,30 +370,33 @@ namespace orb
 				m_batches.push_back(RenderBatch());
 				m_batches[i].setRenderables(grouping[i]);
 			}
+
+			m_isDirty = false;
 		}
-		else
-		{
-			for (unsigned int i = 0; i < m_batches.size(); i++)
-			{
-				m_batches[i].calculateIndices();
-				m_batches[i].calculateVertices();
-			}
-		}
+	}
+
+	void RenderDevice::prepareRendering()
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	void RenderDevice::finishRendering()
+	{
+		glDisable(GL_BLEND);
 	}
 
 	void RenderBatch::setRenderables(std::vector<Renderable*> renderables)
 	{
 		m_renderables = renderables;
-		calculateIndices();
-		calculateVertices();
+		m_isDirty = true;
 	}
 
 	void RenderBatch::render()
 	{
-		// set states
-		/*glActiveTexture(GL_TEXTURE0);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
+		calculateIndices();
+		calculateVertices();
 
 		// init batch prototype
 		Renderable* prototype = getRenderables()[0];
@@ -433,31 +433,35 @@ namespace orb
 		if (prototype->getMaterial()->getTexture() != NULL)
 			glDisableVertexAttribArray(prototype->getMaterial()->getShader()->getAttributeLocation("a_vTexCoord"));
 		glDisableVertexAttribArray(positionAttribLocation);
-		
-		// glDisable(GL_BLEND);
 	}
 
 	void RenderBatch::calculateIndices()
 	{
-		m_indices.clear();
-
-		// reserve (temp)
-		unsigned int indexArrayCount = 0;
-		for (unsigned int i = 0; i < m_renderables.size(); i++) {
-			indexArrayCount += m_renderables[i]->getMesh()->getIndices()->size();
-		}
-		m_indices.reserve(indexArrayCount);
-
-		unsigned int offset = 0;
-		for (unsigned int i = 0; i < m_renderables.size(); i++)
+		if (m_isDirty)
 		{
-			std::vector<GLushort> newIndexes = *m_renderables[i]->getMesh()->getIndices();
-			for (unsigned int i = 0; i < newIndexes.size(); i++)
-				newIndexes[i] += offset;
 
-			m_indices.insert(m_indices.end(), newIndexes.begin(), newIndexes.end());
+			m_indices.clear();
 
-			offset += m_renderables[i]->getMesh()->getNumVertices();
+			// reserve memory
+			unsigned int indexArrayCount = 0;
+			for (unsigned int i = 0; i < m_renderables.size(); i++) {
+				indexArrayCount += m_renderables[i]->getMesh()->getIndices()->size();
+			}
+			m_indices.reserve(indexArrayCount);
+
+			unsigned int offset = 0;
+			for (unsigned int i = 0; i < m_renderables.size(); i++)
+			{
+				std::vector<GLushort> newIndices = *m_renderables[i]->getMesh()->getIndices();
+				for (unsigned int i = 0; i < newIndices.size(); i++)
+					newIndices[i] += offset;
+
+				m_indices.insert(m_indices.end(), newIndices.begin(), newIndices.end());
+
+				offset += m_renderables[i]->getMesh()->getNumVertices();
+			}
+
+			m_isDirty = false;
 		}
 	}
 
@@ -465,7 +469,7 @@ namespace orb
 	{
 		m_vertices.clear();
 
-		// reserve (temp)
+		// reserve memory
 		unsigned int vertexArrayCount = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++) {
 			vertexArrayCount += m_renderables[i]->getMesh()->getVertexData()->size();
@@ -476,15 +480,15 @@ namespace orb
 		m_worldCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::World);
 		m_localCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::Camera);
 
-		// insert vertexes
+		// insert vertices
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
-			std::vector<float> vertexes = computeTransformedVertexes(m_renderables[i]);
-			m_vertices.insert(m_vertices.end(), vertexes.begin(), vertexes.end());
+			std::vector<float> vertices = computeTransformedVertices(m_renderables[i]);
+			m_vertices.insert(m_vertices.end(), vertices.begin(), vertices.end());
 		}
 	}
 
-	std::vector<float> RenderBatch::computeTransformedVertexes(Renderable* renderable)
+	std::vector<float> RenderBatch::computeTransformedVertices(Renderable* renderable)
 	{
 		static Matrix3 worldCamMatrix = Matrix3();
 		static Matrix3 localCamMatrix = Matrix3();

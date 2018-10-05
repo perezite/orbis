@@ -2,16 +2,13 @@ TODO:
 - Refactoring
 	- Renderer gesamthaft refactoren	
 		- Batch-Logik refactoren
-			- Performance fixen (modifizierte non-refactored Version: Desktop -> renderDevice.cpp)
-				-- Ziel: 1.5 ms im Mittel
-			- Vertexfarben fixen
-			- Test auf Mobile
-			- Alten Code löschen
-			- Überlegen, was man alles analog zu SFML machen kann
-			- Überlegen: Vertex = Position + Texturkoordinaten + Farbe 
-			- Code in Renderable / Mesh ziehen 
-			- Weiteres Vorgehen überlegen
-			- Sortierfunktion rausziehen
+		- Test auf Mobile
+		- Alten Code löschen
+		- Überlegen, was man alles analog zu SFML machen kann
+		- Überlegen: Vertex = Position + Texturkoordinaten + Farbe 
+		- Code in Renderable / Mesh ziehen 
+		- Weiteres Vorgehen überlegen
+		- Sortierfunktion rausziehen
 	- Test auf Mobile
 	- Code-Styling überdenken (js-style vs a-style)
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)

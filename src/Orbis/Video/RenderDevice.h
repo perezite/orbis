@@ -118,6 +118,8 @@ namespace orb
 	class RenderBatch
 	{
 	public:
+		RenderBatch() : m_isDirty(false) { }
+
 		void setRenderables(std::vector<Renderable*> renderables);
 
 		std::vector<Renderable*> getRenderables() { return m_renderables; }
@@ -129,7 +131,7 @@ namespace orb
 
 		void calculateVertices();
 
-		std::vector<float> computeTransformedVertexes(Renderable* renderable);
+		std::vector<float> computeTransformedVertices(Renderable* renderable);
 
 	private:
 		std::vector<Renderable*> m_renderables;
@@ -142,12 +144,15 @@ namespace orb
 
 		Matrix3 m_localCamMatrix;
 
-		friend class RenderDevice;
+		bool m_isDirty;
 	};
 
 	class RenderDevice
 	{
 	public:
+		// ctor
+		RenderDevice() : m_isDirty(false) { }
+
 		// add a renderable
 		void addRenderable(Renderable* renderable);
 
@@ -167,12 +172,21 @@ namespace orb
 		// update the batches
 		void computeBatches();
 
+		// prepare the rendering
+		void prepareRendering();
+
+		// finish the rendering
+		void finishRendering();
+
 	private:
-		// the renderalbes
+		// the renderables
 		std::vector<Renderable*> m_renderables;
 
 		// the batches
 		std::vector<RenderBatch> m_batches;
+
+		// is the renderer in dirty state
+		bool m_isDirty;
 	};
 }
 
