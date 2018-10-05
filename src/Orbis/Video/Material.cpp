@@ -5,7 +5,7 @@ using namespace base;
 
 namespace orb
 {
-	bool Material::isBatchableWith(Material * const other) const
+	bool Material::isBatchEqualTo(Material * const other) const
 	{
 		bool texturesBatchEqual = areTexturesBatchEqual(this->getTexture(), other->getTexture());
 

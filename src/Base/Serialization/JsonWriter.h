@@ -24,6 +24,9 @@ namespace base
 		// get the json string
 		std::string toString();
 
+	protected:
+		void removeLeadingCommas(std::string& json);
+
 	private:
 		// the stringstream
 		std::stringstream m_is;

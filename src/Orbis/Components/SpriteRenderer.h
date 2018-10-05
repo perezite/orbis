@@ -12,10 +12,17 @@ namespace orb
 	{
 	public:
 		// ctor
+		SpriteRenderer(Texture* texture);
+
+		// ctor
 		SpriteRenderer(std::string assetPath);
 
 		// start
 		void start();
+
+		// set the texture
+		// TODO: Remove this function
+		void setTexture(Texture* texture);
 
 		// set the texture
 		void setTexture(std::string path);
@@ -24,7 +31,9 @@ namespace orb
 		 std::string getTexturePath(void) { return m_renderable.getMaterial()->getTexture()->getAssetPath(); }
 
 		// get the texture
+		// TODO: Remove this function
 		 Texture* getTexture(void) { return m_renderable.getMaterial()->getTexture(); }
+
 
 	private:
 		// the texture

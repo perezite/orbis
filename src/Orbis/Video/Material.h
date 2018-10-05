@@ -31,7 +31,7 @@ namespace orb
 		Color& getColor() { return m_color; }
 
 		// can the materials be batched
-		bool isBatchableWith(Material* const other) const;
+		bool isBatchEqualTo(Material* const other) const;
 
 		// set the variables of the shader according to the shader properties
 		void prepareShaderVariables();

@@ -26,39 +26,34 @@ namespace orb
 
 	public:
 		// ctor
-		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexCount, std::vector<GLushort> indexes, bool isVertexColored = false)
-			: m_vertexes(vertexData), m_vertexCount(vertexCount), m_indexes(indexes), m_isVertexColored(isVertexColored)
+		Mesh(std::vector<GLfloat> vertexData, unsigned int vertexCount, std::vector<GLushort> indices, bool isVertexColored = false)
+			: m_vertexData(vertexData), m_vertexCount(vertexCount), m_indices(indices), m_isVertexColored(isVertexColored)
 		{}
 
-		// get vertexData (deprecated)
-		const std::vector<GLfloat>* getVertexes2() const { return &m_vertexes; }
+		// get vertexData
+		const std::vector<GLfloat>* getVertexData() const { return &m_vertexData; }
 
-		std::vector<GLfloat> getVertexes() { return m_vertexes; }
-
-		// get num vertexes
-		unsigned int getNumVertexes() const { return m_vertexes.size() / m_vertexCount; }
+		// get num vertices
+		unsigned int getNumVertices() const { return m_vertexData.size() / m_vertexCount; }
 
 		// get the count of one vertex
 		unsigned int getVertexCount() const { return m_vertexCount; }
 
-		// get indexes (deprecated)
-		const std::vector<GLushort>* getIndexes2() const { return &m_indexes; }
-
-		// get indexes
-		std::vector<GLushort> getIndexes() { return m_indexes; }
+		// get indices
+		const std::vector<GLushort>* getIndices() const { return &m_indices; }
 
 		// is vertex colored
 		bool isVertexColored() const { return m_isVertexColored; }
 
 	private:
 		// vertex data
-		std::vector<GLfloat> m_vertexes;
+		std::vector<GLfloat> m_vertexData;
 
-		// number of elements per vertex
+		// count per vertex
 		unsigned int m_vertexCount;
 
-		// indexes
-		std::vector<GLushort> m_indexes;
+		// indices
+		std::vector<GLushort> m_indices;
 
 		// is the mesh vertex color
 		bool m_isVertexColored;

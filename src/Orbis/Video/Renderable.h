@@ -41,7 +41,7 @@ namespace orb
 		Material* getMaterial() { return &m_material; }
 
 		// check if renederable can be batched with another renderable
-		bool isBatchableWith(Renderable* other) { return getMaterial()->isBatchableWith(other->getMaterial()); }
+		bool isBatchEqualTo(Renderable* other) { return getMaterial()->isBatchEqualTo(other->getMaterial()); }
 
 	private:
 		// the render transforms
