@@ -1,14 +1,15 @@
 TODO:	
 - Refactoring
 	- Renderer gesamthaft refactoren	
-		- Batch-Logik refactoren
-		- Test auf Mobile
+		- Performance-Vergleich auf Emulator mittels logcat
+		- Auf Real-Mobile testen (Performance)
 		- Alten Code löschen
 		- Überlegen, was man alles analog zu SFML machen kann
 		- Überlegen: Vertex = Position + Texturkoordinaten + Farbe 
 		- Code in Renderable / Mesh ziehen 
 		- Weiteres Vorgehen überlegen
 		- Sortierfunktion rausziehen
+	- Xperia Hard-reset
 	- Test auf Mobile
 	- Code-Styling überdenken (js-style vs a-style)
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
