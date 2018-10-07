@@ -35,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\ContainerUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\Exception.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryUtil.h" />
