@@ -1,26 +1,17 @@
 TODO:	
 - Refactoring
-	- Renderer gesamthaft refactoren	
-		- Performance-Vergleich auf Emulator mittels logcat
-		- Auf Real-Mobile testen (Performance)
-		- Alten Code löschen
-		- Überlegen, was man alles analog zu SFML machen kann
-		- Überlegen: Vertex = Position + Texturkoordinaten + Farbe 
-		- Code in Renderable / Mesh ziehen 
-		- Weiteres Vorgehen überlegen
-		- Sortierfunktion rausziehen
-	- Xperia Hard-reset
-	- Test auf Mobile
-	- Code-Styling überdenken (js-style vs a-style)
+	- Renderer refactoren
+		- Sukzessive den weggesicherten Code wiederherstellen und Performance-Vergleich mit previous.exe machen 
+		- Code-Styling überdenken (js-style vs a-style)
+	- Angleich an SFML planen
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
-	- Interface überlegen: Sowas ähnliches wie SFML
+- Infrastruktur: Xperia Hard-reset
+- Testing auf Real-Mobile
 - Infastruktur: Ermitteln, welche Prozesse VS blocken (Kandidat: vcpkgsrv.exe) und Lösung dafür finden
 	-- Hint: https://forums.unrealengine.com/development-discussion/c-gameplay-programming/25831-visual-studio-2013-express-vcpkgsrv-exe-going-crazy
 - Evaluieren, ob weitere Refactorings nötig sind
-- Xperia Debugging zum Laufen bringen
 - Testen auf Mobile
 - Branch mergen		
-- Evaluieren, ob der __INTELLISENSE__ fix in Precompiled.h das Intellisense-Problem behoben hat. Ansonsten nochmal schauen.
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)

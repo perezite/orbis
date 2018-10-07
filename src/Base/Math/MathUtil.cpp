@@ -3,6 +3,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdlib.h>
+#include <vector>
+#include <algorithm>
 
 namespace base
 {
@@ -40,5 +42,20 @@ namespace base
 	bool MathUtil::approx(float val1, float val2, float eps)
 	{
 		return fabs(val1 - val2) < eps;
+	}
+
+	float MathUtil::median(std::vector<float> samples)
+	{
+		std::vector<float> sorted = samples;
+		std::sort(sorted.begin(), sorted.end());
+		unsigned int size = sorted.size();
+
+		if (sorted.size() % 2 == 0)
+		{
+			return (sorted[size / 2 - 1] + sorted[size / 2]) / 2.0f;
+		}
+		
+		return sorted[size / 2];
+		
 	}
 }

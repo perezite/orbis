@@ -17,7 +17,7 @@ using namespace orb;
 
 namespace app
 {
-	const int Level3::NUM_SPRITES = 1000;
+	const int Level3::NUM_SPRITES = 50000;
 	const float Level3::MIN_BLOCK_SCALE = 0.01f;
 	const float Level3::MAX_BLOCK_SCALE = 0.05f;
 

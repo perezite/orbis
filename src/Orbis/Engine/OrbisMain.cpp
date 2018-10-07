@@ -7,6 +7,9 @@
 #include "../Libraries/SDL.h"
 #include "../Engine/Settings.h"
 
+#include "../../Base/Base.h"
+using namespace base;
+
 namespace orb
 {
 	OrbisMain* OrbisMain::getInstance()
@@ -47,15 +50,14 @@ namespace orb
 		{
 			// track current performance
 			float currentPerformance = 1000.0f / float(m_numFrames);
-			LogUtil::logMessage("%f ms/frame", currentPerformance);
 			m_startTicks += 1000;
 			m_numFrames = 0;
 
-			// track average performance
-			m_numSamples++;
-			m_cumulativePerformance += currentPerformance;
-			float average = m_cumulativePerformance / float(m_numSamples);
-			LogUtil::logMessage("Average: %f ms/frame, samples: %d", average, m_numSamples);
+			// track performance
+			m_samples.push_back(currentPerformance);
+			float median = MathUtil::median(m_samples);
+			
+			LogUtil::logMessage("current: %f ms, median: %f ms, samples: %d", currentPerformance, median, m_samples.size());
 		}
 	}
 }

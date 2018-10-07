@@ -4,33 +4,30 @@
 
 namespace orb
 {
-		class OrbisMain
-		{
-		public:
-			// get instance
-			static OrbisMain* getInstance();
+	class OrbisMain
+	{
+	public:
+		// get instance
+		static OrbisMain* getInstance();
 
-			// destructor
-			virtual ~OrbisMain() { };
+		// destructor
+		virtual ~OrbisMain() { };
 
-			// run the engine
-			void run();
+		// run the engine
+		void run();
 
-		protected:
-			// log the performance 
-			void logPerformance();
+	protected:
+		// log the performance 
+		void logPerformance();
 
-		private:
-			// start time of current performance log measurement
-			long m_startTicks;
+	private:
+		// start time of current performance log measurement
+		long m_startTicks;
 
-			// number of frames elapsed since last performance log updateLevel
-			long m_numFrames;
+		// number of frames elapsed since last performance log updateLevel
+		long m_numFrames;
 
-			// current number of performance samples
-			long m_numSamples;
-
-			// cumulated performance values
-			float m_cumulativePerformance;
-		};
+		// performance samples
+		std::vector<float> m_samples;
+	};
 }

@@ -28,5 +28,8 @@ namespace base
 
 		// check whether two values are closer than eps
 		static bool approx(float val1, float val2, float eps);
+
+		// compute the median
+		static float MathUtil::median(std::vector<float> samples);
 	};
 }
