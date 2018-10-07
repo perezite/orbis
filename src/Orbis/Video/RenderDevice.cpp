@@ -137,14 +137,12 @@ namespace orb
 	{
 		if (m_isDirty)
 		{
-
 			m_indices.clear();
 
 			// reserve memory
 			unsigned int indexArrayCount = 0;
-			for (unsigned int i = 0; i < m_renderables.size(); i++) {
+			for (unsigned int i = 0; i < m_renderables.size(); i++) 
 				indexArrayCount += m_renderables[i]->getMesh()->getIndices()->size();
-			}
 			m_indices.reserve(indexArrayCount);
 
 			unsigned int offset = 0;
@@ -169,14 +167,9 @@ namespace orb
 
 		// reserve memory
 		unsigned int vertexArrayCount = 0;
-		for (unsigned int i = 0; i < m_renderables.size(); i++) {
+		for (unsigned int i = 0; i < m_renderables.size(); i++)
 			vertexArrayCount += m_renderables[i]->getMesh()->getVertexData()->size();
-		}
 		m_vertices.reserve(vertexArrayCount);
-
-		// compute camera matrices
-		m_worldCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::World);
-		m_localCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::Camera);
 
 		// insert vertices
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
@@ -190,8 +183,7 @@ namespace orb
 	{
 		// compute mvp matrix
 		Transform* transform = renderable->getTransform();
-		Matrix3 camMatrix = transform->transformSpace == TransformSpace::World
-			? m_worldCamMatrix : m_localCamMatrix;
+		const Matrix3& camMatrix = Camera::getInstance()->getCamMatrix(transform->transformSpace);
 		Matrix3 mvpMatrix = camMatrix * transform->getModelMatrix();
 
 		// compute transformed vertex data

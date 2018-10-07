@@ -30,6 +30,12 @@ namespace orb
 		m_instance = NULL;
 	}
 
+	void Camera::update()
+	{
+		m_localCamMatrix = calcCamMatrix(TransformSpace::Camera);
+		m_worldCamMatrix = calcCamMatrix(TransformSpace::World);
+	}
+
 	Vector2D Camera::screenSpaceToCameraSpace(Vector2D v)
 	{
 		return Vector2D(v.x, getAspect() * v.y);
@@ -65,6 +71,11 @@ namespace orb
 	Matrix3 Camera::calcCamMatrix(TransformSpace space)
 	{
 		return calcProjectionMatrix(space) * calcViewMatrix(space);
+	}
+
+	Matrix3& Camera::getCamMatrix(TransformSpace space)
+	{
+		return space == TransformSpace::Camera ? m_localCamMatrix : m_worldCamMatrix;
 	}
 
 	Vector2D Camera::getSize()
