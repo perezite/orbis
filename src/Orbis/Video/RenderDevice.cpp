@@ -152,9 +152,8 @@ namespace orb
 			unsigned int offset = 0;
 			for (unsigned int i = 0; i < m_renderables.size(); i++)
 			{
-				std::vector<GLushort> newIndices = *m_renderables[i]->getMesh()->getIndices();
-				for (unsigned int i = 0; i < newIndices.size(); i++)
-					newIndices[i] += offset;
+				std::vector<GLushort> newIndices;
+				m_renderables[i]->getMesh()->computeIndices(newIndices, offset);
 
 				m_indices.insert(m_indices.end(), newIndices.begin(), newIndices.end());
 
