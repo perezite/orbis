@@ -8,38 +8,10 @@
 #include "../Core/LogUtil.h"
 #include "../Engine/Settings.h"
 
+#include "../../Base/Base.h"
+using namespace base;
+
 #include <algorithm>
-
-namespace
-{
-	using namespace orb;
-
-	std::vector<std::vector<Renderable*>> groupByBatches(std::vector<Renderable*> renderables)
-	{
-		std::vector<Renderable*> list = renderables;
-		std::vector<std::vector<Renderable*>> grouping;
-
-		while (list.size() > 0)
-		{
-			Renderable* proto = list[0];
-			std::vector<Renderable*> group;
-
-			for (unsigned int i = 0; i < list.size(); i++)
-			{
-				if (list[i]->isBatchEqualTo(proto))
-				{
-					group.push_back(list[i]);
-					list.erase(list.begin() + i);
-					i = i - 1;
-				}
-			}
-
-			grouping.push_back(group);
-		}
-
-		return grouping;
-	}
-}
 
 namespace orb
 {
@@ -88,7 +60,7 @@ namespace orb
 		if (m_isDirty)
 		{
 			std::vector<std::vector<Renderable*>> grouping
-				= groupByBatches(m_renderables);
+				= ContainerUtil::group(m_renderables, Renderable::areBatchEqual);
 
 			m_batches.clear();
 			for (unsigned int i = 0; i < grouping.size(); i++)
