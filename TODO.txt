@@ -3,7 +3,7 @@ TODO:
 	- Renderer refactoren
 		- Sukzessive den refactoreden Code hinzufügen und mittels Profiling potentielle Bottlenecks evaulieren
 			- Sukzessive Änderungen einfügen, und bei jedem Schritt verifizieren, dass die Performance gleich bleibt. Jeden Schritt einzeln pushen.
-			-- Performacne von RenderDevice::render muss bei ca. 78% bleiben
+			-- Performance von RenderDevice::render muss bei ca. 78% bleiben
 		- Code-Styling überdenken (js-style vs a-style)
 	- Angleich an SFML planen
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)

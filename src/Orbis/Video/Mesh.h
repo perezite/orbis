@@ -36,8 +36,14 @@ namespace orb
 		// get num vertices
 		unsigned int getNumVertices() const { return m_vertexData.size() / m_vertexCount; }
 
-		// get the count of one vertex
+		// get the size of one vertex
 		unsigned int getVertexCount() const { return m_vertexCount; }
+
+		// get count of indices
+		unsigned int getIndexCount() const { return m_indices.size(); }
+
+		// compute indices
+		const void computeIndices(std::vector<GLushort>& result, unsigned int offset = 0) const;
 
 		// get indices
 		const std::vector<GLushort>* getIndices() const { return &m_indices; }
