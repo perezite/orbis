@@ -8,10 +8,38 @@
 #include "../Core/LogUtil.h"
 #include "../Engine/Settings.h"
 
-#include "../../Base/Base.h"
-using namespace base;
-
 #include <algorithm>
+
+namespace
+{
+	using namespace orb;
+
+	std::vector<std::vector<Renderable*>> groupByBatches(std::vector<Renderable*> renderables)
+	{
+		std::vector<Renderable*> list = renderables;
+		std::vector<std::vector<Renderable*>> grouping;
+
+		while (list.size() > 0)
+		{
+			Renderable* proto = list[0];
+			std::vector<Renderable*> group;
+
+			for (unsigned int i = 0; i < list.size(); i++)
+			{
+				if (list[i]->isBatchEqualTo(proto))
+				{
+					group.push_back(list[i]);
+					list.erase(list.begin() + i);
+					i = i - 1;
+				}
+			}
+
+			grouping.push_back(group);
+		}
+
+		return grouping;
+	}
+}
 
 namespace orb
 {
@@ -60,7 +88,7 @@ namespace orb
 		if (m_isDirty)
 		{
 			std::vector<std::vector<Renderable*>> grouping
-				= ContainerUtil::group(m_renderables, Renderable::areBatchEqual);
+				= groupByBatches(m_renderables);
 
 			m_batches.clear();
 			for (unsigned int i = 0; i < grouping.size(); i++)
@@ -137,12 +165,14 @@ namespace orb
 	{
 		if (m_isDirty)
 		{
+
 			m_indices.clear();
 
 			// reserve memory
 			unsigned int indexArrayCount = 0;
-			for (unsigned int i = 0; i < m_renderables.size(); i++) 
+			for (unsigned int i = 0; i < m_renderables.size(); i++) {
 				indexArrayCount += m_renderables[i]->getMesh()->getIndices()->size();
+			}
 			m_indices.reserve(indexArrayCount);
 
 			unsigned int offset = 0;
@@ -167,9 +197,14 @@ namespace orb
 
 		// reserve memory
 		unsigned int vertexArrayCount = 0;
-		for (unsigned int i = 0; i < m_renderables.size(); i++)
+		for (unsigned int i = 0; i < m_renderables.size(); i++) {
 			vertexArrayCount += m_renderables[i]->getMesh()->getVertexData()->size();
+		}
 		m_vertices.reserve(vertexArrayCount);
+
+		// compute camera matrices
+		m_worldCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::World);
+		m_localCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::Camera);
 
 		// insert vertices
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
@@ -181,12 +216,27 @@ namespace orb
 
 	std::vector<float> RenderBatch::computeTransformedVertices(Renderable* renderable)
 	{
-		Texture* tex = renderable->getMaterial()->getTexture();
-		Mesh* mesh = renderable->getMesh();
-		Transform* trans = renderable->getTransform();
+		// compute mvp matrix
+		Transform* transform = renderable->getTransform();
+		Matrix3 camMatrix = transform->transformSpace == TransformSpace::World
+			? m_worldCamMatrix : m_localCamMatrix;
+		Matrix3 mvpMatrix = camMatrix * transform->getModelMatrix();
 
-		std::vector<float> data;
-		mesh->getTransformedVertexData(trans, tex, data);
+		// compute transformed vertex data
+		Mesh* mesh = renderable->getMesh();
+		Texture* tex = renderable->getMaterial()->getTexture();
+		std::vector<float> data = *mesh->getVertexData();
+		for (unsigned int i = 0; i < mesh->getNumVertices(); i++)
+		{
+			unsigned int start = i * mesh->getVertexCount();
+			Vector2D pos = mvpMatrix * Vector2D(data[start + 0], data[start + 1]);
+			data[start + 0] = pos.x; data[start + 1] = pos.y;
+			if (tex) {
+				Vector2D uvCoord = tex->mapUVCoord(Vector2D(data[start + 2], data[start + 3]));
+				data[start + 2] = uvCoord.x; data[start + 3] = uvCoord.y;
+			}
+		}
+
 		return data;
 	}
 }

@@ -2,8 +2,6 @@
 
 #include "VideoManager.h"
 
-#include "../Components/Camera.h"
-
 namespace orb
 {
 	Mesh* Mesh::createVertexColoredTexturedQuad(Color color)
@@ -53,25 +51,5 @@ namespace orb
 		);
 
 		return mesh;
-	}
-
-	void Mesh::getTransformedVertexData(Transform* trans, Texture* tex, std::vector<float>& result)
-	{
-		// compute mvp matrix
-		const Matrix3& camMatrix = Camera::getInstance()->getCamMatrix(trans->transformSpace);
-		Matrix3 mvpMatrix = camMatrix * trans->getModelMatrix();
-
-		// compute transformed vertex data
-		result = *getVertexData();
-		for (unsigned int i = 0; i < getNumVertices(); i++)
-		{
-			unsigned int start = i * getVertexCount();
-			Vector2D pos = mvpMatrix * Vector2D(result[start + 0], result[start + 1]);
-			result[start + 0] = pos.x; result[start + 1] = pos.y;
-			if (tex) {
-				Vector2D uvCoord = tex->mapUVCoord(Vector2D(result[start + 2], result[start + 3]));
-				result[start + 2] = uvCoord.x; result[start + 3] = uvCoord.y;
-			}
-		}
 	}
 }

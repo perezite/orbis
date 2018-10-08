@@ -2,9 +2,6 @@
 
 #include "Color.h"
 #include "RenderMode.h"
-#include "Texture.h"
-
-#include "../Game/Transform.h"
 
 #include "../../Base/Base.h"
 using namespace base;
@@ -33,11 +30,8 @@ namespace orb
 			: m_vertexData(vertexData), m_vertexCount(vertexCount), m_indices(indices), m_isVertexColored(isVertexColored)
 		{}
 
-		// get vertex data
+		// get vertexData
 		const std::vector<GLfloat>* getVertexData() const { return &m_vertexData; }
-
-		// get transformed vertex data
-		void getTransformedVertexData(Transform* trans, Texture* tex, std::vector<float>& result);
 
 		// get num vertices
 		unsigned int getNumVertices() const { return m_vertexData.size() / m_vertexCount; }
