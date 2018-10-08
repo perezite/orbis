@@ -78,9 +78,9 @@ namespace orb
 
 		finishRendering();
 
-		#ifdef ORBIS_DEBUG_RENDERDEVICE
-			LogUtil::logMessage("Number of draw calls: %d", m_batches.size());
-		#endif
+#ifdef ORBIS_DEBUG_RENDERDEVICE
+		LogUtil::logMessage("Number of draw calls: %d", m_batches.size());
+#endif
 	}
 
 	void RenderDevice::computeBatches()
@@ -121,6 +121,8 @@ namespace orb
 
 	void RenderBatch::render()
 	{
+		Exception::assert(Camera::getInstance() != NULL, "No camera is attached to the level");
+
 		calculateIndices();
 		calculateVertices();
 
@@ -202,10 +204,6 @@ namespace orb
 		}
 		m_vertices.reserve(vertexArrayCount);
 
-		// compute camera matrices
-		m_worldCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::World);
-		m_localCamMatrix = Camera::getInstance()->calcCamMatrix(TransformSpace::Camera);
-
 		// insert vertices
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
@@ -218,8 +216,8 @@ namespace orb
 	{
 		// compute mvp matrix
 		Transform* transform = renderable->getTransform();
-		Matrix3 camMatrix = transform->transformSpace == TransformSpace::World
-			? m_worldCamMatrix : m_localCamMatrix;
+		Camera* cam = Camera::getInstance();
+		Matrix3 camMatrix = cam->getCamMatrix(transform->transformSpace);
 		Matrix3 mvpMatrix = camMatrix * transform->getModelMatrix();
 
 		// compute transformed vertex data

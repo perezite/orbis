@@ -2,17 +2,8 @@ TODO:
 - Refactoring
 	- Renderer refactoren
 		- Sukzessive den refactoreden Code hinzufügen und mittels Profiling potentielle Bottlenecks evaulieren
-			- Rollback bis zum Branch '57b75b5'
-			- RenderDevice::render() Performance messen ohne Änderungen, Performance messen und archivieren
-			- Sukzessive Änderungen hinzufügen, Performance messen und archivieren und verifizieren, dass die Laufzeit von RenderDevice::render gleich bleibt
-			-- Aktueller Stand:
-				-- Man muss die Applikation auf 'Power saving' stellen in ATI, damit das Profiling verlässlichere Werte liefert
-				-- Das Bottleneck ist die Funktion orb::RenderDevice::render (bzw. darin ausgeführte). Ich habe das rausgefunden indem ich die letzte Version profiled habe, und dort orb::RenderDevice::render ca. 8% Prozent mehr Zeit frisst.
-				-- Das Ziel muss es also sein, alle Refactorings wiederherzustellen, ohne dass orb::RenderDevice::render langsamer wird
-				-- Ich habe bereits das erste Refactoring durchgeführt (auslagern der Groupfunktion).
-				-- Aktuell braucht RenderDevice::render 78.94%, vor dem Refactoring im vorigen Punkt 78.81%
-				-- Das Ziel muss es also sein, dass RenderDevice::render nicht merh als ca. 79% frisst
-			- Sobald der Code performant funktioniert: Temporär wegkopieren, Head auschecken, Code wieder reinkopieren, Push
+			- Sukzessive Änderungen einfügen, und bei jedem Schritt verifizieren, dass die Performance gleich bleibt. Jeden Schritt einzeln pushen.
+			-- Performacne von RenderDevice::render muss bei ca. 78% bleiben
 		- Code-Styling überdenken (js-style vs a-style)
 	- Angleich an SFML planen
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)

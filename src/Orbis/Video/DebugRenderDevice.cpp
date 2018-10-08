@@ -14,7 +14,7 @@ namespace orb
 	void DebugRenderDevice::drawDebugLine(Vector2D start, Vector2D end, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::getInstance()->calcCamMatrix();
+		Matrix3 camMatrix = Camera::getInstance()->getCamMatrix();
 		start = camMatrix * start;
 		end = camMatrix * end;
 		GLfloat vertexArray[4] = { start.x, start.y, end.x, end.y };
@@ -26,7 +26,7 @@ namespace orb
 	void DebugRenderDevice::drawDebugRect(Rect rect, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::getInstance()->calcCamMatrix();
+		Matrix3 camMatrix = Camera::getInstance()->getCamMatrix();
 		rect = camMatrix * rect;
 		GLfloat vertexArray[12] = {
 			rect.leftBottom.x , rect.leftBottom.y, rect.getRightBottom().x, rect.getRightBottom().y, rect.getLeftTop().x, rect.getLeftTop().y,

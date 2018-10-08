@@ -42,10 +42,6 @@ namespace orb
 
 		std::vector<GLfloat> m_vertices;
 
-		Matrix3 m_worldCamMatrix;
-
-		Matrix3 m_localCamMatrix;
-
 		bool m_isDirty;
 	};
 

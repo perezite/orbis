@@ -22,6 +22,9 @@ namespace orb
 		// dtor
 		virtual ~Camera();
 
+		// override
+		void update();
+
 		// transform coordinates from screen space to camera space
 		Vector2D screenSpaceToCameraSpace(Vector2D v);
 
@@ -31,8 +34,8 @@ namespace orb
 		// get the orthographic projection matrix
 		Matrix3 calcProjectionMatrix(TransformSpace space = TransformSpace::World);
 
-		// get the view-projection matrix
-		Matrix3 calcCamMatrix(TransformSpace space = TransformSpace::World);
+		// get the camera matrix
+		const Matrix3& getCamMatrix(TransformSpace space = TransformSpace::World) const;
 
 		// get the size of the camera in world coordinates
 		Vector2D getSize();
@@ -40,8 +43,19 @@ namespace orb
 		// get the aspect ratio (height / width)
 		float getAspect();
 
+	protected:
+		// get the view-projection matrix
+		Matrix3 calcCamMatrix(TransformSpace space = TransformSpace::World);
+
 	private:
 		// singleton component instance
 		static Camera* m_instance;
+
+		// the local cam matrix
+		Matrix3 m_localCamMatrix;
+
+		// the world cam matrix
+		Matrix3 m_worldCamMatrix;
+
 	};
 }

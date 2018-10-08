@@ -28,6 +28,7 @@ namespace orb
 	void VideoManager::start()
 	{
 		getTextureAtlas()->generate();
+
 	}
 
 	void VideoManager::render()

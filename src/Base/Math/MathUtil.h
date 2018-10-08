@@ -30,6 +30,6 @@ namespace base
 		static bool approx(float val1, float val2, float eps);
 
 		// compute the median
-		static float MathUtil::median(std::vector<float> samples);
+		static float median(std::vector<float> samples);
 	};
 }

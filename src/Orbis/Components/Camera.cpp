@@ -14,8 +14,6 @@ namespace orb
 
 	Camera* Camera::getInstance()
 	{
-		Exception::assert(m_instance != NULL, "No camera was attached in the level");
-
 		return m_instance;
 	}
 
@@ -28,6 +26,12 @@ namespace orb
 	Camera::~Camera()
 	{
 		m_instance = NULL;
+	}
+
+	void Camera::update()
+	{
+		m_localCamMatrix = calcCamMatrix(TransformSpace::Camera);
+		m_worldCamMatrix = calcCamMatrix(TransformSpace::World);
 	}
 
 	Vector2D Camera::screenSpaceToCameraSpace(Vector2D v)
@@ -62,9 +66,9 @@ namespace orb
 		return mat;
 	}
 
-	Matrix3 Camera::calcCamMatrix(TransformSpace space)
+	const Matrix3& Camera::getCamMatrix(TransformSpace space) const
 	{
-		return calcProjectionMatrix(space) * calcViewMatrix(space);
+		return space == TransformSpace::World ? m_worldCamMatrix : m_localCamMatrix;
 	}
 
 	Vector2D Camera::getSize()
@@ -77,5 +81,10 @@ namespace orb
 	{
 		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		return resolution.y / resolution.x;
+	}
+
+	Matrix3 Camera::calcCamMatrix(TransformSpace space)
+	{
+		return calcProjectionMatrix(space) * calcViewMatrix(space);
 	}
 }

@@ -98,6 +98,8 @@ namespace orb
 	{
 		VideoManager* video = VideoManager::getInstance();
 
+
+
 		video->getWindow()->clear();
 		video->render();
 
