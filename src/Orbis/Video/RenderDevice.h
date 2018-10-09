@@ -33,6 +33,10 @@ namespace orb
 
 		void calculateVertices();
 
+		void reserveIndexMemory();
+
+		void reserveVertexMemory();
+
 		std::vector<float> computeTransformedVertices(Renderable* renderable);
 
 	private:

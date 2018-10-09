@@ -139,15 +139,8 @@ namespace orb
 	{
 		if (m_isDirty)
 		{
-
 			m_indices.clear();
-
-			// reserve memory
-			unsigned int indexArrayCount = 0;
-			for (unsigned int i = 0; i < m_renderables.size(); i++) {
-				indexArrayCount += m_renderables[i]->getMesh()->getIndices()->size();
-			}
-			m_indices.reserve(indexArrayCount);
+			reserveIndexMemory();
 
 			unsigned int offset = 0;
 			for (unsigned int i = 0; i < m_renderables.size(); i++)
@@ -164,23 +157,41 @@ namespace orb
 		}
 	}
 
+	void RenderBatch::reserveIndexMemory()
+	{
+		// reserve memory
+		unsigned int indexArrayCount = 0;
+		for (unsigned int i = 0; i < m_renderables.size(); i++) {
+			indexArrayCount += m_renderables[i]->getMesh()->getIndices()->size();
+		}
+		m_indices.reserve(indexArrayCount);
+	}
+
 	void RenderBatch::calculateVertices()
 	{
 		m_vertices.clear();
+		reserveVertexMemory();
 
-		// reserve memory
 		unsigned int vertexArrayCount = 0;
 		for (unsigned int i = 0; i < m_renderables.size(); i++) {
 			vertexArrayCount += m_renderables[i]->getMesh()->getVertexData()->size();
 		}
-		m_vertices.reserve(vertexArrayCount);
+		m_vertices.reserve(vertexArrayCount); 
 
-		// insert vertices
 		for (unsigned int i = 0; i < m_renderables.size(); i++)
 		{
 			std::vector<float> vertices = computeTransformedVertices(m_renderables[i]);
 			m_vertices.insert(m_vertices.end(), vertices.begin(), vertices.end());
 		}
+	}
+
+	void RenderBatch::reserveVertexMemory()
+	{
+		unsigned int vertexArrayCount = 0;
+		for (unsigned int i = 0; i < m_renderables.size(); i++) {
+			vertexArrayCount += m_renderables[i]->getMesh()->getVertexData()->size();
+		}
+		m_vertices.reserve(vertexArrayCount);
 	}
 
 	std::vector<float> RenderBatch::computeTransformedVertices(Renderable* renderable)

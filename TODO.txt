@@ -5,6 +5,7 @@ TODO:
 			- Sukzessive Änderungen einfügen, und bei jedem Schritt verifizieren, dass die Performance gleich bleibt. Jeden Schritt einzeln pushen.
 			-- Performance von RenderDevice::render muss bei ca. 78% bleiben
 		- Code-Styling überdenken (js-style vs a-style)
+		- Xperia Z3: Muss mit vollen FPS laufen bei 1000 Blocks
 	- Angleich an SFML planen
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
 - Infrastruktur: Xperia Hard-reset
