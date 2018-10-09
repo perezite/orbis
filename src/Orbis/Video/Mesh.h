@@ -3,6 +3,9 @@
 #include "Color.h"
 #include "RenderMode.h"
 
+#include "../Game/Transform.h"
+#include "Texture.h"
+
 #include "../../Base/Base.h"
 using namespace base;
 
@@ -50,6 +53,9 @@ namespace orb
 
 		// is vertex colored
 		bool isVertexColored() const { return m_isVertexColored; }
+
+		// compute transformed vertices
+		void computeTransformedVertices(std::vector<float>& result, Transform* transform, Texture* tex);
 
 	private:
 		// vertex data

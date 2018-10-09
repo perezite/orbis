@@ -1,6 +1,8 @@
 #include "Mesh.h"
 
 #include "VideoManager.h"
+#include "../Components/Camera.h"
+
 
 namespace orb
 {
@@ -58,5 +60,26 @@ namespace orb
 		result = m_indices;
 		for (unsigned int i = 0; i < result.size(); i++)
 			result[i] += offset;
+	}
+
+	void Mesh::computeTransformedVertices(std::vector<float>& result, Transform* transform, Texture* tex)
+	{
+		// compute mvp matrix
+		Camera* cam = Camera::getInstance();
+		Matrix3 camMatrix = cam->getCamMatrix(transform->transformSpace);
+		Matrix3 mvpMatrix = camMatrix * transform->getModelMatrix();
+
+		// compute transformed vertex data
+		result = *getVertexData();
+		for (unsigned int i = 0; i < getNumVertices(); i++)
+		{
+			unsigned int start = i * getVertexCount();
+			Vector2D pos = mvpMatrix * Vector2D(result[start + 0], result[start + 1]);
+			result[start + 0] = pos.x; result[start + 1] = pos.y;
+			if (tex) {
+				Vector2D uvCoord = tex->mapUVCoord(Vector2D(result[start + 2], result[start + 3]));
+				result[start + 2] = uvCoord.x; result[start + 3] = uvCoord.y;
+			}
+		}
 	}
 }

@@ -39,6 +39,8 @@ namespace orb
 
 		std::vector<float> computeTransformedVertices(Renderable* renderable);
 
+		void computeTransformedVertices(Transform* trans, Mesh* mesh, Texture* tex, std::vector<float>& result);
+
 	private:
 		std::vector<Renderable*> m_renderables;
 

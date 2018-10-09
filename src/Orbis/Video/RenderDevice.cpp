@@ -196,27 +196,14 @@ namespace orb
 
 	std::vector<float> RenderBatch::computeTransformedVertices(Renderable* renderable)
 	{
-		// compute mvp matrix
 		Transform* transform = renderable->getTransform();
-		Camera* cam = Camera::getInstance();
-		Matrix3 camMatrix = cam->getCamMatrix(transform->transformSpace);
-		Matrix3 mvpMatrix = camMatrix * transform->getModelMatrix();
-
-		// compute transformed vertex data
 		Mesh* mesh = renderable->getMesh();
 		Texture* tex = renderable->getMaterial()->getTexture();
-		std::vector<float> data = *mesh->getVertexData();
-		for (unsigned int i = 0; i < mesh->getNumVertices(); i++)
-		{
-			unsigned int start = i * mesh->getVertexCount();
-			Vector2D pos = mvpMatrix * Vector2D(data[start + 0], data[start + 1]);
-			data[start + 0] = pos.x; data[start + 1] = pos.y;
-			if (tex) {
-				Vector2D uvCoord = tex->mapUVCoord(Vector2D(data[start + 2], data[start + 3]));
-				data[start + 2] = uvCoord.x; data[start + 3] = uvCoord.y;
-			}
-		}
 
-		return data;
+		std::vector<float> result;
+		mesh->computeTransformedVertices(result, transform, tex);
+		return result;
 	}
 }
+
+
