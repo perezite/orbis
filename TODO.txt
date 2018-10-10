@@ -1,15 +1,6 @@
 TODO:	
 - Refactoring
-	- Renderer refactoren
-		- Sukzessive den refactoreden Code hinzufügen und mittels Profiling potentielle Bottlenecks evaulieren
-			- Sukzessive Änderungen einfügen, und bei jedem Schritt verifizieren, dass die Performance gleich bleibt. Jeden Schritt einzeln pushen.
-			-- Performance von RenderDevice::render muss bei ca. 78% bleiben
-		- Code-Styling überdenken (js-style vs a-style)
-		- Xperia Z3: Muss mit vollen FPS laufen bei 1000 Blocks
-	- Angleich an SFML planen
 	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
-- Infrastruktur: Xperia Hard-reset
-- Testing auf Real-Mobile
 - Infastruktur: Ermitteln, welche Prozesse VS blocken (Kandidat: vcpkgsrv.exe) und Lösung dafür finden
 	-- Hint: https://forums.unrealengine.com/development-discussion/c-gameplay-programming/25831-visual-studio-2013-express-vcpkgsrv-exe-going-crazy
 - Evaluieren, ob weitere Refactorings nötig sind
@@ -33,3 +24,6 @@ TODO:
 	- Hintergrund
 	- Levellogik mit Anzeigen über Console
 	- Reset mit R-Taste
+	- Angleich an SFML planen
+- Angleich an SFML planen 
+	- Source-Code von SFML analysieren
