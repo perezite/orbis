@@ -1,11 +1,35 @@
 TODO:	
-- Refactoring
-	- Testing-Konzept überlegen (aktuell gibt es diverse Testing-Levels)
-- Infastruktur: Ermitteln, welche Prozesse VS blocken (Kandidat: vcpkgsrv.exe) und Lösung dafür finden
-	-- Hint: https://forums.unrealengine.com/development-discussion/c-gameplay-programming/25831-visual-studio-2013-express-vcpkgsrv-exe-going-crazy
-- Evaluieren, ob weitere Refactorings nötig sind
-- Testen auf Mobile
-- Branch mergen		
+- Branch mergen
+- Testing
+	- Integrationstests implementieren für Windows
+		- Ermitteln, wie man den Framebuffer auslesen kann
+		- Separaten Projektordern Tests erstellen 
+		- Shared C++ Projekt 'Integration' erstellen in Projektordner Tests mit Referenz auf Orbis
+		- Packaging-Projekt für Windows erstellen unter Tests\Packaging
+		- Eines der bestehenden Levels in das Integration-Projekt kopieren
+		- Code erstellen, der Orbis startet
+		- Funktion 'Testcase' erstellen, welche
+			- Ein Level, einen Assetpath, eine Framezahl und einen Overwrite Boolean entgegennimmt
+			- Den Level für die Anzahl Frames ausführt und die Framedaten im RAM speichert
+			- Falls Overwrite deaktiviert ist und der Assetpath bereits existiert: Die Framedaten mit denjenigen aus dem Asset vergleicht
+			- Falls Overwrite aktiviert ist oder der Assetpath noch nicht existiert: Die Framedaten in den Assetpath schreibt
+		- Framework erstellen, mit welchem mehrere Testcases ausgeführt werden können. Am Ende wird eine Statistik der Testcases geloggt.
+	- Integrationstests implementieren für Android
+		- Ermitteln, ob der Framebuffer auf Android identisch aussieht wie auf Windows
+			- Falls dem nicht so ist, alternative Strategie überlegen. Im folgenen wird davon ausgegangen, dass die Framebufferdaten identisch sind.
+		- Packaging 'Integration' Projekt für Android erstellen
+		- Implementieren, dass die Funktionalität analog der zu Windows funktioniert, abgesehen von 'Overwrite' Boolean. Dieser muss auf Android zwingend false sein (Tsetcases können auf Android nur ausgefüht, aber nicht erstellt werden)
+		- Falls notwendig (d.h. der Memory nicht ausreicht): Streaming implementieren, welches pro Frame die Daten aus dem Asset ausliest
+		- Verifizieren, dass die Statistik per Logcat ausgelesen werden kann
+	- Überlegen, ob auch Performancetests ausgeführt werden können (evtl. durch prozentuales Vergleichen der Framezeit der neuralgischen Stelle mit der Totalen Laufzeit)	
+- Interface an SFML angleichen 
+	- Tutorials von SFML durchgehen
+	- Source-Code von SFML analysieren
+	- Feature-Branch erstellen
+	- In den Docs die externen Schnittstellen im SFML-Style definieren in Form von Header-Files
+	- Die tatsächlichen Header-Files und Source-Files refactoren
+		-- ifdefs benutzen um zwischen alter und neuer Implementation hin- und her zu springen
+- Evaluieren, ob weitere Refactorings nötig sind und ggf. hier ins TODO aufnehmen	
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
@@ -25,5 +49,3 @@ TODO:
 	- Levellogik mit Anzeigen über Console
 	- Reset mit R-Taste
 	- Angleich an SFML planen
-- Angleich an SFML planen 
-	- Source-Code von SFML analysieren
