@@ -1,4 +1,5 @@
+@echo off
 :loop
-timeout 1
+timeout 5
 taskkill /im vcpkgsrv.exe /f
 goto loop

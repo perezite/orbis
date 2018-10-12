@@ -1,6 +1,5 @@
 TODO:	
 - Testing
-	- Branch erstellen
 	- Integrationstests implementieren für Windows
 		- Ermitteln, wie man den Framebuffer auslesen kann
 		- Separaten Projektordern Tests erstellen 
