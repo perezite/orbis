@@ -2,6 +2,7 @@ TODO:
 - Testing
 	- Integrationstests implementieren für Windows
 		- Ermitteln, wie man den Framebuffer auslesen kann
+		- Trockentest für Framebuffer-Vergleich auf Android und Windows machen
 		- Separaten Projektordern Tests erstellen 
 		- Shared C++ Projekt 'Integration' erstellen in Projektordner Tests mit Referenz auf Orbis
 		- Packaging-Projekt für Windows erstellen unter Tests\Packaging
