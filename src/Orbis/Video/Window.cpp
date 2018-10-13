@@ -1,9 +1,64 @@
 #include "Window.h"
 
 #include "../Libraries/GL.h"
+#include "../Core/LogUtil.h"
+
 
 #include "../../Base/Base.h"
 using namespace base;
+
+#include <sstream>
+
+namespace
+{
+	using namespace orb;
+
+	void normalizeChannels(GLubyte* output_pixels, GLubyte* input_pixels, unsigned int num_pixels)
+	{
+		for (unsigned int i = 0; i < num_pixels; i++)
+		{
+			output_pixels[i * 3] = input_pixels[i * 4 + 2];
+			output_pixels[i * 3 + 1] = input_pixels[i * 4 + 1];
+			output_pixels[i * 3 + 2] = input_pixels[i * 4];
+		}
+	}
+
+	// Reference: https://www.opengl.org/discussion_boards/showthread.php/158514-capturing-the-OpenGL-output-to-a-image-file
+	// Reference: https://stackoverflow.com/questions/16538945/writing-uncompressed-tga-to-file-in-c
+	// Note: For reading RGB/BGR values, you must set GL_PACK_ALIGNMENT to 1, because the default pack alignment of 4 means, 
+	// that each horizontal line must be a multiple of 4 in size. If you use RGBA or ABGR, it is a multiple of 4 automatically
+	// Reference: https://www.khronos.org/opengl/wiki/Common_Mistakes
+	// 
+	void dumpScreen()
+	{
+		static bool done = false;
+		if (done == true)
+			return;
+
+		const int W = 10;
+		const int H = 10;
+
+		GLubyte pixels[4 * W * H];
+		GLubyte normed_pixels[3 * W * H];
+
+		// read
+		glPixelStorei(GL_PACK_ALIGNMENT, 1);
+		glReadPixels(0, 0, W, H, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		auto test = glGetError();
+		normalizeChannels(normed_pixels, pixels, W * H);
+
+		// write to file
+		#ifdef __WIN32__
+			short  TGAhead[] = { 0, 2, 0, 0, 0, 0, W, H, 24 };
+			FILE *out = fopen("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Windows\\test.tga", "wb");
+			fwrite(&TGAhead, sizeof(TGAhead), 1, out);
+			fwrite(normed_pixels, 3 * W * H, 1, out);
+			fclose(out);
+		#endif
+
+		done = true;
+	}
+}
 
 namespace orb
 {
@@ -69,6 +124,7 @@ namespace orb
 
 	void Window::swapBuffers()
 	{
+		dumpScreen();
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 

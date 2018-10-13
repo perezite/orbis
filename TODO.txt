@@ -1,4 +1,5 @@
 TODO:	
+- Minimales Example (Sandbox, ohne Orbis Code aber mit Android) erstellen
 - Testing
 	- Integrationstests implementieren für Windows
 		- Ermitteln, wie man den Framebuffer auslesen kann
