@@ -1,5 +1,6 @@
 TODO:	
 - Minimales Example (Sandbox, ohne Orbis Code aber mit Android) erstellen
+- Rausfinden, wie man logcat auf den Emulator machen kann in der Console (VS hat eine Cache-Maximum)
 - Testing
 	- Integrationstests implementieren für Windows
 		- Ermitteln, wie man den Framebuffer auslesen kann

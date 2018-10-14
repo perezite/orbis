@@ -66,8 +66,8 @@ namespace orb
 		glGenTextures(1, &m_handle);
 		glBindTexture(GL_TEXTURE_2D, m_handle);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_surface->pixels);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, /*GL_LINEAR*/GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, /*GL_LINEAR*/GL_NEAREST);
 
 		#ifdef ORBIS_USE_TEXTURE_ATLASSING
 			if (VideoManager::getInstance()->getTextureAtlas()->isGenerated() == false)

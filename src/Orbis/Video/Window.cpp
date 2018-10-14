@@ -35,11 +35,13 @@ namespace
 		if (done == true)
 			return;
 
-		const int W = 10;
-		const int H = 10;
+		const int W = 1080;
+		const int H = 1920;
 
-		GLubyte pixels[4 * W * H];
-		GLubyte normed_pixels[3 * W * H];
+		GLubyte* pixels = new GLubyte[4 * W * H];
+		// GLubyte pixels[4 * W * H];
+		GLubyte* normed_pixels = new GLubyte[3 * W * H];
+		// GLubyte normed_pixels[3 * W * H];
 
 		// read
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
@@ -56,13 +58,19 @@ namespace
 			fclose(out);
 		#endif
 
+		// compute checksum
+		unsigned long check = 0;
+		for (unsigned int i = 0; i < 4 * W * H; i++)
+			check += (unsigned int)pixels[i];
+
 		done = true;
 	}
 }
 
 namespace orb
 {
-	const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(400, 711);
+	// const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(400, 711);
+	const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(1080, 1920);
 
 	Window::Window()
 	{

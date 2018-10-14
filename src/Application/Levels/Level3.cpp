@@ -26,7 +26,7 @@ namespace app
 		build()->entity("camera")->withComponent(new Camera())->go();
 
 		build()->entity("redFlatRect")->withComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)))
-			->withPosition(-0.5f, 0.0f)->withScale(1.0f, 3.0f)->go();
+			->withPosition(+0.5f, 0.0f)->withScale(0.5f, 3.0f)->go();
 
 		// // init textures
 		//std::vector<std::string> textures = { "Textures/BlackBlock.png", "Textures/BlueBlock.png", "Textures/CyanBlock.png",
