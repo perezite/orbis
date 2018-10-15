@@ -1,6 +1,4 @@
 TODO:	
-- Minimales Example (Sandbox, ohne Orbis Code aber mit Android) erstellen
-- Logcat auf Emulator scheint nicht zu funktionieren -> Rausfinden, weshalb
 - Testing
 	- Integrationstests implementieren für Windows
 		- TimeManager anpassen, so dass er fixe Timesteps unterstützt (für Testing)
