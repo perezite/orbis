@@ -1,29 +1,16 @@
 TODO:	
 - Minimales Example (Sandbox, ohne Orbis Code aber mit Android) erstellen
-- Rausfinden, wie man logcat auf den Emulator machen kann in der Console (VS hat eine Cache-Maximum)
+- Logcat auf Emulator scheint nicht zu funktionieren -> Rausfinden, weshalb
 - Testing
 	- Integrationstests implementieren für Windows
-		- Ermitteln, wie man den Framebuffer auslesen kann
-		- Trockentest für Framebuffer-Vergleich auf Android und Windows machen
-		- Separaten Projektordern Tests erstellen 
-		- Shared C++ Projekt 'Integration' erstellen in Projektordner Tests mit Referenz auf Orbis
-		- Packaging-Projekt für Windows erstellen unter Tests\Packaging
-		- Eines der bestehenden Levels in das Integration-Projekt kopieren
-		- Code erstellen, der Orbis startet
-		- Funktion 'Testcase' erstellen, welche
-			- Ein Level, einen Assetpath, eine Framezahl und einen Overwrite Boolean entgegennimmt
-			- Den Level für die Anzahl Frames ausführt und die Framedaten im RAM speichert
-			- Falls Overwrite deaktiviert ist und der Assetpath bereits existiert: Die Framedaten mit denjenigen aus dem Asset vergleicht
-			- Falls Overwrite aktiviert ist oder der Assetpath noch nicht existiert: Die Framedaten in den Assetpath schreibt
-		- Framework erstellen, mit welchem mehrere Testcases ausgeführt werden können. Am Ende wird eine Statistik der Testcases geloggt.
-	- Integrationstests implementieren für Android
-		- Ermitteln, ob der Framebuffer auf Android identisch aussieht wie auf Windows
-			- Falls dem nicht so ist, alternative Strategie überlegen. Im folgenen wird davon ausgegangen, dass die Framebufferdaten identisch sind.
-		- Packaging 'Integration' Projekt für Android erstellen
-		- Implementieren, dass die Funktionalität analog der zu Windows funktioniert, abgesehen von 'Overwrite' Boolean. Dieser muss auf Android zwingend false sein (Tsetcases können auf Android nur ausgefüht, aber nicht erstellt werden)
-		- Falls notwendig (d.h. der Memory nicht ausreicht): Streaming implementieren, welches pro Frame die Daten aus dem Asset ausliest
-		- Verifizieren, dass die Statistik per Logcat ausgelesen werden kann
-	- Überlegen, ob auch Performancetests ausgeführt werden können (evtl. durch prozentuales Vergleichen der Framezeit der neuralgischen Stelle mit der Totalen Laufzeit)	
+		- TimeManager anpassen, so dass er fixe Timesteps unterstützt (für Testing)
+		- Die Funktionalität grobtesten für zwei Frames (Prüfsumme muss fix sein pro Plattform)
+		- Ifdef erstellen in Application für Testing
+		- Separate Klasse Test.cpp erstellen und Main.cpp/Test.cpp dynamisch auswechseln per ifdef
+		- Ordner Application/Testing erstellen für Testing 'Framework'
+		- Testing 'Framework' implementieren. Ich gehe davon aus, dass pro Platform die Prüfsumme unterschiedlich ist, da ich es nicht geschafft habe auf Windows/Android die Prüfsummen zu fixieren
+		- Testing implementieren in Test.cpp, welches jedes Level für eine fixe Anzahl Frames ausführt und die Prüfsumme über alle Frames berechnet
+		- Framework so implementieren, dass alle Levels durchgetestet werden und erst am Ende eine Statistik kommt mit erwarteter vs. tatsächlicher Prüfsumme pro System
 - Interface an SFML angleichen 
 	- Tutorials von SFML durchgehen
 	- Source-Code von SFML analysieren

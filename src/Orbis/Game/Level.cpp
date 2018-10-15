@@ -67,9 +67,9 @@ namespace orb
 
 	void Level::updateLevel()
 	{
-		TimeManager::getInstance()->update();
 		update();
 		updateEntities();
+		TimeManager::getInstance()->update();
 	}
 
 	void Level::render()

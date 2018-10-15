@@ -19,6 +19,7 @@ namespace orb
 	void TimeManager::reset()
 	{
 		m_lastTicks = SDL_GetTicks();
+		m_currentTicks = SDL_GetTicks();
 	}
 
 	float TimeManager::getDeltaSeconds()
@@ -33,6 +34,6 @@ namespace orb
 
 	TimeManager::TimeManager()
 	{
-		m_lastTicks = SDL_GetTicks();
+		reset();
 	}
 }
