@@ -10,10 +10,16 @@ namespace orb
 		return &instance;
 	}
 
+	void TimeManager::setFixedUpdate(long ticks)
+	{
+		m_fixedTicks = ticks;
+		reset();
+	}
+
 	void TimeManager::update()
 	{
 		m_lastTicks = m_currentTicks;
-		m_currentTicks = SDL_GetTicks();
+		m_currentTicks = m_fixedTicks == 0 ? SDL_GetTicks() : (m_currentTicks + m_fixedTicks);
 	}
 
 	void TimeManager::reset()
@@ -29,10 +35,10 @@ namespace orb
 
 	long TimeManager::getTicks()
 	{
-		return SDL_GetTicks();
+		return m_fixedTicks == 0 ? SDL_GetTicks() : m_currentTicks;
 	}
 
-	TimeManager::TimeManager()
+	TimeManager::TimeManager() : m_fixedTicks(0)
 	{
 		reset();
 	}

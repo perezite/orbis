@@ -10,8 +10,6 @@
 #include "../../Base/Base.h"
 using namespace base;
 
-
-
 namespace orb
 {
 	OrbisMain* OrbisMain::getInstance()
@@ -27,6 +25,10 @@ namespace orb
 
 		m_startTicks = TimeManager::getInstance()->getTicks();
 		m_numFrames = 0;
+
+		// for testing
+		TimeManager::getInstance()->setFixedUpdate(30);
+		srand(43);
 
 		while (true)
 		{
@@ -48,10 +50,11 @@ namespace orb
 	void OrbisMain::logPerformance()
 	{
 		m_numFrames++;
-		if (TimeManager::getInstance()->getTicks() - m_startTicks > 1000)
+		long elapsed = TimeManager::getInstance()->getTicks() - m_startTicks;
+		if (elapsed >= 1000)
 		{
 			// track current performance
-			float currentPerformance = 1000.0f / float(m_numFrames);
+			float currentPerformance = (float)elapsed / float(m_numFrames);
 			m_startTicks += 1000;
 			m_numFrames = 0;
 

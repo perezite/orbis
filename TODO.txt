@@ -1,7 +1,6 @@
 TODO:	
 - Testing
 	- Integrationstests implementieren für Windows
-		- TimeManager anpassen, so dass er fixe Timesteps unterstützt (für Testing)
 		- Die Funktionalität grobtesten für zwei Frames (Prüfsumme muss fix sein pro Plattform)
 		- Ifdef erstellen in Application für Testing
 		- Separate Klasse Test.cpp erstellen und Main.cpp/Test.cpp dynamisch auswechseln per ifdef

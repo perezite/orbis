@@ -29,48 +29,50 @@ namespace
 	// that each horizontal line must be a multiple of 4 in size. If you use RGBA or ABGR, it is a multiple of 4 automatically
 	// Reference: https://www.khronos.org/opengl/wiki/Common_Mistakes
 	// 
-	void dumpScreen()
+	void dumpScreen(unsigned int w, unsigned int h)
 	{
-		static bool done = false;
-		if (done == true)
+		static int count = 0;
+		if (count > 3)
 			return;
+		count++;
 
-		const int W = 1080;
-		const int H = 1920;
+		// const int W = 1080;
+		// const int H = 1920;
 
-		GLubyte* pixels = new GLubyte[4 * W * H];
+		GLubyte* pixels = new GLubyte[4 * w * h];
 		// GLubyte pixels[4 * W * H];
-		GLubyte* normed_pixels = new GLubyte[3 * W * H];
+		GLubyte* normed_pixels = new GLubyte[3 * w * h];
 		// GLubyte normed_pixels[3 * W * H];
 
 		// read
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
-		glReadPixels(0, 0, W, H, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 		auto test = glGetError();
-		normalizeChannels(normed_pixels, pixels, W * H);
+		normalizeChannels(normed_pixels, pixels, w * h);
 
-		// write to file
-		#ifdef __WIN32__
-			short  TGAhead[] = { 0, 2, 0, 0, 0, 0, W, H, 24 };
-			FILE *out = fopen("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Windows\\test.tga", "wb");
-			fwrite(&TGAhead, sizeof(TGAhead), 1, out);
-			fwrite(normed_pixels, 3 * W * H, 1, out);
-			fclose(out);
-		#endif
+		//// write to file
+		//#ifdef __WIN32__
+		//	short  TGAhead[] = { 0, 2, 0, 0, 0, 0, W, H, 24 };
+		//	FILE *out = fopen("D:\\Indie\\Development\\Simulo\\orbis\\bin\\Windows\\test.tga", "wb");
+		//	fwrite(&TGAhead, sizeof(TGAhead), 1, out);
+		//	fwrite(normed_pixels, 3 * W * H, 1, out);
+		//	fclose(out);
+		//#endif
 
 		// compute checksum
-		unsigned long check = 0;
-		for (unsigned int i = 0; i < 4 * W * H; i++)
+		unsigned long long check = 0;
+		for (unsigned int i = 0; i < 4 * w * h; i++)
 			check += (unsigned int)pixels[i];
 
-		done = true;
+		// std::cout << "checksum: " << check << std::endl;
+		LogUtil::logMessage("checksum: %lld", check);
 	}
 }
 
 namespace orb
 {
-	// const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(400, 711);
-	const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(1080, 1920);
+	const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(400, 711);
+	// const Vector2D Window::DESKTOP_DEFAULT_RESOLUTION(1080, 1920);
 
 	Window::Window()
 	{
@@ -132,7 +134,7 @@ namespace orb
 
 	void Window::swapBuffers()
 	{
-		dumpScreen();
+		dumpScreen((unsigned int)m_resolution.x, (unsigned int)m_resolution.y);
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 

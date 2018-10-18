@@ -1,7 +1,7 @@
 #pragma once
 
 // logging settings
-// #define ORBIS_LOG_PERFORMANCE
+#define ORBIS_LOG_PERFORMANCE
 
 // debugging settings
 // #define ORBIS_DEBUG_GL

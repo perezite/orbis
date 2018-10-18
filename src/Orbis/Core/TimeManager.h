@@ -8,8 +8,14 @@ namespace orb
 		// get the instance
 		static TimeManager* getInstance();
 
-		// updateLevel
+		// set a fixed number of ticks per update. Can be used for testing/debugging. Zero ticks means regular (dynamic update)
+		void setFixedUpdate(long ticks);
+
+		// update the level
 		void update();
+
+		// update the level by a fixed amount of ticks
+		void update(long ticks);
 
 		// reset
 		void reset();
@@ -30,5 +36,8 @@ namespace orb
 
 		// number of ticks at beginning of the current frame
 		long m_currentTicks;
+
+		// number of ticks for fixed update
+		long m_fixedTicks;
 	};
 }
