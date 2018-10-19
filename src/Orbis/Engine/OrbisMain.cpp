@@ -26,10 +26,6 @@ namespace orb
 		m_startTicks = TimeManager::getInstance()->getTicks();
 		m_numFrames = 0;
 
-		// for testing
-		TimeManager::getInstance()->setFixedUpdate(30);
-		srand(43);
-
 		while (true)
 		{
 			input->update();
@@ -38,6 +34,9 @@ namespace orb
 
 			level->update();
 			level->render();
+
+			if (m_onRenderedCallback)
+				m_onRenderedCallback();
 
 			#if defined(ORBIS_LOG_PERFORMANCE)
 				logPerformance();

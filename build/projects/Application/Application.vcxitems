@@ -36,6 +36,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Main.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Test\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\Ball.h" />
@@ -62,5 +63,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level8.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\Level9.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Levels\LevelUtil.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Test\Test.h" />
   </ItemGroup>
 </Project>

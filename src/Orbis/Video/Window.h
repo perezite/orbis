@@ -17,7 +17,9 @@ namespace orb
 		virtual ~Window();
 
 		// get the resolution
-		Vector2D getResolution() { return m_resolution; }
+		Vector2D getResolution() { 
+			return m_resolution; 
+		}
 
 		// change the window resultion
 		void setResolution(Vector2D resolution);

@@ -18,8 +18,19 @@ using namespace base;
 #include "../Orbis/Game/LevelManager.h"
 using namespace orb;
 
+#define APP_TEST
+
+#if defined(APP_TEST)
+#include "Test/Test.h"
+#endif
+
 int main(int argc, char* args[])
 {	
+	#if defined(APP_TEST)
+		Test::run();
+		return 0;
+	#endif	
+
 	try
 	{
 		LevelManager::getInstance()->queueLevel(new Level3());
@@ -32,7 +43,7 @@ int main(int argc, char* args[])
 		LogUtil::showMessageBox(e.what(), "Exception");
 
 		#if defined(_DEBUG)
-			 throw e;
+				throw e;
 		#endif
 	}
 

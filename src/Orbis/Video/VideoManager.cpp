@@ -1,5 +1,12 @@
 #include "VideoManager.h"
 
+#include "../Core/LogUtil.h"
+
+#include "../../Base/Base.h"
+using namespace base;
+
+#include <sstream>
+
 #include <iostream>
 
 namespace orb
