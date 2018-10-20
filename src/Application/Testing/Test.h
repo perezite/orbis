@@ -13,10 +13,12 @@ namespace app
 
 		static void test2();
 
-	protected: 
+	protected:
 		static void record();
 
 		static void evaluate(std::vector<unsigned long long> expectedChecksum);
+
+		static void printRecordedChecksums();
 
 		static long long computeFramebufferChecksum();
 
@@ -31,6 +33,6 @@ namespace app
 
 		static std::vector<unsigned long long> m_recordedChecksums;
 
-		static bool m_overallPassed;
+		static bool m_passedOverall;
 	};
 }

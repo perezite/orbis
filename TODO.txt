@@ -1,6 +1,7 @@
 TODO:	
 - Testing
 	- Integrationstests implementieren für Windows
+		- Konzept überlegen für Debug/Release und Windows/Android
 		- Testing implementieren in Test.cpp, welches jedes Level für eine fixe Anzahl Frames ausführt und die Prüfsumme über alle Frames berechnet
 		- Grobtest auf Mobile
 		- Framework so implementieren, dass alle Levels durchgetestet werden und erst am Ende eine Statistik kommt mit erwarteter vs. tatsächlicher Prüfsumme pro System

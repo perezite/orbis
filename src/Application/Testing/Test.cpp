@@ -10,19 +10,27 @@ namespace app
 	unsigned int Test::m_numFramesRecorded = 0;
 	unsigned int Test::m_numFramesToRecord = 0;
 	std::vector<unsigned long long> Test::m_recordedChecksums;
-	bool Test::m_overallPassed;
+	bool Test::m_passedOverall;
 
 	void Test::run()
 	{
 		try
 		{
-			m_overallPassed = true;
+			#ifdef _DEBUG
+				LogUtil::logMessage("Warning: Running in debug mode may yield different results than release mode!");
+			#endif
+
+			m_passedOverall = true;
 			test1();
 			test2();
-			std::cin.get();
 			
-			if (m_overallPassed == false)
-				LogUtil::showMessageBox("There were test failures. Check the log for more details!", "Test failures");
+			if (m_passedOverall == false)
+			{
+				LogUtil::showMessageBox("There were test failures. Check the log for more details", "Test failures");
+				std::cin.get();
+			}
+			else
+				LogUtil::showMessageBox("All tests passed", "Tests successful");
 		}
 		catch (Exception e)
 		{
@@ -47,7 +55,7 @@ namespace app
 		OrbisMain::getInstance()->setOnRenderedCallback(record);
 		LevelManager::getInstance()->queueLevel(new Level2());
 		OrbisMain::getInstance()->run();
-		evaluate({ 278996400, 269567714, 269567714 });
+		evaluate({ 270038350, 270038350, 270038350 });
 	}
 
 	void Test::test2()
@@ -62,12 +70,19 @@ namespace app
 		OrbisMain::getInstance()->setOnRenderedCallback(record);
 		LevelManager::getInstance()->queueLevel(new Level3());
 		OrbisMain::getInstance()->run();
-		evaluate({ 269567714, 213569647, 213592135, 213601057, 213619058 });
+		evaluate({ 213734440, 213757909, 213768253, 213788041, 213818577 });
 	}
 
 	void Test::record()
 	{
-		if (m_numFramesRecorded >= m_numFramesToRecord - 1)
+		// we skip the first frame, because at this point the backbuffer either contains random data or the frontbuffer from a previous level
+		if (m_numFramesRecorded == 0)
+		{
+			m_numFramesRecorded = 1;
+			return;
+		}
+
+		if (m_numFramesRecorded >= m_numFramesToRecord)
 			InputManager::getInstance()->setQuitEvent();
 
 		long long checksum = computeFramebufferChecksum();
@@ -96,10 +111,29 @@ namespace app
 				unsigned int frameIdx = mismatches[i];
 				LogUtil::logMessage("mismatch in frame %d. Expected: %lld, Actual: %lld", frameIdx, expectedChecksums[frameIdx], m_recordedChecksums[frameIdx]);
 			}
-			m_overallPassed = false;
+
+			LogUtil::logMessage("In case, the failures reflect intentional changes, here are the new checksums: ");
+			printRecordedChecksums();
+
+			m_passedOverall = false;
 		}
 		else
 			LogUtil::logMessage("[PASSED]");
+	}
+
+	void Test::printRecordedChecksums()
+	{
+		std::ostringstream os;
+		os << "{";
+		for (unsigned int i = 0; i < m_recordedChecksums.size(); i++)
+		{
+			os << m_recordedChecksums[i];
+			if (i != m_recordedChecksums.size() - 1)
+				os << ", ";
+		}
+			
+		os << "}";
+		LogUtil::logMessage(os.str().c_str());
 	}
 
 	// Reference: https://www.opengl.org/discussion_boards/showthread.php/158514-capturing-the-OpenGL-output-to-a-image-file
@@ -155,5 +189,4 @@ namespace app
 		fclose(out);
 		#endif
 	}
-
 }
