@@ -62,8 +62,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleBrickEffect.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Test\Test.cpp">
-      <Filter>Test</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\Test.cpp">
+      <Filter>Testing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +79,7 @@
     <Filter Include="Levels\Headers">
       <UniqueIdentifier>{93407f73-2e54-41fe-b690-20438e0b9495}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Test">
+    <Filter Include="Testing">
       <UniqueIdentifier>{6e5217cf-9e55-4615-92d4-919b4522b3aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -156,8 +156,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleBrickEffect.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Test\Test.h">
-      <Filter>Test</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\Test.h">
+      <Filter>Testing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

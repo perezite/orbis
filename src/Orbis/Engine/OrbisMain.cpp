@@ -44,6 +44,7 @@ namespace orb
 		}
 
 		level->clear();
+		input->clear();
 	}
 
 	void OrbisMain::logPerformance()

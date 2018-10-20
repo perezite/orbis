@@ -17,8 +17,11 @@ namespace orb
 		// get instance
 		static InputManager* getInstance();
 
-		// updateLevel
+		// update
 		void update();
+
+		// clear
+		void clear();
 
 		// has the input a quit event
 		bool hasQuitEvent() const { return m_hasQuitEvent; }

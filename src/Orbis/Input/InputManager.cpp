@@ -88,6 +88,16 @@ namespace orb
 		}
 	}
 
+	void InputManager::clear()
+	{
+		m_keysDown.clear();
+		m_keysGoingDown.clear();
+		m_tapsDown.clear();
+		m_tapsGoingDown.clear();
+		m_isCursorInsideWindow = false;
+		m_hasQuitEvent = false;
+	}
+
 	void InputManager::setQuitEvent()
 	{
 		m_hasQuitEvent = true;

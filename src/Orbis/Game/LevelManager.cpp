@@ -22,9 +22,15 @@ namespace orb
 	void LevelManager::clear()
 	{
 		if (m_currentLevel)
+		{
 			delete m_currentLevel;
+			m_currentLevel = NULL;
+		}
 		if (m_queuedLevel)
+		{
 			delete m_queuedLevel;
+			m_currentLevel = NULL;
+		}
 	}
 
 	void LevelManager::update()

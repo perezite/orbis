@@ -5,22 +5,18 @@
 
 #include <iostream>
 
-namespace
-{
-	using namespace orb;
-}
-
 namespace app
 {
+	unsigned int Test::m_numFramesRecorded = 0;
+	unsigned int Test::m_numFramesToRecord = 0;
+
 	void Test::run()
 	{
 		try
 		{
-			srand(42);
-			TimeManager::getInstance()->setFixedUpdate(30);
-			OrbisMain::getInstance()->setOnRenderedCallback(update);
-			LevelManager::getInstance()->queueLevel(new Level3());
-			OrbisMain::getInstance()->run();
+			test1();
+			test2();
+			std::cin.get();
 		}
 		catch (Exception e)
 		{
@@ -34,15 +30,37 @@ namespace app
 		}
 	}
 
-	void Test::update()
+	void Test::test1()
 	{
+		srand(42);
+		m_numFramesRecorded = 0;
+		m_numFramesToRecord = 3;
+		TimeManager::getInstance()->setFixedUpdate(30);
+		OrbisMain::getInstance()->setOnRenderedCallback(record);
+		LevelManager::getInstance()->queueLevel(new Level2());
+		OrbisMain::getInstance()->run();
+	}
+
+	void Test::test2()
+	{
+		srand(42);
+		m_numFramesRecorded = 0;
+		m_numFramesToRecord = 5;
+		TimeManager::getInstance()->setFixedUpdate(30);
+		OrbisMain::getInstance()->setOnRenderedCallback(record);
+		LevelManager::getInstance()->queueLevel(new Level3());
+		OrbisMain::getInstance()->run();
+	}
+
+	void Test::record()
+	{
+		if (m_numFramesRecorded >= m_numFramesToRecord - 1)
+			InputManager::getInstance()->setQuitEvent();
+
 		long long checksum = computeFramebufferChecksum();
 		LogUtil::logMessage("checksum: %lld", checksum);
 
-		static int counter = 0;
-		counter++;
-		if (counter == 10)
-			LevelManager::getInstance()->queueLevel(new Level2());
+		m_numFramesRecorded++;
 	}
 
 	// Reference: https://www.opengl.org/discussion_boards/showthread.php/158514-capturing-the-OpenGL-output-to-a-image-file

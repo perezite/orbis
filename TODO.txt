@@ -1,10 +1,6 @@
 TODO:	
 - Testing
 	- Integrationstests implementieren für Windows
-		- Ifdef erstellen in Application für Testing
-		- Separate Klasse Test.cpp erstellen und Main.cpp/Test.cpp dynamisch auswechseln per ifdef
-		- Ordner Application/Testing erstellen für Testing 'Framework'
-		- Testing 'Framework' implementieren. Ich gehe davon aus, dass pro Platform die Prüfsumme unterschiedlich ist, da ich es nicht geschafft habe auf Windows/Android die Prüfsummen zu fixieren
 		- Testing implementieren in Test.cpp, welches jedes Level für eine fixe Anzahl Frames ausführt und die Prüfsumme über alle Frames berechnet
 		- Framework so implementieren, dass alle Levels durchgetestet werden und erst am Ende eine Statistik kommt mit erwarteter vs. tatsächlicher Prüfsumme pro System
 - Interface an SFML angleichen 

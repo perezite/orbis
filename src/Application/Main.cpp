@@ -21,7 +21,7 @@ using namespace orb;
 #define APP_TEST
 
 #if defined(APP_TEST)
-#include "Test/Test.h"
+#include "Testing/Test.h"
 #endif
 
 int main(int argc, char* args[])
