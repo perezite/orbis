@@ -16,6 +16,8 @@ namespace app
 	protected: 
 		static void record();
 
+		static void evaluate(std::vector<unsigned long long> expectedChecksum);
+
 		static long long computeFramebufferChecksum();
 
 		static void normalizeChannels(GLubyte* output_pixels, GLubyte* input_pixels, unsigned int num_pixels);
@@ -26,5 +28,9 @@ namespace app
 		static unsigned int m_numFramesRecorded;
 
 		static unsigned int m_numFramesToRecord;
+
+		static std::vector<unsigned long long> m_recordedChecksums;
+
+		static bool m_overallPassed;
 	};
 }

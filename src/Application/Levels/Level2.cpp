@@ -27,7 +27,7 @@ namespace app
 			->withPosition(0.25f, 0.3f)->withScale(0.33f, 0.33f)->go();
 
 		build()->entity("redFlatRect")->withComponent(new RectangleRenderer(Color(1.0f, 0.0f, 0.0f)))
-			->withPosition(-0.2f, 0.3f)->withRotation(MathUtil::getPi() / 7.0f)->withScale(0.2f, 0.2f)->go();
+			->withPosition(-0.3f, 0.3f)->withRotation(MathUtil::getPi() / 7.0f)->withScale(0.2f, 0.2f)->go();
 
 		build()->entity("greenFlatRect")->withComponent(new RectangleRenderer(Color(0.0f, 1.0f, 0.0f)))
 			->withPosition(0.2f, -0.3f)->withScale(0.1f, 0.1f)->go();
