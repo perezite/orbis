@@ -68,15 +68,17 @@ namespace base
 		return str.find(start) == 0;
 	}
 
-	std::string StringUtil::join(std::vector<std::string> elems, std::string delim)
+
+	std::string StringUtil::remove(std::string str, std::vector<std::string> substrs)
 	{
-		std::ostringstream os;
-		for (unsigned int i = 0; i < elems.size(); i++) {
-			os << elems[i];
-			if (i < elems.size() - 1)
-				os << delim;
-		}
-		return os.str();
+		std::string result = str;
+
+		unsigned int pos = std::string::npos;
+		for (unsigned int i = 0; i < substrs.size(); i++)
+			while ((pos = result.find(substrs[i])) != std::string::npos)
+				result.erase(pos, substrs[i].length());
+
+		return result;
 	}
 }
 

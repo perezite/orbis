@@ -16,6 +16,9 @@ namespace orb
 		// load a text asset
 		static std::string loadTextAsset(std::string assetPath);
 
+		// load a text asset line by line 
+		static std::vector<std::string> loadTextAssetLines(std::string assetPath);
+
 		// check if text asset exists
 		static bool textAssetExists(std::string assetPath);
 

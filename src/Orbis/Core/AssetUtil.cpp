@@ -64,6 +64,19 @@ namespace orb
 		return data;
 	}
 
+	std::vector<std::string> AssetUtil::loadTextAssetLines(std::string assetPath)
+	{
+		std::vector<std::string> result;
+		std::string text = loadTextAsset(assetPath);
+		std::vector<std::string> lines = StringUtil::split(text, "\n");
+
+		for (unsigned int i = 0; i < lines.size(); i++)
+				result.push_back(lines[i]);
+
+		return result;
+	}
+
+
 	bool AssetUtil::textAssetExists(std::string assetPath)
 	{
 		std::string filePath = assetPathToFilePath(assetPath);

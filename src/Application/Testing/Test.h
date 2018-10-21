@@ -1,6 +1,8 @@
 #include "../../Orbis/Orbis.h"
 using namespace orb;
 
+#include <string>
+
 namespace app
 {
 	class Test
@@ -9,14 +11,13 @@ namespace app
 		static void run();
 
 	protected:
-		static void testLevel2();
+		static void execute(Level* level, unsigned int numFrames, std::string testcaseName);
 
-		 static void testLevel3();
-
-	protected:
 		static void record();
 
 		static void evaluate(std::string identifier);
+
+		static std::vector<unsigned long long> handleNewTestcase(std::string identifier);
 
 		static std::vector<unsigned long long> loadExpectedChecksums(std::string identifier);
 

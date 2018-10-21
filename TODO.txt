@@ -1,9 +1,8 @@
 TODO:	
 - Testing
 	- Integrationstests implementieren für Windows
-		- Code soweit als möglich vereinfachen
 		- Aufsplitten in TestHelper und TestRunner
-		- Jeder relevante Level durchtesten
+		- Jedes relevante Level durchtesten
 - Interface an SFML angleichen 
 	- Tutorials von SFML durchgehen
 	- Source-Code von SFML analysieren

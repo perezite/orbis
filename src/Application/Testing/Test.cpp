@@ -17,8 +17,8 @@ namespace app
 		try
 		{
 			m_passedOverall = true;
-			testLevel2();
-			testLevel3();
+			execute(new Level2(), 3, "Level2");
+			execute(new Level3(), 5, "Level3");
 			
 			if (m_passedOverall == false)
 				LogUtil::showMessageBox("There were test failures. Check the log for more details", "Test failures");
@@ -37,33 +37,19 @@ namespace app
 		}
 	}
 
-	void Test::testLevel2()
+	void Test::execute(Level * level, unsigned int numFrames, std::string testcaseName)
 	{
-		LogUtil::logMessage("Testing Level 2...");
-		srand(42);
-		m_numFramesRecorded = 0;
-		m_numFramesToRecord = 3;
-		m_recordedChecksums.clear();
-		TimeManager::getInstance()->setFixedUpdate(30);
-		OrbisMain::getInstance()->setOnRenderedCallback(record);
-		LevelManager::getInstance()->queueLevel(new Level2());
-		OrbisMain::getInstance()->run();
-		evaluate("level2");
-	}
-
-	void Test::testLevel3()
-	{
-		LogUtil::logMessage("Testing Level 3...");
+		LogUtil::logMessage(("Running testcase: " + testcaseName).c_str());
 
 		srand(42);
 		m_numFramesRecorded = 0;
-		m_numFramesToRecord = 5;
+		m_numFramesToRecord = numFrames;
 		m_recordedChecksums.clear();
 		TimeManager::getInstance()->setFixedUpdate(30);
 		OrbisMain::getInstance()->setOnRenderedCallback(record);
-		LevelManager::getInstance()->queueLevel(new Level3());
+		LevelManager::getInstance()->queueLevel(level);
 		OrbisMain::getInstance()->run();
-		evaluate("level3");
+		evaluate(testcaseName);
 	}
 
 	void Test::record()
@@ -71,7 +57,7 @@ namespace app
 		// we skip the first frame, because at this point the backbuffer either contains random data or the frontbuffer from a previous level
 		if (m_numFramesRecorded == 0)
 		{
-			m_numFramesRecorded = 1;
+			m_numFramesRecorded++;
 			return;
 		}
 
@@ -88,21 +74,12 @@ namespace app
 	void Test::evaluate(std::string identifier)
 	{
 		std::vector<unsigned long long> expectedChecksums = loadExpectedChecksums(identifier);
-
+		
 		if (expectedChecksums.size() == 0)
-		{
-			LogUtil::logMessage("[NO DATA]");
-			LogUtil::logMessage("No data found in the test-file. Press w to (w)rite the recorded data to the test file now");
-			std::string str; std::getline(std::cin, str);
-			if (str == "w")
-				addOrUpdateRecordedChecksumsInTestfile(identifier);
-			else
-				m_passedOverall = false;
-			return;
-		}
+			expectedChecksums = handleNewTestcase(identifier);
 
+		// get mismatches
 		Exception::assert(m_recordedChecksums.size() == expectedChecksums.size(), "number of expected checksums is not equal to number of recorded checksums");
-
 		std::vector<int> mismatches;
 		for (unsigned int i = 0; i < m_recordedChecksums.size(); i++)
 		{
@@ -110,6 +87,7 @@ namespace app
 				mismatches.push_back(i);
 		}
 
+		// handle mismatches
 		if (mismatches.size() > 0)
 		{
 			LogUtil::logMessage("[FAILED]");
@@ -123,21 +101,37 @@ namespace app
 			std::string str; std::getline(std::cin, str);
 			if (str == "o")
 				addOrUpdateRecordedChecksumsInTestfile(identifier);
-
-			m_passedOverall = false;
+			else
+				m_passedOverall = false;
 		}
 		else
 			LogUtil::logMessage("[PASSED]");
+	}
+
+	std::vector<unsigned long long> Test::handleNewTestcase(std::string identifier)
+	{
+		std::vector<unsigned long long> result;
+
+		LogUtil::logMessage("No data found in the test-file. Press w to (w)rite the recorded data to the test file now");
+		std::string str; std::getline(std::cin, str);
+		if (str == "w")
+		{
+			addOrUpdateRecordedChecksumsInTestfile(identifier);
+			result = m_recordedChecksums;
+		}	
+		else
+			m_passedOverall = false;
+
+		return result;
 	}
 
 	std::vector<unsigned long long> Test::loadExpectedChecksums(std::string identifier)
 	{
 		std::string fullIdentifier = getFullIdentifier(identifier);
 
-		std::string text = AssetUtil::loadTextAsset("Testing/ExpectedChecksums.test");
-		std::vector<std::string> lines = StringUtil::split(text, "\n");
+		std::vector<std::string> lines = AssetUtil::loadTextAssetLines("Testing/ExpectedChecksums.test");
 
-		std::string line = "";
+		std::string line;
 		for (unsigned int i = 0; i < lines.size(); i++)
 			if (StringUtil::startsWith(lines[i], fullIdentifier))
 				line = lines[i];
@@ -155,10 +149,9 @@ namespace app
 	void Test::addOrUpdateRecordedChecksumsInTestfile(std::string identifier)
 	{
 		std::string fullIdentifier = getFullIdentifier(identifier);
-		std::string text = AssetUtil::loadTextAsset("Testing/ExpectedChecksums.test");
+		std::vector<std::string> lines = AssetUtil::loadTextAssetLines("Testing/ExpectedChecksums.test");
 
-		// remove old data
-		std::vector<std::string> lines = StringUtil::split(text, "\n");
+		// remove line with old data
 		for (unsigned int i = 0; i < lines.size(); i++) {
 			if (StringUtil::startsWith(lines[i], fullIdentifier))
 			{
@@ -166,15 +159,12 @@ namespace app
 				break;
 			}
 		}
-		text = StringUtil::join(lines, "\n");
 
-		// write checksums to file
+		// write new data
 		std::ostringstream os;
-		if (text.length() > 0)
-			os << std::endl;
-		os << fullIdentifier << " = " << getRecordedChecksumsAsJson();
-		text = text + os.str();
-		AssetUtil::saveTextAsset("Testing/ExpectedChecksums.test", text);
+		std::string text = StringUtil::join(lines, "\n");
+		os << text << (text.length() > 0 ? "\n" : "") << fullIdentifier << " = " << getRecordedChecksumsAsJson();
+		AssetUtil::saveTextAsset("Testing/ExpectedChecksums.test", os.str());
 	}
 
 	std::string Test::getFullIdentifier(std::string identifier)
@@ -182,24 +172,19 @@ namespace app
 		std::string identiferConfigurationPrefix;
 		ORBIS_DEBUG(identiferConfigurationPrefix = "Debug_"; )
 		ORBIS_RELEASE(identiferConfigurationPrefix = "Release_"; )
-		std::string fullIdentifier = identiferConfigurationPrefix + identifier;
-
-		return fullIdentifier;
+		return identiferConfigurationPrefix + identifier;
 	}
 
 	std::vector<unsigned long long> Test::getChecksumsFromJson(std::string json)
 	{
-		std::string temp = json;
-		temp.erase(std::remove(temp.begin(), temp.end(), '{'), temp.end());
-		temp.erase(std::remove(temp.begin(), temp.end(), '}'), temp.end());
-		temp.erase(std::remove(temp.begin(), temp.end(), ' '), temp.end());
-
-		std::vector<std::string> elems = StringUtil::split(temp, ",");
 		std::vector<unsigned long long> result;
+		std::string temp = StringUtil::remove(json, { " ", "{", "}" });
+		std::vector<std::string> elems = StringUtil::split(temp, ",");
+
 		std::istringstream is;
+		unsigned long long number;
 		for (unsigned int i = 0; i < elems.size(); i++)
 		{
-			unsigned long long number;
 			std::istringstream(elems[i]) >> number;
 			result.push_back(number);
 		}
@@ -208,17 +193,7 @@ namespace app
 
 	std::string Test::getRecordedChecksumsAsJson()
 	{
-		std::ostringstream os;
-		os << "{";
-		for (unsigned int i = 0; i < m_recordedChecksums.size(); i++)
-		{
-			os << m_recordedChecksums[i];
-			if (i != m_recordedChecksums.size() - 1)
-				os << ", ";
-		}
-			
-		os << "}";
-		return os.str();
+		return "{" + StringUtil::join(m_recordedChecksums, ", ") + "}";
 	}
 
 	// Reference: https://www.opengl.org/discussion_boards/showthread.php/158514-capturing-the-OpenGL-output-to-a-image-file
