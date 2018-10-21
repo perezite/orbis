@@ -62,7 +62,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleBrickEffect.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\Test.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\TestUtil.cpp">
+      <Filter>Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\TestRunner.cpp">
       <Filter>Testing</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,7 +159,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Controllers\WobbleBrickEffect.h">
       <Filter>Controllers\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\Test.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\TestUtil.h">
+      <Filter>Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Application\Testing\TestRunner.h">
       <Filter>Testing</Filter>
     </ClInclude>
   </ItemGroup>

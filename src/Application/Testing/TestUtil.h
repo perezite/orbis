@@ -5,17 +5,16 @@ using namespace orb;
 
 namespace app
 {
-	class Test
+	class TestUtil
 	{
 	public:
-		static void run();
+		static bool execute(Level* level, unsigned int numFrames, std::string testcaseName);
 
 	protected:
-		static void execute(Level* level, unsigned int numFrames, std::string testcaseName);
 
 		static void record();
 
-		static void evaluate(std::string identifier);
+		static bool evaluate(std::string identifier);
 
 		static std::vector<unsigned long long> handleNewTestcase(std::string identifier);
 

@@ -21,18 +21,18 @@ using namespace orb;
 #define APP_TEST
 
 #if defined(APP_TEST)
-#include "Testing/Test.h"
+#include "Testing/TestRunner.h"
 #endif
 
 int main(int argc, char* args[])
 {	
-	#if defined(APP_TEST)
-		Test::run();
-		return 0;
-	#endif	
-
 	try
 	{
+		#if defined(APP_TEST)
+			TestRunner::run();
+			return 0;
+		#endif	
+
 		LevelManager::getInstance()->queueLevel(new Level3());
 		OrbisMain::getInstance()->run();
 	}

@@ -1,4 +1,4 @@
-#include "Test.h"
+#include "TestUtil.h"
 
 #include "../Levels/Level2.h"
 #include "../Levels/Level3.h"
@@ -7,37 +7,12 @@
 
 namespace app
 {
-	unsigned int Test::m_numFramesRecorded = 0;
-	unsigned int Test::m_numFramesToRecord = 0;
-	std::vector<unsigned long long> Test::m_recordedChecksums;
-	bool Test::m_passedOverall;
+	unsigned int TestUtil::m_numFramesRecorded = 0;
+	unsigned int TestUtil::m_numFramesToRecord = 0;
+	std::vector<unsigned long long> TestUtil::m_recordedChecksums;
+	bool TestUtil::m_passedOverall;
 
-	void Test::run()
-	{
-		try
-		{
-			m_passedOverall = true;
-			execute(new Level2(), 3, "Level2");
-			execute(new Level3(), 5, "Level3");
-			
-			if (m_passedOverall == false)
-				LogUtil::showMessageBox("There were test failures. Check the log for more details", "Test failures");
-			else
-				LogUtil::showMessageBox("All tests passed", "Tests successful");
-		}
-		catch (Exception e)
-		{
-			LogUtil::logMessage("%.1023s", e.what().c_str());
-
-			LogUtil::showMessageBox(e.what(), "Exception");
-
-			#if defined(_DEBUG)
-				throw e;
-			#endif
-		}
-	}
-
-	void Test::execute(Level * level, unsigned int numFrames, std::string testcaseName)
+	bool TestUtil::execute(Level * level, unsigned int numFrames, std::string testcaseName)
 	{
 		LogUtil::logMessage(("Running testcase: " + testcaseName).c_str());
 
@@ -49,10 +24,10 @@ namespace app
 		OrbisMain::getInstance()->setOnRenderedCallback(record);
 		LevelManager::getInstance()->queueLevel(level);
 		OrbisMain::getInstance()->run();
-		evaluate(testcaseName);
+		return evaluate(testcaseName);
 	}
 
-	void Test::record()
+	void TestUtil::record()
 	{
 		// we skip the first frame, because at this point the backbuffer either contains random data or the frontbuffer from a previous level
 		if (m_numFramesRecorded == 0)
@@ -71,8 +46,10 @@ namespace app
 		m_numFramesRecorded++;
 	}
 
-	void Test::evaluate(std::string identifier)
+	bool TestUtil::evaluate(std::string identifier)
 	{
+		bool success = true;
+
 		std::vector<unsigned long long> expectedChecksums = loadExpectedChecksums(identifier);
 		
 		if (expectedChecksums.size() == 0)
@@ -102,13 +79,15 @@ namespace app
 			if (str == "o")
 				addOrUpdateRecordedChecksumsInTestfile(identifier);
 			else
-				m_passedOverall = false;
+				success = false;
 		}
 		else
 			LogUtil::logMessage("[PASSED]");
+
+		return success;
 	}
 
-	std::vector<unsigned long long> Test::handleNewTestcase(std::string identifier)
+	std::vector<unsigned long long> TestUtil::handleNewTestcase(std::string identifier)
 	{
 		std::vector<unsigned long long> result;
 
@@ -125,7 +104,7 @@ namespace app
 		return result;
 	}
 
-	std::vector<unsigned long long> Test::loadExpectedChecksums(std::string identifier)
+	std::vector<unsigned long long> TestUtil::loadExpectedChecksums(std::string identifier)
 	{
 		std::string fullIdentifier = getFullIdentifier(identifier);
 
@@ -146,7 +125,7 @@ namespace app
 		return result;
 	}
 
-	void Test::addOrUpdateRecordedChecksumsInTestfile(std::string identifier)
+	void TestUtil::addOrUpdateRecordedChecksumsInTestfile(std::string identifier)
 	{
 		std::string fullIdentifier = getFullIdentifier(identifier);
 		std::vector<std::string> lines = AssetUtil::loadTextAssetLines("Testing/ExpectedChecksums.test");
@@ -167,7 +146,7 @@ namespace app
 		AssetUtil::saveTextAsset("Testing/ExpectedChecksums.test", os.str());
 	}
 
-	std::string Test::getFullIdentifier(std::string identifier)
+	std::string TestUtil::getFullIdentifier(std::string identifier)
 	{
 		std::string identiferConfigurationPrefix;
 		ORBIS_DEBUG(identiferConfigurationPrefix = "Debug_"; )
@@ -175,7 +154,7 @@ namespace app
 		return identiferConfigurationPrefix + identifier;
 	}
 
-	std::vector<unsigned long long> Test::getChecksumsFromJson(std::string json)
+	std::vector<unsigned long long> TestUtil::getChecksumsFromJson(std::string json)
 	{
 		std::vector<unsigned long long> result;
 		std::string temp = StringUtil::remove(json, { " ", "{", "}" });
@@ -191,7 +170,7 @@ namespace app
 		return result;
 	}
 
-	std::string Test::getRecordedChecksumsAsJson()
+	std::string TestUtil::getRecordedChecksumsAsJson()
 	{
 		return "{" + StringUtil::join(m_recordedChecksums, ", ") + "}";
 	}
@@ -201,7 +180,7 @@ namespace app
 	// Note: For reading RGB/BGR values, you must set GL_PACK_ALIGNMENT to 1, because the default pack alignment of 4 means, 
 	// that each horizontal line must be a multiple of 4 in size. If you use RGBA or ABGR, it is a multiple of 4 automatically
 	// Reference: https://www.khronos.org/opengl/wiki/Common_Mistakes
-	unsigned long long Test::computeFramebufferChecksum()
+	unsigned long long TestUtil::computeFramebufferChecksum()
 	{
 		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		unsigned int w = (unsigned int)resolution.x;
@@ -227,7 +206,7 @@ namespace app
 		return check;
 	}
 
-	void Test::normalizeChannels(GLubyte* output_pixels, GLubyte* input_pixels, unsigned int num_pixels)
+	void TestUtil::normalizeChannels(GLubyte* output_pixels, GLubyte* input_pixels, unsigned int num_pixels)
 	{
 		for (unsigned int i = 0; i < num_pixels; i++)
 		{
@@ -237,7 +216,7 @@ namespace app
 		}
 	}
 
-	void Test::writePixelsToFile(GLubyte* normalized_pixels, unsigned short width, unsigned short height)
+	void TestUtil::writePixelsToFile(GLubyte* normalized_pixels, unsigned short width, unsigned short height)
 	{
 		#ifdef __WIN32__
 		short TGAhead[] = { 0, 2, 0, 0, 0, 0, (short)width, (short)height, 24 };
