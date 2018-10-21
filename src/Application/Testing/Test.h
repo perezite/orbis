@@ -9,18 +9,26 @@ namespace app
 		static void run();
 
 	protected:
-		static void test1();
+		static void testLevel2();
 
-		static void test2();
+		 static void testLevel3();
 
 	protected:
 		static void record();
 
-		static void evaluate(std::vector<unsigned long long> expectedChecksum);
+		static void evaluate(std::string identifier);
 
-		static void printRecordedChecksums();
+		static std::vector<unsigned long long> loadExpectedChecksums(std::string identifier);
 
-		static long long computeFramebufferChecksum();
+		static void addOrUpdateRecordedChecksumsInTestfile(std::string identifier);
+
+		static std::string getFullIdentifier(std::string identifier);
+
+		static std::vector<unsigned long long> getChecksumsFromJson(std::string json);
+
+		static std::string getRecordedChecksumsAsJson();
+
+		static unsigned long long computeFramebufferChecksum();
 
 		static void normalizeChannels(GLubyte* output_pixels, GLubyte* input_pixels, unsigned int num_pixels);
 

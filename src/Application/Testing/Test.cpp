@@ -16,19 +16,12 @@ namespace app
 	{
 		try
 		{
-			#ifdef _DEBUG
-				LogUtil::logMessage("Warning: Running in debug mode may yield different results than release mode!");
-			#endif
-
 			m_passedOverall = true;
-			test1();
-			test2();
+			testLevel2();
+			testLevel3();
 			
 			if (m_passedOverall == false)
-			{
 				LogUtil::showMessageBox("There were test failures. Check the log for more details", "Test failures");
-				std::cin.get();
-			}
 			else
 				LogUtil::showMessageBox("All tests passed", "Tests successful");
 		}
@@ -44,7 +37,7 @@ namespace app
 		}
 	}
 
-	void Test::test1()
+	void Test::testLevel2()
 	{
 		LogUtil::logMessage("Testing Level 2...");
 		srand(42);
@@ -55,10 +48,10 @@ namespace app
 		OrbisMain::getInstance()->setOnRenderedCallback(record);
 		LevelManager::getInstance()->queueLevel(new Level2());
 		OrbisMain::getInstance()->run();
-		evaluate({ 270038350, 270038350, 270038350 });
+		evaluate("level2");
 	}
 
-	void Test::test2()
+	void Test::testLevel3()
 	{
 		LogUtil::logMessage("Testing Level 3...");
 
@@ -70,7 +63,7 @@ namespace app
 		OrbisMain::getInstance()->setOnRenderedCallback(record);
 		LevelManager::getInstance()->queueLevel(new Level3());
 		OrbisMain::getInstance()->run();
-		evaluate({ 213734440, 213757909, 213768253, 213788041, 213818577 });
+		evaluate("level3");
 	}
 
 	void Test::record()
@@ -85,15 +78,29 @@ namespace app
 		if (m_numFramesRecorded >= m_numFramesToRecord)
 			InputManager::getInstance()->setQuitEvent();
 
-		long long checksum = computeFramebufferChecksum();
+		unsigned long long checksum = computeFramebufferChecksum();
 		m_recordedChecksums.push_back(checksum);
 		LogUtil::logMessage("checksum: %lld", checksum);
 
 		m_numFramesRecorded++;
 	}
 
-	void Test::evaluate(std::vector<unsigned long long> expectedChecksums)
+	void Test::evaluate(std::string identifier)
 	{
+		std::vector<unsigned long long> expectedChecksums = loadExpectedChecksums(identifier);
+
+		if (expectedChecksums.size() == 0)
+		{
+			LogUtil::logMessage("[NO DATA]");
+			LogUtil::logMessage("No data found in the test-file. Press w to (w)rite the recorded data to the test file now");
+			std::string str; std::getline(std::cin, str);
+			if (str == "w")
+				addOrUpdateRecordedChecksumsInTestfile(identifier);
+			else
+				m_passedOverall = false;
+			return;
+		}
+
 		Exception::assert(m_recordedChecksums.size() == expectedChecksums.size(), "number of expected checksums is not equal to number of recorded checksums");
 
 		std::vector<int> mismatches;
@@ -112,8 +119,10 @@ namespace app
 				LogUtil::logMessage("mismatch in frame %d. Expected: %lld, Actual: %lld", frameIdx, expectedChecksums[frameIdx], m_recordedChecksums[frameIdx]);
 			}
 
-			LogUtil::logMessage("In case, the failures reflect intentional changes, here are the new checksums: ");
-			printRecordedChecksums();
+			LogUtil::logMessage("In case, the failures reflect intentional changes, enter (o) to (o)verwrite the current values");
+			std::string str; std::getline(std::cin, str);
+			if (str == "o")
+				addOrUpdateRecordedChecksumsInTestfile(identifier);
 
 			m_passedOverall = false;
 		}
@@ -121,7 +130,83 @@ namespace app
 			LogUtil::logMessage("[PASSED]");
 	}
 
-	void Test::printRecordedChecksums()
+	std::vector<unsigned long long> Test::loadExpectedChecksums(std::string identifier)
+	{
+		std::string fullIdentifier = getFullIdentifier(identifier);
+
+		std::string text = AssetUtil::loadTextAsset("Testing/ExpectedChecksums.test");
+		std::vector<std::string> lines = StringUtil::split(text, "\n");
+
+		std::string line = "";
+		for (unsigned int i = 0; i < lines.size(); i++)
+			if (StringUtil::startsWith(lines[i], fullIdentifier))
+				line = lines[i];
+
+		std::vector<unsigned long long> result;
+		if (line != "")
+		{
+			std::string json = StringUtil::split(line, " = ")[1];
+			result = getChecksumsFromJson(json);
+		}
+
+		return result;
+	}
+
+	void Test::addOrUpdateRecordedChecksumsInTestfile(std::string identifier)
+	{
+		std::string fullIdentifier = getFullIdentifier(identifier);
+		std::string text = AssetUtil::loadTextAsset("Testing/ExpectedChecksums.test");
+
+		// remove old data
+		std::vector<std::string> lines = StringUtil::split(text, "\n");
+		for (unsigned int i = 0; i < lines.size(); i++) {
+			if (StringUtil::startsWith(lines[i], fullIdentifier))
+			{
+				lines.erase(lines.begin() + i);
+				break;
+			}
+		}
+		text = StringUtil::join(lines, "\n");
+
+		// write checksums to file
+		std::ostringstream os;
+		if (text.length() > 0)
+			os << std::endl;
+		os << fullIdentifier << " = " << getRecordedChecksumsAsJson();
+		text = text + os.str();
+		AssetUtil::saveTextAsset("Testing/ExpectedChecksums.test", text);
+	}
+
+	std::string Test::getFullIdentifier(std::string identifier)
+	{
+		std::string identiferConfigurationPrefix;
+		ORBIS_DEBUG(identiferConfigurationPrefix = "Debug_"; )
+		ORBIS_RELEASE(identiferConfigurationPrefix = "Release_"; )
+		std::string fullIdentifier = identiferConfigurationPrefix + identifier;
+
+		return fullIdentifier;
+	}
+
+	std::vector<unsigned long long> Test::getChecksumsFromJson(std::string json)
+	{
+		std::string temp = json;
+		temp.erase(std::remove(temp.begin(), temp.end(), '{'), temp.end());
+		temp.erase(std::remove(temp.begin(), temp.end(), '}'), temp.end());
+		temp.erase(std::remove(temp.begin(), temp.end(), ' '), temp.end());
+
+		std::vector<std::string> elems = StringUtil::split(temp, ",");
+		std::vector<unsigned long long> result;
+		std::istringstream is;
+		for (unsigned int i = 0; i < elems.size(); i++)
+		{
+			unsigned long long number;
+			std::istringstream(elems[i]) >> number;
+			result.push_back(number);
+		}
+		return result;
+	}
+
+	std::string Test::getRecordedChecksumsAsJson()
 	{
 		std::ostringstream os;
 		os << "{";
@@ -133,7 +218,7 @@ namespace app
 		}
 			
 		os << "}";
-		LogUtil::logMessage(os.str().c_str());
+		return os.str();
 	}
 
 	// Reference: https://www.opengl.org/discussion_boards/showthread.php/158514-capturing-the-OpenGL-output-to-a-image-file
@@ -141,7 +226,7 @@ namespace app
 	// Note: For reading RGB/BGR values, you must set GL_PACK_ALIGNMENT to 1, because the default pack alignment of 4 means, 
 	// that each horizontal line must be a multiple of 4 in size. If you use RGBA or ABGR, it is a multiple of 4 automatically
 	// Reference: https://www.khronos.org/opengl/wiki/Common_Mistakes
-	long long Test::computeFramebufferChecksum()
+	unsigned long long Test::computeFramebufferChecksum()
 	{
 		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		unsigned int w = (unsigned int)resolution.x;

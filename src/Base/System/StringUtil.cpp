@@ -43,4 +43,41 @@ namespace base
 
 		return result;
 	}
+
+	std::vector<std::string> StringUtil::split(const std::string str, const std::string delim)
+	{
+		std::string temp = str;
+		std::vector<std::string> result;
+		std::string current;
+
+		size_t pos = 0;
+		while ((pos = temp.find(delim)) != std::string::npos) 
+		{
+			current = temp.substr(0, pos);
+			temp.erase(0, pos + delim.length());
+			result.push_back(current);
+		}
+
+		result.push_back(temp);
+
+		return result;
+	}
+
+	bool StringUtil::startsWith(std::string str, std::string start)
+	{
+		return str.find(start) == 0;
+	}
+
+	std::string StringUtil::join(std::vector<std::string> elems, std::string delim)
+	{
+		std::ostringstream os;
+		for (unsigned int i = 0; i < elems.size(); i++) {
+			os << elems[i];
+			if (i < elems.size() - 1)
+				os << delim;
+		}
+		return os.str();
+	}
 }
+
+

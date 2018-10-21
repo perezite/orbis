@@ -1,10 +1,9 @@
 TODO:	
 - Testing
 	- Integrationstests implementieren für Windows
-		- Konzept überlegen für Debug/Release und Windows/Android
-		- Testing implementieren in Test.cpp, welches jedes Level für eine fixe Anzahl Frames ausführt und die Prüfsumme über alle Frames berechnet
-		- Grobtest auf Mobile
-		- Framework so implementieren, dass alle Levels durchgetestet werden und erst am Ende eine Statistik kommt mit erwarteter vs. tatsächlicher Prüfsumme pro System
+		- Code soweit als möglich vereinfachen
+		- Aufsplitten in TestHelper und TestRunner
+		- Jeder relevante Level durchtesten
 - Interface an SFML angleichen 
 	- Tutorials von SFML durchgehen
 	- Source-Code von SFML analysieren
@@ -31,4 +30,3 @@ TODO:
 	- Hintergrund
 	- Levellogik mit Anzeigen über Console
 	- Reset mit R-Taste
-	- Angleich an SFML planen
