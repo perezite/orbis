@@ -1,7 +1,10 @@
 TODO:	
 - Testing
 	- Integrationstests implementieren für Windows
+		- AssetUtil in FileUtil umbenennen
 		- Jedes relevante Level durchtesten
+- Performance-Impact der Exceptions profilen
+	- Falls die Exceptions viel Zeit brauchen: Ersetzen durch selbergebasteltes Fehlerhandling
 - Interface an SFML angleichen 
 	- Tutorials von SFML durchgehen
 	- Source-Code von SFML analysieren
@@ -14,13 +17,7 @@ TODO:
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
 		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
 	- Regression & Performanceregression
-- Die CenterPropulsion des Balls aus Blear nachbauen. Dabei die Werte nach Bedarf tweaken
-- Orbis in Bibliothek versiegeln
-- Neues Projekt erstellen für die Implementation von Blear Level 1
-- Orbis-Library als Submodule einbinden
-- Folgende Element des Level1 von Blear implementieren in dieser Reihenfolge
-	- Frame
-	- Kollisionabfrage	
+- Die CenterPropulsion des bu
 	- Ball 
 	- Propulsion des Balles (nur CenterPropulsion)
 	- Paddle

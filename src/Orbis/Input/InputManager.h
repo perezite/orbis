@@ -8,6 +8,7 @@
 using namespace base;
 
 #include <set>
+#include <string>
 
 namespace orb
 {
@@ -55,6 +56,9 @@ namespace orb
 
 		// get the tap position in camera space ((+/-0.5f, +/-0.5f * aspectRation)) 
 		Vector2D getTapPosition();
+
+		// get an input line from console
+		std::string getConsoleLine(std::string promptMessage);
 
 	protected:
 		// singleton ctor

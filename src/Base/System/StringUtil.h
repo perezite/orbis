@@ -23,7 +23,7 @@ namespace base
 
 		// join several strings together
 		template <class T>
-		static std::string StringUtil::join(std::vector<T> elems, std::string delim);
+		static std::string join(std::vector<T> elems, std::string delim);
 
 		// remove substrings from string
 		static std::string remove(std::string str, std::vector<std::string> substrs);

@@ -21,7 +21,7 @@ using namespace orb;
 #define APP_TEST
 
 #if defined(APP_TEST)
-#include "Testing/TestRunner.h"
+#include "Testing/TestSuite.h"
 #endif
 
 int main(int argc, char* args[])
@@ -29,7 +29,7 @@ int main(int argc, char* args[])
 	try
 	{
 		#if defined(APP_TEST)
-			TestRunner::run();
+			TestSuite::run();
 			return 0;
 		#endif	
 

@@ -2,6 +2,7 @@
 
 #include "../Video/VideoManager.h"
 #include "../Components/Camera.h"
+#include "../Core/LogUtil.h"
 
 namespace 
 {
@@ -162,5 +163,14 @@ namespace orb
 		Camera* cam = Camera::getInstance();
 		float aspect = cam->getAspect();
 		return Vector2D(m_tapPosition.x, aspect * m_tapPosition.y);
+	}
+
+	std::string InputManager::getConsoleLine(std::string promptMessage)
+	{
+		LogUtil::logMessage(promptMessage.c_str());
+		std::string str; 
+		std::getline(std::cin, str);
+		return str;
+
 	}
 }
