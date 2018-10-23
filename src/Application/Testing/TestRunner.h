@@ -20,7 +20,7 @@ namespace app
 
 		static std::vector<unsigned long long> loadChecksumsFromFile(std::string identifier);
 
-		static void updateChecksumsInFile(std::string identifier);
+		static std::vector<unsigned long long> updateChecksumsInFile(std::string identifier);
 
 		static std::string getFullIdentifier(std::string identifier);
 

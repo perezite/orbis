@@ -115,7 +115,7 @@ namespace orb
 		// write new data
 		std::ostringstream os;
 		std::string text = StringUtil::join(lines, "\n");
-		os << text << (text.length() > 0 ? "\n" : "") << newContent << std::endl;
+		os << text << (text.length() > 0 ? "\n" : "") << newContent;
 		AssetUtil::saveTextAsset("Testing/ExpectedChecksums.test", os.str());
 	}
 

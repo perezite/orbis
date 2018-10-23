@@ -1,7 +1,6 @@
 TODO:	
 - Testing
 	- Integrationstests implementieren für Windows
-		- AssetUtil in FileUtil umbenennen
 		- Jedes relevante Level durchtesten
 - Performance-Impact der Exceptions profilen
 	- Falls die Exceptions viel Zeit brauchen: Ersetzen durch selbergebasteltes Fehlerhandling

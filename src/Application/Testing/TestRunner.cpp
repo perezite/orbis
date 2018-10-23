@@ -49,31 +49,41 @@ namespace app
 		bool success = true;
 
 		std::vector<unsigned long long> expectedChecksums = loadChecksumsFromFile(identifier);
-		
-		if (expectedChecksums.size() == 0)
-			expectedChecksums = handleFirstRun(identifier);
 
-		// get mismatches
-		Exception::assert(m_recordedChecksums.size() == expectedChecksums.size(), "number of expected checksums is not equal to number of recorded checksums");
+		// handle first run
+		if (expectedChecksums.size() == 0)
+		{
+			if ("u" == InputManager::getInstance()->getConsoleLine("No data found in file. Press (u) to (u)pdate the file with the currently recorded data"))
+				expectedChecksums = updateChecksumsInFile(identifier);
+		}
+		
+		// collect mismatches
 		std::vector<int> mismatches;
-		for (unsigned int i = 0; i < m_recordedChecksums.size(); i++) {
+		for(unsigned int i = 0; i < expectedChecksums.size(); i++) {
 			if (m_recordedChecksums[i] != expectedChecksums[i])
 				mismatches.push_back(i);
 		}
 
 		// handle mismatches
 		if (mismatches.size() > 0) {
-			LogUtil::logMessage("[FAILED]");
 			for (unsigned int i = 0; i < mismatches.size(); i++) {
 				unsigned int frameIdx = mismatches[i];
 				LogUtil::logMessage("mismatch in frame %d. Expected: %lld, Actual: %lld", frameIdx, expectedChecksums[frameIdx], m_recordedChecksums[frameIdx]);
 			}
 
-			if ("o" == InputManager::getInstance()->getConsoleLine("In case, the failures reflect intentional changes, enter (o) to (o)verwrite the current values"))
-				updateChecksumsInFile(identifier);
-			else
-				success = false;
-		} 
+			if ("u" == InputManager::getInstance()->getConsoleLine("In case, the failures reflect intentional changes, enter (u) to (u)verwrite the current values"))
+			{
+				expectedChecksums = updateChecksumsInFile(identifier);
+				mismatches.clear();
+			}
+		}
+
+		// show errors
+		if (mismatches.size() > 0 || m_recordedChecksums.size() != expectedChecksums.size()) {
+			LogUtil::logMessage("[FAILED]");
+			LogUtil::logMessage("There where mismatches between the expected checksums and the currently recorded checksums");
+			success = false;
+		}
 		else
 			LogUtil::logMessage("[PASSED]");
 
@@ -104,11 +114,13 @@ namespace app
 		return result;
 	}
 
-	void TestRunner::updateChecksumsInFile(std::string identifier)
+	std::vector<unsigned long long> TestRunner::updateChecksumsInFile(std::string identifier)
 	{
 		std::string fullIdentifier = getFullIdentifier(identifier);
 		std::string newLine = fullIdentifier + " = " + JsonWriter::toJson(m_recordedChecksums);
 		AssetUtil::updateLineStartingWith("Testing/ExpectedChecksums.test", fullIdentifier, newLine);
+
+		return m_recordedChecksums;
 	}
 
 	std::string TestRunner::getFullIdentifier(std::string identifier)

@@ -22,10 +22,10 @@ namespace orb
 		// check if text asset exists
 		static bool textAssetExists(std::string assetPath);
 
-		// get first line starting with specific string
+		// get the first text line starting with the specified string
 		static std::string getLineStartingWith(std::string assetPath, std::string startString);
 
-		// update the first line starting with specific string 
+		// update the first text line starting with the specified string 
 		static void updateLineStartingWith(std::string assetPath, std::string startString, std::string newContent);
 	};
 }
