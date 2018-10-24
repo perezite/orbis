@@ -1,3 +1,5 @@
+// #define APP_TEST
+
 #include "Levels/Level1.h"
 #include "Levels/Level2.h"
 #include "Levels/Level3.h"
@@ -18,8 +20,6 @@ using namespace base;
 #include "../Orbis/Core/LogUtil.h"
 #include "../Orbis/Game/LevelManager.h"
 using namespace orb;
-
-#define APP_TEST
 
 int main(int argc, char* args[])
 {	

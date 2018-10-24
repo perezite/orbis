@@ -2,6 +2,10 @@
 
 #ifndef __INTELLISENSE__
 
+	#ifdef _DEBUG
+		#define _ITERATOR_DEBUG_LEVEL 0	// prevent slow stl debugging
+	#endif
+
 	#define _USE_MATH_DEFINES
 
 	#include <iostream>
