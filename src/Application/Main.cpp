@@ -8,6 +8,7 @@
 #include "Levels/Level8.h"
 #include "Levels/Level9.h"
 #include "Levels/Level10.h"
+#include "Testing/TestSuite.h"
 using namespace app;
 
 #include "../Base/Base.h"
@@ -20,10 +21,6 @@ using namespace orb;
 
 #define APP_TEST
 
-#if defined(APP_TEST)
-#include "Testing/TestSuite.h"
-#endif
-
 int main(int argc, char* args[])
 {	
 	try
@@ -33,7 +30,7 @@ int main(int argc, char* args[])
 			return 0;
 		#endif	
 
-		LevelManager::getInstance()->queueLevel(new Level3());
+		LevelManager::getInstance()->queueLevel(new Level1());
 		OrbisMain::getInstance()->run();
 	}
 	catch (Exception e)
