@@ -1,11 +1,4 @@
 TODO:	
-- Performance-Impact der Exceptions profilen
-	- Profiler für Level3 anschmeissen und langsame Funktion profile
-	- Testen, ob deaktivieren der Exceptions einen Effekt hat
-	- Falls ja: Exceptions deaktivieren eigenen Error-Handler schreiben
-- Debug STL-Performance verbessern
-	- Profiling durchführen
-	- Compiler-Settings googlen, mit denen der Build optimiert werden kann
 - Interface an SFML angleichen 
 	- Tutorials von SFML durchgehen
 	- Source-Code von SFML analysieren
