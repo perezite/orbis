@@ -14,9 +14,6 @@ namespace orb
 		// update the level
 		void update();
 
-		// update the level by a fixed amount of ticks
-		void update(long ticks);
-
 		// reset
 		void reset();
 

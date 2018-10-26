@@ -1,11 +1,15 @@
 TODO:	
 - Interface an SFML angleichen 
-	- Tutorials von SFML durchgehen
-	- Source-Code von SFML analysieren
-	- Feature-Branch erstellen
-	- In den Docs die externen Schnittstellen im SFML-Style definieren in Form von Header-Files
-	- Die tatsächlichen Header-Files und Source-Files refactoren
-		-- ifdefs benutzen um zwischen alter und neuer Implementation hin- und her zu springen
+	-- Current: https://www.sfml-dev.org/tutorials/2.5/window-window.php 
+	-- Nur die externe API soll refactored werden. Alle internen Member-Methoden sollen so bleiben wie sie sind
+	- Tutorials von SFML durchgehen 
+		UND parallel dazu den SFML Sourcecode anschauen
+		UND parallel dazu nacheinander die relevanten Klassen refactoren
+		-- Ifdefs benutzen um zw. alter und neuer Implementation zu wechseln
+		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
+	- Source-Code von SFML analysieren und wenn nötig basierend darauf weitere Anpassungen vornehmen
+- Interne Interfaces soweit als möglich analog den externen implementieren
+	- Alle Orbis- und Base-Klassen durchgehen und parallel dazu in den Docs Header-Files erstellen mit den Interfaces wie ich sie mir vorstelle
 - Evaluieren, ob weitere Refactorings nötig sind und ggf. hier ins TODO aufnehmen	
 - Partikelsystem implementieren
 	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
