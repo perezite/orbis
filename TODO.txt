@@ -1,5 +1,6 @@
 TODO:	
-- Interface an SFML angleichen 
+- Interface an SFML angleichen
+	- Performance-Logging extrahieren
 	-- Current: https://www.sfml-dev.org/tutorials/2.5/window-window.php 
 	-- Nur die externe API soll refactored werden. Alle internen Member-Methoden sollen so bleiben wie sie sind
 	- Tutorials von SFML durchgehen 

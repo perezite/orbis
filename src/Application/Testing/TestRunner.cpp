@@ -19,7 +19,7 @@ namespace app
 		m_numFramesRecorded = 0;
 		m_numFramesToRecord = numFrames;
 		m_recordedChecksums.clear();
-		TimeManager::getInstance()->setFixedUpdate(30);
+		TimeManager::instance()->setFixedUpdateTime(30);
 		OrbisMain::getInstance()->setOnRenderedCallback(record);
 		LevelManager::getInstance()->queueLevel(level);
 		OrbisMain::getInstance()->run();

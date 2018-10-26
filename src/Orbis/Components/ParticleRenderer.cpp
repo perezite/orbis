@@ -37,7 +37,7 @@ namespace orb
 
 	void ParticleRenderer::updateParticles()
 	{
-		float dt = TimeManager::getInstance()->getDeltaSeconds();
+		float dt = TimeManager::instance()->getDeltaSeconds();
 
 		// updateLevel lifetime
 		for (unsigned int i = 0; i < m_particles.size(); i++)
@@ -62,7 +62,7 @@ namespace orb
 
 	void ParticleRenderer::emitParticles()
 	{
-		float dt = TimeManager::getInstance()->getDeltaSeconds();
+		float dt = TimeManager::instance()->getDeltaSeconds();
 		float emissionPeriod = 1.0f / float(m_emissionRate);
 
 		m_timeToNextEmission -= dt;
@@ -75,7 +75,7 @@ namespace orb
 
 	void ParticleRenderer::spawnParticle()
 	{
-		float dt = TimeManager::getInstance()->getDeltaSeconds();
+		float dt = TimeManager::instance()->getDeltaSeconds();
 		Vector2D entityVelocity = (m_lastEntityPos - getParent()->getTransform()->position) * (1.0f / dt);
 
 		Vector2D position = getParent()->getTransform()->position + MathUtil::getRandomOnUnitCircle() * m_emissionSphereShellRadius;

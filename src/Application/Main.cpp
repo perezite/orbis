@@ -1,4 +1,4 @@
-// #define APP_TEST
+#define APP_TEST
 
 #include "Levels/Level1.h"
 #include "Levels/Level2.h"
@@ -30,7 +30,7 @@ int main(int argc, char* args[])
 			return 0;
 		#endif	
 
-		LevelManager::getInstance()->queueLevel(new Level1());
+		LevelManager::getInstance()->queueLevel(new Level3());
 		OrbisMain::getInstance()->run();
 	}
 	catch (Exception e)

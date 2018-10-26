@@ -22,25 +22,23 @@ namespace orb
 	{
 		LevelManager* level = LevelManager::getInstance();
 		InputManager* input = InputManager::getInstance();
+		TimeManager* time = TimeManager::instance();
 
-		m_startTicks = TimeManager::getInstance()->getTicks();
 		m_numFrames = 0;
+		bool hasQuitEvent = false;
 
-		while (true)
+		while (!hasQuitEvent)
 		{
+			time->update();
 			input->update();
-			if (input->hasQuitEvent())
-				break;
-
 			level->update();
 			level->render();
 
 			if (m_onRenderedCallback)
 				m_onRenderedCallback();
 
-			#if defined(ORBIS_LOG_PERFORMANCE)
-				logPerformance();
-			#endif
+			hasQuitEvent = input->hasQuitEvent();
+			logPerformance();
 		}
 
 		level->clear();
@@ -50,19 +48,19 @@ namespace orb
 	void OrbisMain::logPerformance()
 	{
 		m_numFrames++;
-		long elapsed = TimeManager::getInstance()->getTicks() - m_startTicks;
-		if (elapsed >= 1000)
+		m_ticks += TimeManager::instance()->getDeltaTicks();
+		if (m_ticks >= 1000)
 		{
-			// track current performance
-			float currentPerformance = (float)elapsed / float(m_numFrames);
-			m_startTicks += 1000;
-			m_numFrames = 0;
-
-			// track performance
+			float currentPerformance = (float)m_ticks / float(m_numFrames);
 			m_samples.push_back(currentPerformance);
 			float median = MathUtil::median(m_samples);
+
+			m_ticks = 0;
+			m_numFrames = 0;
 			
-			LogUtil::logMessage("current: %f ms, median: %f ms, samples: %d", currentPerformance, median, m_samples.size());
+			#if defined(ORBIS_LOG_PERFORMANCE)
+				LogUtil::logMessage("current: %f ms, median: %f ms, samples: %d", currentPerformance, median, m_samples.size());
+			#endif
 		}
 	}
 }

@@ -2,18 +2,14 @@
 
 #include "../Libraries/SDL.h"
 
+#include <assert.h>
+
 namespace orb
 {
-	TimeManager* TimeManager::getInstance()
+	TimeManager* TimeManager::instance()
 	{
 		static TimeManager instance;
 		return &instance;
-	}
-
-	void TimeManager::setFixedUpdate(long ticks)
-	{
-		m_fixedTicks = ticks;
-		reset();
 	}
 
 	void TimeManager::update()
@@ -30,12 +26,19 @@ namespace orb
 
 	float TimeManager::getDeltaSeconds()
 	{
-		return (m_currentTicks - m_lastTicks) / 1000.0f;
+		return (getDeltaTicks()) / 1000.0f;
 	}
 
-	long TimeManager::getTicks()
+	long TimeManager::getDeltaTicks()
 	{
-		return m_fixedTicks == 0 ? SDL_GetTicks() : m_currentTicks;
+		bool test = (m_currentTicks - m_lastTicks == m_fixedTicks);
+		return m_currentTicks - m_lastTicks;
+	}
+
+	void TimeManager::setFixedUpdateTime(long fixedTicks)
+	{
+		m_fixedTicks = fixedTicks;
+		reset();
 	}
 
 	TimeManager::TimeManager() : m_fixedTicks(0)

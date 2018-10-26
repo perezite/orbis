@@ -13,7 +13,7 @@ namespace app
 		{
 			float waitSeconds = 2.0f - m_explosionTimeElapsed;
 			LogUtil::logMessage("BallEffects::ExplodingRun(), wait another %f", waitSeconds);
-			m_explosionTimeElapsed += TimeManager::getInstance()->getDeltaSeconds();
+			m_explosionTimeElapsed += TimeManager::instance()->getDeltaSeconds();
 
 			if (m_explosionTimeElapsed >= 2.0f)
 			{

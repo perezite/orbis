@@ -58,7 +58,7 @@ namespace orb
 
 	void Level::startLevel()
 	{
-		TimeManager::getInstance()->reset();
+		TimeManager::instance()->reset();
 		VideoManager::getInstance()->clear();
 		start();
 		startEntities();
@@ -69,7 +69,6 @@ namespace orb
 	{
 		update();
 		updateEntities();
-		TimeManager::getInstance()->update();
 	}
 
 	void Level::render()

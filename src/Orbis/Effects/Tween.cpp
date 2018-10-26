@@ -30,7 +30,7 @@ namespace orb
 
 	float Tween::getValue(float duration)
 	{
-		m_elapsed += TimeManager::getInstance()->getDeltaSeconds();
+		m_elapsed += TimeManager::instance()->getDeltaSeconds();
 		float t = std::min(m_elapsed / duration, 1.0f);
 		float value = m_spline.getValue(t).y;
 

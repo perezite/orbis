@@ -16,7 +16,7 @@ namespace app
 
 	void ParticleSystemTester::update()
 	{
-		float dt = TimeManager::getInstance()->getDeltaSeconds();
+		float dt = TimeManager::instance()->getDeltaSeconds();
 		Vector2D dist = m_currentTarget - getParent()->getTransform()->position;
 		Vector2D direction = dist.normalized();
 		getParent()->getTransform()->position += direction * dt * 0.1f;

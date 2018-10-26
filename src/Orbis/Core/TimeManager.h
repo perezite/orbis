@@ -2,26 +2,27 @@
 
 namespace orb
 {
+	// provides functions related to time
 	class TimeManager
 	{
 	public:
 		// get the instance
-		static TimeManager* getInstance();
+		static TimeManager* instance();
 
-		// set a fixed number of ticks per update. Can be used for testing/debugging. Zero ticks means regular (dynamic update)
-		void setFixedUpdate(long ticks);
-
-		// update the level
+		// update the time
 		void update();
 
-		// reset
+		// reset the time
 		void reset();
 
-		// get the seconds elapsed since the last frame
+		// get the seconds elapsed since the last time update()
 		float getDeltaSeconds();
 
-		// get the current time in seconds
-		long getTicks();
+		// the the ticks elapsed since the last update()
+		long getDeltaTicks();
+
+		// simulate a fixed number of ticks per update. Can be used for testing/debugging. Zero ticks means a sregular (framerate-dependent) update
+		void setFixedUpdateTime(long fixedTicks);
 
 	protected:
 		// singleton ctor

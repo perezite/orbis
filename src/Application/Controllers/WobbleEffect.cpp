@@ -22,7 +22,7 @@ namespace app
 
 	void WobbleEffect::update()
 	{
-		float dt = TimeManager::getInstance()->getDeltaSeconds();
+		float dt = TimeManager::instance()->getDeltaSeconds();
 		Transform* trans = getParent()->getTransform();
 
 		float deltaScale = m_isGrowing ? dt * 0.01f : dt * -0.01f;

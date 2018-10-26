@@ -14,20 +14,20 @@ namespace
 	{
 		omega = clockwise ? -omega : omega;
 		float alpha = transform->rotation;
-		transform->rotation = alpha + TimeManager::getInstance()->getDeltaSeconds() * omega;
+		transform->rotation = alpha + TimeManager::instance()->getDeltaSeconds() * omega;
 	}
 
 	void Translate(Transform* transform, bool forward, float speed)
 	{
 		speed = forward ? speed : -speed;
 		Vector2D position = transform->position;
-		Vector2D translation = Matrix3::rotation2D(transform->rotation) * Vector2D(TimeManager::getInstance()->getDeltaSeconds() * speed, 0.0f);
+		Vector2D translation = Matrix3::rotation2D(transform->rotation) * Vector2D(TimeManager::instance()->getDeltaSeconds() * speed, 0.0f);
 		transform->position = position + translation;
 	}
 
 	void Scale(CameraBehavior *camera, bool positive)
 	{
-		float dt = TimeManager::getInstance()->getDeltaSeconds();
+		float dt = TimeManager::instance()->getDeltaSeconds();
 		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
 		Transform* transform = camera->getParent()->getTransform();
 		Vector2D scale = transform->scale;

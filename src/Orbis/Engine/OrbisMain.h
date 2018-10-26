@@ -15,29 +15,29 @@ namespace orb
 
 		// run the engine
 		void run();
-
-		// set an callback which is called after each rendering cycle. Can be used for testing.
+		
+		// set a callback which is called after each rendering cycle. Can be used for testing.
 		 void setOnRenderedCallback(void(*callback)(void)) { m_onRenderedCallback = callback; }
 
 	protected:
 		// singleton ctor
-		OrbisMain() : m_onRenderedCallback(NULL)
+		OrbisMain() : m_onRenderedCallback(NULL), m_numFrames(0), m_ticks(0)
 		{ }
 
 		// log the performance
 		void logPerformance();
 
 	private:
-		// start time of current performance log measurement
-		long m_startTicks;
-
-		// number of frames elapsed since last performance log updateLevel
+		// number of frames elapsed since last performance log update
 		long m_numFrames;
+
+		// number of ticks elapsed since last performance log update
+		long m_ticks;
 
 		// performance samples
 		std::vector<float> m_samples;
 
-		// blub 
+		// callback called after each redendering cycle
 		void (*m_onRenderedCallback)(void);
 	};
 }
