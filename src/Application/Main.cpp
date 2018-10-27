@@ -1,4 +1,4 @@
-#define APP_TEST
+// #define APP_TEST
 
 #include "Levels/Level1.h"
 #include "Levels/Level2.h"

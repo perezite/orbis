@@ -21,22 +21,13 @@ namespace orb
 
 	protected:
 		// singleton ctor
-		OrbisMain() : m_onRenderedCallback(NULL), m_numFrames(0), m_ticks(0)
+		OrbisMain() : m_onRenderedCallback(NULL)
 		{ }
 
 		// log the performance
 		void logPerformance();
 
 	private:
-		// number of frames elapsed since last performance log update
-		long m_numFrames;
-
-		// number of ticks elapsed since last performance log update
-		long m_ticks;
-
-		// performance samples
-		std::vector<float> m_samples;
-
 		// callback called after each redendering cycle
 		void (*m_onRenderedCallback)(void);
 	};

@@ -150,6 +150,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelBuilder.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\PerformanceLogger.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Orbis.h" />
@@ -269,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Game\LevelBuilder.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\PerformanceLogger.h">
+      <Filter>Core\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

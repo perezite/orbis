@@ -23,6 +23,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\PerformanceLogger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\TimeManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\EffectsManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Particle.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\AssetUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\DebugUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\LogUtil.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\PerformanceLogger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Core\TimeManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\EffectsManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Orbis\Effects\Particle.h" />

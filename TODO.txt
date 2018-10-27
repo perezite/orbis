@@ -1,6 +1,5 @@
 TODO:	
 - Interface an SFML angleichen
-	- Performance-Logging extrahieren
 	-- Current: https://www.sfml-dev.org/tutorials/2.5/window-window.php 
 	-- Nur die externe API soll refactored werden. Alle internen Member-Methoden sollen so bleiben wie sie sind
 	- Tutorials von SFML durchgehen 
@@ -9,6 +8,7 @@ TODO:
 		-- Ifdefs benutzen um zw. alter und neuer Implementation zu wechseln
 		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
 	- Source-Code von SFML analysieren und wenn nötig basierend darauf weitere Anpassungen vornehmen
+- Base in Orbis reinziehen und Base-Projekt entfernen
 - Interne Interfaces soweit als möglich analog den externen implementieren
 	- Alle Orbis- und Base-Klassen durchgehen und parallel dazu in den Docs Header-Files erstellen mit den Interfaces wie ich sie mir vorstelle
 - Evaluieren, ob weitere Refactorings nötig sind und ggf. hier ins TODO aufnehmen	
