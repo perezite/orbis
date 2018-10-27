@@ -11,7 +11,7 @@
 
 namespace orb
 {
-	void DebugRenderDevice::drawDebugLine(Vector2D start, Vector2D end, Color color)
+	void DebugRenderDevice::drawDebugLine(Vector2f start, Vector2f end, Color color)
 	{
 		// compute vertex array
 		Matrix3 camMatrix = Camera::getInstance()->getCamMatrix();

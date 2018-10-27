@@ -9,16 +9,16 @@ namespace
 	using namespace orb;
 
 	// convert pixel coordinates to screen coordinates in the range (-0.5, +0.5)
-	Vector2D PixelCoordinatesToScreenCoordinates(int x, int y)
+	Vector2f PixelCoordinatesToScreenCoordinates(int x, int y)
 	{
-		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
-		return Vector2D(float(x) / resolution.x - 0.5f, 0.5f - float(y) / resolution.y);
+		Vector2f resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		return Vector2f(float(x) / resolution.x - 0.5f, 0.5f - float(y) / resolution.y);
 	}
 
 	// convert finger coordinates to screen coordinates in the range (-0.5, +0.5)
-	Vector2D FingerCoordinatesToScreenCoordinates(float x, float y)
+	Vector2f FingerCoordinatesToScreenCoordinates(float x, float y)
 	{
-		return Vector2D(x - 0.5f, 0.5f - y);
+		return Vector2f(x - 0.5f, 0.5f - y);
 	}
 }
 
@@ -156,13 +156,13 @@ namespace orb
 		return m_tapsGoingDown.find(index) != m_tapsGoingDown.end();
 	}
 
-	Vector2D InputManager::getTapPosition()
+	Vector2f InputManager::getTapPosition()
 	{
 		Exception::assert(isTapDown() || isTapGoingDown(), "getTapPosition() can only be called when a tap is pressed or going down");
 
 		Camera* cam = Camera::getInstance();
 		float aspect = cam->getAspect();
-		return Vector2D(m_tapPosition.x, aspect * m_tapPosition.y);
+		return Vector2f(m_tapPosition.x, aspect * m_tapPosition.y);
 	}
 
 	std::string InputManager::getConsoleLine(std::string promptMessage)

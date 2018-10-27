@@ -55,7 +55,7 @@ namespace orb
 		bool isTapIndexGoingDown(signed long index);
 
 		// get the tap position in camera space ((+/-0.5f, +/-0.5f * aspectRation)) 
-		Vector2D getTapPosition();
+		Vector2f getTapPosition();
 
 		// get an input line from console
 		std::string getConsoleLine(std::string promptMessage);
@@ -80,7 +80,7 @@ namespace orb
 		std::set<Sint64> m_tapsGoingDown;
 
 		// the last recorded tap position
-		Vector2D m_tapPosition;
+		Vector2f m_tapPosition;
 
 		// is cursor inside the window
 		bool m_isCursorInsideWindow;

@@ -20,7 +20,7 @@ namespace orb
 	{
 	public:
 		// draw a debug line
-		static void drawLine(Vector2D start, Vector2D end, Color color = Color::Green);
+		static void drawLine(Vector2f start, Vector2f end, Color color = Color::Green);
 
 		// darw a debug wireframe rectangle
 		static void drawRect(Rect rect, Color color);

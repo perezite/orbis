@@ -4,7 +4,7 @@
 
 namespace orb
 {
-	Particle::Particle(Texture * texture, const Color& color, const Transform & transform, const Vector2D & velocity)
+	Particle::Particle(Texture * texture, const Color& color, const Transform & transform, const Vector2f & velocity)
 		: m_renderable(NULL), m_transform(transform), m_velocity(velocity), m_lifetime(0.5f), m_color(color)
 	{
 		addRenderable(texture);

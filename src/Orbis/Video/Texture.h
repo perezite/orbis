@@ -43,7 +43,7 @@ namespace orb
 		void setTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
 
 		// transform texture uv coordinates
-		Vector2D mapUVCoord(Vector2D texUV);
+		Vector2f mapUVCoord(Vector2f texUV);
 
 		// bind this texture
 		void bind();

@@ -16,7 +16,7 @@ namespace app
 	void WobbleEffect::start()
 	{
 		float scale = MIN_SCALE + (MAX_SCALE - MIN_SCALE) * MathUtil::getRandom();
-		getParent()->getTransform()->scale = Vector2D(scale, scale);
+		getParent()->getTransform()->scale = Vector2f(scale, scale);
 		m_isGrowing = rand() % 2 == 0 ? true : false;
 	}
 
@@ -26,7 +26,7 @@ namespace app
 		Transform* trans = getParent()->getTransform();
 
 		float deltaScale = m_isGrowing ? dt * 0.01f : dt * -0.01f;
-		getParent()->getTransform()->scale += Vector2D(deltaScale, deltaScale);
+		getParent()->getTransform()->scale += Vector2f(deltaScale, deltaScale);
 
 		if (trans->scale.x < MIN_SCALE)
 			m_isGrowing = true;

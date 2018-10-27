@@ -26,7 +26,7 @@ namespace orb
 		void update();
 
 		// transform coordinates from screen space to camera space
-		Vector2D screenSpaceToCameraSpace(Vector2D v);
+		Vector2f screenSpaceToCameraSpace(Vector2f v);
 
 		// get the view matrix (the inverse of the transform of the parent entity)
 		Matrix3 calcViewMatrix(TransformSpace space = TransformSpace::World);
@@ -38,7 +38,7 @@ namespace orb
 		const Matrix3& getCamMatrix(TransformSpace space = TransformSpace::World) const;
 
 		// get the size of the camera in world coordinates
-		Vector2D getSize();
+		Vector2f getSize();
 
 		// get the aspect ratio (height / width)
 		float getAspect();

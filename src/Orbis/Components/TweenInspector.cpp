@@ -25,7 +25,7 @@ namespace orb
 	TweenInspector::TweenInspector(Tween* tween, KeyCode activationKey) :
 		m_tween(*tween), m_isActive(false), m_activationKey(activationKey)
 	{
-		ShiftSpline(m_tween.getSpline(), Vector2D(-0.5f, -0.5f));
+		ShiftSpline(m_tween.getSpline(), Vector2f(-0.5f, -0.5f));
 	}
 
 	void TweenInspector::start()
@@ -33,7 +33,8 @@ namespace orb
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
 			Texture* texture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem2.png");
-		getParent()->getTransform()->scale = Vector2D::Zero;
+		// getParent()->getTransform()->scale = Vector2f::Zero;
+		 getParent()->getTransform()->scale = Vector2f(0.0f, 0.0f);
 		m_renderable.getMaterial()->setTexture(texture);
 		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
 		m_renderable.setMesh(Mesh::createTexturedQuad());
@@ -82,7 +83,7 @@ namespace orb
 
 	void TweenInspector::addOrSelectControlPoint()
 	{
-		Vector2D tap = InputManager::getInstance()->getTapPosition();
+		Vector2f tap = InputManager::getInstance()->getTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			m_selectedControlPoint = computeSelectedControlPoint(tap);
@@ -95,7 +96,7 @@ namespace orb
 
 	void TweenInspector::moveControlPoint()
 	{
-		Vector2D tap = InputManager::getInstance()->getTapPosition();
+		Vector2f tap = InputManager::getInstance()->getTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			// clamp boundary point positions
@@ -111,8 +112,8 @@ namespace orb
 
 	void TweenInspector::rotateTangent()
 	{
-		Vector2D tap = InputManager::getInstance()->getTapPosition();
-		Vector2D ctrlPoint = m_tween.getSpline()->get(m_selectedControlPoint).pos;
+		Vector2f tap = InputManager::getInstance()->getTapPosition();
+		Vector2f ctrlPoint = m_tween.getSpline()->get(m_selectedControlPoint).pos;
 		float tangent;
 		if (tap.x > ctrlPoint.x)
 			tangent = (tap.y - ctrlPoint.y) / (tap.x - ctrlPoint.x);
@@ -132,7 +133,7 @@ namespace orb
 		m_selectedControlPoint = -1;
 	}
 
-	unsigned int TweenInspector::computeSelectedControlPoint(Vector2D tapPosition)
+	unsigned int TweenInspector::computeSelectedControlPoint(Vector2f tapPosition)
 	{
 		for (unsigned int i = 0; i < m_tween.getSpline()->getCount(); i++)
 		{
@@ -143,10 +144,10 @@ namespace orb
 		return -1;
 	}
 
-	bool TweenInspector::isControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition)
+	bool TweenInspector::isControlPointSelected(unsigned int controlPointIndex, Vector2f tapPosition)
 	{
-		Vector2D pos = m_tween.getSpline()->get(controlPointIndex).pos;
-		if (Vector2D::distance(pos, tapPosition) <= SELECT_RADIUS)
+		Vector2f pos = m_tween.getSpline()->get(controlPointIndex).pos;
+		if (Vector2f::distance(pos, tapPosition) <= SELECT_RADIUS)
 			return true;
 
 		return false;
@@ -157,14 +158,14 @@ namespace orb
 		if (m_tween.getSpline()->getCount() < 2)
 			return;
 
-		Spline calcSpline = GetShiftedSpline(m_tween.getSpline(), Vector2D(0.5f, 0.5f));
+		Spline calcSpline = GetShiftedSpline(m_tween.getSpline(), Vector2f(0.5f, 0.5f));
 
 		float step = 1.0f / (float)NUM_SAMPLES;
-		Vector2D last = calcSpline.get(0).pos;
+		Vector2f last = calcSpline.get(0).pos;
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
-			Vector2D current = calcSpline.getValue(x);
-			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(last + Vector2D(-0.5f, -0.5f), current + Vector2D(-0.5f, -0.5f), Color::Black);
+			Vector2f current = calcSpline.getValue(x);
+			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(last + Vector2f(-0.5f, -0.5f), current + Vector2f(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
@@ -175,16 +176,16 @@ namespace orb
 
 		for (unsigned int i = 0; i < m_tween.getSpline()->getCount(); i++)
 		{
-			Vector2D pos = m_tween.getSpline()->get(i).pos;
+			Vector2f pos = m_tween.getSpline()->get(i).pos;
 			Rect rect(pos, MARK_EXTENT);
 			bool isSelected = m_selectedControlPoint == i;
 			drd->drawDebugRect(rect, isSelected ? Color::Red : Color::Green);
 
 			if (isSelected)
 			{
-				Vector2D v = Vector2D(1.0f, m_tween.getSpline()->get(i).tangent).normalized() * 0.5f * TANGENT_LENGTH;
-				Vector2D tangentStart = pos - v;
-				Vector2D tangentEnd = pos + v;
+				Vector2f v = Vector2f(1.0f, m_tween.getSpline()->get(i).tangent).normalized() * 0.5f * TANGENT_LENGTH;
+				Vector2f tangentStart = pos - v;
+				Vector2f tangentEnd = pos + v;
 				Rect startRect(tangentStart, MARK_EXTENT);
 				Rect endRect(tangentEnd, MARK_EXTENT);
 				drd->drawDebugLine(tangentStart, tangentEnd, Color::Red);
@@ -194,7 +195,7 @@ namespace orb
 		}
 	}
 
-	bool TweenInspector::IsClickablePosition(Vector2D position)
+	bool TweenInspector::IsClickablePosition(Vector2f position)
 	{
 		Rect clickableRect = Rect(getParent()->getTransform()->position, 0.5f);
 		return clickableRect.contains(position);
@@ -205,7 +206,7 @@ namespace orb
 		return m_selectedControlPoint == 0 || m_selectedControlPoint == m_tween.getSpline()->getCount() - 1;
 	}
 
-	void TweenInspector::ShiftSpline(Spline* spline, Vector2D shift)
+	void TweenInspector::ShiftSpline(Spline* spline, Vector2f shift)
 	{
 		for (unsigned int i = 0; i < spline->getCount(); i++)
 		{
@@ -215,7 +216,7 @@ namespace orb
 		}
 	}
 
-	Spline TweenInspector::GetShiftedSpline(Spline* spline, Vector2D shift)
+	Spline TweenInspector::GetShiftedSpline(Spline* spline, Vector2f shift)
 	{
 		Spline shifted = *spline;
 		ShiftSpline(&shifted, shift);
@@ -224,19 +225,22 @@ namespace orb
 
 	void TweenInspector::saveToJsonFile()
 	{
-		ShiftSpline(m_tween.getSpline(), Vector2D(0.5f, 0.5f));
+		ShiftSpline(m_tween.getSpline(), Vector2f(0.5f, 0.5f));
 		m_tween.saveToJsonFile();
-		ShiftSpline(m_tween.getSpline(), Vector2D(-0.5f, -0.5f));
+		ShiftSpline(m_tween.getSpline(), Vector2f(-0.5f, -0.5f));
 		LogUtil::logMessage("Tween data saved");
 	}
 
 	void TweenInspector::toggle()
 	{
 		if (m_isActive)
-			getParent()->getTransform()->scale = Vector2D::Zero;
+			// getParent()->getTransform()->scale = Vector2f::Zero;
+			 getParent()->getTransform()->scale = Vector2f(0.0f, 0.0f);
 
 		else
-			getParent()->getTransform()->scale = Vector2D::One;
+			// getParent()->getTransform()->scale = Vector2f::One;
+			getParent()->getTransform()->scale = Vector2f(1.0f, 1.0f);
+
 
 		m_isActive = !m_isActive;
 	}

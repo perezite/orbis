@@ -40,14 +40,14 @@ namespace base
 		*this *= rotation2D(rad);
 	}
 
-	void Matrix3::translate2D(Vector2D trans)
+	void Matrix3::translate2D(Vector2f trans)
 	{
 		*this *= Matrix3(1.0f, 0.0f, trans.x,
 			0.0f, 1.0f, trans.y,
 			0.0f, 0.0f, 1.0f);
 	}
 
-	void Matrix3::scale2D(Vector2D scale)
+	void Matrix3::scale2D(Vector2f scale)
 	{
 		*this *= Matrix3(scale.x, 0.0f, 0.0f,
 			0.0f, scale.y, 0.0f,
@@ -76,11 +76,11 @@ namespace base
 		return *this;
 	}
 
-	Vector2D Matrix3::operator*(const Vector2D & vec) const
+	Vector2f Matrix3::operator*(const Vector2f & vec) const
 	{
 		float x = this->getValue(0, 0) * vec.x + this->getValue(0, 1) * vec.y + this->getValue(0, 2);
 		float y = this->getValue(1, 0) * vec.x + this->getValue(1, 1) * vec.y + this->getValue(1, 2);
-		return Vector2D(x, y);
+		return Vector2f(x, y);
 	}
 
 	Rect Matrix3::operator*(const Rect & rect) const

@@ -67,6 +67,6 @@ namespace orb
 		float m_velocityInheritance;
 
 		// the last position of the entity transforms
-		Vector2D m_lastEntityPos;
+		Vector2f m_lastEntityPos;
 	};
 }

@@ -23,12 +23,12 @@ namespace app
 		static float Speed;
 
 		// the top target
-		static Vector2D TopTarget;
+		static Vector2f TopTarget;
 
 		// the bottom target
-		static Vector2D BottomTarget;
+		static Vector2f BottomTarget;
 
 		// the currently set target
-		Vector2D m_currentTarget;
+		Vector2f m_currentTarget;
 	};
 }

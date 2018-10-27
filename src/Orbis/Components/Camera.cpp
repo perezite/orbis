@@ -34,9 +34,9 @@ namespace orb
 		m_worldCamMatrix = calcCamMatrix(TransformSpace::World);
 	}
 
-	Vector2D Camera::screenSpaceToCameraSpace(Vector2D v)
+	Vector2f Camera::screenSpaceToCameraSpace(Vector2f v)
 	{
-		return Vector2D(v.x, getAspect() * v.y);
+		return Vector2f(v.x, getAspect() * v.y);
 	}
 
 	Matrix3 Camera::calcViewMatrix(TransformSpace space)
@@ -54,10 +54,11 @@ namespace orb
 	// reference: http://www.songho.ca/opengl/gl_projectionmatrix.html (at the bottom)
 	Matrix3 Camera::calcProjectionMatrix(TransformSpace space)
 	{
-		Vector2D scale =
-			space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2D::One;
-		Vector2D inverseScale = Vector2D(1.0f / scale.x, 1.0f / scale.y);
-		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		Vector2f scale =
+			// space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2f::One;
+			 space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2f(1.0f, 1.0f);
+		Vector2f inverseScale = Vector2f(1.0f / scale.x, 1.0f / scale.y);
+		Vector2f resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		float inverseAspect = resolution.x / resolution.y;
 
 		Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f,
@@ -71,15 +72,15 @@ namespace orb
 		return space == TransformSpace::World ? m_worldCamMatrix : m_localCamMatrix;
 	}
 
-	Vector2D Camera::getSize()
+	Vector2f Camera::getSize()
 	{
-		Vector2D scale = getInstance()->getParent()->getTransform()->scale;
-		return Vector2D(scale.x, scale.y * getAspect());
+		Vector2f scale = getInstance()->getParent()->getTransform()->scale;
+		return Vector2f(scale.x, scale.y * getAspect());
 	}
 
 	float Camera::getAspect()
 	{
-		Vector2D resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		Vector2f resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		return resolution.y / resolution.x;
 	}
 

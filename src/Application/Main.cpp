@@ -1,5 +1,7 @@
  // #define APP_TEST
 
+#include "../Base/Math/Vector2.h"
+
 #include "Levels/Level1.h"
 #include "Levels/Level2.h"
 #include "Levels/Level3.h"

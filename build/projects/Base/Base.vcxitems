@@ -18,7 +18,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\MathUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\EnvironmentUtil.cpp" />
@@ -32,7 +31,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Range.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Rect.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonReader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Serialization\JsonWriter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\ContainerUtil.h" />

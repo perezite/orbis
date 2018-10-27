@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector2D.h"
+#include "Vector2.h"
 #include "Rect.h"
 
 namespace base
@@ -27,10 +27,10 @@ namespace base
 		void rotate2D(float radians);
 
 		// apply a 2D-translation
-		void translate2D(Vector2D trans);
+		void translate2D(Vector2f trans);
 
 		// apply a 2D-scaling
-		void scale2D(Vector2D scale);
+		void scale2D(Vector2f scale);
 
 		// multiply
 		Matrix3 operator*(const Matrix3& other) const;
@@ -39,7 +39,7 @@ namespace base
 		const Matrix3& operator*=(const Matrix3 &other);
 
 		// multiply with vector
-		Vector2D operator*(const Vector2D& vec) const;
+		Vector2f operator*(const Vector2f& vec) const;
 
 		// multiply with rect
 		Rect operator*(const Rect& rect) const;

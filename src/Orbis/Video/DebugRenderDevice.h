@@ -16,7 +16,7 @@ namespace orb
 	{
 	public:
 		// draw a debug line (slow!)
-		void drawDebugLine(Vector2D start, Vector2D end, Color color);
+		void drawDebugLine(Vector2f start, Vector2f end, Color color);
 
 		// draw a debug rect (slow!)
 		void drawDebugRect(Rect rect, Color color);

@@ -37,7 +37,7 @@ namespace orb
 		SDL_Rect toSDLRect(Rect rect);
 
 		// get smallest power of two size still containing all texture rects
-		Vector2D getSmallestPowerOfTwoSize(std::vector<Rect> rects);
+		Vector2f getSmallestPowerOfTwoSize(std::vector<Rect> rects);
 
 		// get a tight boundary around all texture rects within the page
 		Rect getBoundaryRect(std::vector<Rect> rects);

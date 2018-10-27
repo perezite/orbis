@@ -16,7 +16,7 @@ namespace base
 		clear();
 	}
 
-	Vector2D Spline::getValue(float x)
+	Vector2f Spline::getValue(float x)
 	{
 		unsigned int startIdx = 0;
 		for (unsigned int i = 0; i < m_points.size() - 1; i++) {
@@ -27,14 +27,14 @@ namespace base
 				startIdx = i;
 		}
 
-		Vector2D startTangent = Vector2D(1, m_points[startIdx].tangent).scaled(TANGENT_LENGTH);
-		Vector2D endTangent = Vector2D(1, m_points[startIdx + 1].tangent).scaled(TANGENT_LENGTH);
-		Vector2D p0 = m_points[startIdx].pos;
-		Vector2D p1 = p0 + startTangent * 0.5f;
-		Vector2D p3 = m_points[startIdx + 1].pos;
-		Vector2D p2 = p3 - endTangent * 0.5f;
+		Vector2f startTangent = Vector2f(1, m_points[startIdx].tangent).scaled(TANGENT_LENGTH);
+		Vector2f endTangent = Vector2f(1, m_points[startIdx + 1].tangent).scaled(TANGENT_LENGTH);
+		Vector2f p0 = m_points[startIdx].pos;
+		Vector2f p1 = p0 + startTangent * 0.5f;
+		Vector2f p3 = m_points[startIdx + 1].pos;
+		Vector2f p2 = p3 - endTangent * 0.5f;
 		float t = (x - p0.x) / (p3.x - p0.x);
-		return Vector2D(x, getValue(t, p0, p1, p2, p3).y);
+		return Vector2f(x, getValue(t, p0, p1, p2, p3).y);
 	}
 
 	void Spline::add(BezierPoint bp)
@@ -43,7 +43,7 @@ namespace base
 		std::sort(m_points.begin(), m_points.end(), compareControlPoints);
 	}
 
-	void Spline::move(unsigned int index, Vector2D newPosition)
+	void Spline::move(unsigned int index, Vector2f newPosition)
 	{
 		std::vector<BezierPoint> newControlPoints = m_points;
 		newControlPoints[index].pos = newPosition;
@@ -63,7 +63,7 @@ namespace base
 			float tangent = reader.getFloat();
 			reader.getChild();
 			float x = reader.getFloat(); float y = reader.getFloat();
-			Vector2D pos(x, y);
+			Vector2f pos(x, y);
 			m_points.push_back(BezierPoint(pos, tangent));
 		}
 	}
@@ -86,7 +86,7 @@ namespace base
 	}
 
 	// reference: https://www.youtube.com/watch?v=Qu-QK3uoMdY
-	Vector2D Spline::getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3)
+	Vector2f Spline::getValue(float t, Vector2f p0, Vector2f p1, Vector2f p2, Vector2f p3)
 	{
 		float tt = t * t;
 		float ttt = tt * t;
@@ -95,13 +95,13 @@ namespace base
 		float tititi = titi * ti;
 		float x = tititi * p0.x + 3 * titi * t * p1.x + 3 * ti * tt * p2.x + ttt * p3.x;
 		float y = tititi * p0.y + 3 * titi * t * p1.y + 3 * ti * tt * p2.y + ttt * p3.y;
-		return Vector2D(x, y);
+		return Vector2f(x, y);
 	}
 
 	void Spline::clear()
 	{
 		m_points.clear();
-		add(BezierPoint(Vector2D(0.0f, 1.0f), 0.0f));
-		add(BezierPoint(Vector2D(1.0f, 1.0f), 0.0f));
+		add(BezierPoint(Vector2f(0.0f, 1.0f), 0.0f));
+		add(BezierPoint(Vector2f(1.0f, 1.0f), 0.0f));
 	}
 }

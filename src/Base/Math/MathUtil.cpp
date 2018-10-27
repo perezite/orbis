@@ -33,10 +33,10 @@ namespace base
 		return MathUtil::getRandom() * (high - low) + low;
 	}
 
-	Vector2D MathUtil::getRandomOnUnitCircle()
+	Vector2f MathUtil::getRandomOnUnitCircle()
 	{
 		float alpha = getRandom(0, 2.0f * getPi());
-		return Vector2D(cosf(alpha), sinf(alpha));
+		return Vector2f(cosf(alpha), sinf(alpha));
 	}
 
 	bool MathUtil::approx(float val1, float val2, float eps)

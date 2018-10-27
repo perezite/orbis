@@ -21,7 +21,7 @@ namespace orb
 
 	LevelBuilder* LevelBuilder::withPosition(float x, float y)
 	{
-		m_transform.position = Vector2D(x, y);
+		m_transform.position = Vector2f(x, y);
 		return this;
 	}
 
@@ -33,7 +33,7 @@ namespace orb
 
 	LevelBuilder* LevelBuilder::withScale(float w, float h)
 	{
-		m_transform.scale = Vector2D(w, h);
+		m_transform.scale = Vector2f(w, h);
 		return this;
 	}
 
@@ -70,7 +70,7 @@ namespace orb
 	void LevelBuilder::reset()
 	{
 		m_entity = NULL;
-		m_transform = Transform(Vector2D(0.0f, 0.0f), 0.0f, Vector2D(1.0f, 1.0f), TransformSpace::World);
+		m_transform = Transform(Vector2f(0.0f, 0.0f), 0.0f, Vector2f(1.0f, 1.0f), TransformSpace::World);
 		m_components.clear();
 	}
 }

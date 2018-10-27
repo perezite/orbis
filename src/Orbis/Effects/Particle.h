@@ -14,7 +14,7 @@ namespace orb
 	{
 	public:
 		// ctor
-		Particle(Texture * texture, const Color& color, const Transform & transform, const Vector2D & velocity);
+		Particle(Texture * texture, const Color& color, const Transform & transform, const Vector2f & velocity);
 
 		// dtor
 		virtual ~Particle();
@@ -29,7 +29,7 @@ namespace orb
 		void setCurrentLifetime(float lifetime) { m_lifetime = lifetime; }
 
 		// get the velocity
-		const Vector2D& getVelocity() const { return m_velocity; }
+		const Vector2f& getVelocity() const { return m_velocity; }
 
 	protected:
 		// add a renderable
@@ -43,7 +43,7 @@ namespace orb
 		Transform m_transform;
 
 		// the velocity
-		Vector2D m_velocity;
+		Vector2f m_velocity;
 
 		// the current lifetime
 		float m_lifetime;

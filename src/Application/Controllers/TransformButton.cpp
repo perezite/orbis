@@ -20,8 +20,8 @@ namespace
 	void Translate(Transform* transform, bool forward, float speed)
 	{
 		speed = forward ? speed : -speed;
-		Vector2D position = transform->position;
-		Vector2D translation = Matrix3::rotation2D(transform->rotation) * Vector2D(TimeManager::instance()->getDeltaSeconds() * speed, 0.0f);
+		Vector2f position = transform->position;
+		Vector2f translation = Matrix3::rotation2D(transform->rotation) * Vector2f(TimeManager::instance()->getDeltaSeconds() * speed, 0.0f);
 		transform->position = position + translation;
 	}
 
@@ -30,7 +30,7 @@ namespace
 		float dt = TimeManager::instance()->getDeltaSeconds();
 		float factor = positive ? 1 - dt * 0.5f : 1 + dt * 0.5f;
 		Transform* transform = camera->getParent()->getTransform();
-		Vector2D scale = transform->scale;
+		Vector2f scale = transform->scale;
 		transform->scale = scale * factor;
 	}
 

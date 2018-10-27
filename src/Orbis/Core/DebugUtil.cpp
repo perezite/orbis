@@ -11,7 +11,7 @@
 
 namespace orb
 {
-	void DebugUtil::drawLine(Vector2D start, Vector2D end, Color color)
+	void DebugUtil::drawLine(Vector2f start, Vector2f end, Color color)
 	{
 		ORBIS_ASSERT_DEBUG();
 

@@ -41,10 +41,10 @@ namespace orb
 		void deleteSelectedControlPoint();
 
 		// get the index of the selected control point or -1 if no point was selected
-		unsigned int computeSelectedControlPoint(Vector2D tapPosition);
+		unsigned int computeSelectedControlPoint(Vector2f tapPosition);
 
 		// check whether a control point is selected by the given tap position
-		bool isControlPointSelected(unsigned int controlPointIndex, Vector2D tapPosition);
+		bool isControlPointSelected(unsigned int controlPointIndex, Vector2f tapPosition);
 
 		// render the bezier spline
 		void renderSpline();
@@ -53,16 +53,16 @@ namespace orb
 		void renderBezierPoints();
 
 		// check if given points is within the clickable rect
-		bool IsClickablePosition(Vector2D position);
+		bool IsClickablePosition(Vector2f position);
 
 		// is the selected control point the first or last point 
 		bool IsSelectedControlPointOnBoundary();
 
 		// shift a spline bys the given vector
-		void ShiftSpline(Spline* spline, Vector2D shift);
+		void ShiftSpline(Spline* spline, Vector2f shift);
 
 		// get a spline shifted by the given vector
-		Spline GetShiftedSpline(Spline* spline, Vector2D shift);
+		Spline GetShiftedSpline(Spline* spline, Vector2f shift);
 
 		// save the tween
 		void saveToJsonFile();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector2D.h"
+#include "Vector2.h"
 
 namespace base
 {
@@ -17,20 +17,20 @@ namespace base
 		{}
 
 		// ctor
-		Rect(Vector2D leftBottom_, Vector2D rightTop_)
+		Rect(Vector2f leftBottom_, Vector2f rightTop_)
 			: leftBottom(leftBottom_), rightTop(rightTop_)
 		{}
 
 		// ctor - creates a square at the given position with the given extent
-		Rect(Vector2D pos, float extent)
+		Rect(Vector2f pos, float extent)
 			: leftBottom(pos.x - extent, pos.y - extent), rightTop(pos.x + extent, pos.y + extent)
 		{}
 
 		// get the left top corner
-		Vector2D getLeftTop() const { return Vector2D(leftBottom.x, rightTop.y); }
+		Vector2f getLeftTop() const { return Vector2f(leftBottom.x, rightTop.y); }
 
 		// get the right bottom corner
-		Vector2D getRightBottom() const { return Vector2D(rightTop.x, leftBottom.y); }
+		Vector2f getRightBottom() const { return Vector2f(rightTop.x, leftBottom.y); }
 
 		// get the width of the rect
 		float getWidth() const { return rightTop.x - leftBottom.x; }
@@ -54,14 +54,14 @@ namespace base
 		float getTop() const { return rightTop.y; }
 
 		// check if rect contains point
-		bool contains(Vector2D point) { return point.x >= getLeft() && point.x <= getRight() && point.y >= getBottom() && point.y <= getTop(); }
+		bool contains(Vector2f point) { return point.x >= getLeft() && point.x <= getRight() && point.y >= getBottom() && point.y <= getTop(); }
 
 	public:
 		// the left bottom corner
-		Vector2D leftBottom;
+		Vector2f leftBottom;
 
 		// the right top corner
-		Vector2D rightTop;
+		Vector2f rightTop;
 
 		// an index, can be used to identify rects after a non order-stable algorithm was performed
 		unsigned int index;

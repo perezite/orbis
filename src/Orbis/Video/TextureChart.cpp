@@ -5,7 +5,7 @@ namespace orb
 	TextureChart::TextureChart(std::vector<Texture*> textures, std::vector<Rect> rects)
 	{
 		// create a page surface with the smallest possible power of two size
-		Vector2D potSize = getSmallestPowerOfTwoSize(rects);
+		Vector2f potSize = getSmallestPowerOfTwoSize(rects);
 		SDL_Surface* texSurface = textures[0]->getSurface();
 		SDL_PixelFormat* texFormat = texSurface->format;
 		SDL_Surface* surface = SDL_CreateRGBSurface(texSurface->flags, (int)potSize.x, (int)potSize.y,
@@ -50,19 +50,19 @@ namespace orb
 		return sdlRect;
 	}
 
-	Vector2D TextureChart::getSmallestPowerOfTwoSize(std::vector<Rect> rects)
+	Vector2f TextureChart::getSmallestPowerOfTwoSize(std::vector<Rect> rects)
 	{
 		Rect boundary = getBoundaryRect(rects);
 		int potWidth = getNextPowerOfTwo((int)boundary.getWidth());
 		int potHeight = getNextPowerOfTwo((int)boundary.getHeight());
 
-		return Vector2D((float)potWidth, (float)potHeight);
+		return Vector2f((float)potWidth, (float)potHeight);
 	}
 
 	Rect TextureChart::getBoundaryRect(std::vector<Rect> rects)
 	{
 		// get maximal x and y coordinates in packed rects
-		Vector2D max(0, 0);
+		Vector2f max(0, 0);
 		for (unsigned int i = 0; i < rects.size(); i++)
 		{
 			if (rects[i].getRight() > max.x)

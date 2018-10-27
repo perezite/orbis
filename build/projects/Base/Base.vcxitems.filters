@@ -24,9 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Matrix3.cpp">
       <Filter>Math</Filter>
     </ClCompile>
@@ -55,9 +52,6 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Algorithms\BinPacking.h">
       <Filter>Algorithms</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2D.h">
-      <Filter>Math\Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Spline.h">
       <Filter>Math\Headers</Filter>
@@ -95,6 +89,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Base.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\ContainerUtil.h">
       <Filter>System\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2.h">
+      <Filter>Math\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,7 +19,8 @@ namespace app
 
 	void WobbleBrickEffect::update()
 	{
-		getParent()->getTransform()->scale = Vector2D::One * m_tween->getValue(m_duration);
+		// getParent()->getTransform()->scale = Vector2f::One * m_tween->getValue(m_duration);
+		 getParent()->getTransform()->scale = Vector2f(1.0f, 1.0f) * m_tween->getValue(m_duration);
 	}
 }
 

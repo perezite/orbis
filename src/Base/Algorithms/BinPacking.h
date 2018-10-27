@@ -32,7 +32,7 @@ namespace base
 		static int findSmallestFittingPartition(std::vector<Rect> m_partitionBuffer, Rect rect);
 
 		// translate, such that the rect's bottom left coincides with the given point
-		static void translateRect(Rect& rect, Vector2D bottomLeftTargetPos);
+		static void translateRect(Rect& rect, Vector2f bottomLeftTargetPos);
 
 		// split the given partition with the given rect at the left bottom
 		static std::tuple<Rect, Rect> split(Rect partition, Rect rect);

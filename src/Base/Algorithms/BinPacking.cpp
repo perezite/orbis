@@ -111,9 +111,9 @@ namespace base
 		return smallest;
 	}
 
-	void BinPacking::translateRect(Rect& rect, Vector2D leftBottomTargetPos)
+	void BinPacking::translateRect(Rect& rect, Vector2f leftBottomTargetPos)
 	{
-		Vector2D dist = leftBottomTargetPos - rect.leftBottom;
+		Vector2f dist = leftBottomTargetPos - rect.leftBottom;
 
 		rect.leftBottom += dist;
 		rect.rightTop += dist;

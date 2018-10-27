@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector2D.h"
+#include "Vector2.h"
 
 namespace base
 {
@@ -24,7 +24,7 @@ namespace base
 		static float getRandom(float low, float hight);
 
 		// a random vector on the unit circle
-		static Vector2D getRandomOnUnitCircle();
+		static Vector2f getRandomOnUnitCircle();
 
 		// check whether two values are closer than eps
 		static bool approx(float val1, float val2, float eps);

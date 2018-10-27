@@ -76,11 +76,11 @@ namespace orb
 	void ParticleRenderer::spawnParticle()
 	{
 		float dt = TimeManager::instance()->getDeltaSeconds();
-		Vector2D entityVelocity = (m_lastEntityPos - getParent()->getTransform()->position) * (1.0f / dt);
+		Vector2f entityVelocity = (m_lastEntityPos - getParent()->getTransform()->position) * (1.0f / dt);
 
-		Vector2D position = getParent()->getTransform()->position + MathUtil::getRandomOnUnitCircle() * m_emissionSphereShellRadius;
-		Vector2D particleVelocity = (MathUtil::getRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
-		Transform transform(position, 0.0f, Vector2D(m_initialSize, m_initialSize));
+		Vector2f position = getParent()->getTransform()->position + MathUtil::getRandomOnUnitCircle() * m_emissionSphereShellRadius;
+		Vector2f particleVelocity = (MathUtil::getRandomOnUnitCircle() * m_initialSpeed) + (entityVelocity * m_velocityInheritance);
+		Transform transform(position, 0.0f, Vector2f(m_initialSize, m_initialSize));
 		m_particles.push_back(new Particle(m_texture, Color::White, transform, particleVelocity));
 
 	}

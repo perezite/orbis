@@ -12,11 +12,12 @@ namespace orb
 	public:
 		// ctor
 		Transform()
-			: position(Vector2D::Zero), rotation(0.0f), scale(Vector2D::One), transformSpace(TransformSpace::World)
+		// 	: position(Vector2f::Zero), rotation(0.0f), scale(Vector2f::One), transformSpace(TransformSpace::World)
+		 	: position(Vector2f(0.0f, 0.0f)), rotation(0.0f), scale(Vector2f(1.0f, 1.0f)), transformSpace(TransformSpace::World)
 		{ }
 
 		// ctor
-		Transform(Vector2D position_, float rotation_, Vector2D scale_, TransformSpace transformSpace_ = TransformSpace::World)
+		Transform(Vector2f position_, float rotation_, Vector2f scale_, TransformSpace transformSpace_ = TransformSpace::World)
 			: position(position_), rotation(rotation_), scale(scale_), transformSpace(transformSpace_)
 		{ }
 
@@ -28,13 +29,13 @@ namespace orb
 
 	public:
 		// the position
-		Vector2D position;
+		Vector2f position;
 
 		// the rotation
 		float rotation;
 
 		// the scale
-		Vector2D scale;
+		Vector2f scale;
 
 		// the transform space
 		TransformSpace transformSpace;

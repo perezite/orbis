@@ -26,8 +26,8 @@ namespace app
 		{
 			float width = MathUtil::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
 			float height = MathUtil::getRandom(EXTENTS_RANGE.min, EXTENTS_RANGE.max);
-			Vector2D leftBottom(-width / 2.0f, -height / 2.0f);
-			Vector2D rightTop(width / 2.0f, height / 2.0f);
+			Vector2f leftBottom(-width / 2.0f, -height / 2.0f);
+			Vector2f rightTop(width / 2.0f, height / 2.0f);
 			m_origRects.push_back(Rect(leftBottom, rightTop));
 			m_rectColors.push_back(Color(MathUtil::getRandom(), MathUtil::getRandom(), MathUtil::getRandom()));
 		}

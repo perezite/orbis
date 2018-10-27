@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Math/Vector2D.h"
+#include "../Math/Vector2.h"
 
 #include <vector>
 #include <sstream>
@@ -12,13 +12,13 @@ namespace base
 	{
 	public:
 		// ctor
-		BezierPoint(Vector2D pos_, float tangent_)
+		BezierPoint(Vector2f pos_, float tangent_)
 			: pos(pos_), tangent(tangent_)
 		{}
 
 	public:
 		// the position
-		Vector2D pos;
+		Vector2f pos;
 
 		// the tangent of the point
 		float tangent;
@@ -39,7 +39,7 @@ namespace base
 		{ }
 
 		// get the spline value at coordinate x
-		Vector2D getValue(float x);
+		Vector2f getValue(float x);
 
 		// get a control point
 		BezierPoint get(unsigned int index) const { return m_points[index]; }
@@ -57,7 +57,7 @@ namespace base
 		void add(BezierPoint bp);
 
 		// move a control point
-		void move(unsigned int index, Vector2D newPosition);
+		void move(unsigned int index, Vector2f newPosition);
 
 		// load from json
 		void loadFromJson(std::string jsonStr);
@@ -66,7 +66,7 @@ namespace base
 		std::string toJson();
 	protected:
 		// get the spline segment value at a parameter t with control points p0, p1, p2, p3
-		Vector2D getValue(float t, Vector2D p0, Vector2D p1, Vector2D p2, Vector2D p3);
+		Vector2f getValue(float t, Vector2f p0, Vector2f p1, Vector2f p2, Vector2f p3);
 
 		// control points sorting function
 		static bool compareControlPoints(BezierPoint first, BezierPoint second) { return first.pos.x < second.pos.x; };

@@ -17,7 +17,7 @@ namespace app
 	{
 		if (!EnvironmentUtil::isMobile()) {
 			m_originalResolution = VideoManager::getInstance()->getWindow()->getResolution();
-			VideoManager::getInstance()->getWindow()->setResolution(Vector2D(800, 800));
+			VideoManager::getInstance()->getWindow()->setResolution(Vector2f(800, 800));
 		}
 
 		build()->entity()->withComponent(new Camera())->go();

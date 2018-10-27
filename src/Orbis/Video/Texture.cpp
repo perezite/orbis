@@ -87,12 +87,12 @@ namespace orb
 		}
 	}
 
-	Vector2D Texture::mapUVCoord(Vector2D texUV)
+	Vector2f Texture::mapUVCoord(Vector2f texUV)
 	{
 		if (m_isAtlassed)
 		{
 			Rect uvRect = m_atlasChart->getUVRect(this);
-			Vector2D atlasUV(uvRect.getLeft() + texUV.x * uvRect.getWidth(), uvRect.getBottom() + texUV.y * uvRect.getHeight());
+			Vector2f atlasUV(uvRect.getLeft() + texUV.x * uvRect.getWidth(), uvRect.getBottom() + texUV.y * uvRect.getHeight());
 			return atlasUV;
 		}
 		else
