@@ -17,25 +17,23 @@ namespace orb
 		virtual ~Window();
 
 		// get the resolution
-		Vector2D getResolution() { 
-			return m_resolution; 
-		}
+		Vector2D getResolution() const;
 
-		// change the window resultion
-		void setResolution(Vector2D resolution);
+		// set the resolution
+		void setResolution(const Vector2D& resolution);
 
-		// clear
+		// clear the window
 		void clear();
 
 		// swap the video buffers
-		void swapBuffers();
+		void swap();
 
 	protected:
-		// get the default window resolution
+		// apply the default resolution to the window
 		Vector2D getDefaultResolution();
 
 		// create the sdl window
-		void createSdlWindow();
+		void createSdlWindow(Vector2D resolution);
 
 	private:
 		// the sdl window
@@ -43,11 +41,5 @@ namespace orb
 
 		// the opengl context
 		SDL_GLContext m_openGlContext;
-
-		// the window resolution
-		Vector2D m_resolution;
-
-		// the default window resolution
-		static const Vector2D DESKTOP_DEFAULT_RESOLUTION;
 	};
 }

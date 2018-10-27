@@ -26,6 +26,8 @@ SDL_GLContext SDL_Verify(SDL_GLContext  returnValue);
 
 SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
 
+int IMG_Verify_Flags(int returnValue, int flags);
+
 #define SDL_RWsize_old(ctx)		(ctx)->size(ctx)
 #undef SDL_RWsize
 #define SDL_RWsize(a) SDL_Verify(SDL_RWsize_old(a), -1)
@@ -67,5 +69,7 @@ SDL_Surface* IMG_Verify(SDL_Surface* returnValue);
 #define SDL_SetSurfaceBlendMode(a, b) SDL_Verify(SDL_SetSurfaceBlendMode(a, b))
 
 #define IMG_Load(path) IMG_Verify(IMG_Load(path))
+
+#define IMG_Init(flags) IMG_Verify_Flags(IMG_Init(flags), flags)
 
 #endif

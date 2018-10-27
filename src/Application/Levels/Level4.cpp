@@ -15,8 +15,10 @@ namespace app
 {
 	void Level4::start()
 	{
-		m_originalResolution = VideoManager::getInstance()->getWindow()->getResolution();
-		VideoManager::getInstance()->getWindow()->setResolution(Vector2D(800, 800));
+		if (!EnvironmentUtil::isMobile()) {
+			m_originalResolution = VideoManager::getInstance()->getWindow()->getResolution();
+			VideoManager::getInstance()->getWindow()->setResolution(Vector2D(800, 800));
+		}
 
 		build()->entity()->withComponent(new Camera())->go();
 
@@ -31,6 +33,7 @@ namespace app
 
 	Level4::~Level4()
 	{
-		VideoManager::getInstance()->getWindow()->setResolution(m_originalResolution);
+		if (!EnvironmentUtil::isMobile())
+			VideoManager::getInstance()->getWindow()->setResolution(m_originalResolution);
 	}
 }

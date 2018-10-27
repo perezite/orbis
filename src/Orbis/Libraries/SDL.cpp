@@ -79,9 +79,17 @@ SDL_GLContext SDL_Verify(SDL_GLContext returnValue)
 	return returnValue;
 }
 
-SDL_Surface * IMG_Verify(SDL_Surface * returnValue)
+SDL_Surface* IMG_Verify(SDL_Surface* returnValue)
 {
 	if (returnValue == NULL)
+		IMG_HandleError();
+
+	return returnValue;
+}
+
+int IMG_Verify_Flags(int returnValue, int flags)
+{
+	if ((returnValue & flags) != flags)
 		IMG_HandleError();
 
 	return returnValue;

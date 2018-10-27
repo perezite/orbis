@@ -31,7 +31,6 @@ namespace orb
 
 	long TimeManager::getDeltaTicks()
 	{
-		bool test = (m_currentTicks - m_lastTicks == m_fixedTicks);
 		return m_currentTicks - m_lastTicks;
 	}
 

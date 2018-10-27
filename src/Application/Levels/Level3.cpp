@@ -23,9 +23,6 @@ namespace app
 
 	void Level3::start()
 	{
-		for (unsigned int i = 0; i < 10; i++)
-			LogUtil::logMessage("bla");
-
 		 // init textures
 		std::vector<std::string> textures = { "Textures/BlackBlock.png", "Textures/BlueBlock.png", "Textures/CyanBlock.png",
 			"Textures/GreenBlock.png", "Textures/GreyBlock.png", "Textures/OrangeBlock.png", "Textures/PurpleBlock.png", 

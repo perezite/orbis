@@ -7,8 +7,9 @@
 // #define ORBIS_DEBUG_GL
 // #define ORBIS_DEBUG_RENDERDEVICE
 
-// render settings
+// video settings
 #define ORBIS_USE_TEXTURE_ATLASSING
+#define ORBIS_DESKTOP_DEFAULT_RESOLUTION (base::Vector2D(400, 711));
 
 // ensure valid settings combinations
 #if defined(ORBIS_DEBUG_GL) && !defined(_DEBUG)

@@ -104,6 +104,6 @@ namespace orb
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 			m_entities[i]->renderDebug();
 
-		video->getWindow()->swapBuffers();
+		video->getWindow()->swap();
 	}
 }
