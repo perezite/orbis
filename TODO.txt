@@ -1,6 +1,6 @@
 TODO:	
 - Interface an SFML angleichen
-	- Next: Vector2f::Zero und Vector2f::One calls wiederherstellen und Vector-Funktionen inlinen
+	- Vector-Funktionen inlinen
 	- Tutorials von SFML durchgehen 
 		UND parallel dazu den SFML Sourcecode anschauen
 		UND parallel dazu nacheinander die relevanten Klassen refactoren

@@ -94,4 +94,9 @@
       <Filter>Math\Headers</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2.inl">
+      <Filter>Math</Filter>
+    </None>
+  </ItemGroup>
 </Project>

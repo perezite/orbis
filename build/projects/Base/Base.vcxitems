@@ -40,4 +40,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\MemoryUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\System\StringUtil.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\..\src\Base\Math\Vector2.inl" />
+  </ItemGroup>
 </Project>
