@@ -1,4 +1,4 @@
-#define APP_TEST
+// #define APP_TEST
 
 #include "../Base/Math/Vector2.h"
 
