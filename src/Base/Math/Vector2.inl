@@ -1,3 +1,4 @@
+#include "Vector2.h"
 
 template <class T>
 const Vector2<T> Vector2<T>::Zero = Vector2<T>(0, 0);
@@ -51,6 +52,12 @@ inline const Vector2<T> Vector2<T>::operator+=(const Vector2<T> & other)
 	return *this + other;
 }
 
+template<class T>
+inline T base::Vector2<T>::length() const
+{
+	return sqrt(x * x + y * y);
+}
+
 template <class T>
 inline const Vector2<T> Vector2<T>::normalized() const
 {
@@ -63,3 +70,12 @@ inline const Vector2<T> Vector2<T>::scaled(T newLength) const
 	Vector2<T> scaled((this->x * newLength) / length(), (this->y * newLength) / length());
 	return scaled;
 }
+
+template <class T>
+inline T Vector2<T>::distance(Vector2<T> left, Vector2<T> right)
+{
+	Vector2<T> d = right - left;
+	return sqrt(d.x * d.x + d.y * d.y);
+}
+
+

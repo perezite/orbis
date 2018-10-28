@@ -41,10 +41,7 @@ namespace base
 		const Vector2 operator+=(const Vector2 &other);
 
 		// get the length of a vector
-		T length() const
-		{
-			return sqrt(x * x + y * y);
-		}
+		T length() const;
 
 		// get normalized
 		const Vector2 normalized() const;
@@ -53,11 +50,7 @@ namespace base
 		const Vector2 scaled(T newLength) const;
 
 		// distance between two vectors
-		static T distance(Vector2 left, Vector2 right)
-		{
-			Vector2 d = right - left;
-			return sqrt(d.x * d.x + d.y * d.y);
-		}
+		static T distance(Vector2 left, Vector2 right);
 
 	public:
 		// the x component 
