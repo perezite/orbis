@@ -11,8 +11,8 @@ namespace
 	// convert pixel coordinates to screen coordinates in the range (-0.5, +0.5)
 	Vector2f PixelCoordinatesToScreenCoordinates(int x, int y)
 	{
-		Vector2f resolution = VideoManager::getInstance()->getWindow()->getResolution();
-		return Vector2f(float(x) / resolution.x - 0.5f, 0.5f - float(y) / resolution.y);
+		Vector2u resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		return Vector2f(float(x) /(float)resolution.x - 0.5f, 0.5f - float(y) / (float)resolution.y);
 	}
 
 	// convert finger coordinates to screen coordinates in the range (-0.5, +0.5)

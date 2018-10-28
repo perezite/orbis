@@ -16,6 +16,6 @@ namespace app
 
 	private:
 		// original window resolution
-		Vector2f m_originalResolution;
+		Vector2u m_originalResolution;
 	};
 }

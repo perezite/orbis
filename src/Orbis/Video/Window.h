@@ -17,10 +17,10 @@ namespace orb
 		virtual ~Window();
 
 		// get the resolution
-		Vector2f getResolution() const;
+		Vector2u getResolution() const;
 
 		// set the resolution
-		void setResolution(const Vector2f& resolution);
+		void setResolution(const Vector2u& resolution);
 
 		// clear the window
 		void clear();
@@ -30,10 +30,10 @@ namespace orb
 
 	protected:
 		// apply the default resolution to the window
-		Vector2f getDefaultResolution();
+		Vector2u getDefaultResolution();
 
 		// create the sdl window
-		void createSdlWindow(Vector2f resolution);
+		void createSdlWindow(const Vector2u& resolution);
 
 	private:
 		// the sdl window

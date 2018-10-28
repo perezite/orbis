@@ -57,8 +57,8 @@ namespace orb
 		Vector2f scale =
 			space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2f::One;
 		Vector2f inverseScale = Vector2f(1.0f / scale.x, 1.0f / scale.y);
-		Vector2f resolution = VideoManager::getInstance()->getWindow()->getResolution();
-		float inverseAspect = resolution.x / resolution.y;
+		Vector2u resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		float inverseAspect = (float)resolution.x / (float)resolution.y;
 
 		Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f,
 			0.0f, 2.0f * inverseAspect * inverseScale.y, 0.0f,
@@ -79,8 +79,8 @@ namespace orb
 
 	float Camera::getAspect()
 	{
-		Vector2f resolution = VideoManager::getInstance()->getWindow()->getResolution();
-		return resolution.y / resolution.x;
+		Vector2u resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		return (float)resolution.y / (float)resolution.x;
 	}
 
 	Matrix3 Camera::calcCamMatrix(TransformSpace space)

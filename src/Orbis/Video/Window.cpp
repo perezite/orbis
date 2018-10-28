@@ -38,14 +38,14 @@ namespace orb
 		SDL_DestroyWindow(m_sdlWindow);
 	}
 
-	Vector2f Window::getResolution() const
+	Vector2u Window::getResolution() const
 	{
 		int x, y;
 		SDL_GL_GetDrawableSize(m_sdlWindow, &x, &y);
-		return Vector2f(float(x), float(y));
+		return Vector2u((unsigned int)x, (unsigned int)y);
 	}
 
-	void Window::setResolution(const Vector2f& resolution)
+	void Window::setResolution(const Vector2u& resolution)
 	{
 		Exception::assert(!EnvironmentUtil::isMobile(), "The resolution cannot be changed on mobile platforms");
 
@@ -64,18 +64,18 @@ namespace orb
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
-	Vector2f Window::getDefaultResolution()
+	Vector2u Window::getDefaultResolution()
 	{
 		if (EnvironmentUtil::isMobile()) {
 			SDL_DisplayMode mode;
 			SDL_GetDisplayMode(0, 0, &mode);
-			return Vector2f((float)mode.w, (float)mode.h);
+			return Vector2u((unsigned int)mode.w, (unsigned int)mode.h);
 		}
 
 		return ORBIS_DESKTOP_DEFAULT_RESOLUTION;
 	}
 
-	void Window::createSdlWindow(Vector2f resolution)
+	void Window::createSdlWindow(const Vector2u& resolution)
 	{
 		#if defined(WIN32)
 			m_sdlWindow = SDL_CreateWindow("Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, (int)resolution.x, (int)resolution.y, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
