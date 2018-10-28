@@ -1,4 +1,4 @@
- // #define APP_TEST
+#define APP_TEST
 
 #include "../Base/Math/Vector2.h"
 
@@ -42,7 +42,7 @@ int main(int argc, char* args[])
 		LogUtil::showMessageBox(e.what(), "Exception");
 
 		#if defined(_DEBUG)
-				throw e;
+			throw e;
 		#endif
 	}
 

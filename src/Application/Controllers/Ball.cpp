@@ -39,7 +39,7 @@ namespace app
 		void Ball::aimingEnter()
 		{
 			LogUtil::logMessage("Ball::aimingEnter");
-			// getParent()->getTransform()->position = Vector2f::Zero;
+			getParent()->getTransform()->position = Vector2f::Zero;
 			m_state = State::AimingRun;
 		}
 

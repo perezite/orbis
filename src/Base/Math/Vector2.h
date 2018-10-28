@@ -40,11 +40,17 @@ namespace base
 		// inline addition 
 		const Vector2 operator+=(const Vector2 &other);
 
+		// get the length of a vector
+		T length() const
+		{
+			return sqrt(x * x + y * y);
+		}
+
 		// get normalized
 		const Vector2 normalized() const;
 
 		// get scaled
-		const Vector2 scaled(T length) const;
+		const Vector2 scaled(T newLength) const;
 
 		// distance between two vectors
 		static T distance(Vector2 left, Vector2 right)
@@ -120,9 +126,9 @@ namespace base
 	}
 
 	template <class T>
-	inline const Vector2<T> Vector2<T>::scaled(T length) const
+	inline const Vector2<T> Vector2<T>::scaled(T newLength) const
 	{
-		Vector2<T> scaled((this->x * length) / 2, (this->y * length) / 2);
+		Vector2<T> scaled((this->x * newLength) / length(), (this->y * newLength) / length());
 		return scaled;
 	}
 	

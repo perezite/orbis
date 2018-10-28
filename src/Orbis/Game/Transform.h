@@ -12,8 +12,7 @@ namespace orb
 	public:
 		// ctor
 		Transform()
-		// 	: position(Vector2f::Zero), rotation(0.0f), scale(Vector2f::One), transformSpace(TransformSpace::World)
-		 	: position(Vector2f(0.0f, 0.0f)), rotation(0.0f), scale(Vector2f(1.0f, 1.0f)), transformSpace(TransformSpace::World)
+			: position(Vector2f::Zero), rotation(0.0f), scale(Vector2f::One), transformSpace(TransformSpace::World)
 		{ }
 
 		// ctor

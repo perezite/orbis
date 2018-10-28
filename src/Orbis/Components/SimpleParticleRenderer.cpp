@@ -29,8 +29,7 @@ namespace orb
 
 	void SimpleParticleRenderer::spawnParticle(const Transform& transform, const Color& color)
 	{
-		//Particle* particle = new Particle(m_texture, color, transform, Vector2f::Zero);
-		Particle* particle = new Particle(m_texture, color, transform, Vector2f(0.0f, 0.0f));
+		Particle* particle = new Particle(m_texture, color, transform, Vector2f::Zero);
 		m_particles.push_back(particle);
 	}
 }

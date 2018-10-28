@@ -55,8 +55,7 @@ namespace orb
 	Matrix3 Camera::calcProjectionMatrix(TransformSpace space)
 	{
 		Vector2f scale =
-			// space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2f::One;
-			 space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2f(1.0f, 1.0f);
+			space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2f::One;
 		Vector2f inverseScale = Vector2f(1.0f / scale.x, 1.0f / scale.y);
 		Vector2f resolution = VideoManager::getInstance()->getWindow()->getResolution();
 		float inverseAspect = resolution.x / resolution.y;
