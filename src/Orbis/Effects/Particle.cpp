@@ -12,8 +12,8 @@ namespace orb
 
 	Particle::~Particle()
 	{
-		VideoManager::getInstance()->getRenderDevice();
-		VideoManager::getInstance()->getRenderDevice()->deleteRenderable(m_renderable);
+		VideoManager::instance()->getRenderDevice();
+		VideoManager::instance()->getRenderDevice()->deleteRenderable(m_renderable);
 		delete m_renderable;
 	}
 
@@ -21,9 +21,9 @@ namespace orb
 	{
 		m_renderable = new Renderable();
 		m_renderable->getMaterial()->setTexture(texture);
-		m_renderable->getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/DiffuseParticle.vs", "Shaders/DiffuseParticle.frag"));
+		m_renderable->getMaterial()->setShader(VideoManager::instance()->getShader("Shaders/DiffuseParticle.vs", "Shaders/DiffuseParticle.frag"));
 		m_renderable->setMesh(Mesh::createVertexColoredTexturedQuad(m_color));
 		m_renderable->setTransform(&m_transform);
-		VideoManager::getInstance()->getRenderDevice()->addRenderable(m_renderable);
+		VideoManager::instance()->getRenderDevice()->addRenderable(m_renderable);
 	}
 }

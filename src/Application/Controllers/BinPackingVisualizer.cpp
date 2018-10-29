@@ -46,7 +46,7 @@ namespace app
 
 	void BinPackingVisualizer::update()
 	{
-		if(InputManager::getInstance()->isKeyGoingDown(KeyCode::Return))
+		if(InputManager::instance()->isKeyGoingDown(KeyCode::Return))
 		{ 
 			m_currentStep++;
 			m_currentStep = std::min(m_currentStep, m_origRects.size());

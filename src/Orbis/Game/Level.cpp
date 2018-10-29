@@ -18,8 +18,8 @@ namespace orb
 
 	Level::~Level()
 	{
-		EffectsManager::getInstance()->clear();
-		VideoManager::getInstance()->clear();
+		EffectsManager::instance()->clear();
+		VideoManager::instance()->clear();
 		MemoryUtil::clear(m_entities);
 		if (m_levelBuilder)
 			delete m_levelBuilder;
@@ -59,10 +59,10 @@ namespace orb
 	void Level::startLevel()
 	{
 		TimeManager::instance()->reset();
-		VideoManager::getInstance()->clear();
+		VideoManager::instance()->clear();
 		start();
 		startEntities();
-		VideoManager::getInstance()->start();
+		VideoManager::instance()->start();
 	}
 
 	void Level::updateLevel()
@@ -73,7 +73,7 @@ namespace orb
 
 	void Level::render()
 	{
-		VideoManager::getInstance()->getWindow()->clear();
+		VideoManager::instance()->getWindow()->clear();
 		renderEntities();
 	}
 
@@ -95,7 +95,7 @@ namespace orb
 
 	void Level::renderEntities()
 	{
-		VideoManager* video = VideoManager::getInstance();
+		VideoManager* video = VideoManager::instance();
 
 
 		video->getWindow()->clear();

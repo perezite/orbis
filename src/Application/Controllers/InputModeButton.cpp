@@ -11,7 +11,7 @@ namespace app
 {
 	void InputModeButton::update()
 	{
-		InputManager* inputManager = InputManager::getInstance();
+		InputManager* inputManager = InputManager::instance();
 
 		if (inputManager->isTapGoingDown(getParent()->getTransform()->getRect()))
 			cycle();

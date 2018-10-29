@@ -1,11 +1,14 @@
 TODO:	
-- Interface an SFML angleichen
+- Interface an SFML angleichen		
 	- Tutorials von SFML durchgehen 
 		UND parallel dazu den SFML Sourcecode anschauen
 		UND parallel dazu nacheinander die relevanten Klassen refactoren
 		-- Ifdefs benutzen um zw. alter und neuer Implementation zu wechseln
 		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
-		-- Current: https://www.sfml-dev.org/tutorials/2.5/window-window.php $
+		-- Current: https://www.sfml-dev.org/tutorials/2.5/window-events.php
+		-- Liste der Klassen zum refactoren:
+			- InputManager	
+	- Zweiter Refactoring-Durchlauf: Rekursiv top-down alle Klassen durchgehen und wo nötig das Interface refactoren
 - Problem lösen, dass die Checksumme unterschiedlich ist im Stromsparmodus
 - Base in Orbis reinziehen und Base-Projekt entfernen
 - Interne Interfaces soweit als möglich analog den externen implementieren

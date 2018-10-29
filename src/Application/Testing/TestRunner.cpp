@@ -20,9 +20,9 @@ namespace app
 		m_numFramesToRecord = numFrames;
 		m_recordedChecksums.clear();
 		TimeManager::instance()->setFixedUpdateTime(30);
-		OrbisMain::getInstance()->setOnRenderedCallback(record);
-		LevelManager::getInstance()->queueLevel(level);
-		OrbisMain::getInstance()->run();
+		OrbisMain::instance()->setOnRenderedCallback(record);
+		LevelManager::instance()->queueLevel(level);
+		OrbisMain::instance()->run();
 		return evaluate(testcaseName);
 	}
 
@@ -35,7 +35,7 @@ namespace app
 		}
 
 		if (m_numFramesRecorded >= m_numFramesToRecord)
-			InputManager::getInstance()->setQuitEvent();
+			InputManager::instance()->setQuitEvent(true);
 
 		unsigned long long checksum = computeFramebufferChecksum();
 		m_recordedChecksums.push_back(checksum);
@@ -53,7 +53,7 @@ namespace app
 		// handle first run
 		if (expectedChecksums.size() == 0)
 		{
-			if ("u" == InputManager::getInstance()->getConsoleLine("No data found in file. Press (u) to (u)pdate the file with the currently recorded data"))
+			if ("u" == InputManager::instance()->getConsoleLine("No data found in file. Press (u) to (u)pdate the file with the currently recorded data"))
 				expectedChecksums = updateChecksumsInFile(identifier);
 		}
 		
@@ -71,7 +71,7 @@ namespace app
 				LogUtil::logMessage("mismatch in frame %d. Expected: %lld, Actual: %lld", frameIdx, expectedChecksums[frameIdx], m_recordedChecksums[frameIdx]);
 			}
 
-			if ("u" == InputManager::getInstance()->getConsoleLine("In case, the failures reflect intentional changes, enter (u) to (u)verwrite the current values"))
+			if ("u" == InputManager::instance()->getConsoleLine("In case, the failures reflect intentional changes, enter (u) to (u)verwrite the current values"))
 			{
 				expectedChecksums = updateChecksumsInFile(identifier);
 				mismatches.clear();
@@ -94,7 +94,7 @@ namespace app
 	{
 		std::vector<unsigned long long> result;
 
-		if ("w" == InputManager::getInstance()->getConsoleLine("No data found in the test-file. Press w to (w)rite the recorded data to the test file now")) {
+		if ("w" == InputManager::instance()->getConsoleLine("No data found in the test-file. Press w to (w)rite the recorded data to the test file now")) {
 			updateChecksumsInFile(identifier);
 			result = m_recordedChecksums;
 		}	
@@ -147,7 +147,7 @@ namespace app
 	// Reference: https://www.khronos.org/opengl/wiki/Common_Mistakes
 	unsigned long long TestRunner::computeFramebufferChecksum()
 	{
-		Vector2u resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		Vector2u resolution = VideoManager::instance()->getWindow()->getResolution();
 		unsigned int w = resolution.x;
 		unsigned int h = resolution.y;
 

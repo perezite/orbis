@@ -18,7 +18,7 @@ namespace orb
 	{
 	public:
 		// get instance
-		static VideoManager* getInstance();
+		static VideoManager* instance();
 
 		// clear the manager
 		void clear();

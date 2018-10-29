@@ -49,7 +49,7 @@ namespace app
 			aimingCurrentAngle = 0.0f;
 			getParent()->getTransform()->rotation = aimingCurrentAngle;
 
-			if (InputManager::getInstance()->isTapGoingDown())
+			if (InputManager::instance()->isTapGoingDown())
 				m_state = State::FlyingEnter;
 		}
 
@@ -66,7 +66,7 @@ namespace app
 		void Ball::flyingRun()
 		{
 			LogUtil::logMessage("Ball::flyingRun");
-			if (InputManager::getInstance()->isTapGoingDown())
+			if (InputManager::instance()->isTapGoingDown())
 			{
 				m_state = State::DyingEnter;
 			}
@@ -90,7 +90,7 @@ namespace app
 		{
 			LogUtil::logMessage("Ball::dyingRun()");
 
-			if (InputManager::getInstance()->isTapGoingDown())
+			if (InputManager::instance()->isTapGoingDown())
 				m_state = State::ParalysedEnter;
 		}
 
@@ -108,7 +108,7 @@ namespace app
 		void Ball::paralysedRun()
 		{
 			LogUtil::logMessage("Ball::paralysedRun");
-			if (InputManager::getInstance()->isTapGoingDown())
+			if (InputManager::instance()->isTapGoingDown())
 				m_state = State::AimingEnter;
 		}
 

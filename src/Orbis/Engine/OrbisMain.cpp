@@ -7,7 +7,7 @@
 
 namespace orb
 {
-	OrbisMain* OrbisMain::getInstance()
+	OrbisMain* OrbisMain::instance()
 	{
 		static OrbisMain instance;
 		return &instance;
@@ -15,8 +15,8 @@ namespace orb
 
 	void OrbisMain::run()
 	{
-		LevelManager* level = LevelManager::getInstance();
-		InputManager* input = InputManager::getInstance();
+		LevelManager* level = LevelManager::instance();
+		InputManager* input = InputManager::instance();
 		TimeManager* time = TimeManager::instance();
 		PerformanceLogger performance;
 

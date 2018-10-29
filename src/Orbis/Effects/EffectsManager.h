@@ -11,7 +11,7 @@ namespace orb
 	{
 	public:
 		// get instance
-		static EffectsManager* getInstance();
+		static EffectsManager* instance();
 
 		// clear the manager
 		void clear();

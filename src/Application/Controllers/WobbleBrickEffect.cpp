@@ -10,7 +10,7 @@ namespace app
 	WobbleBrickEffect::WobbleBrickEffect(std::string tween, float tweenDuration) : 
 		Component::Component(), m_duration(tweenDuration)
 	{
-		m_tween = EffectsManager::getInstance()->getTween(tween);
+		m_tween = EffectsManager::instance()->getTween(tween);
 	}
 
 	void WobbleBrickEffect::start()

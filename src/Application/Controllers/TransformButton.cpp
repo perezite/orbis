@@ -67,19 +67,17 @@ namespace app
 {
 	TransformButton::TransformButton(bool leftDirection) : m_positiveTransform(leftDirection)
 	{
-		Level* level = LevelManager::getInstance()->getCurrentLevel();
+		Level* level = LevelManager::instance()->getCurrentLevel();
 		m_yellowBlock = level->findEntity("yellowBlock")->getComponent<SpriteController>();
 		m_blueBlock = level->findEntity("blueBlock")->getComponent<SpriteController>();
 		m_inputModeSpriteRenderer = level->findEntity("inputModeButton")->getComponent<SpriteRenderer>();
-		m_camera = Camera::getInstance()->getParent()->getComponent<CameraBehavior>();
+		m_camera = Camera::instance()->getParent()->getComponent<CameraBehavior>();
 		storeInitialTransforms();
 	}
 
 	void TransformButton::update()
 	{
-		InputManager* input = InputManager::getInstance();
-
-		if (input->isTapDown(getParent()->getTransform()->getRect()))
+		if (InputManager::instance()->isTapDown(getParent()->getTransform()->getRect()))
 			affect();
 	}
 

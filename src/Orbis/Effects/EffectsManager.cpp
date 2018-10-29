@@ -2,7 +2,7 @@
 
 namespace orb
 {
-	EffectsManager* EffectsManager::getInstance()
+	EffectsManager* EffectsManager::instance()
 	{
 		static EffectsManager instance;
 		return &instance;

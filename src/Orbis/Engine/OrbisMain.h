@@ -8,7 +8,7 @@ namespace orb
 	{
 	public:
 		// get instance
-		static OrbisMain* getInstance();
+		static OrbisMain* instance();
 
 		// destructor
 		virtual ~OrbisMain() { };

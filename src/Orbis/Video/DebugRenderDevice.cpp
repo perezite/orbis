@@ -14,7 +14,7 @@ namespace orb
 	void DebugRenderDevice::drawDebugLine(Vector2f start, Vector2f end, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::getInstance()->getCamMatrix();
+		Matrix3 camMatrix = Camera::instance()->getCamMatrix();
 		start = camMatrix * start;
 		end = camMatrix * end;
 		GLfloat vertexArray[4] = { start.x, start.y, end.x, end.y };
@@ -26,7 +26,7 @@ namespace orb
 	void DebugRenderDevice::drawDebugRect(Rect rect, Color color)
 	{
 		// compute vertex array
-		Matrix3 camMatrix = Camera::getInstance()->getCamMatrix();
+		Matrix3 camMatrix = Camera::instance()->getCamMatrix();
 		rect = camMatrix * rect;
 		GLfloat vertexArray[12] = {
 			rect.leftBottom.x , rect.leftBottom.y, rect.getRightBottom().x, rect.getRightBottom().y, rect.getLeftTop().x, rect.getLeftTop().y,
@@ -40,7 +40,7 @@ namespace orb
 	{
 		// prepare
 		glDisable(GL_BLEND);
-		Shader* shader = VideoManager::getInstance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag");
+		Shader* shader = VideoManager::instance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag");
 		shader->use();
 		shader->setUniform("u_vColor", color);
 		int positionAttribLocation = shader->getAttributeLocation("a_vPosition");

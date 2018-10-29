@@ -32,19 +32,19 @@ namespace orb
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
-			Texture* texture = VideoManager::getInstance()->getTexture("Textures/CoordinateSystem2.png");
+			Texture* texture = VideoManager::instance()->getTexture("Textures/CoordinateSystem2.png");
 		// getParent()->getTransform()->scale = Vector2f::Zero;
 		 getParent()->getTransform()->scale = Vector2f(0.0f, 0.0f);
 		m_renderable.getMaterial()->setTexture(texture);
-		m_renderable.getMaterial()->setShader(VideoManager::getInstance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
+		m_renderable.getMaterial()->setShader(VideoManager::instance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
 		m_renderable.setMesh(Mesh::createTexturedQuad());
 		m_renderable.setTransform(getParent()->getTransform());
-		VideoManager::getInstance()->getRenderDevice()->addRenderable(&m_renderable);
+		VideoManager::instance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 
 	void TweenInspector::update()
 	{
-		InputManager* input = InputManager::getInstance();
+		InputManager* input = InputManager::instance();
 
 		if (input->isKeyGoingDown(m_activationKey))
 			toggle();
@@ -83,7 +83,7 @@ namespace orb
 
 	void TweenInspector::addOrSelectControlPoint()
 	{
-		Vector2f tap = InputManager::getInstance()->getTapPosition();
+		Vector2f tap = InputManager::instance()->getTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			m_selectedControlPoint = computeSelectedControlPoint(tap);
@@ -96,7 +96,7 @@ namespace orb
 
 	void TweenInspector::moveControlPoint()
 	{
-		Vector2f tap = InputManager::getInstance()->getTapPosition();
+		Vector2f tap = InputManager::instance()->getTapPosition();
 		if (IsClickablePosition(tap))
 		{
 			// clamp boundary point positions
@@ -112,7 +112,7 @@ namespace orb
 
 	void TweenInspector::rotateTangent()
 	{
-		Vector2f tap = InputManager::getInstance()->getTapPosition();
+		Vector2f tap = InputManager::instance()->getTapPosition();
 		Vector2f ctrlPoint = m_tween.getSpline()->get(m_selectedControlPoint).pos;
 		float tangent;
 		if (tap.x > ctrlPoint.x)
@@ -165,14 +165,14 @@ namespace orb
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
 			Vector2f current = calcSpline.getValue(x);
-			VideoManager::getInstance()->getDebugRenderDevice()->drawDebugLine(last + Vector2f(-0.5f, -0.5f), current + Vector2f(-0.5f, -0.5f), Color::Black);
+			VideoManager::instance()->getDebugRenderDevice()->drawDebugLine(last + Vector2f(-0.5f, -0.5f), current + Vector2f(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
 
 	void TweenInspector::renderBezierPoints()
 	{
-		DebugRenderDevice* drd = VideoManager::getInstance()->getDebugRenderDevice();
+		DebugRenderDevice* drd = VideoManager::instance()->getDebugRenderDevice();
 
 		for (unsigned int i = 0; i < m_tween.getSpline()->getCount(); i++)
 		{

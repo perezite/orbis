@@ -11,7 +11,7 @@ using namespace base;
 
 namespace orb
 {
-	VideoManager* VideoManager::getInstance()
+	VideoManager* VideoManager::instance()
 	{
 		static VideoManager instance;
 		return &instance;
@@ -19,7 +19,7 @@ namespace orb
 
 	void VideoManager::clear()
 	{
-		VideoManager::getInstance()->getRenderDevice()->clear();
+		VideoManager::instance()->getRenderDevice()->clear();
 
 		for (std::map<std::string, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 			delete (*it).second;

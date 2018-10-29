@@ -22,11 +22,11 @@ namespace app
 		// updateLevel
 		void update()
 		{
-			InputManager* input = InputManager::getInstance();
+			InputManager* input = InputManager::instance();
 			KeyCode switchKey = m_switchForward ? KeyCode::Right : KeyCode::Left;
 
 			if (input->isKeyDown(switchKey) || input->isTapGoingDown(getParent()->getTransform()->getRect()))
-				LevelManager::getInstance()->queueLevel(new T());
+				LevelManager::instance()->queueLevel(new T());
 		}
 
 	private:

@@ -44,7 +44,7 @@ namespace orb
 
 	void Tween::createInspectorEntity()
 	{	
-		Level* level = LevelManager::getInstance()->getCurrentLevel();
+		Level* level = LevelManager::instance()->getCurrentLevel();
 		Entity* inspector = new Entity();
 		inspector->addComponent(new TweenInspector(this));
 		level->addEntity(inspector);

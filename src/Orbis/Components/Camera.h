@@ -14,7 +14,7 @@ namespace orb
 	{
 	public:
 		// get singleton component
-		static Camera* getInstance();
+		static Camera* instance();
 
 		// ctor
 		Camera();

@@ -11,11 +11,11 @@ namespace app
 {
 	void CloseButton::update()
 	{
-		InputManager* input = InputManager::getInstance();
+		InputManager* input = InputManager::instance();
 
 		if (input->isTapGoingDown(getParent()->getTransform()->getRect()))
 		{
-			input->setQuitEvent();
+			input->setQuitEvent(true);
 		}
 	}
 }

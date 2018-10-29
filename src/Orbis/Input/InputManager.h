@@ -1,7 +1,6 @@
 #pragma once
 
 #include "KeyCode.h"
-
 #include "../Game/TransformSpace.h"
 
 #include "../../Base/Base.h"
@@ -16,7 +15,7 @@ namespace orb
 	{
 	public:
 		// get instance
-		static InputManager* getInstance();
+		static InputManager* instance();
 
 		// update
 		void update();
@@ -28,37 +27,37 @@ namespace orb
 		bool hasQuitEvent() const { return m_hasQuitEvent; }
 
 		// set the quit event to true
-		void setQuitEvent();
+		void setQuitEvent(bool hasQuitEvent);
 
 		// is key pressed
-		bool isKeyDown(KeyCode keyCode);
+		bool isKeyDown(KeyCode keyCode) const;
 
 		// is key going down
-		bool isKeyGoingDown(KeyCode keyCode);
+		bool isKeyGoingDown(KeyCode keyCode) const;
 
-		// is a tap pressed
-		bool isTapDown();
+		// is a tap happening
+		bool isTapDown() const;
 
-		// is a tap pressed in cam coordinates rect
-		bool isTapDown(Rect rect);
+		// is a tap happening within the given rect
+		bool isTapDown(Rect rect) const;
 
 		// is a tap index pressed
-		bool isTapIndexDown(signed long index);
+		bool isTapIndexDown(signed long index) const;
 
 		// is a tap going down
-		bool isTapGoingDown();
+		bool isTapGoingDown() const;
 
-		// is a tap going down in cam coordinates rect
-		bool isTapGoingDown(Rect rect);
+		// is a tap going down in the given rect
+		bool isTapGoingDown(Rect rect) const;
 
 		// is a tap index going down
-		bool isTapIndexGoingDown(signed long index);
+		bool isTapIndexGoingDown(signed long index) const;
 
 		// get the tap position in camera space ((+/-0.5f, +/-0.5f * aspectRation)) 
-		Vector2f getTapPosition();
+		const Vector2f getTapPosition() const;
 
 		// get an input line from console
-		std::string getConsoleLine(std::string promptMessage);
+		const std::string getConsoleLine(std::string promptMessage) const;
 
 	protected:
 		// singleton ctor

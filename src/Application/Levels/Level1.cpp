@@ -24,7 +24,7 @@ namespace app
 			"Textures/RotateYellowSprite.png", "Textures/TranslateYellowSprite.png", "Textures/TranslateBlueSprite.png", 
 			"Textures/RotateCamera.png", "Textures/TranslateCamera.png", "Textures/ScaleCamera.png", "Textures/Reset.png" };
 
-		VideoManager::getInstance()->getTextureAtlas()->add(inputModeTextures);
+		VideoManager::instance()->getTextureAtlas()->add(inputModeTextures);
 
 		build()->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
 
@@ -40,7 +40,7 @@ namespace app
 			->withComponent(new SpriteController(-MathUtil::getPi() / 2.0f))
 			->withPosition(-0.25f, -0.1f)->withScale(0.15f, 0.15f)->go();
 
-		Camera* cam = Camera::getInstance();
+		Camera* cam = Camera::instance();
 
 		build()->entity("inputModeButton")->withComponent(new SpriteRenderer("Textures/RotateYellowSprite.png"))
 			->withComponent(new InputModeButton(inputModeTextures))

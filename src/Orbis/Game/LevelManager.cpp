@@ -13,7 +13,7 @@ namespace orb
 		m_currentLevel(NULL), m_queuedLevel(NULL)
 	{ }
 
-	LevelManager * LevelManager::getInstance()
+	LevelManager * LevelManager::instance()
 	{
 		static LevelManager instance;
 		return &instance;

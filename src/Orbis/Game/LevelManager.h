@@ -10,7 +10,7 @@ namespace orb
 	{
 	public:
 		// get instance
-		static LevelManager* getInstance();
+		static LevelManager* instance();
 
 		// queue level
 		void queueLevel(Level *level) { m_queuedLevel = level; }

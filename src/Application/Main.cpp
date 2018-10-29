@@ -1,4 +1,4 @@
-#define APP_TEST
+// #define APP_TEST
 
 #include "../Base/Math/Vector2.h"
 
@@ -32,8 +32,8 @@ int main(int argc, char* args[])
 			return 0;
 		#endif	
 
-		LevelManager::getInstance()->queueLevel(new Level1());
-		OrbisMain::getInstance()->run();
+		LevelManager::instance()->queueLevel(new Level1());
+		OrbisMain::instance()->run();
 	}
 	catch (Exception e)
 	{

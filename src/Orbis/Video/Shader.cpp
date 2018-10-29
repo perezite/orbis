@@ -76,7 +76,7 @@ namespace orb
 
 	Shader::Shader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
 	{
-		VideoManager::getInstance();
+		VideoManager::instance();
 
 		m_programId = glCreateProgram();
 

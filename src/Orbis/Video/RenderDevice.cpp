@@ -95,7 +95,7 @@ namespace orb
 
 	void RenderBatch::render()
 	{
-		Exception::assert(Camera::getInstance() != NULL, "No camera is attached to the level");
+		Exception::assert(Camera::instance() != NULL, "No camera is attached to the level");
 
 		calculateIndices();
 		calculateVertices();

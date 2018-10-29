@@ -65,7 +65,7 @@ namespace orb
 	void Mesh::computeTransformedVertices(std::vector<float>& result, Transform* transform, Texture* tex)
 	{
 		// compute mvp matrix
-		Camera* cam = Camera::getInstance();
+		Camera* cam = Camera::instance();
 		Matrix3 camMatrix = cam->getCamMatrix(transform->transformSpace);
 		Matrix3 mvpMatrix = camMatrix * transform->getModelMatrix();
 

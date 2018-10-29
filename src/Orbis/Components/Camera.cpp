@@ -12,7 +12,7 @@ namespace orb
 {
 	Camera* Camera::m_instance = NULL;
 
-	Camera* Camera::getInstance()
+	Camera* Camera::instance()
 	{
 		return m_instance;
 	}
@@ -44,7 +44,7 @@ namespace orb
 		if (space == TransformSpace::Camera)
 			return Matrix3::getEye();
 
-		Transform* transform = getInstance()->getParent()->getTransform();
+		Transform* transform = instance()->getParent()->getTransform();
 		Matrix3 invTransform;
 		invTransform.rotate2D(-transform->rotation);
 		invTransform.translate2D(-transform->position);
@@ -55,9 +55,9 @@ namespace orb
 	Matrix3 Camera::calcProjectionMatrix(TransformSpace space)
 	{
 		Vector2f scale =
-			space == TransformSpace::World ? getInstance()->getParent()->getTransform()->scale : Vector2f::One;
+			space == TransformSpace::World ? instance()->getParent()->getTransform()->scale : Vector2f::One;
 		Vector2f inverseScale = Vector2f(1.0f / scale.x, 1.0f / scale.y);
-		Vector2u resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		Vector2u resolution = VideoManager::instance()->getWindow()->getResolution();
 		float inverseAspect = (float)resolution.x / (float)resolution.y;
 
 		Matrix3 mat(2.0f * inverseScale.x, 0.0f, 0.0f,
@@ -73,13 +73,13 @@ namespace orb
 
 	Vector2f Camera::getSize()
 	{
-		Vector2f scale = getInstance()->getParent()->getTransform()->scale;
+		Vector2f scale = instance()->getParent()->getTransform()->scale;
 		return Vector2f(scale.x, scale.y * getAspect());
 	}
 
 	float Camera::getAspect()
 	{
-		Vector2u resolution = VideoManager::getInstance()->getWindow()->getResolution();
+		Vector2u resolution = VideoManager::instance()->getWindow()->getResolution();
 		return (float)resolution.y / (float)resolution.x;
 	}
 
