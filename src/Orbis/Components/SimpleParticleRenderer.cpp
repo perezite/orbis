@@ -13,7 +13,7 @@ namespace orb
 {
 	SimpleParticleRenderer::SimpleParticleRenderer(std::string texture) 
 	{
-		m_texture = VideoManager::instance()->getTexture(texture);
+		m_texture = VideoManager::instance().getTexture(texture);
 	}
 
 	SimpleParticleRenderer::~SimpleParticleRenderer()

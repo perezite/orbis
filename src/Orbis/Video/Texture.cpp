@@ -70,9 +70,9 @@ namespace orb
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 		#ifdef ORBIS_USE_TEXTURE_ATLASSING
-			if (VideoManager::instance()->getTextureAtlas()->isGenerated() == false)
+			if (VideoManager::instance().getTextureAtlas().isGenerated() == false)
 			{
-				VideoManager::instance()->getTextureAtlas()->add(this);
+				VideoManager::instance().getTextureAtlas().add(this);
 				m_isAtlassed = true;
 			}
 		#endif	

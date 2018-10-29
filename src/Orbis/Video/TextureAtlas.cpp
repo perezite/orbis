@@ -16,7 +16,7 @@ namespace orb
 	{
 		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			VideoManager::instance()->getTexture(textures[i]);
+			VideoManager::instance().getTexture(textures[i]);
 		}
 	}
 

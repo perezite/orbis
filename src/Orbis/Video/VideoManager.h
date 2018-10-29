@@ -10,7 +10,7 @@
 #include <string>
 #include <map>
 
-typedef std::tuple<std::string, std::string> ShaderPaths;
+typedef std::tuple<std::string, std::string> ShaderConfig;
 
 namespace orb
 {
@@ -18,19 +18,16 @@ namespace orb
 	{
 	public:
 		// get instance
-		static VideoManager* instance();
+		static VideoManager& instance();
 
 		// clear the manager
 		void clear();
-
-		// start the manager
-		void start();
 
 		// render
 		void render();
 
 		// get the texture atlas
-		TextureAtlas* getTextureAtlas() { return &m_textureAtlas; }
+		TextureAtlas& getTextureAtlas() { return m_textureAtlas; }
 
 		// get or load a texture
 		Texture* getTexture(std::string assetPath, bool flipVertically = true);
@@ -56,7 +53,7 @@ namespace orb
 		std::map<std::string, Texture*> m_textures;
 
 		// the shaders
-		std::map<ShaderPaths, Shader*> m_shaders;
+		std::map<ShaderConfig, Shader*> m_shaders;
 
 		// the texture atlas
 		TextureAtlas m_textureAtlas;

@@ -40,7 +40,7 @@ namespace orb
 	{
 		// prepare
 		glDisable(GL_BLEND);
-		Shader* shader = VideoManager::instance()->getShader("Shaders/Flat.vs", "Shaders/Flat.frag");
+		Shader* shader = VideoManager::instance().getShader("Shaders/Flat.vs", "Shaders/Flat.frag");
 		shader->use();
 		shader->setUniform("u_vColor", color);
 		int positionAttribLocation = shader->getAttributeLocation("a_vPosition");

@@ -11,31 +11,25 @@ using namespace base;
 
 namespace orb
 {
-	VideoManager* VideoManager::instance()
+	VideoManager& VideoManager::instance()
 	{
 		static VideoManager instance;
-		return &instance;
+		return instance;
 	}
 
 	void VideoManager::clear()
 	{
-		VideoManager::instance()->getRenderDevice()->clear();
+		VideoManager::instance().getRenderDevice()->clear();
 
 		for (std::map<std::string, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 			delete (*it).second;
 		m_textures.clear();
 
-		for (std::map<ShaderPaths, Shader*>::iterator it = m_shaders.begin(); it != m_shaders.end(); it++)
+		for (std::map<ShaderConfig, Shader*>::iterator it = m_shaders.begin(); it != m_shaders.end(); it++)
 			delete (*it).second;
 		m_shaders.clear();
 
 		m_textureAtlas.clear();
-	}
-
-	void VideoManager::start()
-	{
-		getTextureAtlas()->generate();
-
 	}
 
 	void VideoManager::render()
@@ -55,12 +49,12 @@ namespace orb
 
 	Shader* VideoManager::getShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
 	{
-		ShaderPaths shaderPaths = ShaderPaths(vertexShaderAssetPath, fragmentShaderAssetPath);
-		if (m_shaders[shaderPaths])
-			return m_shaders[shaderPaths];
+		ShaderConfig shaderConfig = ShaderConfig(vertexShaderAssetPath, fragmentShaderAssetPath);
+		if (m_shaders[shaderConfig])
+			return m_shaders[shaderConfig];
 
 		Shader* shader = new Shader(vertexShaderAssetPath, fragmentShaderAssetPath);
-		m_shaders[shaderPaths] = shader;
+		m_shaders[shaderConfig] = shader;
 		return shader;
 	}
 }

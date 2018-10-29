@@ -28,7 +28,7 @@ namespace app
 			"Textures/GreenBlock.png", "Textures/GreyBlock.png", "Textures/OrangeBlock.png", "Textures/PurpleBlock.png", 
 			"Textures/RedBlock.png", "Textures/VioletBlock.png", "Textures/YellowBlock.png" };
 
-		VideoManager::instance()->getTextureAtlas()->add(textures);
+		VideoManager::instance().getTextureAtlas().add(textures);
 
 		build()->entity("camera")->withComponent(new Camera())->go();
 

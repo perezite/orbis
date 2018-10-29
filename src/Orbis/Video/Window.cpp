@@ -38,7 +38,7 @@ namespace orb
 		SDL_DestroyWindow(m_sdlWindow);
 	}
 
-	Vector2u Window::getResolution() const
+	const Vector2u Window::getResolution() const
 	{
 		int x, y;
 		SDL_GL_GetDrawableSize(m_sdlWindow, &x, &y);
@@ -59,12 +59,12 @@ namespace orb
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	
-	void Window::swap()
+	void Window::display()
 	{
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
-	Vector2u Window::getDefaultResolution()
+	const Vector2u Window::getDefaultResolution() const
 	{
 		if (EnvironmentUtil::isMobile()) {
 			SDL_DisplayMode mode;

@@ -15,7 +15,7 @@ namespace orb
 	{
 		ORBIS_ASSERT_DEBUG();
 
-		VideoManager::instance()->getDebugRenderDevice()->drawDebugLine(start, end, color);
+		VideoManager::instance().getDebugRenderDevice()->drawDebugLine(start, end, color);
 	}
 
 	void DebugUtil::drawRect(Rect rect, Color color)
@@ -32,6 +32,6 @@ namespace orb
 	{
 		ORBIS_ASSERT_DEBUG();
 
-		VideoManager::instance()->getDebugRenderDevice()->drawDebugRect(rect, color);
+		VideoManager::instance().getDebugRenderDevice()->drawDebugRect(rect, color);
 	}
 }

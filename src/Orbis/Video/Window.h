@@ -17,7 +17,7 @@ namespace orb
 		virtual ~Window();
 
 		// get the resolution
-		Vector2u getResolution() const;
+		const Vector2u getResolution() const;
 
 		// set the resolution
 		void setResolution(const Vector2u& resolution);
@@ -25,12 +25,12 @@ namespace orb
 		// clear the window
 		void clear();
 
-		// swap the video buffers
-		void swap();
+		// display by swapping the back and front buffer 
+		void display();
 
 	protected:
 		// apply the default resolution to the window
-		Vector2u getDefaultResolution();
+		const Vector2u getDefaultResolution() const;
 
 		// create the sdl window
 		void createSdlWindow(const Vector2u& resolution);
