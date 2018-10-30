@@ -32,14 +32,13 @@ namespace orb
 	{
 		ORBIS_RELEASE(throw Exception("Creating a tween inspector in release mode is not allowed"); )
 
-		Texture* texture = VideoManager::instance().getTexture("Textures/CoordinateSystem2.png");
-		// getParent()->getTransform()->scale = Vector2f::Zero;
-		 getParent()->getTransform()->scale = Vector2f(0.0f, 0.0f);
+		Texture* texture = VideoManager::instance()->getTexture("Textures/CoordinateSystem2.png");
+		getParent()->getTransform()->scale = Vector2f::Zero;
 		m_renderable.getMaterial()->setTexture(texture);
-		m_renderable.getMaterial()->setShader(VideoManager::instance().getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
+		m_renderable.getMaterial()->setShader(VideoManager::instance()->getShader("Shaders/Diffuse.vs", "Shaders/Diffuse.frag"));
 		m_renderable.setMesh(Mesh::createTexturedQuad());
 		m_renderable.setTransform(getParent()->getTransform());
-		VideoManager::instance().getRenderDevice()->addRenderable(&m_renderable);
+		VideoManager::instance()->getRenderDevice()->addRenderable(&m_renderable);
 	}
 
 	void TweenInspector::update()
@@ -165,14 +164,14 @@ namespace orb
 		for (float x = 0.0f; x <= 1.0f; x += step)
 		{
 			Vector2f current = calcSpline.getValue(x);
-			VideoManager::instance().getDebugRenderDevice()->drawDebugLine(last + Vector2f(-0.5f, -0.5f), current + Vector2f(-0.5f, -0.5f), Color::Black);
+			VideoManager::instance()->getDebugRenderDevice()->drawDebugLine(last + Vector2f(-0.5f, -0.5f), current + Vector2f(-0.5f, -0.5f), Color::Black);
 			last = current;
 		}
 	}
 
 	void TweenInspector::renderBezierPoints()
 	{
-		DebugRenderDevice* drd = VideoManager::instance().getDebugRenderDevice();
+		DebugRenderDevice* drd = VideoManager::instance()->getDebugRenderDevice();
 
 		for (unsigned int i = 0; i < m_tween.getSpline()->getCount(); i++)
 		{

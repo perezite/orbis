@@ -129,8 +129,6 @@ namespace orb
 	void TextureChart::registerTextures(std::vector<Texture*> textures)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			textures[i]->setTextureAtlasPage(this);
-		}
+			textures[i]->setParentTextureChart(this);
 	}
 }

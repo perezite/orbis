@@ -28,7 +28,7 @@ namespace orb
 		void setTexture(std::string path);
 
 		// get the texture path
-		 std::string getTexturePath(void) { return m_renderable.getMaterial()->getTexture()->getAssetPath(); }
+		std::string getTexturePath(void) { return m_renderable.getMaterial()->getTexture()->getAssetPath(); }
 
 		// get the texture
 		// TODO: Remove this function

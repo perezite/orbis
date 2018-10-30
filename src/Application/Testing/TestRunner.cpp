@@ -147,7 +147,7 @@ namespace app
 	// Reference: https://www.khronos.org/opengl/wiki/Common_Mistakes
 	unsigned long long TestRunner::computeFramebufferChecksum()
 	{
-		Vector2u resolution = VideoManager::instance().getWindow()->getResolution();
+		Vector2u resolution = VideoManager::instance()->getWindow()->getResolution();
 		unsigned int w = resolution.x;
 		unsigned int h = resolution.y;
 

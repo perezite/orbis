@@ -19,7 +19,7 @@ namespace orb
 	Level::~Level()
 	{
 		EffectsManager::instance()->clear();
-		VideoManager::instance().clear();
+		VideoManager::instance()->clear();
 		MemoryUtil::clear(m_entities);
 		if (m_levelBuilder)
 			delete m_levelBuilder;
@@ -59,10 +59,10 @@ namespace orb
 	void Level::startLevel()
 	{
 		TimeManager::instance()->reset();
-		VideoManager::instance().clear();
+		VideoManager::instance()->clear();
 		start();
 		startEntities();
-		VideoManager::instance().getTextureAtlas().generate();
+		VideoManager::instance()->getTextureAtlas()->generate();
 	}
 
 	void Level::updateLevel()
@@ -73,7 +73,7 @@ namespace orb
 
 	void Level::render()
 	{
-		VideoManager::instance().getWindow()->clear();
+		VideoManager::instance()->getWindow()->clear();
 		renderEntities();
 	}
 
@@ -95,15 +95,15 @@ namespace orb
 
 	void Level::renderEntities()
 	{
-		VideoManager& video = VideoManager::instance();
+		VideoManager* video = VideoManager::instance();
 
 
-		video.getWindow()->clear();
-		video.render();
+		video->getWindow()->clear();
+		video->render();
 
 		for (unsigned int i = 0; i < m_entities.size(); i++)
 			m_entities[i]->renderDebug();
 
-		video.getWindow()->display();
+		video->getWindow()->display();
 	}
 }

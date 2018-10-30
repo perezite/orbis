@@ -22,52 +22,46 @@ namespace orb
 	{
 	public:
 		// ctor
-		Texture(std::string assetPath, bool flipVertically = true);
+		Texture(const std::string& assetPath, bool flipVertically = true);
 
 		// dtor
 		virtual ~Texture();
 
-		// get the texture handle
-		unsigned int getTextureHandle() const { return m_handle; }
-
 		// get the asset path
-		std::string getAssetPath() const { return m_assetPath; }
+		const std::string& getAssetPath() const { return m_assetPath; }
 
 		// get the sdl surface
 		SDL_Surface* getSurface() { return m_surface; }
 
-		// get the gl handle
+		// get the handle
 		GLuint getHandle() { return m_handle; }
 
-		// set the textures atlas page
-		void setTextureAtlasPage(TextureChart* page) { m_atlasChart = page; }
+		// is the texture charted
+		bool isCharted() const { return m_parentChart != NULL; }
 
-		// transform texture uv coordinates
-		Vector2f mapUVCoord(Vector2f texUV);
+		// get the parent chart
+		const TextureChart* getParentChart() const { return m_parentChart; }
+
+		// set the atlas parentChart of the texture
+		void setParentTextureChart(TextureChart* parentChart) { m_parentChart = parentChart; }
+
+		// transform given UV coordinates to actual charted coordinates
+		Vector2f computeChartedUV(const Vector2f& texUV);
 
 		// bind this texture
 		void bind();
-
-		// is the texture using atlassing
-		bool isAtlassed() { return m_isAtlassed; }
-
-		// get the atlas texture chart
-		TextureChart* getAtlasChart() const { return m_atlasChart; }
 
 	private:
 		// the texture asset path
 		std::string m_assetPath;
 
 		// the texture id
-		GLuint m_handle = 0;
+		GLuint m_handle;
 
 		// the image surface
 		SDL_Surface* m_surface;
 
-		// if the texture is on an atlas
-		bool m_isAtlassed;
-
-		// the texture chart containing the texture
-		TextureChart* m_atlasChart;
+		// the texture parentChart containing the texture
+		TextureChart* m_parentChart;
 	};
 }

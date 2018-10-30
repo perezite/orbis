@@ -5,10 +5,13 @@ TODO:
 		UND parallel dazu nacheinander die relevanten Klassen refactoren (inkl. Referenzen zurückgeben anstatt Zeiger, wo möglich)
 		-- Ifdefs benutzen um zw. alter und neuer Implementation zu wechseln
 		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
-		-- Current: https://www.sfml-dev.org/tutorials/2.5/window-events.php
+		-- Current: https://www.sfml-dev.org/tutorials/2.5/graphics-draw.php
 		-- Liste der Klassen zum refactoren:
-			- Window
-			- VideoManager
+			- Texture
+			- Shader
+			- TextureAtlas
+			- RenderDevice
+			- DebugRenderDevice
 	- Zweiter Refactoring-Durchlauf: Rekursiv top-down alle Klassen durchgehen und wo nötig das Interface refactoren und dabei sukzessive den obigen Entwurf einkommentieren
 - Problem lösen, dass die Checksumme unterschiedlich ist im Stromsparmodus
 - Base in Orbis reinziehen und Base-Projekt entfernen

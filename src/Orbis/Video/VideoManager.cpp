@@ -6,22 +6,21 @@
 using namespace base;
 
 #include <sstream>
-
 #include <iostream>
 
 namespace orb
 {
-	VideoManager& VideoManager::instance()
+	VideoManager* VideoManager::instance()
 	{
 		static VideoManager instance;
-		return instance;
+		return &instance;
 	}
 
 	void VideoManager::clear()
 	{
-		VideoManager::instance().getRenderDevice()->clear();
+		VideoManager::instance()->getRenderDevice()->clear();
 
-		for (std::map<std::string, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
+		for (std::map<TextureConfig, Texture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
 			delete (*it).second;
 		m_textures.clear();
 
@@ -37,24 +36,25 @@ namespace orb
 		getRenderDevice()->render();
 	}
 
-	Texture* VideoManager::getTexture(std::string assetPath, bool flipVertically)
+	Texture* VideoManager::getTexture(const std::string& assetPath, bool flipVertically)
 	{
-		if (m_textures[assetPath])
-			return m_textures[assetPath];
+		TextureConfig config = TextureConfig(assetPath, flipVertically);
+		if (m_textures[config])
+			return m_textures[config];
 
 		Texture* texture = new Texture(assetPath, flipVertically);
-		m_textures[assetPath] = texture;
+		m_textures[config] = texture;
 		return texture;
 	}
 
-	Shader* VideoManager::getShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath)
+	Shader* VideoManager::getShader(const std::string& vertexShaderAssetPath, const std::string& fragmentShaderAssetPath)
 	{
-		ShaderConfig shaderConfig = ShaderConfig(vertexShaderAssetPath, fragmentShaderAssetPath);
-		if (m_shaders[shaderConfig])
-			return m_shaders[shaderConfig];
+		ShaderConfig config = ShaderConfig(vertexShaderAssetPath, fragmentShaderAssetPath);
+		if (m_shaders[config])
+			return m_shaders[config];
 
 		Shader* shader = new Shader(vertexShaderAssetPath, fragmentShaderAssetPath);
-		m_shaders[shaderConfig] = shader;
+		m_shaders[config] = shader;
 		return shader;
 	}
 }

@@ -11,6 +11,7 @@
 #include <map>
 
 typedef std::tuple<std::string, std::string> ShaderConfig;
+typedef std::tuple<std::string, bool> TextureConfig;
 
 namespace orb
 {
@@ -18,7 +19,7 @@ namespace orb
 	{
 	public:
 		// get instance
-		static VideoManager& instance();
+		static VideoManager* instance();
 
 		// clear the manager
 		void clear();
@@ -27,13 +28,13 @@ namespace orb
 		void render();
 
 		// get the texture atlas
-		TextureAtlas& getTextureAtlas() { return m_textureAtlas; }
+		TextureAtlas* getTextureAtlas() { return &m_textureAtlas; }
 
 		// get or load a texture
-		Texture* getTexture(std::string assetPath, bool flipVertically = true);
+		Texture* getTexture(const std::string& assetPath, bool flipVertically = true);
 
 		// get or load a shader
-		Shader* getShader(std::string vertexShaderAssetPath, std::string fragmentShaderAssetPath);
+		Shader* getShader(const std::string& vertexShaderAssetPath, const std::string& fragmentShaderAssetPath);
 
 		// get the winow
 		Window* getWindow() { return &m_window; }
@@ -50,7 +51,7 @@ namespace orb
 
 	private:
 		// the textures
-		std::map<std::string, Texture*> m_textures;
+		std::map<TextureConfig, Texture*> m_textures;
 
 		// the shaders
 		std::map<ShaderConfig, Shader*> m_shaders;

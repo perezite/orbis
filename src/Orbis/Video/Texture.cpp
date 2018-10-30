@@ -46,18 +46,15 @@ namespace orb
 		}
 	}
 
-	Texture::Texture(std::string assetPath, bool flipVertically) : m_isAtlassed(false)
+	Texture::Texture(const std::string& assetPath, bool flipVertically) : m_assetPath(assetPath), m_handle(0), m_parentChart(NULL)
 	{
-		m_assetPath = assetPath;
-
 		std::string filePath = AssetUtil::assetPathToFilePath(assetPath);
 		m_surface = IMG_Load(filePath.c_str());
 		SDL_Surface* converted = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
 		SDL_FreeSurface(m_surface);
 		m_surface = converted;
 
-		if (flipVertically)
-		{
+		if (flipVertically) {
 			SDL_Surface* flipped = getFlipped(m_surface);
 			SDL_FreeSurface(m_surface);
 			m_surface = flipped;
@@ -70,46 +67,36 @@ namespace orb
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 		#ifdef ORBIS_USE_TEXTURE_ATLASSING
-			if (VideoManager::instance().getTextureAtlas().isGenerated() == false)
-			{
-				VideoManager::instance().getTextureAtlas().add(this);
-				m_isAtlassed = true;
+			if (VideoManager::instance()->getTextureAtlas()->isGenerated() == false) {
+				VideoManager::instance()->getTextureAtlas()->add(this);
 			}
 		#endif	
 	}
 
 	Texture::~Texture()
 	{
-		if (!m_isAtlassed)
-		{
+		if (!m_parentChart) {
 			glDeleteTextures(1, &m_handle);
 			SDL_FreeSurface(m_surface);
 		}
 	}
 
-	Vector2f Texture::mapUVCoord(Vector2f texUV)
+	Vector2f Texture::computeChartedUV(const Vector2f& texUV)
 	{
-		if (m_isAtlassed)
-		{
-			Rect uvRect = m_atlasChart->getUVRect(this);
+		if (m_parentChart) {
+			Rect uvRect = m_parentChart->getUVRect(this);
 			Vector2f atlasUV(uvRect.getLeft() + texUV.x * uvRect.getWidth(), uvRect.getBottom() + texUV.y * uvRect.getHeight());
 			return atlasUV;
 		}
 		else
-		{
 			return texUV;
-		}
 	}
 
 	void Texture::bind()
 	{
-		if (m_isAtlassed)
-		{
-			m_atlasChart->bind();
-		}
+		if (m_parentChart)
+			m_parentChart->bind();
 		else
-		{
 			glBindTexture(GL_TEXTURE_2D, m_handle);
-		}
 	}
 }
