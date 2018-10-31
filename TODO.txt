@@ -1,5 +1,6 @@
 TODO:	
 - Interface an SFML angleichen		
+	- 
 	- Tutorials von SFML durchgehen 
 		UND parallel dazu den SFML Sourcecode anschauen
 		UND parallel dazu nacheinander die relevanten Klassen refactoren (inkl. Referenzen zurückgeben anstatt Zeiger, wo möglich)
@@ -7,7 +8,6 @@ TODO:
 		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
 		-- Current: https://www.sfml-dev.org/tutorials/2.5/graphics-draw.php
 		-- Liste der Klassen zum refactoren:
-			- Texture
 			- Shader
 			- TextureAtlas
 			- RenderDevice
