@@ -36,6 +36,15 @@ namespace orb
 		getRenderDevice()->render();
 	}
 
+	std::vector<Texture*> VideoManager::getTextures() const
+	{
+		std::vector<Texture*> textures;
+		for (std::map<TextureConfig, Texture*>::const_iterator it = m_textures.begin(); it != m_textures.end(); ++it)
+			textures.push_back(it->second);
+
+		return textures;
+	}
+
 	Texture* VideoManager::getTexture(const std::string& assetPath, bool flipVertically)
 	{
 		TextureConfig config = TextureConfig(assetPath, flipVertically);

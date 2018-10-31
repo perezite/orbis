@@ -1,6 +1,5 @@
 TODO:	
 - Interface an SFML angleichen		
-	- 
 	- Tutorials von SFML durchgehen 
 		UND parallel dazu den SFML Sourcecode anschauen
 		UND parallel dazu nacheinander die relevanten Klassen refactoren (inkl. Referenzen zurückgeben anstatt Zeiger, wo möglich)

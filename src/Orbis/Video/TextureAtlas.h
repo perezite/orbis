@@ -21,20 +21,11 @@ namespace orb
 	{
 	public:
 		// ctor
-		TextureAtlas() : m_isGenerated(false)
+		TextureAtlas()
 		{ }
 
 		// dtor
 		virtual ~TextureAtlas() { };
-
-		// is the atlas generatedk
-		bool isGenerated() { return m_isGenerated; }
-
-		// add a texture 
-		void add(Texture* texture);
-
-		// add multiple textures
-		void add(std::vector<std::string> textures);
 
 		// clear the atlas
 		void clear();
@@ -44,10 +35,10 @@ namespace orb
 
 	protected:
 		// get texture rects
-		std::vector<Rect> getTextureRects();
+		std::vector<Rect> getTextureRects(std::vector<Texture*> textures);
 
 		// select textures by indexed rects
-		std::vector<Texture*> selectTextures(std::vector<Rect> indexedRects);
+		std::vector<Texture*> selectTextures(std::vector<Rect> indexedRects, std::vector<Texture*> textures);
 
 		// get the rect of an sdl surface
 		SDL_Rect getSurfaceRect(SDL_Surface* surface);
@@ -61,8 +52,5 @@ namespace orb
 
 		// the pages
 		std::vector<TextureChart*> m_charts;
-
-		// is the atlas generated
-		bool m_isGenerated;
 	};
 }

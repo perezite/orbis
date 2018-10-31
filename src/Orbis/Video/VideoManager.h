@@ -30,6 +30,9 @@ namespace orb
 		// get the texture atlas
 		TextureAtlas* getTextureAtlas() { return &m_textureAtlas; }
 
+		// get all textures
+		std::vector<Texture*> getTextures() const;
+
 		// get or load a texture
 		Texture* getTexture(const std::string& assetPath, bool flipVertically = true);
 

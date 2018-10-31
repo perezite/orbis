@@ -24,8 +24,6 @@ namespace app
 			"Textures/RotateYellowSprite.png", "Textures/TranslateYellowSprite.png", "Textures/TranslateBlueSprite.png", 
 			"Textures/RotateCamera.png", "Textures/TranslateCamera.png", "Textures/ScaleCamera.png", "Textures/Reset.png" };
 
-		VideoManager::instance()->getTextureAtlas()->add(inputModeTextures);
-
 		build()->entity()->withComponent(new Camera())->withComponent(new CameraBehavior())->go();
 
 		LevelUtil::addLevelSwitcher<Level2>(true);

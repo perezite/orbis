@@ -7,24 +7,10 @@ using namespace base;
 
 namespace orb
 {
-	void TextureAtlas::add(Texture* texture)
-	{
-		m_textures.push_back(texture);
-	}
-
-	void TextureAtlas::add(std::vector<std::string> textures)
-	{
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			VideoManager::instance()->getTexture(textures[i]);
-		}
-	}
-
 	void TextureAtlas::clear()
 	{
 		MemoryUtil::clear(m_charts);
 		m_textures.clear();
-		m_isGenerated = false;
 	}
 
 	void TextureAtlas::generate()
@@ -35,27 +21,27 @@ namespace orb
 		Rect bin = Rect(0, 0, (float)pageSize, (float)pageSize);
 
 		// pack the texture Rects
-		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::calculate(bin, getTextureRects());
+		std::vector<Texture*> textures = VideoManager::instance()->getTextures();
+		std::vector<Rect> textureRects = getTextureRects(textures);
+		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::calculate(bin, textureRects);
 
 		// create charts
 		for (unsigned int i = 0; i < pageRectsCollection.size(); i++)
 		{
 			std::vector<Rect> pageRects = pageRectsCollection[i];
-			std::vector<Texture*> pageTextures = selectTextures(pageRects);
+			std::vector<Texture*> pageTextures = selectTextures(pageRects, textures);
 			TextureChart* page = new TextureChart(pageTextures, pageRects);
 			m_charts.push_back(page);
 		}
-
-		m_isGenerated = true;
 	}
 
-	std::vector<Rect> TextureAtlas::getTextureRects()
+	std::vector<Rect> TextureAtlas::getTextureRects(std::vector<Texture*> textures)
 	{
 		std::vector<Rect> textureRects;
 
-		for (unsigned int i = 0; i < m_textures.size(); i++)
+		for (unsigned int i = 0; i < textures.size(); i++)
 		{
-			Rect rect = toOrbisRect(getSurfaceRect(m_textures[i]->getSurface()));
+			Rect rect = toOrbisRect(getSurfaceRect(textures[i]->getSurface()));
 			rect.index = i;
 			textureRects.push_back(rect);
 		}
@@ -63,17 +49,17 @@ namespace orb
 		return textureRects;
 	}
 
-	std::vector<Texture*> TextureAtlas::selectTextures(std::vector<Rect> indexedRects)
+	std::vector<Texture*> TextureAtlas::selectTextures(std::vector<Rect> indexedRects, std::vector<Texture*> textures)
 	{
-		std::vector<Texture*> textures;
+		std::vector<Texture*> selectedTextures;
 
 		for (unsigned int i = 0; i < indexedRects.size(); i++)
 		{
 			unsigned int texIndex = indexedRects[i].index;
-			textures.push_back(m_textures[texIndex]);
+			selectedTextures.push_back(textures[texIndex]);
 		}
 
-		return textures;
+		return selectedTextures;
 	}
 
 	SDL_Rect TextureAtlas::getSurfaceRect(SDL_Surface* surface)

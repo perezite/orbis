@@ -5,7 +5,7 @@
 
 // debugging settings
 // #define ORBIS_DEBUG_GL
-// #define ORBIS_DEBUG_RENDERDEVICE
+ #define ORBIS_DEBUG_RENDERDEVICE
 
 // video settings
 #define ORBIS_USE_TEXTURE_ATLASSING
