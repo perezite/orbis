@@ -15,62 +15,72 @@ namespace orb
 
 	void TextureAtlas::generate()
 	{
-		// compute the bin / page rect
-		GLint pageSize;
-		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &pageSize);
-		Rect bin = Rect(0, 0, (float)pageSize, (float)pageSize);
+		// get the extent of one chart
+		GLint chartExtent;
+		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &chartExtent);
 
-		// pack the texture Rects
+		// generate the individual charts
 		std::vector<Texture*> textures = VideoManager::instance()->getTextures();
-		std::vector<Rect> textureRects = getTextureRects(textures);
-		std::vector<std::vector<Rect>> pageRectsCollection = BinPacking::calculate(bin, textureRects);
-
-		// create charts
-		for (unsigned int i = 0; i < pageRectsCollection.size(); i++)
-		{
-			std::vector<Rect> pageRects = pageRectsCollection[i];
-			std::vector<Texture*> pageTextures = selectTextures(pageRects, textures);
-			TextureChart* page = new TextureChart(pageTextures, pageRects);
-			m_charts.push_back(page);
-		}
+		AtlasPacking atlasPacking = packTextures(textures, (float)chartExtent, (float)chartExtent);
+		createCharts(atlasPacking);
 	}
 
-	std::vector<Rect> TextureAtlas::getTextureRects(std::vector<Texture*> textures)
+	AtlasPacking TextureAtlas::packTextures(std::vector<Texture*> textures, float width, float height)
+	{
+		AtlasPacking atlasPacking;
+		std::vector<Rect> indexedRects = getIndexedTextureRects(textures);
+		std::vector<std::vector<Rect>> packedRects = BinPacking::calculate(Rect(0, 0, width, height), indexedRects);
+
+		for (unsigned int i = 0; i < packedRects.size(); i++) {
+			ChartPacking chartPacking;
+			for (unsigned int j = 0; j < packedRects[i].size(); j++) {
+				Rect rect = packedRects[i][j];
+				Texture* tex = textures[rect.index];
+				std::tuple<Texture*, Rect> packedTexture(std::make_tuple(tex, rect));
+				chartPacking.push_back(packedTexture);
+			}
+
+			atlasPacking.push_back(chartPacking);
+		}
+
+		return atlasPacking;
+	}
+
+	std::vector<Rect> TextureAtlas::getIndexedTextureRects(std::vector<Texture*> textures)
 	{
 		std::vector<Rect> textureRects;
-
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			Rect rect = toOrbisRect(getSurfaceRect(textures[i]->getSurface()));
-			rect.index = i;
-			textureRects.push_back(rect);
+		for (unsigned int i = 0; i < textures.size(); i++) {
+			Rect localTextureRect = textures[i]->getLocalRect();
+			localTextureRect.index = i;
+			textureRects.push_back(localTextureRect);
 		}
 
 		return textureRects;
 	}
 
-	std::vector<Texture*> TextureAtlas::selectTextures(std::vector<Rect> indexedRects, std::vector<Texture*> textures)
+	void TextureAtlas::createCharts(AtlasPacking atlasPacking)
 	{
-		std::vector<Texture*> selectedTextures;
-
-		for (unsigned int i = 0; i < indexedRects.size(); i++)
-		{
-			unsigned int texIndex = indexedRects[i].index;
-			selectedTextures.push_back(textures[texIndex]);
+		for (unsigned int i = 0; i < atlasPacking.size(); i++) {
+			ChartPacking chartPacking = atlasPacking[i];
+			std::vector<Texture*> textures = getTextures(chartPacking);
+			std::vector<Rect> rects = getRects(chartPacking);
+			m_charts.push_back(new TextureChart(textures, rects));
 		}
-
-		return selectedTextures;
 	}
 
-	SDL_Rect TextureAtlas::getSurfaceRect(SDL_Surface* surface)
+	std::vector<Texture*> TextureAtlas::getTextures(ChartPacking packing)
 	{
-		SDL_Rect rect;
-		rect.x = 0; rect.y = 0; rect.h = surface->h; rect.w = surface->w;
-		return rect;
+		std::vector<Texture*> textures;
+		for (unsigned int i = 0; i < packing.size(); i++) 
+			textures.push_back(std::get<0>(packing[i]));
+		return textures;
 	}
 
-	Rect TextureAtlas::toOrbisRect(SDL_Rect rect)
+	std::vector<Rect> TextureAtlas::getRects(ChartPacking packing)
 	{
-		return Rect((float)rect.x, (float)rect.y, (float)rect.x + (float)rect.w, (float)rect.y + (float)rect.h);
+		std::vector<Rect> rects;
+		for (unsigned int i = 0; i < packing.size(); i++)
+			rects.push_back(std::get<1>(packing[i]));
+		return rects;
 	}
 }

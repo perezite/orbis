@@ -35,6 +35,14 @@ namespace orb
 		}
 	}
 
+	const Rect Texture::getLocalRect() const
+	{
+		SDL_Rect rect;
+		rect.x = 0; rect.y = 0; rect.h = m_surface->h; rect.w = m_surface->w;
+		return Rect((float)rect.x, (float)rect.y, (float)rect.x + (float)rect.w, (float)rect.y + (float)rect.h);
+	}
+
+
 	Vector2f Texture::computeChartedUV(const Vector2f& texUV)
 	{
 		if (m_parentChart) {

@@ -42,6 +42,9 @@ namespace orb
 		// get the parent chart
 		const TextureChart* getParentChart() const { return m_parentChart; }
 
+		// get the rect encompassing the texture in local coordinates
+		const Rect getLocalRect() const;
+
 		// set the atlas parentChart of the texture
 		void setParentChart(TextureChart* parentChart) { m_parentChart = parentChart; }
 

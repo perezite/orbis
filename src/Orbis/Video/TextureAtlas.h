@@ -10,12 +10,15 @@ using namespace base;
 
 #include <vector>
 #include <map>
+#include <tuple>
 
 namespace orb
 {
 	class Texture;
-
 	class TextureChart;
+
+	typedef std::vector<std::tuple<Texture*, Rect>> ChartPacking;
+	typedef std::vector<ChartPacking> AtlasPacking;
 
 	class TextureAtlas
 	{
@@ -34,17 +37,20 @@ namespace orb
 		void generate();
 
 	protected:
-		// get texture rects
-		std::vector<Rect> getTextureRects(std::vector<Texture*> textures);
+		// pack the given textures into one ore more rectangles with the specified width and heigth
+		AtlasPacking packTextures(std::vector<Texture*> textures, float width, float height);
 
-		// select textures by indexed rects
-		std::vector<Texture*> selectTextures(std::vector<Rect> indexedRects, std::vector<Texture*> textures);
+		// get indexed texture rects
+		std::vector<Rect> getIndexedTextureRects(std::vector<Texture*> textures);
 
-		// get the rect of an sdl surface
-		SDL_Rect getSurfaceRect(SDL_Surface* surface);
+		// create individual charts from an atlas packing
+		void createCharts(AtlasPacking atlasPacking);
 
-		// convert sdl rect to orbis rect
-		Rect toOrbisRect(SDL_Rect rect);
+		// extract the textures from a packing
+		std::vector<Texture*> getTextures(ChartPacking packing);
+
+		// extract the rects from a packing
+		std::vector<Rect> getRects(ChartPacking packing);
 
 	private:
 		// the textures
