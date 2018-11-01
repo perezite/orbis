@@ -7,7 +7,7 @@ TODO:
 		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
 		-- Current: https://www.sfml-dev.org/tutorials/2.5/graphics-draw.php
 		-- Liste der Klassen zum refactoren:
-			- TextureAtlas
+			- TextureChart
 			- Shader
 			- RenderDevice
 			- DebugRenderDevice

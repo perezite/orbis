@@ -38,19 +38,22 @@ namespace orb
 
 	protected:
 		// pack the given textures into one ore more rectangles with the specified width and heigth
-		AtlasPacking packTextures(std::vector<Texture*> textures, float width, float height);
+		AtlasPacking packAtlas(std::vector<Texture*> textures, float width, float height);
 
 		// get indexed texture rects
-		std::vector<Rect> getIndexedTextureRects(std::vector<Texture*> textures);
+		std::vector<Rect> getIndexedTextureRects(const std::vector<Texture*>& textures);
+
+		// pack the given textures into a chart
+		ChartPacking packChart(const std::vector<Rect>& rects, const std::vector<Texture*>& textures);
 
 		// create individual charts from an atlas packing
-		void createCharts(AtlasPacking atlasPacking);
+		void createCharts(const AtlasPacking& atlasPacking);
 
 		// extract the textures from a packing
-		std::vector<Texture*> getTextures(ChartPacking packing);
+		std::vector<Texture*> getTextures(const ChartPacking& packing);
 
 		// extract the rects from a packing
-		std::vector<Rect> getRects(ChartPacking packing);
+		std::vector<Rect> getRects(const ChartPacking& packing);
 
 	private:
 		// the textures

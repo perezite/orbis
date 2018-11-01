@@ -15,38 +15,32 @@ namespace orb
 
 	void TextureAtlas::generate()
 	{
-		// get the extent of one chart
+		// compute chart extent
 		GLint chartExtent;
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &chartExtent);
 
-		// generate the individual charts
+		// pack
 		std::vector<Texture*> textures = VideoManager::instance()->getTextures();
-		AtlasPacking atlasPacking = packTextures(textures, (float)chartExtent, (float)chartExtent);
+		AtlasPacking atlasPacking = packAtlas(textures, (float)chartExtent, (float)chartExtent);
+
+		// create charts
 		createCharts(atlasPacking);
 	}
 
-	AtlasPacking TextureAtlas::packTextures(std::vector<Texture*> textures, float width, float height)
+	AtlasPacking TextureAtlas::packAtlas(std::vector<Texture*> textures, float width, float height)
 	{
 		AtlasPacking atlasPacking;
 		std::vector<Rect> indexedRects = getIndexedTextureRects(textures);
 		std::vector<std::vector<Rect>> packedRects = BinPacking::calculate(Rect(0, 0, width, height), indexedRects);
 
 		for (unsigned int i = 0; i < packedRects.size(); i++) {
-			ChartPacking chartPacking;
-			for (unsigned int j = 0; j < packedRects[i].size(); j++) {
-				Rect rect = packedRects[i][j];
-				Texture* tex = textures[rect.index];
-				std::tuple<Texture*, Rect> packedTexture(std::make_tuple(tex, rect));
-				chartPacking.push_back(packedTexture);
-			}
-
-			atlasPacking.push_back(chartPacking);
+			atlasPacking.push_back(packChart(packedRects[i], textures));
 		}
 
 		return atlasPacking;
 	}
 
-	std::vector<Rect> TextureAtlas::getIndexedTextureRects(std::vector<Texture*> textures)
+	std::vector<Rect> TextureAtlas::getIndexedTextureRects(const std::vector<Texture*>& textures)
 	{
 		std::vector<Rect> textureRects;
 		for (unsigned int i = 0; i < textures.size(); i++) {
@@ -58,7 +52,20 @@ namespace orb
 		return textureRects;
 	}
 
-	void TextureAtlas::createCharts(AtlasPacking atlasPacking)
+	ChartPacking TextureAtlas::packChart(const std::vector<Rect>& rects, const std::vector<Texture*>& textures)
+	{
+		ChartPacking chartPacking;
+		for (unsigned int i = 0; i < rects.size(); i++) {
+			Rect rect = rects[i];
+			Texture* tex = textures[rect.index];
+			std::tuple<Texture*, Rect> packedTexture(std::make_tuple(tex, rect));
+			chartPacking.push_back(packedTexture);
+		}
+
+		return chartPacking;
+	}
+
+	void TextureAtlas::createCharts(const AtlasPacking& atlasPacking)
 	{
 		for (unsigned int i = 0; i < atlasPacking.size(); i++) {
 			ChartPacking chartPacking = atlasPacking[i];
@@ -68,7 +75,7 @@ namespace orb
 		}
 	}
 
-	std::vector<Texture*> TextureAtlas::getTextures(ChartPacking packing)
+	std::vector<Texture*> TextureAtlas::getTextures(const ChartPacking& packing)
 	{
 		std::vector<Texture*> textures;
 		for (unsigned int i = 0; i < packing.size(); i++) 
@@ -76,7 +83,7 @@ namespace orb
 		return textures;
 	}
 
-	std::vector<Rect> TextureAtlas::getRects(ChartPacking packing)
+	std::vector<Rect> TextureAtlas::getRects(const ChartPacking& packing)
 	{
 		std::vector<Rect> rects;
 		for (unsigned int i = 0; i < packing.size(); i++)
