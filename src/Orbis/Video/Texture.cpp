@@ -10,14 +10,12 @@ namespace orb
 {
 	Texture::Texture(const std::string& assetPath, bool flipVertically) : m_assetPath(assetPath), m_handle(0), m_parentChart(NULL)
 	{
-		// load
+		// load 
 		std::string filePath = AssetUtil::assetPathToFilePath(assetPath);
 		m_surface = IMG_Load(filePath.c_str());
-		SDL_Surface* converted = SDL_ConvertSurfaceFormat(m_surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
-		SDL_FreeSurface(m_surface);
-		m_surface = converted;
 
-		// flip
+		// convert and flip
+		m_surface = convertPixelFormat(m_surface, SDL_PIXELFORMAT_ABGR8888);
 		if (flipVertically)
 			m_surface = flipSurfaceVertically(m_surface);
 
@@ -54,6 +52,13 @@ namespace orb
 			m_parentChart->bind();
 		else
 			glBindTexture(GL_TEXTURE_2D, m_handle);
+	}
+
+	SDL_Surface* Texture::convertPixelFormat(SDL_Surface* surface, Uint32 pixelFormat)
+	{
+		SDL_Surface* converted = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_ABGR8888, SDL_SWSURFACE);
+		SDL_FreeSurface(surface);
+		return converted;
 	}
 
 	SDL_Surface* Texture::flipSurfaceVertically(SDL_Surface* surface)

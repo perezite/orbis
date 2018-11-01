@@ -52,6 +52,9 @@ namespace orb
 		void bind();
 
 	protected:
+		// convert surface to given pixel format. The poitner to the givne surface is invalidated and gets replaced by the returned pointer
+		SDL_Surface* convertPixelFormat(SDL_Surface* surface, Uint32 pixelFormat);
+
 		// flip the given surface. The pointer to the given surface is invalidated and gets replaced by the returned pointer 
 		SDL_Surface* flipSurfaceVertically(SDL_Surface* surface);
 

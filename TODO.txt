@@ -7,8 +7,8 @@ TODO:
 		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
 		-- Current: https://www.sfml-dev.org/tutorials/2.5/graphics-draw.php
 		-- Liste der Klassen zum refactoren:
-			- Shader
 			- TextureAtlas
+			- Shader
 			- RenderDevice
 			- DebugRenderDevice
 	- Zweiter Refactoring-Durchlauf: Rekursiv top-down alle Klassen durchgehen und wo nötig das Interface refactoren und dabei sukzessive den obigen Entwurf einkommentieren
