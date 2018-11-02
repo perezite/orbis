@@ -1,8 +1,5 @@
 TODO:	
 - Bootstrapping
-	- Aktuellen Stand wegkopieren als Referenz
-	- Branch feature/Bootstrapping erstellen
-	- Alles löschen, ausser die Projekte und Android-Klassen
 	- Rotierendes Dreieck im SFML-Stil implementieren:
 		- Orbis als Console-App implementieren, welche Text ausgibt	
 		- Sandbox implementieren, welche das Dreieck ausgibt
