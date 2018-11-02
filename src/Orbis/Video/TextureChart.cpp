@@ -1,32 +1,18 @@
 #include "TextureChart.h"
 
+#include "../../Base/Base.h"
+using namespace base;
+
 namespace orb
 {
-	TextureChart::TextureChart(std::vector<Texture*> textures, std::vector<Rect> rects)
+	TextureChart::TextureChart(const std::vector<Texture*>& textures, const std::vector<Rect>& rects)
 	{
-		// create a page surface with the smallest possible power of two size
-		Vector2f potSize = getSmallestPowerOfTwoSize(rects);
-		SDL_Surface* texSurface = textures[0]->getSurface();
-		SDL_PixelFormat* texFormat = texSurface->format;
-		SDL_Surface* surface = SDL_CreateRGBSurface(texSurface->flags, (int)potSize.x, (int)potSize.y,
-			texFormat->BitsPerPixel, texFormat->Rmask, texFormat->Gmask, texFormat->Bmask, texFormat->Amask);
-
-		copySurfaces(textures, rects, surface);
-
-		createPageTexture(surface);
-
-		storeUVRects(textures, rects, surface);
-
-		registerTextures(textures);
-
-		// cleanup
+		SDL_Surface* surface = createChartSurface(textures, rects);
+		copyTextureDataToSurface(textures, rects, surface);
+		m_uvRects = computeUVRects(textures, rects, surface);
+		copyChartSurfaceDataToOpenGl(surface);
 		SDL_FreeSurface(surface);
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			GLuint handle = textures[i]->getHandle();
-			glDeleteTextures(1, &handle);
-			SDL_FreeSurface(textures[i]->getSurface());
-		}
+		registerTextures(textures);
 	}
 
 	TextureChart::~TextureChart()
@@ -34,71 +20,52 @@ namespace orb
 		glDeleteTextures(1, &m_textureHandle);
 	}
 
+	const Rect& TextureChart::getUVRect(Texture* tex) const
+	{
+		return m_uvRects.find(tex)->second;
+	}
+
 	void TextureChart::bind()
 	{
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
 
-	SDL_Rect TextureChart::toSDLRect(Rect rect)
+	SDL_Surface* TextureChart::createChartSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects)
 	{
-		SDL_Rect sdlRect;
-		sdlRect.x = (int)rect.getLeft();
-		sdlRect.y = (int)rect.getBottom();
-		sdlRect.w = (int)rect.getWidth();
-		sdlRect.h = (int)rect.getHeight();
-
-		return sdlRect;
+		Vector2f nextPotSize = getNextLargerPowerOfTwoRect(getBoundaryRect(rects)).getSize();
+		SDL_Surface* surface = textures[0]->getSurface();
+		SDL_PixelFormat* format = surface->format;
+		return SDL_CreateRGBSurface(surface->flags, (int)nextPotSize.x, (int)nextPotSize.y, format->BitsPerPixel,
+			format->Rmask, format->Gmask, format->Bmask, format->Amask);
 	}
 
-	Vector2f TextureChart::getSmallestPowerOfTwoSize(std::vector<Rect> rects)
+	void TextureChart::copyTextureDataToSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface)
 	{
-		Rect boundary = getBoundaryRect(rects);
-		int potWidth = getNextPowerOfTwo((int)boundary.getWidth());
-		int potHeight = getNextPowerOfTwo((int)boundary.getHeight());
-
-		return Vector2f((float)potWidth, (float)potHeight);
-	}
-
-	Rect TextureChart::getBoundaryRect(std::vector<Rect> rects)
-	{
-		// get maximal x and y coordinates in packed rects
-		Vector2f max(0, 0);
-		for (unsigned int i = 0; i < rects.size(); i++)
-		{
-			if (rects[i].getRight() > max.x)
-				max.x = rects[i].getRight();
-			if (rects[i].getTop() > max.y)
-				max.y = rects[i].getTop();
-		}
-
-		return Rect(0, 0, max.x, max.y);
-	}
-
-	int TextureChart::getNextPowerOfTwo(int number)
-	{
-		int pot = 1;
-		while (pot < number)
-			pot = 2 * pot;
-
-		return pot;
-	}
-
-	void TextureChart::copySurfaces(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* pageSurface)
-	{
-		// copy the original textures into the page surface
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
+		for (unsigned int i = 0; i < textures.size(); i++) {
 			SDL_Rect sourceRect = getSurfaceRect(textures[i]->getSurface());
-			SDL_Rect targetRect = toSDLRect(rects[i]);
+			SDL_Rect targetRect = toSdlRect(rects[i]);
 			SDL_BlendMode origBlendMode;
 			SDL_GetSurfaceBlendMode(textures[i]->getSurface(), &origBlendMode);
 			SDL_SetSurfaceBlendMode(textures[i]->getSurface(), SDL_BLENDMODE_NONE);
-			SDL_BlitSurface(textures[i]->getSurface(), &sourceRect, pageSurface, &targetRect);
+			SDL_BlitSurface(textures[i]->getSurface(), &sourceRect, surface, &targetRect);
 			SDL_SetSurfaceBlendMode(textures[i]->getSurface(), origBlendMode);
 		}
 	}
 
-	void TextureChart::createPageTexture(SDL_Surface* surface)
+	const std::map<Texture*, Rect> TextureChart::computeUVRects(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface)
+	{
+		std::map<Texture*, Rect> uvRects;
+		float width = (float)surface->w, height = (float)surface->h;
+
+		for (unsigned int i = 0; i < textures.size(); i++) {
+			Rect uvRect = Rect(rects[i].getLeft() / width, rects[i].getBottom() / height, rects[i].getRight() / width, rects[i].getTop() / height);
+			uvRects.insert(std::make_pair(textures[i], uvRect));
+		}
+
+		return uvRects;
+	}
+
+	void TextureChart::copyChartSurfaceDataToOpenGl(SDL_Surface* surface)
 	{
 		glGenTextures(1, &m_textureHandle);
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
@@ -107,28 +74,39 @@ namespace orb
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	}
 
-	SDL_Rect TextureChart::getSurfaceRect(SDL_Surface * surface)
-	{
-		SDL_Rect rect;
-		rect.x = 0; rect.y = 0; rect.h = surface->h; rect.w = surface->w;
-		return rect;
-	}
-
-	void TextureChart::storeUVRects(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* surface)
-	{
-		float width = (float)surface->w;
-		float height = (float)surface->h;
-
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			Rect uvRect = Rect(rects[i].getLeft() / width, rects[i].getBottom() / height, rects[i].getRight() / width, rects[i].getTop() / height);
-			m_uvRects.insert(std::make_pair(textures[i], uvRect));
-		}
-	}
-
-	void TextureChart::registerTextures(std::vector<Texture*> textures)
+	void TextureChart::registerTextures(const std::vector<Texture*>& textures)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++)
 			textures[i]->setParentChart(this);
+	}
+
+	const Rect TextureChart::getNextLargerPowerOfTwoRect(const Rect& rect)
+	{
+		int width = MathUtil::nextPowerOfTwo((int)rect.getWidth());
+		int height = MathUtil::nextPowerOfTwo((int)rect.getHeight());
+		return Rect(0, 0, (float)width, (float)height);
+	}
+
+	const SDL_Rect TextureChart::getSurfaceRect(const SDL_Surface* surface)
+	{
+		return SDL_Rect{ 0, 0, surface->w, surface->h };
+	}
+
+	const SDL_Rect TextureChart::toSdlRect(const Rect& rect)
+	{
+		return SDL_Rect{ (int)rect.getLeft(), (int)rect.getBottom(), (int)rect.getWidth(), (int)rect.getHeight() };
+	}
+
+	const Rect TextureChart::getBoundaryRect(const std::vector<Rect>& rects)
+	{
+		Vector2f max(0, 0);
+		for (unsigned int i = 0; i < rects.size(); i++) {
+			if (rects[i].getRight() > max.x)
+				max.x = rects[i].getRight();
+			if (rects[i].getTop() > max.y)
+				max.y = rects[i].getTop();
+		}
+
+		return Rect(0, 0, max.x, max.y);
 	}
 }

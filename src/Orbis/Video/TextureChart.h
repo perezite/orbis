@@ -19,46 +19,44 @@ namespace orb
 	{
 	public:
 		// ctor
-		TextureChart(std::vector<Texture*> textures, std::vector<Rect> rects);
+		TextureChart(const std::vector<Texture*>& textures, const std::vector<Rect>& rects);
 
 		// dtor
 		virtual ~TextureChart();
 
-		// get the uv rect of the texture within the page
-		Rect getUVRect(Texture* tex) {
-			return m_uvRects.find(tex)->second;
-		}
+		// get the uv rect of the texture within the chart
+		const Rect& getUVRect(Texture* tex) const;
 
-		// bind the page texture
+		// bind the chart
 		void bind();
 
 	protected:
-		// convert a Rect to an SDL_Rect
-		SDL_Rect toSDLRect(Rect rect);
+		// create a surface with the smallest possible power of two size still holding all the given textures with their rects
+		SDL_Surface* createChartSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects);
 
-		// get smallest power of two size still containing all texture rects
-		Vector2f getSmallestPowerOfTwoSize(std::vector<Rect> rects);
-
-		// get a tight boundary around all texture rects within the page
-		Rect getBoundaryRect(std::vector<Rect> rects);
-
-		// get next larger power of two for a given integer
-		int getNextPowerOfTwo(int number);
-
-		// copy sdl surfaces from textures to atlas surface
-		void copySurfaces(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* pageSurface);
-
-		// create the opengl texture
-		void createPageTexture(SDL_Surface* surface);
-
-		// get the rect of an sdl surface
-		SDL_Rect getSurfaceRect(SDL_Surface* surface);
+		// transfer the surfaces with their rects to the given surface
+		void copyTextureDataToSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface);
 
 		// store uv rects in textures
-		void storeUVRects(std::vector<Texture*> textures, std::vector<Rect> rects, SDL_Surface* surface);
+		const std::map<Texture*, Rect> computeUVRects(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface);
+
+		// transfer the data from the surface to an opengl texture and free the surface
+		void copyChartSurfaceDataToOpenGl(SDL_Surface* surface);
 
 		// register the page at the contained textures
-		void registerTextures(std::vector<Texture*> textures);
+		void registerTextures(const std::vector<Texture*>& textures);
+
+		// get next larger power of two rect
+		const Rect getNextLargerPowerOfTwoRect(const Rect& rect);
+
+		// convert a rect to an SDL_Rect
+		const SDL_Rect toSdlRect(const Rect& rect);
+
+		// get the rect of an sdl surface
+		const SDL_Rect getSurfaceRect(const SDL_Surface* surface);
+
+		// compute a tight boundary around the given rects
+		const Rect getBoundaryRect(const std::vector<Rect>& rects);
 
 	private:
 		// the gl texture handle

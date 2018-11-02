@@ -46,10 +46,10 @@ namespace orb
 		const Rect getLocalRect() const;
 
 		// set the atlas parentChart of the texture
-		void setParentChart(TextureChart* parentChart) { m_parentChart = parentChart; }
+		void setParentChart(TextureChart* parentChart);
 
 		// transform given UV coordinates to actual charted coordinates
-		Vector2f computeChartedUV(const Vector2f& texUV);
+		Vector2f computeUVCoords(const Vector2f& texUV);
 
 		// bind this texture
 		void bind();

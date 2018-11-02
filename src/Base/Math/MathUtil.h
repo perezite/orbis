@@ -31,5 +31,8 @@ namespace base
 
 		// compute the median
 		static float median(std::vector<float> samples);
+
+		// compute the next power of two
+		static int nextPowerOfTwo(int number);
 	};
 }

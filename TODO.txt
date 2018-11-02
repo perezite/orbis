@@ -1,4 +1,5 @@
 TODO:	
+- Test mit Xperia L3
 - Interface an SFML angleichen		
 	- Tutorials von SFML durchgehen 
 		UND parallel dazu den SFML Sourcecode anschauen

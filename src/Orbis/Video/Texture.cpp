@@ -42,16 +42,24 @@ namespace orb
 		return Rect((float)rect.x, (float)rect.y, (float)rect.x + (float)rect.w, (float)rect.y + (float)rect.h);
 	}
 
+	void Texture::setParentChart(TextureChart* parentChart) 
+	{
+		m_parentChart = parentChart;
 
-	Vector2f Texture::computeChartedUV(const Vector2f& texUV)
+		// the data is now handled by the chart, so we can free our own data
+		GLuint handle = getHandle();
+		glDeleteTextures(1, &handle);
+		SDL_FreeSurface(getSurface());
+	}
+
+	Vector2f Texture::computeUVCoords(const Vector2f& uv)
 	{
 		if (m_parentChart) {
 			Rect uvRect = m_parentChart->getUVRect(this);
-			Vector2f atlasUV(uvRect.getLeft() + texUV.x * uvRect.getWidth(), uvRect.getBottom() + texUV.y * uvRect.getHeight());
-			return atlasUV;
+			return Vector2f(uvRect.getLeft() + uv.x * uvRect.getWidth(), uvRect.getBottom() + uv.y * uvRect.getHeight());
 		}
 		else
-			return texUV;
+			return uv;
 	}
 
 	void Texture::bind()

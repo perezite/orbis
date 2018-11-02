@@ -77,7 +77,7 @@ namespace orb
 			Vector2f pos = mvpMatrix * Vector2f(result[start + 0], result[start + 1]);
 			result[start + 0] = pos.x; result[start + 1] = pos.y;
 			if (tex) {
-				Vector2f uvCoord = tex->computeChartedUV(Vector2f(result[start + 2], result[start + 3]));
+				Vector2f uvCoord = tex->computeUVCoords(Vector2f(result[start + 2], result[start + 3]));
 				result[start + 2] = uvCoord.x; result[start + 3] = uvCoord.y;
 			}
 		}

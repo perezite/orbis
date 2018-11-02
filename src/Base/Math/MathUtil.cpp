@@ -55,7 +55,15 @@ namespace base
 			return (sorted[size / 2 - 1] + sorted[size / 2]) / 2.0f;
 		}
 		
-		return sorted[size / 2];
-		
+		return sorted[size / 2];	
+	}
+
+	int MathUtil::nextPowerOfTwo(int number)
+	{
+		int pot = 1;
+		while (pot < number)
+			pot = 2 * pot;
+
+		return pot;
 	}
 }

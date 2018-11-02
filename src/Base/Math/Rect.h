@@ -38,6 +38,9 @@ namespace base
 		// get the height of the rect
 		float getHeight() const { return rightTop.y - leftBottom.y; }
 
+		// get the size of the rect
+		const Vector2f getSize() const { return Vector2f(getWidth(), getHeight()); }
+
 		// get the area
 		float getArea() const { return getWidth() * getHeight(); }
 
