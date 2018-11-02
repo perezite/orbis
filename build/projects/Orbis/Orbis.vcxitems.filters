@@ -1,2 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="video">
+      <UniqueIdentifier>{63713855-e849-48a9-88f0-a381f77ae92d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="video\Headers">
+      <UniqueIdentifier>{2a5eb51a-e32b-47e8-aae6-511bc7e2e78d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h">
+      <Filter>video\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\PrimitiveType.h">
+      <Filter>video\Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
