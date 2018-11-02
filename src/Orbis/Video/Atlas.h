@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TextureChart.h"
+#include "Sheet.h"
 
 #include "../Libraries/SDL.h"
 #include "../Libraries/GL.h"
@@ -15,20 +15,21 @@ using namespace base;
 namespace orb
 {
 	class Texture;
-	class TextureChart;
+	class Sheet;
 
-	typedef std::vector<std::tuple<Texture*, Rect>> ChartPacking;
-	typedef std::vector<ChartPacking> AtlasPacking;
+	typedef std::vector<std::tuple<Texture*, Rect>> SheetPacking;
+	typedef std::vector<SheetPacking> AtlasPacking;
 
-	class TextureAtlas
+	// An atlas is a collection of sheets. Maybe, this should be called TexturePacker instead...
+	class Atlas
 	{
 	public:
 		// ctor
-		TextureAtlas()
+		Atlas()
 		{ }
 
 		// dtor
-		virtual ~TextureAtlas() { };
+		virtual ~Atlas() { };
 
 		// clear the atlas
 		void clear();
@@ -43,23 +44,23 @@ namespace orb
 		// get indexed texture rects
 		std::vector<Rect> getIndexedTextureRects(const std::vector<Texture*>& textures);
 
-		// pack the given textures into a chart
-		ChartPacking packChart(const std::vector<Rect>& rects, const std::vector<Texture*>& textures);
+		// pack the given textures into a sheet
+		SheetPacking packSheet(const std::vector<Rect>& rects, const std::vector<Texture*>& textures);
 
-		// create individual charts from an atlas packing
-		void createCharts(const AtlasPacking& atlasPacking);
+		// create individual sheet from an atlas packing
+		void createSheets(const AtlasPacking& atlasPacking);
 
 		// extract the textures from a packing
-		std::vector<Texture*> getTextures(const ChartPacking& packing);
+		std::vector<Texture*> getTextures(const SheetPacking& packing);
 
 		// extract the rects from a packing
-		std::vector<Rect> getRects(const ChartPacking& packing);
+		std::vector<Rect> getRects(const SheetPacking& packing);
 
 	private:
 		// the textures
 		std::vector<Texture*> m_textures;
 
 		// the pages
-		std::vector<TextureChart*> m_charts;
+		std::vector<Sheet*> m_sheets;
 	};
 }

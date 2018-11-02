@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-#include "TextureAtlas.h"
+#include "Atlas.h"
 
 #include "../Libraries/SDL.h"
 #include "../Core/AssetUtil.h"
@@ -8,7 +8,7 @@
 
 namespace orb
 {
-	Texture::Texture(const std::string& assetPath, bool flipVertically) : m_assetPath(assetPath), m_handle(0), m_parentChart(NULL)
+	Texture::Texture(const std::string& assetPath, bool flipVertically) : m_assetPath(assetPath), m_handle(0), m_parentSheet(NULL)
 	{
 		// load 
 		std::string filePath = AssetUtil::assetPathToFilePath(assetPath);
@@ -29,7 +29,7 @@ namespace orb
 
 	Texture::~Texture()
 	{
-		if (!m_parentChart) {
+		if (!m_parentSheet) {
 			glDeleteTextures(1, &m_handle);
 			SDL_FreeSurface(m_surface);
 		}
@@ -42,20 +42,19 @@ namespace orb
 		return Rect((float)rect.x, (float)rect.y, (float)rect.x + (float)rect.w, (float)rect.y + (float)rect.h);
 	}
 
-	void Texture::setParentChart(TextureChart* parentChart) 
+	void Texture::transferOwnershipToSheet(Sheet* parentSheet) 
 	{
-		m_parentChart = parentChart;
+		m_parentSheet = parentSheet;
 
-		// the data is now handled by the chart, so we can free our own data
-		GLuint handle = getHandle();
-		glDeleteTextures(1, &handle);
-		SDL_FreeSurface(getSurface());
+		// the data has been transfered to the sheet, so we can delete our own data
+		glDeleteTextures(1, &m_handle);
+		SDL_FreeSurface(m_surface);
 	}
 
-	Vector2f Texture::computeUVCoords(const Vector2f& uv)
+	Vector2f Texture::localToSheetPosition(const Vector2f& uv)
 	{
-		if (m_parentChart) {
-			Rect uvRect = m_parentChart->getUVRect(this);
+		if (m_parentSheet) {
+			Rect uvRect = m_parentSheet->getUVRect(this);
 			return Vector2f(uvRect.getLeft() + uv.x * uvRect.getWidth(), uvRect.getBottom() + uv.y * uvRect.getHeight());
 		}
 		else
@@ -64,8 +63,8 @@ namespace orb
 
 	void Texture::bind()
 	{
-		if (m_parentChart)
-			m_parentChart->bind();
+		if (m_parentSheet)
+			m_parentSheet->bind();
 		else
 			glBindTexture(GL_TEXTURE_2D, m_handle);
 	}

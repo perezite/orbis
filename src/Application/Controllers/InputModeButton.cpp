@@ -19,11 +19,10 @@ namespace app
 
 	void InputModeButton::cycle()
 	{
-		if (m_spriteRenderer)
-		{
+		if (m_spriteRenderer) {
 			std::vector<std::string>::iterator current = std::find(m_textures.begin(), m_textures.end(), m_spriteRenderer->getTexturePath());
-			if (current != m_textures.end()) current++;
-
+			if (current != m_textures.end()) 
+				current++;
 			std::string newTexture = current != m_textures.end() ? (*current) : m_textures.front();
 			m_spriteRenderer->setTexture(newTexture);
 		}

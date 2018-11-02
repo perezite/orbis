@@ -5,7 +5,7 @@
 #include "DebugRenderDevice.h"
 #include "Texture.h"
 #include "Shader.h"
-#include "TextureAtlas.h"
+#include "Atlas.h"
 
 #include <string>
 #include <map>
@@ -28,7 +28,7 @@ namespace orb
 		void render();
 
 		// get the texture atlas
-		TextureAtlas* getTextureAtlas() { return &m_textureAtlas; }
+		Atlas* getTextureAtlas() { return &m_textureAtlas; }
 
 		// get all textures
 		std::vector<Texture*> getTextures() const;
@@ -60,7 +60,7 @@ namespace orb
 		std::map<ShaderConfig, Shader*> m_shaders;
 
 		// the texture atlas
-		TextureAtlas m_textureAtlas;
+		Atlas m_textureAtlas;
 
 		// the window
 		Window m_window;

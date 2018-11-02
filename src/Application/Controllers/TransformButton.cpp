@@ -83,7 +83,7 @@ namespace app
 
 	void TransformButton::affect()
 	{
-		std::string texAssetPath = m_inputModeSpriteRenderer->getTexture()->getAssetPath();
+		std::string texAssetPath = m_inputModeSpriteRenderer->getTexturePath();
 
 		if (texAssetPath == "Textures/RotateYellowSprite.png")
 		{

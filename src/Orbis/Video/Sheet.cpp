@@ -1,45 +1,45 @@
-#include "TextureChart.h"
+#include "Sheet.h"
 
 #include "../../Base/Base.h"
 using namespace base;
 
 namespace orb
 {
-	TextureChart::TextureChart(const std::vector<Texture*>& textures, const std::vector<Rect>& rects)
+	Sheet::Sheet(const std::vector<Texture*>& textures, const std::vector<Rect>& rects)
 	{
-		SDL_Surface* surface = createChartSurface(textures, rects);
+		SDL_Surface* surface = createSheetSurface(textures, rects);
 		copyTextureDataToSurface(textures, rects, surface);
 		m_uvRects = computeUVRects(textures, rects, surface);
-		copyChartSurfaceDataToOpenGl(surface);
+		copySheetSurfaceToOpenGl(surface);
 		SDL_FreeSurface(surface);
 		registerTextures(textures);
 	}
 
-	TextureChart::~TextureChart()
+	Sheet::~Sheet()
 	{
 		glDeleteTextures(1, &m_textureHandle);
 	}
 
-	const Rect& TextureChart::getUVRect(Texture* tex) const
+	const Rect& Sheet::getUVRect(Texture* tex) const
 	{
 		return m_uvRects.find(tex)->second;
 	}
 
-	void TextureChart::bind()
+	void Sheet::bind()
 	{
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
 	}
 
-	SDL_Surface* TextureChart::createChartSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects)
+	SDL_Surface* Sheet::createSheetSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects)
 	{
-		Vector2f nextPotSize = getNextLargerPowerOfTwoRect(getBoundaryRect(rects)).getSize();
+		Vector2f nextPotSize = getNextLargerPowerOfTwoRect(computeBoundaryRect(rects)).getSize();
 		SDL_Surface* surface = textures[0]->getSurface();
 		SDL_PixelFormat* format = surface->format;
 		return SDL_CreateRGBSurface(surface->flags, (int)nextPotSize.x, (int)nextPotSize.y, format->BitsPerPixel,
 			format->Rmask, format->Gmask, format->Bmask, format->Amask);
 	}
 
-	void TextureChart::copyTextureDataToSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface)
+	void Sheet::copyTextureDataToSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++) {
 			SDL_Rect sourceRect = getSurfaceRect(textures[i]->getSurface());
@@ -52,7 +52,7 @@ namespace orb
 		}
 	}
 
-	const std::map<Texture*, Rect> TextureChart::computeUVRects(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface)
+	const std::map<Texture*, Rect> Sheet::computeUVRects(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface)
 	{
 		std::map<Texture*, Rect> uvRects;
 		float width = (float)surface->w, height = (float)surface->h;
@@ -65,7 +65,7 @@ namespace orb
 		return uvRects;
 	}
 
-	void TextureChart::copyChartSurfaceDataToOpenGl(SDL_Surface* surface)
+	void Sheet::copySheetSurfaceToOpenGl(SDL_Surface* surface)
 	{
 		glGenTextures(1, &m_textureHandle);
 		glBindTexture(GL_TEXTURE_2D, m_textureHandle);
@@ -74,30 +74,30 @@ namespace orb
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	}
 
-	void TextureChart::registerTextures(const std::vector<Texture*>& textures)
+	void Sheet::registerTextures(const std::vector<Texture*>& textures)
 	{
 		for (unsigned int i = 0; i < textures.size(); i++)
-			textures[i]->setParentChart(this);
+			textures[i]->transferOwnershipToSheet(this);
 	}
 
-	const Rect TextureChart::getNextLargerPowerOfTwoRect(const Rect& rect)
+	const Rect Sheet::getNextLargerPowerOfTwoRect(const Rect& rect)
 	{
 		int width = MathUtil::nextPowerOfTwo((int)rect.getWidth());
 		int height = MathUtil::nextPowerOfTwo((int)rect.getHeight());
 		return Rect(0, 0, (float)width, (float)height);
 	}
 
-	const SDL_Rect TextureChart::getSurfaceRect(const SDL_Surface* surface)
+	const SDL_Rect Sheet::getSurfaceRect(const SDL_Surface* surface)
 	{
 		return SDL_Rect{ 0, 0, surface->w, surface->h };
 	}
 
-	const SDL_Rect TextureChart::toSdlRect(const Rect& rect)
+	const SDL_Rect Sheet::toSdlRect(const Rect& rect)
 	{
 		return SDL_Rect{ (int)rect.getLeft(), (int)rect.getBottom(), (int)rect.getWidth(), (int)rect.getHeight() };
 	}
 
-	const Rect TextureChart::getBoundaryRect(const std::vector<Rect>& rects)
+	const Rect Sheet::computeBoundaryRect(const std::vector<Rect>& rects)
 	{
 		Vector2f max(0, 0);
 		for (unsigned int i = 0; i < rects.size(); i++) {

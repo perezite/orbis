@@ -32,25 +32,25 @@ namespace orb
 			return true;
 
 		// compare atlassing
-		if (thisTex->isCharted() && !otherTex->isCharted())
+		if (thisTex->isOnSheet() && !otherTex->isOnSheet())
 			return false;
-		if (!thisTex->isCharted() && otherTex->isCharted())
+		if (!thisTex->isOnSheet() && otherTex->isOnSheet())
 			return false;
 
 		// compare direct textures
-		if (!thisTex->isCharted() && !otherTex->isCharted())
+		if (!thisTex->isOnSheet() && !otherTex->isOnSheet())
 			return thisTex == otherTex;
 
-		// compare atlas charts
-		if (thisTex->isCharted() && otherTex->isCharted())
-			return thisTex->getParentChart() == otherTex->getParentChart();
+		// compare sheets
+		if (thisTex->isOnSheet() && otherTex->isOnSheet())
+			return thisTex->getParentSheet() == otherTex->getParentSheet();
 
 		throw Exception("Something went really wrong!");
 	}
 
 	void Material::prepareShaderVariables()
 	{
-		// note: vertex and tex coord data is set directly in the render device
+		// note: vertex and tex coordinate data is set directly in the render device
 		if (m_texture != NULL)
 			m_shader->setUniform("u_sSampler", 0);
 

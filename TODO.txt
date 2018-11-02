@@ -1,5 +1,5 @@
 TODO:	
-- Test mit Xperia L3
+- Bootstrapping
 - Interface an SFML angleichen		
 	- Tutorials von SFML durchgehen 
 		UND parallel dazu den SFML Sourcecode anschauen

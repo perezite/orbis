@@ -52,9 +52,9 @@ namespace orb
 
 		finishRendering();
 
-#ifdef ORBIS_DEBUG_RENDERDEVICE
-		LogUtil::logMessage("Number of draw calls: %d", m_batches.size());
-#endif
+		#ifdef ORBIS_DEBUG_RENDERDEVICE
+			LogUtil::logMessage("Number of draw calls: %d", m_batches.size());
+		#endif
 	}
 
 	void RenderDevice::computeBatches()

@@ -15,24 +15,25 @@ namespace orb
 {
 	class Texture;
 
-	class TextureChart
+	// a sheet is a big texture which contains several other textures. Can be used to speed up rendering
+	class Sheet
 	{
 	public:
 		// ctor
-		TextureChart(const std::vector<Texture*>& textures, const std::vector<Rect>& rects);
+		Sheet(const std::vector<Texture*>& textures, const std::vector<Rect>& rects);
 
 		// dtor
-		virtual ~TextureChart();
+		virtual ~Sheet();
 
-		// get the uv rect of the texture within the chart
+		// get the uv rect of the texture within the sheet
 		const Rect& getUVRect(Texture* tex) const;
 
-		// bind the chart
+		// bind the sheet
 		void bind();
 
 	protected:
 		// create a surface with the smallest possible power of two size still holding all the given textures with their rects
-		SDL_Surface* createChartSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects);
+		SDL_Surface* createSheetSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects);
 
 		// transfer the surfaces with their rects to the given surface
 		void copyTextureDataToSurface(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface);
@@ -41,7 +42,7 @@ namespace orb
 		const std::map<Texture*, Rect> computeUVRects(const std::vector<Texture*>& textures, const std::vector<Rect>& rects, SDL_Surface* surface);
 
 		// transfer the data from the surface to an opengl texture and free the surface
-		void copyChartSurfaceDataToOpenGl(SDL_Surface* surface);
+		void copySheetSurfaceToOpenGl(SDL_Surface* surface);
 
 		// register the page at the contained textures
 		void registerTextures(const std::vector<Texture*>& textures);
@@ -56,7 +57,7 @@ namespace orb
 		const SDL_Rect getSurfaceRect(const SDL_Surface* surface);
 
 		// compute a tight boundary around the given rects
-		const Rect getBoundaryRect(const std::vector<Rect>& rects);
+		const Rect computeBoundaryRect(const std::vector<Rect>& rects);
 
 	private:
 		// the gl texture handle
