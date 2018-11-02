@@ -1,32 +1,24 @@
 TODO:	
 - Bootstrapping
-- Interface an SFML angleichen		
-	- Tutorials von SFML durchgehen 
-		UND parallel dazu den SFML Sourcecode anschauen
-		UND parallel dazu nacheinander die relevanten Klassen refactoren (inkl. Referenzen zurückgeben anstatt Zeiger, wo möglich)
-		-- Ifdefs benutzen um zw. alter und neuer Implementation zu wechseln
-		-- Null-Funktionen für entfernte oder neue Funktionen verwenden
-		-- Current: https://www.sfml-dev.org/tutorials/2.5/graphics-draw.php
-		-- Liste der Klassen zum refactoren:
-			- TextureChart
-			- Shader
-			- RenderDevice
-			- DebugRenderDevice
-	- Zweiter Refactoring-Durchlauf: Rekursiv top-down alle Klassen durchgehen und wo nötig das Interface refactoren und dabei sukzessive den obigen Entwurf einkommentieren
-- Problem lösen, dass die Checksumme unterschiedlich ist im Stromsparmodus
-- Base in Orbis reinziehen und Base-Projekt entfernen
-- Interne Interfaces soweit als möglich analog den externen implementieren
-	- Alle Orbis- und Base-Klassen durchgehen und parallel dazu in den Docs Header-Files erstellen mit den Interfaces wie ich sie mir vorstelle
-- Evaluieren, ob weitere Refactorings nötig sind und ggf. hier ins TODO aufnehmen	
-- Partikelsystem implementieren
-	- Fürs erste fixe Werte implementieren, welche der CenterPropulsion des Balles aus Blear entsprechen:
-		- ColorOverLifetime (vorerst nicht als Gradient, sondern als Tween implementieren mit y-Achse = Alphawert)
-	- Regression & Performanceregression
-- Die CenterPropulsion des bu
-	- Ball 
-	- Propulsion des Balles (nur CenterPropulsion)
-	- Paddle
-	- Bricks
-	- Hintergrund
-	- Levellogik mit Anzeigen über Console
-	- Reset mit R-Taste
+	- Aktuellen Stand wegkopieren als Referenz
+	- Branch feature/Bootstrapping erstellen
+	- Alles löschen, ausser die Projekte und Android-Klassen
+	- Rotierendes Dreieck im SFML-Stil implementieren:
+		- Orbis als Console-App implementieren, welche Text ausgibt	
+		- Sandbox implementieren, welche das Dreieck ausgibt
+		- Console-App anpassen, so dass sie das Dreieck ausgibt
+	- Zwei Sprites implementieren im SFML-Stil
+		- Orbis erweitern mit Console-Klassen, welche Text ausgeben
+		- Sandbox erstellen, welche die Sprites ausgibt
+		- Console-App anpassen, so dass sie die Sprites ausgibt
+	- Atlassing implementieren im SFML-Stil
+		- Orbis erweitern durch Console-Klassen
+		- Sandbox erweitern
+		- Console-Klassen effektiv implementieren
+	- Restliche Orbis-Funtkionalität im gleichen Dreisatz-Stil implementieren
+		- Orbis erweitern durch Console-Klassen
+		- Sandbox erweitern
+		- Console-Klassen effektiv implementieren
+- Merge auf Main
+- Restliche TODO's aus OneNote wieder in TODO aufnehmen
+	
