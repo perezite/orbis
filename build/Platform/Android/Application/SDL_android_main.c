@@ -23,7 +23,7 @@ JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jc
 	int i;
 	int argc;
 	int status;
-
+	
 	/* This interface could expand with ABI negotiation, callbacks, etc. */
 	SDL_Android_Init(env, cls);
 

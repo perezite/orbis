@@ -4,6 +4,8 @@ TODO:
 		- Orbis als Console-App implementieren, welche Text ausgibt	
 		- Sandbox implementieren, welche das Dreieck ausgibt
 		- Console-App anpassen, so dass sie das Dreieck ausgibt
+	- Tool implementieren, welches automatisch Orbis.h generiert und als Pre-Build Step implementieren
+	- Source-Code entsprechend anpassen
 	- Zwei Sprites implementieren im SFML-Stil
 		- Orbis erweitern mit Console-Klassen, welche Text ausgeben
 		- Sandbox erstellen, welche die Sprites ausgibt

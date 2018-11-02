@@ -15,10 +15,13 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\PrimitiveType.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl" />
   </ItemGroup>
 </Project>
