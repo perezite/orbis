@@ -1,3 +1,4 @@
+#pragma once
 
 namespace orb
 {
@@ -5,7 +6,6 @@ namespace orb
 	class Color
 	{
 	public:
-		// zero vector
 		static const Color White;
 
 	public:
@@ -24,6 +24,4 @@ namespace orb
 
 		unsigned char b;
 	};
-
-	const Color Color::White = Color(255, 255, 255);
 }

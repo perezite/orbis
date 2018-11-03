@@ -1,7 +1,7 @@
+#pragma once
+
 #include "Color.h"
-
 #include "../math/Vector2.h"
-
 
 namespace orb
 {

@@ -15,8 +15,12 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Engine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\Component.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\ShapeRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\game\Level.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h" />
@@ -27,6 +31,11 @@
     <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Engine.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\ShapeRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\game\Level.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.cpp" />
   </ItemGroup>
 </Project>

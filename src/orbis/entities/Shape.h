@@ -1,19 +1,24 @@
+#pragma once
+
+#include "Entity.h"
 #include "../video/Mesh.h"
+#include "../Components/ShapeRenderer.h"
+
+#include <iostream>
 
 namespace orb 
 {
-	// a shape that can be drawn to the screen
-	class Shape 
+	// an entity with a shape that can be drawn onto the screen
+	class Shape : public Entity
 	{
 	public:
-		Shape(PrimitiveType primitiveType, unsigned int size) : m_mesh(primitiveType, size) { };
+		Shape(PrimitiveType primitiveType, unsigned int size);
 
 		virtual ~Shape() { };
 
-		Vertex& operator[](std::size_t index) { return m_mesh[index]; }
+		Vertex& operator[](std::size_t index) { return m_shapeRenderer[index]; }
 
 	private: 
-		Mesh m_mesh;
-
+		ShapeRenderer m_shapeRenderer;
 	};
 }

@@ -25,6 +25,18 @@
     <Filter Include="entities\headers">
       <UniqueIdentifier>{2f3d9fbb-ddee-4c10-a14c-89b279138421}</UniqueIdentifier>
     </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{5e6e6f5e-3553-4eec-b324-fa4e8633abe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components">
+      <UniqueIdentifier>{27f660c4-5608-4b58-8378-8e5df88819f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\headers">
+      <UniqueIdentifier>{d30b505d-ca21-4ece-bad2-80a59bfaa4c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game\headers">
+      <UniqueIdentifier>{39e2df50-19f3-4d36-96b4-562ed86c4cc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h">
@@ -42,11 +54,23 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.h">
       <Filter>video\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Engine.h">
-      <Filter>engine\headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.h">
       <Filter>entities\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.h">
+      <Filter>engine\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.h">
+      <Filter>entities\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\ShapeRenderer.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\Component.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\game\Level.h">
+      <Filter>game\headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -55,8 +79,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Engine.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.cpp">
       <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\ShapeRenderer.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\game\Level.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.cpp">
+      <Filter>entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

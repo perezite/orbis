@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "../orbis/entities/Shape.h"
-#include "../orbis/Engine/Engine.h"
+#include "../orbis/Engine/Orbis.h"
 
 int main(int argc, char* args[])
 {
@@ -10,9 +10,8 @@ int main(int argc, char* args[])
 	shape[1] = orb::Vertex(orb::Vector2f( 1, -1), orb::Color(0, 255, 0));
 	shape[2] = orb::Vertex(orb::Vector2f( 1,  0), orb::Color(0, 0, 255));
 
-	orb::Engine* engine = orb::Engine::instance();
-	while(engine->isRunning())
-	{
-		engine->heartbeat();
+	orb::Orbis* orbis = orb::Orbis::instance();
+	while(!orbis->isClosing()) {
+		orbis->updateFrame();
 	}
 }
