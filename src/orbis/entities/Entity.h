@@ -13,6 +13,8 @@ namespace orb
 
 		void update();
 
+		void render();
+
 	private: 
 		std::vector<Component*> m_components;
 	};

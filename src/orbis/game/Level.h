@@ -15,6 +15,8 @@ namespace orb
 
 		void update();
 
+		void render();
+
 	private: 
 		std::vector<Entity*> m_entities;
 	};

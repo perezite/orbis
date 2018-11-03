@@ -1,11 +1,10 @@
 #include "ShapeRenderer.h"
-
-#include <iostream>
+#include "../video/VideoManager.h"
 
 namespace orb 
 {
-	void ShapeRenderer::update()
+	void ShapeRenderer::render()
 	{
-		std::cout << "update()" << std::endl;
+		VideoManager::instance()->getRenderDevice()->render(m_mesh);
 	}
 }

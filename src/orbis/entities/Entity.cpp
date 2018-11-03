@@ -15,4 +15,10 @@ namespace orb
 		for (unsigned int i = 0; i < m_components.size(); i++)
 			m_components[i]->update();
 	}
+
+	void Entity::render()
+	{
+		for (unsigned int i = 0; i < m_components.size(); i++)
+			m_components[i]->render();
+	}
 }

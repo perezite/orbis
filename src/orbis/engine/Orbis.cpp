@@ -11,6 +11,7 @@ namespace orb
 	void Orbis::updateFrame()
 	{
 		m_currentLevel->update();
+		m_currentLevel->render();
 	}
 
 	Orbis::Orbis()

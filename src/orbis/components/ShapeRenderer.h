@@ -9,13 +9,15 @@ namespace orb
 	class ShapeRenderer : public Component
 	{
 	public:
-		ShapeRenderer(PrimitiveType primitiveType, unsigned int size) 
-		 	: m_mesh(primitiveType, size)
+		ShapeRenderer(PrimitiveType primitiveType, unsigned int size)
+			: m_mesh(primitiveType, size)
 		{ };
 
-		void update();
-
 		Vertex& operator[](std::size_t index) { return m_mesh[index]; }
+
+		void update() { };
+
+		void render();
 
 	private:
 		Mesh m_mesh;
