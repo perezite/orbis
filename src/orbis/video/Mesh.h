@@ -7,18 +7,24 @@
 
 namespace orb
 {
-	// a mesh is a collection of vertices which can be drawn on the screen
+	// a mesh is a bunch of vertices which can be drawn onto the screen
 	class Mesh
 	{
 	public:
 		Mesh(PrimitiveType primitiveType, unsigned int size) 
 			: m_primitiveType(primitiveType), m_vertices(size)
-		{}
+		{ }
 
-		virtual ~Mesh() 
-		{};
+		virtual ~Mesh() { };
 
 		Vertex& operator[](std::size_t index) { return m_vertices[index]; }
+
+		 void computeIndices(std::vector<unsigned int>& result, unsigned int offset);
+
+		 void computeVertices(std::vector<float>& result);
+
+	protected:
+		 void computeTriangleIndices(std::vector<unsigned int>& result, unsigned int offset);
 
 	private:
 		PrimitiveType m_primitiveType;

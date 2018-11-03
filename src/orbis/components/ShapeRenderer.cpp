@@ -5,6 +5,6 @@ namespace orb
 {
 	void ShapeRenderer::render()
 	{
-		VideoManager::instance()->getRenderDevice()->render(m_mesh);
+		VideoManager::instance()->getRenderDevice()->render(&m_mesh);
 	}
 }

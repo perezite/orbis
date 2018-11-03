@@ -1,4 +1,5 @@
 #include "Orbis.h"
+#include "../video/VideoManager.h"
 
 namespace orb
 {
@@ -12,6 +13,7 @@ namespace orb
 	{
 		m_currentLevel->update();
 		m_currentLevel->render();
+		VideoManager::instance()->getRenderDevice()->finalize();
 	}
 
 	Orbis::Orbis()

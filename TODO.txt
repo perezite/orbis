@@ -1,17 +1,18 @@
 TODO:	
 - Bootstrapping
 	- Rotierendes Dreieck im SFML-Stil implementieren:
-		- Orbis als Console-App implementieren, welche Text ausgibt	
-		- Levelfunktionalität implementieren
-		- Sandbox implementieren, welche das Dreieck ausgibt
-		- Console-App anpassen, so dass sie das Dreieck ausgibt
+		- Next: Spass mit error-logging implementieren (mit streams)
+		- Orbis in Textform implementieren
+		- Levelfunktionalität in Textform implementieren
+		- Sandbox implementieren, welche das Dreieck rendert
+		- Console-App anpassen, so dass sie das Dreieck rendert
 	- Tool implementieren, welches automatisch Orbis.h generiert und als Pre-Build Step implementieren
 	- Source-Code entsprechend anpassen
 	- Zwei Sprites implementieren im SFML-Stil
 		- Level-Funktionalität hinzfügen
 		- Orbis erweitern mit Console-Klassen, welche Text ausgeben
-		- Sandbox erstellen, welche die Sprites ausgibt
-		- Console-App anpassen, so dass sie die Sprites ausgibt
+		- Sandbox erstellen, welche die Sprites rendert
+		- Console-App anpassen, so dass sie die Sprites rendert
 	- Atlassing implementieren im SFML-Stil
 		- Orbis erweitern durch Console-Klassen
 		- Sandbox erweitern

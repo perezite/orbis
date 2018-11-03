@@ -109,5 +109,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\VideoManager.cpp">
       <Filter>video</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

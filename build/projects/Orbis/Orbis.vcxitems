@@ -39,6 +39,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\game\Level.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\RenderDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\VideoManager.cpp" />
   </ItemGroup>
