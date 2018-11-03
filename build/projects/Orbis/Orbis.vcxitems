@@ -15,6 +15,8 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Engine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h" />
@@ -23,5 +25,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Engine.cpp" />
   </ItemGroup>
 </Project>
