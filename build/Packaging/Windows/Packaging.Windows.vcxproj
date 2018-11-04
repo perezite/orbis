@@ -110,7 +110,7 @@
       <PreprocessorDefinitions>__WIN32__;WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

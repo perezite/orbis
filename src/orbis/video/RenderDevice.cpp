@@ -1,4 +1,5 @@
 #include "RenderDevice.h"
+#include "../core/Error.h"
 
 #include <iostream>
 
@@ -13,6 +14,8 @@ namespace orb
 	{
 		std::vector<unsigned int> indices; computeIndices(indices);
 		std::vector<float> vertices; computeVertices(vertices);
+
+		ORB_ERROR("test");
 
 		std::cout << "-- begin RenderDevice::finalize()" << std::endl;
 		std::cout << "indices";

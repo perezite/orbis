@@ -93,7 +93,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
-      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

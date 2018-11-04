@@ -37,6 +37,12 @@
     <Filter Include="game\headers">
       <UniqueIdentifier>{39e2df50-19f3-4d36-96b4-562ed86c4cc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{d2c590d2-d622-4571-8bf2-de6b9617cc9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\headers">
+      <UniqueIdentifier>{47db0ef1-33b2-4348-afe7-6a0f1ffb4651}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h">
@@ -78,6 +84,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\RenderDevice.h">
       <Filter>video\headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Log.h">
+      <Filter>core\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Error.h">
+      <Filter>core\headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl">
@@ -111,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.cpp">
       <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Error.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -102,7 +102,7 @@
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <PrecompiledHeaderOutputFile>$(IntDir)Precompiled.pch</PrecompiledHeaderOutputFile>
-      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

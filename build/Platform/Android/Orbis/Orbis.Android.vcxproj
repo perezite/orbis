@@ -99,7 +99,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\Common;$(SolutionDir)External\Android\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ExceptionHandling>Enabled</ExceptionHandling>
+      <ExceptionHandling>Disabled</ExceptionHandling>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <CompileAs>CompileAsCpp</CompileAs>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>

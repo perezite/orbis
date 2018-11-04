@@ -1,7 +1,8 @@
 TODO:	
 - Bootstrapping
 	- Rotierendes Dreieck im SFML-Stil implementieren:
-		- Next: Spass mit error-logging implementieren (mit streams)
+		- Logging vollständig implementieren (mit SDL Logger)
+		- Release Exception-Handling vollständig implementieren (mit SDL-Window)
 		- Orbis in Textform implementieren
 		- Levelfunktionalität in Textform implementieren
 		- Sandbox implementieren, welche das Dreieck rendert

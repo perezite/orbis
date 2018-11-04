@@ -17,6 +17,8 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\Component.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\ShapeRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Error.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Log.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.h" />
@@ -34,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\ShapeRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Error.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.cpp" />

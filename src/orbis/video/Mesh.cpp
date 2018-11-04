@@ -1,4 +1,6 @@
 #include "Mesh.h"
+#include "../core/Log.h"
+#include "../core/Error.h"
 
 #include <iostream>
 
@@ -11,7 +13,7 @@ namespace orb
 			return;
 		}
 		else
-			std::cout << "the specified primitive type is not supported";
+			ORB_ERROR("the specified primitive type is not supported");
 	}
 
 	void Mesh::computeVertices(std::vector<float>& result)
