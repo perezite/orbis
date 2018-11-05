@@ -1,23 +1,23 @@
 #pragma once
 
 #include "Component.h"
-#include "../video/Mesh.h"
+#include "../video/Renderable.h"
 
 namespace orb
 {
 	// a renderer that draws a shape
-	class ShapeRenderer : public Component
+	class ShapeRenderer : public Component, public Renderable
 	{
 	public:
-		ShapeRenderer(PrimitiveType primitiveType, unsigned int size)
-			: m_mesh(primitiveType, size)
+		ShapeRenderer(unsigned int numVertices)
+			: m_mesh(numVertices)
 		{ };
 
 		Vertex& operator[](std::size_t index) { return m_mesh[index]; }
 
-		void update() { };
+		Mesh& getMesh() { return m_mesh; }
 
-		void render();
+		void update() { };
 
 	private:
 		Mesh m_mesh;

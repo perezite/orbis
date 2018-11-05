@@ -11,8 +11,8 @@ namespace orb
 	class Mesh
 	{
 	public:
-		Mesh(PrimitiveType primitiveType, unsigned int size) 
-			: m_primitiveType(primitiveType), m_vertices(size)
+		Mesh(unsigned int numVertices) 
+			: m_vertices(numVertices)
 		{ }
 
 		virtual ~Mesh() { };

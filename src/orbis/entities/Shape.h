@@ -12,7 +12,7 @@ namespace orb
 	class Shape : public Entity
 	{
 	public:
-		Shape(PrimitiveType primitiveType, unsigned int size);
+		Shape(unsigned int numVertices);
 
 		virtual ~Shape() { };
 

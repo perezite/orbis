@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Mesh.h"
-#include "Material.h"
+#include "Renderable.h"
 
 #include <vector>
 
@@ -11,16 +10,20 @@ namespace orb
 	class RenderDevice
 	{
 	public:
-		void render(Mesh* mesh);
+		void enable(Renderable& renderable);
 
-		void finalize();
+		void disable(Renderable& renderable);
+
+		void render();
 
 	protected:
 		void computeIndices(std::vector<unsigned int>& result);
 
 		void computeVertices(std::vector<float>& result);
 
+		void printData(std::vector<unsigned int>& indices, std::vector<float>& vertices);
+
 	private:
-		std::vector<Mesh*> m_meshes;
+		std::vector<Renderable*> m_renderables;
 	};
 }

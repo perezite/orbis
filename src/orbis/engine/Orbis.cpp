@@ -13,10 +13,10 @@ namespace orb
 	{
 		m_currentLevel->update();
 		m_currentLevel->render();
-		VideoManager::instance()->getRenderDevice()->finalize();
+		VideoManager::instance()->getRenderDevice()->render();
 	}
 
-	Orbis::Orbis()
+	Orbis::Orbis() : m_isRunning(true)
 	{
 		m_currentLevel = new Level();
 	}

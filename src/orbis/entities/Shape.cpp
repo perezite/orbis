@@ -2,8 +2,8 @@
 
 namespace orb
 {
-	Shape::Shape(PrimitiveType primitiveType, unsigned int size)
-		: m_shapeRenderer(primitiveType, size)
+	Shape::Shape(unsigned int numVertices)
+		: m_shapeRenderer(numVertices)
 	{
 		addComponent(&m_shapeRenderer);
 	}

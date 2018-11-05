@@ -9,11 +9,11 @@ namespace orb
 	public:
 		static Orbis* instance();
 
-		const bool isClosing() const { return m_isClosing; }
+		const bool isRunning() const { return m_isRunning; }
 
 		Level* getCurrentLevel() const { return m_currentLevel; }
 
-		const void close() { m_isClosing = true; }
+		const void close() { m_isRunning = false; }
 
 		void updateFrame();
 
@@ -23,7 +23,7 @@ namespace orb
 		virtual ~Orbis() { }
 
 	private: 
-		bool m_isClosing;
+		bool m_isRunning;
 
 		Level* m_currentLevel;
 	};
