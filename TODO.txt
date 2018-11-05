@@ -1,8 +1,6 @@
 TODO:	
 - Bootstrapping
 	- Rotierendes Dreieck im SFML-Stil implementieren:
-		- Logging vollständig implementieren (mit SDL Logger)
-		- Release Exception-Handling vollständig implementieren (mit SDL-Messagebox)
 		- Levelfunktionalität in Textform implementieren
 		- Sandbox implementieren, welche das Dreieck rendert
 		- Console-App anpassen, so dass sie das Dreieck rendert

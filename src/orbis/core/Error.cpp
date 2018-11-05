@@ -5,17 +5,14 @@
 
 namespace orb
 {
-	#ifndef _DEBUG
-		void handleError(std::string location, std::string message)
-		{
-			Log().error() << location << ": " << message;
-			std::cin.get();
-			exit(0);
-		}
-	#endif
-
-	void dummy()
+	void handleError(std::string location, std::string message)
 	{
+		Log().error() << location << ": " << message;
+		#ifndef DEBUG
+			Log().errorMessageBox("Error") << location << ": " << message;
+		#endif
+
+		exit(0);
 	}
 }
 

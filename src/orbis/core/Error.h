@@ -2,22 +2,22 @@
 
 #include <string>
 
+#define ORB_STRINGIFY(x) #x
+#define ORB_TOSTRING(x) ORB_STRINGIFY(x)
+#define ORB_AT __FILE__ ":" ORB_TOSTRING(__LINE__)
+
 #ifdef _DEBUG
-	#define ORB_ERROR(message) \
- 		throw message;
+	#define ORB_ERROR(message)	\
+ 		throw message;			\
+		orb::handleError(ORB_AT, message);
 #endif
 
 #ifndef _DEBUG
-	#define STRINGIFY(x) #x
-	#define TOSTRING(x) STRINGIFY(x)
-	#define AT __FILE__ ":" TOSTRING(__LINE__)
 	#define ORB_ERROR(message) \
-		orb::handleError(AT, message);
+		orb::handleError(ORB_AT, message);
 #endif
 
 namespace orb
 {
-	#ifndef _DEBUG
-		void handleError(std::string location, std::string message);
-	#endif
+	void handleError(std::string location, std::string message);
 }

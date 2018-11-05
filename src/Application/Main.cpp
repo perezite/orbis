@@ -1,6 +1,8 @@
 #include "../orbis/Engine/Orbis.h"
 #include "../orbis/entities/Shape.h"
 
+#include "../orbis/core/Log.h"
+
 int main(int argc, char* args[])
 {
 	orb::Shape shape(3);
