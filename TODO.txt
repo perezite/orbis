@@ -1,7 +1,7 @@
 TODO:	
 - Bootstrapping
 	- Rotierendes Dreieck im SFML-Stil implementieren:
-		- Levelfunktionalität in Textform implementieren
+		- Level in Klasse implementieren
 		- Sandbox implementieren, welche das Dreieck rendert
 		- Console-App anpassen, so dass sie das Dreieck rendert
 	- 10000 rotierende Dreiecek im SFML-Stil implementieren

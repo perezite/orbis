@@ -9,6 +9,19 @@ namespace orb
 		return &instance;
 	}
 
+	void Orbis::queueLevel(void(*level)(void))
+	{
+		m_isLevelRunning = false; 
+		m_queuedLevel = level; 
+	}
+
+	void Orbis::runLevel() 
+	{ 
+		m_isLevelRunning = true; 
+		m_queuedLevel(); 
+		m_queuedLevel = NULL;
+	}
+
 	void Orbis::updateFrame()
 	{
 		m_currentLevel->update();
@@ -16,7 +29,7 @@ namespace orb
 		VideoManager::instance()->getRenderDevice()->render();
 	}
 
-	Orbis::Orbis() : m_isRunning(true)
+	Orbis::Orbis() : m_isLevelRunning(true), m_queuedLevel(NULL)
 	{
 		m_currentLevel = new Level();
 	}

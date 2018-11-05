@@ -19,8 +19,6 @@ namespace orb
 
 	void RenderDevice::render()
 	{
-		ORB_ERROR("Whoopsie");
-
 		std::vector<unsigned int> indices; computeIndices(indices);
 		std::vector<float> vertices; computeVertices(vertices);
 		printData(indices, vertices);
