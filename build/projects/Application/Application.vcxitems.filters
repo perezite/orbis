@@ -2,5 +2,21 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\Main.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.cpp">
+      <Filter>levels</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="levels">
+      <UniqueIdentifier>{96fbc106-c594-42b7-b902-391213b257f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="levels\headers">
+      <UniqueIdentifier>{afbe55fe-43f6-462c-a5bd-fce8c2403be7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.h">
+      <Filter>levels\headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
