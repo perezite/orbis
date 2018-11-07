@@ -2,6 +2,7 @@
 #include "../orbis/entities/Shape.h"
 #include "../orbis/core/Log.h"
 #include "levels/Level1.h"
+#include "sandbox/RotatingTriangleSandbox.h"
 
 void level0()
 {		
@@ -14,19 +15,17 @@ void level0()
 	while (orbis->isLevelRunning())
 	{
 		static int cnt = 0; cnt++;
-		if (cnt > 3) 
-			orbis->queueLevel(app::Level1::run);
-
-		orb::Log().message() << "level1::update" << std::endl;
+		if (cnt > 3) orbis->queueLevel(app::Level1::run);
+		orb::Log().message() << "level1::update";
 		orbis->updateFrame();
 	}
 }
 
 int main(int argc, char* args[])
 {
+	app::RotatingTriangleSandbox::run();
+
 	level0();
 	while (orb::Orbis::instance()->isLevelQueued())
 		orb::Orbis::instance()->runLevel();
-
-	std::cin.get();
 }

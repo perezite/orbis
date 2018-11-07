@@ -5,6 +5,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.cpp">
       <Filter>levels</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleSandbox.cpp">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Helper.cpp">
+      <Filter>sandbox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="levels">
@@ -13,10 +19,22 @@
     <Filter Include="levels\headers">
       <UniqueIdentifier>{afbe55fe-43f6-462c-a5bd-fce8c2403be7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sandbox">
+      <UniqueIdentifier>{ea338b6f-fced-48de-a476-c985190b8e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sandbox\headers">
+      <UniqueIdentifier>{41aa3415-784f-4c24-ac9a-7734bf9d9a4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.h">
       <Filter>levels\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleSandbox.h">
+      <Filter>sandbox\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Helper.h">
+      <Filter>sandbox\headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
