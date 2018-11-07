@@ -15,7 +15,7 @@ namespace app
 		init();
 
 		bool running = true;
-		while (!running) {
+		while (running) {
 			running = Helper::updateInput();
 			render();
 			Helper::flip();
@@ -49,7 +49,9 @@ namespace app
 
 	void RotatingTriangleSandbox::computeVertices(std::vector<GLfloat>& result)
 	{
-		result = { -0.2f, -0.2f, 0.2f, -0.2f, 0.0f, 0.2f };
+		result = { -0.5f, -0.5f, 1, 0, 0, 1,
+					0.5f, -0.5f, 0, 1, 0, 1,
+					0.0f,  0.5f, 0, 0, 1, 1};
 	}
 
 
@@ -62,11 +64,12 @@ namespace app
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
+		glClearColor(1, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		Helper::activateShader(m_shader);
-		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vPosition"], 2, 4, &(vertices[0]));
-		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 2, 4, &(vertices[2]));
+		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vPosition"], 2, 6, &(vertices[0]));
+		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 4, 6, &(vertices[2]));
 	}
 
 	void RotatingTriangleSandbox::cleanupRendering()

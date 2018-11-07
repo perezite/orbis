@@ -52,13 +52,13 @@ namespace app
 	std::string Helper::getDiffuseVertexShaderCode()
 	{
 		return
-			"attribute vec4 a_vPosition;   \n"
-			"attribute vec4 a_vColor;	   \n"
-			"varying vec4 v_vColor;		   \n"
-			"void main()                   \n"
-			"{                             \n"
-			"   gl_Position = a_vPosition; \n"
-			"	v_vColor = a_vColor;       \n"
+			"attribute vec2 a_vPosition;										\n"
+			"attribute vec4 a_vColor;											\n"
+			"varying vec4 v_vColor;												\n"
+			"void main()														\n"
+			"{																	\n"
+			"   gl_Position = vec4(a_vPosition.x, a_vPosition.y, 0 , 1 );		\n"
+			"	v_vColor = a_vColor;											\n"
 			"}";
 	}
 
