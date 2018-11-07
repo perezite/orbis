@@ -7,7 +7,6 @@ namespace app
 	SDL_Window* Helper::m_sdlWindow = NULL;
 	SDL_GLContext Helper::m_glContext = NULL;
 
-
 	void Helper::initSDL()
 	{
 		#ifdef WIN32
@@ -95,10 +94,10 @@ namespace app
 		glUseProgram(shader);
 	}
 
-	void Helper::attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLsizei strideCount, const GLvoid* firstElement)
+	void Helper::attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLenum elementType, GLsizei stride, const GLvoid* firstElement)
 	{
 		glEnableVertexAttribArray(shaderAttributeLocation);
-		glVertexAttribPointer(shaderAttributeLocation, elementCount, GL_FLOAT, GL_FALSE, strideCount * sizeof(GLfloat), firstElement);
+		glVertexAttribPointer(shaderAttributeLocation, elementCount, elementType, GL_FALSE, stride, firstElement);
 	}
 
 	void Helper::detachVertexArrayFromShaderAttribute(GLuint shaderAttributeLocation)

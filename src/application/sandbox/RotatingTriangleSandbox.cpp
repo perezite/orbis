@@ -33,7 +33,7 @@ namespace app
 
 	void RotatingTriangleSandbox::render()
 	{
-		std::vector<GLfloat> vertices; computeVertices(vertices);
+		std::vector<Vertex> vertices; computeVertices(vertices);
 		std::vector<GLushort> indices; computeIndices(indices);
 		prepareRendering(vertices);
 
@@ -47,20 +47,19 @@ namespace app
 		Helper::flip();
 	}
 
-	void RotatingTriangleSandbox::computeVertices(std::vector<GLfloat>& result)
+	void RotatingTriangleSandbox::computeVertices(std::vector<Vertex>& result)
 	{
-		result = { -0.5f, -0.5f, 1, 0, 0, 1,
-					0.5f, -0.5f, 0, 1, 0, 1,
-					0.0f,  0.5f, 0, 0, 1, 1};
+		result = {	Vertex(-0.5f, -0.5f, 1, 0, 0, 1),
+					Vertex(0.5f, -0.5f, 0, 1, 0, 1),
+					Vertex(0.0f,  0.5f, 0, 0, 1, 1) };
 	}
-
 
 	void RotatingTriangleSandbox::computeIndices(std::vector<GLushort>& result)
 	{
 		result = { 0, 1, 2 };
 	}
 
-	void RotatingTriangleSandbox::prepareRendering(std::vector<GLfloat>& vertices)
+	void RotatingTriangleSandbox::prepareRendering(std::vector<Vertex>& vertices)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
@@ -68,8 +67,9 @@ namespace app
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		Helper::activateShader(m_shader);
-		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vPosition"], 2, 6, &(vertices[0]));
-		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 4, 6, &(vertices[2]));
+
+		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, sizeof(Vertex), &(vertices[0].x));
+		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 4, GL_UNSIGNED_BYTE, sizeof(Vertex), &(vertices[0].r));
 	}
 
 	void RotatingTriangleSandbox::cleanupRendering()

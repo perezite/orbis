@@ -1,7 +1,6 @@
 TODO:	
 - Bootstrapping
 	- Rotierendes Dreieck im SFML-Stil implementieren:
-		- Sandbox implementieren, welche das Dreieck rendert (sandbox/SDL2MultiTierDebugging, https://github.com/perezite/orbis/blob/cb9dac9c89e02a6a92f56e17cdd35ae38b367148/src/Application/Sandboxing/Helper.cpp#L58)
 		- Console-App anpassen, so dass sie das Dreieck rendert
 	- 10000 rotierende Dreiecke im SFML-Stil implementieren
 		- Vorigen Code so anpassen, dass er so schnell wie möglich läuft

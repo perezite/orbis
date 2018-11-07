@@ -23,9 +23,6 @@ namespace orb
 
 		 void computeVertices(std::vector<float>& result);
 
-	protected:
-		 void computeTriangleIndices(std::vector<unsigned int>& result, unsigned int offset);
-
 	private:
 		PrimitiveType m_primitiveType;
 

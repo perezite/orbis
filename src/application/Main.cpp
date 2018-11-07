@@ -4,28 +4,17 @@
 #include "levels/Level1.h"
 #include "sandbox/RotatingTriangleSandbox.h"
 
-void level0()
-{		
-	orb::Shape shape(3);
-	shape[0] = orb::Vertex(orb::Vector2f(-1, -1), orb::Color(255, 0, 0));
-	shape[1] = orb::Vertex(orb::Vector2f(1, -1), orb::Color(0, 255, 0));
-	shape[2] = orb::Vertex(orb::Vector2f(0, 1), orb::Color(0, 0, 255));
-	
-	orb::Orbis* orbis = orb::Orbis::instance();
-	while (orbis->isLevelRunning())
-	{
-		static int cnt = 0; cnt++;
-		if (cnt > 3) orbis->queueLevel(app::Level1::run);
-		orb::Log().message() << "level1::update";
-		orbis->updateFrame();
-	}
-}
-
 int main(int argc, char* args[])
 {
 	app::RotatingTriangleSandbox::run();
 
-	level0();
-	while (orb::Orbis::instance()->isLevelQueued())
-		orb::Orbis::instance()->runLevel();
+	orb::Shape shape(3);
+	shape[0] = orb::Vertex(orb::Vector2f(-1, -1), orb::Color(255, 0, 0));
+	shape[1] = orb::Vertex(orb::Vector2f(1, -1), orb::Color(0, 255, 0));
+	shape[2] = orb::Vertex(orb::Vector2f(0, 1), orb::Color(0, 0, 255));
+
+	orb::Orbis* orbis = orb::Orbis::instance();
+	while (orbis->isLevelRunning()) {
+		orbis->updateFrame();
+	}
 }

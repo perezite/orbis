@@ -9,13 +9,13 @@ namespace orb
 		static const Color White;
 
 	public:
-		Color(unsigned char r_ = 0, unsigned char g_ = 0, unsigned char b_ = 0) 
-			: r(r_), g(g_), b(b_)
+		Color(unsigned char r_ = 0, unsigned char g_ = 0, unsigned char b_ = 0, unsigned char a_ = 255) 
+			: r(r_), g(g_), b(b_), a(a_)
+
 		{};
 
 		virtual ~Color() 
 		{};
-
 
 	public:
 		unsigned char r;
@@ -23,5 +23,7 @@ namespace orb
 		unsigned char g;
 
 		unsigned char b;
+
+		unsigned char a;
 	};
 }

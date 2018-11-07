@@ -31,7 +31,7 @@ namespace app
 
 		static void activateShader(GLuint shader);
 
-		static void attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLsizei strideCount, const GLvoid* firstElement);
+		static void attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLenum elementType, GLsizei strideCount, const GLvoid* firstElement);
 
 		static void detachVertexArrayFromShaderAttribute(GLuint shaderAttributeLocation);
 
