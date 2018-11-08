@@ -3,8 +3,7 @@
 
 namespace orb
 {
-	Renderable::Renderable(unsigned int numVertices) 
-		: m_mesh(numVertices)
+	Renderable::Renderable()
 	{
 		VideoManager::instance()->getRenderDevice()->enable(*this);
 	}
