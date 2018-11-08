@@ -7,10 +7,11 @@ namespace orb
 	class Renderable
 	{
 	public:
-		Renderable();
+		Renderable(unsigned int numVertices);
 
 		virtual ~Renderable();
 
-		virtual Mesh& getMesh() = 0;
+	private:
+		Mesh m_mesh;
 	};
 }

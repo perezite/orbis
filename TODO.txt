@@ -1,8 +1,10 @@
 TODO:	
 - Bootstrapping
+	- Bootstrapping nochmals durchführen im Console-Modus
 	- Rotierendes Dreieck im SFML-Stil implementieren:
 		- Console-App anpassen, so dass sie das Dreieck rendert
 		- Wrapper-Methoden für SDL und OpenGL einbinden
+	- ShapeArray implementieren und damit 2 Dreiecke rendern
 	- 2 rotierende Dreiecke im SFML-Stil implementieren mit Batching
 	- 10000 rotierende Dreiecke im SFML-Stil implementieren
 		- Vorigen Code so anpassen, dass er so schnell wie möglich rendert

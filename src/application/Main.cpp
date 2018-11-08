@@ -6,7 +6,7 @@
 
 int main(int argc, char* args[])
 {
-	app::RotatingTriangleSandbox::run();
+	// app::RotatingTriangleSandbox::run();
 
 	orb::Shape shape(3);
 	shape[0] = orb::Vertex(orb::Vector2f(-1, -1), orb::Color(255, 0, 0));
