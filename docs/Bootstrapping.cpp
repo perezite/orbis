@@ -1,10 +1,11 @@
-// Detailimplementationen
+// Detail Implementationen
+
 class Drawable
 {
 	virtual draw(Window& window, Transform& transform = Transform::Identity); 
 }
 
-class Component : public Drawable
+class Component : public Drawable, public Transformable
 {
 public:
 	virtual void update(Orbis& orbis) { };
@@ -15,20 +16,40 @@ public:
 class Shape : Component
 {
 public:
-	void draw(Window& window, Transform* parentTransform = NULL) 
+	void draw(Window& window, Transform& transform = Transform::Identity) 
 	{
-		if ()
+		transform *= getTransform();
+		window.draw(mesh, transform);
 	}	
+	
+private:
+	Mesh m_mesh;
+}	
+
+class Level  
+{
+public:
+	void updateLevel() {
+		for_each(actor: m_actors)
+			actor.update();
+	}
+	
+	void drawLevel(Window& window) {
+		for_each(actor: m_actors)
+			actor.draw(window);
+	}
+	
+private:
+	std::vector<Actor*> m_actors;
 }	
 
 class Orbis
 {
-	typedef void (*Level)();
+	typedef void (*Level)(Orbis&);
 
 public:
 	static Orbis& instance() 
 	{ 
-		ORB_ASSERT(m_instance != NULL, "Please create an instance of the Orbis class before calling any Orbis specific functions or constructors")
 		return (*m_instance); 
 	}
 	
@@ -52,10 +73,18 @@ public:
 
 	void updateLevel()
 	{
-		...
+		level.update();
 	}
+	
+	void drawLevel(window)
+	{
+		
+	}
+	
 private:
 	Level m_queueLevel;
+	
+	Level level;
 	
 	static Orbis* m_instance = NULL;
 }	
@@ -63,21 +92,23 @@ private:
 class Actor : public Transformable
 {
 public:
-	void update(Orbis& orbis) {
-		for_each(actor in m_actors)
-			actor.update(orbis);
-		
+	void update() {
 		for_each (component in m_components) 
 			component.update(orbis);
+		
+		for_each(childActor in m_childActors)
+			childActor.update();
 	}			
 	
-	void draw(Window& window, Transform* parentTransform)
+	void draw(Window& window, Transform& transform = Transform::Identity)
 	{
-		Transform hierarchicalTransform = transform;
-		if (parentTransform)
-			hierarchicalTransform = parentTransform * hierarchicalTransform;
+		transform *= getTransform;
 		
-		
+		for_each(component in m_components)
+			component.draw(window, transform);
+			
+		for_each(childActor in m_childActors)
+			childActor.draw(window, transform);
 	}
 	
 	void addComponent(Component& component);
@@ -87,15 +118,18 @@ public:
 private:
 	std::vector<Component*> m_components;
 	
-	std::vector<Actor*> m_actors;
+	std::vector<Actor*> m_childActors;
 }
 
-class ShapeActor
+class ShapeActor : Actor
 {
+	Drawable& getDrawable() { return m_shape; }
 	
+private:
+	Shape m_shape;
 }
 
-// Bootstrapping Stufe 4: Automatisches Actor Management
+// Bootstrapping Stufe 4: Automatisches Actor Management und Levels
 void example4a(Orbis& orbis)
 {		
 	orb::Window window(400, 400, "My Title");
@@ -104,6 +138,7 @@ void example4a(Orbis& orbis)
 	
 	while (orbis.isLevelRunning()) {
 		orbis.updateLevel();
+		orbis.drawLevel(window);
 	}
 }
 
@@ -114,7 +149,7 @@ void example4()
 		orbis.runLevel();
 }
 
-// Bootstrapping Stufe 3: Actors
+// Bootstrapping Stufe 3: Actors mit hierarchischen Transformationen
 void example3()
 {
 	orb::Window window(400, 400, "My Title");

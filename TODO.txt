@@ -1,6 +1,7 @@
 TODO:	
 - Bootstrapping
 	- Bootstrapping nochmals durchführen im Console-Modus
+	- TODO updaten
 	- Rotierendes Dreieck im SFML-Stil implementieren:
 		- Console-App anpassen, so dass sie das Dreieck rendert
 		- Wrapper-Methoden für SDL und OpenGL einbinden
