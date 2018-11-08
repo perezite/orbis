@@ -2,8 +2,12 @@ TODO:
 - Bootstrapping
 	- Rotierendes Dreieck im SFML-Stil implementieren:
 		- Console-App anpassen, so dass sie das Dreieck rendert
+		- Wrapper-Methoden für SDL und OpenGL einbinden
+	- 2 rotierende Dreiecke im SFML-Stil implementieren mit Batching
 	- 10000 rotierende Dreiecke im SFML-Stil implementieren
-		- Vorigen Code so anpassen, dass er so schnell wie möglich läuft
+		- Vorigen Code so anpassen, dass er so schnell wie möglich rendert
+	- 10000 rotierende Partikel im SFML-Stil implementieren
+		- Code so anpassen, dass er so schnell wie möglich rendert
 	- Tool implementieren, welches automatisch Orbis.h generiert und als Pre-Build Step implementieren
 	- Source-Code entsprechend anpassen
 	- Zwei Sprites implementieren im SFML-Stil

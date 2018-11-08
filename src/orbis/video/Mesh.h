@@ -19,13 +19,11 @@ namespace orb
 
 		Vertex& operator[](std::size_t index) { return m_vertices[index]; }
 
-		 void computeIndices(std::vector<unsigned int>& result, unsigned int offset);
+		void computeIndices(std::vector<unsigned int>& result, unsigned int offset);
 
-		 void computeVertices(std::vector<float>& result);
+		void computeVertices(std::vector<float>& result);
 
 	private:
-		PrimitiveType m_primitiveType;
-
 		std::vector<Vertex> m_vertices;
 	};
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-
 #ifdef  WIN32
 #include <gl/glew.h>
 #include <SDL2/SDL_opengl.h>
@@ -9,7 +8,6 @@
 #else
 	#include <GLES2/gl2.h>	
 	#include <GLES2/gl2ext.h>
-	#error Oops, non-window platforms not yet implemented
 #endif 
 
 #include <string>
@@ -38,7 +36,7 @@ namespace app
 	public:
 		static std::string getDiffuseVertexShaderCode();
 
-		static std::string Helper::getDiffuseFragmentShaderCode();
+		static std::string getDiffuseFragmentShaderCode();
 
 	protected: 
 		static GLuint createShader(std::string shaderCode, GLenum type);
