@@ -2,132 +2,51 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="video">
-      <UniqueIdentifier>{63713855-e849-48a9-88f0-a381f77ae92d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="math">
-      <UniqueIdentifier>{7dca26fc-a7ad-4e49-8d74-bfa0025e0b4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="engine">
-      <UniqueIdentifier>{afec8da8-771c-4fe9-846c-4b8d8ec14600}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="engine\headers">
-      <UniqueIdentifier>{fb1fb833-52dd-4704-afce-ae4fe5c06937}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="math\headers">
-      <UniqueIdentifier>{4791613a-1bf2-432a-991d-ca05fcca9d1e}</UniqueIdentifier>
+      <UniqueIdentifier>{2d678298-70f6-467a-8f12-de443422ff1f}</UniqueIdentifier>
     </Filter>
     <Filter Include="video\headers">
-      <UniqueIdentifier>{2a5eb51a-e32b-47e8-aae6-511bc7e2e78d}</UniqueIdentifier>
+      <UniqueIdentifier>{506b3250-0ff4-436c-a5bc-d1015c6c5a65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="entities">
-      <UniqueIdentifier>{3d9a45e4-1403-428a-aa86-4d978e8ff14a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\headers">
-      <UniqueIdentifier>{2f3d9fbb-ddee-4c10-a14c-89b279138421}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game">
-      <UniqueIdentifier>{5e6e6f5e-3553-4eec-b324-fa4e8633abe0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="components">
-      <UniqueIdentifier>{27f660c4-5608-4b58-8378-8e5df88819f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="components\headers">
-      <UniqueIdentifier>{d30b505d-ca21-4ece-bad2-80a59bfaa4c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game\headers">
-      <UniqueIdentifier>{39e2df50-19f3-4d36-96b4-562ed86c4cc7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core">
-      <UniqueIdentifier>{d2c590d2-d622-4571-8bf2-de6b9617cc9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\headers">
-      <UniqueIdentifier>{47db0ef1-33b2-4348-afe7-6a0f1ffb4651}</UniqueIdentifier>
+    <Filter Include="math">
+      <UniqueIdentifier>{b297d04e-2e61-4b9c-9e98-7fdd8986d474}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h">
-      <Filter>video\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\PrimitiveType.h">
-      <Filter>video\headers</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.h">
+      <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Vertex.h">
       <Filter>video\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.h">
-      <Filter>math\headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.h">
       <Filter>video\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.h">
-      <Filter>entities\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.h">
-      <Filter>engine\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.h">
-      <Filter>entities\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\ShapeRenderer.h">
-      <Filter>components\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\Component.h">
-      <Filter>components\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\game\Level.h">
-      <Filter>game\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\VideoManager.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Transform.h">
       <Filter>video\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\RenderDevice.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.h">
       <Filter>video\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Log.h">
-      <Filter>core\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Error.h">
-      <Filter>core\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Renderable.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Renderer.h">
       <Filter>video\headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl">
-      <Filter>math\headers</Filter>
+      <Filter>math</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Entity.cpp">
-      <Filter>entities</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\engine\Orbis.cpp">
-      <Filter>engine</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\game\Level.cpp">
-      <Filter>game</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Color.cpp">
-      <Filter>video</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\entities\Shape.cpp">
-      <Filter>entities</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\RenderDevice.cpp">
-      <Filter>video</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\VideoManager.cpp">
       <Filter>video</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.cpp">
       <Filter>video</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\core\Error.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Renderer.cpp">
+      <Filter>video</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Renderable.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Transform.cpp">
       <Filter>video</Filter>
     </ClCompile>
   </ItemGroup>
