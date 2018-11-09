@@ -17,12 +17,14 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\Main.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Helper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\ErrorLoggingSandbox.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleSandbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Helper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\ErrorLoggingSandbox.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleSandbox.h" />
   </ItemGroup>
 </Project>

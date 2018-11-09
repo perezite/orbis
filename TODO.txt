@@ -1,6 +1,6 @@
 TODO:	
 - Bootstrapping
-	- Bootstrapping nochmals durchführen im Console-Modus
+	- Bootstrapping nochmals durchführen
 	- TODO updaten
 	- Rotierendes Dreieck im SFML-Stil implementieren:
 		- Console-App anpassen, so dass sie das Dreieck rendert

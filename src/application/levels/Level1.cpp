@@ -8,10 +8,10 @@ namespace app
 {
 	void Level1::run()
 	{
-		orb::Orbis* orbis = orb::Orbis::instance();
+		/*orb::Orbis* orbis = orb::Orbis::instance();
 		while (orbis->isLevelRunning()) {
 			orb::Log().message() << "Level1::run()";
 			std::cin.get();
-		}
+		}*/
 	}
 }

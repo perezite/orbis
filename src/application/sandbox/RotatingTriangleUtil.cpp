@@ -1,13 +1,13 @@
-#include "Helper.h"
+#include "RotatingTriangleUtil.h"
 
 #include <iostream>
 
 namespace app
 {
-	SDL_Window* Helper::m_sdlWindow = NULL;
-	SDL_GLContext Helper::m_glContext = NULL;
+	SDL_Window* RotatingTriangleUtil::m_sdlWindow = NULL;
+	SDL_GLContext RotatingTriangleUtil::m_glContext = NULL;
 
-	void Helper::initSDL()
+	void RotatingTriangleUtil::initSDL()
 	{
 		#ifdef WIN32
 			SDL_Init(SDL_INIT_VIDEO);
@@ -34,7 +34,7 @@ namespace app
 		#endif		
 	}
 
-	bool Helper::updateInput()
+	bool RotatingTriangleUtil::updateInput()
 	{
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -48,18 +48,18 @@ namespace app
 		return true;
 	}
 
-	void Helper::flip()
+	void RotatingTriangleUtil::flip()
 	{
 		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 
-	void Helper::cleanup()
+	void RotatingTriangleUtil::cleanup()
 	{
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
 	}
 
-	std::string Helper::getDiffuseVertexShaderCode()
+	std::string RotatingTriangleUtil::getDiffuseVertexShaderCode()
 	{
 		return
 			"attribute vec2 a_vPosition;										\n"
@@ -72,7 +72,7 @@ namespace app
 			"}";
 	}
 
-	std::string Helper::getDiffuseFragmentShaderCode()
+	std::string RotatingTriangleUtil::getDiffuseFragmentShaderCode()
 	{
 		return
 			"#version 100								\n"
@@ -83,11 +83,11 @@ namespace app
 			"  gl_FragColor = v_vColor;					\n"
 			"}                                          \n";
 	}
-
-	GLuint Helper::createShader(const std::string& vertexShaderCode, const std::string& fragmentShaderCode)
+	
+	GLuint RotatingTriangleUtil::createShader(const std::string& vertexShaderCode, const std::string& fragmentShaderCode)
 	{
-		GLuint vertexShader = createShader(vertexShaderCode, GL_VERTEX_SHADER);
-		GLuint fragmentShader = createShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
+		GLuint vertexShader = compileShader(vertexShaderCode, GL_VERTEX_SHADER);
+		GLuint fragmentShader = compileShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
 
 		GLuint shaderProgram = glCreateProgram();
 		if (shaderProgram == 0)
@@ -100,23 +100,23 @@ namespace app
 		return shaderProgram;
 	}
 
-	void Helper::activateShader(GLuint shader)
+	void RotatingTriangleUtil::activateShader(GLuint shader)
 	{
 		glUseProgram(shader);
 	}
 
-	void Helper::attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLenum elementType, GLsizei stride, const GLvoid* firstElement)
+	void RotatingTriangleUtil::attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLenum elementType, GLsizei stride, const GLvoid* firstElement)
 	{
 		glEnableVertexAttribArray(shaderAttributeLocation);
 		glVertexAttribPointer(shaderAttributeLocation, elementCount, elementType, GL_FALSE, stride, firstElement);
 	}
 
-	void Helper::detachVertexArrayFromShaderAttribute(GLuint shaderAttributeLocation)
+	void RotatingTriangleUtil::detachVertexArrayFromShaderAttribute(GLuint shaderAttributeLocation)
 	{
 		glDisableVertexAttribArray(shaderAttributeLocation);
 	}
 
-	GLuint Helper::createShader(std::string shaderCode, GLenum type)
+	GLuint RotatingTriangleUtil::compileShader(std::string shaderCode, GLenum type)
 	{
 		GLint compiled;
 		GLuint shader = glCreateShader(type);
@@ -146,7 +146,7 @@ namespace app
 	}
 
 
-	void Helper::linkShader(GLuint shader)
+	void RotatingTriangleUtil::linkShader(GLuint shader)
 	{
 		glLinkProgram(shader);
 

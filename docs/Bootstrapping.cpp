@@ -172,7 +172,7 @@ void main()
 	}
 }
 
-// Bootstrapping Stufe 3: Actors mit hierarchien
+// Bootstrapping Stufe 3: Actors mit Hierarchien
 void example3()
 {
 	orb::Window window(400, 400, "My Title");

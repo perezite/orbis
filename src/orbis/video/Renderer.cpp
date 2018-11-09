@@ -4,12 +4,12 @@ namespace orb
 {
 	void Renderer::draw(orb::Mesh& mesh, const orb::Transform& transform) 
 	{
-		m_elements.push_back(RenderElement{ mesh, transform });
+		m_elements.push_back(RenderElement { mesh, transform });
 	}
 
-	void Renderer::display() 
+	void Renderer::print() 
 	{
-		std::cout << "Begin display" << std::endl;
+		std::cout << "Begin print" << std::endl;
 		for (std::size_t i = 0; i < m_elements.size(); i++) {
 			std::cout << "\tBegin element" << i << std::endl;
 
@@ -29,10 +29,14 @@ namespace orb
 
 			std::cout << "\tEnd element " << i << std::endl;
 		}
-		std::cout << "End display" << std::endl;
+		std::cout << "End print" << std::endl;
 
 		m_elements.clear();
 	}
 
+	void Renderer::display()
+	{
+		// initDefaultShader();
+	}
 
 }

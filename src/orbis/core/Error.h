@@ -1,23 +1,29 @@
 #pragma once
 
-#include <string>
+#include <sstream>
 
 #define ORB_STRINGIFY(x) #x
 #define ORB_TOSTRING(x) ORB_STRINGIFY(x)
-#define ORB_AT __FILE__ ":" ORB_TOSTRING(__LINE__)
-
-#ifdef _DEBUG
-	#define ORB_ERROR(message)	\
- 		throw message;			\
-		orb::handleError(ORB_AT, message);
-#endif
-
-#ifndef _DEBUG
-	#define ORB_ERROR(message) \
-		orb::handleError(ORB_AT, message);
-#endif
+#define ORB_ERROR() orb::Error(__FILE__, ORB_TOSTRING(__LINE__)).output()
 
 namespace orb
 {
-	void handleError(std::string location, std::string message);
+	class Error
+	{
+	public:
+		Error(std::string file, std::string line)
+			: m_file(file), m_line(line)
+		{ }
+
+		std::ostream& output() { return m_output; };
+
+		virtual ~Error();
+
+	private:
+		std::string m_file;
+
+		std::string m_line;
+
+		std::ostringstream m_output;
+	};
 }

@@ -14,7 +14,7 @@
 
 namespace app
 {
-	class Helper
+	class RotatingTriangleUtil
 	{
 	public:
 		static void initSDL();
@@ -39,12 +39,11 @@ namespace app
 		static std::string getDiffuseFragmentShaderCode();
 
 	protected: 
-		static GLuint createShader(std::string shaderCode, GLenum type);
+		static GLuint compileShader(std::string shaderCode, GLenum type);
 
 		static void linkShader(GLuint shader);
 
 	private:
-
 		static SDL_Window* m_sdlWindow;
 
 		static SDL_GLContext m_glContext;

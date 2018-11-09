@@ -1,11 +1,10 @@
 #include <iostream>
 #include <vector>
-
+#include "../orbis/core/Error.h"
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
 
 /*
-
 class Actor: public Transformable {
     public: void update() {
         for_each(component in m_components)
@@ -192,8 +191,6 @@ void example1()
 	triangle[0].position = orb::Vector2f(0, 0);
 	triangle[1].position = orb::Vector2f(0, 1);
 	triangle[2].position = orb::Vector2f(1, 0);
-
-	triangle[2];
 
 	orb::Shape particles(3, 2); 
 	particles[0].position = orb::Vector2f(0, 0);

@@ -9,7 +9,7 @@ namespace orb
 	{
 	public:
 		Mesh(std::size_t numVertices, std::size_t numElements = 1)
-			: m_numElements(numElements), m_indices(numVertices * numElements), m_vertices(numVertices * numElements)
+			: m_indices(numVertices * numElements), m_vertices(numVertices * numElements)
 		{
 			calculateIndices();
 		}
@@ -24,7 +24,6 @@ namespace orb
 		void calculateIndices();
 
 	private:
-		std::size_t m_numElements;
 
 		std::vector<unsigned int> m_indices;
 

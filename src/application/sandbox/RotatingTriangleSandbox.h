@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Helper.h"
+#include "RotatingTriangleUtil.h"
 
 #include <string>
 #include <map>

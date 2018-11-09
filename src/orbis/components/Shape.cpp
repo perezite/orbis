@@ -1,4 +1,5 @@
 #include "Shape.h"
+#include "../core/Error.h"
 
 namespace orb
 {

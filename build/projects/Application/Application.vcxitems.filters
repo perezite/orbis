@@ -8,7 +8,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleSandbox.cpp">
       <Filter>sandbox</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Helper.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\ErrorLoggingSandbox.cpp">
+      <Filter>sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleUtil.cpp">
       <Filter>sandbox</Filter>
     </ClCompile>
   </ItemGroup>
@@ -33,7 +36,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleSandbox.h">
       <Filter>sandbox\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Helper.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\ErrorLoggingSandbox.h">
+      <Filter>sandbox\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\RotatingTriangleUtil.h">
       <Filter>sandbox\headers</Filter>
     </ClInclude>
   </ItemGroup>

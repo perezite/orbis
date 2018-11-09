@@ -10,22 +10,22 @@ namespace app
 
 	void RotatingTriangleSandbox::run()
 	{
-		Helper::initSDL();
+		RotatingTriangleUtil::initSDL();
 		init();
 
 		bool running = true;
 		while (running) {
-			running = Helper::updateInput();
+			running = RotatingTriangleUtil::updateInput();
 			render();
-			Helper::flip();
+			RotatingTriangleUtil::flip();
 		}
 
-		Helper::cleanup();
+		RotatingTriangleUtil::cleanup();
 	}
 
 	void RotatingTriangleSandbox::init()
 	{
-		m_shader = Helper::createShader(Helper::getDiffuseVertexShaderCode(), Helper::getDiffuseFragmentShaderCode());
+		m_shader = RotatingTriangleUtil::createShader(RotatingTriangleUtil::getDiffuseVertexShaderCode(), RotatingTriangleUtil::getDiffuseFragmentShaderCode());
 		m_attributeLocations["a_vPosition"] = glGetAttribLocation(m_shader, "a_vPosition");
 		m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 	}
@@ -43,7 +43,7 @@ namespace app
 
 	void RotatingTriangleSandbox::flip()
 	{
-		Helper::flip();
+		RotatingTriangleUtil::flip();
 	}
 
 	void RotatingTriangleSandbox::computeVertices(std::vector<Vertex>& result)
@@ -65,18 +65,18 @@ namespace app
 		glClearColor(1, 1, 1, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		Helper::activateShader(m_shader);
+		RotatingTriangleUtil::activateShader(m_shader);
 
-		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, sizeof(Vertex), &(vertices[0].x));
-		Helper::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 4, GL_UNSIGNED_BYTE, sizeof(Vertex), &(vertices[0].r));
+		RotatingTriangleUtil::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, sizeof(Vertex), &(vertices[0].x));
+		RotatingTriangleUtil::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 4, GL_UNSIGNED_BYTE, sizeof(Vertex), &(vertices[0].r));
 	}
 
 	void RotatingTriangleSandbox::cleanupRendering()
 	{
-		Helper::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vColor"]);
-		Helper::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vPosition"]);
+		RotatingTriangleUtil::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vColor"]);
+		RotatingTriangleUtil::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vPosition"]);
 
 		glDisable(GL_BLEND);
-		Helper::activateShader(0);
+		RotatingTriangleUtil::activateShader(0);
 	}
 }
