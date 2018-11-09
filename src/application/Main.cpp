@@ -45,15 +45,28 @@ const Transform Transform::Identity = Transform();
 class Mesh
 {
 public:
-	Mesh(unsigned int numVertices)
-		: m_vertices(numVertices)
-	{ }
+	Mesh(std::size_t numVertices, std::size_t numElements = 1)
+		: m_numElements(numElements), m_indices(numVertices * numElements), m_vertices(numVertices * numElements)
+	{
+		calculateIndices();
+	}
 
-	Vertex& operator[](std::size_t index) { return m_vertices[index]; }
+	Vertex& operator[](std::size_t index) {  return m_vertices[index]; }
 
 	std::size_t getVertexCount() const { return m_vertices.size(); }
 
+	const std::vector<unsigned int>& getIndices() const { return m_indices; }
+
+	void calculateIndices() {
+		for (std::size_t i = 0; i < m_vertices.size(); i++)
+			m_indices[i] = i;
+	}			
+
 private:
+	std::size_t m_numElements;
+
+	std::vector<unsigned int> m_indices;
+
 	std::vector<Vertex> m_vertices;
 };
 
@@ -72,12 +85,21 @@ public:
 		std::cout << "Begin display" << std::endl;
 		for (std::size_t i = 0; i < m_elements.size(); i++) {
 			std::cout << "\tBegin element" << i << std::endl;
+
 			std::cout << "\t\tVertices: ";
 			for (std::size_t j = 0; j < m_elements[i].mesh.getVertexCount(); j++) {
 				std::cout << "(" << m_elements[i].mesh[j].position.x << ", " << m_elements[i].mesh[j].position.y << ") ";
 			}
 			std::cout << std::endl;
+
+			std::cout << "\t\tIndices: ";
+			const std::vector<unsigned int>& indices = m_elements[i].mesh.getIndices();
+			for (std::size_t j = 0; j < indices.size(); j++)
+				std::cout << indices[j] << " ";
+			std::cout << std::endl;
+
 			std::cout << "\t\tTransform position: (" << m_elements[i].transform.getPosition().x << ", " << m_elements[i].transform.getPosition().y << ")" << std::endl;
+
 			std::cout << "\tEnd element " << i << std::endl;
 		}
 		std::cout << "End display" << std::endl;
@@ -137,8 +159,8 @@ public:
 class Shape : public Component
 {
 public:
-	Shape(unsigned int numVertices)
-		: m_mesh(numVertices) 
+	Shape(std::size_t numVertices, std::size_t numShapes = 1)
+		: m_mesh(numVertices * numShapes) 
 	{}
 
 	Vertex& operator[](std::size_t index) { return m_mesh[index]; }
@@ -336,21 +358,20 @@ void example1()
 	triangle[1].position = Vector2f(0, 1);
 	triangle[2].position = Vector2f(1, 0);
 
-	/*orb::Shape particles(	3, // number of vertices per particle
-	2 //number of particles)
-	particles[0].position = orb::Vector2f(0, 0);
-	particles[1].position = orb::Vector2f(0, 1);
-	particles[2].position = orb::Vector2f(1, 0);
-	particles[3].position = orb::Vector2f(1, 1);
-	particles[4].position = orb::Vector2f(1, 2);
-	particles[5].position = orb::Vector2f(2, 1);
-	*/
+	triangle[2];
+
+	Shape particles(3, 2); 
+	particles[0].position = Vector2f(0, 0);
+	particles[1].position = Vector2f(0, 1);
+	particles[2].position = Vector2f(1, 0);
+	particles[3].position = Vector2f(1, 1);
+	particles[4].position = Vector2f(1, 2);
+	particles[5].position = Vector2f(2, 1);
 
 	while (window.isOpen()) {
-		// window.update();
 		window.clear();
 		triangle.draw(window);
-		// particles.draw(window);
+		particles.draw(window);
 		window.display();
 	}
 }
