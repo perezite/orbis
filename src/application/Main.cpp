@@ -20,7 +20,6 @@ public:
 	float x; float y;
 };
 
-
 class Transform
 {
 public:
@@ -29,6 +28,8 @@ public:
 private:
 	Vector2f m_position;
 };
+
+Transform Transform::Identity = Transform();
 
 class Drawable
 {
@@ -57,7 +58,6 @@ class Vertex
 {
 public:
 	Vector2f position;
-	Vector2f color;
 };
 
 class Mesh 
@@ -86,7 +86,7 @@ public:
 		// window.draw(mesh, transform);
 	}
 
-	private:
+private:
 	Mesh m_mesh;
 };
 
