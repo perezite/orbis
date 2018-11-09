@@ -2,6 +2,7 @@
 
 #include "Mesh.h"
 #include "Transform.h"
+#include "Shader.h"
 
 #include <iostream>
 
@@ -9,10 +10,6 @@ namespace orb
 {
 	class Renderer 
 	{
-
-	private:
-		struct RenderElement { orb::Mesh& mesh; const orb::Transform& transform; };
-
 	public:
 		void draw(orb::Mesh& mesh, const orb::Transform& transform);
 		
@@ -24,9 +21,11 @@ namespace orb
 		void initDefaultShader() { };
 
 	private:
+		struct RenderElement { orb::Mesh& mesh; const orb::Transform& transform; };
+
 		std::vector<RenderElement> m_elements;
 
-		// Shader m_defaultShader;
+		Shader m_defaultShader;
 	};
 
 }

@@ -1,10 +1,12 @@
 #pragma once
 
 #include <sstream>
+#include <string>
 
 #define ORB_STRINGIFY(x) #x
 #define ORB_TOSTRING(x) ORB_STRINGIFY(x)
 #define ORB_ERROR() orb::Error(__FILE__, ORB_TOSTRING(__LINE__)).output()
+#define ORB_ERROR_IF(condition) if (condition) ORB_ERROR()
 
 namespace orb
 {

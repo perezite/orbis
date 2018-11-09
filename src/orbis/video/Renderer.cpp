@@ -36,7 +36,7 @@ namespace orb
 
 	void Renderer::display()
 	{
-		// initDefaultShader();
+
 	}
 
 }

@@ -16,6 +16,7 @@ namespace orb
 	void Window::display()
 	{
 		m_renderer.print();
+		m_renderer.display();
 	}
 
 	void Window::initSDL()

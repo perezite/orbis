@@ -9,12 +9,36 @@ namespace orb
 		GLuint fragmentShader = compile(getDefaultFragmentShaderCode(), GL_FRAGMENT_SHADER);
 
 		GLuint m_shader = glCreateProgram();
-		if (m_shader == 0)
-			ORB_ERROR() << "error creating shader program";
+		ORB_ERROR_IF(m_shader == 0) << "error creating shader program";
 		
 		glAttachShader(m_shader, vertexShader);
 		glAttachShader(m_shader, fragmentShader);
 		link(m_shader);
+	}
+
+	void Shader::setAttributePointer(std::string attributeName, GLvoid* pointer, GLint numVerticesPerElement, GLsizei stride, GLenum elementType)
+	{
+		if (m_attributeLocations.count(attributeName)) {
+			m_attributeLocations[attributeName] = glGetAttribLocation(m_shader, "a_vPosition");
+			ORB_ERROR_IF(m_attributeLocations[attributeName] < 0) << "The attribute name '" << attributeName << "' is not valid for this shader";
+		}
+
+		GLuint location = m_attributeLocations[attributeName];
+		glEnableVertexAttribArray(location);
+		glVertexAttribPointer(location, numVerticesPerElement, elementType, GL_FALSE, stride, pointer);
+	}
+
+	void Shader::use()
+	{
+		glUseProgram(m_shader);
+	}
+
+	void Shader::unuse()
+	{
+		for (std::map<std::string, GLuint>::iterator it = m_attributeLocations.begin(); it != m_attributeLocations.end(); it++)
+			glDisableVertexAttribArray(it->second);
+
+		glUseProgram(0);
 	}
 
 	GLuint Shader::compile(std::string shaderCode, GLenum type)

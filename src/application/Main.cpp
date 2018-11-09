@@ -179,7 +179,6 @@ void example2()
         window.display();
     }
 }
-
 */
 
 // Bootstrapping Stufe 1: SFML-Entities
