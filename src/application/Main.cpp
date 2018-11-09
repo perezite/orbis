@@ -1,15 +1,6 @@
 #include <iostream>
 #include <vector>
 
-class Window
-{
-public:
-	Window(unsigned int width, unsigned int height, std::string title) : m_title(title) {}
-
-private:
-	std::string m_title;	
-};
-
 class Vector2f
 {
 public:
@@ -20,21 +11,111 @@ public:
 	float x; float y;
 };
 
+Vector2f operator +(const Vector2f& left, const Vector2f& right) {
+	return Vector2f(left.x + right.x, left.y + right.y);
+}
+
+class Vertex
+{
+public:
+	Vector2f position;
+};
+
 class Transform
 {
 public:
-	static Transform Identity;
+	static const Transform Identity;
+
+	Transform(Vector2f position = Vector2f())
+		: m_position(position)
+	{ };
+
+	Vector2f getPosition() const { return m_position; }
 
 private:
 	Vector2f m_position;
 };
 
-Transform Transform::Identity = Transform();
+Transform operator *(const Transform& left, const Transform& right) {
+	return Transform(left.getPosition() + right.getPosition());
+}
+
+const Transform Transform::Identity = Transform();
+
+class Mesh
+{
+public:
+	Mesh(unsigned int numVertices)
+		: m_vertices(numVertices)
+	{ }
+
+	Vertex& operator[](std::size_t index) { return m_vertices[index]; }
+
+	std::size_t getVertexCount() const { return m_vertices.size(); }
+
+private:
+	std::vector<Vertex> m_vertices;
+};
+
+struct RenderElement {
+	Mesh& mesh;
+	const Transform& transform;
+};
+
+class Renderer {
+public:
+	void draw(Mesh& mesh, const Transform& transform) {
+		m_elements.push_back(RenderElement{ mesh, transform });
+	}
+
+	void display() {
+		std::cout << "Begin display" << std::endl;
+		for (std::size_t i = 0; i < m_elements.size(); i++) {
+			std::cout << "\tBegin element" << i << std::endl;
+			std::cout << "\t\tVertices: ";
+			for (std::size_t j = 0; j < m_elements[i].mesh.getVertexCount(); j++) {
+				std::cout << "(" << m_elements[i].mesh[j].position.x << ", " << m_elements[i].mesh[j].position.y << ") ";
+			}
+			std::cout << std::endl;
+			std::cout << "\t\tTransform position: (" << m_elements[i].transform.getPosition().x << ", " << m_elements[i].transform.getPosition().y << ")" << std::endl;
+			std::cout << "\tEnd element " << i << std::endl;
+		}
+		std::cout << "End display" << std::endl;
+
+		m_elements.clear();
+	}
+
+private:
+	std::vector<RenderElement> m_elements;
+};
+
+class Window
+{
+public:
+	Window(unsigned int width, unsigned int height, std::string title) : m_title(title) {}
+
+	bool isOpen() const { return true; }
+
+	void clear() { }
+
+	void draw(Mesh& mesh, const Transform& transform) {
+		m_renderer.draw(mesh, transform);
+	}
+
+	void display() {
+		m_renderer.display();
+	}
+
+private:
+	std::string m_title;
+
+	Renderer m_renderer;
+};
 
 class Drawable
 {
 public:
-	virtual void draw(Window& window, Transform& transform) = 0;
+	virtual void draw(Window& window, const Transform& transform) = 0;
 };
 
 class Transformable
@@ -51,26 +132,6 @@ class Component : public Drawable, public Transformable
 {
 public:
 	virtual void update() { };
-	virtual void draw(Window& window, Transform& transform) { };
-};
-
-class Vertex
-{
-public:
-	Vector2f position;
-};
-
-class Mesh 
-{
-public:
-	Mesh(unsigned int numVertices) 
-		: m_vertices(numVertices)
-	{ }
-
-	Vertex& operator[](unsigned int index) { return m_vertices[index]; }
-
-private:
-	std::vector<Vertex> m_vertices;
 };
 
 class Shape : public Component
@@ -80,10 +141,12 @@ public:
 		: m_mesh(numVertices) 
 	{}
 
-	void draw(Window& window, Transform& transform = Transform::Identity)
+	Vertex& operator[](std::size_t index) { return m_mesh[index]; }
+
+	void draw(Window& window, const Transform& transform = Transform::Identity)
 	{
-		// transform *= getTransform();
-		// window.draw(mesh, transform);
+		Transform combinedTransform = transform * getTransform();
+		window.draw(m_mesh, transform);
 	}
 
 private:
@@ -269,11 +332,11 @@ void example1()
 	Window window(400, 400, "My Title");
 
 	Shape triangle(3);
-	// triangle[0].position = Vector2f(0, 0);
-	/*triangle[1].position = orb::Vector2f(0, 1);
-	triangle[2].position = orb::Vector2f(1, 0);
+	triangle[0].position = Vector2f(0, 0);
+	triangle[1].position = Vector2f(0, 1);
+	triangle[2].position = Vector2f(1, 0);
 
-	orb::Shape particles(	3, // number of vertices per particle
+	/*orb::Shape particles(	3, // number of vertices per particle
 	2 //number of particles)
 	particles[0].position = orb::Vector2f(0, 0);
 	particles[1].position = orb::Vector2f(0, 1);
@@ -281,20 +344,23 @@ void example1()
 	particles[3].position = orb::Vector2f(1, 1);
 	particles[4].position = orb::Vector2f(1, 2);
 	particles[5].position = orb::Vector2f(2, 1);
+	*/
 
 	while (window.isOpen()) {
-	window.update();
-	window.clear();
-	shape.draw(window);
-	shape.draw(particles);
-	window.display();
-	}*/
+		// window.update();
+		window.clear();
+		triangle.draw(window);
+		// particles.draw(window);
+		window.display();
+	}
 }
 
-void main()
+int main(int argc, char* args[])
 {
 	example1();
 	/*example2();
 	example3();
 	example4();*/
+
+	return 0;
 }
