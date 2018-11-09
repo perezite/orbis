@@ -43,52 +43,6 @@ private:
 	std::vector<Actor*> m_actors;
 }	
 
-class Orbis
-{
-	typedef void (*Level)(Orbis&);
-
-public:
-	static Orbis& instance() 
-	{ 
-		return (*m_instance); 
-	}
-	
-	Orbis(Level level) : m_instance()
-	{
-		ORB_ASSERT(m_instance == NULL, "Only one instance of the Orbis class must be constructed!");
-		m_instance = this;
-		queueLevel(level);
-	}
-
-	virtual ~Orbis() 
-	{
-		m_instance = NULL;
-	}
-	
-	void queueLevel(Level level) { m_queueLevel = level; }
-
-	bool isLevelRunning() { m_queuedLevel = NULL; }
-
-	bool hasLevel() { return m_queuedLevel != NULL; }
-
-	void updateLevel()
-	{
-		level.update();
-	}
-	
-	void drawLevel(window)
-	{
-		
-	}
-	
-private:
-	Level m_queueLevel;
-	
-	Level level;
-	
-	static Orbis* m_instance = NULL;
-}	
-
 class Actor : public Transformable
 {
 public:
@@ -129,27 +83,96 @@ private:
 	Shape m_shape;
 }
 
-// Bootstrapping Stufe 4: Automatisches Actor Management und Levels
-void example4a(Orbis& orbis)
-{		
-	orb::Window window(400, 400, "My Title");
-	orb::Actor actor;
-	actor.addComponent(Talker("Talking text"));
+class Scene
+{
+	typedef void (*SceneRunner)(Orbis&, Window&);
 	
-	while (orbis.isLevelRunning()) {
-		orbis.updateLevel();
-		orbis.drawLevel(window);
+public:
+	Scene(SceneRunner sceneRunner) 
+		: m_runner(sceneRunner), m_isRunning(false) 
+	{ }
+
+	void add(Component& component);
+	
+	void add(Actor& actor);
+	
+	bool isRunning() const { return m_isRunning; }
+	
+	void isRunning(bool running) { m_isRunning = running; } 
+	
+	void update();
+	
+	run(Window& window) {
+		m_runner(*this, window);
+	}
+	
+private:
+	std::vector<Actor&> m_actors;
+
+	std::vector<Component&> m_components;
+	
+	SceneRunner m_runner;
+	
+	bool m_isRunning;
+}
+
+class Window
+{
+public:
+	void setScene(Scene& scene) 
+	{
+		if (m_scene)
+			m_scene->isRunning(false);		
+		m_scene = &scene; 
+		scene->isRunning(true);
+	}
+	
+	void hasScene(){ return m_scene != NULL }
+	
+	void runScene() { scene->run(*this); }
+	
+private:
+	Scene* m_scene;
+}
+
+// Bootstrapping Stufe 4: Levels
+void example4a(Scene& scene, Window& window)
+{	
+	orb::Actor actor;
+	actor.addComponent(Talker("Talking text 1"));
+	actor.addComponent(Talker("Talking text 2"));
+	scene.add(actor);
+	
+	Talker nakedComponent("Talking text from naked component without an actor");
+	scene.add(nakedComponent);
+	
+	while(scene.isRunning()) {
+		scene.update();
+		window.setScene(Scene(example4b));
+	}	
+}
+
+void example4b(Scene& scene, Window& window)
+{
+	Talker talker("Hello from scene 2");
+
+	while(scene.isRunning()) {
+		scene.update();
+		window.close();
 	}
 }
 
-void example4()
+void main()
 {
-	orb::Orbis orbis(example4a);
-	while(orbis.hasLevel())
-		orbis.runLevel();
+	Window window;
+	window.setScene(Scene(example4a));
+	
+	while(window.hasScene()) {
+		window.runScene();
+	}
 }
 
-// Bootstrapping Stufe 3: Actors mit hierarchischen Transformationen
+// Bootstrapping Stufe 3: Actors mit hierarchien
 void example3()
 {
 	orb::Window window(400, 400, "My Title");

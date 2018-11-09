@@ -21,6 +21,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Renderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Transform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Vertex.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl" />
@@ -30,5 +31,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Mesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Renderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Transform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Window.cpp" />
   </ItemGroup>
 </Project>

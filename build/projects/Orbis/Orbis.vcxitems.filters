@@ -30,6 +30,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Renderer.h">
       <Filter>video\headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Window.h">
+      <Filter>video\headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl">
@@ -47,6 +50,9 @@
       <Filter>video</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Transform.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Window.cpp">
       <Filter>video</Filter>
     </ClCompile>
   </ItemGroup>

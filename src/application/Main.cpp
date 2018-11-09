@@ -1,45 +1,19 @@
 #include <iostream>
 #include <vector>
 
-#include "../orbis/math/Vector2.h"
-#include "../orbis/video/Vertex.h"
-#include "../orbis/video/Transform.h"
-#include "../orbis/video/Mesh.h"
-#include "../orbis/video/Renderer.h"
-
-class Window
-{
-public:
-	Window(unsigned int width, unsigned int height, std::string title) : m_title(title) {}
-
-	bool isOpen() const { return true; }
-
-	void clear() { }
-
-	void draw(orb::Mesh& mesh, const orb::Transform& transform) {
-		m_renderer.draw(mesh, transform);
-	}
-
-	void display() {
-		m_renderer.display();
-	}
-
-private:
-	std::string m_title;
-
-	orb::Renderer m_renderer;
-};
+#include "../orbis/video/Window.h"
 
 class Drawable
 {
 public:
-	virtual void draw(Window& window, const orb::Transform& transform) = 0;
+	virtual void draw(orb::Window& window, const orb::Transform& transform) = 0;
 };
 
 class Transformable
 {
 public:
 	Transformable() { };
+
 	const orb::Transform& getTransform() { return m_transform; }
 
 private: 
@@ -61,7 +35,7 @@ public:
 
 	orb::Vertex& operator[](std::size_t index) { return m_mesh[index]; }
 
-	void draw(Window& window, const orb::Transform& transform = orb::Transform::Identity)
+	void draw(orb::Window& window, const orb::Transform& transform = orb::Transform::Identity)
 	{
 		orb::Transform combinedTransform = transform * getTransform();
 		window.draw(m_mesh, transform);
@@ -71,183 +45,189 @@ private:
 	orb::Mesh m_mesh;
 };
 
-/*class Level
-{
-public:
-void updateLevel() {
-for_each(actor: m_actors)
-actor.update();
+/*
+
+class Actor: public Transformable {
+    public: void update() {
+        for_each(component in m_components)
+        component.update(orbis);
+
+        for_each(childActor in m_childActors)
+        childActor.update();
+    }
+
+    void draw(Window & window, Transform & transform = Transform::Identity) {
+        transform *= getTransform;
+
+        for_each(component in m_components)
+        component.draw(window, transform);
+
+        for_each(childActor in m_childActors)
+        childActor.draw(window, transform);
+    }
+
+    void addComponent(Component & component);
+
+    void addChild(Actor & actor);
+
+    private: std::vector < Component * > m_components;
+
+    std::vector < Actor * > m_childActors;
 }
 
-void drawLevel(Window& window) {
-for_each(actor: m_actors)
-actor.draw(window);
+class ShapeActor: Actor {
+    Drawable & getDrawable() {
+        return m_shape;
+    }
+
+    private:
+        Shape m_shape;
 }
 
-private:
-std::vector<Actor*> m_actors;
+class Scene {
+    typedef void( * SceneRunner)(Orbis & , Window & );
+
+    public:
+        Scene(SceneRunner sceneRunner): m_runner(sceneRunner), m_isRunning(false) {}
+
+    void add(Component & component);
+
+    void add(Actor & actor);
+
+    bool isRunning() const {
+        return m_isRunning;
+    }
+
+    void isRunning(bool running) {
+        m_isRunning = running;
+    }
+
+    void update();
+
+    run(Window & window) {
+        m_runner( * this, window);
+    }
+
+    private:
+        std::vector < Actor & > m_actors;
+
+    std::vector < Component & > m_components;
+
+    SceneRunner m_runner;
+
+    bool m_isRunning;
 }
 
-class Orbis
-{
-typedef void(*Level)(Orbis&);
+class Window {
+    public:
+        void setScene(Scene & scene) {
+            if (m_scene)
+                m_scene - > isRunning(false);
+            m_scene = & scene;
+            scene - > isRunning(true);
+        }
 
-public:
-static Orbis& instance()
-{
-return (*m_instance);
-}
+    void hasScene() {
+        return m_scene != NULL
+    }
 
-Orbis(Level level) : m_instance()
-{
-ORB_ASSERT(m_instance == NULL, "Only one instance of the Orbis class must be constructed!");
-m_instance = this;
-queueLevel(level);
-}
+    void runScene() {
+        scene - > run( * this);
+    }
 
-virtual ~Orbis()
-{
-m_instance = NULL;
-}
-
-void queueLevel(Level level) { m_queueLevel = level; }
-
-bool isLevelRunning() { m_queuedLevel = NULL; }
-
-bool hasLevel() { return m_queuedLevel != NULL; }
-
-void updateLevel()
-{
-level.update();
-}
-
-void drawLevel(window)
-{
-
-}
-
-private:
-Level m_queueLevel;
-
-Level level;
-
-static Orbis* m_instance = NULL;
-}
-
-class Actor : public Transformable
-{
-public:
-void update() {
-for_each(component in m_components)
-component.update(orbis);
-
-for_each(childActor in m_childActors)
-childActor.update();
-}
-
-void draw(Window& window, Transform& transform = Transform::Identity)
-{
-transform *= getTransform;
-
-for_each(component in m_components)
-component.draw(window, transform);
-
-for_each(childActor in m_childActors)
-childActor.draw(window, transform);
-}
-
-void addComponent(Component& component);
-
-void addChild(Actor& actor);
-
-private:
-std::vector<Component*> m_components;
-
-std::vector<Actor*> m_childActors;
-}
-
-class ShapeActor : Actor
-{
-Drawable& getDrawable() { return m_shape; }
-
-private:
-Shape m_shape;
+    private:
+        Scene * m_scene;
 }
 
 // Bootstrapping Stufe 4: Automatisches Actor Management und Levels
-void example4a(Orbis& orbis)
-{
-orb::Window window(400, 400, "My Title");
-orb::Actor actor;
-actor.addComponent(Talker("Talking text"));
+// Bootstrapping Stufe 4: Levels
+void example4a(Scene & scene, Window & window) {
+    orb::Actor actor;
+    actor.addComponent(Talker("Talking text 1"));
+    actor.addComponent(Talker("Talking text 2"));
+    scene.add(actor);
 
-while (orbis.isLevelRunning()) {
-orbis.updateLevel();
-orbis.drawLevel(window);
-}
+    Talker nakedComponent("Talking text from naked component without an actor");
+    scene.add(nakedComponent);
+
+    while (scene.isRunning()) {
+        scene.update();
+        window.setScene(Scene(example4b));
+    }
 }
 
-void example4()
-{
-orb::Orbis orbis(example4a);
-while (orbis.hasLevel())
-orbis.runLevel();
+void example4b(Scene & scene, Window & window) {
+    Talker talker("Hello from scene 2");
+
+    while (scene.isRunning()) {
+        scene.update();
+        window.close();
+    }
+}
+
+void main() {
+    Window window;
+    window.setScene(Scene(example4a));
+
+    while (window.hasScene()) {
+        window.runScene();
+    }
 }
 
 // Bootstrapping Stufe 3: Actors mit hierarchischen Transformationen
-void example3()
-{
-orb::Window window(400, 400, "My Title");
+void example3() {
+    orb::Window window(400, 400, "My Title");
 
-orb::ShapeActor arm(4);
-arm.getDrawable().setPosition(10, 10);
-arm.addComponent(Talker("Talking text"));					// this text is shown every frame
-person[0].position = orb::Vector2f(0, 0);
-person[1].position = orb::Vector2f(2, 0);
-person[2].position = orb::Vector2f(2, 0.5);
-person[2].position = orb::Vector2f(0, 0.5);
+    orb::ShapeActor arm(4);
+    arm.getDrawable().setPosition(10, 10);
+    arm.addComponent(Talker("Talking text")); // this text is shown every frame
+    person[0].position = orb::Vector2f(0, 0);
+    person[1].position = orb::Vector2f(2, 0);
+    person[2].position = orb::Vector2f(2, 0.5);
+    person[2].position = orb::Vector2f(0, 0.5);
 
-orb::ShapeActor person(4);
-person.addChild(arm);
-person[0].position = orb::Vector2f(0, 0);
-person[1].position = orb::Vector2f(1, 0);
-person[2].position = orb::Vector2f(1, 1);
-person[2].position = orb::Vector2f(1, 0);
+    orb::ShapeActor person(4);
+    person.addChild(arm);
+    person[0].position = orb::Vector2f(0, 0);
+    person[1].position = orb::Vector2f(1, 0);
+    person[2].position = orb::Vector2f(1, 1);
+    person[2].position = orb::Vector2f(1, 0);
 
-while (window.isOpen()) {
-window.update();
-window.clear();
-person.update();
-person.draw(window);
-window.display();
-}
+    while (window.isOpen()) {
+        window.update();
+        window.clear();
+        person.update();
+        person.draw(window);
+        window.display();
+    }
 }
 
 // Bootstrapping Stufe 2: Transformation für SFML-Style Entities
 void example2()
 
 {
-orb::Window window(400, 400, "My Title");
+    orb::Window window(400, 400, "My Title");
 
-orb::Shape triangle(3);
-triangle[0].position = orb::Vector2f(0, 0);
-triangle[1].position = orb::Vector2f(0, 1);
-triangle[2].position = orb::Vector2f(1, 0);
-triangle.setPosition(20, 30);
+    orb::Shape triangle(3);
+    triangle[0].position = orb::Vector2f(0, 0);
+    triangle[1].position = orb::Vector2f(0, 1);
+    triangle[2].position = orb::Vector2f(1, 0);
+    triangle.setPosition(20, 30);
 
-while (window.isOpen()) {
-window.update();
-window.clear();
-shape.draw(window);
-window.display();
-}
+    while (window.isOpen()) {
+        window.update();
+        window.clear();
+        shape.draw(window);
+        window.display();
+    }
 }
 
 */
+
 // Bootstrapping Stufe 1: SFML-Entities
 void example1()
 {
-	Window window(400, 400, "My Title");
+	orb::Window window(400, 400, "My Title");
 
 	Shape triangle(3);
 	triangle[0].position = orb::Vector2f(0, 0);

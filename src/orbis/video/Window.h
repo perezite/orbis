@@ -1,6 +1,9 @@
 #pragma once
 
-
+#include <string>
+#include "Mesh.h"
+#include "Transform.h"
+#include "Renderer.h"
 
 namespace orb
 {
@@ -13,9 +16,7 @@ namespace orb
 
 		void clear() { }
 
-		void draw(Mesh& mesh, const Transform& transform) {
-			m_renderer.draw(mesh, transform);
-		}
+		void draw(Mesh& mesh, const Transform& transform);
 
 		void display() {
 			m_renderer.display();
