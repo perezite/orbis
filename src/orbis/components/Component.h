@@ -1,14 +1,13 @@
 #pragma once
 
+#include "../video/Transformable.h"
+#include "../video/Drawable.h"
+
 namespace orb
 {
-	class Component
+	class Component : public Transformable, public Drawable
 	{
 	public:
-		virtual ~Component() {};
-
 		virtual void update() { };
-
-		virtual void render() { };
 	};
 }

@@ -10,6 +10,12 @@
     <Filter Include="math">
       <UniqueIdentifier>{b297d04e-2e61-4b9c-9e98-7fdd8986d474}</UniqueIdentifier>
     </Filter>
+    <Filter Include="components">
+      <UniqueIdentifier>{1b298c09-0597-48a3-b0a4-d92a6904a867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components\headers">
+      <UniqueIdentifier>{f0ed6073-077c-4f53-b2da-2f5e1cc5ed22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.h">
@@ -33,6 +39,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Window.h">
       <Filter>video\headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Drawable.h">
+      <Filter>video\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Transformable.h">
+      <Filter>video\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\Shape.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\Component.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\math\Vector2.inl">
@@ -54,6 +72,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\video\Window.cpp">
       <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\orbis\components\Shape.cpp">
+      <Filter>components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

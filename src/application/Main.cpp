@@ -2,48 +2,7 @@
 #include <vector>
 
 #include "../orbis/video/Window.h"
-
-class Drawable
-{
-public:
-	virtual void draw(orb::Window& window, const orb::Transform& transform) = 0;
-};
-
-class Transformable
-{
-public:
-	Transformable() { };
-
-	const orb::Transform& getTransform() { return m_transform; }
-
-private: 
-	orb::Transform m_transform;
-};
-
-class Component : public Drawable, public Transformable
-{
-public:
-	virtual void update() { };
-};
-
-class Shape : public Component
-{
-public:
-	Shape(std::size_t numVertices, std::size_t numShapes = 1)
-		: m_mesh(numVertices * numShapes) 
-	{}
-
-	orb::Vertex& operator[](std::size_t index) { return m_mesh[index]; }
-
-	void draw(orb::Window& window, const orb::Transform& transform = orb::Transform::Identity)
-	{
-		orb::Transform combinedTransform = transform * getTransform();
-		window.draw(m_mesh, transform);
-	}
-
-private:
-	orb::Mesh m_mesh;
-};
+#include "../orbis/components/Shape.h"
 
 /*
 
@@ -229,14 +188,14 @@ void example1()
 {
 	orb::Window window(400, 400, "My Title");
 
-	Shape triangle(3);
+	orb::Shape triangle(3);
 	triangle[0].position = orb::Vector2f(0, 0);
 	triangle[1].position = orb::Vector2f(0, 1);
 	triangle[2].position = orb::Vector2f(1, 0);
 
 	triangle[2];
 
-	Shape particles(3, 2); 
+	orb::Shape particles(3, 2); 
 	particles[0].position = orb::Vector2f(0, 0);
 	particles[1].position = orb::Vector2f(0, 1);
 	particles[2].position = orb::Vector2f(1, 0);
