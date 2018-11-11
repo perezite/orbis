@@ -31,6 +31,7 @@ namespace orb
 	void Shader::use()
 	{
 		glUseProgram(m_shader);
+		glDeleteShader(m_shader);
 	}
 
 	void Shader::unuse()

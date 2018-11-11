@@ -103,6 +103,7 @@ namespace app
 	void RotatingTriangleUtil::activateShader(GLuint shader)
 	{
 		glUseProgram(shader);
+		glDeleteShader(shader);
 	}
 
 	void RotatingTriangleUtil::attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLenum elementType, GLsizei stride, const GLvoid* firstElement)
