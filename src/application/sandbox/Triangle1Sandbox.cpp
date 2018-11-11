@@ -1,4 +1,4 @@
-#include "RotatingTriangleSandbox.h"
+#include "Triangle1Sandbox.h"
 
 #include <iostream>
 

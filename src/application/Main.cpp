@@ -3,7 +3,7 @@
 #include "../orbis/core/Error.h"
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
-#include "sandbox/RotatingTriangleSandbox.h"
+#include "sandbox/Triangle1Sandbox.h"
 
 /*
 class Actor: public Transformable {
