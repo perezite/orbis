@@ -11,9 +11,10 @@
 #include <SDL2/SDL.h>
 #include <string>
 
-namespace sb {
-	namespace triangle1 {
-
+namespace sb 
+{
+	namespace triangle1
+	{
 		class Triangle1Util
 		{
 		public:
@@ -23,7 +24,7 @@ namespace sb {
 
 			static void flip();
 
-			static void cleanup();
+			static void close();
 
 			static GLuint createShader(const std::string& vertexShaderCode, const std::string& fragmentShaderCode);
 

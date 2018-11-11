@@ -1,0 +1,55 @@
+#include "Triangle2.h"
+namespace sb 
+{
+	namespace triangle2 
+	{
+		SDL_Window* Triangle2::m_sdlWindow;
+
+		SDL_GLContext Triangle2::m_glContext;
+
+		void Triangle2::run()
+		{
+			createWindow();
+
+			while (true) {
+
+			}
+		}
+
+		void Triangle2::createWindow()
+		{
+			int i = 42;
+			#ifdef WIN32
+				SDL_Init(SDL_INIT_VIDEO);
+				SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+				SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+				SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+				SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+				SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+				m_sdlWindow = SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 400, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+				m_glContext = SDL_GL_CreateContext(m_sdlWindow);
+			GLenum glewError = glewInit();
+			#elif defined(__ANDROID__)
+				SDL_Init(SDL_INIT_VIDEO);
+				SDL_DisplayMode mode;
+				SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+				SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+				SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+				SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+				SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+				SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+				SDL_GetDisplayMode(0, 0, &mode);
+				m_sdlWindow = SDL_CreateWindow("Sandbox", 0, 0, mode.w, mode.h, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
+				m_glContext = SDL_GL_CreateContext(m_sdlWindow);
+			#endif
+		}
+
+		void Triangle2::close()
+		{
+			SDL_DestroyWindow(m_sdlWindow);
+			SDL_Quit();
+		}
+
+	}
+}
+

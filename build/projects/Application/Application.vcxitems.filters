@@ -14,6 +14,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle1.cpp">
       <Filter>sandbox\triangle1</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle2.cpp">
+      <Filter>sandbox\triangle2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="levels">
@@ -56,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle1.h">
       <Filter>sandbox\triangle1\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle2.h">
+      <Filter>sandbox\triangle2\headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

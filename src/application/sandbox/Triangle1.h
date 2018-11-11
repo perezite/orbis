@@ -6,22 +6,23 @@
 #include <map>
 #include <vector>
 
-namespace sb {
-	namespace triangle1 {
+namespace sb 
+{
+	namespace triangle1 
+	{
 
 		class Vertex
 		{
 		public:
 			Vertex(float x_, float y_, unsigned char r_, unsigned char  g_, unsigned char  b_, unsigned char  a_)
 				: x(x_), y(y_), r(r_), g(g_), b(b_), a(a_)
-			{
-
-			}
+			{ }
 
 			float x, y;
 			unsigned char r, g, b, a;
 		};
 
+		// this sandbox renders a triangle using vanilla indexed rendering (no vertex buffers, and no vertex arrays)
 		class Triangle1
 		{
 		public:

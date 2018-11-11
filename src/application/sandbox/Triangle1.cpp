@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-namespace sb {
-	namespace triangle1 {
-
+namespace sb 
+{
+	namespace triangle1 
+	{
 		GLuint Triangle1::m_shader;
 
 		std::map<std::string, GLuint> Triangle1::m_attributeLocations;
@@ -21,7 +22,7 @@ namespace sb {
 				Triangle1::flip();
 			}
 
-			Triangle1Util::cleanup();
+			Triangle1Util::close();
 		}
 
 		void Triangle1::init()

@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-namespace sb {
-	namespace triangle1 {
-
+namespace sb
+{
+	namespace triangle1 
+	{
 		SDL_Window* Triangle1Util::m_sdlWindow = NULL;
 		SDL_GLContext Triangle1Util::m_glContext = NULL;
 		GLuint Triangle1Util::m_shader = 0;
@@ -55,7 +56,7 @@ namespace sb {
 			SDL_GL_SwapWindow(m_sdlWindow);
 		}
 
-		void Triangle1Util::cleanup()
+		void Triangle1Util::close()
 		{
 			glDeleteProgram(m_shader);
 			SDL_DestroyWindow(m_sdlWindow);
