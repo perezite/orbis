@@ -40,7 +40,7 @@ namespace app
 
 		static void prepareRendering(std::vector<Vertex>& rendering);
 
-		static void cleanupRendering();
+		static void finalize();
 
 	private:
 		static GLuint m_shader;

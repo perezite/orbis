@@ -16,6 +16,11 @@ namespace orb
 		link(m_shader);
 	}
 
+	Shader::~Shader()
+	{
+		glDeleteProgram(m_shader);
+	}
+
 	void Shader::setAttributePointer(std::string attributeName, GLvoid* pointer, GLint numVerticesPerElement, GLsizei stride, GLenum elementType)
 	{
 		if (m_attributeLocations.count(attributeName)) {

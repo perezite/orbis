@@ -47,5 +47,7 @@ namespace app
 		static SDL_Window* m_sdlWindow;
 
 		static SDL_GLContext m_glContext;
+
+		static GLuint m_shader;
 	};
 }

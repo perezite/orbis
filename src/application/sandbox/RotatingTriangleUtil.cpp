@@ -6,6 +6,7 @@ namespace app
 {
 	SDL_Window* RotatingTriangleUtil::m_sdlWindow = NULL;
 	SDL_GLContext RotatingTriangleUtil::m_glContext = NULL;
+	GLuint RotatingTriangleUtil::m_shader = 0;
 
 	void RotatingTriangleUtil::initSDL()
 	{
@@ -55,6 +56,7 @@ namespace app
 
 	void RotatingTriangleUtil::cleanup()
 	{
+		glDeleteProgram(m_shader);
 		SDL_DestroyWindow(m_sdlWindow);
 		SDL_Quit();
 	}
@@ -89,18 +91,17 @@ namespace app
 		GLuint vertexShader = compileShader(vertexShaderCode, GL_VERTEX_SHADER);
 		GLuint fragmentShader = compileShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
 
-		GLuint shaderProgram = glCreateProgram();
-		if (shaderProgram == 0)
+		m_shader = glCreateProgram();
+		if (m_shader == 0)
 			std::cout << "error creating shader program" << std::endl;
 
-		glAttachShader(shaderProgram, vertexShader);
-		glAttachShader(shaderProgram, fragmentShader);
-		linkShader(shaderProgram);
+		glAttachShader(m_shader, vertexShader);
+		glAttachShader(m_shader, fragmentShader);
+		linkShader(m_shader);
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
 
-
-		return shaderProgram;
+		return m_shader;
 	}
 
 	void RotatingTriangleUtil::activateShader(GLuint shader)

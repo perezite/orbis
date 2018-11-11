@@ -38,7 +38,7 @@ namespace app
 
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, &(indices[0]));
 
-		cleanupRendering();
+		finalize();
 	}
 
 	void RotatingTriangleSandbox::flip()
@@ -71,12 +71,16 @@ namespace app
 		RotatingTriangleUtil::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 4, GL_UNSIGNED_BYTE, sizeof(Vertex), &(vertices[0].r));
 	}
 
-	void RotatingTriangleSandbox::cleanupRendering()
+	void RotatingTriangleSandbox::finalize()
 	{
 		RotatingTriangleUtil::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vColor"]);
 		RotatingTriangleUtil::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vPosition"]);
 
 		glDisable(GL_BLEND);
 		RotatingTriangleUtil::activateShader(0);
+
+		GLenum error = glGetError();
+		if (glGetError() != GL_NO_ERROR)
+			std::cout << "GL error: " << error << std::endl;
 	}
 }

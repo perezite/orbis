@@ -11,6 +11,8 @@ namespace orb
 	public:
 		Shader();
 
+		virtual ~Shader();
+
 		void setAttributePointer(std::string attributeName, GLvoid* pointer, GLint numVerticesPerElement, GLsizei stride, GLenum elementType);
 
 		void use();
