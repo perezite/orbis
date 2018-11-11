@@ -3,7 +3,7 @@
 #include "../orbis/core/Error.h"
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
-#include "sandbox/Triangle1Sandbox.h"
+#include "sandbox/Triangle1.h"
 
 /*
 class Actor: public Transformable {
@@ -210,7 +210,7 @@ void example1()
 
 int main(int argc, char* args[])
 {
-	app::RotatingTriangleSandbox::run();
+	sb::triangle1::Triangle1::run();
 
 	/*example1();
 	example2();
