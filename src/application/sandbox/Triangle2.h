@@ -9,6 +9,7 @@
 #include <GLES2/gl2ext.h>
 #endif 
 #include <SDL2/SDL.h>
+#include <string>
 
 namespace sb 
 {
@@ -23,12 +24,26 @@ namespace sb
 		protected:
 			static void createWindow();
 
+			static void initOpenGl();
+
+			static void createShader();
+
+			static std::string getVertexShaderSource();
+
+			static std::string getFragmentShaderSource();
+
+			static GLuint compileShader(std::string shaderCode, GLenum type);
+
+			static void linkShader(GLuint shader);
+
 			static void close();
 
 		private:
 			static SDL_Window* m_sdlWindow;	
 
 			static SDL_GLContext m_glContext;
+
+			static GLuint m_shader;
 
 		};
 	}
