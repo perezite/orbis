@@ -7,17 +7,18 @@ namespace sb
 	{
 		SDL_Window* Triangle2::m_sdlWindow;
 		SDL_GLContext Triangle2::m_glContext;
+		bool Triangle2::m_running = true;
 		GLuint Triangle2::m_shader;
+		std::map<std::string, GLuint> Triangle2::m_attributeLocations;
 
 		void Triangle2::run()
 		{
 			createWindow();
 			initOpenGl();
 
-			bool running = true;
-			while (running) {			
-				// running = updateInput();
-				// render();
+			while (m_running) {			
+				updateInput();
+				// draw();
 				// flip();
 			}
 
@@ -55,6 +56,8 @@ namespace sb
 		void Triangle2::initOpenGl()
 		{
 			createShader();
+			m_attributeLocations["a_vPosition"] = glGetAttribLocation(m_shader, "a_vPosition");
+			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 		}
 
 		void Triangle2::createShader()
@@ -65,8 +68,8 @@ namespace sb
 
 			std::string vertexShaderCode = getVertexShaderSource();
 			std::string fragmentShaderCode = getFragmentShaderSource();
-			GLuint vertexShader = (vertexShaderCode, GL_VERTEX_SHADER);
-			GLuint fragmentShader = (fragmentShaderCode, GL_FRAGMENT_SHADER);
+			GLuint vertexShader = compileShader(vertexShaderCode, GL_VERTEX_SHADER);
+			GLuint fragmentShader = compileShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
 
 			glAttachShader(m_shader, vertexShader);
 			glAttachShader(m_shader, fragmentShader);
@@ -147,7 +150,18 @@ namespace sb
 
 				glDeleteProgram(shader);
 			}
+		}
 
+		void Triangle2::updateInput()
+		{
+			SDL_Event event;
+			while (SDL_PollEvent(&event))
+			{
+				if (event.type == SDL_QUIT)
+				{
+					m_running = false;
+				}
+			}
 		}
 
 		void Triangle2::close()

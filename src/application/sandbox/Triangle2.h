@@ -10,6 +10,7 @@
 #endif 
 #include <SDL2/SDL.h>
 #include <string>
+#include <map>
 
 namespace sb 
 {
@@ -36,6 +37,8 @@ namespace sb
 
 			static void linkShader(GLuint shader);
 
+			static void updateInput();
+
 			static void close();
 
 		private:
@@ -43,8 +46,11 @@ namespace sb
 
 			static SDL_GLContext m_glContext;
 
+			static bool m_running;
+
 			static GLuint m_shader;
 
+			static std::map<std::string, GLuint> m_attributeLocations;
 		};
 	}
 }
