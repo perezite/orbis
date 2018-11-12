@@ -11,11 +11,22 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <map>
+#include <vector>
+
+#ifdef WIN32
+	#define SB_USE_VERTEX_ARRAYS 
+#endif
 
 namespace sb 
 {
 	namespace triangle2 
 	{
+		struct Vertex
+		{
+			float x, y;
+			float r, g, b, a;
+		};
+
 		// This sandbox implements the triangle with vertex buffers and vertex arrays. Reference: https://learnopengl.com/Getting-started/Hello-Triangle
 		class Triangle2
 		{
@@ -37,7 +48,17 @@ namespace sb
 
 			static void linkShader(GLuint shader);
 
+			static void createVertexBuffer();
+
+			static void createVertices();
+
 			static void updateInput();
+
+			static void draw();
+
+			static void flip();
+
+			static void prepareDraw();
 
 			static void close();
 
@@ -51,6 +72,15 @@ namespace sb
 			static GLuint m_shader;
 
 			static std::map<std::string, GLuint> m_attributeLocations;
+
+			#ifdef SB_USE_VERTEX_ARRAYS
+				static GLuint m_vao;
+			#endif
+
+			static GLuint m_vbo;
+
+			static std::vector<Vertex> m_vertices;
+
 		};
 	}
 }

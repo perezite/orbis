@@ -10,6 +10,11 @@ namespace sb
 		bool Triangle2::m_running = true;
 		GLuint Triangle2::m_shader;
 		std::map<std::string, GLuint> Triangle2::m_attributeLocations;
+		#ifdef SB_USE_VERTEX_ARRAYS
+			GLuint Triangle2::m_vao;
+		#endif
+		GLuint Triangle2::m_vbo;
+		std::vector<Vertex> Triangle2::m_vertices;
 
 		void Triangle2::run()
 		{
@@ -18,8 +23,8 @@ namespace sb
 
 			while (m_running) {			
 				updateInput();
-				// draw();
-				// flip();
+				draw();
+				flip();
 			}
 
 			close();
@@ -56,8 +61,12 @@ namespace sb
 		void Triangle2::initOpenGl()
 		{
 			createShader();
+
 			m_attributeLocations["a_vPosition"] = glGetAttribLocation(m_shader, "a_vPosition");
 			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
+
+			createVertices();
+			createVertexBuffer();
 		}
 
 		void Triangle2::createShader()
@@ -125,7 +134,7 @@ namespace sb
 						delete[] infoLog;
 					}
 					glDeleteShader(shader);
-					shader = 0;
+					shader = NULL;
 				}
 			}
 
@@ -152,6 +161,38 @@ namespace sb
 			}
 		}
 
+		void Triangle2::createVertexBuffer()
+		{
+			glGenBuffers(1, &m_vbo);
+			#ifdef SB_USE_VERTEX_ARRAYS
+				glGenVertexArrays(1, &m_vao);
+				glBindVertexArray(m_vao);
+			#endif
+			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+
+			glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(Vertex), &m_vertices, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
+			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
+			glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
+			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(2 * sizeof(float)));
+
+			glEnableVertexAttribArray(NULL);
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			#ifdef SB_USE_VERTEX_ARRAYS
+				glBindVertexArray(NULL);
+			#endif	
+		}
+
+		void Triangle2::createVertices()
+		{
+			m_vertices =
+				{
+					Vertex { -0.5f, -0.5f, 1, 0, 0, 1 },
+					Vertex {  0.5,  -0.5f, 0, 1, 0, 1 },
+					Vertex {  0.0f,  0.5f, 0, 0, 1, 1 }
+				};
+		}
+
 		void Triangle2::updateInput()
 		{
 			SDL_Event event;
@@ -162,6 +203,36 @@ namespace sb
 					m_running = false;
 				}
 			}
+		}
+
+		void Triangle2::draw()
+		{
+			prepareDraw();
+
+			#ifdef SB_USE_VERTEX_ARRAYS
+				glBindVertexArray(m_vao);
+			#else
+				// bind the vertex buffer according to https://github.com/learnopengles/Learn-OpenGLES-Tutorials/blob/master/android/AndroidOpenGLESLessonsCpp/app/src/main/cpp/lesson7/CubesWithVboWithStride.cpp
+			#endif
+
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+
+			std::cout << glGetError() << std::endl;
+		}
+
+		void Triangle2::flip()
+		{
+			SDL_GL_SwapWindow(m_sdlWindow);
+		}
+
+		void Triangle2::prepareDraw()
+		{
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glEnable(GL_BLEND);
+			glClearColor(1, 1, 1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			glUseProgram(m_shader);
+
 		}
 
 		void Triangle2::close()
