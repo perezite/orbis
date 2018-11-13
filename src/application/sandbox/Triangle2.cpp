@@ -164,20 +164,20 @@ namespace sb
 		void Triangle2::createVertexBuffer()
 		{
 			glGenBuffers(1, &m_vbo);
+				
 			#ifdef SB_USE_VERTEX_ARRAYS
 				glGenVertexArrays(1, &m_vao);
 				glBindVertexArray(m_vao);
 			#endif
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
+			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 			glBufferData(GL_ARRAY_BUFFER, 3 * sizeof(Vertex), &m_vertices, GL_STATIC_DRAW);
 			glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
 			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
 			glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
 			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(2 * sizeof(float)));
-
 			glEnableVertexAttribArray(NULL);
-			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+
 			#ifdef SB_USE_VERTEX_ARRAYS
 				glBindVertexArray(NULL);
 			#endif	
@@ -232,7 +232,6 @@ namespace sb
 			glClearColor(1, 1, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			glUseProgram(m_shader);
-
 		}
 
 		void Triangle2::close()
