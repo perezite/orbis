@@ -17,6 +17,12 @@ namespace sb
 {
 	namespace triangle2 
 	{
+		struct Vertex
+		{
+			float x, y;
+			float r, g, b, a;
+		};
+
 		// This sandbox implements the triangle with vertex buffers and vertex array objects. Reference: https://learnopengl.com/Getting-started/Hello-Triangle
 		class Triangle2
 		{
@@ -69,7 +75,7 @@ namespace sb
 
 			static GLuint m_vbo;
 
-			static std::vector<float> m_vertices;
+			static std::vector<Vertex> m_vertices;
 
 		};
 	}

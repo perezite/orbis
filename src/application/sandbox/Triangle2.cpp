@@ -12,7 +12,7 @@ namespace sb
 		std::map<std::string, GLuint> Triangle2::m_attributeLocations;
 		GLuint Triangle2::m_vao;
 		GLuint Triangle2::m_vbo;
-		std::vector<float> Triangle2::m_vertices;
+		std::vector<Vertex> Triangle2::m_vertices;
 
 		void Triangle2::run()
 		{
@@ -173,19 +173,19 @@ namespace sb
 
 			glBindVertexArray(m_vao);
 			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(float), m_vertices.data(), GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
 			glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
 			glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
-			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);	// Vertex attributes stay the same
-			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
+			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same
+			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
 			glEnableVertexAttribArray(0);
 		}
 
 		void Triangle2::createVertices()
 		{
-			m_vertices = { -1, -1, 1, 0, 0, 1,
-							1, -1, 0, 1, 0, 1,
-							0,  1, 0, 0, 1, 1 };
+			m_vertices = {  Vertex { -1, -1, 1, 0, 0, 1 },
+							Vertex {  1, -1, 0, 1, 0, 1 },
+							Vertex {  0,  1, 0, 0, 1, 1 } };
 		}
 
 		void Triangle2::updateInput()
