@@ -12,7 +12,6 @@ namespace sb
 		std::map<std::string, GLuint> Triangle2::m_attributeLocations;
 		GLuint Triangle2::m_vao;
 		GLuint Triangle2::m_vbo;
-		// std::vector<Vertex> Triangle2::m_vertices;
 		std::vector<float> Triangle2::m_vertices;
 
 		void Triangle2::run()
@@ -65,7 +64,7 @@ namespace sb
 			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 
 			createVertices();
-			createBuffers();
+			createVertexInput();
 		}
 
 		void Triangle2::createShader()
@@ -75,7 +74,6 @@ namespace sb
 				std::cout << "error creating shader program" << std::endl;
 				std::cin.get();
 			}
-
 
 			std::string vertexShaderCode = getVertexShaderSource();
 			std::string fragmentShaderCode = getFragmentShaderSource();
@@ -93,12 +91,12 @@ namespace sb
 		{
 			return
 				"attribute vec2 a_vPosition;										\n"
-				//"attribute vec4 a_vColor;											\n"
-				//"varying vec4 v_vColor;											\n"
+				"attribute vec4 a_vColor;											\n"
+				"varying vec4 v_vColor;												\n"
 				"void main()														\n"
 				"{																	\n"
 				"   gl_Position = vec4(a_vPosition.x, a_vPosition.y, 0 , 1 );		\n"
-				// "	v_vColor = a_vColor;										\n"
+				 "	v_vColor = a_vColor;											\n"
 				"}";
 		}
 
@@ -107,11 +105,10 @@ namespace sb
 			return 
 				"#version 100										\n"
 					"precision mediump float;						\n"
-					// "varying vec4 v_vColor;		 				\n"
+					"varying vec4 v_vColor;		 					\n"
 					"void main()									\n"
 					"{												\n"
-					// "  gl_FragColor = v_vColor;					\n"
-					"  gl_FragColor = vec4(1, 0, 0, 1);				\n"
+					"  gl_FragColor = v_vColor;						\n"
 					"}												\n";
 		}
 
@@ -166,39 +163,44 @@ namespace sb
 			}
 		}
 
-		void Triangle2::createBuffers()
+		void Triangle2::createVertexInput()
 		{
 			glGenVertexArrays(1, &m_vao); 
 			glGenBuffers(1, &m_vbo);
 
+			auto test1 = m_attributeLocations["a_vPosition"];
+			auto test2 = m_attributeLocations["a_vColor"];
+
 			glBindVertexArray(m_vao);
 			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(float), m_vertices.data(), GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);	// Vertex attributes stay the same
+			glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
+			glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
+			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);	// Vertex attributes stay the same
+			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
 			glEnableVertexAttribArray(0);
 		}
 
 		void Triangle2::createVertices()
 		{
-			m_vertices = { -1, -1, 1, -1, 0, 1 };
+			m_vertices = { -1, -1, 1, 0, 0, 1,
+							1, -1, 0, 1, 0, 1,
+							0,  1, 0, 0, 1, 1 };
 		}
 
 		void Triangle2::updateInput()
 		{
 			SDL_Event event;
-			while (SDL_PollEvent(&event))
-			{
+			while (SDL_PollEvent(&event)) {
 				if (event.type == SDL_QUIT)
-				{
 					m_running = false;
-				}
 			}
 		}
 
 		void Triangle2::draw()
 		{
 			prepareDraw();
-			prepareBuffers();		// in GLES, bind the vertex buffer according to https://github.com/learnopengles/Learn-OpenGLES-Tutorials/blob/master/android/AndroidOpenGLESLessonsCpp/app/src/main/cpp/lesson7/CubesWithVboWithStride.cpp
+
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 
 			GLuint error = glGetError();
@@ -221,9 +223,11 @@ namespace sb
 			glClear(GL_COLOR_BUFFER_BIT);
 			glUseProgram(m_shader);
 
+			prepareVertexInput();		// in GLES, bind the vertex buffer according to https://github.com/learnopengles/Learn-OpenGLES-Tutorials/blob/master/android/AndroidOpenGLESLessonsCpp/app/src/main/cpp/lesson7/CubesWithVboWithStride.cpp
+
 		}
 
-		void Triangle2::prepareBuffers()
+		void Triangle2::prepareVertexInput()
 		{
 			glBindVertexArray(m_vao);
 		}

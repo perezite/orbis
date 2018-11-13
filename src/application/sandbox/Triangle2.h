@@ -17,7 +17,7 @@ namespace sb
 {
 	namespace triangle2 
 	{
-		// This sandbox implements the triangle with vertex buffers and vertex arrays. Reference: https://learnopengl.com/Getting-started/Hello-Triangle
+		// This sandbox implements the triangle with vertex buffers and vertex array objects. Reference: https://learnopengl.com/Getting-started/Hello-Triangle
 		class Triangle2
 		{
 		public:
@@ -38,7 +38,7 @@ namespace sb
 
 			static void linkShader(GLuint shader);
 
-			static void createBuffers();
+			static void createVertexInput();
 
 			static void createVertices();
 
@@ -50,7 +50,7 @@ namespace sb
 
 			static void prepareDraw();
 
-			static void prepareBuffers();
+			static void prepareVertexInput();
 
 			static void close();
 
@@ -69,7 +69,6 @@ namespace sb
 
 			static GLuint m_vbo;
 
-			// static std::vector<Vertex> m_vertices;
 			static std::vector<float> m_vertices;
 
 		};
