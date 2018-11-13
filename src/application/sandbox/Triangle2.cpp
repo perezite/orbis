@@ -30,7 +30,6 @@ namespace sb
 
 		void Triangle2::createWindow()
 		{
-			int i = 42;
 			#ifdef WIN32
 				SDL_Init(SDL_INIT_VIDEO);
 				SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -135,7 +134,7 @@ namespace sb
 						delete[] infoLog;
 					}
 					glDeleteShader(shader);
-					shader = NULL;
+					shader = 0;
 				}
 			}
 
@@ -165,20 +164,34 @@ namespace sb
 
 		void Triangle2::createVertexInput()
 		{
-			glGenVertexArrays(1, &m_vao); 
-			glGenBuffers(1, &m_vbo);
+			#ifdef WIN32
 
-			auto test1 = m_attributeLocations["a_vPosition"];
-			auto test2 = m_attributeLocations["a_vColor"];
+				glGenVertexArrays(1, &m_vao); 
+				glGenBuffers(1, &m_vbo);
 
-			glBindVertexArray(m_vao);
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
-			glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
-			glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
-			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same
-			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
-			glEnableVertexAttribArray(0);
+				glBindVertexArray(m_vao);
+				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+
+				glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
+				glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
+				glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
+				glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same
+				glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
+				glEnableVertexAttribArray(0);
+
+				glBindBuffer(GL_ARRAY_BUFFER, NULL);
+				glBindVertexArray(NULL);
+
+			#elif defined(__ANDROID__)
+
+				glGenBuffers(1, &m_vbo);
+				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+				glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
+				glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+			#else		
+				#error Platform not supported
+			#endif				
 		}
 
 		void Triangle2::createVertices()
@@ -223,13 +236,31 @@ namespace sb
 			glClear(GL_COLOR_BUFFER_BIT);
 			glUseProgram(m_shader);
 
-			prepareVertexInput();		// in GLES, bind the vertex buffer according to https://github.com/learnopengles/Learn-OpenGLES-Tutorials/blob/master/android/AndroidOpenGLESLessonsCpp/app/src/main/cpp/lesson7/CubesWithVboWithStride.cpp
+			prepareVertexInput();		
 
 		}
 
 		void Triangle2::prepareVertexInput()
 		{
-			glBindVertexArray(m_vao);
+			#ifdef WIN32
+
+				glBindVertexArray(m_vao);
+
+			#elif defined(__ANDROID__)
+
+				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+				auto test1 = m_attributeLocations["a_vPosition"];
+				auto test2 = m_attributeLocations["a_vColor"];
+				glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
+				glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
+				glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same
+				glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
+				glEnableVertexAttribArray(0);
+
+			#else
+				#error Platform not supported
+			#endif
+
 		}
 
 		void Triangle2::close()

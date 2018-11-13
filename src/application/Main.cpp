@@ -212,6 +212,7 @@ void example1()
 int main(int argc, char* args[])
 {
 	sb::triangle2::Triangle2::run();
+	//sb::triangle1::Triangle1::run();
 
 	/*example1();
 	example2();
