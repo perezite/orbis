@@ -13,10 +13,6 @@
 #include <map>
 #include <vector>
 
-#ifdef WIN32
-	#define SB_USE_VERTEX_ARRAYS 
-#endif
-
 namespace sb 
 {
 	namespace triangle2 
@@ -48,7 +44,7 @@ namespace sb
 
 			static void linkShader(GLuint shader);
 
-			static void createVertexBuffer();
+			static void setupBuffers();
 
 			static void createVertices();
 
@@ -59,6 +55,10 @@ namespace sb
 			static void flip();
 
 			static void prepareDraw();
+
+			static void prepareVertexAttributes();
+
+			static void prepareVao();
 
 			static void close();
 
@@ -73,13 +73,12 @@ namespace sb
 
 			static std::map<std::string, GLuint> m_attributeLocations;
 
-			#ifdef SB_USE_VERTEX_ARRAYS
-				static GLuint m_vao;
-			#endif
+			static GLuint m_vao;
 
 			static GLuint m_vbo;
 
-			static std::vector<Vertex> m_vertices;
+			// static std::vector<Vertex> m_vertices;
+			static std::vector<float> m_vertices;
 
 		};
 	}
