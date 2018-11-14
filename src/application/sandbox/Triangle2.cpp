@@ -175,18 +175,10 @@ namespace sb
 		void Triangle2::setVertexBufferData()
 		{
 			#ifdef WIN32
-				glBindVertexArray(m_vao);
-				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-
-				glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
-				glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
-				glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
-				glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same
-				glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
-				glEnableVertexAttribArray(0);
-
-				glBindBuffer(GL_ARRAY_BUFFER, NULL);
-				glBindVertexArray(NULL);
+			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);			
+			setVertexAttribPointers();
 
 			#elif defined(__ANDROID__)
 
@@ -197,6 +189,25 @@ namespace sb
 			#else		
 				#error Platform not supported
 			#endif				
+		}
+
+		void Triangle2::setVertexAttribPointers()
+		{
+			#ifdef WIN32
+				glBindVertexArray(m_vao);
+			#endif
+
+				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+					glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
+					glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
+					glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same
+					glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
+					glEnableVertexAttribArray(0);
+				glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+			#ifdef WIN32
+				glBindVertexArray(0);
+			#endif
 		}
 
 		void Triangle2::createVertices()
@@ -247,17 +258,15 @@ namespace sb
 		void Triangle2::prepareVertexBuffer()
 		{
 			#ifdef WIN32
-
 				glBindVertexArray(m_vao);
-
 			#elif defined(__ANDROID__)
-
-				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+				setVertexAttribPointers();
+				/*glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 				glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
 				glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
 				glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same
 				glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));	// Vertex attributes stay the same
-				glEnableVertexAttribArray(0);
+				glEnableVertexAttribArray(0);*/
 
 			#else
 				#error Platform not supported

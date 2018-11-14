@@ -48,6 +48,8 @@ namespace sb
 
 			static void setVertexBufferData();
 
+			static void setVertexAttribPointers();
+
 			static void createVertices();
 
 			static void updateInput();
