@@ -49,21 +49,13 @@ namespace sb
 
 			static void linkShader(GLuint shader);
 
-			static void createVertexBuffer();
-
 			static void createVertices();
-
-			static void setVertexBufferData();
 
 			static void updateInput();
 
 			static void draw();
 
-			static void flip();
-
 			static void prepareDraw();
-
-			static void prepareVertexBufferForDraw();
 
 			static void close();
 
@@ -79,12 +71,6 @@ namespace sb
 			static std::map<std::string, GLuint> m_attributeLocations;
 
 			static VertexBuffer m_vertexBuffer;
-
-			//static GLuint m_vao;
-
-			//static bool m_isVaoInit;
-
-			//static GLuint m_vbo;
 
 			static std::vector<Vertex> m_vertices;
 

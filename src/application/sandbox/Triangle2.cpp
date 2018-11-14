@@ -11,9 +11,6 @@ namespace sb
 		GLuint Triangle2::m_shader;
 		std::map<std::string, GLuint> Triangle2::m_attributeLocations;
 		VertexBuffer Triangle2::m_vertexBuffer;
-		//GLuint Triangle2::m_vao;
-		//bool Triangle2::m_isVaoInit = false;
-		//GLuint Triangle2::m_vbo;
 
 		std::vector<Vertex> Triangle2::m_vertices;
 
@@ -25,7 +22,7 @@ namespace sb
 			while (m_running) {			
 				updateInput();
 				draw();
-				flip();
+				SDL_GL_SwapWindow(m_sdlWindow);
 			}
 
 			close();
@@ -61,15 +58,12 @@ namespace sb
 		void Triangle2::initOpenGl()
 		{
 			createShader();
-
 			m_attributeLocations["a_vPosition"] = glGetAttribLocation(m_shader, "a_vPosition");
 			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 
-			createVertices();
-
-			// createVertexBuffer();
 			m_vertexBuffer.init();
-			setVertexBufferData();
+			createVertices();
+			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
 		}
 
 		void Triangle2::createShader()
@@ -168,27 +162,11 @@ namespace sb
 			}
 		}
 
-		void Triangle2::createVertexBuffer()
-		{
-			/*#ifdef WIN32
-				glGenVertexArrays(1, &m_vao);
-			#endif
-			glGenBuffers(1, &m_vbo);*/
-		}
-
 		void Triangle2::createVertices()
 		{
 			m_vertices = { Vertex{ -1, -1, 1, 0, 0, 1 },
 				Vertex{ 1, -1, 0, 1, 0, 1 },
 				Vertex{ 0,  1, 0, 0, 1, 1 } };
-		}
-
-		void Triangle2::setVertexBufferData()
-		{
-			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
-			/*glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0); */			
 		}
 
 		void Triangle2::updateInput()
@@ -212,11 +190,6 @@ namespace sb
 				std::cin.get();
 			}
 		}
-		
-		void Triangle2::flip()
-		{
-			SDL_GL_SwapWindow(m_sdlWindow);
-		}
 
 		void Triangle2::prepareDraw()
 		{
@@ -226,33 +199,9 @@ namespace sb
 			glClear(GL_COLOR_BUFFER_BIT);
 			glUseProgram(m_shader);
 
-			prepareVertexBufferForDraw();
-		}
-
-		void Triangle2::prepareVertexBufferForDraw()
-		{
 			m_vertexBuffer.setVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 			m_vertexBuffer.setVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));
 			m_vertexBuffer.enable();
-
-			/*#ifdef WIN32
-				glBindVertexArray(m_vao);
-				if (m_isVaoInit)
-					return;
-			#endif
-
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-			glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
-			glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
-			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));
-			glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-			#ifdef WIN32
-			glBindVertexArray(0);
-				m_isVaoInit = true;
-			#endif*/
 		}
 
 		void Triangle2::close()
