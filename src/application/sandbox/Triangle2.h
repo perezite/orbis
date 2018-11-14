@@ -48,7 +48,7 @@ namespace sb
 
 			static void setVertexBufferData();
 
-			static void setVertexAttribPointers();
+			static void prepareVertexBufferForDraw();
 
 			static void createVertices();
 
@@ -60,9 +60,9 @@ namespace sb
 
 			static void prepareDraw();
 
-			static void prepareVertexBuffer();
-
 			static void close();
+
+			static void destroyVertexBuffer();
 
 		private:
 			static SDL_Window* m_sdlWindow;	
@@ -76,6 +76,8 @@ namespace sb
 			static std::map<std::string, GLuint> m_attributeLocations;
 
 			static GLuint m_vao;
+
+			static bool m_isVaoInit;
 
 			static GLuint m_vbo;
 
