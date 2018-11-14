@@ -10,9 +10,10 @@ namespace sb
 		bool Triangle2::m_running = true;
 		GLuint Triangle2::m_shader;
 		std::map<std::string, GLuint> Triangle2::m_attributeLocations;
-		GLuint Triangle2::m_vao;
-		bool Triangle2::m_isVaoInit = false;
-		GLuint Triangle2::m_vbo;
+		VertexBuffer Triangle2::m_vertexBuffer;
+		//GLuint Triangle2::m_vao;
+		//bool Triangle2::m_isVaoInit = false;
+		//GLuint Triangle2::m_vbo;
 
 		std::vector<Vertex> Triangle2::m_vertices;
 
@@ -66,7 +67,8 @@ namespace sb
 
 			createVertices();
 
-			createVertexBuffer();
+			// createVertexBuffer();
+			m_vertexBuffer.init();
 			setVertexBufferData();
 		}
 
@@ -168,57 +170,25 @@ namespace sb
 
 		void Triangle2::createVertexBuffer()
 		{
-			#ifdef WIN32
+			/*#ifdef WIN32
 				glGenVertexArrays(1, &m_vao);
 			#endif
-			glGenBuffers(1, &m_vbo);
-		}
-
-		void Triangle2::setVertexBufferData()
-		{
-			#ifdef WIN32
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);			
-
-			#elif defined(__ANDROID__)
-
-				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-				glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-			#else		
-				#error Platform not supported
-			#endif				
-		}
-
-		void Triangle2::prepareVertexBufferForDraw()
-		{
-			#ifdef WIN32
-				glBindVertexArray(m_vao);
-				if (m_isVaoInit)
-					return;
-			#endif
-
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-				glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
-				glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
-				glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	
-				glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));
-				glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-			#ifdef WIN32
-				glBindVertexArray(0);
-				m_isVaoInit = true;
-			#endif
+			glGenBuffers(1, &m_vbo);*/
 		}
 
 		void Triangle2::createVertices()
 		{
-			m_vertices = {  Vertex { -1, -1, 1, 0, 0, 1 },
-							Vertex {  1, -1, 0, 1, 0, 1 },
-							Vertex {  0,  1, 0, 0, 1, 1 } };
+			m_vertices = { Vertex{ -1, -1, 1, 0, 0, 1 },
+				Vertex{ 1, -1, 0, 1, 0, 1 },
+				Vertex{ 0,  1, 0, 0, 1, 1 } };
+		}
+
+		void Triangle2::setVertexBufferData()
+		{
+			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
+			/*glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+			glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0); */			
 		}
 
 		void Triangle2::updateInput()
@@ -242,7 +212,7 @@ namespace sb
 				std::cin.get();
 			}
 		}
-
+		
 		void Triangle2::flip()
 		{
 			SDL_GL_SwapWindow(m_sdlWindow);
@@ -259,23 +229,38 @@ namespace sb
 			prepareVertexBufferForDraw();
 		}
 
+		void Triangle2::prepareVertexBufferForDraw()
+		{
+			m_vertexBuffer.setVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+			m_vertexBuffer.setVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));
+			m_vertexBuffer.enable();
+
+			/*#ifdef WIN32
+				glBindVertexArray(m_vao);
+				if (m_isVaoInit)
+					return;
+			#endif
+
+			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+			glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
+			glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
+			glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+			glVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));
+			glEnableVertexAttribArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+			#ifdef WIN32
+			glBindVertexArray(0);
+				m_isVaoInit = true;
+			#endif*/
+		}
+
 		void Triangle2::close()
 		{
 			glDeleteProgram(m_shader);
-			destroyVertexBuffer();
 			SDL_DestroyWindow(m_sdlWindow);
 			SDL_Quit();
 		}
-
-		void Triangle2::destroyVertexBuffer()
-		{
-			glDeleteBuffers(1, &m_vbo);
-
-			#ifdef WIN32
-				glDeleteVertexArrays(1, &m_vao);
-			#endif
-		}
-
 	}
 }
 

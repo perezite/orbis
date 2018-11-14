@@ -1,5 +1,7 @@
 #pragma once
 
+#include "VertexBuffer.h"
+
 #ifdef  WIN32
 #include <gl/glew.h>
 #include <SDL2/SDL_opengl.h>
@@ -23,7 +25,10 @@ namespace sb
 			float r, g, b, a;
 		};
 
-		// This sandbox implements the triangle with vertex buffers and vertex array objects. Reference: https://learnopengl.com/Getting-started/Hello-Triangle
+		// This sandbox implements the triangle with vertex buffers and vertex array objects. 
+		// References:	https://learnopengl.com/Getting-started/Hello-Triangle
+		//				https://www.youtube.com/watch?v=ImtWD_9OAeY&t=2s
+		//				http://www.learnopengles.com/android-lesson-seven-an-introduction-to-vertex-buffer-objects-vbos/
 		class Triangle2
 		{
 		public:
@@ -46,11 +51,9 @@ namespace sb
 
 			static void createVertexBuffer();
 
-			static void setVertexBufferData();
-
-			static void prepareVertexBufferForDraw();
-
 			static void createVertices();
+
+			static void setVertexBufferData();
 
 			static void updateInput();
 
@@ -60,9 +63,9 @@ namespace sb
 
 			static void prepareDraw();
 
-			static void close();
+			static void prepareVertexBufferForDraw();
 
-			static void destroyVertexBuffer();
+			static void close();
 
 		private:
 			static SDL_Window* m_sdlWindow;	
@@ -75,11 +78,13 @@ namespace sb
 
 			static std::map<std::string, GLuint> m_attributeLocations;
 
-			static GLuint m_vao;
+			static VertexBuffer m_vertexBuffer;
 
-			static bool m_isVaoInit;
+			//static GLuint m_vao;
 
-			static GLuint m_vbo;
+			//static bool m_isVaoInit;
+
+			//static GLuint m_vbo;
 
 			static std::vector<Vertex> m_vertices;
 
