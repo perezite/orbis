@@ -63,7 +63,9 @@ namespace sb
 			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 
 			createVertices();
-			createVertexInput();
+
+			createVertexBuffer();
+			setVertexBufferData();
 		}
 
 		void Triangle2::createShader()
@@ -162,13 +164,17 @@ namespace sb
 			}
 		}
 
-		void Triangle2::createVertexInput()
+		void Triangle2::createVertexBuffer()
 		{
 			#ifdef WIN32
+				glGenVertexArrays(1, &m_vao);
+			#endif
+			glGenBuffers(1, &m_vbo);
+		}
 
-				glGenVertexArrays(1, &m_vao); 
-				glGenBuffers(1, &m_vbo);
-
+		void Triangle2::setVertexBufferData()
+		{
+			#ifdef WIN32
 				glBindVertexArray(m_vao);
 				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
@@ -184,7 +190,6 @@ namespace sb
 
 			#elif defined(__ANDROID__)
 
-				glGenBuffers(1, &m_vbo);
 				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 				glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -236,11 +241,10 @@ namespace sb
 			glClear(GL_COLOR_BUFFER_BIT);
 			glUseProgram(m_shader);
 
-			prepareVertexInput();		
-
+			prepareVertexBuffer();		
 		}
 
-		void Triangle2::prepareVertexInput()
+		void Triangle2::prepareVertexBuffer()
 		{
 			#ifdef WIN32
 
@@ -249,8 +253,6 @@ namespace sb
 			#elif defined(__ANDROID__)
 
 				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-				auto test1 = m_attributeLocations["a_vPosition"];
-				auto test2 = m_attributeLocations["a_vColor"];
 				glEnableVertexAttribArray(m_attributeLocations["a_vPosition"]);
 				glEnableVertexAttribArray(m_attributeLocations["a_vColor"]);
 				glVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);	// Vertex attributes stay the same

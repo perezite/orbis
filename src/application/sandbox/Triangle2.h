@@ -44,7 +44,9 @@ namespace sb
 
 			static void linkShader(GLuint shader);
 
-			static void createVertexInput();
+			static void createVertexBuffer();
+
+			static void setVertexBufferData();
 
 			static void createVertices();
 
@@ -56,7 +58,7 @@ namespace sb
 
 			static void prepareDraw();
 
-			static void prepareVertexInput();
+			static void prepareVertexBuffer();
 
 			static void close();
 
