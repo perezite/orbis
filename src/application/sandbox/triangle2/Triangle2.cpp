@@ -4,6 +4,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <time.h>
+#include <chrono>
 
 namespace sb 
 {
@@ -215,7 +216,12 @@ namespace sb
 			static clock_t current = clock();
 			clock_t last = current;
 			current = clock();
-			return float(current - last) / (float)CLOCKS_PER_SEC;
+			return 
+			#ifdef __ANDROID__
+				(float(current - last) / CLOCKS_PER_SEC) * 100.0f;			// better don't ask...
+			#else
+				float(current - last) / CLOCKS_PER_SEC;
+			#endif	
 		}
 
 		void Triangle2::display()
