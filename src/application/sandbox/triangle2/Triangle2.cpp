@@ -1,5 +1,9 @@
 #include "Triangle2.h"
 #include <iostream>
+#include <stddef.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <time.h>
 
 namespace sb 
 {
@@ -11,8 +15,8 @@ namespace sb
 		GLuint Triangle2::m_shader;
 		std::map<std::string, GLuint> Triangle2::m_attributeLocations;
 		VertexBuffer Triangle2::m_vertexBuffer;
-
 		std::vector<Vertex> Triangle2::m_vertices;
+		std::vector<Vertex> Triangle2::m_transformedVertices;
 
 		void Triangle2::run()
 		{
@@ -22,6 +26,7 @@ namespace sb
 			while (m_running) {			
 				updateInput();
 				draw();
+				display();
 				SDL_GL_SwapWindow(m_sdlWindow);
 			}
 
@@ -63,7 +68,7 @@ namespace sb
 
 			m_vertexBuffer.init();
 			createVertices();
-			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_STATIC_DRAW);
+			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_DYNAMIC_DRAW);
 		}
 
 		void Triangle2::createShader()
@@ -164,12 +169,12 @@ namespace sb
 
 		void Triangle2::createVertices()
 		{
-			m_vertices = {	Vertex{ -1,   -1, 1, 0, 0, 1 },
-							Vertex{  0,	  -1, 0, 1, 0, 1 },
-							Vertex{ -0.5f, 0, 0, 0, 1, 1 }, 
-							Vertex{	 1,    1, 1, 0, 0, 1 },
-							Vertex{  0,    1, 0, 1, 0, 1 },
-							Vertex{  0.5f, 0, 0, 0, 1, 1 } };
+			m_vertices = {	Vertex{		Vector2f{-0.5f,		-0.5f	},		Color { 1, 0, 0, 1 } },
+							Vertex{		Vector2f{ 0,		-0.5f	},		Color { 0, 1, 0, 1 } },
+							Vertex{		Vector2f{-0.25f,	 0		},		Color { 0, 0, 1, 1 } },
+							Vertex{		Vector2f{ 0.5f,      0.5f	},		Color { 1, 0, 0, 1 } },
+							Vertex{		Vector2f{ 0,		 0.5f	},		Color { 0, 1, 0, 1 } },
+							Vertex{		Vector2f{ 0.25f,	 0		},		Color { 0, 0, 1, 1 } } };
 		}
 
 		void Triangle2::updateInput()
@@ -183,7 +188,39 @@ namespace sb
 
 		void Triangle2::draw()
 		{
-			prepareDraw();
+			computeTransformedVertices();
+			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_transformedVertices.data()[0]), GL_DYNAMIC_DRAW);
+		}
+
+		void Triangle2::computeTransformedVertices()
+		{
+			static float alpha = 0;
+			const float omega = 1.5f;
+			alpha = fmod(alpha + getElapsedTime() * omega, 2 * (float)M_PI);
+			float ca = cosf(alpha), sa = sinf(alpha);
+			
+			m_transformedVertices.resize(m_vertices.size());
+			for (std::size_t i = 0; i < m_vertices.size(); i++) {
+				bool ccw = (i % 6) < 3;
+ 				Vector2f pos = m_vertices[i].position;
+				if (ccw)
+					m_transformedVertices[i].position = Vector2f{ ca * pos.x - sa * pos.y,  sa * pos.x + ca * pos.y };
+				else
+					m_transformedVertices[i].position = Vector2f{ ca * pos.x + sa * pos.y, -sa * pos.x + ca * pos.y };
+				m_transformedVertices[i].color = m_vertices[i].color;
+			}
+		}
+	
+		float Triangle2::getElapsedTime() {
+			static clock_t current = clock();
+			clock_t last = current;
+			current = clock();
+			return float(current - last) / (float)CLOCKS_PER_SEC;
+		}
+
+		void Triangle2::display()
+		{
+			prepareDisplay();
 
 			glDrawArrays(GL_TRIANGLES, 0, m_vertices.size());
 
@@ -194,7 +231,7 @@ namespace sb
 			}
 		}
 
-		void Triangle2::prepareDraw()
+		void Triangle2::prepareDisplay()
 		{
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
@@ -203,7 +240,7 @@ namespace sb
 			glUseProgram(m_shader);
 
 			m_vertexBuffer.setVertexAttribPointer(m_attributeLocations["a_vPosition"], 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-			m_vertexBuffer.setVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(float)));
+			m_vertexBuffer.setVertexAttribPointer(m_attributeLocations["a_vColor"], 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
 			m_vertexBuffer.enable();
 		}
 

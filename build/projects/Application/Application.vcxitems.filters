@@ -69,5 +69,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Triangle2.h">
       <Filter>sandbox\triangle2\headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Vector2f.h">
+      <Filter>sandbox\triangle2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Color.h">
+      <Filter>sandbox\triangle2\headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

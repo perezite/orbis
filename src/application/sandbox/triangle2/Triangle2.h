@@ -1,6 +1,8 @@
 #pragma once
 
 #include "VertexBuffer.h"
+#include "Vector2f.h"
+#include "Color.h"
 
 #ifdef  WIN32
 #include <gl/glew.h>
@@ -21,8 +23,8 @@ namespace sb
 	{
 		struct Vertex
 		{
-			float x, y;
-			float r, g, b, a;
+			Vector2f position;
+			Color color;
 		};
 
 		// This sandbox implements the triangle with vertex buffers and vertex array objects. 
@@ -55,7 +57,13 @@ namespace sb
 
 			static void draw();
 
-			static void prepareDraw();
+			static void computeTransformedVertices();
+
+			static float getElapsedTime();
+
+			static void display();
+
+			static void prepareDisplay();
 
 			static void close();
 
@@ -73,6 +81,8 @@ namespace sb
 			static VertexBuffer m_vertexBuffer;
 
 			static std::vector<Vertex> m_vertices;
+
+			static std::vector<Vertex> m_transformedVertices;
 
 		};
 	}
