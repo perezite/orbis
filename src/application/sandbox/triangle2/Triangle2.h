@@ -57,6 +57,12 @@ namespace sb
 
 			static void draw();
 
+			static void drawVersion1();
+
+			static void drawVersion2();
+
+			static void drawVersion3();
+
 			static void computeTransformedVertices();
 
 			static float getElapsedTime();

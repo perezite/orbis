@@ -21,11 +21,24 @@ namespace sb
 			#endif
 		}
 	
-		void VertexBuffer::setData(GLsizeiptr size, const GLvoid* data, GLenum usage)
+		void VertexBuffer::bind()
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-				glBufferData(GL_ARRAY_BUFFER, size, data, usage);
+		}
+
+		void VertexBuffer::unbind()
+		{
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+
+		void VertexBuffer::setData(GLsizeiptr size, const GLvoid* data, GLenum usage)
+		{
+			glBufferData(GL_ARRAY_BUFFER, size, data, usage);
+		}
+
+		void VertexBuffer::setSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data)
+		{
+			glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
 		}
 
 		void VertexBuffer::setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)

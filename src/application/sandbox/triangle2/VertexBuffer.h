@@ -29,7 +29,13 @@ namespace sb
 
 			void init();
 
+			void bind();
+
+			void unbind();
+
 			void setData(GLsizeiptr size, const GLvoid* data, GLenum usage);
+
+			void setSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data);
 
 			void setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer);
 

@@ -69,7 +69,8 @@ namespace sb
 
 			m_vertexBuffer.init();
 			createVertices();
-			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_DYNAMIC_DRAW);
+			// m_vertexBuffer.bind();
+			// m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_DYNAMIC_DRAW);
 		}
 
 		void Triangle2::createShader()
@@ -189,8 +190,33 @@ namespace sb
 
 		void Triangle2::draw()
 		{
+			// drawVersion1();
+			// drawVersion2();
+			drawVersion3();
+		}
+
+		void Triangle2::drawVersion1()
+		{
 			computeTransformedVertices();
-			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_transformedVertices.data()[0]), GL_DYNAMIC_DRAW);
+			m_vertexBuffer.bind();
+			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_transformedVertices[0]), GL_DYNAMIC_DRAW);		
+		}
+
+		void Triangle2::drawVersion2() 
+		{
+			computeTransformedVertices();
+			m_vertexBuffer.bind();
+			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
+			m_vertexBuffer.setSubData(0, m_vertices.size() * sizeof(Vertex), &(m_transformedVertices[0]));
+		}
+
+		void Triangle2::drawVersion3()
+		{
+			computeTransformedVertices();
+			m_vertexBuffer.bind();
+			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
+			for (unsigned int i = 0; i < m_vertices.size(); i++)									// individual vertex sub-updates
+				m_vertexBuffer.setSubData(i * sizeof(Vertex) + offsetof(Vertex, position), sizeof(Vertex), &(m_transformedVertices[i].position));
 		}
 
 		void Triangle2::computeTransformedVertices()
