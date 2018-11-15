@@ -5,19 +5,19 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.cpp">
       <Filter>levels</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\ErrorLoggingSandbox.cpp">
-      <Filter>sandbox\errorLogging</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle1Util.cpp">
-      <Filter>sandbox\triangle1</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle1.cpp">
-      <Filter>sandbox\triangle1</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle2.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\VertexBuffer.cpp">
       <Filter>sandbox\triangle2</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\VertexBuffer.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1.cpp">
+      <Filter>sandbox\triangle1</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1Util.cpp">
+      <Filter>sandbox\triangle1</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogging\ErrorLogging.cpp">
+      <Filter>sandbox\errorLogging</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Triangle2.cpp">
       <Filter>sandbox\triangle2</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,19 +54,19 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.h">
       <Filter>levels\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\ErrorLoggingSandbox.h">
-      <Filter>sandbox\errorLogging\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle1Util.h">
-      <Filter>sandbox\triangle1\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle1.h">
-      <Filter>sandbox\triangle1\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\Triangle2.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\VertexBuffer.h">
       <Filter>sandbox\triangle2\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\VertexBuffer.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1.h">
+      <Filter>sandbox\triangle1\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1Util.h">
+      <Filter>sandbox\triangle1\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogging\ErrorLogging.h">
+      <Filter>sandbox\errorLogging\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Triangle2.h">
       <Filter>sandbox\triangle2\headers</Filter>
     </ClInclude>
   </ItemGroup>

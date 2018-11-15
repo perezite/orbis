@@ -164,9 +164,12 @@ namespace sb
 
 		void Triangle2::createVertices()
 		{
-			m_vertices = { Vertex{ -1, -1, 1, 0, 0, 1 },
-				Vertex{ 1, -1, 0, 1, 0, 1 },
-				Vertex{ 0,  1, 0, 0, 1, 1 } };
+			m_vertices = {	Vertex{ -1,   -1, 1, 0, 0, 1 },
+							Vertex{  0,	  -1, 0, 1, 0, 1 },
+							Vertex{ -0.5f, 0, 0, 0, 1, 1 }, 
+							Vertex{	 1,    1, 1, 0, 0, 1 },
+							Vertex{  0,    1, 0, 1, 0, 1 },
+							Vertex{  0.5f, 0, 0, 0, 1, 1 } };
 		}
 
 		void Triangle2::updateInput()
@@ -182,7 +185,7 @@ namespace sb
 		{
 			prepareDraw();
 
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			glDrawArrays(GL_TRIANGLES, 0, m_vertices.size());
 
 			GLuint error = glGetError();
 			if (error != 0) {
@@ -210,6 +213,8 @@ namespace sb
 			SDL_DestroyWindow(m_sdlWindow);
 			SDL_Quit();
 		}
+
+
 	}
 }
 

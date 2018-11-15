@@ -3,8 +3,8 @@
 #include "../orbis/core/Error.h"
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
-#include "sandbox/Triangle1.h"
-#include "sandbox/Triangle2.h"
+#include "sandbox/triangle1/Triangle1.h"
+#include "sandbox/triangle2/Triangle2.h"
 
 /*
 class Actor: public Transformable {
