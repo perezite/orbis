@@ -34,9 +34,9 @@ namespace sb
 
 			static void initTriangles();
 
-			static void initVertices();
-
 			static void update();
+
+			static std::size_t getNumVertices();
 
 			static void render();
 
@@ -47,6 +47,8 @@ namespace sb
 			static void render3();
 
 			static void display();
+
+			static void checkGLErrors();
 
 			static void prepareDisplay();
 
@@ -59,16 +61,11 @@ namespace sb
 
 			static Stopwatch m_stopwatch;
 
-			static VertexBuffer m_vertexBuffer;
-
-			static std::vector<Vertex> m_vertices;
-
 			static std::vector<Triangle> m_triangles;
 
+			static VertexBuffer m_vertexBuffer;
+
 			static std::vector<Vertex> m_transformedVertices;
-
-			static std::vector<Transform> m_transforms;
-
 		};
 	}
 }

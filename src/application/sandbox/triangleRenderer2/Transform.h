@@ -21,6 +21,6 @@ namespace sb
 			Vector2f scale;
 		};
 
-		Vector2f operator *(const Transform& left, Vector2f right);
+		Vector2f operator *(const Transform& transform, Vector2f position);
 	}
 }

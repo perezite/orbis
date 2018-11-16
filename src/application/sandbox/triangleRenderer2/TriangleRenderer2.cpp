@@ -10,22 +10,21 @@ namespace sb
 {
 	namespace triangleRenderer2 
 	{
-		const unsigned int TriangleRenderer2::NumTrianglesHorz = 2;
-		const unsigned int TriangleRenderer2::NumTrianglesVert = 2;
+		const unsigned int TriangleRenderer2::NumTrianglesHorz = 100;
+		const unsigned int TriangleRenderer2::NumTrianglesVert = 100;
 		
 		Window TriangleRenderer2::m_window;
 		Shader TriangleRenderer2::m_shader;
 		Stopwatch TriangleRenderer2::m_stopwatch;
+		std::vector<Triangle> TriangleRenderer2::m_triangles;
 		VertexBuffer TriangleRenderer2::m_vertexBuffer;
-		std::vector<Vertex> TriangleRenderer2::m_vertices;
 		std::vector<Vertex> TriangleRenderer2::m_transformedVertices;
-		std::vector<Transform> TriangleRenderer2::m_transforms;
 
 		void TriangleRenderer2::run()
 		{
-			m_window.init();
+			m_window.init(1800, 1000);
 			initGL();
-			initVertices();
+			initTriangles();
 
 			while (!m_window.hasQuitEvent()) {			
 				m_window.update();
@@ -46,50 +45,46 @@ namespace sb
 
 		void TriangleRenderer2::initTriangles()
 		{
-			float stepWidth = 0.9f / float(NumTrianglesHorz);
-			float stepHeight = 0.9f / float(NumTrianglesVert);
-			Vector2f triangleSize(0.9f * stepWidth, 0.9f * stepHeight);
+			float stepWidth = 2 / float(NumTrianglesHorz);
+			float stepHeight = 2 / float(NumTrianglesVert);
+			Vector2f triangleSize(stepWidth, stepHeight);
 
 			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
 				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
-					Vector2f position = Vector2f(i * stepWidth, j * stepHeight);
-					Triangle triangle(Transform(position, triangleSize));
+					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
+					m_triangles.push_back(Triangle(Transform(position, triangleSize)));
 				}
 			}
 		}
 
-		void TriangleRenderer2::initVertices()
-		{
-			m_vertices = {	Vertex{ Vector2f{ -0.5f,		-0.5f },		Color{ 1, 0, 0, 1 } },
-							Vertex{ Vector2f{ 0,		-0.5f },		Color{ 0, 1, 0, 1 } },
-							Vertex{ Vector2f{ -0.25f,	 0 },		Color{ 0, 0, 1, 1 } },
-							Vertex{ Vector2f{ 0.5f,      0.5f },		Color{ 1, 0, 0, 1 } },
-							Vertex{ Vector2f{ 0,		 0.5f },		Color{ 0, 1, 0, 1 } },
-							Vertex{ Vector2f{ 0.25f,	 0 },		Color{ 0, 0, 1, 1 } } };
-		}
-
 		void TriangleRenderer2::update()
 		{
-			float alpha = fmod(m_stopwatch.getElapsedSeconds(), 2 * (float)M_PI);
-			float ca = cosf(alpha), sa = sinf(alpha);
+			m_transformedVertices.resize(getNumVertices());
 
-			m_transformedVertices.resize(m_vertices.size());
-			for (std::size_t i = 0; i < m_vertices.size(); i++) {
-				bool ccw = (i % 6) < 3;
-				Vector2f pos = m_vertices[i].position;
-				if (ccw)
-					m_transformedVertices[i].position = Vector2f{ ca * pos.x - sa * pos.y,  sa * pos.x + ca * pos.y };
-				else
-					m_transformedVertices[i].position = Vector2f{ ca * pos.x + sa * pos.y, -sa * pos.x + ca * pos.y };
-				m_transformedVertices[i].color = m_vertices[i].color;
+			unsigned int counter = 0;
+			for (std::size_t i = 0; i < m_triangles.size(); i++) {
+				for (std::size_t j = 0; j < m_triangles[i].mesh.getSize(); j++) {
+					m_transformedVertices[counter].position = m_triangles[i].transform * m_triangles[i].mesh[j].position;
+					m_transformedVertices[counter].color = m_triangles[i].mesh[j].color;
+					counter++;
+				}
 			}
+		}
+
+		std::size_t TriangleRenderer2::getNumVertices()
+		{
+			std::size_t numVertices = 0;
+			for (std::size_t i = 0; i < m_triangles.size(); i++)
+				numVertices += m_triangles[i].mesh.getSize();
+
+			return numVertices;
 		}
 
 		void TriangleRenderer2::render()
 		{
-			render1();
+			// render1();
 			render2();
-			render3();
+			// render3();
 		}
 
 		void TriangleRenderer2::render1()
@@ -101,7 +96,7 @@ namespace sb
 		void TriangleRenderer2::render2()
 		{
 			m_vertexBuffer.bind();
-			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
+			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);					// buffer orphaning
 			m_vertexBuffer.setSubData(0, m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]));
 		}
 
@@ -109,16 +104,19 @@ namespace sb
 		{
 			m_vertexBuffer.bind();
 			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
-			for (unsigned int i = 0; i < m_transformedVertices.size(); i++)									// buffer sub-updates
+			for (unsigned int i = 0; i < m_transformedVertices.size(); i++)										// buffer sub-updates
 				m_vertexBuffer.setSubData(i * sizeof(Vertex) + offsetof(Vertex, position), sizeof(Vertex), &(m_transformedVertices[i].position));
 		}
 
 		void TriangleRenderer2::display()
 		{
 			prepareDisplay();
+			glDrawArrays(GL_TRIANGLES, 0, m_transformedVertices.size());
+			checkGLErrors();
+		}
 
-			glDrawArrays(GL_TRIANGLES, 0, m_vertices.size());
-
+		void TriangleRenderer2::checkGLErrors()
+		{
 			GLuint error = glGetError();
 			if (error != 0) {
 				std::cout << error << std::endl;

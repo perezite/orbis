@@ -4,7 +4,7 @@ namespace sb
 {
 	namespace triangleRenderer2 
 	{
-		void Window::init() 
+		void Window::init(int width, int height) 
 		{
 			#ifdef WIN32
 				SDL_Init(SDL_INIT_VIDEO);
@@ -13,7 +13,7 @@ namespace sb
 				SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 				SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 				SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-				m_sdlWindow = SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 400, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+				m_sdlWindow = SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 				m_glContext = SDL_GL_CreateContext(m_sdlWindow);
 				GLenum glewError = glewInit();
 			#elif defined(__ANDROID__)

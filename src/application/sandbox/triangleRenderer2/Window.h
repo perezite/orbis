@@ -19,7 +19,7 @@ namespace sb
 		public:
 			bool hasQuitEvent() { return m_hasQuitEvent; }
 
-			void init();
+			void init(int width = 400, int height = 400);
 
 			void flip();
 

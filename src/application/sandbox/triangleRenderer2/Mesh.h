@@ -16,7 +16,9 @@ namespace sb
 				m_vertices = vertices;
 			}
 
-			Vertex& operator[](std::size_t index) { return m_vertices[index]; }
+			std::size_t getSize() const { return m_vertices.size(); }
+
+			const Vertex& operator[](std::size_t index) const { return m_vertices[index]; }
 
 		private:
 			std::vector<Vertex> m_vertices;
