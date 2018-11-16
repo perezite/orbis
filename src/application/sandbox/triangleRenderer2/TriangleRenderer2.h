@@ -1,17 +1,11 @@
 #pragma once
 
+#include "Window.h"
 #include "Triangle.h"
 #include "VertexBuffer.h"
+#include "Shader.h"
+#include "Stopwatch.h"
 
-#ifdef  WIN32
-#include <gl/glew.h>
-#include <SDL2/SDL_opengl.h>
-#include <gl/glu.h>
-#else
-#include <GLES2/gl2.h>	
-#include <GLES2/gl2ext.h>
-#endif 
-#include <SDL2/SDL.h>
 #include <string>
 #include <map>
 #include <vector>
@@ -36,35 +30,21 @@ namespace sb
 		protected:
 			static void createWindow();
 
-			static void initOpenGl();
+			static void initGL();
 
 			static void initTriangles();
 
 			static void initVertices();
 
-			static void createShader();
+			static void update();
 
-			static std::string getVertexShaderSource();
+			static void render();
 
-			static std::string getFragmentShaderSource();
+			static void render1();
 
-			static GLuint compileShader(std::string shaderCode, GLenum type);
+			static void render2();
 
-			static void linkShader(GLuint shader);
-
-			static void updateInput();
-
-			static void draw();
-
-			static void drawVersion1();
-
-			static void drawVersion2();
-
-			static void drawVersion3();
-
-			static void computeTransformedVertices();
-
-			static float getElapsedTime();
+			static void render3();
 
 			static void display();
 
@@ -73,15 +53,11 @@ namespace sb
 			static void close();
 
 		private:
-			static SDL_Window* m_sdlWindow;	
+			static Window m_window;
 
-			static SDL_GLContext m_glContext;
+			static Shader m_shader;
 
-			static bool m_running;
-
-			static GLuint m_shader;
-
-			static std::map<std::string, GLuint> m_attributeLocations;
+			static Stopwatch m_stopwatch;
 
 			static VertexBuffer m_vertexBuffer;
 

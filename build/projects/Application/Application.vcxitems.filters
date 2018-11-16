@@ -26,6 +26,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Triangle.cpp">
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Shader.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Window.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Stopwatch.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="levels">
@@ -91,6 +100,15 @@
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Triangle.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Shader.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Window.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Stopwatch.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
   </ItemGroup>
