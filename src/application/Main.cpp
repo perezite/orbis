@@ -3,7 +3,7 @@
 #include "../orbis/core/Error.h"
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
-#include "sandbox/triangle1/Triangle1.h"
+#include "sandbox/triangleRenderer1/TriangleRenderer1.h"
 #include "sandbox/triangle2/Triangle2.h"
 
 /*
@@ -212,7 +212,7 @@ void example1()
 int main(int argc, char* args[])
 {
 	sb::triangle2::Triangle2::run();
-	//sb::triangle1::Triangle1::run();
+	//sb::triangleRenderer1::TriangleRenderer1::run();
 
 	/*example1();
 	example2();

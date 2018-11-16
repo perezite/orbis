@@ -17,18 +17,16 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\Main.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogging\ErrorLogging.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1Util.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogger\ErrorLogger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Transform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Triangle2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\VertexBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer1\TriangleRenderer1.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer1\RenderUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogging\ErrorLogging.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle1\Triangle1Util.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogger\ErrorLogger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Mesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Transform.h" />
@@ -36,5 +34,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Vector2f.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Vertex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\VertexBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer1\TriangleRenderer1.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer1\RenderUtil.h" />
   </ItemGroup>
 </Project>

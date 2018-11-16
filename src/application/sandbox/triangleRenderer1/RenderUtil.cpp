@@ -1,16 +1,16 @@
-#include "Triangle1Util.h"
+#include "RenderUtil.h"
 
 #include <iostream>
 
 namespace sb
 {
-	namespace triangle1 
+	namespace triangleRenderer1 
 	{
-		SDL_Window* Triangle1Util::m_sdlWindow = NULL;
-		SDL_GLContext Triangle1Util::m_glContext = NULL;
-		GLuint Triangle1Util::m_shader = 0;
+		SDL_Window* RenderUtil::m_sdlWindow = NULL;
+		SDL_GLContext RenderUtil::m_glContext = NULL;
+		GLuint RenderUtil::m_shader = 0;
 
-		void Triangle1Util::initSDL()
+		void RenderUtil::initSDL()
 		{
 				#ifdef WIN32
 				SDL_Init(SDL_INIT_VIDEO);
@@ -37,7 +37,7 @@ namespace sb
 			#endif		
 		}
 
-		bool Triangle1Util::updateInput()
+		bool RenderUtil::updateInput()
 		{
 			SDL_Event event;
 			while (SDL_PollEvent(&event))
@@ -51,19 +51,19 @@ namespace sb
 			return true;
 		}
 
-		void Triangle1Util::flip()
+		void RenderUtil::flip()
 		{
 			SDL_GL_SwapWindow(m_sdlWindow);
 		}
 
-		void Triangle1Util::close()
+		void RenderUtil::close()
 		{
 			glDeleteProgram(m_shader);
 			SDL_DestroyWindow(m_sdlWindow);
 			SDL_Quit();
 		}
 
-		std::string Triangle1Util::getDiffuseVertexShaderCode()
+		std::string RenderUtil::getDiffuseVertexShaderCode()
 		{
 			return
 				"attribute vec2 a_vPosition;										\n"
@@ -76,7 +76,7 @@ namespace sb
 				"}";
 		}
 
-		std::string Triangle1Util::getDiffuseFragmentShaderCode()
+		std::string RenderUtil::getDiffuseFragmentShaderCode()
 		{
 			return
 				"#version 100								\n"
@@ -88,7 +88,7 @@ namespace sb
 				"}                                          \n";
 		}
 
-		GLuint Triangle1Util::createShader(const std::string& vertexShaderCode, const std::string& fragmentShaderCode)
+		GLuint RenderUtil::createShader(const std::string& vertexShaderCode, const std::string& fragmentShaderCode)
 		{
 			GLuint vertexShader = compileShader(vertexShaderCode, GL_VERTEX_SHADER);
 			GLuint fragmentShader = compileShader(fragmentShaderCode, GL_FRAGMENT_SHADER);
@@ -106,23 +106,23 @@ namespace sb
 			return m_shader;
 		}
 
-		void Triangle1Util::activateShader(GLuint shader)
+		void RenderUtil::activateShader(GLuint shader)
 		{
 			glUseProgram(shader);
 		}
 
-		void Triangle1Util::attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLenum elementType, GLsizei stride, const GLvoid* firstElement)
+		void RenderUtil::attachVertexArrayToShaderAttribute(GLuint shaderAttributeLocation, GLint elementCount, GLenum elementType, GLsizei stride, const GLvoid* firstElement)
 		{
 			glEnableVertexAttribArray(shaderAttributeLocation);
 			glVertexAttribPointer(shaderAttributeLocation, elementCount, elementType, GL_FALSE, stride, firstElement);
 		}
 
-		void Triangle1Util::detachVertexArrayFromShaderAttribute(GLuint shaderAttributeLocation)
+		void RenderUtil::detachVertexArrayFromShaderAttribute(GLuint shaderAttributeLocation)
 		{
 			glDisableVertexAttribArray(shaderAttributeLocation);
 		}
 
-		GLuint Triangle1Util::compileShader(std::string shaderCode, GLenum type)
+		GLuint RenderUtil::compileShader(std::string shaderCode, GLenum type)
 		{
 			GLint compiled;
 			GLuint shader = glCreateShader(type);
@@ -152,7 +152,7 @@ namespace sb
 		}
 
 
-		void Triangle1Util::linkShader(GLuint shader)
+		void RenderUtil::linkShader(GLuint shader)
 		{
 			glLinkProgram(shader);
 

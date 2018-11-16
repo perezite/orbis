@@ -2,9 +2,9 @@
 
 namespace sb
 {
-	namespace errorLogging
+	namespace errorLogger
 	{
-		class ErrorLogging
+		class ErrorLogger
 		{
 		public:
 			static void run();

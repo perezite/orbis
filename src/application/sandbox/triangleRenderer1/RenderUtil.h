@@ -13,9 +13,9 @@
 
 namespace sb 
 {
-	namespace triangle1
+	namespace triangleRenderer1
 	{
-		class Triangle1Util
+		class RenderUtil
 		{
 		public:
 			static void initSDL();

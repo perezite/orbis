@@ -1,4 +1,4 @@
-#include "ErrorLogging.h"
+#include "ErrorLogger.h"
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -6,11 +6,11 @@
 
 #define ORB_STRINGIFY(x) #x
 #define ORB_TOSTRING(x) ORB_STRINGIFY(x)
-#define ORB_ERROR() sb::errorLogging::Error(__FILE__, ORB_TOSTRING(__LINE__)).output()
+#define ORB_ERROR() sb::errorLogger::Error(__FILE__, ORB_TOSTRING(__LINE__)).output()
 
 namespace sb
 {
-	namespace errorLogging
+	namespace errorLogger
 	{
 		class Error
 		{
@@ -59,7 +59,7 @@ namespace sb
 			std::ostringstream m_output;
 		};
 
-		void ErrorLogging::run()
+		void ErrorLogger::run()
 		{
 			ORB_ERROR() << "Ooops, an error happened";
 
