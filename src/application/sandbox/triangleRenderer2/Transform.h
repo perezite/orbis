@@ -8,8 +8,17 @@ namespace sb
 	{
 		class Transform
 		{
-		public: 
+		public:
+			Transform(Vector2f position_, Vector2f scale_) 
+				: position(position_), scale(scale_)
+			{ }
+
+			Transform()
+			{ }
+
 			Vector2f position;
+
+			Vector2f scale;
 		};
 
 		Vector2f operator *(const Transform& left, Vector2f right);

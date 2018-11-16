@@ -10,21 +10,25 @@ namespace sb
 {
 	namespace triangleRenderer2 
 	{
-		SDL_Window* Renderer::m_sdlWindow;
-		SDL_GLContext Renderer::m_glContext;
-		bool Renderer::m_running = true;
-		GLuint Renderer::m_shader;
-		std::map<std::string, GLuint> Renderer::m_attributeLocations;
-		VertexBuffer Renderer::m_vertexBuffer;
-		std::vector<Vertex> Renderer::m_vertices;
-		std::vector<Vertex> Renderer::m_transformedVertices;
-		std::vector<Transform> Renderer::m_transforms;
+		const unsigned int TriangleRenderer2::NumTrianglesHorz = 2;
+		const unsigned int TriangleRenderer2::NumTrianglesVert = 2;
 
-		void Renderer::run()
+		SDL_Window* TriangleRenderer2::m_sdlWindow;
+		SDL_GLContext TriangleRenderer2::m_glContext;
+		bool TriangleRenderer2::m_running = true;
+		GLuint TriangleRenderer2::m_shader;
+		std::map<std::string, GLuint> TriangleRenderer2::m_attributeLocations;
+		VertexBuffer TriangleRenderer2::m_vertexBuffer;
+		std::vector<Vertex> TriangleRenderer2::m_vertices;
+		std::vector<Vertex> TriangleRenderer2::m_transformedVertices;
+		std::vector<Transform> TriangleRenderer2::m_transforms;
+
+		void TriangleRenderer2::run()
 		{
 			createWindow();
 			initOpenGl();
 			initVertices();
+			initTriangles();
 
 			while (m_running) {			
 				updateInput();
@@ -36,7 +40,7 @@ namespace sb
 			close();
 		}
 
-		void Renderer::createWindow()
+		void TriangleRenderer2::createWindow()
 		{
 			#ifdef WIN32
 				SDL_Init(SDL_INIT_VIDEO);
@@ -63,7 +67,7 @@ namespace sb
 			#endif
 		}
 
-		void Renderer::initOpenGl()
+		void TriangleRenderer2::initOpenGl()
 		{
 			createShader();
 			m_attributeLocations["a_vPosition"] = glGetAttribLocation(m_shader, "a_vPosition");
@@ -72,7 +76,21 @@ namespace sb
 			m_vertexBuffer.init();
 		}
 
-		void Renderer::initVertices()
+		void TriangleRenderer2::initTriangles()
+		{
+			float stepWidth = 0.9f / float(NumTrianglesHorz);
+			float stepHeight = 0.9f / float(NumTrianglesVert);
+			Vector2f triangleSize(0.9f * stepWidth, 0.9f * stepHeight);
+
+			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
+				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
+					Vector2f position = Vector2f(i * stepWidth, j * stepHeight);
+					Triangle triangle(Transform(position, triangleSize));
+				}
+			}
+		}
+
+		void TriangleRenderer2::initVertices()
 		{
 			m_vertices = {	Vertex{ Vector2f{ -0.5f,		-0.5f },		Color{ 1, 0, 0, 1 } },
 							Vertex{ Vector2f{ 0,		-0.5f },		Color{ 0, 1, 0, 1 } },
@@ -83,7 +101,7 @@ namespace sb
 		}
 
 
-		void Renderer::createShader()
+		void TriangleRenderer2::createShader()
 		{
 			m_shader = glCreateProgram();
 			if (m_shader == 0) {
@@ -103,7 +121,7 @@ namespace sb
 			glDeleteShader(fragmentShader);
 		}
 	
-		std::string Renderer::getVertexShaderSource()
+		std::string TriangleRenderer2::getVertexShaderSource()
 		{
 			return
 				"attribute vec2 a_vPosition;										\n"
@@ -116,7 +134,7 @@ namespace sb
 				"}";
 		}
 
-		std::string Renderer::getFragmentShaderSource()
+		std::string TriangleRenderer2::getFragmentShaderSource()
 		{
 			return 
 				"#version 100										\n"
@@ -128,7 +146,7 @@ namespace sb
 					"}												\n";
 		}
 
-		GLuint Renderer::compileShader(std::string shaderCode, GLenum type)
+		GLuint TriangleRenderer2::compileShader(std::string shaderCode, GLenum type)
 		{
 			GLint compiled;
 			GLuint shader = glCreateShader(type);
@@ -158,7 +176,7 @@ namespace sb
 			return shader;
 		}
 
-		void Renderer::linkShader(GLuint shader)
+		void TriangleRenderer2::linkShader(GLuint shader)
 		{
 			glLinkProgram(shader);
 			GLint linked;
@@ -179,7 +197,7 @@ namespace sb
 			}
 		}
 
-		void Renderer::updateInput()
+		void TriangleRenderer2::updateInput()
 		{
 			SDL_Event event;
 			while (SDL_PollEvent(&event)) {
@@ -188,38 +206,38 @@ namespace sb
 			}
 		}
 
-		void Renderer::draw()
+		void TriangleRenderer2::draw()
 		{
-			// drawVersion1();
-			// drawVersion2();
-			drawVersion3();
+			drawVersion1();
+			 //drawVersion2();
+			 //drawVersion3();
 		}
 
-		void Renderer::drawVersion1()
-		{
-			computeTransformedVertices();
-			m_vertexBuffer.bind();
-			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_transformedVertices[0]), GL_DYNAMIC_DRAW);		
-		}
-
-		void Renderer::drawVersion2() 
+		void TriangleRenderer2::drawVersion1()
 		{
 			computeTransformedVertices();
 			m_vertexBuffer.bind();
-			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
-			m_vertexBuffer.setSubData(0, m_vertices.size() * sizeof(Vertex), &(m_transformedVertices[0]));
+			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]), GL_DYNAMIC_DRAW);		
 		}
 
-		void Renderer::drawVersion3()
+		void TriangleRenderer2::drawVersion2() 
 		{
 			computeTransformedVertices();
 			m_vertexBuffer.bind();
 			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
-			for (unsigned int i = 0; i < m_vertices.size(); i++)									// buffer sub-updates
+			m_vertexBuffer.setSubData(0, m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]));
+		}
+
+		void TriangleRenderer2::drawVersion3()
+		{
+			computeTransformedVertices();
+			m_vertexBuffer.bind();
+			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
+			for (unsigned int i = 0; i < m_transformedVertices.size(); i++)									// buffer sub-updates
 				m_vertexBuffer.setSubData(i * sizeof(Vertex) + offsetof(Vertex, position), sizeof(Vertex), &(m_transformedVertices[i].position));
 		}
 
-		void Renderer::computeTransformedVertices()
+		void TriangleRenderer2::computeTransformedVertices()
 		{
 			static float alpha = 0;
 			const float omega = 1.5f;
@@ -238,7 +256,7 @@ namespace sb
 			}
 		}
 	
-		float Renderer::getElapsedTime() {
+		float TriangleRenderer2::getElapsedTime() {
 			static clock_t current = clock();
 			clock_t last = current;
 			current = clock();
@@ -250,7 +268,7 @@ namespace sb
 			#endif	
 		}
 
-		void Renderer::display()
+		void TriangleRenderer2::display()
 		{
 			prepareDisplay();
 
@@ -263,7 +281,7 @@ namespace sb
 			}
 		}
 
-		void Renderer::prepareDisplay()
+		void TriangleRenderer2::prepareDisplay()
 		{
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
@@ -276,7 +294,7 @@ namespace sb
 			m_vertexBuffer.enable();
 		}
 
-		void Renderer::close()
+		void TriangleRenderer2::close()
 		{
 			glDeleteProgram(m_shader);
 			SDL_DestroyWindow(m_sdlWindow);

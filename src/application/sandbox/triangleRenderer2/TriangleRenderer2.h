@@ -1,8 +1,7 @@
 #pragma once
 
+#include "Triangle.h"
 #include "VertexBuffer.h"
-#include "Vertex.h"
-#include "Transform.h"
 
 #ifdef  WIN32
 #include <gl/glew.h>
@@ -25,8 +24,12 @@ namespace sb
 		// References:	https://learnopengl.com/Getting-started/Hello-Triangle
 		//				https://www.youtube.com/watch?v=ImtWD_9OAeY&t=2s
 		//				http://www.learnopengles.com/android-lesson-seven-an-introduction-to-vertex-buffer-objects-vbos/
-		class Renderer
+		class TriangleRenderer2
 		{
+		public:
+			static const unsigned int NumTrianglesHorz;
+			static const unsigned int NumTrianglesVert;
+
 		public:
 			static void run();
 
@@ -34,6 +37,8 @@ namespace sb
 			static void createWindow();
 
 			static void initOpenGl();
+
+			static void initTriangles();
 
 			static void initVertices();
 
@@ -81,6 +86,8 @@ namespace sb
 			static VertexBuffer m_vertexBuffer;
 
 			static std::vector<Vertex> m_vertices;
+
+			static std::vector<Triangle> m_triangles;
 
 			static std::vector<Vertex> m_transformedVertices;
 

@@ -211,7 +211,7 @@ void example1()
 
 int main(int argc, char* args[])
 {
-	sb::triangleRenderer2::Renderer::run();
+	sb::triangleRenderer2::TriangleRenderer2::run();
 	//sb::triangleRenderer1::TriangleRenderer1::run();
 
 	/*example1();

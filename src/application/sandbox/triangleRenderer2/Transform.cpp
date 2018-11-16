@@ -6,8 +6,7 @@ namespace sb
 	{
 		Vector2f operator*(const Transform & left, Vector2f right)
 		{
-			return Vector2f(left.position.x + right.x, left.position.y + right.y);
+			return Vector2f((left.position.x + right.x) * left.scale.x, (left.position.y + right.y) * left.scale.y);
 		}
-
 	}
 }

@@ -9,6 +9,8 @@ namespace sb
 	{
 		struct Vertex
 		{
+			Vertex() { }
+
 			Vertex(const Vector2f& position_, const Color& color_)
 				: position(position_), color(color_)
 			{ }

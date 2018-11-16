@@ -10,7 +10,14 @@ namespace sb
 		class Triangle
 		{
 		public:
-			static Mesh mesh;
+			Triangle()
+			{ }
+
+			Triangle(const Transform& transform_)
+				: transform(transform_)
+			{ }
+
+			static const Mesh mesh;
 
 			Transform transform;
 		};
