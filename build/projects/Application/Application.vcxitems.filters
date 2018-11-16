@@ -5,15 +5,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.cpp">
       <Filter>levels</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\VertexBuffer.cpp">
-      <Filter>sandbox\triangle2</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Triangle2.cpp">
-      <Filter>sandbox\triangle2</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Transform.cpp">
-      <Filter>sandbox\triangle2</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogger\ErrorLogger.cpp">
       <Filter>sandbox\errorLogger</Filter>
     </ClCompile>
@@ -22,6 +13,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer1\TriangleRenderer1.cpp">
       <Filter>sandbox\triangleRenderer1</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Transform.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\TriangleRenderer2.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\VertexBuffer.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,12 +33,6 @@
     </Filter>
     <Filter Include="sandbox">
       <UniqueIdentifier>{ea338b6f-fced-48de-a476-c985190b8e0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="sandbox\triangle2">
-      <UniqueIdentifier>{c26f4575-a50f-4ef3-9050-55748dbbbdba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="sandbox\triangle2\headers">
-      <UniqueIdentifier>{6a093035-40a9-4d05-8877-0bc31d58b5c3}</UniqueIdentifier>
     </Filter>
     <Filter Include="sandbox\errorLogger">
       <UniqueIdentifier>{d8dd8e5e-0f66-4698-8f74-b4247330b5e5}</UniqueIdentifier>
@@ -52,31 +46,16 @@
     <Filter Include="sandbox\triangleRenderer1\headers">
       <UniqueIdentifier>{575ccfab-ff06-4cd8-b456-16be10d4ac08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sandbox\triangleRenderer2">
+      <UniqueIdentifier>{c26f4575-a50f-4ef3-9050-55748dbbbdba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sandbox\triangleRenderer2\headers">
+      <UniqueIdentifier>{6a093035-40a9-4d05-8877-0bc31d58b5c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\levels\Level1.h">
       <Filter>levels\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\VertexBuffer.h">
-      <Filter>sandbox\triangle2\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Triangle2.h">
-      <Filter>sandbox\triangle2\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Vector2f.h">
-      <Filter>sandbox\triangle2\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Color.h">
-      <Filter>sandbox\triangle2\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Vertex.h">
-      <Filter>sandbox\triangle2\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Transform.h">
-      <Filter>sandbox\triangle2\headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Mesh.h">
-      <Filter>sandbox\triangle2\headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogger\ErrorLogger.h">
       <Filter>sandbox\errorLogger\headers</Filter>
@@ -86,6 +65,27 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer1\TriangleRenderer1.h">
       <Filter>sandbox\triangleRenderer1\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Color.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Mesh.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Transform.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Vector2f.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Vertex.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\VertexBuffer.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\TriangleRenderer2.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

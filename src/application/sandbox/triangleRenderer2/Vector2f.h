@@ -2,7 +2,7 @@
 
 namespace sb
 {
-	namespace triangle2
+	namespace triangleRenderer2
 	{
 		struct Vector2f
 		{

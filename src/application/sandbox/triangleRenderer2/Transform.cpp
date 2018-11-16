@@ -2,7 +2,7 @@
 
 namespace sb
 {
-	namespace triangle2
+	namespace triangleRenderer2
 	{
 		Vector2f operator*(const Transform & left, Vector2f right)
 		{
