@@ -20,6 +20,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Triangle2.cpp">
       <Filter>sandbox\triangle2</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Transform.cpp">
+      <Filter>sandbox\triangle2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="levels">
@@ -73,6 +76,12 @@
       <Filter>sandbox\triangle2\headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Color.h">
+      <Filter>sandbox\triangle2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Vertex.h">
+      <Filter>sandbox\triangle2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangle2\Transform.h">
       <Filter>sandbox\triangle2\headers</Filter>
     </ClInclude>
   </ItemGroup>

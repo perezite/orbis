@@ -18,11 +18,13 @@ namespace sb
 		VertexBuffer Triangle2::m_vertexBuffer;
 		std::vector<Vertex> Triangle2::m_vertices;
 		std::vector<Vertex> Triangle2::m_transformedVertices;
+		std::vector<Transform> Triangle2::m_transforms;
 
 		void Triangle2::run()
 		{
 			createWindow();
 			initOpenGl();
+			initVertices();
 
 			while (m_running) {			
 				updateInput();
@@ -68,10 +70,18 @@ namespace sb
 			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 
 			m_vertexBuffer.init();
-			createVertices();
-			// m_vertexBuffer.bind();
-			// m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), &(m_vertices.data()[0]), GL_DYNAMIC_DRAW);
 		}
+
+		void Triangle2::initVertices()
+		{
+			m_vertices = {	Vertex{ Vector2f{ -0.5f,		-0.5f },		Color{ 1, 0, 0, 1 } },
+							Vertex{ Vector2f{ 0,		-0.5f },		Color{ 0, 1, 0, 1 } },
+							Vertex{ Vector2f{ -0.25f,	 0 },		Color{ 0, 0, 1, 1 } },
+							Vertex{ Vector2f{ 0.5f,      0.5f },		Color{ 1, 0, 0, 1 } },
+							Vertex{ Vector2f{ 0,		 0.5f },		Color{ 0, 1, 0, 1 } },
+							Vertex{ Vector2f{ 0.25f,	 0 },		Color{ 0, 0, 1, 1 } } };
+		}
+
 
 		void Triangle2::createShader()
 		{
@@ -169,16 +179,6 @@ namespace sb
 			}
 		}
 
-		void Triangle2::createVertices()
-		{
-			m_vertices = {	Vertex{		Vector2f{-0.5f,		-0.5f	},		Color { 1, 0, 0, 1 } },
-							Vertex{		Vector2f{ 0,		-0.5f	},		Color { 0, 1, 0, 1 } },
-							Vertex{		Vector2f{-0.25f,	 0		},		Color { 0, 0, 1, 1 } },
-							Vertex{		Vector2f{ 0.5f,      0.5f	},		Color { 1, 0, 0, 1 } },
-							Vertex{		Vector2f{ 0,		 0.5f	},		Color { 0, 1, 0, 1 } },
-							Vertex{		Vector2f{ 0.25f,	 0		},		Color { 0, 0, 1, 1 } } };
-		}
-
 		void Triangle2::updateInput()
 		{
 			SDL_Event event;
@@ -215,7 +215,7 @@ namespace sb
 			computeTransformedVertices();
 			m_vertexBuffer.bind();
 			m_vertexBuffer.setData(m_vertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
-			for (unsigned int i = 0; i < m_vertices.size(); i++)									// individual vertex sub-updates
+			for (unsigned int i = 0; i < m_vertices.size(); i++)									// buffer sub-updates
 				m_vertexBuffer.setSubData(i * sizeof(Vertex) + offsetof(Vertex, position), sizeof(Vertex), &(m_transformedVertices[i].position));
 		}
 

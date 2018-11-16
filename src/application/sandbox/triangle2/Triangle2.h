@@ -1,8 +1,8 @@
 #pragma once
 
 #include "VertexBuffer.h"
-#include "Vector2f.h"
-#include "Color.h"
+#include "Vertex.h"
+#include "Transform.h"
 
 #ifdef  WIN32
 #include <gl/glew.h>
@@ -21,12 +21,6 @@ namespace sb
 {
 	namespace triangle2 
 	{
-		struct Vertex
-		{
-			Vector2f position;
-			Color color;
-		};
-
 		// This sandbox implements the triangle with vertex buffers and vertex array objects. 
 		// References:	https://learnopengl.com/Getting-started/Hello-Triangle
 		//				https://www.youtube.com/watch?v=ImtWD_9OAeY&t=2s
@@ -41,6 +35,8 @@ namespace sb
 
 			static void initOpenGl();
 
+			static void initVertices();
+
 			static void createShader();
 
 			static std::string getVertexShaderSource();
@@ -50,8 +46,6 @@ namespace sb
 			static GLuint compileShader(std::string shaderCode, GLenum type);
 
 			static void linkShader(GLuint shader);
-
-			static void createVertices();
 
 			static void updateInput();
 
@@ -89,6 +83,8 @@ namespace sb
 			static std::vector<Vertex> m_vertices;
 
 			static std::vector<Vertex> m_transformedVertices;
+
+			static std::vector<Transform> m_transforms;
 
 		};
 	}
