@@ -28,8 +28,6 @@ namespace sb
 			static void run();
 
 		protected:
-			static void createWindow();
-
 			static void initGL();
 
 			static void initTriangles();
@@ -45,8 +43,6 @@ namespace sb
 			static void render1();
 
 			static void render2();
-
-			static void render3();
 
 			static void display();
 

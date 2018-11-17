@@ -17,7 +17,7 @@ namespace sb
 
 		void TriangleRenderer2::run()
 		{
-			m_window.init(1800, 1000);
+			m_window.init(1500, 800);
 			SDL_GL_SetSwapInterval(0);
 			initGL();
 			initTriangles();
@@ -63,12 +63,11 @@ namespace sb
 			frames++;
 			if (elapsed > 1.0f) {
 				float fps = frames / elapsed;
-				SDL_Log("Frame ms: %f, FPS %f", elapsed, fps);
+				SDL_Log("FPS: %f", fps);
 				frames = 0;
 				stopwatch.reset();
 			}
 		}
-
 
 		void TriangleRenderer2::update()
 		{
@@ -95,9 +94,8 @@ namespace sb
 
 		void TriangleRenderer2::render()
 		{
-			 render1();
-			// render2();
-			//render3();
+			//render1();
+			 render2();
 		}
 
 		void TriangleRenderer2::render1()
@@ -111,14 +109,6 @@ namespace sb
 			m_vertexBuffer.bind();
 			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);					// buffer orphaning
 			m_vertexBuffer.setSubData(0, m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]));
-		}
-
-		void TriangleRenderer2::render3()
-		{
-			m_vertexBuffer.bind();
-			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);		// buffer orphaning
-			for (unsigned int i = 0; i < m_transformedVertices.size(); i++)										// buffer sub-updates
-				m_vertexBuffer.setSubData(i * sizeof(Vertex) + offsetof(Vertex, position), sizeof(Vertex), &(m_transformedVertices[i].position));
 		}
 
 		void TriangleRenderer2::display()
