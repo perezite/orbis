@@ -20,9 +20,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\TriangleRenderer2.cpp">
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\VertexBuffer.cpp">
-      <Filter>sandbox\triangleRenderer2</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Triangle.cpp">
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
@@ -33,6 +30,9 @@
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Stopwatch.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\GraphicsBuffers.cpp">
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,9 +93,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Vertex.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\VertexBuffer.h">
-      <Filter>sandbox\triangleRenderer2\headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\TriangleRenderer2.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
@@ -109,6 +106,9 @@
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Stopwatch.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\GraphicsBuffers.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
   </ItemGroup>

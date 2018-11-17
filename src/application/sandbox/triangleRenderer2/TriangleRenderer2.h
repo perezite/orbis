@@ -2,7 +2,7 @@
 
 #include "Window.h"
 #include "Triangle.h"
-#include "VertexBuffer.h"
+#include "GraphicsBuffers.h"
 #include "Shader.h"
 #include "Stopwatch.h"
 
@@ -59,9 +59,11 @@ namespace sb
 
 			static std::vector<Triangle> m_triangles;
 
-			static VertexBuffer m_vertexBuffer;
+			static GraphicsBuffers m_graphicsBuffers;
 
 			static std::vector<Vertex> m_transformedVertices;
+
+			static std::vector<GLushort> m_indices;
 		};
 	}
 }
