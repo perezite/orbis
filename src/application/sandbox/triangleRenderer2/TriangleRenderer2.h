@@ -34,6 +34,8 @@ namespace sb
 
 			static void initTriangles();
 
+			static void logPerformance();
+
 			static void update();
 
 			static std::size_t getNumVertices();
@@ -58,8 +60,6 @@ namespace sb
 			static Window m_window;
 
 			static Shader m_shader;
-
-			static Stopwatch m_stopwatch;
 
 			static std::vector<Triangle> m_triangles;
 

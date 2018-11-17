@@ -1,21 +1,16 @@
 #include "TriangleRenderer2.h"
 #include <iostream>
 #include <stddef.h>
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <time.h>
-#include <chrono>
 
 namespace sb 
 {
 	namespace triangleRenderer2 
 	{
-		const unsigned int TriangleRenderer2::NumTrianglesHorz = 100;
-		const unsigned int TriangleRenderer2::NumTrianglesVert = 100;
+		const unsigned int TriangleRenderer2::NumTrianglesHorz = 230;
+		const unsigned int TriangleRenderer2::NumTrianglesVert = 230;
 		
 		Window TriangleRenderer2::m_window;
 		Shader TriangleRenderer2::m_shader;
-		Stopwatch TriangleRenderer2::m_stopwatch;
 		std::vector<Triangle> TriangleRenderer2::m_triangles;
 		VertexBuffer TriangleRenderer2::m_vertexBuffer;
 		std::vector<Vertex> TriangleRenderer2::m_transformedVertices;
@@ -23,10 +18,12 @@ namespace sb
 		void TriangleRenderer2::run()
 		{
 			m_window.init(1800, 1000);
+			SDL_GL_SetSwapInterval(0);
 			initGL();
 			initTriangles();
 
-			while (!m_window.hasQuitEvent()) {			
+			while (!m_window.hasQuitEvent()) {
+				logPerformance();
 				m_window.update();
 				update();
 				render();
@@ -57,6 +54,22 @@ namespace sb
 			}
 		}
 
+		void TriangleRenderer2::logPerformance()
+		{
+			static Stopwatch stopwatch;
+			static unsigned int frames = 0;
+
+			float elapsed = stopwatch.getElapsedSeconds();
+			frames++;
+			if (elapsed > 1.0f) {
+				float fps = frames / elapsed;
+				SDL_Log("Frame ms: %f, FPS %f", elapsed, fps);
+				frames = 0;
+				stopwatch.reset();
+			}
+		}
+
+
 		void TriangleRenderer2::update()
 		{
 			m_transformedVertices.resize(getNumVertices());
@@ -82,9 +95,9 @@ namespace sb
 
 		void TriangleRenderer2::render()
 		{
-			// render1();
-			render2();
-			// render3();
+			 render1();
+			// render2();
+			//render3();
 		}
 
 		void TriangleRenderer2::render1()
