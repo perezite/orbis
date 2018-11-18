@@ -102,14 +102,14 @@ namespace sb
 
 			unsigned int counter = 0;
 			for (std::size_t i = 0; i < m_rectangles.size(); i++) {
-				for (std::size_t j = 0; j < m_rectangles[i].mesh.getVertexCount(); j++) {
-					m_transformedVertices[counter].position = m_rectangles[i].transform * m_rectangles[i].mesh[j].position;
-					m_transformedVertices[counter].color = m_rectangles[i].mesh[j].color;
+				for (std::size_t j = 0; j < m_rectangles[i].getMesh().getVertexCount(); j++) {
+					m_transformedVertices[counter].position = m_rectangles[i].getTransform() * m_rectangles[i].getMesh()[j].position;
+					m_transformedVertices[counter].color = m_rectangles[i].getMesh()[j].color;
 					counter++;
 				}
 			}
 		}
-
+		
 		void Renderer2::updateIndices()
 		{
 			m_indices.resize(getNumIndices());
@@ -117,13 +117,13 @@ namespace sb
 			unsigned int counter = 0;
 			unsigned int offset = 0;
 			for (std::size_t i = 0; i < m_rectangles.size(); i++) {
-				Mesh mesh = m_rectangles[i].mesh;
+				Mesh mesh = m_rectangles[i].getMesh();
 				const std::vector<GLuint>& indices = mesh.getIndices();
 				for (std::size_t j = 0; j < mesh.getIndexCount(); j++) {
 					m_indices[counter] = indices[j] + offset;
 					counter++;
 				}
-				offset += m_rectangles[i].mesh.getVertexCount();
+				offset += m_rectangles[i].getMesh().getVertexCount();
 			}
 		}
 
@@ -155,7 +155,7 @@ namespace sb
 		{
 			std::size_t numVertices = 0;
 			for (std::size_t i = 0; i < m_rectangles.size(); i++)
-				numVertices += m_rectangles[i].mesh.getVertexCount();
+				numVertices += m_rectangles[i].getMesh().getVertexCount();
 
 			return numVertices;
 		}
@@ -164,7 +164,7 @@ namespace sb
 		{
 			std::size_t numIndices = 0;
 			for (std::size_t i = 0; i < m_rectangles.size(); i++)
-				numIndices += m_rectangles[i].mesh.getIndexCount();
+				numIndices += m_rectangles[i].getMesh().getIndexCount();
 
 			return numIndices;
 		}

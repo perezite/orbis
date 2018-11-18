@@ -1,25 +1,30 @@
 #pragma once
 
-#include "Mesh.h"
-#include "Transform.h"
+#include "Drawable.h"
 
 namespace sb
 {
 	namespace renderer2
 	{
-		class Triangle
+		class Triangle : public Drawable
 		{
 		public:
 			Triangle()
 			{ }
 
-			Triangle(const Transform& transform_)
-				: transform(transform_)
+			Triangle(const Transform& transform)
+				: m_transform(transform)
 			{ }
 
-			static const Mesh mesh;
+		public:
+			const Mesh& getMesh() const { return m_mesh; }
 
-			Transform transform;
+			const Transform& getTransform() const { return m_transform; }
+
+		private:
+			static const Mesh m_mesh;
+
+			Transform m_transform;
 		};
 	}
 }
