@@ -6,18 +6,13 @@ namespace sb
 {
 	namespace renderer2 
 	{
-		const unsigned int Renderer2::NumTrianglesHorz = 230;
-		const unsigned int Renderer2::NumTrianglesVert = 230;
-		
-		const unsigned int Renderer2::NumRectanglesHorz = 10;
-		const unsigned int Renderer2::NumRectanglesVert = 10;
+		const unsigned int Renderer2::NumDrawablesHorz = 10;
+		const unsigned int Renderer2::NumDrawablesVert = 10;
 
 
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
 		std::vector<Drawable*> Renderer2::m_drawables;
-		std::vector<Triangle> Renderer2::m_triangles;
-		std::vector<Rectangle> Renderer2::m_rectangles;
 		GraphicsBuffers Renderer2::m_graphicsBuffers;
 		std::vector<Vertex> Renderer2::m_transformedVertices;
 		std::vector<GLushort> Renderer2::m_indices;
@@ -25,11 +20,8 @@ namespace sb
 		void Renderer2::run()
 		{
 			m_window.init(1500, 800);
-			SDL_GL_SetSwapInterval(0);
 			initGL();
 			initDrawables();
-			initRectangles();
-			initRectangles();
 
 			while (!m_window.hasQuitEvent()) {
 				logPerformance();
@@ -51,13 +43,13 @@ namespace sb
 		
 		void Renderer2::initDrawables()
 		{
-			float stepWidth = 2 / float(NumTrianglesHorz);
-			float stepHeight = 2 / float(NumTrianglesVert);
+			float stepWidth = 2 / float(NumDrawablesHorz);
+			float stepHeight = 2 / float(NumDrawablesVert);
 			Vector2f size(stepWidth, stepHeight);
 
 			unsigned int counter = 0;
-			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
-				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
+			for (unsigned int i = 0; i < NumDrawablesHorz; i++) {
+				for (unsigned int j = 0; j < NumDrawablesVert; j++) {
 					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
 					Drawable* drawable = counter % 2 == 0 ? 
 						(Drawable*)new Triangle(Transform(position, size)) : 
@@ -65,34 +57,7 @@ namespace sb
 					m_drawables.push_back(drawable);
 					counter++;
 				}
-			}
-		}
-
-		void Renderer2::initTriangles()
-		{
-			float stepWidth = 2 / float(NumTrianglesHorz);
-			float stepHeight = 2 / float(NumTrianglesVert);
-			Vector2f size(stepWidth, stepHeight);
-
-			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
-				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
-					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
-					m_triangles.push_back(Triangle(Transform(position, size)));
-				}
-			}
-		}
-
-		void Renderer2::initRectangles()
-		{
-			float stepWidth = 2 / float(NumRectanglesHorz);
-			float stepHeight = 2 / float(NumRectanglesVert);
-			Vector2f size(0.9f * stepWidth, 0.9f * stepHeight);
-
-			for (unsigned int i = 0; i < NumRectanglesHorz; i++) {
-				for (unsigned int j = 0; j < NumRectanglesVert; j++) {
-					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
-					m_rectangles.push_back(Rectangle(Transform(position, size)));
-				}
+				counter++;
 			}
 		}
 
@@ -122,10 +87,10 @@ namespace sb
 			m_transformedVertices.resize(getNumVertices());
 
 			unsigned int counter = 0;
-			for (std::size_t i = 0; i < m_rectangles.size(); i++) {
-				for (std::size_t j = 0; j < m_rectangles[i].getMesh().getVertexCount(); j++) {
-					m_transformedVertices[counter].position = m_rectangles[i].getTransform() * m_rectangles[i].getMesh()[j].position;
-					m_transformedVertices[counter].color = m_rectangles[i].getMesh()[j].color;
+			for (std::size_t i = 0; i < m_drawables.size(); i++) {
+				for (std::size_t j = 0; j < m_drawables[i]->getMesh().getVertexCount(); j++) {
+					m_transformedVertices[counter].position = m_drawables[i]->getTransform() * m_drawables[i]->getMesh()[j].position;
+					m_transformedVertices[counter].color = m_drawables[i]->getMesh()[j].color;
 					counter++;
 				}
 			}
@@ -137,55 +102,31 @@ namespace sb
 
 			unsigned int counter = 0;
 			unsigned int offset = 0;
-			for (std::size_t i = 0; i < m_rectangles.size(); i++) {
-				Mesh mesh = m_rectangles[i].getMesh();
+			for (std::size_t i = 0; i < m_drawables.size(); i++) {
+				Mesh mesh = m_drawables[i]->getMesh();
 				const std::vector<GLuint>& indices = mesh.getIndices();
 				for (std::size_t j = 0; j < mesh.getIndexCount(); j++) {
 					m_indices[counter] = indices[j] + offset;
 					counter++;
 				}
-				offset += m_rectangles[i].getMesh().getVertexCount();
+				offset += m_drawables[i]->getMesh().getVertexCount();
 			}
 		}
-
-		//void Renderer2::update()
-		//{
-		//	m_transformedVertices.resize(getNumVertices());
-
-		//	unsigned int counter = 0;
-		//	for (std::size_t i = 0; i < m_triangles.size(); i++) {
-		//		for (std::size_t j = 0; j < m_triangles[i].mesh.getVertexCount(); j++) {
-		//			m_transformedVertices[counter].position = m_triangles[i].transform * m_triangles[i].mesh[j].position;
-		//			m_transformedVertices[counter].color = m_triangles[i].mesh[j].color;
-		//			counter++;
-		//		}
-		//	}
-		//}
-
-	/*	std::size_t Renderer2::getNumVertices()
-		{
-			std::size_t numVertices = 0;
-			for (std::size_t i = 0; i < m_triangles.size(); i++)
-				numVertices += m_triangles[i].mesh.getVertexCount();
-
-			return numVertices;
-		}
-*/
 
 		std::size_t Renderer2::getNumVertices()
 		{
 			std::size_t numVertices = 0;
-			for (std::size_t i = 0; i < m_rectangles.size(); i++)
-				numVertices += m_rectangles[i].getMesh().getVertexCount();
+			for (std::size_t i = 0; i < m_drawables.size(); i++)
+				numVertices += m_drawables[i]->getMesh().getVertexCount();
 
 			return numVertices;
 		}
-
+		
 		std::size_t Renderer2::getNumIndices()
 		{
 			std::size_t numIndices = 0;
-			for (std::size_t i = 0; i < m_rectangles.size(); i++)
-				numIndices += m_rectangles[i].getMesh().getIndexCount();
+			for (std::size_t i = 0; i < m_drawables.size(); i++)
+				numIndices += m_drawables[i]->getMesh().getIndexCount();
 
 			return numIndices;
 		}
@@ -220,7 +161,6 @@ namespace sb
 			checkGLErrors();
 			m_graphicsBuffers.enable();
 			glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_SHORT, 0);
-			// glDrawArrays(GL_TRIANGLES, 0, m_transformedVertices.size());
 			checkGLErrors();
 		}
 

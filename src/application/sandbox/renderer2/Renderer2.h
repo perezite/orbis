@@ -23,10 +23,8 @@ namespace sb
 		class Renderer2
 		{
 		public:
-			static const unsigned int NumTrianglesHorz;
-			static const unsigned int NumTrianglesVert;
-			static const unsigned int NumRectanglesHorz;
-			static const unsigned int NumRectanglesVert;
+			static const unsigned int NumDrawablesHorz;
+			static const unsigned int NumDrawablesVert;
 
 		public:
 			static void run();
@@ -35,10 +33,6 @@ namespace sb
 			static void initGL();
 
 			static void initDrawables();
-
-			static void initTriangles();
-			
-			static void initRectangles();
 
 			static void logPerformance();
 
@@ -74,10 +68,6 @@ namespace sb
 			static Shader m_shader;
 
 			static std::vector<Drawable*> m_drawables;
-
-			static std::vector<Triangle> m_triangles;
-
-			static std::vector<Rectangle> m_rectangles;
 
 			static GraphicsBuffers m_graphicsBuffers;
 

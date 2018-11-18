@@ -15,6 +15,7 @@ namespace sb
 				SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 				m_sdlWindow = SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 				m_glContext = SDL_GL_CreateContext(m_sdlWindow);
+				SDL_GL_SetSwapInterval(0);
 				GLenum glewError = glewInit();
 			#elif defined(__ANDROID__)
 				SDL_Init(SDL_INIT_VIDEO);
@@ -28,6 +29,7 @@ namespace sb
 				SDL_GetDisplayMode(0, 0, &mode);
 				m_sdlWindow = SDL_CreateWindow("Sandbox", 0, 0, mode.w, mode.h, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
 				m_glContext = SDL_GL_CreateContext(m_sdlWindow);
+				SDL_GL_SetSwapInterval(0);
 			#endif
 		}
 

@@ -10,10 +10,11 @@ namespace sb
 		class Drawable
 		{
 		public:
+			virtual ~Drawable() { }
+
 			virtual const Mesh& getMesh() const = 0;
 
 			virtual const Transform& getTransform() const = 0;
-
 		};
 	}
 }
