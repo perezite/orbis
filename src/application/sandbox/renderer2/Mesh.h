@@ -12,6 +12,9 @@ namespace sb
 		class Mesh
 		{
 		public:
+			Mesh()
+			{ }
+
 			Mesh(const std::vector<Vertex>& vertices)
 			{
 				m_vertices = vertices;

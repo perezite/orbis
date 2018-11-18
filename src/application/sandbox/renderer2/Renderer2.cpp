@@ -15,6 +15,7 @@ namespace sb
 
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
+		std::vector<Drawable*> Renderer2::m_drawables;
 		std::vector<Triangle> Renderer2::m_triangles;
 		std::vector<Rectangle> Renderer2::m_rectangles;
 		GraphicsBuffers Renderer2::m_graphicsBuffers;
@@ -26,7 +27,8 @@ namespace sb
 			m_window.init(1500, 800);
 			SDL_GL_SetSwapInterval(0);
 			initGL();
-			initTriangles();
+			initDrawables();
+			initRectangles();
 			initRectangles();
 
 			while (!m_window.hasQuitEvent()) {
@@ -45,6 +47,25 @@ namespace sb
 		{
 			m_shader.init();
 			m_graphicsBuffers.init();
+		}
+		
+		void Renderer2::initDrawables()
+		{
+			float stepWidth = 2 / float(NumTrianglesHorz);
+			float stepHeight = 2 / float(NumTrianglesVert);
+			Vector2f size(stepWidth, stepHeight);
+
+			unsigned int counter = 0;
+			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
+				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
+					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
+					Drawable* drawable = counter % 2 == 0 ? 
+						(Drawable*)new Triangle(Transform(position, size)) : 
+						(Drawable*)new Rectangle(Transform(position, size));
+					m_drawables.push_back(drawable);
+					counter++;
+				}
+			}
 		}
 
 		void Renderer2::initTriangles()
@@ -228,6 +249,13 @@ namespace sb
 		{
 			m_shader.destroy();
 			m_window.destroy();
+			destroyDrawables();
+		}
+
+		void Renderer2::destroyDrawables()
+		{
+			for (std::size_t i = 0; i < m_drawables.size(); i++)
+				delete m_drawables[i];
 		}
 	}
 }

@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "Triangle.h"
 #include "Rectangle.h"
+#include "Drawable.h"
 #include "GraphicsBuffers.h"
 #include "Shader.h"
 #include "Stopwatch.h"
@@ -32,6 +33,8 @@ namespace sb
 
 		protected:
 			static void initGL();
+
+			static void initDrawables();
 
 			static void initTriangles();
 			
@@ -63,10 +66,14 @@ namespace sb
 
 			static void close();
 
+			static void destroyDrawables();
+
 		private:
 			static Window m_window;
 
 			static Shader m_shader;
+
+			static std::vector<Drawable*> m_drawables;
 
 			static std::vector<Triangle> m_triangles;
 
