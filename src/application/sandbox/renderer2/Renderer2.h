@@ -2,6 +2,7 @@
 
 #include "Window.h"
 #include "Triangle.h"
+#include "Rectangle.h"
 #include "GraphicsBuffers.h"
 #include "Shader.h"
 #include "Stopwatch.h"
@@ -32,11 +33,19 @@ namespace sb
 
 			static void initTriangles();
 
+			static void initRectangles();
+
 			static void logPerformance();
 
 			static void update();
 
+			static void updateVertices();
+
+			static void updateIndices();
+
 			static std::size_t getNumVertices();
+			
+			static std::size_t getNumIndices();
 
 			static void render();
 
@@ -58,6 +67,8 @@ namespace sb
 			static Shader m_shader;
 
 			static std::vector<Triangle> m_triangles;
+
+			static std::vector<Rectangle> m_rectangles;
 
 			static GraphicsBuffers m_graphicsBuffers;
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vertex.h"
+#include "GL.h"
 
 #include <vector>
 
@@ -14,14 +15,24 @@ namespace sb
 			Mesh(const std::vector<Vertex>& vertices)
 			{
 				m_vertices = vertices;
+				computeIndices();
 			}
 
-			std::size_t getSize() const { return m_vertices.size(); }
+			std::size_t getVertexCount() const { return m_vertices.size(); }
 
 			const Vertex& operator[](std::size_t index) const { return m_vertices[index]; }
 
+			std::size_t getIndexCount() const { return m_indices.size(); }
+
+			const std::vector<GLuint>& getIndices() const { return m_indices; }
+
+		private:
+			void computeIndices();
+
 		private:
 			std::vector<Vertex> m_vertices;
+
+			std::vector<GLuint> m_indices;
 		};
 	}
 }

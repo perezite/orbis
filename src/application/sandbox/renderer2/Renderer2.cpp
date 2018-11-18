@@ -12,6 +12,7 @@ namespace sb
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
 		std::vector<Triangle> Renderer2::m_triangles;
+		std::vector<Rectangle> Renderer2::m_rectangles;
 		GraphicsBuffers Renderer2::m_graphicsBuffers;
 		std::vector<Vertex> Renderer2::m_transformedVertices;
 		std::vector<GLushort> Renderer2::m_indices;
@@ -22,6 +23,7 @@ namespace sb
 			SDL_GL_SetSwapInterval(0);
 			initGL();
 			initTriangles();
+			initRectangles();
 
 			while (!m_window.hasQuitEvent()) {
 				logPerformance();
@@ -55,6 +57,11 @@ namespace sb
 			}
 		}
 
+		void Renderer2::initRectangles()
+		{
+			m_rectangles.push_back(Rectangle(Transform(Vector2f(0.5f, 0.5f), Vector2f(0.5f, 0.5f))));
+		}
+
 		void Renderer2::logPerformance()
 		{
 			static Stopwatch stopwatch;
@@ -72,12 +79,33 @@ namespace sb
 
 		void Renderer2::update()
 		{
-			m_transformedVertices = {	Vertex(Vector2f(0.0f, 0.0f), Color(1, 0, 0, 1)),
-										Vertex(Vector2f(0.5f, 0.0f), Color(0, 1, 0, 1)) ,
-										Vertex(Vector2f(0.5f, 0.5f), Color(0, 0, 1, 1)) ,
-										Vertex(Vector2f(0.0f, 0.5f), Color(0, 1, 0, 1)) };
+			updateVertices();
+			updateIndices();
+		}
 
-			m_indices = { 0, 1, 3, 1, 2, 3 };
+		void Renderer2::updateVertices()
+		{
+			m_transformedVertices.resize(getNumVertices());
+
+			unsigned int counter = 0;
+			for (std::size_t i = 0; i < m_rectangles.size(); i++) {
+				for (std::size_t j = 0; j < m_rectangles[i].mesh.getVertexCount(); j++) {
+					m_transformedVertices[counter].position = m_rectangles[i].transform * m_rectangles[i].mesh[j].position;
+					m_transformedVertices[counter].color = m_rectangles[i].mesh[j].color;
+					counter++;
+				}
+			}
+		}
+
+		void Renderer2::updateIndices()
+		{
+			m_indices.resize(getNumIndices());
+
+			unsigned int counter = 0;
+			for (std::size_t i = 0; i < m_rectangles.size(); i++) {
+				const std::vector<GLuint>& indices = m_rectangles[i].mesh.getIndices();
+				m_indices.insert(m_indices.end(), indices.begin(), indices.end());
+			}
 		}
 
 		//void Renderer2::update()
@@ -86,7 +114,7 @@ namespace sb
 
 		//	unsigned int counter = 0;
 		//	for (std::size_t i = 0; i < m_triangles.size(); i++) {
-		//		for (std::size_t j = 0; j < m_triangles[i].mesh.getSize(); j++) {
+		//		for (std::size_t j = 0; j < m_triangles[i].mesh.getVertexCount(); j++) {
 		//			m_transformedVertices[counter].position = m_triangles[i].transform * m_triangles[i].mesh[j].position;
 		//			m_transformedVertices[counter].color = m_triangles[i].mesh[j].color;
 		//			counter++;
@@ -94,13 +122,32 @@ namespace sb
 		//	}
 		//}
 
-		std::size_t Renderer2::getNumVertices()
+	/*	std::size_t Renderer2::getNumVertices()
 		{
 			std::size_t numVertices = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++)
-				numVertices += m_triangles[i].mesh.getSize();
+				numVertices += m_triangles[i].mesh.getVertexCount();
 
 			return numVertices;
+		}
+*/
+
+		std::size_t Renderer2::getNumVertices()
+		{
+			std::size_t numVertices = 0;
+			for (std::size_t i = 0; i < m_rectangles.size(); i++)
+				numVertices += m_rectangles[i].mesh.getVertexCount();
+
+			return numVertices;
+		}
+
+		std::size_t Renderer2::getNumIndices()
+		{
+			std::size_t numIndices = 0;
+			for (std::size_t i = 0; i < m_rectangles.size(); i++)
+				numIndices += m_rectangles[i].mesh.getIndexCount();
+
+			return numIndices;
 		}
 
 		void Renderer2::render()

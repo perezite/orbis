@@ -20,6 +20,8 @@ namespace orb
 
 		const std::vector<unsigned int>& getIndices() const { return m_indices; }
 
+		std::size_t getIndexCount() const { return m_indices.size(); }
+
 	protected:
 		void calculateIndices();
 
