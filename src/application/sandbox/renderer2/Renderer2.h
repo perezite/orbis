@@ -24,6 +24,8 @@ namespace sb
 		public:
 			static const unsigned int NumTrianglesHorz;
 			static const unsigned int NumTrianglesVert;
+			static const unsigned int NumRectanglesHorz;
+			static const unsigned int NumRectanglesVert;
 
 		public:
 			static void run();
@@ -32,7 +34,7 @@ namespace sb
 			static void initGL();
 
 			static void initTriangles();
-
+			
 			static void initRectangles();
 
 			static void logPerformance();

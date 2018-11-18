@@ -9,6 +9,10 @@ namespace sb
 		const unsigned int Renderer2::NumTrianglesHorz = 230;
 		const unsigned int Renderer2::NumTrianglesVert = 230;
 		
+		const unsigned int Renderer2::NumRectanglesHorz = 10;
+		const unsigned int Renderer2::NumRectanglesVert = 10;
+
+
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
 		std::vector<Triangle> Renderer2::m_triangles;
@@ -47,19 +51,28 @@ namespace sb
 		{
 			float stepWidth = 2 / float(NumTrianglesHorz);
 			float stepHeight = 2 / float(NumTrianglesVert);
-			Vector2f triangleSize(stepWidth, stepHeight);
+			Vector2f size(stepWidth, stepHeight);
 
 			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
 				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
 					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
-					m_triangles.push_back(Triangle(Transform(position, triangleSize)));
+					m_triangles.push_back(Triangle(Transform(position, size)));
 				}
 			}
 		}
 
 		void Renderer2::initRectangles()
 		{
-			m_rectangles.push_back(Rectangle(Transform(Vector2f(0.5f, 0.5f), Vector2f(0.5f, 0.5f))));
+			float stepWidth = 2 / float(NumRectanglesHorz);
+			float stepHeight = 2 / float(NumRectanglesVert);
+			Vector2f size(0.9f * stepWidth, 0.9f * stepHeight);
+
+			for (unsigned int i = 0; i < NumRectanglesHorz; i++) {
+				for (unsigned int j = 0; j < NumRectanglesVert; j++) {
+					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
+					m_rectangles.push_back(Rectangle(Transform(position, size)));
+				}
+			}
 		}
 
 		void Renderer2::logPerformance()
@@ -102,9 +115,15 @@ namespace sb
 			m_indices.resize(getNumIndices());
 
 			unsigned int counter = 0;
+			unsigned int offset = 0;
 			for (std::size_t i = 0; i < m_rectangles.size(); i++) {
-				const std::vector<GLuint>& indices = m_rectangles[i].mesh.getIndices();
-				m_indices.insert(m_indices.end(), indices.begin(), indices.end());
+				Mesh mesh = m_rectangles[i].mesh;
+				const std::vector<GLuint>& indices = mesh.getIndices();
+				for (std::size_t j = 0; j < mesh.getIndexCount(); j++) {
+					m_indices[counter] = indices[j] + offset;
+					counter++;
+				}
+				offset += m_rectangles[i].mesh.getVertexCount();
 			}
 		}
 
