@@ -2,7 +2,7 @@
 
 namespace sb
 {
-	namespace triangleRenderer2
+	namespace renderer2
 	{
 		bool operator==(const VertexAttribPointer& left, const VertexAttribPointer& right) {
 			return

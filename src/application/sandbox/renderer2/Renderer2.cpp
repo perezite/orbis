@@ -1,22 +1,22 @@
-#include "TriangleRenderer2.h"
+#include "Renderer2.h"
 #include <iostream>
 #include <stddef.h>
 
 namespace sb 
 {
-	namespace triangleRenderer2 
+	namespace renderer2 
 	{
-		const unsigned int TriangleRenderer2::NumTrianglesHorz = 230;
-		const unsigned int TriangleRenderer2::NumTrianglesVert = 230;
+		const unsigned int Renderer2::NumTrianglesHorz = 230;
+		const unsigned int Renderer2::NumTrianglesVert = 230;
 		
-		Window TriangleRenderer2::m_window;
-		Shader TriangleRenderer2::m_shader;
-		std::vector<Triangle> TriangleRenderer2::m_triangles;
-		GraphicsBuffers TriangleRenderer2::m_graphicsBuffers;
-		std::vector<Vertex> TriangleRenderer2::m_transformedVertices;
-		std::vector<GLushort> TriangleRenderer2::m_indices;
+		Window Renderer2::m_window;
+		Shader Renderer2::m_shader;
+		std::vector<Triangle> Renderer2::m_triangles;
+		GraphicsBuffers Renderer2::m_graphicsBuffers;
+		std::vector<Vertex> Renderer2::m_transformedVertices;
+		std::vector<GLushort> Renderer2::m_indices;
 
-		void TriangleRenderer2::run()
+		void Renderer2::run()
 		{
 			m_window.init(1500, 800);
 			SDL_GL_SetSwapInterval(0);
@@ -35,13 +35,13 @@ namespace sb
 			close();
 		}
 
-		void TriangleRenderer2::initGL()
+		void Renderer2::initGL()
 		{
 			m_shader.init();
 			m_graphicsBuffers.init();
 		}
 
-		void TriangleRenderer2::initTriangles()
+		void Renderer2::initTriangles()
 		{
 			float stepWidth = 2 / float(NumTrianglesHorz);
 			float stepHeight = 2 / float(NumTrianglesVert);
@@ -55,7 +55,7 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::logPerformance()
+		void Renderer2::logPerformance()
 		{
 			static Stopwatch stopwatch;
 			static unsigned int frames = 0;
@@ -70,7 +70,7 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::update()
+		void Renderer2::update()
 		{
 			m_transformedVertices = {	Vertex(Vector2f(0.0f, 0.0f), Color(1, 0, 0, 1)),
 										Vertex(Vector2f(0.5f, 0.0f), Color(0, 1, 0, 1)) ,
@@ -80,7 +80,7 @@ namespace sb
 			m_indices = { 0, 1, 3, 1, 2, 3 };
 		}
 
-		//void TriangleRenderer2::update()
+		//void Renderer2::update()
 		//{
 		//	m_transformedVertices.resize(getNumVertices());
 
@@ -94,7 +94,7 @@ namespace sb
 		//	}
 		//}
 
-		std::size_t TriangleRenderer2::getNumVertices()
+		std::size_t Renderer2::getNumVertices()
 		{
 			std::size_t numVertices = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++)
@@ -103,13 +103,13 @@ namespace sb
 			return numVertices;
 		}
 
-		void TriangleRenderer2::render()
+		void Renderer2::render()
 		{
 			render1();
 			 //render2();
 		}
 
-		void TriangleRenderer2::render1()
+		void Renderer2::render1()
 		{
 			m_graphicsBuffers.bindVertexBuffer();
 			m_graphicsBuffers.setVertexData(m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]), GL_DYNAMIC_DRAW);
@@ -117,7 +117,7 @@ namespace sb
 			m_graphicsBuffers.setIndexData(m_indices.size() * sizeof(GLushort), &(m_indices[0]), GL_DYNAMIC_DRAW);
 		}
 
-		void TriangleRenderer2::render2()
+		void Renderer2::render2()
 		{
 			m_graphicsBuffers.bindVertexBuffer();
 			m_graphicsBuffers.setVertexData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);	// buffer orphaning
@@ -127,7 +127,7 @@ namespace sb
 			m_graphicsBuffers.setIndexData(6, &(m_indices[0]), GL_STREAM_DRAW);
 		}
 
-		void TriangleRenderer2::display()
+		void Renderer2::display()
 		{
 			prepareDisplay();
 			checkGLErrors();
@@ -137,7 +137,7 @@ namespace sb
 			checkGLErrors();
 		}
 
-		void TriangleRenderer2::checkGLErrors()
+		void Renderer2::checkGLErrors()
 		{
 			GLuint error = glGetError();
 			if (error != 0) {
@@ -146,7 +146,7 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::prepareDisplay()
+		void Renderer2::prepareDisplay()
 		{
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
@@ -158,7 +158,7 @@ namespace sb
 			m_graphicsBuffers.setVertexAttribPointer(m_shader.getAttributeLocation("a_vColor"), 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
 		}
 
-		void TriangleRenderer2::close()
+		void Renderer2::close()
 		{
 			m_shader.destroy();
 			m_window.destroy();

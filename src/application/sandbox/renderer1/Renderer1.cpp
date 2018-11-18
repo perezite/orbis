@@ -1,16 +1,16 @@
-#include "TriangleRenderer1.h"
+#include "Renderer1.h"
 
 #include <iostream>
 
 namespace sb 
 {
-	namespace triangleRenderer1 
+	namespace renderer1 
 	{
-		GLuint TriangleRenderer1::m_shader;
+		GLuint Renderer1::m_shader;
 
-		std::map<std::string, GLuint> TriangleRenderer1::m_attributeLocations;
+		std::map<std::string, GLuint> Renderer1::m_attributeLocations;
 
-		void TriangleRenderer1::run()
+		void Renderer1::run()
 		{
 			RenderUtil::initSDL();
 			init();
@@ -19,20 +19,20 @@ namespace sb
 			while (running) {
 				running = RenderUtil::updateInput();
 				render();
-				TriangleRenderer1::flip();
+				Renderer1::flip();
 			}
 
 			RenderUtil::close();
 		}
 
-		void TriangleRenderer1::init()
+		void Renderer1::init()
 		{
 			m_shader = RenderUtil::createShader(RenderUtil::getDiffuseVertexShaderCode(), RenderUtil::getDiffuseFragmentShaderCode());
 			m_attributeLocations["a_vPosition"] = glGetAttribLocation(m_shader, "a_vPosition");
 			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 		}
 
-		void TriangleRenderer1::render()
+		void Renderer1::render()
 		{
 			std::vector<Vertex> vertices; computeVertices(vertices);
 			std::vector<GLushort> indices; computeIndices(indices);
@@ -43,24 +43,24 @@ namespace sb
 			finalize();
 		}
 
-		void TriangleRenderer1::flip()
+		void Renderer1::flip()
 		{
 			RenderUtil::flip();
 		}
 
-		void TriangleRenderer1::computeVertices(std::vector<Vertex>& result)
+		void Renderer1::computeVertices(std::vector<Vertex>& result)
 		{
 			result = { Vertex(-0.5f, -0.5f, 1, 0, 0, 1),
 						Vertex(0.5f, -0.5f, 0, 1, 0, 1),
 						Vertex(0.0f,  0.5f, 0, 0, 1, 1) };
 		}
 
-		void TriangleRenderer1::computeIndices(std::vector<GLushort>& result)
+		void Renderer1::computeIndices(std::vector<GLushort>& result)
 		{
 			result = { 0, 1, 2 };
 		}
 
-		void TriangleRenderer1::prepareRendering(std::vector<Vertex>& vertices)
+		void Renderer1::prepareRendering(std::vector<Vertex>& vertices)
 		{
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
@@ -73,7 +73,7 @@ namespace sb
 			RenderUtil::attachVertexArrayToShaderAttribute(m_attributeLocations["a_vColor"], 4, GL_UNSIGNED_BYTE, sizeof(Vertex), &(vertices[0].r));
 		}
 
-		void TriangleRenderer1::finalize()
+		void Renderer1::finalize()
 		{
 			RenderUtil::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vColor"]);
 			RenderUtil::detachVertexArrayFromShaderAttribute(m_attributeLocations["a_vPosition"]);
