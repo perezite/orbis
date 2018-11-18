@@ -111,5 +111,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\GraphicsBuffers.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\GL.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

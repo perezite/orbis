@@ -8,7 +8,7 @@ namespace sb
 	{
 		void Shader::init()
 		{
-			m_shader = glCreateProgram();
+			SB_GL_CHECK(m_shader = glCreateProgram());
 			if (m_shader == 0) {
 				std::cout << "error creating shader program" << std::endl;
 				std::cin.get();
@@ -19,11 +19,11 @@ namespace sb
 			GLuint vertexShader = compile(vertexShaderCode, GL_VERTEX_SHADER);
 			GLuint fragmentShader = compile(fragmentShaderCode, GL_FRAGMENT_SHADER);
 
-			glAttachShader(m_shader, vertexShader);
-			glAttachShader(m_shader, fragmentShader);
+			SB_GL_CHECK(glAttachShader(m_shader, vertexShader));
+			SB_GL_CHECK(glAttachShader(m_shader, fragmentShader));
 			link();
-			glDeleteShader(vertexShader);
-			glDeleteShader(fragmentShader);
+			SB_GL_CHECK(glDeleteShader(vertexShader));
+			SB_GL_CHECK(glDeleteShader(fragmentShader));
 		}
 
 		GLuint Shader::getAttributeLocation(std::string attribute) 
@@ -35,12 +35,12 @@ namespace sb
 
 		void Shader::use()
 		{
-			glUseProgram(m_shader);
+			SB_GL_CHECK(glUseProgram(m_shader));
 		}
 
 		void Shader::destroy()
 		{
-			glDeleteProgram(m_shader);
+			SB_GL_CHECK(glDeleteProgram(m_shader));
 		}
 
 		std::string Shader::getVertexShaderSource()
@@ -71,7 +71,7 @@ namespace sb
 		GLuint Shader::compile(std::string shaderCode, GLenum type)
 		{
 			GLint compiled;
-			GLuint shader = glCreateShader(type);
+			SB_GL_CHECK(GLuint shader = glCreateShader(type));
 
 			if (shader != 0) {
 				const char* shaderCodeStr = shaderCode.c_str();

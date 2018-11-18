@@ -16,45 +16,45 @@ namespace sb
 		void GraphicsBuffers::init()
 		{
 			#ifdef ORB_DESKTOP_GL
-				glGenVertexArrays(1, &m_vao);
+				SB_GL_CHECK(glGenVertexArrays(1, &m_vao));
 			#endif
-			glGenBuffers(1, &m_vbo);
-			glGenBuffers(1, &m_ibo);
+			SB_GL_CHECK(glGenBuffers(1, &m_vbo));
+			SB_GL_CHECK(glGenBuffers(1, &m_ibo));
 		}
 
 		GraphicsBuffers::~GraphicsBuffers()
 		{
-			glDeleteBuffers(1, &m_ibo);
-			glDeleteBuffers(1, &m_vbo);
+			SB_GL_CHECK(glDeleteBuffers(1, &m_ibo));
+			SB_GL_CHECK(glDeleteBuffers(1, &m_vbo));
 
 			#ifdef ORB_DESKTOP_GL
-				glDeleteVertexArrays(1, &m_vao);
+			SB_GL_CHECK(glDeleteVertexArrays(1, &m_vao));
 			#endif
 		}
 	
 		void GraphicsBuffers::bindVertexBuffer()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+			SB_GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vbo));
 		}
 
 		void GraphicsBuffers::bindIndexBuffer()
 		{
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
+			SB_GL_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo));
 		}
 
 		void GraphicsBuffers::setVertexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
 		{
-			glBufferData(GL_ARRAY_BUFFER, size, data, usage);
+			SB_GL_CHECK(glBufferData(GL_ARRAY_BUFFER, size, data, usage));
 		}
 
 		void GraphicsBuffers::setVertexSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data)
 		{
-			glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+			SB_GL_CHECK(glBufferSubData(GL_ARRAY_BUFFER, offset, size, data));
 		}
 
 		void GraphicsBuffers::setIndexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
 		{
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage);
+			SB_GL_CHECK(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage));
 		}
 
 		void GraphicsBuffers::setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)
@@ -69,7 +69,7 @@ namespace sb
 		void GraphicsBuffers::enable()
 		{
 			#ifdef ORB_DESKTOP_GL
-				glBindVertexArray(m_vao);
+			SB_GL_CHECK(glBindVertexArray(m_vao));
 				if (m_vaoNeedsUpdate) {
 					updateVao();
 					m_vaoNeedsUpdate = false;
@@ -85,26 +85,26 @@ namespace sb
 			{
 				update();
 
-				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);	// we record the correct index buffer binding in the VAO. Otherwise binding the VAO will cause a default 
-																// binding (i.e. NO binding) for the index buffer, which is not what we want for subsequent glDrawElement calls
-
+				SB_GL_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo));	// when using a vao, the binding of the index buffer must be recorded when the vao is bound, which
+																			// is at this point. Failure to do so will result in the vao resetting all previously bound index buffers
+																			// when being bound
 			}
 
 		#endif
 
 		void GraphicsBuffers::update()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+			SB_GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vbo));
 			for(std::map<GLuint, VertexAttribPointer>::iterator it = m_vertexAttribPointers.begin(); it != m_vertexAttribPointers.end(); ++it)
 			{
 				GLuint index = it->first;
 				VertexAttribPointer vap = it->second;
-				glEnableVertexAttribArray(index);
-				glVertexAttribPointer(index, vap.size, vap.type, vap.normalized, vap.stride, vap.pointer);
+				SB_GL_CHECK(glEnableVertexAttribArray(index));
+				SB_GL_CHECK(glVertexAttribPointer(index, vap.size, vap.type, vap.normalized, vap.stride, vap.pointer));
 			}
 
-			glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			SB_GL_CHECK(glEnableVertexAttribArray(0));
+			SB_GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, 0));
 		}
 	}
 }
