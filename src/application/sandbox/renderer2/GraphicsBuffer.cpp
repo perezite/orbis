@@ -1,4 +1,4 @@
-#include "GraphicsBuffers.h"
+#include "GraphicsBuffer.h"
 
 namespace sb
 {
@@ -13,7 +13,7 @@ namespace sb
 			return !(left == right);
 		}
 
-		void GraphicsBuffers::init()
+		void GraphicsBuffer::init()
 		{
 			#ifdef ORB_DESKTOP_GL
 				SB_GL_CHECK(glGenVertexArrays(1, &m_vao));
@@ -22,7 +22,7 @@ namespace sb
 			SB_GL_CHECK(glGenBuffers(1, &m_ibo));
 		}
 
-		GraphicsBuffers::~GraphicsBuffers()
+		GraphicsBuffer::~GraphicsBuffer()
 		{
 			SB_GL_CHECK(glDeleteBuffers(1, &m_ibo));
 			SB_GL_CHECK(glDeleteBuffers(1, &m_vbo));
@@ -32,32 +32,32 @@ namespace sb
 			#endif
 		}
 	
-		void GraphicsBuffers::bindVertexBuffer()
+		void GraphicsBuffer::bindVertexBuffer()
 		{
 			SB_GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vbo));
 		}
 
-		void GraphicsBuffers::bindIndexBuffer()
+		void GraphicsBuffer::bindIndexBuffer()
 		{
 			SB_GL_CHECK(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo));
 		}
 
-		void GraphicsBuffers::setVertexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
+		void GraphicsBuffer::setVertexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
 		{
 			SB_GL_CHECK(glBufferData(GL_ARRAY_BUFFER, size, data, usage));
 		}
 
-		void GraphicsBuffers::setVertexSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data)
+		void GraphicsBuffer::setVertexSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data)
 		{
 			SB_GL_CHECK(glBufferSubData(GL_ARRAY_BUFFER, offset, size, data));
 		}
 
-		void GraphicsBuffers::setIndexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
+		void GraphicsBuffer::setIndexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
 		{
 			SB_GL_CHECK(glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage));
 		}
 
-		void GraphicsBuffers::setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)
+		void GraphicsBuffer::setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)
 		{
 			VertexAttribPointer vap = VertexAttribPointer{ size, type, normalized, stride, pointer };
 			if (m_vertexAttribPointers.find(index) == m_vertexAttribPointers.end() || m_vertexAttribPointers[index] != vap)
@@ -66,7 +66,7 @@ namespace sb
 			m_vertexAttribPointers[index] = vap;
 		}
 
-		void GraphicsBuffers::enable()
+		void GraphicsBuffer::enable()
 		{
 			#ifdef ORB_DESKTOP_GL
 			SB_GL_CHECK(glBindVertexArray(m_vao));
@@ -81,7 +81,7 @@ namespace sb
 
 		#ifdef ORB_DESKTOP_GL
 
-			void GraphicsBuffers::updateVao()
+			void GraphicsBuffer::updateVao()
 			{
 				update();
 
@@ -92,7 +92,7 @@ namespace sb
 
 		#endif
 
-		void GraphicsBuffers::update()
+		void GraphicsBuffer::update()
 		{
 			SB_GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vbo));
 			for(std::map<GLuint, VertexAttribPointer>::iterator it = m_vertexAttribPointers.begin(); it != m_vertexAttribPointers.end(); ++it)

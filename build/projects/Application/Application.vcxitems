@@ -20,7 +20,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogger\ErrorLogger.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer1\RenderUtil.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer1\Renderer1.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffers.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Mesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Rectangle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Shader.cpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Drawable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GL.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffers.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Mesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Rectangle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Shader.h" />

@@ -11,9 +11,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer1\RenderUtil.cpp">
       <Filter>sandbox\triangleRenderer1</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffers.cpp">
-      <Filter>sandbox\triangleRenderer2</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Shader.cpp">
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
@@ -39,6 +36,9 @@
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Rectangle.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffer.cpp">
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,9 +87,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GL.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffers.h">
-      <Filter>sandbox\triangleRenderer2\headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Mesh.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
@@ -124,6 +121,9 @@
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Drawable.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffer.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,7 +4,7 @@
 #include "Triangle.h"
 #include "Rectangle.h"
 #include "Drawable.h"
-#include "GraphicsBuffers.h"
+#include "GraphicsBuffer.h"
 #include "Shader.h"
 #include "Stopwatch.h"
 
@@ -69,11 +69,13 @@ namespace sb
 
 			static std::vector<Drawable*> m_drawables;
 
-			static GraphicsBuffers m_graphicsBuffers;
+			static GraphicsBuffer m_graphicsBuffer;
 
 			static std::vector<Vertex> m_transformedVertices;
 
 			static std::vector<GLushort> m_indices;
+
+			static bool m_indicesNeedUpdate;
 		};
 	}
 }

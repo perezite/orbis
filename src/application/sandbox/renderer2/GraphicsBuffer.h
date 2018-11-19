@@ -21,13 +21,13 @@ namespace sb
 		bool operator==(const VertexAttribPointer& left, const VertexAttribPointer& right);
 		bool operator!=(const VertexAttribPointer& left, const VertexAttribPointer& right);
 
-		class GraphicsBuffers
+		class GraphicsBuffer
 		{
 		public:
-			GraphicsBuffers() : m_vbo(0), m_ibo(0)
+			GraphicsBuffer() : m_vbo(0), m_ibo(0)
 			{ }
 
-			virtual ~GraphicsBuffers();
+			virtual ~GraphicsBuffer();
 
 			void init();
 

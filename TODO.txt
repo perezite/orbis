@@ -1,5 +1,7 @@
 TODO:	
 - Bootstrapping
+	- Renderer2 Sandbox
+		- Drawables rotieren
 	- LevelBuilder im Bootstrapping-Plan hinzufügen
 	- Release-Speedups implementieren von hier: https://www.youtube.com/watch?v=ImtWD_9OAeY&list=PLlrATfBNZ98fqE45g3jZA_hLGUrD4bo6_&index=14 (zB. Funktions-Inlining)
 	- Stuff mit Transforms dokumentieren: GL/GLCore, GPU/CPU, PDF auf Desktop, Stuff in https://learnopengl.com/Getting-started/Hello-Triangle, wieso ich glBufferSubData brauche..

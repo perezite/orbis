@@ -6,16 +6,16 @@ namespace sb
 {
 	namespace renderer2 
 	{
-		const unsigned int Renderer2::NumDrawablesHorz = 10;
-		const unsigned int Renderer2::NumDrawablesVert = 10;
-
+		const unsigned int Renderer2::NumDrawablesHorz = 100;
+		const unsigned int Renderer2::NumDrawablesVert = 100;
 
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
 		std::vector<Drawable*> Renderer2::m_drawables;
-		GraphicsBuffers Renderer2::m_graphicsBuffers;
+		GraphicsBuffer Renderer2::m_graphicsBuffer;
 		std::vector<Vertex> Renderer2::m_transformedVertices;
 		std::vector<GLushort> Renderer2::m_indices;
+		bool Renderer2::m_indicesNeedUpdate = true;
 
 		void Renderer2::run()
 		{
@@ -38,14 +38,14 @@ namespace sb
 		void Renderer2::initGL()
 		{
 			m_shader.init();
-			m_graphicsBuffers.init();
+			m_graphicsBuffer.init();
 		}
 		
 		void Renderer2::initDrawables()
 		{
 			float stepWidth = 2 / float(NumDrawablesHorz);
 			float stepHeight = 2 / float(NumDrawablesVert);
-			Vector2f size(stepWidth, stepHeight);
+			Vector2f size(stepWidth * 0.9f, stepHeight * 0.9f);
 
 			unsigned int counter = 0;
 			for (unsigned int i = 0; i < NumDrawablesHorz; i++) {
@@ -79,8 +79,11 @@ namespace sb
 		void Renderer2::update()
 		{
 			updateVertices();
-			updateIndices();
+			if (m_indicesNeedUpdate)
+				updateIndices();
 		}
+
+
 
 		void Renderer2::updateVertices()
 		{
@@ -133,33 +136,37 @@ namespace sb
 
 		void Renderer2::render()
 		{
-			render1();
-			 //render2();
+			// render1();
+			render2();
+			m_indicesNeedUpdate = false;
 		}
 
 		void Renderer2::render1()
 		{
-			m_graphicsBuffers.bindVertexBuffer();
-			m_graphicsBuffers.setVertexData(m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]), GL_DYNAMIC_DRAW);
-			m_graphicsBuffers.bindIndexBuffer();
-			m_graphicsBuffers.setIndexData(m_indices.size() * sizeof(GLushort), &(m_indices[0]), GL_DYNAMIC_DRAW);
+			m_graphicsBuffer.bindVertexBuffer();
+			m_graphicsBuffer.setVertexData(m_transformedVertices.size() * sizeof(Vertex), m_transformedVertices.data(), GL_DYNAMIC_DRAW);
+			if (m_indicesNeedUpdate) {
+				m_graphicsBuffer.bindIndexBuffer();
+				m_graphicsBuffer.setIndexData(m_indices.size() * sizeof(GLushort), m_indices.data(), GL_STATIC_DRAW);
+			}
 		}
 
 		void Renderer2::render2()
 		{
-			m_graphicsBuffers.bindVertexBuffer();
-			m_graphicsBuffers.setVertexData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);	// buffer orphaning
-			m_graphicsBuffers.setVertexSubData(0, m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]));
-			m_graphicsBuffers.bindIndexBuffer();
-			m_graphicsBuffers.setIndexData(6, NULL, GL_STREAM_DRAW);												// buffer orphaning
-			m_graphicsBuffers.setIndexData(6, &(m_indices[0]), GL_STREAM_DRAW);
+			m_graphicsBuffer.bindVertexBuffer();
+			m_graphicsBuffer.setVertexData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);					// buffer orphaning
+			m_graphicsBuffer.setVertexSubData(0, m_transformedVertices.size() * sizeof(Vertex), m_transformedVertices.data());
+			if (m_indicesNeedUpdate) {
+				m_graphicsBuffer.bindIndexBuffer();
+				m_graphicsBuffer.setIndexData(m_indices.size() * sizeof(GLushort), m_indices.data(), GL_STATIC_DRAW);				// buffer orphaning
+			}
 		}
 
 		void Renderer2::display()
 		{
 			prepareDisplay();
 			checkGLErrors();
-			m_graphicsBuffers.enable();
+			m_graphicsBuffer.enable();
 			glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_SHORT, 0);
 			checkGLErrors();
 		}
@@ -181,8 +188,8 @@ namespace sb
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_shader.use();
 
-			m_graphicsBuffers.setVertexAttribPointer(m_shader.getAttributeLocation("a_vPosition"), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-			m_graphicsBuffers.setVertexAttribPointer(m_shader.getAttributeLocation("a_vColor"), 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
+			m_graphicsBuffer.setVertexAttribPointer(m_shader.getAttributeLocation("a_vPosition"), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+			m_graphicsBuffer.setVertexAttribPointer(m_shader.getAttributeLocation("a_vColor"), 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
 		}
 
 		void Renderer2::close()
