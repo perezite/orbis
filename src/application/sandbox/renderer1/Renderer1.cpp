@@ -18,7 +18,7 @@ namespace sb
 			bool running = true;
 			while (running) {
 				running = RenderUtil::updateInput();
-				render();
+				updateBuffers();
 				Renderer1::flip();
 			}
 
@@ -32,7 +32,7 @@ namespace sb
 			m_attributeLocations["a_vColor"] = glGetAttribLocation(m_shader, "a_vColor");
 		}
 
-		void Renderer1::render()
+		void Renderer1::updateBuffers()
 		{
 			std::vector<Vertex> vertices; computeVertices(vertices);
 			std::vector<GLushort> indices; computeIndices(indices);

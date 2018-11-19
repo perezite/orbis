@@ -14,7 +14,7 @@ namespace sb
 
 			virtual const Mesh& getMesh() const = 0;
 
-			virtual const Transform& getTransform() const = 0;
+			virtual Transform& getTransform() = 0;
 		};
 	}
 }

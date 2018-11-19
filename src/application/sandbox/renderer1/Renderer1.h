@@ -31,7 +31,7 @@ namespace sb
 		protected:
 			static void init();
 
-			static void render();
+			static void updateBuffers();
 
 			static void flip();
 

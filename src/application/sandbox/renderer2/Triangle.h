@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Drawable.h"
+#include "Actor.h"
 
 namespace sb
 {
 	namespace renderer2
 	{
-		class Triangle : public Drawable
+		class Triangle : public Actor
 		{
 		public:
 			Triangle()
@@ -15,11 +15,13 @@ namespace sb
 			Triangle(const Transform& transform)
 				: m_transform(transform)
 			{ }
+			
+			void rotate(float dt);
 
 		public:
 			const Mesh& getMesh() const { return m_mesh; }
 
-			const Transform& getTransform() const { return m_transform; }
+			Transform& getTransform() { return m_transform; }
 
 		private:
 			static const Mesh m_mesh;

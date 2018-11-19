@@ -10,7 +10,7 @@
 #endif
 #include <iostream>
 
-#ifdef _DEBUG
+#if defined(_DEBUG) && defined(WIN32)
 	#define SB_GL_CHECK(cmd)  										\
 		glGetError();												\
 		cmd;														\
@@ -18,7 +18,7 @@
 			int error = glGetError();								\
 			if (error != GL_NO_ERROR) {								\
 				std::cout << "GL Error: " << error << std::endl;	\
-				std::cin.get();										\
+				__debugbreak();										\
 			}														\
 		} 	
 		

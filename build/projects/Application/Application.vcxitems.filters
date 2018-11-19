@@ -126,5 +126,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffer.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\PerformanceLogger.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Logger.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Actor.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

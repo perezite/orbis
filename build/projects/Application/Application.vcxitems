@@ -35,11 +35,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\errorLogger\ErrorLogger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer1\RenderUtil.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer1\Renderer1.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Actor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Color.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Drawable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GL.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\GraphicsBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Logger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Mesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\PerformanceLogger.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Rectangle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Shader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Stopwatch.h" />

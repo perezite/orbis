@@ -3,7 +3,7 @@
 #include "Window.h"
 #include "Triangle.h"
 #include "Rectangle.h"
-#include "Drawable.h"
+#include "Actor.h"
 #include "GraphicsBuffer.h"
 #include "Shader.h"
 #include "Stopwatch.h"
@@ -30,13 +30,15 @@ namespace sb
 			static void run();
 
 		protected:
+			static void init();
+
 			static void initGL();
 
-			static void initDrawables();
-
-			static void logPerformance();
+			static void initActors();
 
 			static void update();
+
+			static void render();
 
 			static void updateVertices();
 
@@ -46,11 +48,7 @@ namespace sb
 			
 			static std::size_t getNumIndices();
 
-			static void render();
-
-			static void render1();
-
-			static void render2();
+			static void updateBuffers();
 
 			static void display();
 
@@ -60,14 +58,14 @@ namespace sb
 
 			static void close();
 
-			static void destroyDrawables();
+			static void destroyActors();
 
 		private:
 			static Window m_window;
 
 			static Shader m_shader;
 
-			static std::vector<Drawable*> m_drawables;
+			static std::vector<Actor*> m_actors;
 
 			static GraphicsBuffer m_graphicsBuffer;
 
