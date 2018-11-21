@@ -3,8 +3,8 @@
 #include "../orbis/core/Error.h"
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
-#include "sandbox/renderer1/Renderer1.h"
-#include "sandbox/renderer2/Renderer2.h"
+#include "sandbox/triangleRenderer1/TriangleRenderer1.h"
+#include "sandbox/triangleRenderer2/TriangleRenderer2.h"
 
 /*
 class Actor: public Transformable {
@@ -211,8 +211,8 @@ void example1()
 
 int main(int argc, char* args[])
 {
-	sb::renderer2::Renderer2::run();
-	//sb::renderer1::Renderer1::run();
+	sb::triangleRenderer2::TriangleRenderer2::run();
+	//sb::triangleRenderer1::TriangleRenderer1::run();
 
 	/*example1();
 	example2();

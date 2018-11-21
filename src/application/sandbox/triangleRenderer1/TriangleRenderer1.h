@@ -8,7 +8,7 @@
 
 namespace sb 
 {
-	namespace renderer1 
+	namespace triangleRenderer1 
 	{
 
 		class Vertex
@@ -23,7 +23,7 @@ namespace sb
 		};
 
 		// this sandbox renders a triangle using vanilla indexed rendering (no vertex buffers, and no vertex arrays)
-		class Renderer1
+		class TriangleRenderer1
 		{
 		public:
 			static void run();
@@ -31,7 +31,7 @@ namespace sb
 		protected:
 			static void init();
 
-			static void updateBuffers();
+			static void render();
 
 			static void flip();
 

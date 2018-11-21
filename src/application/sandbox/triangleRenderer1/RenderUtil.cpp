@@ -4,7 +4,7 @@
 
 namespace sb
 {
-	namespace renderer1 
+	namespace triangleRenderer1 
 	{
 		SDL_Window* RenderUtil::m_sdlWindow = NULL;
 		SDL_GLContext RenderUtil::m_glContext = NULL;

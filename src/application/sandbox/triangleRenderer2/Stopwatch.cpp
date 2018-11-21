@@ -2,7 +2,7 @@
 
 namespace sb
 {
-	namespace renderer2
+	namespace triangleRenderer2
 	{
 		#ifdef WIN32
 

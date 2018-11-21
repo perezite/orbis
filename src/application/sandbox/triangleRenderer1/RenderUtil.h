@@ -13,7 +13,7 @@
 
 namespace sb 
 {
-	namespace renderer1
+	namespace triangleRenderer1
 	{
 		class RenderUtil
 		{

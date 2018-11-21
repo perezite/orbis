@@ -2,7 +2,7 @@
 
 namespace sb 
 {
-	namespace renderer2 
+	namespace triangleRenderer2 
 	{
 		void Window::init(int width, int height) 
 		{
@@ -15,7 +15,6 @@ namespace sb
 				SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 				m_sdlWindow = SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 				m_glContext = SDL_GL_CreateContext(m_sdlWindow);
-				SDL_GL_SetSwapInterval(0);
 				GLenum glewError = glewInit();
 			#elif defined(__ANDROID__)
 				SDL_Init(SDL_INIT_VIDEO);
@@ -29,7 +28,6 @@ namespace sb
 				SDL_GetDisplayMode(0, 0, &mode);
 				m_sdlWindow = SDL_CreateWindow("Sandbox", 0, 0, mode.w, mode.h, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_SHOWN);
 				m_glContext = SDL_GL_CreateContext(m_sdlWindow);
-				SDL_GL_SetSwapInterval(0);
 			#endif
 		}
 
@@ -42,7 +40,7 @@ namespace sb
 		{
 			SDL_Event event;
 			while (SDL_PollEvent(&event)) {
-				if (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_FINGERDOWN)
+				if (event.type == SDL_QUIT)
 					m_hasQuitEvent = true;
 			}
 		}

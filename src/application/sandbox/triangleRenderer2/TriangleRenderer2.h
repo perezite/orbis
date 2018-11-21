@@ -2,9 +2,7 @@
 
 #include "Window.h"
 #include "Triangle.h"
-#include "Rectangle.h"
-#include "Actor.h"
-#include "GraphicsBuffer.h"
+#include "VertexBuffer.h"
 #include "Shader.h"
 #include "Stopwatch.h"
 
@@ -14,41 +12,37 @@
 
 namespace sb 
 {
-	namespace renderer2 
+	namespace triangleRenderer2 
 	{
 		// This sandbox implements the triangle with vertex buffers and vertex array objects. 
 		// References:	https://learnopengl.com/Getting-started/Hello-Triangle
 		//				https://www.youtube.com/watch?v=ImtWD_9OAeY&t=2s
 		//				http://www.learnopengles.com/android-lesson-seven-an-introduction-to-vertex-buffer-objects-vbos/
-		class Renderer2
+		class TriangleRenderer2
 		{
 		public:
-			static const unsigned int NumDrawablesHorz;
-			static const unsigned int NumDrawablesVert;
+			static const unsigned int NumTrianglesHorz;
+			static const unsigned int NumTrianglesVert;
 
 		public:
 			static void run();
 
 		protected:
-			static void init();
-
 			static void initGL();
 
-			static void initActors();
+			static void initTriangles();
+
+			static void logPerformance();
 
 			static void update();
 
+			static std::size_t getNumVertices();
+
 			static void render();
 
-			static void updateVertices();
+			static void render1();
 
-			static void updateIndices();
-
-			static std::size_t getNumVertices();
-			
-			static std::size_t getNumIndices();
-
-			static void updateBuffers();
+			static void render2();
 
 			static void display();
 
@@ -58,22 +52,16 @@ namespace sb
 
 			static void close();
 
-			static void destroyActors();
-
 		private:
 			static Window m_window;
 
 			static Shader m_shader;
 
-			static std::vector<Actor*> m_actors;
+			static std::vector<Triangle> m_triangles;
 
-			static GraphicsBuffer m_graphicsBuffer;
+			static VertexBuffer m_vertexBuffer;
 
 			static std::vector<Vertex> m_transformedVertices;
-
-			static std::vector<GLushort> m_indices;
-
-			static bool m_indicesNeedUpdate;
 		};
 	}
 }
