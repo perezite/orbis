@@ -1,5 +1,11 @@
 TODO:	
 - Bootstrapping
+	- Folgende Funktionalität aus Commit 35172a1 wieder implementieren. Dabei sicherstellen, dass Framerate nicht droppt
+		- auf 100 x 100 Objekte stellen (viel mehr kann mit Indices nicht ohne weiteres gerendert werden) und Performance ermitteln
+		- Rectangles rendern mit Indices
+		- Rectangles und Dreiecke rotieren
+	- std::sort Sandbox
+	- Batching implementieren. Framerate im Auge behalten
 	- LevelBuilder im Bootstrapping-Plan hinzufügen
 	- Release-Speedups implementieren von hier: https://www.youtube.com/watch?v=ImtWD_9OAeY&list=PLlrATfBNZ98fqE45g3jZA_hLGUrD4bo6_&index=14 (zB. Funktions-Inlining)
 	- Stuff mit Transforms dokumentieren: GL/GLCore, GPU/CPU, PDF auf Desktop, Stuff in https://learnopengl.com/Getting-started/Hello-Triangle, wieso ich glBufferSubData brauche..
