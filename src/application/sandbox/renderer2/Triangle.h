@@ -16,7 +16,7 @@ namespace sb
 				: m_transform(transform)
 			{ }
 			
-			void rotate(float dt);
+			void setRotation(float alpha);
 
 		public:
 			const Mesh& getMesh() const { return m_mesh; }

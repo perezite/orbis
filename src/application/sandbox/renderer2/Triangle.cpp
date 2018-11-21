@@ -10,9 +10,9 @@ namespace sb
 			Vertex( Vector2f( 0.0f,  0.5f), Color(0, 0, 1, 1))
 		});
 
-		void Triangle::rotate(float dt) 
+		void Triangle::setRotation(float alpha) 
 		{ 
-			m_transform.rotate(dt * 1.0f); 
+			m_transform.setRotation(alpha); 
 		}
 	}
 }

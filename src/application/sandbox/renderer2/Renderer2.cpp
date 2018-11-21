@@ -8,8 +8,8 @@ namespace sb
 {
 	namespace renderer2 
 	{
-		const unsigned int Renderer2::NumDrawablesHorz = 10;
-		const unsigned int Renderer2::NumDrawablesVert = 10;
+		const unsigned int Renderer2::NumDrawablesHorz = 130;
+		const unsigned int Renderer2::NumDrawablesVert = 130;
 
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
@@ -61,6 +61,7 @@ namespace sb
 					Actor* actor = counter % 2 == 0 ? 
 						(Actor*)new Triangle(Transform(position, size)) : 
 						(Actor*)new Rectangle(Transform(position, size));
+					actor->omega = -2.0f + 4.0f * (float)(rand() % RAND_MAX) / (float)RAND_MAX;
 					m_actors.push_back(actor);
 					counter++;
 				}
@@ -73,7 +74,7 @@ namespace sb
 			static Stopwatch sw;
 
 			for (std::size_t i = 0; i < m_actors.size(); i++)
-				m_actors[i]->rotate(sw.getElapsedSeconds());
+				m_actors[i]->setRotation(sw.getElapsedSeconds() * m_actors[i]->omega);
 		}
 
 		void Renderer2::render()
@@ -91,8 +92,6 @@ namespace sb
 			unsigned int counter = 0;
 			for (std::size_t i = 0; i < m_actors.size(); i++) {
 				for (std::size_t j = 0; j < m_actors[i]->getMesh().getVertexCount(); j++) {
-					auto penis = m_actors[i];
-					penis->getMesh();
 					m_transformedVertices[counter].position = m_actors[i]->getTransform() * m_actors[i]->getMesh()[j].position;
 					m_transformedVertices[counter].color = m_actors[i]->getMesh()[j].color;
 					counter++;

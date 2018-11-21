@@ -9,7 +9,9 @@ namespace sb
 		class Actor : public Drawable 
 		{
 		public:
-			virtual void rotate(float dt) = 0;
+			virtual void setRotation(float alpha) = 0;
+
+			float omega;
 		};
 	}
 }
