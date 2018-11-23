@@ -1,9 +1,10 @@
 TODO:	
 - Bootstrapping
 	- Folgende Funktionalität aus Commit 35172a1 wieder implementieren. Dabei sicherstellen, dass Framerate nicht droppt
-		- auf 100 x 100 Objekte stellen (viel mehr kann mit Indices nicht ohne weiteres gerendert werden) und Performance ermitteln
 		- Rectangles rendern mit Indices
 		- Rectangles und Dreiecke rotieren
+		-- 130 bis 140 fps auf Xperia bei 100 x 100 Dreicken
+	- Sandboxes in eigene Solutions rausziehen
 	- std::sort Sandbox
 	- Batching implementieren. Framerate im Auge behalten
 	- LevelBuilder im Bootstrapping-Plan hinzufügen

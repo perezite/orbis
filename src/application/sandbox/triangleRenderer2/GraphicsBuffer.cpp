@@ -1,10 +1,10 @@
-#include "VertexBuffer.h"
+#include "GraphicsBuffer.h"
 
 namespace sb
 {
 	namespace triangleRenderer2
 	{
-		void VertexBuffer::init()
+		void GraphicsBuffer::init()
 		{
 			#ifdef ORB_GL
 				glGenVertexArrays(1, &m_vao);
@@ -12,7 +12,7 @@ namespace sb
 			glGenBuffers(1, &m_vbo);
 		}
 
-		VertexBuffer::~VertexBuffer()
+		GraphicsBuffer::~GraphicsBuffer()
 		{
 			glDeleteBuffers(1, &m_vbo);
 
@@ -21,32 +21,32 @@ namespace sb
 			#endif
 		}
 	
-		void VertexBuffer::bind()
+		void GraphicsBuffer::bind()
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		}
 
-		void VertexBuffer::unbind()
+		void GraphicsBuffer::unbind()
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 
-		void VertexBuffer::setData(GLsizeiptr size, const GLvoid* data, GLenum usage)
+		void GraphicsBuffer::setData(GLsizeiptr size, const GLvoid* data, GLenum usage)
 		{
 			glBufferData(GL_ARRAY_BUFFER, size, data, usage);
 		}
 
-		void VertexBuffer::setSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data)
+		void GraphicsBuffer::setSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data)
 		{
 			glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
 		}
 
-		void VertexBuffer::setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)
+		void GraphicsBuffer::setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)
 		{
 			m_vertexAttribPointers[index] = VertexAttribPointer{ size, type, normalized, stride, pointer };
 		}
 
-		void VertexBuffer::enable()
+		void GraphicsBuffer::enable()
 		{
 			#ifdef ORB_GL
 				glBindVertexArray(m_vao);
@@ -59,7 +59,7 @@ namespace sb
 			#endif		
 		}
 
-		void VertexBuffer::setupVertexAttribPointers()
+		void GraphicsBuffer::setupVertexAttribPointers()
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 			for(std::map<GLuint, VertexAttribPointer>::iterator it = m_vertexAttribPointers.begin(); it != m_vertexAttribPointers.end(); ++it)

@@ -6,13 +6,13 @@ namespace sb
 {
 	namespace triangleRenderer2 
 	{
-		const unsigned int TriangleRenderer2::NumTrianglesHorz = 230;
-		const unsigned int TriangleRenderer2::NumTrianglesVert = 230;
+		const unsigned int TriangleRenderer2::NumTrianglesHorz = 100;
+		const unsigned int TriangleRenderer2::NumTrianglesVert = 100;
 		
 		Window TriangleRenderer2::m_window;
 		Shader TriangleRenderer2::m_shader;
 		std::vector<Triangle> TriangleRenderer2::m_triangles;
-		VertexBuffer TriangleRenderer2::m_vertexBuffer;
+		GraphicsBuffer TriangleRenderer2::m_vertexBuffer;
 		std::vector<Vertex> TriangleRenderer2::m_transformedVertices;
 
 		void TriangleRenderer2::run()

@@ -22,10 +22,10 @@ namespace sb
 			GLint size; GLenum type; GLboolean normalized; GLsizei stride; GLvoid* pointer;
 		};
 
-		class VertexBuffer
+		class GraphicsBuffer
 		{
 		public:
-			virtual ~VertexBuffer();
+			virtual ~GraphicsBuffer();
 
 			void init();
 
