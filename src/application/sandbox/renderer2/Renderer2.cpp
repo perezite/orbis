@@ -11,7 +11,7 @@ namespace sb
 		
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
-		std::vector<Triangle> Renderer2::m_triangles;
+		std::vector<Triangle*> Renderer2::m_triangles;
 		GraphicsBuffer Renderer2::m_buffer;
 		std::vector<Vertex> Renderer2::m_vertices;
 		std::vector<GLushort> Renderer2::m_indices;
@@ -19,6 +19,8 @@ namespace sb
 
 		void Renderer2::run()
 		{
+			SDL_Log("Renderer2: %s %s", __DATE__, __TIME__);
+
 			m_window.init(1500, 800);
 			SDL_GL_SetSwapInterval(0);
 			initGL();
@@ -50,7 +52,7 @@ namespace sb
 			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
 				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
 					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
-					m_triangles.push_back(Triangle(position, size));
+					m_triangles.push_back(new Triangle(position, size));
 				}
 			}
 		}
@@ -86,9 +88,9 @@ namespace sb
 
 			unsigned int counter = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++) {
-				for (std::size_t j = 0; j < m_triangles[i].mesh.getVertexCount(); j++) {
-					m_vertices[counter].position = m_triangles[i].transform * m_triangles[i].mesh[j].position;
-					m_vertices[counter].color = m_triangles[i].mesh[j].color;
+				for (std::size_t j = 0; j < m_triangles[i]->mesh.getVertexCount(); j++) {
+					m_vertices[counter].position = m_triangles[i]->transform * m_triangles[i]->mesh[j].position;
+					m_vertices[counter].color = m_triangles[i]->mesh[j].color;
 					counter++;
 				}
 			}
@@ -98,7 +100,7 @@ namespace sb
 		{
 			std::size_t numVertices = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++)
-				numVertices += m_triangles[i].mesh.getVertexCount();
+				numVertices += m_triangles[i]->mesh.getVertexCount();
 
 			return numVertices;
 		}
@@ -110,12 +112,12 @@ namespace sb
 			unsigned int counter = 0;
 			unsigned int offset = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++) {
-				const std::vector<GLuint>& indices = m_triangles[i].mesh.getIndices();
-				for (std::size_t j = 0; j < m_triangles[i].mesh.getIndexCount(); j++) {
+				const std::vector<GLuint>& indices = m_triangles[i]->mesh.getIndices();
+				for (std::size_t j = 0; j < m_triangles[i]->mesh.getIndexCount(); j++) {
 					m_indices[counter] = indices[j] + offset;
 					counter++;
 				}
-				offset += m_triangles[i].mesh.getVertexCount();
+				offset += m_triangles[i]->mesh.getVertexCount();
 			}
 		}
 
@@ -123,7 +125,7 @@ namespace sb
 		{
 			std::size_t numIndices = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++)
-				numIndices += m_triangles[i].mesh.getIndexCount();
+				numIndices += m_triangles[i]->mesh.getIndexCount();
 
 			return numIndices;
 		}
@@ -171,6 +173,8 @@ namespace sb
 		{
 			m_shader.destroy();
 			m_window.destroy();
+			for (std::size_t i = 0; i < m_triangles.size(); i++)
+				delete m_triangles[i];
 		}
 	}
 }

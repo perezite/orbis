@@ -59,7 +59,7 @@ namespace sb
 
 			static Shader m_shader;
 
-			static std::vector<Triangle> m_triangles;
+			static std::vector<Triangle*> m_triangles;
 
 			static GraphicsBuffer m_buffer;
 
