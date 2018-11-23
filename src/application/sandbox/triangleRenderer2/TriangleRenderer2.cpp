@@ -12,8 +12,10 @@ namespace sb
 		Window TriangleRenderer2::m_window;
 		Shader TriangleRenderer2::m_shader;
 		std::vector<Triangle> TriangleRenderer2::m_triangles;
-		GraphicsBuffer TriangleRenderer2::m_vertexBuffer;
-		std::vector<Vertex> TriangleRenderer2::m_transformedVertices;
+		GraphicsBuffer TriangleRenderer2::m_buffer;
+		std::vector<Vertex> TriangleRenderer2::m_vertices;
+		std::vector<GLushort> TriangleRenderer2::m_indices;
+		bool TriangleRenderer2::m_indicesNeedUpdate = true;
 
 		void TriangleRenderer2::run()
 		{
@@ -25,7 +27,6 @@ namespace sb
 			while (!m_window.hasQuitEvent()) {
 				logPerformance();
 				m_window.update();
-				update();
 				render();
 				display();
 				m_window.flip();
@@ -37,7 +38,7 @@ namespace sb
 		void TriangleRenderer2::initGL()
 		{
 			m_shader.init();
-			m_vertexBuffer.init();
+			m_buffer.init();
 		}
 
 		void TriangleRenderer2::initTriangles()
@@ -69,15 +70,25 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::update()
+		void TriangleRenderer2::render()
 		{
-			m_transformedVertices.resize(getNumVertices());
+			calcVertices();
+			if (m_indicesNeedUpdate)
+				calcIndices();
+			setupBuffer();
+
+			m_indicesNeedUpdate = false;
+		}
+
+		void TriangleRenderer2::calcVertices()
+		{
+			m_vertices.resize(getNumVertices());
 
 			unsigned int counter = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++) {
-				for (std::size_t j = 0; j < m_triangles[i].mesh.getSize(); j++) {
-					m_transformedVertices[counter].position = m_triangles[i].transform * m_triangles[i].mesh[j].position;
-					m_transformedVertices[counter].color = m_triangles[i].mesh[j].color;
+				for (std::size_t j = 0; j < m_triangles[i].mesh.getVertexCount(); j++) {
+					m_vertices[counter].position = m_triangles[i].transform * m_triangles[i].mesh[j].position;
+					m_vertices[counter].color = m_triangles[i].mesh[j].color;
 					counter++;
 				}
 			}
@@ -87,34 +98,51 @@ namespace sb
 		{
 			std::size_t numVertices = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++)
-				numVertices += m_triangles[i].mesh.getSize();
+				numVertices += m_triangles[i].mesh.getVertexCount();
 
 			return numVertices;
 		}
 
-		void TriangleRenderer2::render()
+		void TriangleRenderer2::calcIndices()
 		{
-			//render1();
-			 render2();
+			m_indices.resize(getNumIndices());
+
+			unsigned int counter = 0;
+			unsigned int offset = 0;
+			for (std::size_t i = 0; i < m_triangles.size(); i++) {
+				const std::vector<GLuint>& indices = m_triangles[i].mesh.getIndices();
+				for (std::size_t j = 0; j < m_triangles[i].mesh.getIndexCount(); j++) {
+					m_indices[counter] = indices[j] + offset;
+					counter++;
+				}
+				offset += m_triangles[i].mesh.getVertexCount();
+			}
 		}
 
-		void TriangleRenderer2::render1()
+		std::size_t TriangleRenderer2::getNumIndices()
 		{
-			m_vertexBuffer.bind();
-			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]), GL_DYNAMIC_DRAW);		
+			std::size_t numIndices = 0;
+			for (std::size_t i = 0; i < m_triangles.size(); i++)
+				numIndices += m_triangles[i].mesh.getIndexCount();
+
+			return numIndices;
 		}
 
-		void TriangleRenderer2::render2()
+		void TriangleRenderer2::setupBuffer()
 		{
-			m_vertexBuffer.bind();
-			m_vertexBuffer.setData(m_transformedVertices.size() * sizeof(Vertex), NULL, GL_STREAM_DRAW);					// buffer orphaning
-			m_vertexBuffer.setSubData(0, m_transformedVertices.size() * sizeof(Vertex), &(m_transformedVertices[0]));
+			m_buffer.bindVertexBuffer();
+			m_buffer.setVertexData(m_vertices.size() * sizeof(Vertex), &(m_vertices[0]), GL_DYNAMIC_DRAW);		
+			m_buffer.bindIndexBuffer();
+			if (m_indicesNeedUpdate) {
+				m_buffer.setIndexData(m_indices.size() * sizeof(GLushort), m_indices.data(), GL_STATIC_DRAW);
+			}
 		}
 
 		void TriangleRenderer2::display()
 		{
 			prepareDisplay();
-			glDrawArrays(GL_TRIANGLES, 0, m_transformedVertices.size());
+			m_buffer.enable();
+			glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_SHORT, 0);
 			checkGLErrors();
 		}
 
@@ -135,9 +163,8 @@ namespace sb
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_shader.use();
 
-			m_vertexBuffer.setVertexAttribPointer(m_shader.getAttributeLocation("a_vPosition"), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-			m_vertexBuffer.setVertexAttribPointer(m_shader.getAttributeLocation("a_vColor"), 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
-			m_vertexBuffer.enable();
+			m_buffer.setVertexAttribPointer(m_shader.getAttributeLocation("a_vPosition"), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+			m_buffer.setVertexAttribPointer(m_shader.getAttributeLocation("a_vColor"), 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
 		}
 
 		void TriangleRenderer2::close()

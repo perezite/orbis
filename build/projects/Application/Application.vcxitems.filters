@@ -35,6 +35,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\GraphicsBuffer.cpp">
       <Filter>sandbox\triangleRenderer2</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\Mesh.cpp">
+      <Filter>sandbox\triangleRenderer2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="levels">
@@ -109,6 +112,9 @@
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\GraphicsBuffer.h">
+      <Filter>sandbox\triangleRenderer2\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\triangleRenderer2\GL.h">
       <Filter>sandbox\triangleRenderer2\headers</Filter>
     </ClInclude>
   </ItemGroup>

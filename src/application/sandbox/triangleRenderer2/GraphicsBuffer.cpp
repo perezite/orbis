@@ -10,10 +10,12 @@ namespace sb
 				glGenVertexArrays(1, &m_vao);
 			#endif
 			glGenBuffers(1, &m_vbo);
+			glGenBuffers(1, &m_ibo);
 		}
 
 		GraphicsBuffer::~GraphicsBuffer()
 		{
+			glDeleteBuffers(1, &m_ibo);
 			glDeleteBuffers(1, &m_vbo);
 
 			#ifdef ORB_GL
@@ -21,24 +23,24 @@ namespace sb
 			#endif
 		}
 	
-		void GraphicsBuffer::bind()
+		void GraphicsBuffer::bindVertexBuffer()
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		}
 
-		void GraphicsBuffer::unbind()
+		void GraphicsBuffer::bindIndexBuffer()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 		}
 
-		void GraphicsBuffer::setData(GLsizeiptr size, const GLvoid* data, GLenum usage)
+		void GraphicsBuffer::setVertexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
 		{
 			glBufferData(GL_ARRAY_BUFFER, size, data, usage);
 		}
 
-		void GraphicsBuffer::setSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data)
+		void GraphicsBuffer::setIndexData(GLsizeiptr size, const GLvoid* data, GLenum usage)
 		{
-			glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage);
 		}
 
 		void GraphicsBuffer::setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)
@@ -50,18 +52,24 @@ namespace sb
 		{
 			#ifdef ORB_GL
 				glBindVertexArray(m_vao);
-				if (m_isVaoInitialised == false) {
-					setupVertexAttribPointers();
-					m_isVaoInitialised = true;
+				if (m_isVaoSetup == false) {
+					setupVao();
+					m_isVaoSetup = true;
 				}
 			#else
 				setupVertexAttribPointers();
 			#endif		
 		}
 
+		void GraphicsBuffer::setupVao()
+		{
+			bindVertexBuffer();
+			bindIndexBuffer();
+			setupVertexAttribPointers();
+		}
+
 		void GraphicsBuffer::setupVertexAttribPointers()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 			for(std::map<GLuint, VertexAttribPointer>::iterator it = m_vertexAttribPointers.begin(); it != m_vertexAttribPointers.end(); ++it)
 			{
 				GLuint index = it->first;
@@ -70,7 +78,6 @@ namespace sb
 				glVertexAttribPointer(index, vap.size, vap.type, vap.normalized, vap.stride, vap.pointer);
 			}
 			glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 	}
 }

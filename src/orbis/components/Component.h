@@ -8,6 +8,6 @@ namespace orb
 	class Component : public Transformable, public Drawable
 	{
 	public:
-		virtual void update() { };
+		virtual void render() { };
 	};
 }

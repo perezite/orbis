@@ -34,15 +34,17 @@ namespace sb
 
 			static void logPerformance();
 
-			static void update();
+			static void render();
+
+			static void calcVertices();
 
 			static std::size_t getNumVertices();
 
-			static void render();
+			static void calcIndices();
 
-			static void render1();
+			static std::size_t getNumIndices();
 
-			static void render2();
+			static void setupBuffer();
 
 			static void display();
 
@@ -59,9 +61,13 @@ namespace sb
 
 			static std::vector<Triangle> m_triangles;
 
-			static GraphicsBuffer m_vertexBuffer;
+			static GraphicsBuffer m_buffer;
 
-			static std::vector<Vertex> m_transformedVertices;
+			static std::vector<Vertex> m_vertices;
+
+			static std::vector<GLushort> m_indices;
+
+			static bool m_indicesNeedUpdate;
 		};
 	}
 }

@@ -1,13 +1,9 @@
 #pragma once
 
+#include "GL.h"
 #ifdef  WIN32
-	#include <gl/glew.h>
-	#include <SDL2/SDL_opengl.h>
-	#include <gl/glu.h>
 	#define ORB_GL
 #else
-	#include <GLES2/gl2.h>	
-	#include <GLES2/gl2ext.h>
 	#define ORB_GLES
 #endif 
 
@@ -29,15 +25,17 @@ namespace sb
 
 			void init();
 
-			void bind();
+			void bindVertexBuffer();
 
-			void unbind();
+			void bindIndexBuffer();
 
-			void setData(GLsizeiptr size, const GLvoid* data, GLenum usage);
+			void setVertexData(GLsizeiptr size, const GLvoid* data, GLenum usage);
 
-			void setSubData(GLsizeiptr offset, GLsizeiptr size, const GLvoid* data);
+			void setIndexData(GLsizeiptr size, const GLvoid* data, GLenum usage);
 
 			void setVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer);
+
+			void setupVao();
 
 			void enable();
 
@@ -48,10 +46,12 @@ namespace sb
 			#ifdef ORB_GL
 				GLuint m_vao;
 
-				bool m_isVaoInitialised;
+				bool m_isVaoSetup;
 			#endif	
 
 			GLuint m_vbo;
+
+			GLuint m_ibo;
 
 			std::map<GLuint, VertexAttribPointer> m_vertexAttribPointers;
 		};
