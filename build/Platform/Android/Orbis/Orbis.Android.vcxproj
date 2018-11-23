@@ -109,7 +109,7 @@
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>$(ProjectDir)..\..\Common\Precompiled.h</PrecompiledHeaderFile>
-      <ExceptionHandling>Enabled</ExceptionHandling>
+      <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\Common;$(SolutionDir)External\Android\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
@@ -125,7 +125,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\Common;$(SolutionDir)External\Android\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ExceptionHandling>Enabled</ExceptionHandling>
+      <ExceptionHandling>Disabled</ExceptionHandling>
       <ForcedIncludeFiles>Precompiled.h</ForcedIncludeFiles>
       <CompileAs>CompileAsCpp</CompileAs>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
