@@ -26,9 +26,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Transform.cpp">
       <Filter>sandbox\renderer2</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Triangle.cpp">
-      <Filter>sandbox\renderer2</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Window.cpp">
       <Filter>sandbox\renderer2</Filter>
     </ClCompile>
@@ -37,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer1\RenderUtil.cpp">
       <Filter>sandbox\renderer1</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Drawable.cpp">
+      <Filter>sandbox\renderer2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +96,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Transform.h">
       <Filter>sandbox\renderer2\headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Triangle.h">
-      <Filter>sandbox\renderer2\headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Vector2f.h">
       <Filter>sandbox\renderer2\headers</Filter>
     </ClInclude>
@@ -116,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer1\RenderUtil.h">
       <Filter>sandbox\renderer1</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Drawable.h">
+      <Filter>sandbox\renderer2\headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

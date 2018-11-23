@@ -11,7 +11,7 @@ namespace sb
 		
 		Window Renderer2::m_window;
 		Shader Renderer2::m_shader;
-		std::vector<Triangle*> Renderer2::m_triangles;
+		std::vector<Drawable*> Renderer2::m_triangles;
 		GraphicsBuffer Renderer2::m_buffer;
 		std::vector<Vertex> Renderer2::m_vertices;
 		std::vector<GLushort> Renderer2::m_indices;
@@ -52,7 +52,7 @@ namespace sb
 			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
 				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
 					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
-					m_triangles.push_back(new Triangle(position, size));
+					m_triangles.push_back(new Drawable(position, size));
 				}
 			}
 		}

@@ -7,13 +7,13 @@ namespace sb
 {
 	namespace renderer2
 	{
-		class Triangle
+		class Drawable
 		{
 		public:
-			Triangle()
+			Drawable()
 			{ }
 
-			Triangle(const Vector2f& position, const Vector2f scale)
+			Drawable(const Vector2f& position, const Vector2f scale)
 				: m_transform(position, scale)
 			{ }
 

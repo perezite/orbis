@@ -26,7 +26,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Shader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Stopwatch.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Transform.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Triangle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Drawable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +42,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Shader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Stopwatch.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Transform.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Triangle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Drawable.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Vector2f.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Vertex.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\src\application\sandbox\renderer2\Window.h" />

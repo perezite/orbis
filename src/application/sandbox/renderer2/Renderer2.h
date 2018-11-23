@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Window.h"
-#include "Triangle.h"
+#include "Drawable.h"
 #include "GraphicsBuffer.h"
 #include "Shader.h"
 #include "Stopwatch.h"
@@ -59,7 +59,7 @@ namespace sb
 
 			static Shader m_shader;
 
-			static std::vector<Triangle*> m_triangles;
+			static std::vector<Drawable*> m_triangles;
 
 			static GraphicsBuffer m_buffer;
 
