@@ -14,12 +14,18 @@ namespace sb
 			{ }
 
 			Triangle(const Vector2f& position, const Vector2f scale)
-				: transform(position, scale)
+				: m_transform(position, scale)
 			{ }
 
-			static const Mesh mesh;
+		public:
+			inline Transform& getTransform() { return m_transform; }
+			
+			inline const Mesh& getMesh() const { return m_mesh; }
 
-			Transform transform;
+		private: 
+			Transform m_transform;
+
+			static const Mesh m_mesh;
 		};
 	}
 }
