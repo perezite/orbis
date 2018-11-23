@@ -30,7 +30,7 @@ namespace sb
 		protected:
 			static void initGL();
 
-			static void initTriangles();
+			static void initActors();
 
 			static void logPerformance();
 

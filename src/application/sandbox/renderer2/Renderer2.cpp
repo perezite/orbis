@@ -22,7 +22,7 @@ namespace sb
 			m_window.init(1500, 800);
 			SDL_GL_SetSwapInterval(0);
 			initGL();
-			initTriangles();
+			initActors();
 
 			while (!m_window.hasQuitEvent()) {
 				logPerformance();
@@ -41,16 +41,16 @@ namespace sb
 			m_buffer.init();
 		}
 
-		void Renderer2::initTriangles()
+		void Renderer2::initActors()
 		{
 			float stepWidth = 2 / float(NumTrianglesHorz);
 			float stepHeight = 2 / float(NumTrianglesVert);
-			Vector2f triangleSize(stepWidth, stepHeight);
+			Vector2f size(stepWidth, stepHeight);
 
 			for (unsigned int i = 0; i < NumTrianglesHorz; i++) {
 				for (unsigned int j = 0; j < NumTrianglesVert; j++) {
 					Vector2f position = Vector2f(-1 + i * stepWidth + 0.5f * stepWidth, -1 + j * stepHeight + 0.5f * stepWidth);
-					m_triangles.push_back(Triangle(Transform(position, triangleSize)));
+					m_triangles.push_back(Triangle(position, size));
 				}
 			}
 		}

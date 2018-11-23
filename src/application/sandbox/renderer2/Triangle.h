@@ -13,8 +13,8 @@ namespace sb
 			Triangle()
 			{ }
 
-			Triangle(const Transform& transform_)
-				: transform(transform_)
+			Triangle(const Vector2f& position, const Vector2f scale)
+				: transform(position, scale)
 			{ }
 
 			static const Mesh mesh;
