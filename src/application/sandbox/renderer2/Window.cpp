@@ -2,7 +2,7 @@
 
 namespace sb 
 {
-	namespace triangleRenderer2 
+	namespace renderer2 
 	{
 		void Window::init(int width, int height) 
 		{

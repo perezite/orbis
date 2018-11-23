@@ -5,7 +5,7 @@
 
 namespace sb
 {
-	namespace triangleRenderer2
+	namespace renderer2
 	{
 		struct Vertex
 		{

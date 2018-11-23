@@ -12,13 +12,13 @@
 
 namespace sb 
 {
-	namespace triangleRenderer2 
+	namespace renderer2 
 	{
 		// This sandbox implements the triangle with vertex buffers and vertex array objects. 
 		// References:	https://learnopengl.com/Getting-started/Hello-Triangle
 		//				https://www.youtube.com/watch?v=ImtWD_9OAeY&t=2s
 		//				http://www.learnopengles.com/android-lesson-seven-an-introduction-to-vertex-buffer-objects-vbos/
-		class TriangleRenderer2
+		class Renderer2
 		{
 		public:
 			static const unsigned int NumTrianglesHorz;

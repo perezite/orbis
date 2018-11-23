@@ -1,7 +1,6 @@
 TODO:	
 - Bootstrapping
 	- Folgende Funktionalität aus Commit 35172a1 wieder implementieren. Dabei sicherstellen, dass Framerate nicht droppt
-		- Dreiecke rendern mit Indices
 		- Rectangles rendern mit Indices
 		- Dreiecke und Rechtecke zusammen rendern
 		- Rectangles und Dreiecke rotieren

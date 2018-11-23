@@ -4,7 +4,7 @@
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
 #include "sandbox/triangleRenderer1/TriangleRenderer1.h"
-#include "sandbox/triangleRenderer2/TriangleRenderer2.h"
+#include "sandbox/renderer2/Renderer2.h"
 
 /*
 class Actor: public Transformable {
@@ -211,7 +211,7 @@ void example1()
 
 int main(int argc, char* args[])
 {
-	sb::triangleRenderer2::TriangleRenderer2::run();
+	sb::renderer2::Renderer2::run();
 	//sb::triangleRenderer1::TriangleRenderer1::run();
 
 	/*example1();

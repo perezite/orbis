@@ -2,7 +2,7 @@
 
 namespace sb
 {
-	namespace triangleRenderer2
+	namespace renderer2
 	{
 
 		void Mesh::computeIndices()

@@ -1,23 +1,23 @@
-#include "TriangleRenderer2.h"
+#include "Renderer2.h"
 #include <iostream>
 #include <stddef.h>
 
 namespace sb 
 {
-	namespace triangleRenderer2 
+	namespace renderer2 
 	{
-		const unsigned int TriangleRenderer2::NumTrianglesHorz = 100;
-		const unsigned int TriangleRenderer2::NumTrianglesVert = 100;
+		const unsigned int Renderer2::NumTrianglesHorz = 100;
+		const unsigned int Renderer2::NumTrianglesVert = 100;
 		
-		Window TriangleRenderer2::m_window;
-		Shader TriangleRenderer2::m_shader;
-		std::vector<Triangle> TriangleRenderer2::m_triangles;
-		GraphicsBuffer TriangleRenderer2::m_buffer;
-		std::vector<Vertex> TriangleRenderer2::m_vertices;
-		std::vector<GLushort> TriangleRenderer2::m_indices;
-		bool TriangleRenderer2::m_indicesNeedUpdate = true;
+		Window Renderer2::m_window;
+		Shader Renderer2::m_shader;
+		std::vector<Triangle> Renderer2::m_triangles;
+		GraphicsBuffer Renderer2::m_buffer;
+		std::vector<Vertex> Renderer2::m_vertices;
+		std::vector<GLushort> Renderer2::m_indices;
+		bool Renderer2::m_indicesNeedUpdate = true;
 
-		void TriangleRenderer2::run()
+		void Renderer2::run()
 		{
 			m_window.init(1500, 800);
 			SDL_GL_SetSwapInterval(0);
@@ -35,13 +35,13 @@ namespace sb
 			close();
 		}
 
-		void TriangleRenderer2::initGL()
+		void Renderer2::initGL()
 		{
 			m_shader.init();
 			m_buffer.init();
 		}
 
-		void TriangleRenderer2::initTriangles()
+		void Renderer2::initTriangles()
 		{
 			float stepWidth = 2 / float(NumTrianglesHorz);
 			float stepHeight = 2 / float(NumTrianglesVert);
@@ -55,7 +55,7 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::logPerformance()
+		void Renderer2::logPerformance()
 		{
 			static Stopwatch stopwatch;
 			static unsigned int frames = 0;
@@ -70,7 +70,7 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::render()
+		void Renderer2::render()
 		{
 			calcVertices();
 			if (m_indicesNeedUpdate)
@@ -80,7 +80,7 @@ namespace sb
 			m_indicesNeedUpdate = false;
 		}
 
-		void TriangleRenderer2::calcVertices()
+		void Renderer2::calcVertices()
 		{
 			m_vertices.resize(getNumVertices());
 
@@ -94,7 +94,7 @@ namespace sb
 			}
 		}
 
-		std::size_t TriangleRenderer2::getNumVertices()
+		std::size_t Renderer2::getNumVertices()
 		{
 			std::size_t numVertices = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++)
@@ -103,7 +103,7 @@ namespace sb
 			return numVertices;
 		}
 
-		void TriangleRenderer2::calcIndices()
+		void Renderer2::calcIndices()
 		{
 			m_indices.resize(getNumIndices());
 
@@ -119,7 +119,7 @@ namespace sb
 			}
 		}
 
-		std::size_t TriangleRenderer2::getNumIndices()
+		std::size_t Renderer2::getNumIndices()
 		{
 			std::size_t numIndices = 0;
 			for (std::size_t i = 0; i < m_triangles.size(); i++)
@@ -128,7 +128,7 @@ namespace sb
 			return numIndices;
 		}
 
-		void TriangleRenderer2::setupBuffer()
+		void Renderer2::setupBuffer()
 		{
 			m_buffer.bindVertexBuffer();
 			m_buffer.setVertexData(m_vertices.size() * sizeof(Vertex), &(m_vertices[0]), GL_DYNAMIC_DRAW);		
@@ -138,7 +138,7 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::display()
+		void Renderer2::display()
 		{
 			prepareDisplay();
 			m_buffer.enable();
@@ -146,7 +146,7 @@ namespace sb
 			checkGLErrors();
 		}
 
-		void TriangleRenderer2::checkGLErrors()
+		void Renderer2::checkGLErrors()
 		{
 			GLuint error = glGetError();
 			if (error != 0) {
@@ -155,7 +155,7 @@ namespace sb
 			}
 		}
 
-		void TriangleRenderer2::prepareDisplay()
+		void Renderer2::prepareDisplay()
 		{
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
@@ -167,7 +167,7 @@ namespace sb
 			m_buffer.setVertexAttribPointer(m_shader.getAttributeLocation("a_vColor"), 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
 		}
 
-		void TriangleRenderer2::close()
+		void Renderer2::close()
 		{
 			m_shader.destroy();
 			m_window.destroy();

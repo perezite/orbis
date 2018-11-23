@@ -12,7 +12,7 @@
 
 namespace sb
 {
-	namespace triangleRenderer2
+	namespace renderer2
 	{
 		class Window
 		{
