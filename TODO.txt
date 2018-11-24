@@ -1,5 +1,9 @@
 TODO:	
 - Bootstrapping
+	- Orbis einchecken, Commit hier dokumentieren
+	- Simple OpenGL Renderer Sandbox erstellen
+	- Einsichten zum Thema Rendering dokumentieren
+	- TODO aufräumen
 	- Folgende Funktionalität aus Commit 35172a1 wieder implementieren. Dabei sicherstellen, dass Framerate nicht droppt
 		- Rectangles rendern mit Indices
 		- Dreiecke und Rechtecke zusammen rendern
