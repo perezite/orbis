@@ -1,22 +1,14 @@
 TODO:	
 - Bootstrapping
-	- Orbis wieder zum Laufen kriegen
 	- Orbis einchecken, Commit dokumentieren als letzten Commit vor Entfernung der Sandbox (für mögliches Rollback) 
 	- Simple OpenGL Renderer Sandbox erstellen
+	- Renderer in Orbis einbinden
+		- Falls das nicht klappt: Renderer2 in Sandbox-Repository weiterbearbeiten
+		- Falls das auch nicht klappt: Commit 08b2314ab4b6f38d1cf5b4003c2bf5629914bc6d wiederherstellen und an Renderer2 Sandbox weiterarbeiten
 	- Einsichten zum Thema Rendering dokumentieren
-	- TODO aufräumen
-	- Folgende Funktionalität aus Commit 35172a1 wieder implementieren. Dabei sicherstellen, dass Framerate nicht droppt
-		- Rectangles rendern mit Indices
-		- Dreiecke und Rechtecke zusammen rendern
-		- Rectangles und Dreiecke rotieren
-		- GL Checks einbinden
-		-- 130 bis 140 fps auf Xperia bei 100 x 100 Dreicken
-	- Sandboxes in eigene Solutions rausziehen
-	- std::sort Sandbox
-	- Neue Sandbox Renderer 3 erstellen
-		- Batching implementieren. Framerate im Auge behalten
-	- Neue Sandbox Renderer 4 erstellen
-		- Kontinuierliches Löschen und Hinzufügen von Renderables. Framerate im Auge behalten
+	- Plan aktualisieren
+
+LATER:
 	- LevelBuilder im Bootstrapping-Plan hinzufügen
 	- Release-Speedups implementieren von hier: https://www.youtube.com/watch?v=ImtWD_9OAeY&list=PLlrATfBNZ98fqE45g3jZA_hLGUrD4bo6_&index=14 (zB. Funktions-Inlining)
 	- Stuff mit Transforms dokumentieren: GL/GLCore, GPU/CPU, PDF auf Desktop, Stuff in https://learnopengl.com/Getting-started/Hello-Triangle, wieso ich glBufferSubData brauche..
