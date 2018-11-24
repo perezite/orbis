@@ -1,6 +1,7 @@
 TODO:	
 - Bootstrapping
-	- Orbis einchecken, Commit hier dokumentieren
+	- Orbis wieder zum Laufen kriegen
+	- Orbis einchecken, Commit dokumentieren als letzten Commit vor Entfernung der Sandbox (für mögliches Rollback) 
 	- Simple OpenGL Renderer Sandbox erstellen
 	- Einsichten zum Thema Rendering dokumentieren
 	- TODO aufräumen

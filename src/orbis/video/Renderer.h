@@ -25,7 +25,7 @@ namespace orb
 
 		std::vector<RenderElement> m_elements;
 
-		Shader m_defaultShader;
+		// Shader m_defaultShader;
 	};
 
 }

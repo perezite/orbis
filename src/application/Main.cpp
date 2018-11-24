@@ -3,8 +3,6 @@
 #include "../orbis/core/Error.h"
 #include "../orbis/video/Window.h"
 #include "../orbis/components/Shape.h"
-#include "sandbox/renderer1/Renderer1.h"
-#include "sandbox/renderer2/Renderer2.h"
 
 /*
 class Actor: public Transformable {
@@ -211,11 +209,9 @@ void example1()
 
 int main(int argc, char* args[])
 {
-	sb::renderer2::Renderer2::run();
-	//sb::renderer1::Renderer1::run();
-
-	/*example1();
-	example2();
+	example1();
+	
+	/*example2();
 	example3();
 	example4();*/
 
