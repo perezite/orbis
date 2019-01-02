@@ -209,6 +209,7 @@ void example1()
 
 int main(int argc, char* args[])
 {
+	// SDL_Log("Hello World!");
 	example1();
 	
 	/*example2();

@@ -1,7 +1,9 @@
 TODO:	
 - Bootstrapping
-	- Orbis einchecken, Commit dokumentieren als letzten Commit vor Entfernung der Sandbox (für mögliches Rollback) 
-	- Simple OpenGL Renderer Sandbox erstellen
+	- Erweiterte Renderer implementieren
+		- IndexedRenderer fertigstellen
+		- BatchedRenderer
+		- TexturedBatchedRenderer (Rendert einige diffuse Drawables, einige texturierte Drawables, und einige texturierte Partikel in einem DrawBatch)
 	- Renderer in Orbis einbinden
 		- Falls das nicht klappt: Renderer2 in Sandbox-Repository weiterbearbeiten
 		- Falls das auch nicht klappt: Commit 08b2314ab4b6f38d1cf5b4003c2bf5629914bc6d wiederherstellen und an Renderer2 Sandbox weiterarbeiten
