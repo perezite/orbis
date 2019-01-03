@@ -1,30 +1,42 @@
-SceneRunner scene2(Window& window) {
+typedef int (*)(Window&) SceneRunner;
+
+int level1(Window& window) {
 	Scene scene;
 	
 	Entity tetromino;
-	tetromino.addComponent(Tetromino);
-	tetromino.addComponent(TetrominoRenderer);
+	scene.add(&tetromino);
+	tetromino.addComponent(TetrominoDrawer);
 	
 	Entity sprite;
-	sprite.addComponent(SpriteRenderer(sprite));
+	scene.add(&sprite);
+	sprite.addComponent(SpriteDrawer(sprite));
 	
 	while(scene.isRunning(window)) {
+		scene.update();
+		
 		scene.draw(window);
 		window.display();
+		
+		static Stopwatch sw;
+		if (sw.elapsedSeconds() > 10)
+			window.close();
 	}
 }
 
-SceneRunner scene1(Window& window) {
-	return scene2;
+int level0(Window& window) {
+	return level1;
 }
 
 void main()
 {
 	Window window;
-	SceneRunner currentScene = scene1;
+	Scene scene;
+	std::map<int, SceneRunner> scenes;
+	scenes[0] = level0;
+	scenes[1] = level1;
 	
-	while(currentScene != NULL) {
-		currentScene = scene(window);
+	int currentScene = 0;
+	while(window.isOpen()) 
+		currentScene = scenes[currentScene]();
 	}
 }
-

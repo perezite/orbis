@@ -1,3 +1,12 @@
+/*
+	DrawBatch.h
+	
+	class DrawBatch : public RenderTarget
+	{
+		....
+	}
+*/
+
 void DrawBatch::draw(const std::vector<Vertex>& vertices, RenderStates& states) 
 {
 	if (vertices.size() < m_batchThreshold) 
