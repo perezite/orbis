@@ -184,37 +184,37 @@ void example2()
 // Bootstrapping Stufe 1: SFML-Entities
 void example1()
 {
-	orb::Window window(400, 400, "My Title");
+    orb::Window window(400, 400, "My Title");
 
-	orb::Shape triangle(3);
-	triangle[0].position = orb::Vector2f(0, 0);
-	triangle[1].position = orb::Vector2f(0, 1);
-	triangle[2].position = orb::Vector2f(1, 0);
+    orb::Shape triangle(3);
+    triangle[0].position = orb::Vector2f(0, 0);
+    triangle[1].position = orb::Vector2f(0, 1);
+    triangle[2].position = orb::Vector2f(1, 0);
 
-	orb::Shape particles(3, 2); 
-	particles[0].position = orb::Vector2f(0, 0);
-	particles[1].position = orb::Vector2f(0, 1);
-	particles[2].position = orb::Vector2f(1, 0);
-	particles[3].position = orb::Vector2f(1, 1);
-	particles[4].position = orb::Vector2f(1, 2);
-	particles[5].position = orb::Vector2f(2, 1);
+    orb::Shape particles(3, 2); 
+    particles[0].position = orb::Vector2f(0, 0);
+    particles[1].position = orb::Vector2f(0, 1);
+    particles[2].position = orb::Vector2f(1, 0);
+    particles[3].position = orb::Vector2f(1, 1);
+    particles[4].position = orb::Vector2f(1, 2);
+    particles[5].position = orb::Vector2f(2, 1);
 
-	while (window.isOpen()) {
-		window.clear();
-		triangle.draw(window);
-		particles.draw(window);
-		window.display();
-	}
+    while (window.isOpen()) {
+        window.clear();
+        triangle.draw(window);
+        particles.draw(window);
+        window.display();
+    }
 }
 
 int main(int argc, char* args[])
 {
-	// SDL_Log("Hello World!");
-	example1();
-	
-	/*example2();
-	example3();
-	example4();*/
+    // SDL_Log("Hello World!");
+    example1();
+    
+    /*example2();
+    example3();
+    example4();*/
 
-	return 0;
+    return 0;
 }
